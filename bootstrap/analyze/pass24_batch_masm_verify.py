@@ -414,11 +414,13 @@ _TEXT   ENDS
 
 LST_INSTR_RE = re.compile(
     r'^\s*([0-9A-Fa-f]{4})\s+'                       # offset
-    # 1+ hex tokens, separated by EITHER ":" (with optional single space) or
-    # exactly one space. This is tight enough to prevent greedy matching from
-    # eating instruction mnemonics that happen to be valid hex words (e.g.
-    # `dec`, `add`, `cbf`, etc.) which sit after the wider source-column gap.
-    r'([0-9A-Fa-f]{2,8}(?:(?::[ ]?| )[0-9A-Fa-f]{2,8})*)'
+    # 1+ hex tokens, separated by EITHER ":" (with optional single space),
+    # exactly one space, OR "/ " which MASM uses to mark a REP/REPNE/LOCK
+    # prefix (e.g. "F3/ A5  rep movsw"). The grouping is tight enough to
+    # prevent greedy matching from eating instruction mnemonics that
+    # happen to be valid hex words (e.g. `dec`, `add`, `cbf`, etc.) which
+    # sit after the wider source-column gap.
+    r'([0-9A-Fa-f]{2,8}(?:(?:/ |:[ ]?| )[0-9A-Fa-f]{2,8})*)'
     r'\s{2,}'                                         # wide gap (>=2 spaces)
     r'([A-Za-z][^\r\n]*?)$'                           # source (starts with letter)
 )
@@ -472,7 +474,7 @@ def parse_lst_instructions(lst_path, func_name):
         offset = int(m.group(1), 16)
         if proc_start_offset is None:
             proc_start_offset = offset
-        byte_str = m.group(2).replace(':', ' ')
+        byte_str = m.group(2).replace(':', ' ').replace('/', ' ')
         byte_tokens = byte_str.split()
         try:
             raw = b''.join(_lst_token_to_bytes(t) for t in byte_tokens)
