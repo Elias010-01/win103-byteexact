@@ -28,6 +28,9 @@
 
 WRITE_TEXT SEGMENT BYTE PUBLIC 'CODE'
 
+; Description (heuristic):
+;   Pure computation / dispatcher (140 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0000   offset=0x0000  size=140 instr  segment=seg22.asm
 ;
@@ -200,6 +203,10 @@ L_015E:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Description (heuristic):
+;   Mixed routine using: SETDLGITEMTEXT, SHOWCURSOR.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_016A   offset=0x016A  size=179 instr  segment=seg22.asm
 ;

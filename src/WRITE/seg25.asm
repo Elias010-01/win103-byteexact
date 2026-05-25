@@ -205,6 +205,10 @@ L_0160:
         cmp     ax, 3                           ; 3D 03 00
         je      L_0190                          ; 74 1E
         jmp     L_013F                          ; EB CB
+; Description (heuristic):
+;   Thin wrapper around ISDLGBUTTONCHECKED.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0174   offset=0x0174  size=9 instr  segment=seg25.asm
 ;
@@ -228,6 +232,10 @@ L_0183:
         push    word ptr [bp + 0xa]             ; FF 76 0A
         call    far _entry_59                   ; 9A FF FF 00 00 [FIXUP]
         jmp     L_012B                          ; EB 9B
+; Description (heuristic):
+;   Mixed routine using: DIALOGBOX, ENABLEWINDOW, ENDDIALOG (+1 more).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0190   offset=0x0190  size=495 instr  segment=seg25.asm
 ;

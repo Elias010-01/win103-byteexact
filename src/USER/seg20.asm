@@ -30,6 +30,9 @@
 
 USER_TEXT SEGMENT BYTE PUBLIC 'CODE'
 
+; Description (heuristic):
+;   Pure computation / dispatcher (26 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0000   offset=0x0000  size=26 instr  segment=seg20.asm
 ;
@@ -70,6 +73,9 @@ L_002E:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     2                               ; C2 02 00
+; Description (heuristic):
+;   Thin wrapper around SETBKMODE(hDC, iMode) -> INT.
+
 ;-------------------------------------------------------------------------
 ; sub_0036   offset=0x0036  size=21 instr  segment=seg20.asm
 ;
@@ -108,6 +114,9 @@ L_0036:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     4                               ; C2 04 00
+; Description (heuristic):
+;   Internal helper (13 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_0061   offset=0x0061  size=13 instr  segment=seg20.asm
 ;

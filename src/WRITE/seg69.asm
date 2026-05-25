@@ -29,6 +29,9 @@
 
 WRITE_TEXT SEGMENT BYTE PUBLIC 'CODE'
 
+; Description (heuristic):
+;   Pure computation / dispatcher (32 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0000   offset=0x0000  size=32 instr  segment=seg69.asm
 ;
@@ -68,6 +71,9 @@ L_0000:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf                                    ; CB
+; Description (heuristic):
+;   Pure computation / dispatcher (203 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0040   offset=0x0040  size=203 instr  segment=seg69.asm
 ;
@@ -318,6 +324,9 @@ L_0274:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf                                    ; CB
+; Description (heuristic):
+;   Mixed routine using: GETCARETBLINKTIME, GETMESSAGE, TRANSLATEMESSAGE.
+
 ;-------------------------------------------------------------------------
 ; sub_0288   offset=0x0288  size=184 instr  segment=seg69.asm
 ;

@@ -34,6 +34,10 @@
 
 CALENDAR_TEXT SEGMENT BYTE PUBLIC 'CODE'
 
+; Description (heuristic):
+;   Drawing routine (3 GDI APIs).
+;   Acquires a device context, draws, releases.
+
 ;-------------------------------------------------------------------------
 ; sub_0000   offset=0x0000  size=474 instr  segment=seg3.asm
 ;
@@ -711,6 +715,9 @@ L_04EC:
 ;   [fall-through exit] L_0500
 L_0500:
         ret                                     ; C3
+; Description (heuristic):
+;   Thin wrapper around GETCLIENTRECT(hWnd, lpRect) -> VOID.
+
 ;-------------------------------------------------------------------------
 ; sub_0501   offset=0x0501  size=30 instr  segment=seg3.asm
 ;
@@ -761,6 +768,9 @@ L_054B:
 ;   [fall-through exit] L_054E
 L_054E:
         ret                                     ; C3
+; Description (heuristic):
+;   Thin wrapper around GETCLIENTRECT(hWnd, lpRect) -> VOID.
+
 ;-------------------------------------------------------------------------
 ; sub_054F   offset=0x054F  size=28 instr  segment=seg3.asm
 ;
@@ -812,6 +822,9 @@ L_0594:
 ;   [fall-through exit] L_0597
 L_0597:
         ret                                     ; C3
+; Description (heuristic):
+;   Thin wrapper around SETFOCUS.
+
 ;-------------------------------------------------------------------------
 ; sub_0598   offset=0x0598  size=7 instr  segment=seg3.asm
 ;
@@ -834,6 +847,13 @@ L_0598:
 ;   [error/early exit] L_05AC
 L_05AC:
         ret                                     ; C3
+; Inferred stack frame (pass18, heuristic):
+;   Locals:
+;     [bp-0x6]   LRESULT   (1 use)
+
+; Description (heuristic):
+;   Menu manipulation routine (2 menu APIs).
+
 ;-------------------------------------------------------------------------
 ; sub_05AD   offset=0x05AD  size=113 instr  segment=seg3.asm
 ;
@@ -1031,6 +1051,9 @@ L_06D2:
         ; --> ENABLEMENUITEM(HMENU hMenu, WORD wIDItem, WORD wEnable) -> BOOL
         call    far USER.ENABLEMENUITEM         ; 9A 25 06 00 00 [FIXUP]
         ret                                     ; C3
+; Description (heuristic):
+;   Mixed routine using: DELETEDC, ENABLEMENUITEM, GETMENU (+1 more).
+
 ;-------------------------------------------------------------------------
 ; sub_06E0   offset=0x06E0  size=38 instr  segment=seg3.asm
 ;
@@ -1104,6 +1127,13 @@ L_0733:
         ; --> INVALIDATERECT(HWND hWnd, LPRECT lpRect, BOOL bErase) -> VOID
         call    far USER.INVALIDATERECT         ; 9A FF FF 00 00 [FIXUP]
         ret                                     ; C3
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x6]  HDC       (1 use)
+
+; Description (heuristic):
+;   Mixed routine using: PATBLT, SETTEXTCOLOR, GETSYSCOLOR.
+
 ;-------------------------------------------------------------------------
 ; sub_074B   offset=0x074B  size=95 instr  segment=seg3.asm
 ;
@@ -1249,6 +1279,14 @@ L_0841:
 ;   [error/early exit] L_084D
 L_084D:
         ret                                     ; C3
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x4]  INT       (1 use)
+;     [bp+0x6]  HANDLE    (1 use)
+
+; Description (heuristic):
+;   Small helper using 2 API(s): BITBLT, SELECTOBJECT.
+
 ;-------------------------------------------------------------------------
 ; sub_084E   offset=0x084E  size=20 instr  segment=seg3.asm
 ;
@@ -1297,6 +1335,13 @@ L_084E:
         ; --> BITBLT(HDC hDCDest, INT x, INT y, INT nWidth, INT nHeight, HDC hDCSrc, INT xSrc, INT ySrc, DWORD dwRop) -> BOOL
         call    far GDI.BITBLT                  ; 9A FF FF 00 00 [FIXUP]
         ret                                     ; C3
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x4]  INT       (1 use)
+
+; Description (heuristic):
+;   Thin wrapper around PATBLT(hDC, x, y, nWidth, nHeight, dwRop) -> BOOL.
+
 ;-------------------------------------------------------------------------
 ; sub_0888   offset=0x0888  size=14 instr  segment=seg3.asm
 ;
@@ -1332,6 +1377,9 @@ L_0888:
         ; --> PATBLT(HDC hDC, INT x, INT y, INT nWidth, INT nHeight, DWORD dwRop) -> BOOL
         call    far GDI.PATBLT                  ; 9A 0B 08 00 00 [FIXUP]
         ret                                     ; C3
+; Description (heuristic):
+;   Small helper using 2 API(s): LSTRLEN, TEXTOUT.
+
 ;-------------------------------------------------------------------------
 ; sub_08AD   offset=0x08AD  size=20 instr  segment=seg3.asm
 ;
@@ -1370,6 +1418,9 @@ L_08AD:
         ; --> TEXTOUT(HDC hDC, INT x, INT y, LPSTR lpszStr, INT cbStr) -> BOOL
         call    far GDI.TEXTOUT                 ; 9A FF FF 00 00 [FIXUP]
         ret                                     ; C3
+; Description (heuristic):
+;   Internal helper (18 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_08DE   offset=0x08DE  size=18 instr  segment=seg3.asm
 ;
@@ -1399,6 +1450,9 @@ L_08DE:
         push    ax                              ; 50
         call    far _entry_30                   ; 9A FF FF 00 00 [FIXUP]
         ret                                     ; C3
+; Description (heuristic):
+;   Internal helper (17 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_0909   offset=0x0909  size=17 instr  segment=seg3.asm
 ;
@@ -1426,6 +1480,9 @@ L_0909:
         mov     bx, word ptr [bp + 4]           ; 8B 5E 04
         mov     byte ptr [bx], ah               ; 88 27
         ret                                     ; C3
+; Description (heuristic):
+;   Internal helper (13 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_0930   offset=0x0930  size=13 instr  segment=seg3.asm
 ;
@@ -1451,6 +1508,13 @@ L_0935:
         mov     ax, word ptr [bp + 6]           ; 8B 46 06
         dec     ax                              ; 48
         ret                                     ; C3
+; Inferred stack frame (pass18, heuristic):
+;   Locals:
+;     [bp-0x4c]   HBRUSH    (1 use)
+
+; Description (heuristic):
+;   Mixed routine using: CREATESOLIDBRUSH, TEXTOUT, LSTRLEN (+3 more).
+
 ;-------------------------------------------------------------------------
 ; sub_094E   offset=0x094E  size=41 instr  segment=seg3.asm
 ;
@@ -1524,6 +1588,9 @@ L_0998:
         ; --> TEXTOUT(HDC hDC, INT x, INT y, LPSTR lpszStr, INT cbStr) -> BOOL
         call    far GDI.TEXTOUT                 ; 9A D9 08 00 00 [FIXUP]
         ret                                     ; C3
+; Description (heuristic):
+;   Internal helper (20 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_09B9   offset=0x09B9  size=20 instr  segment=seg3.asm
 ;
@@ -1554,6 +1621,9 @@ L_09B9:
         push    ax                              ; 50
         call    far _entry_31                   ; 9A FF FF 00 00 [FIXUP]
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (45 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_09EE   offset=0x09EE  size=45 instr  segment=seg3.asm
 ;
@@ -1619,6 +1689,9 @@ L_0A52:
         ja      L_0A18                          ; 77 B5
         mov     ax, word ptr [bp + 6]           ; 8B 46 06
         ret                                     ; C3
+; Description (heuristic):
+;   Internal helper (18 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_0A67   offset=0x0A67  size=18 instr  segment=seg3.asm
 ;
@@ -1648,6 +1721,9 @@ L_0A67:
         push    ax                              ; 50
         call    far _entry_33                   ; 9A FF FF 00 00 [FIXUP]
         ret                                     ; C3
+; Description (heuristic):
+;   Internal helper (20 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_0A96   offset=0x0A96  size=20 instr  segment=seg3.asm
 ;
@@ -1683,6 +1759,9 @@ L_0AC4:
 ;   [fall-through exit] L_0AC7
 L_0AC7:
         ret                                     ; C3
+; Description (heuristic):
+;   Internal helper (10 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_0AC8   offset=0x0AC8  size=10 instr  segment=seg3.asm
 ;
@@ -1707,6 +1786,9 @@ L_0AD4:
         cmp     byte ptr [bx], 0x20             ; 80 3F 20
         je      L_0ACF                          ; 74 F1
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (25 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0ADF   offset=0x0ADF  size=25 instr  segment=seg3.asm
 ;
@@ -1744,6 +1826,9 @@ L_0ADF:
 L_0B1A:
         mov     ax, word ptr [bp - 8]           ; 8B 46 F8
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (46 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0B1E   offset=0x0B1E  size=46 instr  segment=seg3.asm
 ;
@@ -1813,6 +1898,13 @@ L_0B83:
         mov     ax, word ptr [bp + 6]           ; 8B 46 06
         mov     word ptr [bx + 2], ax           ; 89 47 02
         ret                                     ; C3
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x6]  HWND      (2 uses)
+
+; Description (heuristic):
+;   Thin wrapper around SENDMESSAGE(hWnd, wMsg, wParam, lParam) -> LRESULT.
+
 ;-------------------------------------------------------------------------
 ; sub_0B92   offset=0x0B92  size=22 instr  segment=seg3.asm
 ;
@@ -1861,6 +1953,9 @@ L_0B92:
         ; --> SENDMESSAGE(HWND hWnd, WORD wMsg, WPARAM wParam, LPARAM lParam) -> LRESULT
         call    far USER.SENDMESSAGE            ; 9A DA 05 00 00 [FIXUP]
         ret                                     ; C3
+; Description (heuristic):
+;   Mixed routine using: CREATESOLIDBRUSH, GETSYSCOLOR.
+
 ;-------------------------------------------------------------------------
 ; sub_0BC2   offset=0x0BC2  size=32 instr  segment=seg3.asm
 ;
@@ -1924,6 +2019,9 @@ L_0BDF:
 ;   [fall-through exit] L_0C10
 L_0C10:
         ret                                     ; C3
+; Description (heuristic):
+;   Thin wrapper around DELETEOBJECT(hObj) -> BOOL.
+
 ;-------------------------------------------------------------------------
 ; sub_0C11   offset=0x0C11  size=15 instr  segment=seg3.asm
 ;
@@ -1964,6 +2062,9 @@ L_0C36:
 ;   [error/early exit] L_0C46
 L_0C46:
         ret                                     ; C3
+; Description (heuristic):
+;   Small helper using 2 API(s): FILLRECT, GETCLIENTRECT.
+
 ;-------------------------------------------------------------------------
 ; sub_0C47   offset=0x0C47  size=19 instr  segment=seg3.asm
 ;
@@ -2000,6 +2101,13 @@ L_0C69:
         push    si                              ; 56
         call    far USER.FILLRECT               ; 9A 94 09 00 00 [FIXUP]
         ret                                     ; C3
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x6]  HWND      (1 use)
+
+; Description (heuristic):
+;   Thin wrapper around GETDC(hWnd) -> HDC.
+
 ;-------------------------------------------------------------------------
 ; sub_0C78   offset=0x0C78  size=9 instr  segment=seg3.asm
 ;
@@ -2024,6 +2132,13 @@ L_0C78:
         call    L_0C8E                          ; E8 03 00
         mov     ax, si                          ; 8B C6
         ret                                     ; C3
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x4]  HDC       (1 use)
+
+; Description (heuristic):
+;   Mixed routine using: SELECTOBJECT, SETBKCOLOR, SETTEXTCOLOR (+1 more).
+
 ;-------------------------------------------------------------------------
 ; sub_0C8E   offset=0x0C8E  size=20 instr  segment=seg3.asm
 ;
@@ -2066,6 +2181,14 @@ L_0C8E:
         ; --> SELECTOBJECT(HDC hDC, HANDLE hObj) -> HANDLE
         call    far GDI.SELECTOBJECT            ; 9A D4 0C 00 00 [FIXUP]
         ret                                     ; C3
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x4]  INT       (1 use)
+;     [bp+0x6]  HDC       (1 use)
+
+; Description (heuristic):
+;   Small helper using 2 API(s): BITBLT, SELECTOBJECT.
+
 ;-------------------------------------------------------------------------
 ; sub_0CC6   offset=0x0CC6  size=20 instr  segment=seg3.asm
 ;
@@ -2114,6 +2237,9 @@ L_0CC6:
         ; --> BITBLT(HDC hDCDest, INT x, INT y, INT nWidth, INT nHeight, HDC hDCSrc, INT xSrc, INT ySrc, DWORD dwRop) -> BOOL
         call    far GDI.BITBLT                  ; 9A 83 08 00 00 [FIXUP]
         ret                                     ; C3
+; Description (heuristic):
+;   Internal helper (13 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_0D00   offset=0x0D00  size=13 instr  segment=seg3.asm
 ;
@@ -2137,6 +2263,9 @@ L_0D00:
         div     cx                              ; F7 F1
         mov     ax, dx                          ; 8B C2
         ret                                     ; C3
+; Description (heuristic):
+;   Internal helper (19 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_0D19   offset=0x0D19  size=19 instr  segment=seg3.asm
 ;
@@ -2168,6 +2297,9 @@ L_0D19:
 L_0D42:
         mov     ax, si                          ; 8B C6
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (56 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0D45   offset=0x0D45  size=56 instr  segment=seg3.asm
 ;
@@ -2240,6 +2372,9 @@ L_0DAE:
 L_0DD5:
         call    L_132D                          ; E8 55 05
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (51 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0DD9   offset=0x0DD9  size=51 instr  segment=seg3.asm
 ;
@@ -2307,6 +2442,10 @@ L_0E55:
         sub     ax, word ptr [0x456]            ; 2B 06 56 04
         mov     word ptr [bx + 0x604], ax       ; 89 87 04 06
         ret                                     ; C3
+; Description (heuristic):
+;   Mixed routine using: PATBLT.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0E6E   offset=0x0E6E  size=31 instr  segment=seg3.asm
 ;
@@ -2363,6 +2502,13 @@ L_0EAD:
         add     ax, 0xc                         ; 05 0C 00
         mov     word ptr [bp - 2], ax           ; 89 46 FE
         jmp     L_0EE8                          ; EB 25
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x4]  HDC       (1 use)
+
+; Description (heuristic):
+;   Thin wrapper around PATBLT(hDC, x, y, nWidth, nHeight, dwRop) -> BOOL.
+
 ;-------------------------------------------------------------------------
 ; sub_0EC3   offset=0x0EC3  size=16 instr  segment=seg3.asm
 ;
@@ -2400,6 +2546,15 @@ L_0EE8:
         cmp     word ptr [bp - 4], ax           ; 39 46 FC
         jb      L_0EC3                          ; 72 D3
         ret                                     ; C3
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x4]  HDC       (1 use)
+;   Locals:
+;     [bp-0x5e]   INT       (1 use)
+
+; Description (heuristic):
+;   Mixed routine using: TEXTOUT, LOADSTRING.
+
 ;-------------------------------------------------------------------------
 ; sub_0EF1   offset=0x0EF1  size=167 instr  segment=seg3.asm
 ;
@@ -2632,6 +2787,9 @@ L_10A5:
 ;   [error/early exit] L_10BB
 L_10BB:
         ret                                     ; C3
+; Description (heuristic):
+;   Mixed routine using: PATBLT.
+
 ;-------------------------------------------------------------------------
 ; sub_10BC   offset=0x10BC  size=87 instr  segment=seg3.asm
 ;
@@ -2769,6 +2927,14 @@ L_110E:
         ; --> PATBLT(HDC hDC, INT x, INT y, INT nWidth, INT nHeight, DWORD dwRop) -> BOOL
         call    far GDI.PATBLT                  ; 9A A5 0E 00 00 [FIXUP]
         ret                                     ; C3
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x6]  INT       (2 uses)
+;     [bp+0xa]  HDC       (2 uses)
+
+; Description (heuristic):
+;   Thin wrapper around TEXTOUT(hDC, x, y, lpszStr, cbStr) -> BOOL.
+
 ;-------------------------------------------------------------------------
 ; sub_11A1   offset=0x11A1  size=27 instr  segment=seg3.asm
 ;
@@ -2825,6 +2991,9 @@ L_11A1:
         ; --> TEXTOUT(HDC hDC, INT x, INT y, LPSTR lpszStr, INT cbStr) -> BOOL
         call    far GDI.TEXTOUT                 ; 9A 84 10 00 00 [FIXUP]
         ret                                     ; C3
+; Description (heuristic):
+;   Thin wrapper around INVERTRECT.
+
 ;-------------------------------------------------------------------------
 ; sub_11E4   offset=0x11E4  size=13 instr  segment=seg3.asm
 ;
@@ -2853,6 +3022,9 @@ L_11F0:
         push    ax                              ; 50
         call    far USER.INVERTRECT             ; 9A FF FF 00 00 [FIXUP]
         ret                                     ; C3
+; Description (heuristic):
+;   Thin wrapper around SETCARETPOS.
+
 ;-------------------------------------------------------------------------
 ; sub_1201   offset=0x1201  size=21 instr  segment=seg3.asm
 ;
@@ -2887,6 +3059,9 @@ L_1201:
         push    ax                              ; 50
         call    far USER.SETCARETPOS            ; 9A FF FF 00 00 [FIXUP]
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (36 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_1237   offset=0x1237  size=36 instr  segment=seg3.asm
 ;
@@ -2933,6 +3108,9 @@ L_1237:
         mov     ax, word ptr [si + 0x606]       ; 8B 84 06 06
         mov     word ptr [bx + 6], ax           ; 89 47 06
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (23 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_129C   offset=0x129C  size=23 instr  segment=seg3.asm
 ;
@@ -2977,6 +3155,9 @@ L_12D3:
 ;   [fall-through exit] L_12D5
 L_12D5:
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (34 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_12D6   offset=0x12D6  size=34 instr  segment=seg3.asm
 ;
@@ -3025,6 +3206,9 @@ L_1320:
         add     word ptr [bp - 4], ax           ; 01 46 FC
         mov     ax, word ptr [bp - 4]           ; 8B 46 FC
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (47 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_132D   offset=0x132D  size=47 instr  segment=seg3.asm
 ;
@@ -3091,6 +3275,9 @@ L_1399:
 L_13A1:
         call    L_36A4                          ; E8 00 23
         ret                                     ; C3
+; Description (heuristic):
+;   Mixed routine using: INVALIDATERECT, SETSCROLLPOS, SETSCROLLRANGE (+1 more).
+
 ;-------------------------------------------------------------------------
 ; sub_13A5   offset=0x13A5  size=55 instr  segment=seg3.asm
 ;
@@ -3177,6 +3364,9 @@ L_1427:
         push    cs                              ; 0E
         call    L_0598                          ; E8 6B F1
         ret                                     ; C3
+; Description (heuristic):
+;   Internal helper (14 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_142E   offset=0x142E  size=14 instr  segment=seg3.asm
 ;
@@ -3210,6 +3400,9 @@ L_1455:
 ;   [fall-through exit] L_1458
 L_1458:
         ret                                     ; C3
+; Description (heuristic):
+;   Internal helper (14 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_1459   offset=0x1459  size=14 instr  segment=seg3.asm
 ;
@@ -3243,6 +3436,9 @@ L_1480:
 ;   [fall-through exit] L_1483
 L_1483:
         ret                                     ; C3
+; Description (heuristic):
+;   Internal helper (13 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_1484   offset=0x1484  size=13 instr  segment=seg3.asm
 ;
@@ -3272,6 +3468,9 @@ L_1497:
 ;   [error/early exit] L_14A0
 L_14A0:
         ret                                     ; C3
+; Description (heuristic):
+;   Mixed routine using: SETSCROLLPOS, UPDATEWINDOW.
+
 ;-------------------------------------------------------------------------
 ; sub_14A1   offset=0x14A1  size=41 instr  segment=seg3.asm
 ;
@@ -3338,6 +3537,9 @@ L_14C1:
 ;   [error/early exit] L_1505
 L_1505:
         ret                                     ; C3
+; Description (heuristic):
+;   Mixed routine using: GETFOCUS.
+
 ;-------------------------------------------------------------------------
 ; sub_1506   offset=0x1506  size=52 instr  segment=seg3.asm
 ;
@@ -3407,6 +3609,9 @@ L_1575:
 ;   [error/early exit] L_1582
 L_1582:
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (52 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_1583   offset=0x1583  size=52 instr  segment=seg3.asm
 ;
@@ -3494,6 +3699,9 @@ L_15E3:
 ;   [fall-through exit] L_15FD
 L_15FD:
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (114 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_15FE   offset=0x15FE  size=114 instr  segment=seg3.asm
 ;
@@ -3676,6 +3884,13 @@ L_1708:
 ;   [fall-through exit] L_170A
 L_170A:
         ret                                     ; C3
+; Inferred stack frame (pass18, heuristic):
+;   Locals:
+;     [bp-0x2]   HDC       (1 use)
+
+; Description (heuristic):
+;   Thin wrapper around RELEASEDC(hWnd, hDC) -> INT.
+
 ;-------------------------------------------------------------------------
 ; sub_170B   offset=0x170B  size=27 instr  segment=seg3.asm
 ;
@@ -3721,6 +3936,9 @@ L_170B:
 ;   [error/early exit] L_1753
 L_1753:
         ret                                     ; C3
+; Description (heuristic):
+;   Internal helper (13 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_1754   offset=0x1754  size=13 instr  segment=seg3.asm
 ;
@@ -3746,6 +3964,9 @@ L_1754:
 ;   [error/early exit] L_1771
 L_1771:
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (26 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_1772   offset=0x1772  size=26 instr  segment=seg3.asm
 ;
@@ -3786,6 +4007,9 @@ L_1792:
 ;   [fall-through exit] L_17A5
 L_17A5:
         ret                                     ; C3
+; Description (heuristic):
+;   Thin wrapper around INVALIDATERECT(hWnd, lpRect, bErase) -> VOID.
+
 ;-------------------------------------------------------------------------
 ; sub_17A6   offset=0x17A6  size=10 instr  segment=seg3.asm
 ;
@@ -3815,6 +4039,9 @@ L_17A6:
         ; --> INVALIDATERECT(HWND hWnd, LPRECT lpRect, BOOL bErase) -> VOID
         call    far USER.INVALIDATERECT         ; 9A 0C 14 00 00 [FIXUP]
         ret                                     ; C3
+; Description (heuristic):
+;   Thin wrapper around GETFOCUS.
+
 ;-------------------------------------------------------------------------
 ; sub_17BD   offset=0x17BD  size=18 instr  segment=seg3.asm
 ;
@@ -3846,6 +4073,9 @@ L_17BD:
         call    L_0598                          ; E8 BA ED
         mov     ax, di                          ; 8B C7
         ret                                     ; C3
+; Description (heuristic):
+;   Mixed routine using: FILLRECT, GETCLIENTRECT, RELEASEDC (+1 more).
+
 ;-------------------------------------------------------------------------
 ; sub_17E1   offset=0x17E1  size=47 instr  segment=seg3.asm
 ;
@@ -3925,6 +4155,9 @@ L_185D:
         push    word ptr [bp + 4]               ; FF 76 04
         call    L_1864                          ; E8 01 00
         ret                                     ; C3
+; Description (heuristic):
+;   Mixed routine using: INVALIDATERECT, UPDATEWINDOW.
+
 ;-------------------------------------------------------------------------
 ; sub_1864   offset=0x1864  size=72 instr  segment=seg3.asm
 ;
@@ -4038,6 +4271,9 @@ L_18C8:
         call    far USER.UPDATEWINDOW           ; 9A E8 18 00 00 [FIXUP]
         call    L_261E                          ; E8 15 0D
         ret                                     ; C3
+; Description (heuristic):
+;   Mixed routine using: TEXTOUT, DRAWTEXT, SENDMESSAGE (+1 more).
+
 ;-------------------------------------------------------------------------
 ; sub_190A   offset=0x190A  size=127 instr  segment=seg3.asm
 ;
@@ -4237,6 +4473,9 @@ L_1A3B:
 L_1A44:
         call    L_2503                          ; E8 BC 0A
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (53 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_1A48   offset=0x1A48  size=53 instr  segment=seg3.asm
 ;
@@ -4312,6 +4551,9 @@ L_1AC2:
 ;   [error/early exit] L_1AC9
 L_1AC9:
         ret                                     ; C3
+; Description (heuristic):
+;   Internal helper (16 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_1ACA   offset=0x1ACA  size=16 instr  segment=seg3.asm
 ;
@@ -4338,6 +4580,9 @@ L_1ACA:
         push    ax                              ; 50
         call    L_35FF                          ; E8 13 1B
         ret                                     ; C3
+; Description (heuristic):
+;   Internal helper (16 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_1AED   offset=0x1AED  size=16 instr  segment=seg3.asm
 ;
@@ -4364,6 +4609,9 @@ L_1AED:
         push    ax                              ; 50
         call    L_35FF                          ; E8 F0 1A
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (44 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_1B10   offset=0x1B10  size=44 instr  segment=seg3.asm
 ;
@@ -4433,6 +4681,9 @@ L_1B7D:
 ;   [fall-through exit] L_1B86
 L_1B86:
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (49 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_1B87   offset=0x1B87  size=49 instr  segment=seg3.asm
 ;
@@ -4511,6 +4762,9 @@ L_1C04:
 ;   [fall-through exit] L_1C0D
 L_1C0D:
         ret                                     ; C3
+; Description (heuristic):
+;   Mixed routine using: INVALIDATERECT.
+
 ;-------------------------------------------------------------------------
 ; sub_1C0E   offset=0x1C0E  size=66 instr  segment=seg3.asm
 ;
@@ -4623,6 +4877,9 @@ L_1C9C:
 ;   [fall-through exit] L_1C9E
 L_1C9E:
         ret                                     ; C3
+; Description (heuristic):
+;   Drawing routine (4 GDI APIs).
+
 ;-------------------------------------------------------------------------
 ; sub_1C9F   offset=0x1C9F  size=119 instr  segment=seg3.asm
 ;
@@ -4810,6 +5067,9 @@ L_1D8D:
 ;   [error/early exit] L_1DCC
 L_1DCC:
         ret                                     ; C3
+; Description (heuristic):
+;   Drawing routine (4 GDI APIs).
+
 ;-------------------------------------------------------------------------
 ; sub_1DCD   offset=0x1DCD  size=127 instr  segment=seg3.asm
 ;
@@ -5003,6 +5263,9 @@ L_1EDA:
 ;   [error/early exit] L_1F15
 L_1F15:
         ret                                     ; C3
+; Description (heuristic):
+;   Mixed routine using: INVALIDATERECT, OFFSETRECT.
+
 ;-------------------------------------------------------------------------
 ; sub_1F16   offset=0x1F16  size=33 instr  segment=seg3.asm
 ;
@@ -5062,6 +5325,9 @@ L_1F16:
         ; --> INVALIDATERECT(HWND hWnd, LPRECT lpRect, BOOL bErase) -> VOID
         call    far USER.INVALIDATERECT         ; 9A 08 1F 00 00 [FIXUP]
         ret                                     ; C3
+; Description (heuristic):
+;   Internal helper (6 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_1F6D   offset=0x1F6D  size=6 instr  segment=seg3.asm
 ;
@@ -5078,6 +5344,9 @@ L_1F6D:
         imul    word ptr [0x5ec]                ; F7 2E EC 05
         add     ax, word ptr [0x458]            ; 03 06 58 04
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (25 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_1F7E   offset=0x1F7E  size=25 instr  segment=seg3.asm
 ;
@@ -5125,6 +5394,9 @@ L_1FB4:
 ;   [fall-through exit] L_1FB7
 L_1FB7:
         ret                                     ; C3
+; Description (heuristic):
+;   Mixed routine using: MOVEWINDOW, SENDMESSAGE, VALIDATERECT.
+
 ;-------------------------------------------------------------------------
 ; sub_1FB8   offset=0x1FB8  size=71 instr  segment=seg3.asm
 ;
@@ -5235,6 +5507,9 @@ L_2017:
 ;   [error/early exit] L_2065
 L_2065:
         ret                                     ; C3
+; Description (heuristic):
+;   Thin wrapper around SETSCROLLRANGE.
+
 ;-------------------------------------------------------------------------
 ; sub_2066   offset=0x2066  size=16 instr  segment=seg3.asm
 ;
@@ -5265,6 +5540,9 @@ L_2066:
         push    ax                              ; 50
         call    far USER.SETSCROLLRANGE         ; 9A BD 20 00 00 [FIXUP]
         ret                                     ; C3
+; Description (heuristic):
+;   Small helper using 2 API(s): GETSCROLLRANGE, SETSCROLLRANGE.
+
 ;-------------------------------------------------------------------------
 ; sub_208B   offset=0x208B  size=24 instr  segment=seg3.asm
 ;
@@ -5305,6 +5583,9 @@ L_208B:
         push    ax                              ; 50
         call    far USER.SETSCROLLRANGE         ; 9A D2 13 00 00 [FIXUP]
         ret                                     ; C3
+; Description (heuristic):
+;   Thin wrapper around SETSCROLLPOS.
+
 ;-------------------------------------------------------------------------
 ; sub_20C2   offset=0x20C2  size=15 instr  segment=seg3.asm
 ;
@@ -5336,6 +5617,9 @@ L_20D8:
         push    ax                              ; 50
         call    far USER.SETSCROLLPOS           ; 9A EF 14 00 00 [FIXUP]
         ret                                     ; C3
+; Description (heuristic):
+;   Thin wrapper around GETSCROLLPOS.
+
 ;-------------------------------------------------------------------------
 ; sub_20E8   offset=0x20E8  size=10 instr  segment=seg3.asm
 ;
@@ -5360,6 +5644,9 @@ L_20E8:
         push    ax                              ; 50
         call    L_20C2                          ; E8 C1 FF
         ret                                     ; C3
+; Description (heuristic):
+;   Internal helper (10 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_2102   offset=0x2102  size=10 instr  segment=seg3.asm
 ;
@@ -5380,6 +5667,9 @@ L_2102:
         call    L_212F                          ; E8 18 00
         mov     ax, word ptr [bp - 2]           ; 8B 46 FE
         ret                                     ; C3
+; Description (heuristic):
+;   Internal helper (9 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_211B   offset=0x211B  size=9 instr  segment=seg3.asm
 ;
@@ -5399,6 +5689,9 @@ L_211B:
         call    L_212F                          ; E8 04 00
         mov     ax, word ptr [bp - 2]           ; 8B 46 FE
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (62 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_212F   offset=0x212F  size=62 instr  segment=seg3.asm
 ;
@@ -5492,6 +5785,9 @@ L_21C1:
 ;   [fall-through exit] L_21C6
 L_21C6:
         ret                                     ; C3
+; Description (heuristic):
+;   Internal helper (14 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_21C7   offset=0x21C7  size=14 instr  segment=seg3.asm
 ;
@@ -5518,6 +5814,9 @@ L_21C7:
 L_21E4:
         mov     ax, di                          ; 8B C7
         ret                                     ; C3
+; Description (heuristic):
+;   Internal helper (15 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_21E7   offset=0x21E7  size=15 instr  segment=seg3.asm
 ;
@@ -5545,6 +5844,9 @@ L_21E7:
 L_2207:
         mov     ax, di                          ; 8B C7
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (60 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_220A   offset=0x220A  size=60 instr  segment=seg3.asm
 ;
@@ -5627,6 +5929,13 @@ L_229F:
 ;   [fall-through exit] L_22AD
 L_22AD:
         ret                                     ; C3
+; Inferred stack frame (pass18, heuristic):
+;   Locals:
+;     [bp-0x64]   LRESULT   (1 use)
+
+; Description (heuristic):
+;   Mixed routine using: LSTRCMP, SENDMESSAGE.
+
 ;-------------------------------------------------------------------------
 ; sub_22AE   offset=0x22AE  size=129 instr  segment=seg3.asm
 ;
@@ -5802,6 +6111,9 @@ L_23DC:
 ;   [error/early exit] L_23FD
 L_23FD:
         ret                                     ; C3
+; Description (heuristic):
+;   Internal helper (16 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_23FE   offset=0x23FE  size=16 instr  segment=seg3.asm
 ;
@@ -5832,6 +6144,9 @@ L_241A:
         cmp     word ptr [bp + 6], ax           ; 39 46 06
         jl      L_2405                          ; 7C E0
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (28 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_2426   offset=0x2426  size=28 instr  segment=seg3.asm
 ;
@@ -5870,6 +6185,9 @@ L_2426:
         sub     word ptr [bx + 8], ax           ; 29 47 08
         call    L_2503                          ; E8 99 00
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (52 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_246B   offset=0x246B  size=52 instr  segment=seg3.asm
 ;
@@ -5941,6 +6259,9 @@ L_24E0:
         call    L_2503                          ; E8 20 00
         mov     ax, word ptr [bp - 4]           ; 8B 46 FC
         ret                                     ; C3
+; Description (heuristic):
+;   Internal helper (7 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_24E7   offset=0x24E7  size=7 instr  segment=seg3.asm
 ;
@@ -5958,6 +6279,9 @@ L_24E7:
         push    si                              ; 56
         call    L_2538                          ; E8 43 00
         ret                                     ; C3
+; Description (heuristic):
+;   Internal helper (5 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_24F6   offset=0x24F6  size=5 instr  segment=seg3.asm
 ;
@@ -5973,6 +6297,9 @@ L_24F6:
         push    word ptr [0x282]                ; FF 36 82 02
         call    L_2510                          ; E8 0E 00
         ret                                     ; C3
+; Description (heuristic):
+;   Internal helper (5 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_2503   offset=0x2503  size=5 instr  segment=seg3.asm
 ;
@@ -5988,6 +6315,9 @@ L_2503:
         push    word ptr [0x282]                ; FF 36 82 02
         call    L_2524                          ; E8 15 00
         ret                                     ; C3
+; Description (heuristic):
+;   Thin wrapper around LOCALLOCK(hMem) -> PSTR.
+
 ;-------------------------------------------------------------------------
 ; sub_2510   offset=0x2510  size=7 instr  segment=seg3.asm
 ;
@@ -6010,6 +6340,9 @@ L_2510:
         ; --> LOCALLOCK(HANDLE hMem) -> PSTR
         call    far KERNEL.LOCALLOCK            ; 9A FF FF 00 00 [FIXUP]
         ret                                     ; C3
+; Description (heuristic):
+;   Thin wrapper around LOCALUNLOCK(hMem) -> BOOL.
+
 ;-------------------------------------------------------------------------
 ; sub_2524   offset=0x2524  size=7 instr  segment=seg3.asm
 ;
@@ -6032,6 +6365,9 @@ L_2524:
         ; --> LOCALUNLOCK(HANDLE hMem) -> BOOL
         call    far KERNEL.LOCALUNLOCK          ; 9A FF FF 00 00 [FIXUP]
         ret                                     ; C3
+; Description (heuristic):
+;   Internal helper (7 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_2538   offset=0x2538  size=7 instr  segment=seg3.asm
 ;
@@ -6049,6 +6385,9 @@ L_2538:
         add     ax, bx                          ; 03 C3
         add     ax, 0xa                         ; 05 0A 00
         ret                                     ; C3
+; Description (heuristic):
+;   Mixed routine using: LSTRCMP, SENDMESSAGE.
+
 ;-------------------------------------------------------------------------
 ; sub_2549   offset=0x2549  size=86 instr  segment=seg3.asm
 ;
@@ -6192,6 +6531,9 @@ L_2602:
 ;   [error/early exit] L_261D
 L_261D:
         ret                                     ; C3
+; Description (heuristic):
+;   Internal helper (14 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_261E   offset=0x261E  size=14 instr  segment=seg3.asm
 ;
@@ -6218,6 +6560,9 @@ L_2636:
         call    L_0B92                          ; E8 54 E5
         call    L_2503                          ; E8 C2 FE
         ret                                     ; C3
+; Description (heuristic):
+;   Mixed routine using: SENDMESSAGE.
+
 ;-------------------------------------------------------------------------
 ; sub_2642   offset=0x2642  size=89 instr  segment=seg3.asm
 ;
@@ -6356,6 +6701,9 @@ L_270D:
 ;   [error/early exit] L_272E
 L_272E:
         ret                                     ; C3
+; Description (heuristic):
+;   Mixed routine using: ANSINEXT, ENDDIALOG, SENDMESSAGE (+1 more).
+
 ;-------------------------------------------------------------------------
 ; sub_272F   offset=0x272F  size=84 instr  segment=seg3.asm
 ;
@@ -6490,6 +6838,9 @@ L_280E:
 ;   [fall-through exit] L_2810
 L_2810:
         ret                                     ; C3
+; Description (heuristic):
+;   Mixed routine using: ENDDIALOG, GETDLGITEMTEXT.
+
 ;-------------------------------------------------------------------------
 ; sub_2811   offset=0x2811  size=80 instr  segment=seg3.asm
 ;
@@ -6605,6 +6956,9 @@ L_28B4:
 ;   [fall-through exit] L_28C2
 L_28C2:
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (66 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_28C3   offset=0x28C3  size=66 instr  segment=seg3.asm
 ;
@@ -6690,6 +7044,9 @@ L_2947:
         mov     word ptr [0x380], 1             ; C7 06 80 03 01 00
         call    L_2971                          ; E8 21 00
         ret                                     ; C3
+; Description (heuristic):
+;   Thin wrapper around SETCURSOR.
+
 ;-------------------------------------------------------------------------
 ; sub_2951   offset=0x2951  size=11 instr  segment=seg3.asm
 ;
@@ -6716,6 +7073,9 @@ L_2951:
 ;   [error/early exit] L_2970
 L_2970:
         ret                                     ; C3
+; Description (heuristic):
+;   Thin wrapper around SETCURSOR.
+
 ;-------------------------------------------------------------------------
 ; sub_2971   offset=0x2971  size=7 instr  segment=seg3.asm
 ;
@@ -6738,6 +7098,10 @@ L_2971:
 ;   [error/early exit] L_2985
 L_2985:
         ret                                     ; C3
+; Description (heuristic):
+;   Mixed routine using: GETFOCUS, GETKEYSTATE, GETMENU (+3 more).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_2986   offset=0x2986  size=125 instr  segment=seg3.asm
 ;
@@ -6917,6 +7281,10 @@ L_2A75:
         push    ax                              ; 50
         call    far USER.HILITEMENUITEM         ; 9A FF FF 00 00 [FIXUP]
         jmp     L_2C2F                          ; E9 71 01
+; Description (heuristic):
+;   Mixed routine using: GETFOCUS, RELEASEDC, SENDMESSAGE.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_2ABE   offset=0x2ABE  size=149 instr  segment=seg3.asm
 ;
@@ -7117,6 +7485,14 @@ L_2BC2:
         sub     bp, word ptr [bx]               ; 2B 2F
         sub     al, 0x2e                        ; 2C 2E
         sub     al, bl                          ; 2A C3
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x4]  LPSTR     (1 use)
+
+; Description (heuristic):
+;   Mixed routine using: DIALOGBOX.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_2C30   offset=0x2C30  size=48 instr  segment=seg3.asm
 ;
@@ -7198,6 +7574,14 @@ L_2CA2:
 L_2CAA:
         sub     ax, ax                          ; 2B C0
         jmp     L_2D83                          ; E9 D4 00
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0xe]  HWND      (2 uses)
+
+; Description (heuristic):
+;   File I/O routine (2 file APIs).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_2CAF   offset=0x2CAF  size=69 instr  segment=seg3.asm
 ;
@@ -7315,6 +7699,10 @@ L_2D4D:
         or      ax, ax                          ; 0B C0
         jne     L_2D5D                          ; 75 03
         jmp     L_2C8C                          ; E9 2F FF
+; Description (heuristic):
+;   Thin wrapper around ENDDIALOG(hDlg, nResult) -> BOOL.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_2D5D   offset=0x2D5D  size=8 instr  segment=seg3.asm
 ;
@@ -7340,6 +7728,10 @@ L_2D6C:
         push    word ptr [bp + 0xe]             ; FF 76 0E
         sub     ax, ax                          ; 2B C0
         jmp     L_2D63                          ; EB F0
+; Description (heuristic):
+;   Mixed routine using: SETDLGITEMTEXT.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_2D73   offset=0x2D73  size=32 instr  segment=seg3.asm
 ;
@@ -7400,6 +7792,14 @@ L_2DB2:
         cmp     ax, 2                           ; 3D 02 00
         je      L_2DFC                          ; 74 3D
         jmp     L_2DAD                          ; EB EC
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0xe]  HWND      (1 use)
+
+; Description (heuristic):
+;   Mixed routine using: CHECKDLGBUTTON, ENDDIALOG, GETDLGITEMTEXT (+1 more).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_2DC1   offset=0x2DC1  size=68 instr  segment=seg3.asm
 ;
@@ -7510,6 +7910,10 @@ L_2E54:
         cmp     ax, 9                           ; 3D 09 00
         je      L_2EBB                          ; 74 55
         jmp     L_2E4E                          ; EB E6
+; Description (heuristic):
+;   Mixed routine using: ENDDIALOG, GETDLGITEMINT.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_2E68   offset=0x2E68  size=33 instr  segment=seg3.asm
 ;
@@ -7567,6 +7971,10 @@ L_2EB3:
         ; --> ENDDIALOG(HWND hDlg, INT nResult) -> BOOL
         call    far USER.ENDDIALOG              ; 9A 03 2E 00 00 [FIXUP]
         jmp     L_2E4E                          ; EB 93
+; Description (heuristic):
+;   Mixed routine using: CHECKDLGBUTTON, ISDLGBUTTONCHECKED, SETDLGITEMTEXT.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_2EBB   offset=0x2EBB  size=79 instr  segment=seg3.asm
 ;
@@ -7692,6 +8100,10 @@ L_2F62:
         cmp     ax, 0xb                         ; 3D 0B 00
         je      L_2FAC                          ; 74 2E
         jmp     L_2F5C                          ; EB DC
+; Description (heuristic):
+;   Mixed routine using: GETDLGITEMTEXT.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_2F80   offset=0x2F80  size=59 instr  segment=seg3.asm
 ;
@@ -7786,6 +8198,10 @@ L_300B:
         push    ax                              ; 50
         call    L_31D5                          ; E8 C0 01
         jmp     L_2F5C                          ; E9 44 FF
+; Description (heuristic):
+;   Dialog procedure (DlgProc). Handles dialog messages.
+;   Reads/writes dialog item text.
+
 ;-------------------------------------------------------------------------
 ; sub_3018   offset=0x3018  size=171 instr  segment=seg3.asm
 ;
@@ -8051,6 +8467,9 @@ L_31D2:
 ;   [fall-through exit] L_31D4
 L_31D4:
         ret                                     ; C3
+; Description (heuristic):
+;   Thin wrapper around MESSAGEBOX(hWndOwner, lpszText, lpszTitle, wStyle) -> INT.
+
 ;-------------------------------------------------------------------------
 ; sub_31D5   offset=0x31D5  size=23 instr  segment=seg3.asm
 ;
@@ -8098,6 +8517,9 @@ L_31F6:
         ; --> MESSAGEBOX(HWND hWndOwner, LPSTR lpszText, LPSTR lpszTitle, WORD wStyle) -> INT
         call    far USER.MESSAGEBOX             ; 9A FF FF 00 00 [FIXUP]
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (35 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_320B   offset=0x320B  size=35 instr  segment=seg3.asm
 ;
@@ -8158,6 +8580,9 @@ L_324A:
 ;   [fall-through exit] L_3255
 L_3255:
         ret                                     ; C3
+; Description (heuristic):
+;   String manipulation routine (2 string APIs).
+
 ;-------------------------------------------------------------------------
 ; sub_3256   offset=0x3256  size=40 instr  segment=seg3.asm
 ;
@@ -8229,6 +8654,14 @@ L_3297:
 ;   [error/early exit] L_32AD
 L_32AD:
         ret                                     ; C3
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x6]  INT       (1 use)
+;     [bp+0x8]  HWND      (2 uses)
+
+; Description (heuristic):
+;   Small helper using 3 API(s): ENABLEWINDOW, GETDLGITEM, SENDMESSAGE.
+
 ;-------------------------------------------------------------------------
 ; sub_32AE   offset=0x32AE  size=23 instr  segment=seg3.asm
 ;
@@ -8283,6 +8716,9 @@ L_32AE:
 ;   [error/early exit] L_32E7
 L_32E7:
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (36 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_32E8   offset=0x32E8  size=36 instr  segment=seg3.asm
 ;
@@ -8344,6 +8780,9 @@ L_333D:
 ;   [fall-through exit] L_3340
 L_3340:
         ret                                     ; C3
+; Description (heuristic):
+;   Thin wrapper around GETFOCUS.
+
 ;-------------------------------------------------------------------------
 ; sub_3341   offset=0x3341  size=12 instr  segment=seg3.asm
 ;
@@ -8373,6 +8812,9 @@ L_3358:
 ;   [error/early exit] L_3361
 L_3361:
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (57 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_3362   offset=0x3362  size=57 instr  segment=seg3.asm
 ;
@@ -8461,6 +8903,9 @@ L_33F1:
         push    ax                              ; 50
         call    L_31D5                          ; E8 D7 FD
         ret                                     ; C3
+; Description (heuristic):
+;   Mixed routine using: INVALIDATERECT.
+
 ;-------------------------------------------------------------------------
 ; sub_33FF   offset=0x33FF  size=42 instr  segment=seg3.asm
 ;
@@ -8530,6 +8975,9 @@ L_3431:
 L_3468:
         mov     word ptr [0x380], 1             ; C7 06 80 03 01 00
         ret                                     ; C3
+; Description (heuristic):
+;   Thin wrapper around LOCALREALLOC(hMem, wBytes, wFlags) -> HANDLE.
+
 ;-------------------------------------------------------------------------
 ; sub_346F   offset=0x346F  size=13 instr  segment=seg3.asm
 ;
@@ -8560,6 +9008,9 @@ L_346F:
         mov     word ptr [0x2e6], ax            ; A3 E6 02
         mov     word ptr [0x26a], ax            ; A3 6A 02
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (55 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_3490   offset=0x3490  size=55 instr  segment=seg3.asm
 ;
@@ -8638,6 +9089,9 @@ L_3507:
 L_3515:
         mov     ax, word ptr [bp - 8]           ; 8B 46 F8
         ret                                     ; C3
+; Description (heuristic):
+;   Mixed routine using: LOCALREALLOC.
+
 ;-------------------------------------------------------------------------
 ; sub_3519   offset=0x3519  size=52 instr  segment=seg3.asm
 ;
@@ -8722,6 +9176,9 @@ L_356A:
 ;   [fall-through exit] L_359E
 L_359E:
         ret                                     ; C3
+; Description (heuristic):
+;   Mixed routine using: LOCALREALLOC.
+
 ;-------------------------------------------------------------------------
 ; sub_359F   offset=0x359F  size=37 instr  segment=seg3.asm
 ;
@@ -8782,6 +9239,9 @@ L_359F:
 ;   [error/early exit] L_35FE
 L_35FE:
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (34 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_35FF   offset=0x35FF  size=34 instr  segment=seg3.asm
 ;
@@ -8836,6 +9296,9 @@ L_3649:
 L_3653:
         mov     ax, si                          ; 8B C6
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (25 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_3656   offset=0x3656  size=25 instr  segment=seg3.asm
 ;
@@ -8880,6 +9343,9 @@ L_3681:
 ;   [error/early exit] L_3694
 L_3694:
         ret                                     ; C3
+; Description (heuristic):
+;   Thin wrapper around LOCALLOCK(hMem) -> PSTR.
+
 ;-------------------------------------------------------------------------
 ; sub_3695   offset=0x3695  size=5 instr  segment=seg3.asm
 ;
@@ -8900,6 +9366,9 @@ L_3695:
         ; --> LOCALLOCK(HANDLE hMem) -> PSTR
         call    far KERNEL.LOCALLOCK            ; 9A 1F 25 00 00 [FIXUP]
         ret                                     ; C3
+; Description (heuristic):
+;   Thin wrapper around LOCALUNLOCK(hMem) -> BOOL.
+
 ;-------------------------------------------------------------------------
 ; sub_36A4   offset=0x36A4  size=5 instr  segment=seg3.asm
 ;
@@ -8920,6 +9389,9 @@ L_36A4:
         ; --> LOCALUNLOCK(HANDLE hMem) -> BOOL
         call    far KERNEL.LOCALUNLOCK          ; 9A 33 25 00 00 [FIXUP]
         ret                                     ; C3
+; Description (heuristic):
+;   Internal helper (19 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_36B3   offset=0x36B3  size=19 instr  segment=seg3.asm
 ;
@@ -8952,6 +9424,9 @@ L_36B3:
 ;   [error/early exit] L_36E0
 L_36E0:
         ret                                     ; C3
+; Description (heuristic):
+;   Internal helper (9 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_36E1   offset=0x36E1  size=9 instr  segment=seg3.asm
 ;
@@ -8974,6 +9449,13 @@ L_36E1:
 ;   [error/early exit] L_36FA
 L_36FA:
         ret                                     ; C3
+; Inferred stack frame (pass18, heuristic):
+;   Locals:
+;     [bp-0x2]   HFILE     (2 uses)
+
+; Description (heuristic):
+;   File I/O routine (3 file APIs).
+
 ;-------------------------------------------------------------------------
 ; sub_36FB   offset=0x36FB  size=37 instr  segment=seg3.asm
 ;
@@ -9039,6 +9521,9 @@ L_374B:
 ;   [fall-through exit] L_374D
 L_374D:
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (47 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_374E   offset=0x374E  size=47 instr  segment=seg3.asm
 ;
@@ -9113,6 +9598,13 @@ L_37B5:
 ;   [fall-through exit] L_37C5
 L_37C5:
         ret                                     ; C3
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x6]  WORD      (1 use)
+
+; Description (heuristic):
+;   Mixed routine using: _LLSEEK.
+
 ;-------------------------------------------------------------------------
 ; sub_37C6   offset=0x37C6  size=70 instr  segment=seg3.asm
 ;
@@ -9217,6 +9709,10 @@ L_3876:
 ;   [fall-through exit] L_3878
 L_3878:
         ret                                     ; C3
+; Description (heuristic):
+;   File I/O routine (2 file APIs).
+;   Reads from file handle.
+
 ;-------------------------------------------------------------------------
 ; sub_3879   offset=0x3879  size=80 instr  segment=seg3.asm
 ;
@@ -9346,6 +9842,9 @@ L_3941:
 ;   [fall-through exit] L_3943
 L_3943:
         ret                                     ; C3
+; Description (heuristic):
+;   Mixed routine using: GETFOCUS.
+
 ;-------------------------------------------------------------------------
 ; sub_3944   offset=0x3944  size=169 instr  segment=seg3.asm
 ;
@@ -9567,6 +10066,10 @@ L_3B10:
 ;   [fall-through exit] L_3B1E
 L_3B1E:
         ret                                     ; C3
+; Description (heuristic):
+;   Internal helper (12 instructions).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_3B1F   offset=0x3B1F  size=12 instr  segment=seg3.asm
 ;
@@ -9594,6 +10097,9 @@ L_3B3E:
         ; constant WM_CREATE
         mov     ax, 1                           ; B8 01 00
         jmp     L_3BFE                          ; E9 BA 00
+; Description (heuristic):
+;   Pure computation / dispatcher (74 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_3B44   offset=0x3B44  size=74 instr  segment=seg3.asm
 ;
@@ -9701,6 +10207,13 @@ L_3BEC:
 ;   [fall-through exit] L_3BFE
 L_3BFE:
         ret                                     ; C3
+; Inferred stack frame (pass18, heuristic):
+;   Locals:
+;     [bp-0xa]   HFILE     (2 uses)
+
+; Description (heuristic):
+;   File I/O routine (4 file APIs).
+
 ;-------------------------------------------------------------------------
 ; sub_3BFF   offset=0x3BFF  size=196 instr  segment=seg3.asm
 ;
@@ -9982,6 +10495,9 @@ L_3DE6:
 ;   [fall-through exit] L_3DF0
 L_3DF0:
         ret                                     ; C3
+; Description (heuristic):
+;   Mixed routine using: GETFOCUS.
+
 ;-------------------------------------------------------------------------
 ; sub_3DF1   offset=0x3DF1  size=42 instr  segment=seg3.asm
 ;
@@ -10042,6 +10558,9 @@ L_3E2E:
         push    cs                              ; 0E
         call    L_0598                          ; E8 43 C7
         ret                                     ; C3
+; Description (heuristic):
+;   Internal helper (15 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_3E56   offset=0x3E56  size=15 instr  segment=seg3.asm
 ;
@@ -10071,6 +10590,9 @@ L_3E76:
 ;   [fall-through exit] L_3E79
 L_3E79:
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (58 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_3E7A   offset=0x3E7A  size=58 instr  segment=seg3.asm
 ;
@@ -10153,6 +10675,9 @@ L_3F06:
 L_3F0F:
         mov     ax, word ptr [bp - 4]           ; 8B 46 FC
         ret                                     ; C3
+; Description (heuristic):
+;   Thin wrapper around _LCLOSE(hFile) -> HFILE.
+
 ;-------------------------------------------------------------------------
 ; sub_3F13   offset=0x3F13  size=17 instr  segment=seg3.asm
 ;
@@ -10192,6 +10717,9 @@ L_3F2B:
 ;   [fall-through exit] L_3F3E
 L_3F3E:
         ret                                     ; C3
+; Description (heuristic):
+;   Mixed routine using: _LLSEEK.
+
 ;-------------------------------------------------------------------------
 ; sub_3F3F   offset=0x3F3F  size=135 instr  segment=seg3.asm
 ;
@@ -10374,6 +10902,14 @@ L_405E:
 ;   [fall-through exit] L_4060
 L_4060:
         ret                                     ; C3
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x4]  WORD      (1 use)
+;     [bp+0x8]  HFILE     (1 use)
+
+; Description (heuristic):
+;   Thin wrapper around _LWRITE(hFile, lpBuffer, wBytes) -> WORD.
+
 ;-------------------------------------------------------------------------
 ; sub_4061   offset=0x4061  size=20 instr  segment=seg3.asm
 ;
@@ -10417,6 +10953,9 @@ L_4080:
 ;   [fall-through exit] L_4090
 L_4090:
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (23 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_4091   offset=0x4091  size=23 instr  segment=seg3.asm
 ;
@@ -10455,6 +10994,13 @@ L_40C3:
 ;   [fall-through exit] L_40C5
 L_40C5:
         ret                                     ; C3
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x4]  WORD      (1 use)
+
+; Description (heuristic):
+;   Thin wrapper around OPENFILE(lpszFileName, lpReOpenBuff, wStyle) -> HFILE.
+
 ;-------------------------------------------------------------------------
 ; sub_40C6   offset=0x40C6  size=22 instr  segment=seg3.asm
 ;
@@ -10501,6 +11047,9 @@ L_40F6:
 ;   [fall-through exit] L_40F8
 L_40F8:
         ret                                     ; C3
+; Description (heuristic):
+;   Mixed routine using: ANSIUPPER, SETWINDOWTEXT.
+
 ;-------------------------------------------------------------------------
 ; sub_40F9   offset=0x40F9  size=34 instr  segment=seg3.asm
 ;
@@ -10563,6 +11112,9 @@ L_4128:
         ; --> SETWINDOWTEXT(HWND hWnd, LPSTR lpszText) -> VOID
         call    far USER.SETWINDOWTEXT          ; 9A FF FF 00 00 [FIXUP]
         ret                                     ; C3
+; Description (heuristic):
+;   Internal helper (12 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_414F   offset=0x414F  size=12 instr  segment=seg3.asm
 ;
@@ -10592,6 +11144,9 @@ L_4169:
 ;   [fall-through exit] L_416B
 L_416B:
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (45 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_416C   offset=0x416C  size=45 instr  segment=seg3.asm
 ;
@@ -10651,6 +11206,9 @@ L_418D:
 L_41F2:
         call    L_2971                          ; E8 7C E7
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (29 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_41F6   offset=0x41F6  size=29 instr  segment=seg3.asm
 ;
@@ -10695,6 +11253,10 @@ L_41F6:
 ;   [error/early exit] L_4233
 L_4233:
         ret                                     ; C3
+; Description (heuristic):
+;   File I/O routine (2 file APIs).
+;   Reads from file handle.
+
 ;-------------------------------------------------------------------------
 ; sub_4234   offset=0x4234  size=171 instr  segment=seg3.asm
 ;
@@ -10932,6 +11494,9 @@ L_43B9:
         call    L_17E1                          ; E8 1B D4
         call    L_2971                          ; E8 A8 E5
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (21 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_43CA   offset=0x43CA  size=21 instr  segment=seg3.asm
 ;
@@ -10965,6 +11530,9 @@ L_43CA:
 L_43FE:
         mov     ax, word ptr [bp - 2]           ; 8B 46 FE
         ret                                     ; C3
+; Description (heuristic):
+;   Mixed routine using: INVALIDATERECT, UPDATEWINDOW.
+
 ;-------------------------------------------------------------------------
 ; sub_4402   offset=0x4402  size=175 instr  segment=seg3.asm
 ;
@@ -11193,6 +11761,9 @@ L_45AF:
 ;   [error/early exit] L_45D1
 L_45D1:
         ret                                     ; C3
+; Description (heuristic):
+;   Mixed routine using: ENDDIALOG.
+
 ;-------------------------------------------------------------------------
 ; sub_45D2   offset=0x45D2  size=82 instr  segment=seg3.asm
 ;
@@ -11313,6 +11884,9 @@ L_4692:
 ;   [fall-through exit] L_46A6
 L_46A6:
         ret                                     ; C3
+; Description (heuristic):
+;   Mixed routine using: SENDDLGITEMMESSAGE.
+
 ;-------------------------------------------------------------------------
 ; sub_46A7   offset=0x46A7  size=125 instr  segment=seg3.asm
 ;
@@ -11485,6 +12059,9 @@ L_47DC:
 L_47E7:
         call    L_2971                          ; E8 87 E1
         ret                                     ; C3
+; Description (heuristic):
+;   Internal helper (14 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_47EB   offset=0x47EB  size=14 instr  segment=seg3.asm
 ;
@@ -11512,6 +12089,9 @@ L_47F3:
         jne     L_47F3                          ; 75 ED
         mov     ax, si                          ; 8B C6
         ret                                     ; C3
+; Description (heuristic):
+;   Internal helper (14 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_4809   offset=0x4809  size=14 instr  segment=seg3.asm
 ;
@@ -11537,6 +12117,9 @@ L_4809:
         push    word ptr [bp + 6]               ; FF 76 06
         call    L_2524                          ; E8 F8 DC
         ret                                     ; C3
+; Description (heuristic):
+;   Thin wrapper around FLASHWINDOW.
+
 ;-------------------------------------------------------------------------
 ; sub_482D   offset=0x482D  size=11 instr  segment=seg3.asm
 ;
@@ -11563,6 +12146,9 @@ L_482D:
 ;   [error/early exit] L_484A
 L_484A:
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (27 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_484B   offset=0x484B  size=27 instr  segment=seg3.asm
 ;
@@ -11603,6 +12189,9 @@ L_484B:
 ;   [error/early exit] L_488D
 L_488D:
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (58 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_488E   offset=0x488E  size=58 instr  segment=seg3.asm
 ;
@@ -11675,6 +12264,9 @@ L_4911:
         call    L_208B                          ; E8 73 D7
         call    L_491C                          ; E8 01 00
         ret                                     ; C3
+; Description (heuristic):
+;   Mixed routine using: ENDDIALOG, INVALIDATERECT, SETDLGITEMTEXT.
+
 ;-------------------------------------------------------------------------
 ; sub_491C   offset=0x491C  size=75 instr  segment=seg3.asm
 ;
@@ -11799,6 +12391,9 @@ L_49CD:
 ;   [fall-through exit] L_49CF
 L_49CF:
         ret                                     ; C3
+; Description (heuristic):
+;   Mixed routine using: GETDEVICECAPS, GETTEXTMETRICS.
+
 ;-------------------------------------------------------------------------
 ; sub_49D0   offset=0x49D0  size=94 instr  segment=seg3.asm
 ;
@@ -11932,6 +12527,9 @@ L_4AC4:
 ;   [error/early exit] L_4ACE
 L_4ACE:
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (152 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_4ACF   offset=0x4ACF  size=152 instr  segment=seg3.asm
 ;
@@ -12148,6 +12746,9 @@ L_4C5C:
 ;   [fall-through exit] L_4C65
 L_4C65:
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (31 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_4C66   offset=0x4C66  size=31 instr  segment=seg3.asm
 ;
@@ -12199,6 +12800,9 @@ L_4CAF:
 ;   [fall-through exit] L_4CB2
 L_4CB2:
         ret                                     ; C3
+; Description (heuristic):
+;   Internal helper (16 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_4CB3   offset=0x4CB3  size=16 instr  segment=seg3.asm
 ;
@@ -12232,6 +12836,9 @@ L_4CCC:
 ;   [fall-through exit] L_4CD9
 L_4CD9:
         ret                                     ; C3
+; Description (heuristic):
+;   Small helper using 2 API(s): LSTRLEN, TEXTOUT.
+
 ;-------------------------------------------------------------------------
 ; sub_4CDA   offset=0x4CDA  size=30 instr  segment=seg3.asm
 ;
@@ -12287,6 +12894,9 @@ L_4D1F:
 ;   [fall-through exit] L_4D26
 L_4D26:
         ret                                     ; C3
+; Description (heuristic):
+;   Mixed routine using: DELETEDC, ESCAPE, LSTRLEN (+4 more).
+
 ;-------------------------------------------------------------------------
 ; sub_4D27   offset=0x4D27  size=103 instr  segment=seg3.asm
 ;
@@ -12439,6 +13049,9 @@ L_4DF0:
 ;   [fall-through exit] L_4E27
 L_4E27:
         ret                                     ; C3
+; Description (heuristic):
+;   Mixed routine using: DELETEDC, ESCAPE, DISPATCHMESSAGE (+6 more).
+
 ;-------------------------------------------------------------------------
 ; sub_4E28   offset=0x4E28  size=102 instr  segment=seg3.asm
 ;
@@ -12613,6 +13226,9 @@ L_4F28:
 ;   [fall-through exit] L_4F2A
 L_4F2A:
         ret                                     ; C3
+; Description (heuristic):
+;   Cleanup / deallocation routine.
+
 ;-------------------------------------------------------------------------
 ; sub_4F2B   offset=0x4F2B  size=10 instr  segment=seg3.asm
 ;
@@ -12640,6 +13256,10 @@ L_4F2B:
         call    far USER.DESTROYWINDOW          ; 9A 7D 01 00 00 [FIXUP]
         mov     word ptr [0x2e0], 0             ; C7 06 E0 02 00 00
         ret                                     ; C3
+; Description (heuristic):
+;   Drawing routine (3 GDI APIs).
+;   Acquires a device context, draws, releases.
+
 ;-------------------------------------------------------------------------
 ; sub_4F4D   offset=0x4F4D  size=723 instr  segment=seg3.asm
 ;
@@ -13646,6 +14266,9 @@ L_5636:
 ;   [fall-through exit] L_56A6
 L_56A6:
         ret                                     ; C3
+; Description (heuristic):
+;   Thin wrapper around LOCALALLOC(wFlags, wBytes) -> HANDLE.
+
 ;-------------------------------------------------------------------------
 ; sub_56A7   offset=0x56A7  size=20 instr  segment=seg3.asm
 ;
@@ -13690,6 +14313,13 @@ L_56CB:
 ;   [fall-through exit] L_56D4
 L_56D4:
         ret                                     ; C3
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x4]  HANDLE    (1 use)
+
+; Description (heuristic):
+;   Mixed routine using: LOADBITMAP.
+
 ;-------------------------------------------------------------------------
 ; sub_56D5   offset=0x56D5  size=35 instr  segment=seg3.asm
 ;
@@ -13756,6 +14386,9 @@ L_5724:
 ;   [fall-through exit] L_5726
 L_5726:
         ret                                     ; C3
+; Description (heuristic):
+;   Thin wrapper around DELETEOBJECT(hObj) -> BOOL.
+
 ;-------------------------------------------------------------------------
 ; sub_5727   offset=0x5727  size=15 instr  segment=seg3.asm
 ;
@@ -13796,6 +14429,9 @@ L_574C:
 ;   [error/early exit] L_575C
 L_575C:
         ret                                     ; C3
+; Description (heuristic):
+;   Thin wrapper around DELETEDC(hDC) -> BOOL.
+
 ;-------------------------------------------------------------------------
 ; sub_575D   offset=0x575D  size=15 instr  segment=seg3.asm
 ;
@@ -13832,6 +14468,9 @@ L_577F:
 L_5782:
         sub     ax, ax                          ; 2B C0
         ret                                     ; C3
+; Description (heuristic):
+;   Internal helper (15 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_5785   offset=0x5785  size=15 instr  segment=seg3.asm
 ;
@@ -13859,6 +14498,9 @@ L_5798:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     2                               ; C2 02 00
+; Description (heuristic):
+;   Internal helper (18 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_57A0   offset=0x57A0  size=18 instr  segment=seg3.asm
 ;
@@ -13889,6 +14531,9 @@ L_57B8:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     4                               ; C2 04 00
+; Description (heuristic):
+;   Internal helper (9 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_57C0   offset=0x57C0  size=9 instr  segment=seg3.asm
 ;
@@ -13906,6 +14551,10 @@ L_57C0:
         pop     di                              ; 5F
         pop     si                              ; 5E
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (97 instructions, no FAR API calls).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_57CD   offset=0x57CD  size=97 instr  segment=seg3.asm
 ;

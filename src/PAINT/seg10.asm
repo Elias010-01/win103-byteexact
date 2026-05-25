@@ -34,6 +34,13 @@
 
 PAINT_TEXT SEGMENT BYTE PUBLIC 'CODE'
 
+; Inferred stack frame (pass18, heuristic):
+;   Locals:
+;     [bp-0x6]   HDC       (1 use)
+
+; Description (heuristic):
+;   Mixed routine using: BITBLT, DELETEDC, SETCURSOR.
+
 ;-------------------------------------------------------------------------
 ; sub_0000   offset=0x0000  size=340 instr  segment=seg10.asm
 ;
@@ -523,6 +530,11 @@ L_034D:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    6                               ; CA 06 00
+; Description (heuristic):
+;   Drawing routine (4 GDI APIs).
+;   Acquires a device context, draws, releases.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_035A   offset=0x035A  size=318 instr  segment=seg10.asm
 ;
@@ -988,6 +1000,9 @@ L_062F:
         push    ax                              ; 50
         sub     ax, ax                          ; 2B C0
         jmp     L_06BD                          ; EB 0A
+; Description (heuristic):
+;   Mixed routine using: CREATEBITMAP, ENABLEMENUITEM, GETMENU (+2 more).
+
 ;-------------------------------------------------------------------------
 ; sub_06B3   offset=0x06B3  size=46 instr  segment=seg10.asm
 ;
@@ -1071,6 +1086,13 @@ L_0717:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    8                               ; CA 08 00
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x4]  HWND      (1 use)
+
+; Description (heuristic):
+;   Mixed routine using: LSTRCPY, OPENFILE, MOVEWINDOW.
+
 ;-------------------------------------------------------------------------
 ; sub_072E   offset=0x072E  size=145 instr  segment=seg10.asm
 ;
@@ -1305,6 +1327,9 @@ L_0843:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     2                               ; C2 02 00
+; Description (heuristic):
+;   Mixed routine using: GETDEVICECAPS, LSTRCPY, OPENFILE (+4 more).
+
 ;-------------------------------------------------------------------------
 ; sub_0899   offset=0x0899  size=297 instr  segment=seg10.asm
 ;
@@ -1687,6 +1712,13 @@ L_0BE4:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Inferred stack frame (pass18, heuristic):
+;   Locals:
+;     [bp-0x12]   HDC       (3 uses)
+
+; Description (heuristic):
+;   Mixed routine using: DELETEDC, GLOBALALLOC, GLOBALFREE (+4 more).
+
 ;-------------------------------------------------------------------------
 ; sub_0BF2   offset=0x0BF2  size=147 instr  segment=seg10.asm
 ;
@@ -1902,6 +1934,9 @@ L_0D6F:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Description (heuristic):
+;   Pure computation / dispatcher (74 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0D7D   offset=0x0D7D  size=74 instr  segment=seg10.asm
 ;
@@ -1986,6 +2021,9 @@ L_0D7D:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Description (heuristic):
+;   Thin wrapper around OPENFILE(lpszFileName, lpReOpenBuff, wStyle) -> HFILE.
+
 ;-------------------------------------------------------------------------
 ; sub_0E50   offset=0x0E50  size=23 instr  segment=seg10.asm
 ;
@@ -2026,6 +2064,9 @@ L_0E50:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf                                    ; CB
+; Description (heuristic):
+;   Mixed routine using: MESSAGEBOX.
+
 ;-------------------------------------------------------------------------
 ; sub_0E76   offset=0x0E76  size=68 instr  segment=seg10.asm
 ;
@@ -2123,6 +2164,9 @@ L_0F14:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Description (heuristic):
+;   Mixed routine using: LSTRCPY, OPENFILE, MESSAGEBOX.
+
 ;-------------------------------------------------------------------------
 ; sub_0F23   offset=0x0F23  size=182 instr  segment=seg10.asm
 ;
@@ -2380,6 +2424,9 @@ L_0FF4:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf                                    ; CB
+; Description (heuristic):
+;   Pure computation / dispatcher (30 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_10C0   offset=0x10C0  size=30 instr  segment=seg10.asm
 ;
@@ -2422,6 +2469,13 @@ L_10F4:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x6]  HDC       (6 uses)
+
+; Description (heuristic):
+;   Mixed routine using: GETDEVICECAPS, MULDIV.
+
 ;-------------------------------------------------------------------------
 ; sub_1102   offset=0x1102  size=180 instr  segment=seg10.asm
 ;
@@ -2649,6 +2703,9 @@ L_12B5:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Description (heuristic):
+;   Mixed routine using: GLOBALALLOC, GLOBALFREE, GLOBALLOCK (+2 more).
+
 ;-------------------------------------------------------------------------
 ; sub_12DA   offset=0x12DA  size=125 instr  segment=seg10.asm
 ;
@@ -2821,6 +2878,9 @@ L_1424:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    4                               ; CA 04 00
+; Description (heuristic):
+;   Mixed routine using: BITBLT, DELETEDC, GETBITMAPBITS (+5 more).
+
 ;-------------------------------------------------------------------------
 ; sub_142F   offset=0x142F  size=262 instr  segment=seg10.asm
 ;
@@ -3162,6 +3222,9 @@ L_16D3:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0xe                             ; CA 0E 00
+; Description (heuristic):
+;   Mixed routine using: BITBLT, DELETEDC, SETBITMAPBITS (+4 more).
+
 ;-------------------------------------------------------------------------
 ; sub_16DF   offset=0x16DF  size=217 instr  segment=seg10.asm
 ;
@@ -3453,6 +3516,9 @@ L_1907:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0xe                             ; CA 0E 00
+; Description (heuristic):
+;   Internal helper (15 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_1913   offset=0x1913  size=15 instr  segment=seg10.asm
 ;
@@ -3478,6 +3544,9 @@ L_1913:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     2                               ; C2 02 00
+; Description (heuristic):
+;   Internal helper (16 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_1935   offset=0x1935  size=16 instr  segment=seg10.asm
 ;
@@ -3505,6 +3574,9 @@ L_1935:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     2                               ; C2 02 00
+; Description (heuristic):
+;   Internal helper (15 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_195C   offset=0x195C  size=15 instr  segment=seg10.asm
 ;
@@ -3530,6 +3602,9 @@ L_195C:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     4                               ; C2 04 00
+; Description (heuristic):
+;   Mixed routine using: FREEPROCINSTANCE, MAKEPROCINSTANCE, DIALOGBOX (+2 more).
+
 ;-------------------------------------------------------------------------
 ; sub_197F   offset=0x197F  size=159 instr  segment=seg10.asm
 ;
@@ -3737,6 +3812,9 @@ L_1AEE:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Description (heuristic):
+;   Mixed routine using: MESSAGEBOX.
+
 ;-------------------------------------------------------------------------
 ; sub_1AF9   offset=0x1AF9  size=87 instr  segment=seg10.asm
 ;
@@ -3857,6 +3935,13 @@ L_1BA7:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Inferred stack frame (pass18, heuristic):
+;   Locals:
+;     [bp-0x8c]   HFILE     (1 use)
+
+; Description (heuristic):
+;   String manipulation routine (2 string APIs).
+
 ;-------------------------------------------------------------------------
 ; sub_1BB2   offset=0x1BB2  size=124 instr  segment=seg10.asm
 ;
@@ -4048,6 +4133,9 @@ L_1CD5:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     2                               ; C2 02 00
+; Description (heuristic):
+;   Pure computation / dispatcher (48 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_1CDB   offset=0x1CDB  size=48 instr  segment=seg10.asm
 ;
@@ -4114,6 +4202,9 @@ L_1D3A:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    4                               ; CA 04 00
+; Description (heuristic):
+;   Mixed routine using: DELETEDC, FREEPROCINSTANCE, LSTRCPY (+7 more).
+
 ;-------------------------------------------------------------------------
 ; sub_1D48   offset=0x1D48  size=230 instr  segment=seg10.asm
 ;
@@ -4452,6 +4543,15 @@ L_1F8A:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf                                    ; CB
+; Inferred stack frame (pass18, heuristic):
+;   Locals:
+;     [bp-0x4]   INT       (1 use)
+;     [bp-0x6]   FARPROC   (2 uses)
+;     [bp-0x8]   FARPROC   (3 uses)
+
+; Description (heuristic):
+;   Mixed routine using: FREEPROCINSTANCE, MAKEPROCINSTANCE, DIALOGBOX (+1 more).
+
 ;-------------------------------------------------------------------------
 ; sub_1F96   offset=0x1F96  size=38 instr  segment=seg10.asm
 ;
@@ -4512,6 +4612,9 @@ L_1F96:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Description (heuristic):
+;   String manipulation routine (4 string APIs).
+
 ;-------------------------------------------------------------------------
 ; sub_1FF3   offset=0x1FF3  size=159 instr  segment=seg10.asm
 ;
@@ -4742,6 +4845,9 @@ L_214D:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Description (heuristic):
+;   Thin wrapper around GETTEMPFILENAME.
+
 ;-------------------------------------------------------------------------
 ; sub_2158   offset=0x2158  size=25 instr  segment=seg10.asm
 ;
@@ -4778,6 +4884,9 @@ L_2158:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Description (heuristic):
+;   Mixed routine using: ANSINEXT.
+
 ;-------------------------------------------------------------------------
 ; sub_2186   offset=0x2186  size=39 instr  segment=seg10.asm
 ;
@@ -4836,6 +4945,10 @@ L_21C3:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Description (heuristic):
+;   String manipulation routine (2 string APIs).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_21D9   offset=0x21D9  size=56 instr  segment=seg10.asm
 ;

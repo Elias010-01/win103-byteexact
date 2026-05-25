@@ -254,6 +254,9 @@ L_0175:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    6                               ; CA 06 00
+; Description (heuristic):
+;   Pure computation / dispatcher (43 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_01C1   offset=0x01C1  size=43 instr  segment=seg6.asm
 ;

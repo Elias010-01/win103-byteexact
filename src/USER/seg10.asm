@@ -167,6 +167,9 @@ L_00DC:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    6                               ; CA 06 00
+; Description (heuristic):
+;   Mixed routine using: 2, ENABLE, ENABLESYSTEMTIMERS.
+
 ;-------------------------------------------------------------------------
 ; sub_00E8   offset=0x00E8  size=49 instr  segment=seg10.asm
 ;
@@ -235,6 +238,9 @@ L_0151:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf                                    ; CB
+; Description (heuristic):
+;   Small helper using 3 API(s): 3, DISABLE, DISABLESYSTEMTIMERS.
+
 ;-------------------------------------------------------------------------
 ; sub_015B   offset=0x015B  size=26 instr  segment=seg10.asm
 ;

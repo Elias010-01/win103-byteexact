@@ -34,6 +34,9 @@
 
 WRITE_TEXT SEGMENT BYTE PUBLIC 'CODE'
 
+; Description (heuristic):
+;   Cleanup / deallocation routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0000   offset=0x0000  size=165 instr  segment=seg34.asm
 ;
@@ -260,6 +263,9 @@ L_01EB:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Cleanup / deallocation routine.
+
 ;-------------------------------------------------------------------------
 ; sub_01EF   offset=0x01EF  size=864 instr  segment=seg34.asm
 ;
@@ -1350,6 +1356,9 @@ L_0B85:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     4                               ; C2 04 00
+; Description (heuristic):
+;   Pure computation / dispatcher (185 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0B8C   offset=0x0B8C  size=185 instr  segment=seg34.asm
 ;
@@ -1592,6 +1601,9 @@ L_0D84:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0xa                             ; CA 0A 00
+; Description (heuristic):
+;   Pure computation / dispatcher (52 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0D90   offset=0x0D90  size=52 instr  segment=seg34.asm
 ;
@@ -1666,6 +1678,9 @@ L_0E0C:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     2                               ; C2 02 00
+; Description (heuristic):
+;   Pure computation / dispatcher (29 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0E12   offset=0x0E12  size=29 instr  segment=seg34.asm
 ;
@@ -1712,6 +1727,9 @@ L_0E59:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Cleanup / deallocation routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0E5D   offset=0x0E5D  size=145 instr  segment=seg34.asm
 ;
@@ -1920,6 +1938,9 @@ L_0FE0:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     2                               ; C2 02 00
+; Description (heuristic):
+;   Pure computation / dispatcher (66 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0FE7   offset=0x0FE7  size=66 instr  segment=seg34.asm
 ;
@@ -2010,6 +2031,9 @@ L_1083:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     8                               ; C2 08 00
+; Description (heuristic):
+;   Pure computation / dispatcher (31 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_108A   offset=0x108A  size=31 instr  segment=seg34.asm
 ;
@@ -2058,6 +2082,17 @@ L_10C9:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    8                               ; CA 08 00
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0xe]  HWND      (1 use)
+;   Locals:
+;     [bp-0x2]   HWND      (1 use)
+;     [bp-0x108]   HWND      (1 use)
+
+; Description (heuristic):
+;   Cleanup / deallocation routine.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_10D4   offset=0x10D4  size=41 instr  segment=seg34.asm
 ;
@@ -2124,6 +2159,10 @@ L_1130:
 ;   [conditional branch target (if/else)] L_113D
 L_113D:
         jmp     L_11D8                          ; E9 98 00
+; Description (heuristic):
+;   Small helper using 2 API(s): CHECKDLGBUTTON, ENABLEWINDOW.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_1140   offset=0x1140  size=23 instr  segment=seg34.asm
 ;
@@ -2160,6 +2199,14 @@ L_1140:
         push    ax                              ; 50
         call    far USER.ENABLEWINDOW           ; 9A FF FF 00 00 [FIXUP]
         jmp     L_11A3                          ; EB 1E
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0xe]  HWND      (1 use)
+
+; Description (heuristic):
+;   Mixed routine using: CHECKDLGBUTTON, ISDLGBUTTONCHECKED, ISWINDOWENABLED (+2 more).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_1185   offset=0x1185  size=64 instr  segment=seg34.asm
 ;
@@ -2262,6 +2309,10 @@ L_1235:
         or      ax, ax                          ; 0B C0
         jne     L_124E                          ; 75 03
         jmp     L_11B7                          ; E9 69 FF
+; Description (heuristic):
+;   Internal helper (19 instructions).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_124E   offset=0x124E  size=19 instr  segment=seg34.asm
 ;
@@ -2291,6 +2342,14 @@ L_124E:
         cmp     ax, 1                           ; 3D 01 00
         je      L_127B                          ; 74 03
         jmp     L_11B7                          ; E9 3C FF
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0xe]  HWND      (1 use)
+
+; Description (heuristic):
+;   Cleanup / deallocation routine.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_127B   offset=0x127B  size=254 instr  segment=seg34.asm
 ;
@@ -2653,6 +2712,14 @@ L_1537:
         push    ax                              ; 50
         call    far USER.ENABLEWINDOW           ; 9A 52 15 00 00 [FIXUP]
         jmp     L_1474                          ; E9 34 FF
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0xe]  HWND      (3 uses)
+
+; Description (heuristic):
+;   Mixed routine using: ENABLEWINDOW, GETDLGITEM, ISWINDOWENABLED.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_1540   offset=0x1540  size=31 instr  segment=seg34.asm
 ;
@@ -2712,6 +2779,10 @@ L_158E:
         cmp     word ptr [0x322], 0             ; 83 3E 22 03 00
         jge     L_1598                          ; 7D 03
         jmp     L_1474                          ; E9 DC FE
+; Description (heuristic):
+;   Internal helper (19 instructions).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_1598   offset=0x1598  size=19 instr  segment=seg34.asm
 ;
@@ -2741,6 +2812,14 @@ L_1598:
         cmp     ax, 1                           ; 3D 01 00
         je      L_15C5                          ; 74 03
         jmp     L_1474                          ; E9 AF FE
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0xe]  HWND      (1 use)
+
+; Description (heuristic):
+;   Thin wrapper around SETDLGITEMTEXT(hDlg, nIDItem, lpszText) -> VOID.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_15C5   offset=0x15C5  size=14 instr  segment=seg34.asm
 ;
@@ -2773,6 +2852,10 @@ L_15D7:
         inc     ax                              ; 40
         jne     L_15EA                          ; 75 03
         jmp     L_1474                          ; E9 8A FE
+; Description (heuristic):
+;   Internal helper (19 instructions).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_15EA   offset=0x15EA  size=19 instr  segment=seg34.asm
 ;
@@ -2802,6 +2885,13 @@ L_15EA:
         cmp     ax, 1                           ; 3D 01 00
         je      L_1617                          ; 74 03
         jmp     L_1474                          ; E9 5D FE
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0xe]  HWND      (1 use)
+
+; Description (heuristic):
+;   Cleanup / deallocation routine.
+
 ;-------------------------------------------------------------------------
 ; sub_1617   offset=0x1617  size=149 instr  segment=seg34.asm
 ;
@@ -3016,6 +3106,9 @@ L_17A4:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0xa                             ; CA 0A 00
+; Description (heuristic):
+;   Mixed routine using: CREATEDIALOG, ENABLEWINDOW, GETACTIVEWINDOW (+5 more).
+
 ;-------------------------------------------------------------------------
 ; sub_17AF   offset=0x17AF  size=211 instr  segment=seg34.asm
 ;
@@ -3321,6 +3414,9 @@ L_1996:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf                                    ; CB
+; Description (heuristic):
+;   Pure computation / dispatcher (145 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_199F   offset=0x199F  size=145 instr  segment=seg34.asm
 ;
@@ -3513,6 +3609,9 @@ L_1B17:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     4                               ; C2 04 00
+; Description (heuristic):
+;   Mixed routine using: DISPATCHMESSAGE, GETMESSAGE, GETWINDOWWORD (+1 more).
+
 ;-------------------------------------------------------------------------
 ; sub_1B1F   offset=0x1B1F  size=79 instr  segment=seg34.asm
 ;
@@ -3644,6 +3743,9 @@ L_1BD1:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (166 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_1BD7   offset=0x1BD7  size=166 instr  segment=seg34.asm
 ;
@@ -3856,6 +3958,9 @@ L_1D8E:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     8                               ; C2 08 00
+; Description (heuristic):
+;   Pure computation / dispatcher (172 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_1D95   offset=0x1D95  size=172 instr  segment=seg34.asm
 ;
@@ -4121,6 +4226,9 @@ L_1F91:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     6                               ; C2 06 00
+; Description (heuristic):
+;   Pure computation / dispatcher (57 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_1F98   offset=0x1F98  size=57 instr  segment=seg34.asm
 ;
@@ -4195,6 +4303,17 @@ L_2005:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     4                               ; C2 04 00
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x4]  INT       (1 use)
+;     [bp+0x8]  INT       (1 use)
+;     [bp+0xa]  HWND      (1 use)
+;   Locals:
+;     [bp-0x2]   INT       (1 use)
+
+; Description (heuristic):
+;   Thin wrapper around GETDLGITEMTEXT(hDlg, nIDItem, lpszText, cbMax) -> INT.
+
 ;-------------------------------------------------------------------------
 ; sub_2028   offset=0x2028  size=27 instr  segment=seg34.asm
 ;
@@ -4245,6 +4364,14 @@ L_2060:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     8                               ; C2 08 00
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x6]  INT       (2 uses)
+;     [bp+0x8]  HWND      (2 uses)
+
+; Description (heuristic):
+;   Mixed routine using: GETDLGITEM, SENDDLGITEMMESSAGE, SETFOCUS.
+
 ;-------------------------------------------------------------------------
 ; sub_2067   offset=0x2067  size=32 instr  segment=seg34.asm
 ;
@@ -4301,6 +4428,10 @@ L_2067:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     6                               ; C2 06 00
+; Description (heuristic):
+;   Mixed routine using: GETWINDOWTEXT, SETWINDOWTEXT.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_20BD   offset=0x20BD  size=61 instr  segment=seg34.asm
 ;

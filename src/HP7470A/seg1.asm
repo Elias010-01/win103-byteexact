@@ -231,6 +231,9 @@ L_01F4:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0x12                            ; CA 12 00
+; Description (heuristic):
+;   Pure computation / dispatcher (232 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0200   offset=0x0200  size=232 instr  segment=seg1.asm
 ;
@@ -516,6 +519,10 @@ L_04A9:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    6                               ; CA 06 00
+; Description (heuristic):
+;   Pure computation / dispatcher (121 instructions, no FAR API calls).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_04B4   offset=0x04B4  size=121 instr  segment=seg1.asm
 ;

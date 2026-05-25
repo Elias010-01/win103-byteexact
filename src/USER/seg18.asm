@@ -95,6 +95,9 @@ L_004E:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    4                               ; CA 04 00
+; Description (heuristic):
+;   Allocation / initialization routine (5 alloc APIs).
+
 ;-------------------------------------------------------------------------
 ; sub_005A   offset=0x005A  size=61 instr  segment=seg18.asm
 ;
@@ -195,6 +198,9 @@ L_00F9:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     2                               ; C2 02 00
+; Description (heuristic):
+;   Pure computation / dispatcher (26 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0101   offset=0x0101  size=26 instr  segment=seg18.asm
 ;
@@ -233,6 +239,9 @@ L_0120:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Description (heuristic):
+;   Pure computation / dispatcher (40 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_012C   offset=0x012C  size=40 instr  segment=seg18.asm
 ;
@@ -287,6 +296,9 @@ L_016B:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Description (heuristic):
+;   Allocation / initialization routine (2 alloc APIs).
+
 ;-------------------------------------------------------------------------
 ; sub_017F   offset=0x017F  size=63 instr  segment=seg18.asm
 ;
@@ -385,6 +397,9 @@ L_020A:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Description (heuristic):
+;   Mixed routine using: GLOBALHANDLE.
+
 ;-------------------------------------------------------------------------
 ; sub_0216   offset=0x0216  size=74 instr  segment=seg18.asm
 ;
@@ -487,6 +502,9 @@ L_02BE:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0xa                             ; CA 0A 00
+; Description (heuristic):
+;   Pure computation / dispatcher (22 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_02D2   offset=0x02D2  size=22 instr  segment=seg18.asm
 ;

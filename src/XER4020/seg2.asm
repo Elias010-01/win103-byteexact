@@ -398,6 +398,13 @@ L_02B4:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0xa                             ; CA 0A 00
+; Inferred stack frame (pass18, heuristic):
+;   Locals:
+;     [bp-0x30]   WORD      (1 use)
+
+; Description (heuristic):
+;   String manipulation routine (2 string APIs).
+
 ;-------------------------------------------------------------------------
 ; sub_02C0   offset=0x02C0  size=386 instr  segment=seg2.asm
 ;
@@ -876,6 +883,9 @@ L_0661:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    4                               ; CA 04 00
+; Description (heuristic):
+;   Pure computation / dispatcher (29 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_066C   offset=0x066C  size=29 instr  segment=seg2.asm
 ;
@@ -917,6 +927,9 @@ L_069B:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    4                               ; CA 04 00
+; Description (heuristic):
+;   Pure computation / dispatcher (27 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_06A7   offset=0x06A7  size=27 instr  segment=seg2.asm
 ;
@@ -958,6 +971,10 @@ L_06E7:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     8                               ; C2 08 00
+; Description (heuristic):
+;   Mixed routine using: FINDRESOURCE, FREERESOURCE, GETMODULEHANDLE (+4 more).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_06ED   offset=0x06ED  size=221 instr  segment=seg2.asm
 ;
@@ -1249,6 +1266,9 @@ L_0905:
         ; constant WM_CREATE
         mov     ax, 1                           ; B8 01 00
         jmp     L_0979                          ; EB 56
+; Description (heuristic):
+;   Pure computation / dispatcher (43 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0923   offset=0x0923  size=43 instr  segment=seg2.asm
 ;
@@ -1308,6 +1328,9 @@ L_0979:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0x10                            ; CA 10 00
+; Description (heuristic):
+;   Mixed routine using: LSTRCPY.
+
 ;-------------------------------------------------------------------------
 ; sub_0984   offset=0x0984  size=132 instr  segment=seg2.asm
 ;
@@ -1469,6 +1492,9 @@ L_0B24:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     8                               ; C2 08 00
+; Description (heuristic):
+;   Pure computation / dispatcher (69 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0B2C   offset=0x0B2C  size=69 instr  segment=seg2.asm
 ;
@@ -1564,6 +1590,9 @@ L_0BE1:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     0xa                             ; C2 0A 00
+; Description (heuristic):
+;   Cleanup / deallocation routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0BE8   offset=0x0BE8  size=210 instr  segment=seg2.asm
 ;
@@ -1832,6 +1861,9 @@ L_0E04:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0x1e                            ; CA 1E 00
+; Description (heuristic):
+;   Allocation / initialization routine (2 alloc APIs).
+
 ;-------------------------------------------------------------------------
 ; sub_0E11   offset=0x0E11  size=74 instr  segment=seg2.asm
 ;
@@ -1939,6 +1971,9 @@ L_0EE1:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     0xa                             ; C2 0A 00
+; Description (heuristic):
+;   Allocation / initialization routine (3 alloc APIs).
+
 ;-------------------------------------------------------------------------
 ; sub_0EE7   offset=0x0EE7  size=110 instr  segment=seg2.asm
 ;
@@ -2099,6 +2134,9 @@ L_100C:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     0xa                             ; C2 0A 00
+; Description (heuristic):
+;   Mixed routine using: GLOBALALLOC, GLOBALREALLOC.
+
 ;-------------------------------------------------------------------------
 ; sub_1013   offset=0x1013  size=66 instr  segment=seg2.asm
 ;
@@ -2196,6 +2234,9 @@ L_10A9:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    4                               ; CA 04 00
+; Description (heuristic):
+;   Pure computation / dispatcher (177 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_10B4   offset=0x10B4  size=177 instr  segment=seg2.asm
 ;
@@ -2419,6 +2460,9 @@ L_12A2:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     0x16                            ; C2 16 00
+; Description (heuristic):
+;   Cleanup / deallocation routine.
+
 ;-------------------------------------------------------------------------
 ; sub_12A9   offset=0x12A9  size=256 instr  segment=seg2.asm
 ;
@@ -2750,6 +2794,9 @@ L_153E:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0x1e                            ; CA 1E 00
+; Description (heuristic):
+;   Pure computation / dispatcher (26 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_1549   offset=0x1549  size=26 instr  segment=seg2.asm
 ;
@@ -2795,6 +2842,10 @@ L_157A:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     6                               ; C2 06 00
+; Description (heuristic):
+;   Pure computation / dispatcher (44 instructions, no FAR API calls).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_1583   offset=0x1583  size=44 instr  segment=seg2.asm
 ;

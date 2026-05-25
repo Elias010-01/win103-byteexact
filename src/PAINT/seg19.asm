@@ -76,6 +76,10 @@ PAINT_TEXT SEGMENT BYTE PUBLIC 'CODE'
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    8                               ; CA 08 00
+; Description (heuristic):
+;   Small helper using 2 API(s): GETSTOCKOBJECT, SELECTOBJECT.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_004F   offset=0x004F  size=18 instr  segment=seg19.asm
 ;
@@ -114,6 +118,10 @@ L_004F:
         cmp     word ptr [bp + 6], 0            ; 83 7E 06 00
         jne     L_0082                          ; 75 03
         jmp     L_019B                          ; E9 19 01
+; Description (heuristic):
+;   Mixed routine using: ELLIPSE, GETBKMODE, SETBKMODE (+2 more).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0082   offset=0x0082  size=100 instr  segment=seg19.asm
 ;
@@ -278,6 +286,10 @@ L_019B:
         cmp     word ptr [bp + 8], 0            ; 83 7E 08 00
         je      L_01A4                          ; 74 03
         jmp     L_0250                          ; E9 AC 00
+; Description (heuristic):
+;   Mixed routine using: ELLIPSE, SETROP2.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_01A4   offset=0x01A4  size=68 instr  segment=seg19.asm
 ;

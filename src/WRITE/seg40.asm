@@ -27,6 +27,10 @@
 
 WRITE_TEXT SEGMENT BYTE PUBLIC 'CODE'
 
+; Description (heuristic):
+;   Cleanup / deallocation routine.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0000   offset=0x0000  size=148 instr  segment=seg40.asm
 ;

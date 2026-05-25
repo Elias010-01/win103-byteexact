@@ -1084,6 +1084,9 @@ L_09C9:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Description (heuristic):
+;   Mixed routine using: SETCURSOR.
+
 ;-------------------------------------------------------------------------
 ; sub_09D6   offset=0x09D6  size=74 instr  segment=seg45.asm
 ;
@@ -1176,6 +1179,9 @@ L_0A2B:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf                                    ; CB
+; Description (heuristic):
+;   Pure computation / dispatcher (67 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0A93   offset=0x0A93  size=67 instr  segment=seg45.asm
 ;
@@ -1256,6 +1262,9 @@ L_0B50:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (56 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0B54   offset=0x0B54  size=56 instr  segment=seg45.asm
 ;
@@ -1327,6 +1336,9 @@ L_0BCF:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Description (heuristic):
+;   Mixed routine using: TEXTOUT.
+
 ;-------------------------------------------------------------------------
 ; sub_0BDA   offset=0x0BDA  size=214 instr  segment=seg45.asm
 ;
@@ -1614,6 +1626,9 @@ L_0E16:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    6                               ; CA 06 00
+; Description (heuristic):
+;   Pure computation / dispatcher (50 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0E26   offset=0x0E26  size=50 instr  segment=seg45.asm
 ;
@@ -1675,6 +1690,9 @@ L_0EA9:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (25 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0EB9   offset=0x0EB9  size=25 instr  segment=seg45.asm
 ;
@@ -1711,6 +1729,9 @@ L_0EB9:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     2                               ; C2 02 00
+; Description (heuristic):
+;   Pure computation / dispatcher (195 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0F03   offset=0x0F03  size=195 instr  segment=seg45.asm
 ;
@@ -1946,6 +1967,9 @@ L_1107:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     6                               ; C2 06 00
+; Description (heuristic):
+;   Mixed routine using: SETRECT, VALIDATERECT.
+
 ;-------------------------------------------------------------------------
 ; sub_110F   offset=0x110F  size=93 instr  segment=seg45.asm
 ;
@@ -2061,6 +2085,9 @@ L_11E6:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Description (heuristic):
+;   Pure computation / dispatcher (28 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_1204   offset=0x1204  size=28 instr  segment=seg45.asm
 ;

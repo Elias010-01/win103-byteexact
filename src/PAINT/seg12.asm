@@ -252,6 +252,9 @@ L_0173:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0xa                             ; CA 0A 00
+; Description (heuristic):
+;   Mixed routine using: CREATEDC, CREATEIC, DELETEDC (+2 more).
+
 ;-------------------------------------------------------------------------
 ; sub_0181   offset=0x0181  size=145 instr  segment=seg12.asm
 ;
@@ -473,6 +476,10 @@ L_02E6:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     4                               ; C2 04 00
+; Description (heuristic):
+;   String manipulation routine (3 string APIs).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_02EC   offset=0x02EC  size=227 instr  segment=seg12.asm
 ;
@@ -781,6 +788,10 @@ L_0478:
         or      ax, ax                          ; 0B C0
         jge     L_052F                          ; 7D 03
         jmp     L_06B0                          ; E9 81 01
+; Description (heuristic):
+;   Cleanup / deallocation routine.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_052F   offset=0x052F  size=167 instr  segment=seg12.asm
 ;
@@ -991,6 +1002,9 @@ L_06C1:
         call    far USER.DESTROYWINDOW          ; 9A 61 07 00 00 [FIXUP]
         mov     word ptr [0x56e], 0             ; C7 06 6E 05 00 00
         jmp     L_0712                          ; EB 13
+; Description (heuristic):
+;   Small helper using 3 API(s): DELETEDC, ESCAPE, FREEPROCINSTANCE.
+
 ;-------------------------------------------------------------------------
 ; sub_06FF   offset=0x06FF  size=25 instr  segment=seg12.asm
 ;
@@ -1041,6 +1055,9 @@ L_0730:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Description (heuristic):
+;   Cleanup / deallocation routine.
+
 ;-------------------------------------------------------------------------
 ; sub_073C   offset=0x073C  size=56 instr  segment=seg12.asm
 ;
@@ -1124,6 +1141,10 @@ L_07CB:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     4                               ; C2 04 00
+; Description (heuristic):
+;   Mixed routine using: CREATEBITMAP, DELETEDC, MULDIV (+6 more).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_07D1   offset=0x07D1  size=240 instr  segment=seg12.asm
 ;

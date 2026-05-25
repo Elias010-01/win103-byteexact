@@ -34,6 +34,10 @@
 
 WRITE_TEXT SEGMENT BYTE PUBLIC 'CODE'
 
+; Description (heuristic):
+;   Mixed routine using: CHANGEMENU, CHECKMENUITEM, CLOSECLIPBOARD (+3 more).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0000   offset=0x0000  size=404 instr  segment=seg48.asm
 ;
@@ -585,6 +589,9 @@ L_0485:
         cmp     word ptr [bp - 0x30], 3         ; 83 7E D0 03
         jl      L_048E                          ; 7C 03
         jmp     L_00D3                          ; E9 45 FC
+; Description (heuristic):
+;   Menu manipulation routine (2 menu APIs).
+
 ;-------------------------------------------------------------------------
 ; sub_048E   offset=0x048E  size=127 instr  segment=seg48.asm
 ;
@@ -786,6 +793,9 @@ L_05D1:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    4                               ; CA 04 00
+; Description (heuristic):
+;   Mixed routine using: CHANGEMENU, LOADSTRING.
+
 ;-------------------------------------------------------------------------
 ; sub_05DE   offset=0x05DE  size=50 instr  segment=seg48.asm
 ;
@@ -865,6 +875,9 @@ L_0667:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (136 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_066B   offset=0x066B  size=136 instr  segment=seg48.asm
 ;
@@ -1032,6 +1045,9 @@ L_07C2:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Description (heuristic):
+;   Pure computation / dispatcher (77 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_07CD   offset=0x07CD  size=77 instr  segment=seg48.asm
 ;
@@ -1130,6 +1146,9 @@ L_088D:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Description (heuristic):
+;   Pure computation / dispatcher (39 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0898   offset=0x0898  size=39 instr  segment=seg48.asm
 ;
@@ -1178,6 +1197,9 @@ L_0898:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     4                               ; C2 04 00
+; Description (heuristic):
+;   Pure computation / dispatcher (24 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_08EE   offset=0x08EE  size=24 instr  segment=seg48.asm
 ;
@@ -1211,6 +1233,9 @@ L_08EE:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     4                               ; C2 04 00
+; Description (heuristic):
+;   Pure computation / dispatcher (36 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0924   offset=0x0924  size=36 instr  segment=seg48.asm
 ;
@@ -1256,6 +1281,9 @@ L_0924:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     4                               ; C2 04 00
+; Description (heuristic):
+;   Pure computation / dispatcher (80 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0979   offset=0x0979  size=80 instr  segment=seg48.asm
 ;
@@ -1357,6 +1385,9 @@ L_0A3D:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     6                               ; C2 06 00
+; Description (heuristic):
+;   Pure computation / dispatcher (55 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0A45   offset=0x0A45  size=55 instr  segment=seg48.asm
 ;
@@ -1431,6 +1462,9 @@ L_0ACB:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     6                               ; C2 06 00
+; Description (heuristic):
+;   Pure computation / dispatcher (61 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0AD3   offset=0x0AD3  size=61 instr  segment=seg48.asm
 ;
@@ -1510,6 +1544,9 @@ L_0B62:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    8                               ; CA 08 00
+; Description (heuristic):
+;   Mixed routine using: GETACTIVEWINDOW, GETDLGITEMTEXT, GETWINDOWWORD (+1 more).
+
 ;-------------------------------------------------------------------------
 ; sub_0B6E   offset=0x0B6E  size=68 instr  segment=seg48.asm
 ;
@@ -1610,6 +1647,15 @@ L_0C05:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    8                               ; CA 08 00
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x6]  WORD      (2 uses)
+;   Locals:
+;     [bp-0x4]   BOOL      (1 use)
+
+; Description (heuristic):
+;   Mixed routine using: ENABLEMENUITEM.
+
 ;-------------------------------------------------------------------------
 ; sub_0C10   offset=0x0C10  size=406 instr  segment=seg48.asm
 ;
@@ -2156,6 +2202,9 @@ L_101B:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    8                               ; CA 08 00
+; Description (heuristic):
+;   Pure computation / dispatcher (22 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_102B   offset=0x102B  size=22 instr  segment=seg48.asm
 ;

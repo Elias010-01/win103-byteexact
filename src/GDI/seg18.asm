@@ -27,6 +27,9 @@
 
 GDI_TEXT SEGMENT BYTE PUBLIC 'CODE'
 
+; Description (heuristic):
+;   Pure computation / dispatcher (53 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0000   offset=0x0000  size=53 instr  segment=seg18.asm
 ;
@@ -93,6 +96,9 @@ L_0053:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     8                               ; C2 08 00
+; Description (heuristic):
+;   Pure computation / dispatcher (47 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0072   offset=0x0072  size=47 instr  segment=seg18.asm
 ;
@@ -163,6 +169,9 @@ L_00D9:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     0xa                             ; C2 0A 00
+; Description (heuristic):
+;   Pure computation / dispatcher (31 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_00E6   offset=0x00E6  size=31 instr  segment=seg18.asm
 ;
@@ -211,6 +220,9 @@ L_0122:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     0xc                             ; C2 0C 00
+; Description (heuristic):
+;   Pure computation / dispatcher (38 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_012C   offset=0x012C  size=38 instr  segment=seg18.asm
 ;
@@ -265,6 +277,9 @@ L_0176:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     0xc                             ; C2 0C 00
+; Description (heuristic):
+;   Pure computation / dispatcher (137 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_017C   offset=0x017C  size=137 instr  segment=seg18.asm
 ;
@@ -465,6 +480,9 @@ L_02BC:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     0x1a                            ; C2 1A 00
+; Description (heuristic):
+;   Pure computation / dispatcher (73 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_02D8   offset=0x02D8  size=73 instr  segment=seg18.asm
 ;
@@ -557,6 +575,9 @@ L_0391:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     6                               ; C2 06 00
+; Description (heuristic):
+;   Cleanup / deallocation routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0399   offset=0x0399  size=1038 instr  segment=seg18.asm
 ;
@@ -1796,6 +1817,9 @@ L_0E9C:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0x14                            ; CA 14 00
+; Description (heuristic):
+;   Pure computation / dispatcher (47 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0EA9   offset=0x0EA9  size=47 instr  segment=seg18.asm
 ;
@@ -1876,6 +1900,13 @@ L_0F0B:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     8                               ; C2 08 00
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x22]  WORD      (1 use)
+
+; Description (heuristic):
+;   Cleanup / deallocation routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0F13   offset=0x0F13  size=558 instr  segment=seg18.asm
 ;
@@ -2646,6 +2677,10 @@ L_14C3:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     0x22                            ; C2 22 00
+; Description (heuristic):
+;   Cleanup / deallocation routine.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_14CA   offset=0x14CA  size=594 instr  segment=seg18.asm
 ;

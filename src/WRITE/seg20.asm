@@ -34,6 +34,10 @@
 
 WRITE_TEXT SEGMENT BYTE PUBLIC 'CODE'
 
+; Description (heuristic):
+;   Pure computation / dispatcher (41 instructions, no FAR API calls).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0000   offset=0x0000  size=41 instr  segment=seg20.asm
 ;
@@ -95,6 +99,9 @@ L_0038:
 ;   [loop start] L_004D
 L_004D:
         jmp     L_004D                          ; EB FE
+; Description (heuristic):
+;   Allocation / initialization routine (2 alloc APIs).
+
 ;-------------------------------------------------------------------------
 ; sub_004F   offset=0x004F  size=118 instr  segment=seg20.asm
 ;
@@ -279,6 +286,13 @@ L_017E:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x6]  WORD      (2 uses)
+
+; Description (heuristic):
+;   Cleanup / deallocation routine.
+
 ;-------------------------------------------------------------------------
 ; sub_018A   offset=0x018A  size=537 instr  segment=seg20.asm
 ;
@@ -974,6 +988,9 @@ L_06D4:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Description (heuristic):
+;   Mixed routine using: DISPATCHMESSAGE, ENABLEWINDOW, ISWINDOWENABLED (+4 more).
+
 ;-------------------------------------------------------------------------
 ; sub_06E1   offset=0x06E1  size=58 instr  segment=seg20.asm
 ;
@@ -1073,6 +1090,9 @@ L_0772:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     2                               ; C2 02 00
+; Description (heuristic):
+;   Mixed routine using: ENABLEWINDOW, ISWINDOW.
+
 ;-------------------------------------------------------------------------
 ; sub_0778   offset=0x0778  size=48 instr  segment=seg20.asm
 ;

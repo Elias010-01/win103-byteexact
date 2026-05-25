@@ -223,6 +223,9 @@ L_0178:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    4                               ; CA 04 00
+; Description (heuristic):
+;   Internal helper (17 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_0183   offset=0x0183  size=17 instr  segment=seg1.asm
 ;
@@ -251,6 +254,10 @@ L_01A1:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     4                               ; C2 04 00
+; Description (heuristic):
+;   Allocation / initialization routine (2 alloc APIs).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_01AA   offset=0x01AA  size=208 instr  segment=seg1.asm
 ;

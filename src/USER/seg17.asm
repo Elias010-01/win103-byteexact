@@ -368,6 +368,13 @@ L_021A:
         cmp     word ptr [bp + 0xc], 0x403      ; 81 7E 0C 03 04
         je      L_0269                          ; 74 03
         jmp     L_0396                          ; E9 2D 01
+; Inferred stack frame (pass18, heuristic):
+;   Locals:
+;     [bp-0x18]   PSTR      (1 use)
+
+; Description (heuristic):
+;   Allocation / initialization routine (2 alloc APIs).
+
 ;-------------------------------------------------------------------------
 ; sub_0269   offset=0x0269  size=139 instr  segment=seg17.asm
 ;
@@ -557,6 +564,9 @@ L_035A:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0xa                             ; CA 0A 00
+; Description (heuristic):
+;   Mixed routine using: GETCLIPBOX, LOCALALLOC.
+
 ;-------------------------------------------------------------------------
 ; sub_03A9   offset=0x03A9  size=158 instr  segment=seg17.asm
 ;
@@ -767,6 +777,9 @@ L_0515:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    6                               ; CA 06 00
+; Description (heuristic):
+;   Allocation / initialization routine (2 alloc APIs).
+
 ;-------------------------------------------------------------------------
 ; sub_0521   offset=0x0521  size=186 instr  segment=seg17.asm
 ;
@@ -1021,6 +1034,9 @@ L_0703:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     4                               ; C2 04 00
+; Description (heuristic):
+;   Pure computation / dispatcher (52 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_070B   offset=0x070B  size=52 instr  segment=seg17.asm
 ;
@@ -1085,6 +1101,9 @@ L_0755:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    8                               ; CA 08 00
+; Description (heuristic):
+;   Pure computation / dispatcher (61 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_077E   offset=0x077E  size=61 instr  segment=seg17.asm
 ;
@@ -1168,6 +1187,9 @@ L_07F1:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    4                               ; CA 04 00
+; Description (heuristic):
+;   Pure computation / dispatcher (56 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_07FE   offset=0x07FE  size=56 instr  segment=seg17.asm
 ;
@@ -1246,6 +1268,9 @@ L_087F:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     0xc                             ; C2 0C 00
+; Description (heuristic):
+;   Pure computation / dispatcher (109 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0887   offset=0x0887  size=109 instr  segment=seg17.asm
 ;
@@ -1387,6 +1412,9 @@ L_097B:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    4                               ; CA 04 00
+; Description (heuristic):
+;   Allocation / initialization routine (2 alloc APIs).
+
 ;-------------------------------------------------------------------------
 ; sub_0987   offset=0x0987  size=47 instr  segment=seg17.asm
 ;
@@ -1461,6 +1489,9 @@ L_09EC:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     4                               ; C2 04 00
+; Description (heuristic):
+;   Pure computation / dispatcher (116 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_09F4   offset=0x09F4  size=116 instr  segment=seg17.asm
 ;
@@ -1605,6 +1636,9 @@ L_0AF9:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     6                               ; C2 06 00
+; Description (heuristic):
+;   Pure computation / dispatcher (67 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0B09   offset=0x0B09  size=67 instr  segment=seg17.asm
 ;
@@ -1690,6 +1724,16 @@ L_0B83:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    4                               ; CA 04 00
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0xe]  HDC       (1 use)
+;   Locals:
+;     [bp-0x4]   HANDLE    (1 use)
+;     [bp-0xe]   PSTR      (1 use)
+
+; Description (heuristic):
+;   Allocation / initialization routine (2 alloc APIs).
+
 ;-------------------------------------------------------------------------
 ; sub_0B93   offset=0x0B93  size=97 instr  segment=seg17.asm
 ;
@@ -1828,6 +1872,13 @@ L_0C55:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0xc                             ; CA 0C 00
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0xc]  HDC       (1 use)
+
+; Description (heuristic):
+;   Mixed routine using: SETBKMODE, TEXTOUT.
+
 ;-------------------------------------------------------------------------
 ; sub_0C7A   offset=0x0C7A  size=31 instr  segment=seg17.asm
 ;
@@ -1889,6 +1940,9 @@ L_0CA4:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     0xa                             ; C2 0A 00
+; Description (heuristic):
+;   Pure computation / dispatcher (44 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0CC5   offset=0x0CC5  size=44 instr  segment=seg17.asm
 ;
@@ -1945,6 +1999,9 @@ L_0D00:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    8                               ; CA 08 00
+; Description (heuristic):
+;   Allocation / initialization routine (2 alloc APIs).
+
 ;-------------------------------------------------------------------------
 ; sub_0D24   offset=0x0D24  size=266 instr  segment=seg17.asm
 ;
@@ -2283,6 +2340,9 @@ L_0FA9:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0xc                             ; CA 0C 00
+; Description (heuristic):
+;   Allocation / initialization routine (2 alloc APIs).
+
 ;-------------------------------------------------------------------------
 ; sub_0FB6   offset=0x0FB6  size=136 instr  segment=seg17.asm
 ;
@@ -2464,6 +2524,9 @@ L_10E0:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    6                               ; CA 06 00
+; Description (heuristic):
+;   Pure computation / dispatcher (97 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_10ED   offset=0x10ED  size=97 instr  segment=seg17.asm
 ;
@@ -2592,6 +2655,9 @@ L_11C5:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    4                               ; CA 04 00
+; Description (heuristic):
+;   Pure computation / dispatcher (111 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_11D1   offset=0x11D1  size=111 instr  segment=seg17.asm
 ;
@@ -2753,6 +2819,15 @@ L_12E2:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     8                               ; C2 08 00
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x8]  WORD      (1 use)
+;   Locals:
+;     [bp-0x8]   WORD      (2 uses)
+
+; Description (heuristic):
+;   Pure computation / dispatcher (95 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_12EA   offset=0x12EA  size=95 instr  segment=seg17.asm
 ;
@@ -2871,6 +2946,9 @@ L_13A6:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0xc                             ; CA 0C 00
+; Description (heuristic):
+;   Allocation / initialization routine (2 alloc APIs).
+
 ;-------------------------------------------------------------------------
 ; sub_13C8   offset=0x13C8  size=71 instr  segment=seg17.asm
 ;
@@ -2971,6 +3049,9 @@ L_1455:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Description (heuristic):
+;   Internal helper (11 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_1467   offset=0x1467  size=11 instr  segment=seg17.asm
 ;
@@ -2996,6 +3077,9 @@ L_1479:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     2                               ; C2 02 00
+; Description (heuristic):
+;   Allocation / initialization routine (2 alloc APIs).
+
 ;-------------------------------------------------------------------------
 ; sub_147F   offset=0x147F  size=88 instr  segment=seg17.asm
 ;
@@ -3116,6 +3200,9 @@ L_1549:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Description (heuristic):
+;   Allocation / initialization routine (2 alloc APIs).
+
 ;-------------------------------------------------------------------------
 ; sub_1556   offset=0x1556  size=114 instr  segment=seg17.asm
 ;
@@ -3271,6 +3358,13 @@ L_164B:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    6                               ; CA 06 00
+; Inferred stack frame (pass18, heuristic):
+;   Locals:
+;     [bp-0x2]   HANDLE    (1 use)
+
+; Description (heuristic):
+;   Thin wrapper around LOCALREALLOC(hMem, wBytes, wFlags) -> HANDLE.
+
 ;-------------------------------------------------------------------------
 ; sub_1672   offset=0x1672  size=23 instr  segment=seg17.asm
 ;
@@ -3313,6 +3407,9 @@ L_169A:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     4                               ; C2 04 00
+; Description (heuristic):
+;   Pure computation / dispatcher (114 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_16A4   offset=0x16A4  size=114 instr  segment=seg17.asm
 ;
@@ -3450,6 +3547,13 @@ L_179F:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0xa                             ; CA 0A 00
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x6]  WORD      (1 use)
+
+; Description (heuristic):
+;   Mixed routine using: GLOBALHANDLE.
+
 ;-------------------------------------------------------------------------
 ; sub_17AC   offset=0x17AC  size=151 instr  segment=seg17.asm
 ;
@@ -3647,6 +3751,14 @@ L_18FC:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0xc                             ; CA 0C 00
+; Inferred stack frame (pass18, heuristic):
+;   Locals:
+;     [bp-0x6]   PSTR      (1 use)
+;     [bp-0x8]   PSTR      (1 use)
+
+; Description (heuristic):
+;   Allocation / initialization routine (2 alloc APIs).
+
 ;-------------------------------------------------------------------------
 ; sub_190B   offset=0x190B  size=69 instr  segment=seg17.asm
 ;
@@ -3750,6 +3862,9 @@ L_19BA:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     6                               ; C2 06 00
+; Description (heuristic):
+;   Allocation / initialization routine (2 alloc APIs).
+
 ;-------------------------------------------------------------------------
 ; sub_19CB   offset=0x19CB  size=120 instr  segment=seg17.asm
 ;
@@ -3906,6 +4021,9 @@ L_1AD1:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    6                               ; CA 06 00
+; Description (heuristic):
+;   Allocation / initialization routine (2 alloc APIs).
+
 ;-------------------------------------------------------------------------
 ; sub_1ADE   offset=0x1ADE  size=42 instr  segment=seg17.asm
 ;
@@ -3971,6 +4089,9 @@ L_1B3E:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     0xa                             ; C2 0A 00
+; Description (heuristic):
+;   Pure computation / dispatcher (24 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_1B49   offset=0x1B49  size=24 instr  segment=seg17.asm
 ;
@@ -4006,6 +4127,13 @@ L_1B73:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     4                               ; C2 04 00
+; Inferred stack frame (pass18, heuristic):
+;   Locals:
+;     [bp-0xe]   PSTR      (1 use)
+
+; Description (heuristic):
+;   Mixed routine using: LOCALALLOC, LOCALFREE, LOCALLOCK (+1 more).
+
 ;-------------------------------------------------------------------------
 ; sub_1B7E   offset=0x1B7E  size=114 instr  segment=seg17.asm
 ;
@@ -4164,6 +4292,13 @@ L_1C95:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     2                               ; C2 02 00
+; Inferred stack frame (pass18, heuristic):
+;   Locals:
+;     [bp-0x4]   PSTR      (1 use)
+
+; Description (heuristic):
+;   Allocation / initialization routine (2 alloc APIs).
+
 ;-------------------------------------------------------------------------
 ; sub_1CA8   offset=0x1CA8  size=38 instr  segment=seg17.asm
 ;
@@ -4220,6 +4355,9 @@ L_1CFC:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Description (heuristic):
+;   Allocation / initialization routine (2 alloc APIs).
+
 ;-------------------------------------------------------------------------
 ; sub_1D08   offset=0x1D08  size=36 instr  segment=seg17.asm
 ;
@@ -4281,6 +4419,9 @@ L_1D54:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     2                               ; C2 02 00
+; Description (heuristic):
+;   Allocation / initialization routine (2 alloc APIs).
+
 ;-------------------------------------------------------------------------
 ; sub_1D5C   offset=0x1D5C  size=145 instr  segment=seg17.asm
 ;
@@ -4476,6 +4617,13 @@ L_1EBE:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     4                               ; C2 04 00
+; Inferred stack frame (pass18, heuristic):
+;   Locals:
+;     [bp-0x4]   PSTR      (1 use)
+
+; Description (heuristic):
+;   Allocation / initialization routine (2 alloc APIs).
+
 ;-------------------------------------------------------------------------
 ; sub_1EC6   offset=0x1EC6  size=21 instr  segment=seg17.asm
 ;
@@ -4519,6 +4667,9 @@ L_1EE9:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     2                               ; C2 02 00
+; Description (heuristic):
+;   Pure computation / dispatcher (35 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_1F00   offset=0x1F00  size=35 instr  segment=seg17.asm
 ;

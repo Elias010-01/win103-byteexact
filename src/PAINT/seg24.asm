@@ -126,6 +126,13 @@ L_00C0:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    8                               ; CA 08 00
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x8]  HDC       (3 uses)
+
+; Description (heuristic):
+;   Mixed routine using: GETSTOCKOBJECT, LINETO, MOVETO (+2 more).
+
 ;-------------------------------------------------------------------------
 ; sub_00CB   offset=0x00CB  size=92 instr  segment=seg24.asm
 ;
@@ -284,6 +291,9 @@ L_01EA:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     8                               ; C2 08 00
+; Description (heuristic):
+;   Mixed routine using: BITBLT, CREATEBITMAP, DELETEDC (+7 more).
+
 ;-------------------------------------------------------------------------
 ; sub_01F0   offset=0x01F0  size=318 instr  segment=seg24.asm
 ;
@@ -781,6 +791,9 @@ L_0544:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     4                               ; C2 04 00
+; Description (heuristic):
+;   Mixed routine using: SCANLR.
+
 ;-------------------------------------------------------------------------
 ; sub_054A   offset=0x054A  size=81 instr  segment=seg24.asm
 ;
@@ -896,6 +909,9 @@ L_061C:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     8                               ; C2 08 00
+; Description (heuristic):
+;   Mixed routine using: BITBLT, DELETEDC, GETKEYSTATE.
+
 ;-------------------------------------------------------------------------
 ; sub_0622   offset=0x0622  size=68 instr  segment=seg24.asm
 ;
@@ -1019,6 +1035,9 @@ L_06ED:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     2                               ; C2 02 00
+; Description (heuristic):
+;   Mixed routine using: BITBLT, DELETEDC, COPYRECT (+1 more).
+
 ;-------------------------------------------------------------------------
 ; sub_06F3   offset=0x06F3  size=191 instr  segment=seg24.asm
 ;
@@ -1332,6 +1351,15 @@ L_08A5:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     2                               ; C2 02 00
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x6]  HDC       (1 use)
+;   Locals:
+;     [bp-0x4]   HDC       (2 uses)
+
+; Description (heuristic):
+;   Mixed routine using: BITBLT, DELETEDC, GETSTOCKOBJECT (+1 more).
+
 ;-------------------------------------------------------------------------
 ; sub_0913   offset=0x0913  size=40 instr  segment=seg24.asm
 ;
@@ -1403,6 +1431,9 @@ L_0913:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Description (heuristic):
+;   Mixed routine using: BITBLT, DELETEDC, COPYRECT.
+
 ;-------------------------------------------------------------------------
 ; sub_0979   offset=0x0979  size=169 instr  segment=seg24.asm
 ;

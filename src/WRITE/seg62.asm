@@ -155,6 +155,10 @@ L_00F3:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    6                               ; CA 06 00
+; Description (heuristic):
+;   Mixed routine using: CREATEFONTINDIRECT, GETTEXTEXTENT, GETTEXTFACE (+2 more).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0100   offset=0x0100  size=365 instr  segment=seg62.asm
 ;
@@ -611,6 +615,9 @@ L_04D6:
         mov     word ptr [bp - 0x72], ax        ; 89 46 8E
         or      byte ptr [bp - 0x71], 8         ; 80 4E 8F 08
         jmp     L_0516                          ; EB 37
+; Description (heuristic):
+;   Mixed routine using: GETTEXTFACE.
+
 ;-------------------------------------------------------------------------
 ; sub_04DF   offset=0x04DF  size=198 instr  segment=seg62.asm
 ;
@@ -861,6 +868,10 @@ L_070A:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     4                               ; C2 04 00
+; Description (heuristic):
+;   Mixed routine using: DELETEDC, GETSTOCKOBJECT, SELECTOBJECT (+1 more).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0712   offset=0x0712  size=136 instr  segment=seg62.asm
 ;

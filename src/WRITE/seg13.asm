@@ -406,6 +406,9 @@ L_02F2:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Description (heuristic):
+;   Mixed routine using: DELETEDC, GETCARETBLINKTIME, KILLTIMER (+2 more).
+
 ;-------------------------------------------------------------------------
 ; sub_02FD   offset=0x02FD  size=93 instr  segment=seg13.asm
 ;

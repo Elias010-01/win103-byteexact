@@ -369,6 +369,10 @@ L_02E6:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf                                    ; CB
+; Description (heuristic):
+;   Cleanup / deallocation routine.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_02F1   offset=0x02F1  size=217 instr  segment=seg6.asm
 ;
@@ -641,6 +645,9 @@ L_0520:
         mov     word ptr [0x1010], ax           ; A3 10 10
         mov     word ptr [0x1bc8], ax           ; A3 C8 1B
         jmp     L_0542                          ; EB 15
+; Description (heuristic):
+;   Internal helper (12 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_052D   offset=0x052D  size=12 instr  segment=seg6.asm
 ;
@@ -663,6 +670,9 @@ L_0542:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf                                    ; CB
+; Description (heuristic):
+;   Pure computation / dispatcher (107 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_054B   offset=0x054B  size=107 instr  segment=seg6.asm
 ;
@@ -822,6 +832,9 @@ L_062A:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    6                               ; CA 06 00
+; Description (heuristic):
+;   Mixed routine using: DPTOLP, GETDEVICECAPS, SETMAPMODE.
+
 ;-------------------------------------------------------------------------
 ; sub_063A   offset=0x063A  size=76 instr  segment=seg6.asm
 ;
@@ -939,6 +952,9 @@ L_06E6:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf                                    ; CB
+; Description (heuristic):
+;   Mixed routine using: GETDC.
+
 ;-------------------------------------------------------------------------
 ; sub_0703   offset=0x0703  size=92 instr  segment=seg6.asm
 ;
@@ -1059,6 +1075,9 @@ L_07EB:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Description (heuristic):
+;   Mixed routine using: ESCAPE, GETDEVICECAPS.
+
 ;-------------------------------------------------------------------------
 ; sub_07F7   offset=0x07F7  size=277 instr  segment=seg6.asm
 ;

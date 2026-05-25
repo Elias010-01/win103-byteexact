@@ -256,6 +256,9 @@ L_01AC:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    4                               ; CA 04 00
+; Description (heuristic):
+;   Internal helper (20 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_01B9   offset=0x01B9  size=20 instr  segment=seg7.asm
 ;
@@ -291,6 +294,9 @@ L_01E5:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     4                               ; C2 04 00
+; Description (heuristic):
+;   Mixed routine using: ISTWOBYTECHARPREFIX.
+
 ;-------------------------------------------------------------------------
 ; sub_01EB   offset=0x01EB  size=47 instr  segment=seg7.asm
 ;
@@ -364,6 +370,10 @@ L_024C:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     4                               ; C2 04 00
+; Description (heuristic):
+;   Pure computation / dispatcher (82 instructions, no FAR API calls).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0254   offset=0x0254  size=82 instr  segment=seg7.asm
 ;

@@ -28,6 +28,16 @@
 
 WRITE_TEXT SEGMENT BYTE PUBLIC 'CODE'
 
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0xe]  HDC       (5 uses)
+;   Locals:
+;     [bp-0x4]   INT       (1 use)
+;     [bp-0xa]   INT       (1 use)
+
+; Description (heuristic):
+;   Mixed routine using: ESCAPE, GETDEVICECAPS.
+
 ;-------------------------------------------------------------------------
 ; sub_0000   offset=0x0000  size=232 instr  segment=seg73.asm
 ;
@@ -321,6 +331,9 @@ L_021E:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0xa                             ; CA 0A 00
+; Description (heuristic):
+;   Pure computation / dispatcher (352 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_022B   offset=0x022B  size=352 instr  segment=seg73.asm
 ;
@@ -767,6 +780,9 @@ L_0570:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0xe                             ; CA 0E 00
+; Description (heuristic):
+;   Pure computation / dispatcher (46 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_059C   offset=0x059C  size=46 instr  segment=seg73.asm
 ;
@@ -827,6 +843,9 @@ L_0604:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0xc                             ; CA 0C 00
+; Description (heuristic):
+;   Pure computation / dispatcher (91 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0610   offset=0x0610  size=91 instr  segment=seg73.asm
 ;
@@ -932,6 +951,9 @@ L_06A1:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    8                               ; CA 08 00
+; Description (heuristic):
+;   Pure computation / dispatcher (26 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_06E6   offset=0x06E6  size=26 instr  segment=seg73.asm
 ;
@@ -972,6 +994,10 @@ L_0715:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    4                               ; CA 04 00
+; Description (heuristic):
+;   Internal helper (15 instructions).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0720   offset=0x0720  size=15 instr  segment=seg73.asm
 ;
@@ -997,6 +1023,9 @@ L_0720:
 L_073B:
         call    far _entry_94                   ; 9A 76 07 00 00 [FIXUP]
         jmp     L_074F                          ; EB 0D
+; Description (heuristic):
+;   Internal helper (11 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_0742   offset=0x0742  size=11 instr  segment=seg73.asm
 ;
@@ -1018,6 +1047,9 @@ L_074F:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    4                               ; CA 04 00
+; Description (heuristic):
+;   Pure computation / dispatcher (26 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_075A   offset=0x075A  size=26 instr  segment=seg73.asm
 ;
@@ -1058,6 +1090,10 @@ L_0789:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    4                               ; CA 04 00
+; Description (heuristic):
+;   Internal helper (15 instructions).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0794   offset=0x0794  size=15 instr  segment=seg73.asm
 ;
@@ -1083,6 +1119,10 @@ L_0794:
 L_07AF:
         call    far _entry_94                   ; 9A C4 00 00 00 [FIXUP]
         jmp     L_07C3                          ; EB 0D
+; Description (heuristic):
+;   Internal helper (12 instructions).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_07B6   offset=0x07B6  size=12 instr  segment=seg73.asm
 ;

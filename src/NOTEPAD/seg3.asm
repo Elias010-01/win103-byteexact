@@ -548,6 +548,9 @@ L_03AC:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf                                    ; CB
+; Description (heuristic):
+;   Cleanup / deallocation routine.
+
 ;-------------------------------------------------------------------------
 ; sub_03B5   offset=0x03B5  size=12 instr  segment=seg3.asm
 ;

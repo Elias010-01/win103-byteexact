@@ -200,6 +200,15 @@ L_0136:
 ;   [conditional branch target (if/else)] L_013E
 L_013E:
         jmp     L_0391                          ; E9 50 02
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0xe]  HWND      (1 use)
+
+; Description (heuristic):
+;   Dialog procedure (DlgProc). Handles dialog messages.
+;   Reads/writes dialog item text.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0141   offset=0x0141  size=203 instr  segment=seg7.asm
 ;
@@ -518,6 +527,9 @@ L_0349:
 L_035B:
         push    ds                              ; 1E
         jmp     L_01BF                          ; E9 60 FE
+; Description (heuristic):
+;   Thin wrapper around DLGDIRLIST.
+
 ;-------------------------------------------------------------------------
 ; sub_035F   offset=0x035F  size=27 instr  segment=seg7.asm
 ;
@@ -566,6 +578,14 @@ L_0393:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0xa                             ; CA 0A 00
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x8]  INT       (1 use)
+;     [bp+0xa]  HWND      (2 uses)
+
+; Description (heuristic):
+;   Mixed routine using: ENABLEWINDOW, GETDLGITEM, SENDMESSAGE.
+
 ;-------------------------------------------------------------------------
 ; sub_039F   offset=0x039F  size=34 instr  segment=seg7.asm
 ;
@@ -629,6 +649,13 @@ L_03DD:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    6                               ; CA 06 00
+; Inferred stack frame (pass18, heuristic):
+;   Locals:
+;     [bp-0xa]   INT       (2 uses)
+
+; Description (heuristic):
+;   String manipulation routine (2 string APIs).
+
 ;-------------------------------------------------------------------------
 ; sub_03E8   offset=0x03E8  size=90 instr  segment=seg7.asm
 ;
@@ -765,6 +792,9 @@ L_04B5:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     4                               ; C2 04 00
+; Description (heuristic):
+;   Mixed routine using: OPENFILE.
+
 ;-------------------------------------------------------------------------
 ; sub_04BD   offset=0x04BD  size=32 instr  segment=seg7.asm
 ;
@@ -819,6 +849,10 @@ L_04ED:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Description (heuristic):
+;   Internal helper (20 instructions).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_04F9   offset=0x04F9  size=20 instr  segment=seg7.asm
 ;

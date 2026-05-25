@@ -56,6 +56,9 @@ L_001C:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf                                    ; CB
+; Description (heuristic):
+;   Mixed routine using: MESSAGEBEEP, RELEASECAPTURE, SETCAPTURE (+1 more).
+
 ;-------------------------------------------------------------------------
 ; sub_0025   offset=0x0025  size=152 instr  segment=seg49.asm
 ;
@@ -263,6 +266,9 @@ L_01B1:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    4                               ; CA 04 00
+; Description (heuristic):
+;   Pure computation / dispatcher (57 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_01BC   offset=0x01BC  size=57 instr  segment=seg49.asm
 ;
@@ -345,6 +351,9 @@ L_022B:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    4                               ; CA 04 00
+; Description (heuristic):
+;   Pure computation / dispatcher (36 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0250   offset=0x0250  size=36 instr  segment=seg49.asm
 ;
@@ -404,6 +413,9 @@ L_029A:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    4                               ; CA 04 00
+; Description (heuristic):
+;   Pure computation / dispatcher (39 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_02A5   offset=0x02A5  size=39 instr  segment=seg49.asm
 ;
@@ -462,6 +474,9 @@ L_030A:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf                                    ; CB
+; Description (heuristic):
+;   Pure computation / dispatcher (53 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0313   offset=0x0313  size=53 instr  segment=seg49.asm
 ;
@@ -533,6 +548,10 @@ L_0385:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    4                               ; CA 04 00
+; Description (heuristic):
+;   Mixed routine using: DISPATCHMESSAGE, GETKEYSTATE, PEEKMESSAGE (+1 more).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0390   offset=0x0390  size=59 instr  segment=seg49.asm
 ;

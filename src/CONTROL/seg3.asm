@@ -634,6 +634,9 @@ L_0487:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    4                               ; CA 04 00
+; Description (heuristic):
+;   Pure computation / dispatcher (137 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0492   offset=0x0492  size=137 instr  segment=seg3.asm
 ;
@@ -811,6 +814,13 @@ L_0617:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    6                               ; CA 06 00
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x6]  WORD      (1 use)
+
+; Description (heuristic):
+;   Mixed routine using: GETDLGITEM, SENDMESSAGE, SHOWWINDOW.
+
 ;-------------------------------------------------------------------------
 ; sub_0623   offset=0x0623  size=57 instr  segment=seg3.asm
 ;
@@ -905,6 +915,9 @@ L_0690:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    4                               ; CA 04 00
+; Description (heuristic):
+;   Pure computation / dispatcher (72 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_069B   offset=0x069B  size=72 instr  segment=seg3.asm
 ;
@@ -1016,6 +1029,9 @@ L_0771:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     2                               ; C2 02 00
+; Description (heuristic):
+;   Pure computation / dispatcher (22 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0777   offset=0x0777  size=22 instr  segment=seg3.asm
 ;
@@ -1046,6 +1062,9 @@ L_0777:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf                                    ; CB
+; Description (heuristic):
+;   Pure computation / dispatcher (22 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_07A6   offset=0x07A6  size=22 instr  segment=seg3.asm
 ;

@@ -69,6 +69,14 @@ L_0036:
 ;   [conditional branch target (if/else)] L_003E
 L_003E:
         jmp     L_02E0                          ; E9 9F 02
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0xe]  HWND      (1 use)
+
+; Description (heuristic):
+;   Small helper using 2 API(s): GETDLGITEM, ISWINDOWENABLED.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0041   offset=0x0041  size=9 instr  segment=seg11.asm
 ;
@@ -94,6 +102,14 @@ L_0041:
         or      ax, ax                          ; 0B C0
         jne     L_005A                          ; 75 03
         jmp     L_02DB                          ; E9 81 02
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0xe]  HWND      (1 use)
+
+; Description (heuristic):
+;   String manipulation routine (2 string APIs).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_005A   offset=0x005A  size=83 instr  segment=seg11.asm
 ;
@@ -229,6 +245,14 @@ L_011F:
         cmp     word ptr [bp + 8], 0x300        ; 81 7E 08 00 03
         je      L_0129                          ; 74 03
         jmp     L_02E0                          ; E9 B7 01
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0xe]  HWND      (2 uses)
+
+; Description (heuristic):
+;   Small helper using 3 API(s): ENABLEWINDOW, GETDLGITEM, SENDMESSAGE.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0129   offset=0x0129  size=27 instr  segment=seg11.asm
 ;
@@ -288,6 +312,14 @@ L_015A:
 ;   [conditional branch target (if/else)] L_016A
 L_016A:
         jmp     L_02E0                          ; E9 73 01
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0xe]  HWND      (1 use)
+
+; Description (heuristic):
+;   String manipulation routine (2 string APIs).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_016D   offset=0x016D  size=94 instr  segment=seg11.asm
 ;
@@ -445,6 +477,10 @@ L_0248:
         ; --> SETDLGITEMTEXT(HWND hDlg, INT nIDItem, LPSTR lpszText) -> VOID
         call    far USER.SETDLGITEMTEXT         ; 9A 9E 02 00 00 [FIXUP]
         jmp     L_02DB                          ; EB 7F
+; Description (heuristic):
+;   Thin wrapper around DLGDIRLIST.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_025C   offset=0x025C  size=14 instr  segment=seg11.asm
 ;
@@ -471,6 +507,9 @@ L_025C:
         or      ax, ax                          ; 0B C0
         jne     L_027C                          ; 75 03
         jmp     L_0041                          ; E9 C5 FD
+; Description (heuristic):
+;   Mixed routine using: DLGDIRLIST, SENDDLGITEMMESSAGE, SETDLGITEMTEXT.
+
 ;-------------------------------------------------------------------------
 ; sub_027C   offset=0x027C  size=50 instr  segment=seg11.asm
 ;
@@ -558,6 +597,13 @@ L_02E0:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0xa                             ; CA 0A 00
+; Inferred stack frame (pass18, heuristic):
+;   Locals:
+;     [bp-0xa]   INT       (2 uses)
+
+; Description (heuristic):
+;   String manipulation routine (2 string APIs).
+
 ;-------------------------------------------------------------------------
 ; sub_02EF   offset=0x02EF  size=90 instr  segment=seg11.asm
 ;
@@ -694,6 +740,10 @@ L_03BB:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (41 instructions, no FAR API calls).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_03C1   offset=0x03C1  size=41 instr  segment=seg11.asm
 ;
@@ -757,6 +807,14 @@ L_0404:
         cmp     ax, 3                           ; 3D 03 00
         je      L_0466                          ; 74 50
         jmp     L_05BE                          ; E9 A5 01
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0xe]  HWND      (1 use)
+
+; Description (heuristic):
+;   Small helper using 2 API(s): GETDLGITEM, ISWINDOWENABLED.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0419   offset=0x0419  size=9 instr  segment=seg11.asm
 ;
@@ -782,6 +840,14 @@ L_0419:
         or      ax, ax                          ; 0B C0
         jne     L_0432                          ; 75 03
         jmp     L_05B9                          ; E9 87 01
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0xe]  HWND      (1 use)
+
+; Description (heuristic):
+;   Small helper using 2 API(s): ENDDIALOG, GETDLGITEMTEXT.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0432   offset=0x0432  size=23 instr  segment=seg11.asm
 ;
@@ -832,6 +898,14 @@ L_0466:
         cmp     word ptr [bp + 8], 0x300        ; 81 7E 08 00 03
         je      L_0470                          ; 74 03
         jmp     L_05B9                          ; E9 49 01
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0xe]  HWND      (2 uses)
+
+; Description (heuristic):
+;   Mixed routine using: DLGDIRLIST, ENABLEWINDOW, GETDLGITEM (+1 more).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0470   offset=0x0470  size=46 instr  segment=seg11.asm
 ;
@@ -917,6 +991,16 @@ L_04E3:
         cmp     byte ptr [bx], 0                ; 80 3F 00
         jne     L_04EF                          ; 75 03
         jmp     L_059C                          ; E9 AD 00
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0xe]  HWND      (1 use)
+;   Locals:
+;     [bp-0x4]   INT       (1 use)
+
+; Description (heuristic):
+;   Mixed routine using: ANSINEXT, GETDLGITEMTEXT, SETDLGITEMTEXT.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_04EF   offset=0x04EF  size=58 instr  segment=seg11.asm
 ;
@@ -1014,6 +1098,13 @@ L_0580:
         push    ax                              ; 50
         call    far KERNEL.ANSINEXT             ; 9A 18 06 00 00 [FIXUP]
         jmp     L_0535                          ; EB 99
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0xe]  HWND      (1 use)
+
+; Description (heuristic):
+;   Small helper using 2 API(s): ENABLEWINDOW, GETDLGITEM.
+
 ;-------------------------------------------------------------------------
 ; sub_059C   offset=0x059C  size=21 instr  segment=seg11.asm
 ;
@@ -1059,6 +1150,9 @@ L_05BE:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0xa                             ; CA 0A 00
+; Description (heuristic):
+;   Mixed routine using: ANSINEXT, ANSIPREV, LSTRLEN (+1 more).
+
 ;-------------------------------------------------------------------------
 ; sub_05CD   offset=0x05CD  size=109 instr  segment=seg11.asm
 ;
@@ -1215,6 +1309,16 @@ L_06C3:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0xa                             ; CA 0A 00
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x6]  HWND      (3 uses)
+;   Locals:
+;     [bp-0x4]   INT       (1 use)
+;     [bp-0x12]   INT       (1 use)
+
+; Description (heuristic):
+;   Mixed routine using: GETPARENT, GETWINDOWRECT, MOVEWINDOW (+1 more).
+
 ;-------------------------------------------------------------------------
 ; sub_06D1   offset=0x06D1  size=61 instr  segment=seg11.asm
 ;
@@ -1307,6 +1411,18 @@ L_06D1:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0xe]  HWND      (2 uses)
+;   Locals:
+;     [bp-0x4]   INT       (1 use)
+;     [bp-0xe]   HDC       (3 uses)
+;     [bp-0x10]   INT       (1 use)
+
+; Description (heuristic):
+;   Mixed routine using: GETDEVICECAPS, GETDC, GETWINDOWRECT (+2 more).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_075A   offset=0x075A  size=112 instr  segment=seg11.asm
 ;

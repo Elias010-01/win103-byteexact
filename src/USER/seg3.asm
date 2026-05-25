@@ -262,6 +262,9 @@ L_01BF:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0xa                             ; CA 0A 00
+; Description (heuristic):
+;   Pure computation / dispatcher (21 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_01E7   offset=0x01E7  size=21 instr  segment=seg3.asm
 ;
@@ -1314,6 +1317,9 @@ L_096F:
         ret                                     ; C3
 GETSYSTEMMENU ENDP
 
+; Description (heuristic):
+;   Allocation / initialization routine (2 alloc APIs).
+
 ;-------------------------------------------------------------------------
 ; sub_0979   offset=0x0979  size=74 instr  segment=seg3.asm
 ;
@@ -1424,6 +1430,14 @@ L_0A1C:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    6                               ; CA 06 00
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x4]  LPSTR     (2 uses)
+;     [bp+0x6]  LPSTR     (2 uses)
+
+; Description (heuristic):
+;   String manipulation routine (2 string APIs).
+
 ;-------------------------------------------------------------------------
 ; sub_0A29   offset=0x0A29  size=32 instr  segment=seg3.asm
 ;

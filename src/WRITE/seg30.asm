@@ -1299,6 +1299,9 @@ L_0AD3:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0xa                             ; CA 0A 00
+; Description (heuristic):
+;   Mixed routine using: DISPATCHMESSAGE, PEEKMESSAGE.
+
 ;-------------------------------------------------------------------------
 ; sub_0ADE   offset=0x0ADE  size=35 instr  segment=seg30.asm
 ;

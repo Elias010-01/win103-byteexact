@@ -34,6 +34,13 @@
 
 TERMINAL_TEXT SEGMENT BYTE PUBLIC 'CODE'
 
+; Inferred stack frame (pass18, heuristic):
+;   Locals:
+;     [bp-0x2]   HFILE     (1 use)
+
+; Description (heuristic):
+;   File I/O routine (2 file APIs).
+
 ;-------------------------------------------------------------------------
 ; sub_0000   offset=0x0000  size=34 instr  segment=seg6.asm
 ;
@@ -100,6 +107,10 @@ L_0044:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     2                               ; C2 02 00
+; Description (heuristic):
+;   File I/O routine (4 file APIs).
+;   Writes to file handle.
+
 ;-------------------------------------------------------------------------
 ; sub_004A   offset=0x004A  size=44 instr  segment=seg6.asm
 ;
@@ -183,6 +194,9 @@ L_009E:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     2                               ; C2 02 00
+; Description (heuristic):
+;   Pure computation / dispatcher (36 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_00AE   offset=0x00AE  size=36 instr  segment=seg6.asm
 ;
@@ -240,6 +254,9 @@ L_0102:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     6                               ; C2 06 00
+; Description (heuristic):
+;   String manipulation routine (2 string APIs).
+
 ;-------------------------------------------------------------------------
 ; sub_010A   offset=0x010A  size=174 instr  segment=seg6.asm
 ;

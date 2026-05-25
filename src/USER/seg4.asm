@@ -68,6 +68,9 @@ L_0024:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf                                    ; CB
+; Description (heuristic):
+;   Mixed routine using: LOCALALLOC.
+
 ;-------------------------------------------------------------------------
 ; sub_002F   offset=0x002F  size=66 instr  segment=seg4.asm
 ;
@@ -152,6 +155,9 @@ L_002F:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     2                               ; C2 02 00
+; Description (heuristic):
+;   Mixed routine using: LOCALALLOC.
+
 ;-------------------------------------------------------------------------
 ; sub_00D9   offset=0x00D9  size=65 instr  segment=seg4.asm
 ;
@@ -239,6 +245,9 @@ L_0161:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Mixed routine using: CREATEBITMAP, CREATEPATTERNBRUSH, DELETEOBJECT (+1 more).
+
 ;-------------------------------------------------------------------------
 ; sub_017D   offset=0x017D  size=47 instr  segment=seg4.asm
 ;
@@ -320,6 +329,9 @@ L_0189:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Thin wrapper around GETOBJECT.
+
 ;-------------------------------------------------------------------------
 ; sub_01F5   offset=0x01F5  size=29 instr  segment=seg4.asm
 ;
@@ -362,6 +374,9 @@ L_01F5:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     4                               ; C2 04 00
+; Description (heuristic):
+;   Mixed routine using: GETSTOCKOBJECT, GETTEXTMETRICS, FINDRESOURCE (+6 more).
+
 ;-------------------------------------------------------------------------
 ; sub_0233   offset=0x0233  size=255 instr  segment=seg4.asm
 ;
@@ -656,6 +671,9 @@ L_037A:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Internal helper (16 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_04D6   offset=0x04D6  size=16 instr  segment=seg4.asm
 ;
@@ -681,6 +699,9 @@ L_04D6:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Thin wrapper around CREATESYSTEMTIMER.
+
 ;-------------------------------------------------------------------------
 ; sub_04FF   offset=0x04FF  size=23 instr  segment=seg4.asm
 ;
@@ -716,6 +737,9 @@ L_04FF:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Mixed routine using: 101, FATALEXIT, GETMODULEHANDLE (+4 more).
+
 ;-------------------------------------------------------------------------
 ; sub_0539   offset=0x0539  size=62 instr  segment=seg4.asm
 ;
@@ -814,6 +838,9 @@ L_05EA:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Internal helper (5 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_05EE   offset=0x05EE  size=5 instr  segment=seg4.asm
 ;
@@ -828,6 +855,9 @@ L_05EE:
         mov     word ptr [0x62], 0              ; C7 06 62 00 00 00
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Mixed routine using: CREATECOMPATIBLEDC, CREATEDC, CREATERECTRGN (+1 more).
+
 ;-------------------------------------------------------------------------
 ; sub_05F9   offset=0x05F9  size=93 instr  segment=seg4.asm
 ;
@@ -955,6 +985,9 @@ L_0636:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Mixed routine using: ANSILOWER, GETPROFILEINT, GETPROFILESTRING.
+
 ;-------------------------------------------------------------------------
 ; sub_06DD   offset=0x06DD  size=162 instr  segment=seg4.asm
 ;
@@ -1142,6 +1175,9 @@ L_076E:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (43 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0848   offset=0x0848  size=43 instr  segment=seg4.asm
 ;
@@ -1204,6 +1240,9 @@ L_0892:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     4                               ; C2 04 00
+; Description (heuristic):
+;   Mixed routine using: CREATESOLIDBRUSH, GETPROFILESTRING.
+
 ;-------------------------------------------------------------------------
 ; sub_08B8   offset=0x08B8  size=62 instr  segment=seg4.asm
 ;
@@ -1288,6 +1327,9 @@ L_091E:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Mixed routine using: GETTEXTMETRICS.
+
 ;-------------------------------------------------------------------------
 ; sub_094E   offset=0x094E  size=120 instr  segment=seg4.asm
 ;
@@ -1422,6 +1464,9 @@ L_094E:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Description (heuristic):
+;   Mixed routine using: FINDRESOURCE, LOADRESOURCE, LOCKRESOURCE.
+
 ;-------------------------------------------------------------------------
 ; sub_0A95   offset=0x0A95  size=51 instr  segment=seg4.asm
 ;
@@ -1492,6 +1537,9 @@ L_0B19:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Cleanup / deallocation routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0B1D   offset=0x0B1D  size=125 instr  segment=seg4.asm
 ;
@@ -1670,6 +1718,9 @@ L_0C49:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Internal helper (15 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_0C55   offset=0x0C55  size=15 instr  segment=seg4.asm
 ;
@@ -1696,6 +1747,9 @@ L_0C55:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Cleanup / deallocation routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0C7A   offset=0x0C7A  size=38 instr  segment=seg4.asm
 ;
@@ -1752,6 +1806,13 @@ L_0C7A:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Inferred stack frame (pass18, heuristic):
+;   Locals:
+;     [bp-0x2]   HANDLE    (2 uses)
+
+; Description (heuristic):
+;   Cleanup / deallocation routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0CE9   offset=0x0CE9  size=26 instr  segment=seg4.asm
 ;
@@ -1796,6 +1857,13 @@ L_0CE9:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Inferred stack frame (pass18, heuristic):
+;   Locals:
+;     [bp-0x2]   HANDLE    (2 uses)
+
+; Description (heuristic):
+;   Cleanup / deallocation routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0D34   offset=0x0D34  size=28 instr  segment=seg4.asm
 ;
@@ -1842,6 +1910,13 @@ L_0D34:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Inferred stack frame (pass18, heuristic):
+;   Locals:
+;     [bp-0x2]   HANDLE    (2 uses)
+
+; Description (heuristic):
+;   Cleanup / deallocation routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0D86   offset=0x0D86  size=29 instr  segment=seg4.asm
 ;
@@ -1889,6 +1964,13 @@ L_0D86:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Inferred stack frame (pass18, heuristic):
+;   Locals:
+;     [bp-0x2]   HANDLE    (2 uses)
+
+; Description (heuristic):
+;   Cleanup / deallocation routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0DDC   offset=0x0DDC  size=28 instr  segment=seg4.asm
 ;
@@ -1935,6 +2017,13 @@ L_0DDC:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Inferred stack frame (pass18, heuristic):
+;   Locals:
+;     [bp-0x2]   HANDLE    (2 uses)
+
+; Description (heuristic):
+;   Cleanup / deallocation routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0E2E   offset=0x0E2E  size=28 instr  segment=seg4.asm
 ;
@@ -1981,6 +2070,13 @@ L_0E2E:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Inferred stack frame (pass18, heuristic):
+;   Locals:
+;     [bp-0x2]   HANDLE    (2 uses)
+
+; Description (heuristic):
+;   Cleanup / deallocation routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0E80   offset=0x0E80  size=28 instr  segment=seg4.asm
 ;
@@ -2027,6 +2123,10 @@ L_0E80:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   File I/O routine (3 file APIs).
+;   Reads from file handle.
+
 ;-------------------------------------------------------------------------
 ; sub_0ED2   offset=0x0ED2  size=134 instr  segment=seg4.asm
 ;
@@ -2242,6 +2342,13 @@ L_105B:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Inferred stack frame (pass18, heuristic):
+;   Locals:
+;     [bp-0x2]   HANDLE    (2 uses)
+
+; Description (heuristic):
+;   Cleanup / deallocation routine.
+
 ;-------------------------------------------------------------------------
 ; sub_105F   offset=0x105F  size=29 instr  segment=seg4.asm
 ;
@@ -2289,6 +2396,13 @@ L_105F:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Inferred stack frame (pass18, heuristic):
+;   Locals:
+;     [bp-0x2]   HANDLE    (2 uses)
+
+; Description (heuristic):
+;   Cleanup / deallocation routine.
+
 ;-------------------------------------------------------------------------
 ; sub_10B5   offset=0x10B5  size=30 instr  segment=seg4.asm
 ;
@@ -2337,6 +2451,13 @@ L_10B5:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Inferred stack frame (pass18, heuristic):
+;   Locals:
+;     [bp-0x2]   HANDLE    (2 uses)
+
+; Description (heuristic):
+;   Cleanup / deallocation routine.
+
 ;-------------------------------------------------------------------------
 ; sub_1112   offset=0x1112  size=49 instr  segment=seg4.asm
 ;

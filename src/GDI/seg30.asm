@@ -27,6 +27,9 @@
 
 GDI_TEXT SEGMENT BYTE PUBLIC 'CODE'
 
+; Description (heuristic):
+;   Cleanup / deallocation routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0000   offset=0x0000  size=132 instr  segment=seg30.asm
 ;
@@ -203,6 +206,9 @@ L_0125:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    4                               ; CA 04 00
+; Description (heuristic):
+;   Pure computation / dispatcher (156 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0134   offset=0x0134  size=156 instr  segment=seg30.asm
 ;
@@ -397,6 +403,9 @@ L_02AD:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0xc                             ; CA 0C 00
+; Description (heuristic):
+;   Pure computation / dispatcher (61 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_02BA   offset=0x02BA  size=61 instr  segment=seg30.asm
 ;
@@ -469,6 +478,10 @@ L_033F:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     8                               ; C2 08 00
+; Description (heuristic):
+;   Cleanup / deallocation routine.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0347   offset=0x0347  size=43 instr  segment=seg30.asm
 ;

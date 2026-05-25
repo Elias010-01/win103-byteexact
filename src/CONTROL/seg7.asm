@@ -78,6 +78,13 @@ L_004A:
         ; constant WM_CREATE
         mov     ax, 1                           ; B8 01 00
         jmp     L_00C8                          ; EB 79
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0xe]  HWND      (1 use)
+
+; Description (heuristic):
+;   Mixed routine using: BEGINPAINT, ENDPAINT, MESSAGEBEEP (+2 more).
+
 ;-------------------------------------------------------------------------
 ; sub_004F   offset=0x004F  size=51 instr  segment=seg7.asm
 ;
@@ -170,6 +177,10 @@ L_00C8:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0xa                             ; CA 0A 00
+; Description (heuristic):
+;   Mixed routine using: GETSTOCKOBJECT, GETSYSCOLOR, LOADSTRING (+1 more).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_00D3   offset=0x00D3  size=65 instr  segment=seg7.asm
 ;
@@ -283,6 +294,13 @@ L_0173:
         cmp     word ptr [bp - 0xc], 0xa        ; 83 7E F4 0A
         jge     L_0182                          ; 7D 03
         jmp     L_00F2                          ; E9 70 FF
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x4]  HWND      (4 uses)
+
+; Description (heuristic):
+;   Mixed routine using: GETTEXTEXTENT, LSTRLEN, GETCLIENTRECT (+10 more).
+
 ;-------------------------------------------------------------------------
 ; sub_0182   offset=0x0182  size=483 instr  segment=seg7.asm
 ;
@@ -907,6 +925,9 @@ L_06BF:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     2                               ; C2 02 00
+; Description (heuristic):
+;   Mixed routine using: SETSCROLLPOS.
+
 ;-------------------------------------------------------------------------
 ; sub_06C7   offset=0x06C7  size=32 instr  segment=seg7.asm
 ;
@@ -956,6 +977,10 @@ L_06C7:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Mixed routine using: ENDDIALOG, GETDC, LOADCURSOR (+4 more).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0720   offset=0x0720  size=96 instr  segment=seg7.asm
 ;
@@ -1114,6 +1139,13 @@ L_0814:
         ; --> RELEASEDC(HWND hWnd, HDC hDC) -> INT
         call    far USER.RELEASEDC              ; 9A 96 03 00 00 [FIXUP]
         jmp     L_08E2                          ; E9 BC 00
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x6]  HWND      (2 uses)
+
+; Description (heuristic):
+;   Mixed routine using: GETDC, RELEASEDC, SENDMESSAGE.
+
 ;-------------------------------------------------------------------------
 ; sub_0826   offset=0x0826  size=68 instr  segment=seg7.asm
 ;
@@ -1225,6 +1257,9 @@ L_08E2:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     8                               ; C2 08 00
+; Description (heuristic):
+;   String manipulation routine (2 string APIs).
+
 ;-------------------------------------------------------------------------
 ; sub_08E9   offset=0x08E9  size=108 instr  segment=seg7.asm
 ;
@@ -1390,6 +1425,9 @@ L_09E6:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     2                               ; C2 02 00
+; Description (heuristic):
+;   Mixed routine using: GETNEARESTCOLOR, GETDC, GETKEYSTATE (+2 more).
+
 ;-------------------------------------------------------------------------
 ; sub_09EC   offset=0x09EC  size=186 instr  segment=seg7.asm
 ;
@@ -1665,6 +1703,9 @@ L_0C01:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     8                               ; C2 08 00
+; Description (heuristic):
+;   Mixed routine using: CREATESOLIDBRUSH, DELETEOBJECT, FILLRECT.
+
 ;-------------------------------------------------------------------------
 ; sub_0C1D   offset=0x0C1D  size=234 instr  segment=seg7.asm
 ;
@@ -1957,6 +1998,16 @@ L_0E8C:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     6                               ; C2 06 00
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x6]  HDC       (1 use)
+;   Locals:
+;     [bp-0xa]   HBRUSH    (1 use)
+
+; Description (heuristic):
+;   Drawing routine (4 GDI APIs).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0E9C   offset=0x0E9C  size=214 instr  segment=seg7.asm
 ;
@@ -2274,6 +2325,10 @@ L_10CA:
         push    word ptr [0xad8]                ; FF 36 D8 0A
         mov     ax, 0xc54                       ; B8 54 0C
         jmp     L_1162                          ; EB 2E
+; Description (heuristic):
+;   Drawing routine (3 GDI APIs).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_1134   offset=0x1134  size=171 instr  segment=seg7.asm
 ;
@@ -2525,6 +2580,9 @@ L_1312:
         ; constant WM_MOVE
         mov     ax, 3                           ; B8 03 00
         jmp     L_132D                          ; EB 06
+; Description (heuristic):
+;   Mixed routine using: DELETEOBJECT.
+
 ;-------------------------------------------------------------------------
 ; sub_1327   offset=0x1327  size=38 instr  segment=seg7.asm
 ;
@@ -2583,6 +2641,9 @@ L_1376:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     4                               ; C2 04 00
+; Description (heuristic):
+;   Pure computation / dispatcher (158 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_1384   offset=0x1384  size=158 instr  segment=seg7.asm
 ;
@@ -2787,6 +2848,9 @@ L_14FF:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     4                               ; C2 04 00
+; Description (heuristic):
+;   Pure computation / dispatcher (34 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_1507   offset=0x1507  size=34 instr  segment=seg7.asm
 ;
@@ -2845,6 +2909,9 @@ L_155D:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     6                               ; C2 06 00
+; Description (heuristic):
+;   Pure computation / dispatcher (89 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_1563   offset=0x1563  size=89 instr  segment=seg7.asm
 ;
@@ -2953,6 +3020,13 @@ L_162C:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     6                               ; C2 06 00
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x8]  HWND      (1 use)
+
+; Description (heuristic):
+;   Mixed routine using: GETSYSTEMMETRICS, GETWINDOWRECT, SCREENTOCLIENT.
+
 ;-------------------------------------------------------------------------
 ; sub_1649   offset=0x1649  size=53 instr  segment=seg7.asm
 ;

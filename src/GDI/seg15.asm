@@ -85,6 +85,9 @@ L_0047:
         retf    8                               ; CA 08 00
 POLYGON ENDP
 
+; Description (heuristic):
+;   Cleanup / deallocation routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0054   offset=0x0054  size=104 instr  segment=seg15.asm
 ;

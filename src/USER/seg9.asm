@@ -34,6 +34,13 @@
 
 USER_TEXT SEGMENT BYTE PUBLIC 'CODE'
 
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0xc]  WORD      (1 use)
+
+; Description (heuristic):
+;   Pure computation / dispatcher (67 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0000   offset=0x0000  size=67 instr  segment=seg9.asm
 ;
@@ -119,6 +126,9 @@ L_0093:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0xa                             ; CA 0A 00
+; Description (heuristic):
+;   Pure computation / dispatcher (32 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_009E   offset=0x009E  size=32 instr  segment=seg9.asm
 ;
@@ -163,6 +173,9 @@ L_00CD:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf                                    ; CB
+; Description (heuristic):
+;   Internal helper (19 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_00D7   offset=0x00D7  size=19 instr  segment=seg9.asm
 ;
@@ -193,6 +206,9 @@ L_00D7:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    4                               ; CA 04 00
+; Description (heuristic):
+;   Pure computation / dispatcher (81 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_00F9   offset=0x00F9  size=81 instr  segment=seg9.asm
 ;
@@ -296,6 +312,9 @@ L_01AB:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     6                               ; C2 06 00
+; Description (heuristic):
+;   Internal helper (18 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_01B3   offset=0x01B3  size=18 instr  segment=seg9.asm
 ;
@@ -713,6 +732,9 @@ L_049A:
         ret     6                               ; C2 06 00
 ICONWNDPROC ENDP
 
+; Description (heuristic):
+;   Pure computation / dispatcher (74 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_04EB   offset=0x04EB  size=74 instr  segment=seg9.asm
 ;
@@ -803,6 +825,9 @@ L_0584:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf                                    ; CB
+; Description (heuristic):
+;   Pure computation / dispatcher (151 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_058D   offset=0x058D  size=151 instr  segment=seg9.asm
 ;
@@ -981,6 +1006,9 @@ L_0631:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf                                    ; CB
+; Description (heuristic):
+;   Mixed routine using: INTERSECTVISRECT, RECTVISIBLE, RESTOREVISRGN (+2 more).
+
 ;-------------------------------------------------------------------------
 ; sub_06CA   offset=0x06CA  size=90 instr  segment=seg9.asm
 ;
@@ -1104,6 +1132,9 @@ L_07A5:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     8                               ; C2 08 00
+; Description (heuristic):
+;   Pure computation / dispatcher (41 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_07AD   offset=0x07AD  size=41 instr  segment=seg9.asm
 ;
@@ -1163,6 +1194,9 @@ L_07F9:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    4                               ; CA 04 00
+; Description (heuristic):
+;   Pure computation / dispatcher (25 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0806   offset=0x0806  size=25 instr  segment=seg9.asm
 ;
@@ -1205,6 +1239,9 @@ L_082A:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     2                               ; C2 02 00
+; Description (heuristic):
+;   Mixed routine using: DELETEOBJECT.
+
 ;-------------------------------------------------------------------------
 ; sub_0838   offset=0x0838  size=98 instr  segment=seg9.asm
 ;
@@ -1332,6 +1369,9 @@ L_08E7:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Description (heuristic):
+;   Pure computation / dispatcher (63 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0918   offset=0x0918  size=63 instr  segment=seg9.asm
 ;
@@ -1408,6 +1448,9 @@ L_0935:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Description (heuristic):
+;   Pure computation / dispatcher (45 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0996   offset=0x0996  size=45 instr  segment=seg9.asm
 ;
@@ -1470,6 +1513,9 @@ L_09D4:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Description (heuristic):
+;   Pure computation / dispatcher (65 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_09EF   offset=0x09EF  size=65 instr  segment=seg9.asm
 ;
@@ -1551,6 +1597,9 @@ L_0A7E:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    4                               ; CA 04 00
+; Description (heuristic):
+;   Pure computation / dispatcher (98 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0A8D   offset=0x0A8D  size=98 instr  segment=seg9.asm
 ;

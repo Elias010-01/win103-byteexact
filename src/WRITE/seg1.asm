@@ -91,6 +91,16 @@ L_002A:
 L_0073:
         mov     ax, 0x4cff                      ; B8 FF 4C
         int     0x21                            ; CD 21
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x6]  HANDLE    (7 uses)
+;     [bp+0x8]  HANDLE    (3 uses)
+;   Locals:
+;     [bp-0x4]   HANDLE    (2 uses)
+
+; Description (heuristic):
+;   Mixed routine using: GLOBALALLOC, GLOBALCOMPACT, GLOBALFREE (+5 more).
+
 ;-------------------------------------------------------------------------
 ; sub_0078   offset=0x0078  size=284 instr  segment=seg1.asm
 ;
@@ -432,6 +442,9 @@ L_0203:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    6                               ; CA 06 00
+; Description (heuristic):
+;   Pure computation / dispatcher (256 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_025F   offset=0x025F  size=256 instr  segment=seg1.asm
 ;
@@ -747,6 +760,9 @@ L_047B:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    8                               ; CA 08 00
+; Description (heuristic):
+;   Pure computation / dispatcher (28 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0488   offset=0x0488  size=28 instr  segment=seg1.asm
 ;
@@ -783,6 +799,9 @@ L_0488:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    8                               ; CA 08 00
+; Description (heuristic):
+;   Pure computation / dispatcher (114 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_04BC   offset=0x04BC  size=114 instr  segment=seg1.asm
 ;
@@ -931,6 +950,9 @@ L_0597:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf                                    ; CB
+; Description (heuristic):
+;   Pure computation / dispatcher (54 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_05A0   offset=0x05A0  size=54 instr  segment=seg1.asm
 ;
@@ -1008,6 +1030,9 @@ L_05FC:
 ;   [error/early exit] L_060B
 L_060B:
         retf                                    ; CB
+; Description (heuristic):
+;   Internal helper (9 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_060C   offset=0x060C  size=9 instr  segment=seg1.asm
 ;

@@ -97,6 +97,9 @@ L_007E:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf                                    ; CB
+; Description (heuristic):
+;   Mixed routine using: CREATEBITMAPINDIRECT, SETBITMAPDIMENSION, GLOBALALLOC (+5 more).
+
 ;-------------------------------------------------------------------------
 ; sub_0087   offset=0x0087  size=212 instr  segment=seg63.asm
 ;
@@ -402,6 +405,14 @@ L_02B5:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf                                    ; CB
+; Inferred stack frame (pass18, heuristic):
+;   Locals:
+;     [bp-0xe]   HANDLE    (1 use)
+
+; Description (heuristic):
+;   Mixed routine using: GLOBALALLOC, GLOBALFREE, GLOBALLOCK (+5 more).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_02BF   offset=0x02BF  size=246 instr  segment=seg63.asm
 ;
@@ -734,6 +745,9 @@ L_0561:
         cmp     word ptr [bp - 0x1a8], 0x63     ; 83 BE 58 FE 63
         je      L_0588                          ; 74 03
         jmp     L_0674                          ; E9 EC 00
+; Description (heuristic):
+;   Mixed routine using: DELETEOBJECT, GETBITMAPBITS, GETBITMAPDIMENSION (+7 more).
+
 ;-------------------------------------------------------------------------
 ; sub_0588   offset=0x0588  size=274 instr  segment=seg63.asm
 ;
@@ -1125,6 +1139,9 @@ L_08BC:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf                                    ; CB
+; Description (heuristic):
+;   Pure computation / dispatcher (48 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_08C5   offset=0x08C5  size=48 instr  segment=seg63.asm
 ;
@@ -1190,6 +1207,16 @@ L_0924:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0xa                             ; CA 0A 00
+; Inferred stack frame (pass18, heuristic):
+;   Locals:
+;     [bp-0x4]   INT       (1 use)
+;     [bp-0x6]   INT       (1 use)
+;     [bp-0x8]   INT       (1 use)
+;     [bp-0x10]   INT       (1 use)
+
+; Description (heuristic):
+;   Mixed routine using: GETDEVICECAPS.
+
 ;-------------------------------------------------------------------------
 ; sub_0930   offset=0x0930  size=132 instr  segment=seg63.asm
 ;
@@ -1376,6 +1403,14 @@ L_0A86:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    6                               ; CA 06 00
+; Inferred stack frame (pass18, heuristic):
+;   Locals:
+;     [bp-0x6]   HDC       (1 use)
+
+; Description (heuristic):
+;   Mixed routine using: BITBLT, CREATEBITMAP, CREATECOMPATIBLEDC (+4 more).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0A92   offset=0x0A92  size=94 instr  segment=seg63.asm
 ;

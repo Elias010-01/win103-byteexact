@@ -93,6 +93,9 @@ L_0078:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    8                               ; CA 08 00
+; Description (heuristic):
+;   Mixed routine using: BITBLT, DELETEDC, GETKEYSTATE (+1 more).
+
 ;-------------------------------------------------------------------------
 ; sub_0083   offset=0x0083  size=76 instr  segment=seg26.asm
 ;
@@ -209,6 +212,9 @@ L_0160:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     2                               ; C2 02 00
+; Description (heuristic):
+;   Mixed routine using: BITBLT, CREATEBITMAP, DELETEDC (+6 more).
+
 ;-------------------------------------------------------------------------
 ; sub_0166   offset=0x0166  size=142 instr  segment=seg26.asm
 ;
@@ -434,6 +440,15 @@ L_02D2:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     8                               ; C2 08 00
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x6]  HDC       (1 use)
+;   Locals:
+;     [bp-0x4]   HANDLE    (1 use)
+
+; Description (heuristic):
+;   Mixed routine using: PATBLT, SELECTOBJECT.
+
 ;-------------------------------------------------------------------------
 ; sub_02D8   offset=0x02D8  size=105 instr  segment=seg26.asm
 ;
@@ -592,6 +607,9 @@ L_03B1:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Description (heuristic):
+;   Mixed routine using: BITBLT, CREATEBITMAP, DELETEDC (+3 more).
+
 ;-------------------------------------------------------------------------
 ; sub_03D5   offset=0x03D5  size=636 instr  segment=seg26.asm
 ;
@@ -1541,6 +1559,9 @@ L_09BA:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Description (heuristic):
+;   Mixed routine using: BITBLT, DELETEDC, GETSTOCKOBJECT (+3 more).
+
 ;-------------------------------------------------------------------------
 ; sub_0A3E   offset=0x0A3E  size=87 instr  segment=seg26.asm
 ;

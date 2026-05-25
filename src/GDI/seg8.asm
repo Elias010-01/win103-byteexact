@@ -494,6 +494,9 @@ L_0483:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    6                               ; CA 06 00
+; Description (heuristic):
+;   Pure computation / dispatcher (54 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_048E   offset=0x048E  size=54 instr  segment=seg8.asm
 ;
@@ -557,6 +560,10 @@ L_048E:
         mov     word ptr es:[bx + 0x1b], ax     ; 26 89 47 1B
         pop     bp                              ; 5D
         ret     0xc                             ; C2 0C 00
+; Description (heuristic):
+;   Pure computation / dispatcher (201 instructions, no FAR API calls).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_053F   offset=0x053F  size=201 instr  segment=seg8.asm
 ;

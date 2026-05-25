@@ -65,6 +65,10 @@ L_0034:
         ; constant WM_CREATE
         mov     ax, 1                           ; B8 01 00
         jmp     L_0063                          ; EB 12
+; Description (heuristic):
+;   Drawing routine (3 GDI APIs).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0051   offset=0x0051  size=64 instr  segment=seg28.asm
 ;

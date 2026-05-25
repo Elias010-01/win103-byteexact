@@ -498,6 +498,9 @@ L_0353:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf                                    ; CB
+; Description (heuristic):
+;   Pure computation / dispatcher (36 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_035E   offset=0x035E  size=36 instr  segment=seg71.asm
 ;
@@ -553,6 +556,10 @@ L_03B2:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     2                               ; C2 02 00
+; Description (heuristic):
+;   Drawing routine (3 GDI APIs).
+;   Acquires a device context, draws, releases.
+
 ;-------------------------------------------------------------------------
 ; sub_03BB   offset=0x03BB  size=222 instr  segment=seg71.asm
 ;
@@ -844,6 +851,9 @@ L_0623:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     2                               ; C2 02 00
+; Description (heuristic):
+;   Mixed routine using: GETSTOCKOBJECT, INTERSECTCLIPRECT, SAVEDC (+1 more).
+
 ;-------------------------------------------------------------------------
 ; sub_062B   offset=0x062B  size=20 instr  segment=seg71.asm
 ;
@@ -882,6 +892,9 @@ L_062B:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Mixed routine using: RESTOREDC, INVERTRECT, RELEASECAPTURE (+2 more).
+
 ;-------------------------------------------------------------------------
 ; sub_066A   offset=0x066A  size=30 instr  segment=seg71.asm
 ;
@@ -934,6 +947,9 @@ L_06AD:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Mixed routine using: RESTOREDC, OFFSETRECT, PTINRECT (+1 more).
+
 ;-------------------------------------------------------------------------
 ; sub_06CB   offset=0x06CB  size=497 instr  segment=seg71.asm
 ;
@@ -1558,6 +1574,14 @@ L_0C42:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     6                               ; C2 06 00
+; Inferred stack frame (pass18, heuristic):
+;   Locals:
+;     [bp-0x2]   INT       (2 uses)
+;     [bp-0x4]   INT       (2 uses)
+
+; Description (heuristic):
+;   Mixed routine using: PATBLT.
+
 ;-------------------------------------------------------------------------
 ; sub_0C4A   offset=0x0C4A  size=67 instr  segment=seg71.asm
 ;
@@ -1673,6 +1697,9 @@ L_0C4A:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Small helper using 2 API(s): GETCURSORPOS, SCREENTOCLIENT.
+
 ;-------------------------------------------------------------------------
 ; sub_0CF4   offset=0x0CF4  size=14 instr  segment=seg71.asm
 ;
@@ -1700,6 +1727,9 @@ L_0CF4:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     2                               ; C2 02 00
+; Description (heuristic):
+;   Small helper using 2 API(s): CLIENTTOSCREEN, SETCURSORPOS.
+
 ;-------------------------------------------------------------------------
 ; sub_0D15   offset=0x0D15  size=13 instr  segment=seg71.asm
 ;
@@ -1726,6 +1756,9 @@ L_0D15:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     4                               ; C2 04 00
+; Description (heuristic):
+;   Pure computation / dispatcher (47 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0D37   offset=0x0D37  size=47 instr  segment=seg71.asm
 ;
@@ -1793,6 +1826,9 @@ L_0D99:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     0xa                             ; C2 0A 00
+; Description (heuristic):
+;   Pure computation / dispatcher (166 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0DB5   offset=0x0DB5  size=166 instr  segment=seg71.asm
 ;
@@ -1997,6 +2033,9 @@ L_0F7A:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     0xc                             ; C2 0C 00
+; Description (heuristic):
+;   Pure computation / dispatcher (32 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0F81   offset=0x0F81  size=32 instr  segment=seg71.asm
 ;
@@ -2041,6 +2080,10 @@ L_0F81:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (56 instructions, no FAR API calls).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0FD3   offset=0x0FD3  size=56 instr  segment=seg71.asm
 ;

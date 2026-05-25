@@ -167,6 +167,10 @@ L_0107:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    4                               ; CA 04 00
+; Description (heuristic):
+;   Internal helper (14 instructions).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0114   offset=0x0114  size=14 instr  segment=seg1.asm
 ;
@@ -193,6 +197,9 @@ L_0120:
         inc     bx                              ; 43
         loop    L_0116                          ; E2 EC
         jmp     L_012D                          ; EB 01
+; Description (heuristic):
+;   Pure computation / dispatcher (40 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_012C   offset=0x012C  size=40 instr  segment=seg1.asm
 ;

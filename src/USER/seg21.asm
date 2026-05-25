@@ -453,6 +453,10 @@ L_02F1:
         ret     6                               ; C2 06 00
 STATICWNDPROC ENDP
 
+; Description (heuristic):
+;   Internal helper (18 instructions).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_032F   offset=0x032F  size=18 instr  segment=seg21.asm
 ;
@@ -479,6 +483,9 @@ L_032F:
         call    far _SEG1_35C9                  ; 9A FF FF 00 00 [FIXUP]
         sub     ax, ax                          ; 2B C0
         jmp     L_0378                          ; EB 26
+; Description (heuristic):
+;   Pure computation / dispatcher (22 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0352   offset=0x0352  size=22 instr  segment=seg21.asm
 ;

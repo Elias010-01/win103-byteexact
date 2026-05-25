@@ -176,6 +176,13 @@ L_0106:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    6                               ; CA 06 00
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x4]  WORD      (1 use)
+
+; Description (heuristic):
+;   Thin wrapper around LOADSTRING(hInstance, wID, lpBuffer, cbBuffer) -> INT.
+
 ;-------------------------------------------------------------------------
 ; sub_0113   offset=0x0113  size=18 instr  segment=seg8.asm
 ;

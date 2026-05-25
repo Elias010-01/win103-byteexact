@@ -237,6 +237,9 @@ L_017E:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0xa                             ; CA 0A 00
+; Description (heuristic):
+;   Mixed routine using: GETKEYSTATE, SETCURSOR, SETFOCUS.
+
 ;-------------------------------------------------------------------------
 ; sub_0189   offset=0x0189  size=75 instr  segment=seg12.asm
 ;
@@ -353,6 +356,10 @@ L_0253:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0xa                             ; CA 0A 00
+; Description (heuristic):
+;   Pure computation / dispatcher (49 instructions, no FAR API calls).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_025E   offset=0x025E  size=49 instr  segment=seg12.asm
 ;

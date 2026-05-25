@@ -72,6 +72,9 @@ L_0047:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    4                               ; CA 04 00
+; Description (heuristic):
+;   Mixed routine using: LOCKSEGMENT, UNLOCKSEGMENT.
+
 ;-------------------------------------------------------------------------
 ; sub_0052   offset=0x0052  size=185 instr  segment=seg1.asm
 ;
@@ -297,6 +300,9 @@ L_01F7:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0x12                            ; CA 12 00
+; Description (heuristic):
+;   Pure computation / dispatcher (157 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0253   offset=0x0253  size=157 instr  segment=seg1.asm
 ;
@@ -502,6 +508,9 @@ L_04A9:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    8                               ; CA 08 00
+; Description (heuristic):
+;   Pure computation / dispatcher (137 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_04B8   offset=0x04B8  size=137 instr  segment=seg1.asm
 ;
@@ -672,6 +681,10 @@ L_05E5:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    6                               ; CA 06 00
+; Description (heuristic):
+;   Pure computation / dispatcher (121 instructions, no FAR API calls).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_05F0   offset=0x05F0  size=121 instr  segment=seg1.asm
 ;

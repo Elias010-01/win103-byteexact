@@ -27,6 +27,9 @@
 
 GDI_TEXT SEGMENT BYTE PUBLIC 'CODE'
 
+; Description (heuristic):
+;   Pure computation / dispatcher (136 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0000   offset=0x0000  size=136 instr  segment=seg12.asm
 ;
@@ -200,6 +203,9 @@ L_014D:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     2                               ; C2 02 00
+; Description (heuristic):
+;   Pure computation / dispatcher (91 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0155   offset=0x0155  size=91 instr  segment=seg12.asm
 ;
@@ -319,6 +325,9 @@ L_021E:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     8                               ; C2 08 00
+; Description (heuristic):
+;   Pure computation / dispatcher (279 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0226   offset=0x0226  size=279 instr  segment=seg12.asm
 ;
@@ -820,6 +829,9 @@ L_05E8:
         retf    0xa                             ; CA 0A 00
 FLOODFILL ENDP
 
+; Description (heuristic):
+;   Pure computation / dispatcher (44 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_05F5   offset=0x05F5  size=44 instr  segment=seg12.asm
 ;
@@ -873,6 +885,9 @@ L_05F5:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     4                               ; C2 04 00
+; Description (heuristic):
+;   Pure computation / dispatcher (132 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0649   offset=0x0649  size=132 instr  segment=seg12.asm
 ;
@@ -1050,6 +1065,9 @@ L_079B:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     0xa                             ; C2 0A 00
+; Description (heuristic):
+;   Pure computation / dispatcher (57 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_07A3   offset=0x07A3  size=57 instr  segment=seg12.asm
 ;
@@ -1138,6 +1156,9 @@ L_0821:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     6                               ; C2 06 00
+; Description (heuristic):
+;   Pure computation / dispatcher (34 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0829   offset=0x0829  size=34 instr  segment=seg12.asm
 ;

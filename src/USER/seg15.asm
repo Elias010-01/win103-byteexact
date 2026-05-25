@@ -34,6 +34,9 @@
 
 USER_TEXT SEGMENT BYTE PUBLIC 'CODE'
 
+; Description (heuristic):
+;   Pure computation / dispatcher (35 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0000   offset=0x0000  size=35 instr  segment=seg15.asm
 ;
@@ -82,6 +85,9 @@ L_0039:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Description (heuristic):
+;   Allocation / initialization routine (2 alloc APIs).
+
 ;-------------------------------------------------------------------------
 ; sub_004E   offset=0x004E  size=84 instr  segment=seg15.asm
 ;
@@ -204,6 +210,9 @@ L_00FC:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0xa                             ; CA 0A 00
+; Description (heuristic):
+;   Mixed routine using: INTERSECTCLIPRECT, SELECTOBJECT.
+
 ;-------------------------------------------------------------------------
 ; sub_0109   offset=0x0109  size=47 instr  segment=seg15.asm
 ;
@@ -268,6 +277,9 @@ L_0148:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    4                               ; CA 04 00
+; Description (heuristic):
+;   Pure computation / dispatcher (28 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_016F   offset=0x016F  size=28 instr  segment=seg15.asm
 ;
@@ -306,6 +318,9 @@ L_016F:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Description (heuristic):
+;   Internal helper (18 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_01A1   offset=0x01A1  size=18 instr  segment=seg15.asm
 ;
@@ -332,6 +347,9 @@ L_01A1:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    4                               ; CA 04 00
+; Description (heuristic):
+;   Cleanup / deallocation routine.
+
 ;-------------------------------------------------------------------------
 ; sub_01C9   offset=0x01C9  size=362 instr  segment=seg15.asm
 ;
@@ -779,6 +797,9 @@ L_0511:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0xa                             ; CA 0A 00
+; Description (heuristic):
+;   Mixed routine using: LOCALALLOC.
+
 ;-------------------------------------------------------------------------
 ; sub_051E   offset=0x051E  size=60 instr  segment=seg15.asm
 ;
@@ -875,6 +896,9 @@ L_05B3:
 ;   [error/early exit] L_05B5
 L_05B5:
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (117 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_05B6   offset=0x05B6  size=117 instr  segment=seg15.asm
 ;
@@ -1022,6 +1046,9 @@ L_0667:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Description (heuristic):
+;   Mixed routine using: GLOBALHANDLE.
+
 ;-------------------------------------------------------------------------
 ; sub_06A5   offset=0x06A5  size=49 instr  segment=seg15.asm
 ;
@@ -1086,6 +1113,9 @@ L_06A5:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    6                               ; CA 06 00
+; Description (heuristic):
+;   Pure computation / dispatcher (158 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0703   offset=0x0703  size=158 instr  segment=seg15.asm
 ;
@@ -1274,6 +1304,9 @@ L_0866:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    8                               ; CA 08 00
+; Description (heuristic):
+;   Internal helper (5 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_0873   offset=0x0873  size=5 instr  segment=seg15.asm
 ;
@@ -1289,6 +1322,9 @@ L_0873:
 ;   [error/early exit] L_087B
 L_087B:
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (205 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_087C   offset=0x087C  size=205 instr  segment=seg15.asm
 ;
@@ -1553,6 +1589,9 @@ L_0A63:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (21 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0A67   offset=0x0A67  size=21 instr  segment=seg15.asm
 ;
@@ -1589,6 +1628,9 @@ L_0A92:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     2                               ; C2 02 00
+; Description (heuristic):
+;   Pure computation / dispatcher (25 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0A98   offset=0x0A98  size=25 instr  segment=seg15.asm
 ;
@@ -1630,6 +1672,9 @@ L_0AC7:
 ;   [error/early exit] L_0ACC
 L_0ACC:
         ret                                     ; C3
+; Description (heuristic):
+;   Internal helper (12 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_0ACD   offset=0x0ACD  size=12 instr  segment=seg15.asm
 ;

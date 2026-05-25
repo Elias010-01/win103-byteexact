@@ -723,6 +723,13 @@ L_04E7:
 L_0500:
         sub     ax, ax                          ; 2B C0
         jmp     L_0668                          ; E9 63 01
+; Inferred stack frame (pass18, heuristic):
+;   Locals:
+;     [bp-0x26]   HDC       (2 uses)
+
+; Description (heuristic):
+;   Cleanup / deallocation routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0505   offset=0x0505  size=131 instr  segment=seg2.asm
 ;

@@ -25,6 +25,13 @@
 
 WRITE_TEXT SEGMENT BYTE PUBLIC 'CODE'
 
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x6]  WORD      (1 use)
+
+; Description (heuristic):
+;   Pure computation / dispatcher (58 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0000   offset=0x0000  size=58 instr  segment=seg67.asm
 ;
@@ -99,6 +106,9 @@ L_006F:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0xa                             ; CA 0A 00
+; Description (heuristic):
+;   Pure computation / dispatcher (49 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_007A   offset=0x007A  size=49 instr  segment=seg67.asm
 ;
@@ -166,6 +176,9 @@ L_00BE:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    6                               ; CA 06 00
+; Description (heuristic):
+;   Pure computation / dispatcher (202 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_00EE   offset=0x00EE  size=202 instr  segment=seg67.asm
 ;
@@ -431,6 +444,9 @@ L_02E7:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    6                               ; CA 06 00
+; Description (heuristic):
+;   Pure computation / dispatcher (25 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_02F3   offset=0x02F3  size=25 instr  segment=seg67.asm
 ;

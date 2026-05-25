@@ -689,6 +689,9 @@ L_0382:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf                                    ; CB
+; Description (heuristic):
+;   Pure computation / dispatcher (92 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0415   offset=0x0415  size=92 instr  segment=seg3.asm
 ;
@@ -801,6 +804,9 @@ L_04B1:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    4                               ; CA 04 00
+; Description (heuristic):
+;   Mixed routine using: GETDEVICECAPS, CLIENTTOSCREEN, GETCLIENTRECT (+7 more).
+
 ;-------------------------------------------------------------------------
 ; sub_04BE   offset=0x04BE  size=256 instr  segment=seg3.asm
 ;
@@ -1144,6 +1150,9 @@ L_0702:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Description (heuristic):
+;   Pure computation / dispatcher (29 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_070D   offset=0x070D  size=29 instr  segment=seg3.asm
 ;
@@ -1192,6 +1201,10 @@ L_0742:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Description (heuristic):
+;   Pure computation / dispatcher (124 instructions, no FAR API calls).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_074D   offset=0x074D  size=124 instr  segment=seg3.asm
 ;

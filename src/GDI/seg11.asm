@@ -180,6 +180,10 @@ L_00F7:
         retf    4                               ; CA 04 00
 INVERTRGN ENDP
 
+; Description (heuristic):
+;   Pure computation / dispatcher (53 instructions, no FAR API calls).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0102   offset=0x0102  size=53 instr  segment=seg11.asm
 ;
@@ -251,6 +255,9 @@ L_0177:
         push    word ptr [bx + 0x12]            ; FF 77 12
         call    far _entry_421                  ; 9A 37 02 00 00 [FIXUP]
         jmp     L_0278                          ; E9 DE 00
+; Description (heuristic):
+;   Pure computation / dispatcher (99 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_019A   offset=0x019A  size=99 instr  segment=seg11.asm
 ;
@@ -1075,6 +1082,9 @@ L_0878:
         dec     bp                              ; 4D
         retf    0xa                             ; CA 0A 00
 FRAMERGN ENDP
+
+; Description (heuristic):
+;   Pure computation / dispatcher (171 instructions, no FAR API calls).
 
 ;-------------------------------------------------------------------------
 ; sub_0885   offset=0x0885  size=171 instr  segment=seg11.asm

@@ -66,6 +66,10 @@ L_0034:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Description (heuristic):
+;   Mixed routine using: GETKEYSTATE, SENDMESSAGE.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0040   offset=0x0040  size=253 instr  segment=seg65.asm
 ;

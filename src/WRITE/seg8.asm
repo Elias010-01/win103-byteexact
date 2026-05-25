@@ -349,6 +349,9 @@ L_0290:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0xe                             ; CA 0E 00
+; Description (heuristic):
+;   Mixed routine using: ENUMFONTS.
+
 ;-------------------------------------------------------------------------
 ; sub_029D   offset=0x029D  size=335 instr  segment=seg8.asm
 ;
@@ -768,6 +771,9 @@ L_05FB:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    6                               ; CA 06 00
+; Description (heuristic):
+;   Mixed routine using: GETPROFILESTRING.
+
 ;-------------------------------------------------------------------------
 ; sub_0607   offset=0x0607  size=110 instr  segment=seg8.asm
 ;
@@ -915,6 +921,9 @@ L_0736:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (36 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_073A   offset=0x073A  size=36 instr  segment=seg8.asm
 ;
@@ -967,6 +976,9 @@ L_077F:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Description (heuristic):
+;   Pure computation / dispatcher (78 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_078D   offset=0x078D  size=78 instr  segment=seg8.asm
 ;
@@ -1065,6 +1077,10 @@ L_0809:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf                                    ; CB
+; Description (heuristic):
+;   Pure computation / dispatcher (31 instructions, no FAR API calls).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0837   offset=0x0837  size=31 instr  segment=seg8.asm
 ;

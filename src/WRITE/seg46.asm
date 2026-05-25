@@ -25,6 +25,9 @@
 
 WRITE_TEXT SEGMENT BYTE PUBLIC 'CODE'
 
+; Description (heuristic):
+;   Pure computation / dispatcher (220 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0000   offset=0x0000  size=220 instr  segment=seg46.asm
 ;
@@ -271,6 +274,9 @@ L_0148:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    8                               ; CA 08 00
+; Description (heuristic):
+;   Pure computation / dispatcher (145 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_01F3   offset=0x01F3  size=145 instr  segment=seg46.asm
 ;
@@ -438,6 +444,9 @@ L_0352:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0xc                             ; CA 0C 00
+; Description (heuristic):
+;   Pure computation / dispatcher (139 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_035F   offset=0x035F  size=139 instr  segment=seg46.asm
 ;
@@ -615,6 +624,10 @@ L_04BE:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0x12                            ; CA 12 00
+; Description (heuristic):
+;   Pure computation / dispatcher (53 instructions, no FAR API calls).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_04CA   offset=0x04CA  size=53 instr  segment=seg46.asm
 ;

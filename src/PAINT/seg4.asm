@@ -300,6 +300,13 @@ L_0082:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x4]  HWND      (3 uses)
+
+; Description (heuristic):
+;   Mixed routine using: CREATEWINDOW, GETWINDOWRECT, SETCURSORPOS.
+
 ;-------------------------------------------------------------------------
 ; sub_0234   offset=0x0234  size=72 instr  segment=seg4.asm
 ;
@@ -423,6 +430,14 @@ L_0234:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     2                               ; C2 02 00
+; Inferred stack frame (pass18, heuristic):
+;   Locals:
+;     [bp-0x6]   HANDLE    (1 use)
+;     [bp-0x8]   HANDLE    (1 use)
+
+; Description (heuristic):
+;   Drawing routine (3 GDI APIs).
+
 ;-------------------------------------------------------------------------
 ; sub_02E0   offset=0x02E0  size=169 instr  segment=seg4.asm
 ;
@@ -690,6 +705,9 @@ L_0330:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     4                               ; C2 04 00
+; Description (heuristic):
+;   Mixed routine using: GETDC, RELEASECAPTURE, RELEASEDC (+1 more).
+
 ;-------------------------------------------------------------------------
 ; sub_04A2   offset=0x04A2  size=81 instr  segment=seg4.asm
 ;
@@ -825,6 +843,10 @@ L_058B:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     8                               ; C2 08 00
+; Description (heuristic):
+;   Small helper using 2 API(s): GETCURSORPOS, SCREENTOCLIENT.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0591   offset=0x0591  size=26 instr  segment=seg4.asm
 ;
@@ -870,6 +892,9 @@ L_05D0:
         cmp     word ptr [bp + 6], 0            ; 83 7E 06 00
         jge     L_05D9                          ; 7D 03
         jmp     L_066D                          ; E9 94 00
+; Description (heuristic):
+;   Mixed routine using: CLIENTTOSCREEN, GETFOCUS, SETCURSORPOS (+1 more).
+
 ;-------------------------------------------------------------------------
 ; sub_05D9   offset=0x05D9  size=144 instr  segment=seg4.asm
 ;
@@ -1102,6 +1127,9 @@ L_0776:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     8                               ; C2 08 00
+; Description (heuristic):
+;   Mixed routine using: CLIENTTOSCREEN, GETCURSORPOS, GETSYSTEMMETRICS (+3 more).
+
 ;-------------------------------------------------------------------------
 ; sub_077C   offset=0x077C  size=81 instr  segment=seg4.asm
 ;
@@ -1215,6 +1243,10 @@ L_0847:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     4                               ; C2 04 00
+; Description (heuristic):
+;   Window procedure (WindowProc). Handles WM_CREATE, WM_DESTROY.
+;   Does its own painting/drawing (4 GDI APIs used).
+
 ;-------------------------------------------------------------------------
 ; sub_084D   offset=0x084D  size=158 instr  segment=seg4.asm
 ;
@@ -1463,6 +1495,9 @@ L_09F9:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0xa                             ; CA 0A 00
+; Description (heuristic):
+;   Pure computation / dispatcher (27 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0A04   offset=0x0A04  size=27 instr  segment=seg4.asm
 ;
@@ -1500,6 +1535,9 @@ L_0A04:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     4                               ; C2 04 00
+; Description (heuristic):
+;   Mixed routine using: CREATEPATTERNBRUSH, GETSTOCKOBJECT, PATBLT (+2 more).
+
 ;-------------------------------------------------------------------------
 ; sub_0A4A   offset=0x0A4A  size=98 instr  segment=seg4.asm
 ;
@@ -1650,6 +1688,9 @@ L_0AE0:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     6                               ; C2 06 00
+; Description (heuristic):
+;   Pure computation / dispatcher (26 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0B5E   offset=0x0B5E  size=26 instr  segment=seg4.asm
 ;
@@ -1691,6 +1732,9 @@ L_0B9B:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     4                               ; C2 04 00
+; Description (heuristic):
+;   Internal helper (13 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_0BA1   offset=0x0BA1  size=13 instr  segment=seg4.asm
 ;
@@ -1715,6 +1759,9 @@ L_0BA1:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Internal helper (13 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_0BBA   offset=0x0BBA  size=13 instr  segment=seg4.asm
 ;
@@ -1739,6 +1786,9 @@ L_0BBA:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Internal helper (19 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_0BD3   offset=0x0BD3  size=19 instr  segment=seg4.asm
 ;

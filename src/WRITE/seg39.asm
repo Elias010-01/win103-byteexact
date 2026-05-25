@@ -34,6 +34,9 @@
 
 WRITE_TEXT SEGMENT BYTE PUBLIC 'CODE'
 
+; Description (heuristic):
+;   Drawing routine (3 GDI APIs).
+
 ;-------------------------------------------------------------------------
 ; sub_0000   offset=0x0000  size=796 instr  segment=seg39.asm
 ;
@@ -1126,6 +1129,9 @@ L_08A2:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    6                               ; CA 06 00
+; Description (heuristic):
+;   Pure computation / dispatcher (79 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_08AF   offset=0x08AF  size=79 instr  segment=seg39.asm
 ;
@@ -1227,6 +1233,9 @@ L_0950:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Description (heuristic):
+;   Pure computation / dispatcher (386 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_095B   offset=0x095B  size=386 instr  segment=seg39.asm
 ;
@@ -1708,6 +1717,9 @@ L_0D53:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    4                               ; CA 04 00
+; Description (heuristic):
+;   Mixed routine using: SETRECT.
+
 ;-------------------------------------------------------------------------
 ; sub_0D60   offset=0x0D60  size=146 instr  segment=seg39.asm
 ;
@@ -1896,6 +1908,9 @@ L_0EC1:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    8                               ; CA 08 00
+; Description (heuristic):
+;   Mixed routine using: DISPATCHMESSAGE, GETMESSAGE, PEEKMESSAGE (+1 more).
+
 ;-------------------------------------------------------------------------
 ; sub_0ED1   offset=0x0ED1  size=179 instr  segment=seg39.asm
 ;
@@ -2154,6 +2169,9 @@ L_106B:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    6                               ; CA 06 00
+; Description (heuristic):
+;   Mixed routine using: INVERTRECT.
+
 ;-------------------------------------------------------------------------
 ; sub_1077   offset=0x1077  size=334 instr  segment=seg39.asm
 ;
@@ -2582,6 +2600,9 @@ L_1409:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0xa                             ; CA 0A 00
+; Description (heuristic):
+;   Pure computation / dispatcher (24 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_1415   offset=0x1415  size=24 instr  segment=seg39.asm
 ;
@@ -2616,6 +2637,9 @@ L_1415:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Description (heuristic):
+;   Pure computation / dispatcher (84 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_1440   offset=0x1440  size=84 instr  segment=seg39.asm
 ;
@@ -2720,6 +2744,9 @@ L_14E9:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf                                    ; CB
+; Description (heuristic):
+;   Mixed routine using: PATBLT.
+
 ;-------------------------------------------------------------------------
 ; sub_14F2   offset=0x14F2  size=58 instr  segment=seg39.asm
 ;

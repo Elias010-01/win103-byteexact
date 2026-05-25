@@ -27,6 +27,9 @@
 
 GDI_TEXT SEGMENT BYTE PUBLIC 'CODE'
 
+; Description (heuristic):
+;   Pure computation / dispatcher (596 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0000   offset=0x0000  size=596 instr  segment=seg22.asm
 ;
@@ -768,6 +771,10 @@ L_05A4:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    8                               ; CA 08 00
+; Description (heuristic):
+;   Pure computation / dispatcher (121 instructions, no FAR API calls).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_05B1   offset=0x05B1  size=121 instr  segment=seg22.asm
 ;
@@ -1233,6 +1240,13 @@ L_08A8:
 POLYLINE ENDP
 
         jmp     L_089B                          ; EB EF
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x4]  WORD      (1 use)
+
+; Description (heuristic):
+;   Cleanup / deallocation routine.
+
 ;-------------------------------------------------------------------------
 ; sub_08AC   offset=0x08AC  size=144 instr  segment=seg22.asm
 ;
@@ -1422,6 +1436,9 @@ L_0A1A:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     8                               ; C2 08 00
+; Description (heuristic):
+;   Pure computation / dispatcher (104 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0A21   offset=0x0A21  size=104 instr  segment=seg22.asm
 ;
@@ -1556,6 +1573,10 @@ L_0B48:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     4                               ; C2 04 00
+; Description (heuristic):
+;   Pure computation / dispatcher (211 instructions, no FAR API calls).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0B52   offset=0x0B52  size=211 instr  segment=seg22.asm
 ;

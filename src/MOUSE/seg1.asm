@@ -185,6 +185,9 @@ L_00F6:
 L_0107:
         mov     ax, word ptr [0x20]             ; A1 20 00
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (127 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_010B   offset=0x010B  size=127 instr  segment=seg1.asm
 ;
@@ -361,6 +364,10 @@ L_0245:
         pop     ax                              ; 58
         sti                                     ; FB
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (118 instructions, no FAR API calls).
+;   Interrupt handler.
+
 ;-------------------------------------------------------------------------
 ; sub_024D   offset=0x024D  size=118 instr  segment=seg1.asm
 ;
@@ -515,6 +522,9 @@ L_0346:
         out     0x20, al                        ; E6 20
         pop     ax                              ; 58
         iret                                    ; CF
+; Description (heuristic):
+;   Pure computation / dispatcher (61 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_034C   offset=0x034C  size=61 instr  segment=seg1.asm
 ;

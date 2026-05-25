@@ -101,6 +101,16 @@ L_002A:
 L_007C:
         mov     ax, 0x4cff                      ; B8 FF 4C
         int     0x21                            ; CD 21
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x6]  LPSTR     (1 use)
+;     [bp+0x8]  LPSTR     (1 use)
+;   Locals:
+;     [bp-0x4]   HANDLE    (1 use)
+
+; Description (heuristic):
+;   Mixed routine using: LOCALALLOC, LSTRCPY.
+
 ;-------------------------------------------------------------------------
 ; sub_0081   offset=0x0081  size=38 instr  segment=seg2.asm
 ;
@@ -164,6 +174,9 @@ L_00CE:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    4                               ; CA 04 00
+; Description (heuristic):
+;   Mixed routine using: GETPROFILESTRING.
+
 ;-------------------------------------------------------------------------
 ; sub_00DC   offset=0x00DC  size=163 instr  segment=seg2.asm
 ;
@@ -395,6 +408,15 @@ L_02A1:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Inferred stack frame (pass18, heuristic):
+;   Locals:
+;     [bp-0x2a]   HDC       (5 uses)
+;     [bp-0x2c]   HDC       (2 uses)
+
+; Description (heuristic):
+;   Drawing routine (4 GDI APIs).
+;   Acquires a device context, draws, releases.
+
 ;-------------------------------------------------------------------------
 ; sub_02A8   offset=0x02A8  size=260 instr  segment=seg2.asm
 ;
@@ -746,6 +768,9 @@ L_0513:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Cleanup / deallocation routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0519   offset=0x0519  size=353 instr  segment=seg2.asm
 ;
@@ -1271,6 +1296,9 @@ L_087B:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Description (heuristic):
+;   Mixed routine using: GETINSTANCEDATA.
+
 ;-------------------------------------------------------------------------
 ; sub_0886   offset=0x0886  size=83 instr  segment=seg2.asm
 ;
@@ -1366,6 +1394,9 @@ L_0886:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     2                               ; C2 02 00
+; Description (heuristic):
+;   Cleanup / deallocation routine.
+
 ;-------------------------------------------------------------------------
 ; sub_095F   offset=0x095F  size=146 instr  segment=seg2.asm
 ;
@@ -1597,6 +1628,10 @@ L_0AC8:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0xa                             ; CA 0A 00
+; Description (heuristic):
+;   Mixed routine using: GETPROFILESTRING, GETMENU.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0AD3   offset=0x0AD3  size=34 instr  segment=seg2.asm
 ;
@@ -1644,6 +1679,9 @@ L_0AD3:
         ; constant WM_CREATE
         mov     ax, 1                           ; B8 01 00
         jmp     L_0B22                          ; EB 09
+; Description (heuristic):
+;   Mixed routine using: GETPROFILEINT, GETPROFILESTRING, ENABLEMENUITEM.
+
 ;-------------------------------------------------------------------------
 ; sub_0B19   offset=0x0B19  size=94 instr  segment=seg2.asm
 ;

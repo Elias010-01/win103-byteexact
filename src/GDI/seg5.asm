@@ -238,6 +238,17 @@ L_018A:
         inc     ax                              ; 40
         jne     L_019E                          ; 75 03
         jmp     L_00C7                          ; E9 29 FF
+; Inferred stack frame (pass18, heuristic):
+;   Locals:
+;     [bp-0x4]   LPVOID    (1 use)
+;     [bp-0x6]   LPVOID    (1 use)
+;     [bp-0x14]   WORD      (1 use)
+;     [bp-0x1c]   HFILE     (3 uses)
+
+; Description (heuristic):
+;   File I/O routine (3 file APIs).
+;   Reads from file handle.
+
 ;-------------------------------------------------------------------------
 ; sub_019E   offset=0x019E  size=42 instr  segment=seg5.asm
 ;
@@ -320,6 +331,13 @@ L_021A:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    6                               ; CA 06 00
+; Inferred stack frame (pass18, heuristic):
+;   Locals:
+;     [bp-0x8]   LPVOID    (1 use)
+
+; Description (heuristic):
+;   Allocation / initialization routine (2 alloc APIs).
+
 ;-------------------------------------------------------------------------
 ; sub_0225   offset=0x0225  size=65 instr  segment=seg5.asm
 ;
@@ -413,6 +431,9 @@ L_02C3:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    6                               ; CA 06 00
+; Description (heuristic):
+;   Mixed routine using: FATALEXIT, GLOBALFREE, GLOBALLOCK (+6 more).
+
 ;-------------------------------------------------------------------------
 ; sub_02CE   offset=0x02CE  size=903 instr  segment=seg5.asm
 ;
@@ -1610,6 +1631,9 @@ L_0D0D:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0x20                            ; CA 20 00
+; Description (heuristic):
+;   Small helper using 2 API(s): ADDATOM, FINDATOM.
+
 ;-------------------------------------------------------------------------
 ; sub_0D1A   offset=0x0D1A  size=17 instr  segment=seg5.asm
 ;
@@ -1642,6 +1666,10 @@ L_0D40:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     4                               ; C2 04 00
+; Description (heuristic):
+;   Pure computation / dispatcher (670 instructions, no FAR API calls).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0D49   offset=0x0D49  size=670 instr  segment=seg5.asm
 ;

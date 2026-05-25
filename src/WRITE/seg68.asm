@@ -80,6 +80,9 @@ L_004E:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Description (heuristic):
+;   Pure computation / dispatcher (74 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0059   offset=0x0059  size=74 instr  segment=seg68.asm
 ;
@@ -177,6 +180,9 @@ L_00E5:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    4                               ; CA 04 00
+; Description (heuristic):
+;   Pure computation / dispatcher (47 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_00F2   offset=0x00F2  size=47 instr  segment=seg68.asm
 ;
@@ -243,6 +249,9 @@ L_0159:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Description (heuristic):
+;   Mixed routine using: LOCALREALLOC.
+
 ;-------------------------------------------------------------------------
 ; sub_0165   offset=0x0165  size=88 instr  segment=seg68.asm
 ;
@@ -356,6 +365,9 @@ L_01C3:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Description (heuristic):
+;   Pure computation / dispatcher (49 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0246   offset=0x0246  size=49 instr  segment=seg68.asm
 ;

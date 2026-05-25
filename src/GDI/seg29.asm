@@ -151,6 +151,9 @@ RCOS PROC FAR
         jmp     L_0105                          ; EB 02
 RCOS ENDP
 
+; Description (heuristic):
+;   Pure computation / dispatcher (32 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0103   offset=0x0103  size=32 instr  segment=seg29.asm
 ;

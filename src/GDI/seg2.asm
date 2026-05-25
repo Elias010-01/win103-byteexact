@@ -93,6 +93,9 @@ L_0051:
         retf                                    ; CB
 entry ENDP
 
+; Description (heuristic):
+;   Allocation / initialization routine (2 alloc APIs).
+
 ;-------------------------------------------------------------------------
 ; sub_005C   offset=0x005C  size=138 instr  segment=seg2.asm
 ;
@@ -272,6 +275,9 @@ L_0158:
 ;   [error/early exit] L_0194
 L_0194:
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (32 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0195   offset=0x0195  size=32 instr  segment=seg2.asm
 ;

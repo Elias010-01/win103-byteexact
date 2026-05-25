@@ -359,6 +359,9 @@ L_02E9:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf                                    ; CB
+; Description (heuristic):
+;   Pure computation / dispatcher (176 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_02F2   offset=0x02F2  size=176 instr  segment=seg76.asm
 ;
@@ -576,6 +579,9 @@ L_04B7:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0x10                            ; CA 10 00
+; Description (heuristic):
+;   Pure computation / dispatcher (139 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_04C2   offset=0x04C2  size=139 instr  segment=seg76.asm
 ;

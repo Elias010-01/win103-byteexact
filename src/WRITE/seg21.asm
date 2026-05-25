@@ -340,6 +340,14 @@ L_022A:
         cmp     word ptr [bx], 0                ; 83 3F 00
         jne     L_0252                          ; 75 03
         jmp     L_01C7                          ; E9 75 FF
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0xe]  HWND      (1 use)
+
+; Description (heuristic):
+;   Small helper using 2 API(s): ENABLEWINDOW, GETDLGITEM.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0252   offset=0x0252  size=17 instr  segment=seg21.asm
 ;
@@ -375,6 +383,14 @@ L_0272:
         cmp     word ptr [bx], 0                ; 83 3F 00
         je      L_0285                          ; 74 03
         jmp     L_01C7                          ; E9 42 FF
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0xe]  HWND      (1 use)
+
+; Description (heuristic):
+;   Cleanup / deallocation routine.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0285   offset=0x0285  size=132 instr  segment=seg21.asm
 ;
@@ -559,6 +575,10 @@ L_03D4:
         jne     L_03FA                          ; 75 08
         mov     word ptr [0x1010], 0            ; C7 06 10 10 00 00
         jmp     L_039B                          ; EB A1
+; Description (heuristic):
+;   Cleanup / deallocation routine.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_03FA   offset=0x03FA  size=25 instr  segment=seg21.asm
 ;
@@ -599,6 +619,14 @@ L_041E:
         jne     L_0446                          ; 75 09
         mov     word ptr [0xf94], 0             ; C7 06 94 0F 00 00
         jmp     L_039B                          ; E9 55 FF
+; Inferred stack frame (pass18, heuristic):
+;   Locals:
+;     [bp-0x33e]   HANDLE    (1 use)
+
+; Description (heuristic):
+;   Mixed routine using: LOADLIBRARY.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0446   offset=0x0446  size=35 instr  segment=seg21.asm
 ;
@@ -650,6 +678,14 @@ L_04A0:
         push    ax                              ; 50
         call    far _entry_47                   ; 9A CB 04 00 00 [FIXUP]
         jmp     L_01D3                          ; E9 27 FD
+; Inferred stack frame (pass18, heuristic):
+;   Locals:
+;     [bp-0x33c]   FARPROC   (1 use)
+;     [bp-0x33e]   HANDLE    (2 uses)
+
+; Description (heuristic):
+;   Cleanup / deallocation routine.
+
 ;-------------------------------------------------------------------------
 ; sub_04AC   offset=0x04AC  size=69 instr  segment=seg21.asm
 ;
@@ -758,6 +794,10 @@ L_057A:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0xa                             ; CA 0A 00
+; Description (heuristic):
+;   Pure computation / dispatcher (51 instructions, no FAR API calls).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0586   offset=0x0586  size=51 instr  segment=seg21.asm
 ;

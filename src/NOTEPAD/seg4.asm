@@ -49,6 +49,14 @@ NOTEPAD_TEXT SEGMENT BYTE PUBLIC 'CODE'
         cmp     ax, 0x111                       ; 3D 11 01
         je      L_0057                          ; 74 3C
         jmp     L_006F                          ; EB 52
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0xe]  HWND      (1 use)
+
+; Description (heuristic):
+;   Mixed routine using: SENDDLGITEMMESSAGE.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_001D   offset=0x001D  size=35 instr  segment=seg4.asm
 ;
@@ -114,6 +122,14 @@ L_0067:
 L_006F:
         sub     ax, ax                          ; 2B C0
         jmp     L_019E                          ; E9 2A 01
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0xe]  HWND      (1 use)
+
+; Description (heuristic):
+;   Small helper using 2 API(s): GETDLGITEM, ISWINDOWENABLED.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0074   offset=0x0074  size=9 instr  segment=seg4.asm
 ;
@@ -139,6 +155,14 @@ L_0074:
         or      ax, ax                          ; 0B C0
         jne     L_008D                          ; 75 03
         jmp     L_014E                          ; E9 C1 00
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0xe]  HWND      (1 use)
+
+; Description (heuristic):
+;   File I/O routine (2 file APIs).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_008D   offset=0x008D  size=100 instr  segment=seg4.asm
 ;
@@ -299,6 +323,9 @@ L_0186:
         push    word ptr [bp + 0xe]             ; FF 76 0E
         sub     ax, ax                          ; 2B C0
         jmp     L_017E                          ; EB F1
+; Description (heuristic):
+;   Internal helper (12 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_018D   offset=0x018D  size=12 instr  segment=seg4.asm
 ;
@@ -322,6 +349,15 @@ L_019E:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0xa                             ; CA 0A 00
+; Inferred stack frame (pass18, heuristic):
+;   Locals:
+;     [bp-0x8]   LRESULT   (1 use)
+
+; Description (heuristic):
+;   File I/O routine (7 file APIs).
+;   Reads from file handle.
+;   Writes to file handle.
+
 ;-------------------------------------------------------------------------
 ; sub_01A9   offset=0x01A9  size=433 instr  segment=seg4.asm
 ;
@@ -1004,6 +1040,9 @@ L_0609:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Description (heuristic):
+;   Mixed routine using: LSTRCPY, SENDMESSAGE.
+
 ;-------------------------------------------------------------------------
 ; sub_0615   offset=0x0615  size=50 instr  segment=seg4.asm
 ;
@@ -1088,6 +1127,9 @@ L_067B:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Description (heuristic):
+;   String manipulation routine (2 string APIs).
+
 ;-------------------------------------------------------------------------
 ; sub_0686   offset=0x0686  size=58 instr  segment=seg4.asm
 ;
@@ -1175,6 +1217,13 @@ L_06E9:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Inferred stack frame (pass18, heuristic):
+;   Locals:
+;     [bp-0x6]   LRESULT   (1 use)
+
+; Description (heuristic):
+;   Mixed routine using: SENDMESSAGE.
+
 ;-------------------------------------------------------------------------
 ; sub_06F6   offset=0x06F6  size=36 instr  segment=seg4.asm
 ;

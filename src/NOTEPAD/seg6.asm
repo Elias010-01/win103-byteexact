@@ -48,6 +48,15 @@ NOTEPAD_TEXT SEGMENT BYTE PUBLIC 'CODE'
         cmp     ax, 0x111                       ; 3D 11 01
         je      L_005B                          ; 74 44
         jmp     L_0075                          ; EB 5C
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0xe]  HWND      (2 uses)
+
+; Description (heuristic):
+;   Dialog procedure (DlgProc). Handles dialog messages.
+;   Reads/writes dialog item text.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0019   offset=0x0019  size=42 instr  segment=seg6.asm
 ;
@@ -128,6 +137,16 @@ L_0085:
         ; constant WM_CREATE
         mov     ax, 1                           ; B8 01 00
         jmp     L_0114                          ; E9 89 00
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0xa]  INT       (1 use)
+;     [bp+0xe]  HWND      (3 uses)
+
+; Description (heuristic):
+;   Dialog procedure (DlgProc). Handles dialog messages.
+;   Reads/writes dialog item text.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_008B   offset=0x008B  size=26 instr  segment=seg6.asm
 ;
@@ -184,6 +203,10 @@ L_008B:
         push    cs                              ; 0E
         call    L_011F                          ; E8 53 00
         jmp     L_0085                          ; EB B7
+; Description (heuristic):
+;   Small helper using 2 API(s): CHECKDLGBUTTON, ISDLGBUTTONCHECKED.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_00CE   offset=0x00CE  size=20 instr  segment=seg6.asm
 ;
@@ -227,6 +250,9 @@ L_00FB:
 L_00FD:
         mov     word ptr [0x282], ax            ; A3 82 02
         jmp     L_0085                          ; EB 83
+; Description (heuristic):
+;   Internal helper (12 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_0102   offset=0x0102  size=12 instr  segment=seg6.asm
 ;
@@ -250,6 +276,16 @@ L_0114:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0xa                             ; CA 0A 00
+; Inferred stack frame (pass18, heuristic):
+;   Locals:
+;     [bp-0xa]   LRESULT   (1 use)
+;     [bp-0xc]   LRESULT   (1 use)
+;     [bp-0x10]   PSTR      (1 use)
+;     [bp-0x12]   HANDLE    (2 uses)
+
+; Description (heuristic):
+;   Allocation / initialization routine (2 alloc APIs).
+
 ;-------------------------------------------------------------------------
 ; sub_011F   offset=0x011F  size=90 instr  segment=seg6.asm
 ;
@@ -387,6 +423,13 @@ L_01EC:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf                                    ; CB
+; Inferred stack frame (pass18, heuristic):
+;   Locals:
+;     [bp-0x4]   INT       (1 use)
+
+; Description (heuristic):
+;   Mixed routine using: LSTRLEN.
+
 ;-------------------------------------------------------------------------
 ; sub_01F5   offset=0x01F5  size=31 instr  segment=seg6.asm
 ;
@@ -443,6 +486,9 @@ L_023F:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     6                               ; C2 06 00
+; Description (heuristic):
+;   Mixed routine using: ANSIUPPER.
+
 ;-------------------------------------------------------------------------
 ; sub_0245   offset=0x0245  size=50 instr  segment=seg6.asm
 ;
@@ -521,6 +567,14 @@ L_02BD:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     6                               ; C2 06 00
+; Inferred stack frame (pass18, heuristic):
+;   Locals:
+;     [bp-0x2]   LRESULT   (1 use)
+
+; Description (heuristic):
+;   Mixed routine using: ANSINEXT, GLOBALLOCK, GLOBALUNLOCK (+18 more).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_02C7   offset=0x02C7  size=414 instr  segment=seg6.asm
 ;

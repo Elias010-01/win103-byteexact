@@ -50,6 +50,14 @@ CARDFILE_TEXT SEGMENT BYTE PUBLIC 'CODE'
         cmp     ax, 0x111                       ; 3D 11 01
         je      L_006A                          ; 74 4A
         jmp     L_008A                          ; EB 68
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0xe]  HWND      (2 uses)
+
+; Description (heuristic):
+;   Mixed routine using: DLGDIRLIST, SENDDLGITEMMESSAGE, SETDLGITEMTEXT.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0022   offset=0x0022  size=45 instr  segment=seg6.asm
 ;
@@ -133,6 +141,14 @@ L_0082:
 L_008A:
         sub     ax, ax                          ; 2B C0
         jmp     L_0300                          ; E9 71 02
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0xe]  HWND      (1 use)
+
+; Description (heuristic):
+;   Small helper using 2 API(s): GETDLGITEM, ISWINDOWENABLED.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_008F   offset=0x008F  size=9 instr  segment=seg6.asm
 ;
@@ -158,6 +174,17 @@ L_008F:
         or      ax, ax                          ; 0B C0
         jne     L_00A8                          ; 75 03
         jmp     L_0179                          ; E9 D1 00
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0xe]  HWND      (1 use)
+;   Locals:
+;     [bp-0x4]   WORD      (1 use)
+;     [bp-0x6]   HANDLE    (1 use)
+
+; Description (heuristic):
+;   Small helper using 3 API(s): GETDLGITEM, GETWINDOWTEXTLENGTH, LOCALALLOC.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_00A8   offset=0x00A8  size=16 instr  segment=seg6.asm
 ;
@@ -193,6 +220,16 @@ L_00A8:
         or      ax, ax                          ; 0B C0
         jne     L_00D6                          ; 75 03
         jmp     L_0179                          ; E9 A3 00
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0xe]  HWND      (1 use)
+;   Locals:
+;     [bp-0x4]   INT       (1 use)
+
+; Description (heuristic):
+;   String manipulation routine (2 string APIs).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_00D6   offset=0x00D6  size=81 instr  segment=seg6.asm
 ;
@@ -331,6 +368,17 @@ L_018F:
 ;   [conditional branch target (if/else)] L_019F
 L_019F:
         jmp     L_0064                          ; E9 C2 FE
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0xe]  HWND      (1 use)
+;   Locals:
+;     [bp-0x4]   WORD      (2 uses)
+;     [bp-0x6]   HANDLE    (1 use)
+
+; Description (heuristic):
+;   Small helper using 3 API(s): GETDLGITEM, GETWINDOWTEXTLENGTH, LOCALALLOC.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_01A2   offset=0x01A2  size=16 instr  segment=seg6.asm
 ;
@@ -366,6 +414,15 @@ L_01A2:
         or      ax, ax                          ; 0B C0
         jne     L_01D0                          ; 75 03
         jmp     L_0064                          ; E9 94 FE
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0xe]  HWND      (1 use)
+;   Locals:
+;     [bp-0x4]   INT       (1 use)
+
+; Description (heuristic):
+;   String manipulation routine (2 string APIs).
+
 ;-------------------------------------------------------------------------
 ; sub_01D0   offset=0x01D0  size=125 instr  segment=seg6.asm
 ;
@@ -567,6 +624,13 @@ L_0300:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0xa                             ; CA 0A 00
+; Inferred stack frame (pass18, heuristic):
+;   Locals:
+;     [bp-0xa]   INT       (2 uses)
+
+; Description (heuristic):
+;   String manipulation routine (2 string APIs).
+
 ;-------------------------------------------------------------------------
 ; sub_030B   offset=0x030B  size=90 instr  segment=seg6.asm
 ;
@@ -703,6 +767,10 @@ L_03D7:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Mixed routine using: DLGDIRLIST.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_03DD   offset=0x03DD  size=49 instr  segment=seg6.asm
 ;
@@ -779,6 +847,16 @@ L_0424:
         cmp     byte ptr [0x35a], 0             ; 80 3E 5A 03 00
         jne     L_0442                          ; 75 03
         jmp     L_04F1                          ; E9 AF 00
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0xe]  HWND      (1 use)
+;   Locals:
+;     [bp-0x4]   INT       (1 use)
+
+; Description (heuristic):
+;   Mixed routine using: ANSINEXT, GETDLGITEMTEXT, SETDLGITEMTEXT.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0442   offset=0x0442  size=58 instr  segment=seg6.asm
 ;
@@ -876,6 +954,14 @@ L_04D5:
         push    ax                              ; 50
         call    far KERNEL.ANSINEXT             ; 9A 10 06 00 00 [FIXUP]
         jmp     L_048C                          ; EB 9B
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0xe]  HWND      (1 use)
+
+; Description (heuristic):
+;   Small helper using 2 API(s): ENABLEWINDOW, GETDLGITEM.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_04F1   offset=0x04F1  size=21 instr  segment=seg6.asm
 ;
@@ -922,6 +1008,17 @@ L_051C:
 L_0524:
         sub     ax, ax                          ; 2B C0
         jmp     L_05B9                          ; E9 90 00
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0xe]  HWND      (3 uses)
+;   Locals:
+;     [bp-0x4]   WORD      (2 uses)
+;     [bp-0x86]   HANDLE    (1 use)
+
+; Description (heuristic):
+;   Dialog procedure (DlgProc). Handles dialog messages.
+;   Reads/writes dialog item text.
+
 ;-------------------------------------------------------------------------
 ; sub_0529   offset=0x0529  size=56 instr  segment=seg6.asm
 ;
@@ -1023,6 +1120,9 @@ L_05B9:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0xa                             ; CA 0A 00
+; Description (heuristic):
+;   Mixed routine using: ANSINEXT, ANSIPREV, LSTRLEN.
+
 ;-------------------------------------------------------------------------
 ; sub_05C5   offset=0x05C5  size=40 instr  segment=seg6.asm
 ;
@@ -1086,6 +1186,14 @@ L_0617:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x4]  HWND      (2 uses)
+
+; Description (heuristic):
+;   Dialog procedure (DlgProc). Handles dialog messages.
+;   Reads/writes dialog item text.
+
 ;-------------------------------------------------------------------------
 ; sub_061E   offset=0x061E  size=85 instr  segment=seg6.asm
 ;
@@ -1233,6 +1341,10 @@ L_06DF:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0xa                             ; CA 0A 00
+; Description (heuristic):
+;   Mixed routine using: GETDLGITEM, SETDLGITEMTEXT, SETFOCUS.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_06EB   offset=0x06EB  size=107 instr  segment=seg6.asm
 ;
@@ -1387,6 +1499,16 @@ L_07DD:
 L_07EF:
         sub     ax, ax                          ; 2B C0
         jmp     L_0852                          ; EB 5F
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0xe]  HWND      (1 use)
+;   Locals:
+;     [bp-0x4]   HWND      (1 use)
+
+; Description (heuristic):
+;   Dialog procedure (DlgProc). Handles dialog messages.
+;   Reads/writes dialog item text.
+
 ;-------------------------------------------------------------------------
 ; sub_07F3   offset=0x07F3  size=864 instr  segment=seg6.asm
 ;
@@ -2669,6 +2791,13 @@ L_110B:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf                                    ; CB
+; Inferred stack frame (pass18, heuristic):
+;   Locals:
+;     [bp-0x10]   LRESULT   (1 use)
+
+; Description (heuristic):
+;   Mixed routine using: GLOBALALLOC, GLOBALFREE, GLOBALLOCK (+4 more).
+
 ;-------------------------------------------------------------------------
 ; sub_1116   offset=0x1116  size=105 instr  segment=seg6.asm
 ;
@@ -2834,6 +2963,9 @@ L_1219:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf                                    ; CB
+; Description (heuristic):
+;   Mixed routine using: LSTRCPY, CLOSECOMM, FLUSHCOMM (+6 more).
+
 ;-------------------------------------------------------------------------
 ; sub_1223   offset=0x1223  size=248 instr  segment=seg6.asm
 ;
@@ -3194,6 +3326,9 @@ L_149E:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf                                    ; CB
+; Description (heuristic):
+;   Mixed routine using: GETPROFILESTRING, LSTRCPY, GETCOMMSTATE (+1 more).
+
 ;-------------------------------------------------------------------------
 ; sub_14A7   offset=0x14A7  size=113 instr  segment=seg6.asm
 ;
@@ -3368,6 +3503,13 @@ L_15AE:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Inferred stack frame (pass18, heuristic):
+;   Locals:
+;     [bp-0x4]   LPSTR     (1 use)
+
+; Description (heuristic):
+;   String manipulation routine (2 string APIs).
+
 ;-------------------------------------------------------------------------
 ; sub_15B2   offset=0x15B2  size=102 instr  segment=seg6.asm
 ;

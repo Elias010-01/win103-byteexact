@@ -300,6 +300,9 @@ L_0201:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0xa                             ; CA 0A 00
+; Description (heuristic):
+;   Mixed routine using: GLOBALHANDLE.
+
 ;-------------------------------------------------------------------------
 ; sub_020E   offset=0x020E  size=140 instr  segment=seg16.asm
 ;
@@ -487,6 +490,9 @@ L_0351:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     4                               ; C2 04 00
+; Description (heuristic):
+;   Pure computation / dispatcher (29 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_037A   offset=0x037A  size=29 instr  segment=seg16.asm
 ;
@@ -524,6 +530,9 @@ L_037A:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    8                               ; CA 08 00
+; Description (heuristic):
+;   Pure computation / dispatcher (59 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_03B9   offset=0x03B9  size=59 instr  segment=seg16.asm
 ;
@@ -603,6 +612,9 @@ L_0427:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    4                               ; CA 04 00
+; Description (heuristic):
+;   Allocation / initialization routine (2 alloc APIs).
+
 ;-------------------------------------------------------------------------
 ; sub_0434   offset=0x0434  size=98 instr  segment=seg16.asm
 ;
@@ -741,6 +753,13 @@ L_0501:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    8                               ; CA 08 00
+; Inferred stack frame (pass18, heuristic):
+;   Locals:
+;     [bp-0x6]   PSTR      (1 use)
+
+; Description (heuristic):
+;   Allocation / initialization routine (2 alloc APIs).
+
 ;-------------------------------------------------------------------------
 ; sub_050E   offset=0x050E  size=47 instr  segment=seg16.asm
 ;
@@ -806,6 +825,9 @@ L_0568:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Description (heuristic):
+;   Pure computation / dispatcher (51 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0579   offset=0x0579  size=51 instr  segment=seg16.asm
 ;

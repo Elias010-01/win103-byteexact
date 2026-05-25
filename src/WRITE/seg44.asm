@@ -1466,6 +1466,9 @@ L_0C7C:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0xe                             ; CA 0E 00
+; Description (heuristic):
+;   Pure computation / dispatcher (147 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0C87   offset=0x0C87  size=147 instr  segment=seg44.asm
 ;
@@ -1660,6 +1663,9 @@ L_0DDD:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     6                               ; C2 06 00
+; Description (heuristic):
+;   Internal helper (20 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_0DE6   offset=0x0DE6  size=20 instr  segment=seg44.asm
 ;
@@ -1694,6 +1700,13 @@ L_0E0D:
 ;   [fall-through exit] L_0E14
 L_0E14:
         ret                                     ; C3
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x8]  WORD      (3 uses)
+
+; Description (heuristic):
+;   Mixed routine using: GETTEXTEXTENT.
+
 ;-------------------------------------------------------------------------
 ; sub_0E15   offset=0x0E15  size=69 instr  segment=seg44.asm
 ;
@@ -1802,6 +1815,9 @@ L_0EB8:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    4                               ; CA 04 00
+; Description (heuristic):
+;   Internal helper (16 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_0EC1   offset=0x0EC1  size=16 instr  segment=seg44.asm
 ;
@@ -1829,6 +1845,9 @@ L_0ED7:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     2                               ; C2 02 00
+; Description (heuristic):
+;   Mixed routine using: CREATECOMPATIBLEDC, GETDEVICECAPS, SETBKMODE (+1 more).
+
 ;-------------------------------------------------------------------------
 ; sub_0EDE   offset=0x0EDE  size=47 instr  segment=seg44.asm
 ;

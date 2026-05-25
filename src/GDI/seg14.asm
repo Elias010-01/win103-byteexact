@@ -28,6 +28,13 @@
 
 GDI_TEXT SEGMENT BYTE PUBLIC 'CODE'
 
+; Inferred stack frame (pass18, heuristic):
+;   Locals:
+;     [bp-0x8]   LPVOID    (1 use)
+
+; Description (heuristic):
+;   Mixed routine using: GLOBALLOCK.
+
 ;-------------------------------------------------------------------------
 ; sub_0000   offset=0x0000  size=39 instr  segment=seg14.asm
 ;
@@ -84,6 +91,9 @@ L_0059:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     4                               ; C2 04 00
+; Description (heuristic):
+;   Mixed routine using: GLOBALUNLOCK.
+
 ;-------------------------------------------------------------------------
 ; sub_006E   offset=0x006E  size=944 instr  segment=seg14.asm
 ;
@@ -1223,6 +1233,13 @@ L_0992:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0xa                             ; CA 0A 00
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x6]  WORD      (1 use)
+
+; Description (heuristic):
+;   Pure computation / dispatcher (66 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0A23   offset=0x0A23  size=66 instr  segment=seg14.asm
 ;
@@ -1319,6 +1336,9 @@ L_0A97:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     0xc                             ; C2 0C 00
+; Description (heuristic):
+;   Internal helper (19 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_0AB0   offset=0x0AB0  size=19 instr  segment=seg14.asm
 ;

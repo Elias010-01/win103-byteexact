@@ -494,6 +494,9 @@ L_03C8:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    6                               ; CA 06 00
+; Description (heuristic):
+;   Mixed routine using: SELECTOBJECT, SETBKCOLOR, SETTEXTCOLOR (+1 more).
+
 ;-------------------------------------------------------------------------
 ; sub_03D4   offset=0x03D4  size=40 instr  segment=seg64.asm
 ;
@@ -569,6 +572,9 @@ L_0447:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Thin wrapper around RELEASEDC(hWnd, hDC) -> INT.
+
 ;-------------------------------------------------------------------------
 ; sub_044C   offset=0x044C  size=17 instr  segment=seg64.asm
 ;

@@ -356,6 +356,17 @@ L_0266:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    8                               ; CA 08 00
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0xc]  HDC       (14 uses)
+;   Locals:
+;     [bp-0x2]   HANDLE    (2 uses)
+;     [bp-0x4]   INT       (6 uses)
+;     [bp-0x6]   INT       (6 uses)
+
+; Description (heuristic):
+;   Mixed routine using: LINETO, MOVETO, SELECTOBJECT.
+
 ;-------------------------------------------------------------------------
 ; sub_0273   offset=0x0273  size=115 instr  segment=seg13.asm
 ;
@@ -541,6 +552,9 @@ L_0273:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     0xa                             ; C2 0A 00
+; Description (heuristic):
+;   Mixed routine using: MULDIV.
+
 ;-------------------------------------------------------------------------
 ; sub_03D1   offset=0x03D1  size=54 instr  segment=seg13.asm
 ;
@@ -609,6 +623,9 @@ L_045B:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     0xc                             ; C2 0C 00
+; Description (heuristic):
+;   Mixed routine using: MULDIV.
+
 ;-------------------------------------------------------------------------
 ; sub_0463   offset=0x0463  size=55 instr  segment=seg13.asm
 ;
@@ -678,6 +695,9 @@ L_04EE:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     0xc                             ; C2 0C 00
+; Description (heuristic):
+;   Mixed routine using: MULDIV.
+
 ;-------------------------------------------------------------------------
 ; sub_04F6   offset=0x04F6  size=55 instr  segment=seg13.asm
 ;
@@ -747,6 +767,9 @@ L_0586:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     0xc                             ; C2 0C 00
+; Description (heuristic):
+;   Mixed routine using: MULDIV.
+
 ;-------------------------------------------------------------------------
 ; sub_058E   offset=0x058E  size=56 instr  segment=seg13.asm
 ;
@@ -817,6 +840,9 @@ L_061F:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     0xc                             ; C2 0C 00
+; Description (heuristic):
+;   Internal helper (13 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_0627   offset=0x0627  size=13 instr  segment=seg13.asm
 ;
@@ -839,6 +865,9 @@ L_0627:
         mov     word ptr es:[bx], ax            ; 26 89 07
         pop     bp                              ; 5D
         ret     0xc                             ; C2 0C 00
+; Description (heuristic):
+;   Internal helper (13 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_0649   offset=0x0649  size=13 instr  segment=seg13.asm
 ;

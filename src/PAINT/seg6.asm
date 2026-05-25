@@ -34,6 +34,9 @@
 
 PAINT_TEXT SEGMENT BYTE PUBLIC 'CODE'
 
+; Description (heuristic):
+;   Internal helper (9 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_0000   offset=0x0000  size=9 instr  segment=seg6.asm
 ;
@@ -51,6 +54,9 @@ L_0000:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     2                               ; C2 02 00
+; Description (heuristic):
+;   Mixed routine using: DELETEDC.
+
 ;-------------------------------------------------------------------------
 ; sub_0015   offset=0x0015  size=60 instr  segment=seg6.asm
 ;
@@ -144,6 +150,16 @@ L_00BF:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     6                               ; C2 06 00
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0xa]  HWND      (1 use)
+;   Locals:
+;     [bp-0x2]   BOOL      (1 use)
+
+; Description (heuristic):
+;   Drawing routine (3 GDI APIs).
+;   Acquires a device context, draws, releases.
+
 ;-------------------------------------------------------------------------
 ; sub_00CB   offset=0x00CB  size=397 instr  segment=seg6.asm
 ;
@@ -704,6 +720,9 @@ L_0596:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     8                               ; C2 08 00
+; Description (heuristic):
+;   Small helper using 2 API(s): GETDC, RELEASEDC.
+
 ;-------------------------------------------------------------------------
 ; sub_059E   offset=0x059E  size=27 instr  segment=seg6.asm
 ;
@@ -754,6 +773,13 @@ L_05DA:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     6                               ; C2 06 00
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x4]  WORD      (1 use)
+
+; Description (heuristic):
+;   Mixed routine using: CLIENTTOSCREEN, DESTROYCARET, GETCURSORPOS (+5 more).
+
 ;-------------------------------------------------------------------------
 ; sub_05E9   offset=0x05E9  size=65 instr  segment=seg6.asm
 ;
@@ -851,6 +877,9 @@ L_0693:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     4                               ; C2 04 00
+; Description (heuristic):
+;   Mixed routine using: BITBLT, DELETEDC, SELECTOBJECT.
+
 ;-------------------------------------------------------------------------
 ; sub_0699   offset=0x0699  size=97 instr  segment=seg6.asm
 ;
@@ -1026,6 +1055,10 @@ L_07B8:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     4                               ; C2 04 00
+; Description (heuristic):
+;   Mixed routine using: BEGINPAINT, CLIENTTOSCREEN, DEFWINDOWPROC (+6 more).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_07BE   offset=0x07BE  size=408 instr  segment=seg6.asm
 ;

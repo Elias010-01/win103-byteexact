@@ -100,6 +100,9 @@ L_0068:
         lea     ax, [bp - 0xe]                  ; 8D 46 F2
         push    ss                              ; 16
         jmp     L_009D                          ; EB 0B
+; Description (heuristic):
+;   Mixed routine using: SETDLGITEMTEXT, SHOWCURSOR.
+
 ;-------------------------------------------------------------------------
 ; sub_0092   offset=0x0092  size=71 instr  segment=seg29.asm
 ;
@@ -215,6 +218,9 @@ L_0142:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0xa                             ; CA 0A 00
+; Description (heuristic):
+;   Pure computation / dispatcher (114 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_014E   offset=0x014E  size=114 instr  segment=seg29.asm
 ;

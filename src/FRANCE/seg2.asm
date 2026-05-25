@@ -156,6 +156,9 @@ L_00FD:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    8                               ; CA 08 00
+; Description (heuristic):
+;   Pure computation / dispatcher (29 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_010A   offset=0x010A  size=29 instr  segment=seg2.asm
 ;
@@ -202,6 +205,10 @@ L_010A:
         je      L_0157                          ; 74 0D
         mov     byte ptr [0x21], 1              ; C6 06 21 00 01
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (160 instructions, no FAR API calls).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0150   offset=0x0150  size=160 instr  segment=seg2.asm
 ;
@@ -390,6 +397,9 @@ L_0263:
         or      al, al                          ; 0A C0
         jne     L_025A                          ; 75 F2
         jmp     L_024B                          ; EB E1
+; Description (heuristic):
+;   Pure computation / dispatcher (191 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_026A   offset=0x026A  size=191 instr  segment=seg2.asm
 ;
@@ -651,6 +661,9 @@ L_041B:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0xe                             ; CA 0E 00
+; Description (heuristic):
+;   Pure computation / dispatcher (24 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0428   offset=0x0428  size=24 instr  segment=seg2.asm
 ;
@@ -693,6 +706,9 @@ L_0451:
         pushf                                   ; 9C
         lcall   [0x14]                          ; FF 1E 14 00
         ret                                     ; C3
+; Description (heuristic):
+;   Internal helper (10 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_0467   offset=0x0467  size=10 instr  segment=seg2.asm
 ;

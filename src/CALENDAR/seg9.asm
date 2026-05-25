@@ -230,6 +230,9 @@ L_0183:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Description (heuristic):
+;   Thin wrapper around LOADSTRING(hInstance, wID, lpBuffer, cbBuffer) -> INT.
+
 ;-------------------------------------------------------------------------
 ; sub_0193   offset=0x0193  size=29 instr  segment=seg9.asm
 ;
@@ -281,6 +284,10 @@ L_01BF:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     4                               ; C2 04 00
+; Description (heuristic):
+;   Mixed routine using: FINDRESOURCE, GLOBALLOCK, LOADRESOURCE.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_01D3   offset=0x01D3  size=33 instr  segment=seg9.asm
 ;

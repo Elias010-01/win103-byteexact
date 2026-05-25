@@ -27,6 +27,9 @@
 
 GDI_TEXT SEGMENT BYTE PUBLIC 'CODE'
 
+; Description (heuristic):
+;   Pure computation / dispatcher (38 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0000   offset=0x0000  size=38 instr  segment=seg16.asm
 ;
@@ -77,6 +80,9 @@ L_0043:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0xa                             ; CA 0A 00
+; Description (heuristic):
+;   Pure computation / dispatcher (49 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0050   offset=0x0050  size=49 instr  segment=seg16.asm
 ;
@@ -143,6 +149,9 @@ L_00BA:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Description (heuristic):
+;   Pure computation / dispatcher (40 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_00C5   offset=0x00C5  size=40 instr  segment=seg16.asm
 ;
@@ -844,6 +853,9 @@ L_0660:
         retf    0xa                             ; CA 0A 00
 RECTANGLE ENDP
 
+; Description (heuristic):
+;   Pure computation / dispatcher (144 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_066D   offset=0x066D  size=144 instr  segment=seg16.asm
 ;
@@ -1033,6 +1045,9 @@ L_07FE:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     0xe                             ; C2 0E 00
+; Description (heuristic):
+;   Pure computation / dispatcher (86 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0806   offset=0x0806  size=86 instr  segment=seg16.asm
 ;
@@ -1127,6 +1142,9 @@ L_0806:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0xa                             ; CA 0A 00
+; Description (heuristic):
+;   Pure computation / dispatcher (83 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_08AD   offset=0x08AD  size=83 instr  segment=seg16.asm
 ;
@@ -1233,6 +1251,9 @@ L_096D:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     6                               ; C2 06 00
+; Description (heuristic):
+;   Pure computation / dispatcher (150 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_097A   offset=0x097A  size=150 instr  segment=seg16.asm
 ;
@@ -1422,6 +1443,9 @@ L_0AE8:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0x14                            ; CA 14 00
+; Description (heuristic):
+;   Cleanup / deallocation routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0AF5   offset=0x0AF5  size=53 instr  segment=seg16.asm
 ;
@@ -1503,6 +1527,10 @@ L_0B7B:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     0xc                             ; C2 0C 00
+; Description (heuristic):
+;   Cleanup / deallocation routine.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0B82   offset=0x0B82  size=59 instr  segment=seg16.asm
 ;

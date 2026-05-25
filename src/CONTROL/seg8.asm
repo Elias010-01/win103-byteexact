@@ -96,6 +96,9 @@ L_0056:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0xa                             ; CA 0A 00
+; Description (heuristic):
+;   Allocation / initialization routine (2 alloc APIs).
+
 ;-------------------------------------------------------------------------
 ; sub_0061   offset=0x0061  size=134 instr  segment=seg8.asm
 ;
@@ -321,6 +324,10 @@ L_01BA:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     2                               ; C2 02 00
+; Description (heuristic):
+;   Cleanup / deallocation routine.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_01C0   offset=0x01C0  size=68 instr  segment=seg8.asm
 ;
@@ -444,6 +451,14 @@ L_025A:
         ; --> ENDDIALOG(HWND hDlg, INT nResult) -> BOOL
         call    far USER.ENDDIALOG              ; 9A FF FF 00 00 [FIXUP]
         jmp     L_0426                          ; E9 AC 01
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0xa]  HWND      (1 use)
+
+; Description (heuristic):
+;   Thin wrapper around SENDDLGITEMMESSAGE(hDlg, nIDItem, wMsg, wParam, lParam) -> LRESULT.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_027A   offset=0x027A  size=16 instr  segment=seg8.asm
 ;
@@ -480,6 +495,15 @@ L_027A:
         ; --> SENDDLGITEMMESSAGE(HWND hDlg, INT nIDItem, WORD wMsg, WPARAM wParam, LPARAM lParam) -> LRESULT
         call    far USER.SENDDLGITEMMESSAGE     ; 9A FF FF 00 00 [FIXUP]
         jmp     L_0426                          ; E9 86 01
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x4]  LRESULT   (1 use)
+;     [bp+0x6]  HWND      (1 use)
+
+; Description (heuristic):
+;   Thin wrapper around SENDMESSAGE(hWnd, wMsg, wParam, lParam) -> LRESULT.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_02A0   offset=0x02A0  size=23 instr  segment=seg8.asm
 ;
@@ -526,6 +550,10 @@ L_02C8:
         push    ax                              ; 50
         call    L_042C                          ; E8 56 01
         jmp     L_0426                          ; E9 4D 01
+; Description (heuristic):
+;   Thin wrapper around CHECKRADIOBUTTON.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_02D9   offset=0x02D9  size=9 instr  segment=seg8.asm
 ;
@@ -548,6 +576,10 @@ L_02E7:
         push    ax                              ; 50
         call    far USER.CHECKRADIOBUTTON       ; 9A 1D 03 00 00 [FIXUP]
         jmp     L_0426                          ; E9 36 01
+; Description (heuristic):
+;   Internal helper (7 instructions).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_02F0   offset=0x02F0  size=7 instr  segment=seg8.asm
 ;
@@ -563,6 +595,10 @@ L_02F0:
         push    ax                              ; 50
         mov     ax, 0x38c                       ; B8 8C 03
         jmp     L_02E7                          ; EB E7
+; Description (heuristic):
+;   Internal helper (6 instructions).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0300   offset=0x0300  size=6 instr  segment=seg8.asm
 ;
@@ -579,6 +615,15 @@ L_0300:
 L_030A:
         push    ax                              ; 50
         jmp     L_02E7                          ; EB DA
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x4]  LRESULT   (1 use)
+;     [bp+0xa]  HWND      (1 use)
+
+; Description (heuristic):
+;   Mixed routine using: CHECKRADIOBUTTON, GETDLGITEM, SENDMESSAGE (+1 more).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_030D   offset=0x030D  size=49 instr  segment=seg8.asm
 ;
@@ -663,6 +708,14 @@ L_0380:
         ; --> SETDLGITEMTEXT(HWND hDlg, INT nIDItem, LPSTR lpszText) -> VOID
         call    far USER.SETDLGITEMTEXT         ; 9A A7 03 00 00 [FIXUP]
         jmp     L_0426                          ; E9 9D 00
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0xa]  HWND      (1 use)
+
+; Description (heuristic):
+;   Small helper using 2 API(s): CHECKRADIOBUTTON, SETDLGITEMTEXT.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0389   offset=0x0389  size=20 instr  segment=seg8.asm
 ;
@@ -700,6 +753,10 @@ L_0389:
         mov     ax, 0x581                       ; B8 81 05
         push    ds                              ; 1E
         jmp     L_0380                          ; EB C8
+; Description (heuristic):
+;   Internal helper (7 instructions).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_03B8   offset=0x03B8  size=7 instr  segment=seg8.asm
 ;
@@ -715,6 +772,10 @@ L_03B8:
         push    ax                              ; 50
         mov     ax, 0x386                       ; B8 86 03
         jmp     L_02E7                          ; E9 1E FF
+; Description (heuristic):
+;   Internal helper (5 instructions).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_03C9   offset=0x03C9  size=5 instr  segment=seg8.asm
 ;
@@ -728,6 +789,9 @@ L_03C9:
         push    ax                              ; 50
         mov     ax, 0x387                       ; B8 87 03
         jmp     L_030A                          ; E9 34 FF
+; Description (heuristic):
+;   Mixed routine using: CHECKDLGBUTTON, ISDLGBUTTONCHECKED.
+
 ;-------------------------------------------------------------------------
 ; sub_03D6   offset=0x03D6  size=34 instr  segment=seg8.asm
 ;
@@ -791,6 +855,14 @@ L_0426:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     8                               ; C2 08 00
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x8]  HWND      (6 uses)
+
+; Description (heuristic):
+;   Mixed routine using: SETDLGITEMINT, SETDLGITEMTEXT.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_042C   offset=0x042C  size=76 instr  segment=seg8.asm
 ;
@@ -910,6 +982,14 @@ L_042C:
         add     ax, 0x2a                        ; 05 2A 00
         push    dx                              ; 52
         jmp     L_0509                          ; EB 1C
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x8]  HWND      (1 use)
+
+; Description (heuristic):
+;   Small helper using 2 API(s): CHECKDLGBUTTON, SETDLGITEMTEXT.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_04ED   offset=0x04ED  size=30 instr  segment=seg8.asm
 ;
@@ -960,6 +1040,10 @@ L_0509:
         push    ax                              ; 50
         mov     ax, 0x38f                       ; B8 8F 03
         jmp     L_0547                          ; EB 0B
+; Description (heuristic):
+;   Thin wrapper around CHECKRADIOBUTTON.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_053C   offset=0x053C  size=16 instr  segment=seg8.asm
 ;
@@ -989,6 +1073,10 @@ L_0547:
         cmp     ax, 2                           ; 3D 02 00
         je      L_05D7                          ; 74 75
         jmp     L_0578                          ; EB 14
+; Description (heuristic):
+;   Mixed routine using: LSTRCPY, CHECKRADIOBUTTON.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0564   offset=0x0564  size=39 instr  segment=seg8.asm
 ;
@@ -1051,6 +1139,10 @@ L_059E:
         mov     ax, 0x584                       ; B8 84 05
         push    ds                              ; 1E
         jmp     L_061D                          ; EB 56
+; Description (heuristic):
+;   Internal helper (7 instructions).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_05C7   offset=0x05C7  size=7 instr  segment=seg8.asm
 ;
@@ -1066,6 +1158,10 @@ L_05C7:
         push    ax                              ; 50
         mov     ax, 0x38c                       ; B8 8C 03
         jmp     L_0572                          ; EB 9B
+; Description (heuristic):
+;   Internal helper (6 instructions).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_05D7   offset=0x05D7  size=6 instr  segment=seg8.asm
 ;
@@ -1080,6 +1176,9 @@ L_05D7:
         mov     ax, 0x38d                       ; B8 8D 03
         push    ax                              ; 50
         jmp     L_0572                          ; EB 8E
+; Description (heuristic):
+;   String manipulation routine (2 string APIs).
+
 ;-------------------------------------------------------------------------
 ; sub_05E4   offset=0x05E4  size=36 instr  segment=seg8.asm
 ;
@@ -1145,6 +1244,9 @@ L_0623:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     6                               ; C2 06 00
+; Description (heuristic):
+;   Pure computation / dispatcher (96 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_063A   offset=0x063A  size=96 instr  segment=seg8.asm
 ;
@@ -1252,6 +1354,9 @@ L_063A:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     4                               ; C2 04 00
+; Description (heuristic):
+;   Pure computation / dispatcher (75 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0721   offset=0x0721  size=75 instr  segment=seg8.asm
 ;
@@ -1358,6 +1463,9 @@ L_07FD:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     4                               ; C2 04 00
+; Description (heuristic):
+;   Mixed routine using: GETPROFILEINT, GETPROFILESTRING.
+
 ;-------------------------------------------------------------------------
 ; sub_0806   offset=0x0806  size=204 instr  segment=seg8.asm
 ;
@@ -1580,6 +1688,16 @@ L_0806:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x4]  HWND      (1 use)
+;   Locals:
+;     [bp-0x6]   LRESULT   (1 use)
+
+; Description (heuristic):
+;   Mixed routine using: LSTRCPY, ISDLGBUTTONCHECKED, SENDDLGITEMMESSAGE.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_09FA   offset=0x09FA  size=44 instr  segment=seg8.asm
 ;
@@ -1654,6 +1772,10 @@ L_0A5B:
         je      L_0A73                          ; 74 08
         mov     word ptr [bp - 0x8e], 0         ; C7 86 72 FF 00 00
         jmp     L_0A91                          ; EB 1E
+; Description (heuristic):
+;   Mixed routine using: LSTRCPY, GETDLGITEMINT, GETDLGITEMTEXT (+3 more).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0A73   offset=0x0A73  size=135 instr  segment=seg8.asm
 ;
@@ -1872,6 +1994,15 @@ L_0BC1:
         jne     L_0BED                          ; 75 05
         sub     ax, ax                          ; 2B C0
         jmp     L_0FEC                          ; E9 FF 03
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x4]  HWND      (7 uses)
+;   Locals:
+;     [bp-0xb0]   INT       (7 uses)
+
+; Description (heuristic):
+;   Mixed routine using: WRITEPROFILESTRING, GETDLGITEMTEXT, ISDLGBUTTONCHECKED (+1 more).
+
 ;-------------------------------------------------------------------------
 ; sub_0BED   offset=0x0BED  size=419 instr  segment=seg8.asm
 ;
@@ -2425,6 +2556,10 @@ L_0FEC:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     2                               ; C2 02 00
+; Description (heuristic):
+;   Mixed routine using: LSTRCPY.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0FF3   offset=0x0FF3  size=37 instr  segment=seg8.asm
 ;

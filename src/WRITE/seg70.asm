@@ -51,6 +51,9 @@ WRITE_TEXT SEGMENT BYTE PUBLIC 'CODE'
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf                                    ; CB
+; Description (heuristic):
+;   Cleanup / deallocation routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0029   offset=0x0029  size=168 instr  segment=seg70.asm
 ;
@@ -273,6 +276,9 @@ L_01AB:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Description (heuristic):
+;   Pure computation / dispatcher (44 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_01B7   offset=0x01B7  size=44 instr  segment=seg70.asm
 ;

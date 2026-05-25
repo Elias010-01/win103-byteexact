@@ -500,6 +500,14 @@ L_0393:
         lea     ax, [bp - 0xe]                  ; 8D 46 F2
         mov     word ptr [bp - 0x12], ax        ; 89 46 EE
         jmp     L_03D7                          ; EB 11
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0xe]  HWND      (1 use)
+
+; Description (heuristic):
+;   Mixed routine using: CHECKDLGBUTTON, GETDLGITEM, GETDLGITEMTEXT (+3 more).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_03C6   offset=0x03C6  size=558 instr  segment=seg23.asm
 ;

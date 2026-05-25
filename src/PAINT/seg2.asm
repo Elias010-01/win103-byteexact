@@ -79,6 +79,13 @@ L_004D:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Inferred stack frame (pass18, heuristic):
+;   Locals:
+;     [bp-0x2]   HANDLE    (1 use)
+
+; Description (heuristic):
+;   Cleanup / deallocation routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0058   offset=0x0058  size=49 instr  segment=seg2.asm
 ;
@@ -162,6 +169,13 @@ L_00D9:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     2                               ; C2 02 00
+; Inferred stack frame (pass18, heuristic):
+;   Locals:
+;     [bp-0x2]   HANDLE    (1 use)
+
+; Description (heuristic):
+;   Cleanup / deallocation routine.
+
 ;-------------------------------------------------------------------------
 ; sub_00DF   offset=0x00DF  size=44 instr  segment=seg2.asm
 ;
@@ -235,6 +249,13 @@ L_0151:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     2                               ; C2 02 00
+; Inferred stack frame (pass18, heuristic):
+;   Locals:
+;     [bp-0x2]   HANDLE    (1 use)
+
+; Description (heuristic):
+;   Cleanup / deallocation routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0157   offset=0x0157  size=43 instr  segment=seg2.asm
 ;
@@ -307,6 +328,13 @@ L_01C8:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     2                               ; C2 02 00
+; Inferred stack frame (pass18, heuristic):
+;   Locals:
+;     [bp-0x2]   HANDLE    (1 use)
+
+; Description (heuristic):
+;   Cleanup / deallocation routine.
+
 ;-------------------------------------------------------------------------
 ; sub_01CE   offset=0x01CE  size=44 instr  segment=seg2.asm
 ;
@@ -380,6 +408,13 @@ L_0240:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     2                               ; C2 02 00
+; Inferred stack frame (pass18, heuristic):
+;   Locals:
+;     [bp-0x2]   HANDLE    (1 use)
+
+; Description (heuristic):
+;   Cleanup / deallocation routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0246   offset=0x0246  size=43 instr  segment=seg2.asm
 ;
@@ -452,6 +487,14 @@ L_02B7:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     2                               ; C2 02 00
+; Inferred stack frame (pass18, heuristic):
+;   Locals:
+;     [bp-0x2]   HANDLE    (1 use)
+
+; Description (heuristic):
+;   Cleanup / deallocation routine.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_02BD   offset=0x02BD  size=38 instr  segment=seg2.asm
 ;

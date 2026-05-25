@@ -124,6 +124,9 @@ L_00C5:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    8                               ; CA 08 00
+; Description (heuristic):
+;   Pure computation / dispatcher (68 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_00D0   offset=0x00D0  size=68 instr  segment=seg37.asm
 ;
@@ -210,6 +213,9 @@ L_0165:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf                                    ; CB
+; Description (heuristic):
+;   Pure computation / dispatcher (46 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0173   offset=0x0173  size=46 instr  segment=seg37.asm
 ;
@@ -266,6 +272,9 @@ L_01D3:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf                                    ; CB
+; Description (heuristic):
+;   Pure computation / dispatcher (96 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_01DD   offset=0x01DD  size=96 instr  segment=seg37.asm
 ;
@@ -389,6 +398,9 @@ L_02C6:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf                                    ; CB
+; Description (heuristic):
+;   Mixed routine using: GETCLIPBOARDOWNER.
+
 ;-------------------------------------------------------------------------
 ; sub_02CF   offset=0x02CF  size=51 instr  segment=seg37.asm
 ;
@@ -468,6 +480,9 @@ L_033F:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf                                    ; CB
+; Description (heuristic):
+;   Pure computation / dispatcher (65 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0348   offset=0x0348  size=65 instr  segment=seg37.asm
 ;
@@ -551,6 +566,9 @@ L_03DE:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Description (heuristic):
+;   Pure computation / dispatcher (41 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_03E9   offset=0x03E9  size=41 instr  segment=seg37.asm
 ;
@@ -606,6 +624,9 @@ L_044C:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf                                    ; CB
+; Description (heuristic):
+;   Allocation / initialization routine (3 alloc APIs).
+
 ;-------------------------------------------------------------------------
 ; sub_0455   offset=0x0455  size=74 instr  segment=seg37.asm
 ;
@@ -710,6 +731,9 @@ L_04FC:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf                                    ; CB
+; Description (heuristic):
+;   Allocation / initialization routine (2 alloc APIs).
+
 ;-------------------------------------------------------------------------
 ; sub_0505   offset=0x0505  size=129 instr  segment=seg37.asm
 ;
@@ -886,6 +910,9 @@ L_064B:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf                                    ; CB
+; Description (heuristic):
+;   Mixed routine using: CLOSECLIPBOARD, EMPTYCLIPBOARD, OPENCLIPBOARD (+1 more).
+
 ;-------------------------------------------------------------------------
 ; sub_0655   offset=0x0655  size=92 instr  segment=seg37.asm
 ;
@@ -1020,6 +1047,10 @@ L_0738:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf                                    ; CB
+; Description (heuristic):
+;   Pure computation / dispatcher (202 instructions, no FAR API calls).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0742   offset=0x0742  size=202 instr  segment=seg37.asm
 ;

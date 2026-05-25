@@ -202,6 +202,10 @@ L_013B:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf                                    ; CB
+; Description (heuristic):
+;   Pure computation / dispatcher (59 instructions, no FAR API calls).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_014C   offset=0x014C  size=59 instr  segment=seg52.asm
 ;

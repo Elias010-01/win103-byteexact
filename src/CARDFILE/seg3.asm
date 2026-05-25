@@ -662,6 +662,9 @@ L_04C9:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf                                    ; CB
+; Description (heuristic):
+;   File I/O routine (4 file APIs).
+
 ;-------------------------------------------------------------------------
 ; sub_04D4   offset=0x04D4  size=601 instr  segment=seg3.asm
 ;
@@ -1546,6 +1549,10 @@ L_0B3D:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf                                    ; CB
+; Description (heuristic):
+;   File I/O routine (3 file APIs).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0B48   offset=0x0B48  size=430 instr  segment=seg3.asm
 ;
@@ -2149,6 +2156,13 @@ L_0F88:
         ; --> GLOBALFREE(HANDLE hMem) -> HANDLE
         call    far KERNEL.GLOBALFREE           ; 9A FB 0C 00 00 [FIXUP]
         jmp     L_0FB4                          ; EB 1A
+; Inferred stack frame (pass18, heuristic):
+;   Locals:
+;     [bp-0x1a]   HFILE     (1 use)
+
+; Description (heuristic):
+;   File I/O routine (4 file APIs).
+
 ;-------------------------------------------------------------------------
 ; sub_0F9A   offset=0x0F9A  size=130 instr  segment=seg3.asm
 ;
@@ -2329,6 +2343,9 @@ L_10B4:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Internal helper (15 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_10D8   offset=0x10D8  size=15 instr  segment=seg3.asm
 ;
@@ -2355,6 +2372,9 @@ L_10EC:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Internal helper (10 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_10F1   offset=0x10F1  size=10 instr  segment=seg3.asm
 ;
@@ -2377,6 +2397,9 @@ L_10FF:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         retf                                    ; CB
+; Description (heuristic):
+;   Internal helper (14 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_1103   offset=0x1103  size=14 instr  segment=seg3.asm
 ;
@@ -2402,6 +2425,9 @@ L_1118:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Internal helper (12 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_111D   offset=0x111D  size=12 instr  segment=seg3.asm
 ;
@@ -2425,6 +2451,9 @@ L_1131:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Internal helper (14 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_1135   offset=0x1135  size=14 instr  segment=seg3.asm
 ;
@@ -2450,6 +2479,9 @@ L_114A:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Internal helper (12 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_114F   offset=0x114F  size=12 instr  segment=seg3.asm
 ;

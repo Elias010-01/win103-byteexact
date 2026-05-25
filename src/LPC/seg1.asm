@@ -61,6 +61,9 @@ L_0025:
         pop     bx                              ; 5B
         pop     ax                              ; 58
         retf                                    ; CB
+; Description (heuristic):
+;   Pure computation / dispatcher (154 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_002F   offset=0x002F  size=154 instr  segment=seg1.asm
 ;
@@ -250,6 +253,9 @@ L_0212:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf                                    ; CB
+; Description (heuristic):
+;   Pure computation / dispatcher (38 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0227   offset=0x0227  size=38 instr  segment=seg1.asm
 ;
@@ -306,6 +312,9 @@ L_0257:
         pop     dx                              ; 5A
         call    L_0269                          ; E8 01 00
         ret                                     ; C3
+; Description (heuristic):
+;   Mixed routine using: CREATESYSTEMTIMER, DISABLESYSTEMTIMERS, ENABLESYSTEMTIMERS (+1 more).
+
 ;-------------------------------------------------------------------------
 ; sub_0269   offset=0x0269  size=201 instr  segment=seg1.asm
 ;

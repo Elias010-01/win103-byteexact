@@ -405,6 +405,9 @@ L_02F5:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Description (heuristic):
+;   Pure computation / dispatcher (73 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0302   offset=0x0302  size=73 instr  segment=seg5.asm
 ;
@@ -506,6 +509,9 @@ L_03C8:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Mixed routine using: ESCAPE, GETDEVICECAPS.
+
 ;-------------------------------------------------------------------------
 ; sub_03CC   offset=0x03CC  size=211 instr  segment=seg5.asm
 ;
@@ -761,6 +767,9 @@ L_0643:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (115 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0647   offset=0x0647  size=115 instr  segment=seg5.asm
 ;
@@ -905,6 +914,9 @@ L_076F:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (53 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0773   offset=0x0773  size=53 instr  segment=seg5.asm
 ;
@@ -978,6 +990,13 @@ L_07E7:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf                                    ; CB
+; Inferred stack frame (pass18, heuristic):
+;   Locals:
+;     [bp-0x6]   DWORD     (1 use)
+
+; Description (heuristic):
+;   Mixed routine using: GLOBALCOMPACT, LOCALALLOC.
+
 ;-------------------------------------------------------------------------
 ; sub_07FF   offset=0x07FF  size=90 instr  segment=seg5.asm
 ;

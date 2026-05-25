@@ -31,6 +31,9 @@
 
 GDI_TEXT SEGMENT BYTE PUBLIC 'CODE'
 
+; Description (heuristic):
+;   Internal helper (17 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_0000   offset=0x0000  size=17 instr  segment=seg7.asm
 ;
@@ -694,6 +697,14 @@ L_0569:
         ; --> GLOBALUNLOCK(HANDLE hMem) -> BOOL
         call    far KERNEL.GLOBALUNLOCK         ; 9A 61 05 00 00 [FIXUP]
 SETENVIRONMENT ENDP
+
+; Inferred stack frame (pass18, heuristic):
+;   Locals:
+;     [bp-0x4]   HANDLE    (1 use)
+
+; Description (heuristic):
+;   Cleanup / deallocation routine.
+;   Tail-calls into another routine.
 
 ;-------------------------------------------------------------------------
 ; sub_0573   offset=0x0573  size=102 instr  segment=seg7.asm

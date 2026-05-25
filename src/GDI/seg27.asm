@@ -324,6 +324,14 @@ L_020A:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x8]  LPSTR     (1 use)
+;     [bp+0xa]  LPSTR     (1 use)
+
+; Description (heuristic):
+;   Mixed routine using: GETPROFILESTRING, LSTRCPY.
+
 ;-------------------------------------------------------------------------
 ; sub_0248   offset=0x0248  size=148 instr  segment=seg27.asm
 ;
@@ -541,6 +549,10 @@ L_03DA:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     8                               ; C2 08 00
+; Description (heuristic):
+;   Pure computation / dispatcher (32 instructions, no FAR API calls).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_03E1   offset=0x03E1  size=32 instr  segment=seg27.asm
 ;

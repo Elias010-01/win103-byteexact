@@ -141,6 +141,15 @@ EXTRACTPQ PROC FAR
         retf    2                               ; CA 02 00
 EXTRACTPQ ENDP
 
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x6]  HANDLE    (1 use)
+;   Locals:
+;     [bp-0xe]   LPVOID    (1 use)
+
+; Description (heuristic):
+;   Allocation / initialization routine (2 alloc APIs).
+
 ;-------------------------------------------------------------------------
 ; sub_00AF   offset=0x00AF  size=116 instr  segment=seg23.asm
 ;
@@ -559,6 +568,9 @@ L_03C9:
         dec     bp                              ; 4D
         retf    6                               ; CA 06 00
 INSERTPQ ENDP
+
+; Description (heuristic):
+;   Pure computation / dispatcher (23 instructions, no FAR API calls).
 
 ;-------------------------------------------------------------------------
 ; sub_03D5   offset=0x03D5  size=23 instr  segment=seg23.asm

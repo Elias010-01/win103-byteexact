@@ -250,6 +250,15 @@ L_019F:
         cmp     word ptr [bp + 6], ax           ; 39 46 06
         je      L_01AA                          ; 74 03
         jmp     L_0367                          ; E9 BD 01
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0xa]  HDC       (2 uses)
+;     [bp+0xe]  HWND      (1 use)
+
+; Description (heuristic):
+;   Drawing routine (5 GDI APIs).
+;   Acquires a device context, draws, releases.
+
 ;-------------------------------------------------------------------------
 ; sub_01AA   offset=0x01AA  size=190 instr  segment=seg4.asm
 ;
@@ -551,6 +560,13 @@ L_03AF:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0xa                             ; CA 0A 00
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x4]  HWND      (1 use)
+
+; Description (heuristic):
+;   Mixed routine using: CREATESOLIDBRUSH, DELETEOBJECT, SELECTOBJECT (+6 more).
+
 ;-------------------------------------------------------------------------
 ; sub_03BA   offset=0x03BA  size=54 instr  segment=seg4.asm
 ;
@@ -647,6 +663,9 @@ L_0455:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Drawing routine (3 GDI APIs).
+
 ;-------------------------------------------------------------------------
 ; sub_0459   offset=0x0459  size=231 instr  segment=seg4.asm
 ;
@@ -941,6 +960,16 @@ L_06CA:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x4]  HWND      (1 use)
+;     [bp+0x6]  HDC       (1 use)
+;   Locals:
+;     [bp-0x12]   LPVOID    (1 use)
+
+; Description (heuristic):
+;   Allocation / initialization routine (2 alloc APIs).
+
 ;-------------------------------------------------------------------------
 ; sub_06CF   offset=0x06CF  size=92 instr  segment=seg4.asm
 ;
@@ -1080,6 +1109,15 @@ L_07D1:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Inferred stack frame (pass18, heuristic):
+;   Locals:
+;     [bp-0x18]   HDC       (1 use)
+;     [bp-0x1c]   LPVOID    (1 use)
+
+; Description (heuristic):
+;   Drawing routine (4 GDI APIs).
+;   Acquires a device context, draws, releases.
+
 ;-------------------------------------------------------------------------
 ; sub_07D5   offset=0x07D5  size=124 instr  segment=seg4.asm
 ;
@@ -1253,6 +1291,9 @@ L_090E:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Mixed routine using: MOVEWINDOW.
+
 ;-------------------------------------------------------------------------
 ; sub_091C   offset=0x091C  size=44 instr  segment=seg4.asm
 ;
@@ -1320,6 +1361,10 @@ L_098A:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Thin wrapper around CATCH.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_098F   offset=0x098F  size=15 instr  segment=seg4.asm
 ;
@@ -1347,6 +1392,13 @@ L_098F:
         cmp     ax, 0x12                        ; 3D 12 00
         je      L_09B2                          ; 74 03
         jmp     L_130F                          ; E9 5D 09
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x4]  HWND      (1 use)
+
+; Description (heuristic):
+;   File I/O routine (3 file APIs).
+
 ;-------------------------------------------------------------------------
 ; sub_09B2   offset=0x09B2  size=844 instr  segment=seg4.asm
 ;
@@ -2578,6 +2630,9 @@ L_130F:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Mixed routine using: DIALOGBOX.
+
 ;-------------------------------------------------------------------------
 ; sub_1315   offset=0x1315  size=44 instr  segment=seg4.asm
 ;
@@ -2653,6 +2708,10 @@ L_1386:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Mixed routine using: CHECKMENUITEM, GETMENU, SENDMESSAGE.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_138A   offset=0x138A  size=66 instr  segment=seg4.asm
 ;
@@ -2761,6 +2820,10 @@ L_140D:
         push    ax                              ; 50
         sub     ax, ax                          ; 2B C0
         jmp     L_143F                          ; EB 0A
+; Description (heuristic):
+;   Mixed routine using: CLOSECLIPBOARD, ENABLEMENUITEM, ENUMCLIPBOARDFORMATS (+2 more).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_1435   offset=0x1435  size=107 instr  segment=seg4.asm
 ;
@@ -2949,6 +3012,13 @@ L_1541:
         push    ax                              ; 50
         sub     ax, ax                          ; 2B C0
         jmp     L_15F6                          ; E9 9A 00
+; Inferred stack frame (pass18, heuristic):
+;   Locals:
+;     [bp-0x2]   HMENU     (9 uses)
+
+; Description (heuristic):
+;   Mixed routine using: ENABLEMENUITEM.
+
 ;-------------------------------------------------------------------------
 ; sub_155C   offset=0x155C  size=63 instr  segment=seg4.asm
 ;
@@ -3074,6 +3144,14 @@ L_15F6:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x4]  LPSTR     (1 use)
+;     [bp+0x6]  LPSTR     (1 use)
+
+; Description (heuristic):
+;   Thin wrapper around SETWINDOWTEXT(hWnd, lpszText) -> VOID.
+
 ;-------------------------------------------------------------------------
 ; sub_1600   offset=0x1600  size=10 instr  segment=seg4.asm
 ;
@@ -3100,6 +3178,11 @@ L_1600:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Drawing routine (3 GDI APIs).
+;   Acquires a device context, draws, releases.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_161C   offset=0x161C  size=205 instr  segment=seg4.asm
 ;
@@ -3390,6 +3473,9 @@ L_17BB:
         ; constant WM_CREATE
         mov     ax, 1                           ; B8 01 00
         jmp     L_185B                          ; EB 22
+; Description (heuristic):
+;   Internal helper (18 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_1839   offset=0x1839  size=18 instr  segment=seg4.asm
 ;
@@ -3421,6 +3507,9 @@ L_185B:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf                                    ; CB
+; Description (heuristic):
+;   Mixed routine using: PTINRECT, SETRECT.
+
 ;-------------------------------------------------------------------------
 ; sub_1864   offset=0x1864  size=100 instr  segment=seg4.asm
 ;
@@ -3548,6 +3637,13 @@ L_1950:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x6]  WORD      (1 use)
+
+; Description (heuristic):
+;   Mixed routine using: LSTRCPY, LOADSTRING, MESSAGEBOX.
+
 ;-------------------------------------------------------------------------
 ; sub_1955   offset=0x1955  size=43 instr  segment=seg4.asm
 ;
@@ -3627,6 +3723,9 @@ L_1991:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf                                    ; CB
+; Description (heuristic):
+;   Pure computation / dispatcher (62 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_19B2   offset=0x19B2  size=62 instr  segment=seg4.asm
 ;
@@ -3712,6 +3811,9 @@ L_1A45:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf                                    ; CB
+; Description (heuristic):
+;   Internal helper (13 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_1A4E   offset=0x1A4E  size=13 instr  segment=seg4.asm
 ;
@@ -3736,6 +3838,9 @@ L_1A4E:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Thin wrapper around SETWINDOWTEXT(hWnd, lpszText) -> VOID.
+
 ;-------------------------------------------------------------------------
 ; sub_1A70   offset=0x1A70  size=17 instr  segment=seg4.asm
 ;
@@ -3771,6 +3876,9 @@ L_1A70:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   String manipulation routine (2 string APIs).
+
 ;-------------------------------------------------------------------------
 ; sub_1A94   offset=0x1A94  size=62 instr  segment=seg4.asm
 ;
@@ -3872,6 +3980,13 @@ L_1B0F:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf                                    ; CB
+; Inferred stack frame (pass18, heuristic):
+;   Locals:
+;     [bp-0x4]   HMENU     (1 use)
+
+; Description (heuristic):
+;   Mixed routine using: GETPROFILESTRING, ENABLEMENUITEM, GETMENU.
+
 ;-------------------------------------------------------------------------
 ; sub_1B1F   offset=0x1B1F  size=60 instr  segment=seg4.asm
 ;
@@ -3960,6 +4075,10 @@ L_1B99:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf                                    ; CB
+; Description (heuristic):
+;   Drawing routine (4 GDI APIs).
+;   Acquires a device context, draws, releases.
+
 ;-------------------------------------------------------------------------
 ; sub_1BA8   offset=0x1BA8  size=140 instr  segment=seg4.asm
 ;
@@ -4165,6 +4284,14 @@ L_1D47:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x4]  HWND      (1 use)
+
+; Description (heuristic):
+;   Mixed routine using: GETCLIENTRECT.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_1D4B   offset=0x1D4B  size=51 instr  segment=seg4.asm
 ;
@@ -4246,6 +4373,9 @@ L_1DCE:
         mov     ax, word ptr [bp + 8]           ; 8B 46 08
         sub     ax, word ptr [0x28a]            ; 2B 06 8A 02
         jmp     L_1DC4                          ; EB ED
+; Description (heuristic):
+;   Mixed routine using: SCROLLWINDOW, SETSCROLLPOS, UPDATEWINDOW.
+
 ;-------------------------------------------------------------------------
 ; sub_1DD7   offset=0x1DD7  size=41 instr  segment=seg4.asm
 ;
@@ -4312,6 +4442,9 @@ L_1E3C:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Mixed routine using: BEGINPAINT, CALLWINDOWPROC, ENDPAINT (+3 more).
+
 ;-------------------------------------------------------------------------
 ; sub_1E41   offset=0x1E41  size=164 instr  segment=seg4.asm
 ;
@@ -4566,6 +4699,9 @@ L_1FF6:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0xa                             ; CA 0A 00
+; Description (heuristic):
+;   Mixed routine using: BITBLT, CREATECOMPATIBLEDC, DELETEDC (+3 more).
+
 ;-------------------------------------------------------------------------
 ; sub_2001   offset=0x2001  size=71 instr  segment=seg4.asm
 ;
@@ -4684,6 +4820,13 @@ L_20BA:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf                                    ; CB
+; Inferred stack frame (pass18, heuristic):
+;   Locals:
+;     [bp-0x4]   LPVOID    (1 use)
+
+; Description (heuristic):
+;   Allocation / initialization routine (2 alloc APIs).
+
 ;-------------------------------------------------------------------------
 ; sub_20C3   offset=0x20C3  size=34 instr  segment=seg4.asm
 ;
@@ -4737,6 +4880,13 @@ L_20C3:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Inferred stack frame (pass18, heuristic):
+;   Locals:
+;     [bp-0x12]   LPVOID    (1 use)
+
+; Description (heuristic):
+;   Allocation / initialization routine (2 alloc APIs).
+
 ;-------------------------------------------------------------------------
 ; sub_2115   offset=0x2115  size=105 instr  segment=seg4.asm
 ;
@@ -4889,6 +5039,9 @@ L_21F1:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf                                    ; CB
+; Description (heuristic):
+;   Mixed routine using: DELETEOBJECT, GLOBALALLOC, GLOBALFREE (+4 more).
+
 ;-------------------------------------------------------------------------
 ; sub_2219   offset=0x2219  size=109 instr  segment=seg4.asm
 ;
@@ -5075,6 +5228,13 @@ L_233A:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Inferred stack frame (pass18, heuristic):
+;   Locals:
+;     [bp-0x6]   HANDLE    (1 use)
+
+; Description (heuristic):
+;   Mixed routine using: GLOBALALLOC, GLOBALFREE, GLOBALLOCK (+2 more).
+
 ;-------------------------------------------------------------------------
 ; sub_2340   offset=0x2340  size=101 instr  segment=seg4.asm
 ;
@@ -5220,6 +5380,9 @@ L_2432:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (54 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_2438   offset=0x2438  size=54 instr  segment=seg4.asm
 ;
@@ -5298,6 +5461,10 @@ L_2493:
         and     al, 0x8b                        ; 24 8B
         in      ax, 0x5d                        ; E5 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Drawing routine (4 GDI APIs).
+;   Acquires a device context, draws, releases.
+
 ;-------------------------------------------------------------------------
 ; sub_24B4   offset=0x24B4  size=129 instr  segment=seg4.asm
 ;
@@ -5499,6 +5666,14 @@ L_2621:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Inferred stack frame (pass18, heuristic):
+;   Locals:
+;     [bp-0x10]   HDC       (2 uses)
+
+; Description (heuristic):
+;   Drawing routine (4 GDI APIs).
+;   Acquires a device context, draws, releases.
+
 ;-------------------------------------------------------------------------
 ; sub_2625   offset=0x2625  size=85 instr  segment=seg4.asm
 ;
@@ -5623,6 +5798,14 @@ L_2702:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x4]  HWND      (1 use)
+
+; Description (heuristic):
+;   Drawing routine (3 GDI APIs).
+;   Acquires a device context, draws, releases.
+
 ;-------------------------------------------------------------------------
 ; sub_2706   offset=0x2706  size=94 instr  segment=seg4.asm
 ;
@@ -5767,6 +5950,9 @@ L_27F8:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Internal helper (16 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_27FC   offset=0x27FC  size=16 instr  segment=seg4.asm
 ;
@@ -5792,6 +5978,9 @@ L_27FC:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (21 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_2815   offset=0x2815  size=21 instr  segment=seg4.asm
 ;
@@ -5822,6 +6011,9 @@ L_2815:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Cleanup / deallocation routine.
+
 ;-------------------------------------------------------------------------
 ; sub_2835   offset=0x2835  size=71 instr  segment=seg4.asm
 ;
@@ -5940,6 +6132,15 @@ L_28F5:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x6]  HANDLE    (1 use)
+;   Locals:
+;     [bp-0x6]   HFILE     (1 use)
+
+; Description (heuristic):
+;   Cleanup / deallocation routine.
+
 ;-------------------------------------------------------------------------
 ; sub_28F9   offset=0x28F9  size=72 instr  segment=seg4.asm
 ;
@@ -6048,6 +6249,9 @@ L_29AE:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf                                    ; CB
+; Description (heuristic):
+;   File I/O routine (3 file APIs).
+
 ;-------------------------------------------------------------------------
 ; sub_29B7   offset=0x29B7  size=223 instr  segment=seg4.asm
 ;

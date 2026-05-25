@@ -72,6 +72,9 @@ TERMINAL_TEXT SEGMENT BYTE PUBLIC 'CODE'
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    8                               ; CA 08 00
+; Description (heuristic):
+;   Mixed routine using: DISPATCHMESSAGE, PEEKMESSAGE, TRANSLATEACCELERATOR (+1 more).
+
 ;-------------------------------------------------------------------------
 ; sub_0048   offset=0x0048  size=69 instr  segment=seg1.asm
 ;
@@ -182,6 +185,10 @@ L_00FA:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     0xa                             ; C2 0A 00
+; Description (heuristic):
+;   Mixed routine using: FATALEXIT, INITTASK, WAITEVENT (+3 more).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0100   offset=0x0100  size=91 instr  segment=seg1.asm
 ;
@@ -301,6 +308,16 @@ L_019D:
 L_01E0:
         mov     ax, 0x4cff                      ; B8 FF 4C
         int     0x21                            ; CD 21
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x4]  HANDLE    (7 uses)
+;     [bp+0x6]  HANDLE    (3 uses)
+;   Locals:
+;     [bp-0x2]   HANDLE    (2 uses)
+
+; Description (heuristic):
+;   Mixed routine using: GLOBALALLOC, GLOBALCOMPACT, GLOBALFREE (+5 more).
+
 ;-------------------------------------------------------------------------
 ; sub_01E5   offset=0x01E5  size=130 instr  segment=seg1.asm
 ;
@@ -488,6 +505,9 @@ L_02D5:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (59 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_02EE   offset=0x02EE  size=59 instr  segment=seg1.asm
 ;
@@ -572,6 +592,9 @@ L_037C:
         inc     bx                              ; 43
         loop    L_0371                          ; E2 F2
         ret                                     ; C3
+; Description (heuristic):
+;   Internal helper (8 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_0380   offset=0x0380  size=8 instr  segment=seg1.asm
 ;
@@ -591,6 +614,9 @@ L_0380:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (74 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0390   offset=0x0390  size=74 instr  segment=seg1.asm
 ;
@@ -692,6 +718,9 @@ L_042A:
         pop     di                              ; 5F
         pop     bp                              ; 5D
         ret     8                               ; C2 08 00
+; Description (heuristic):
+;   Pure computation / dispatcher (46 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0431   offset=0x0431  size=46 instr  segment=seg1.asm
 ;
@@ -753,6 +782,9 @@ L_048F:
         pop     di                              ; 5F
         pop     bp                              ; 5D
         ret     8                               ; C2 08 00
+; Description (heuristic):
+;   Internal helper (6 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_0495   offset=0x0495  size=6 instr  segment=seg1.asm
 ;
@@ -771,6 +803,9 @@ L_0499:
 ;   [error/early exit] L_049F
 L_049F:
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (21 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_04A0   offset=0x04A0  size=21 instr  segment=seg1.asm
 ;
@@ -807,6 +842,9 @@ L_04CF:
         mov     ax, word ptr [bp + 4]           ; 8B 46 04
         mov     ah, 0x4c                        ; B4 4C
         int     0x21                            ; CD 21
+; Description (heuristic):
+;   Internal helper (10 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_04D6   offset=0x04D6  size=10 instr  segment=seg1.asm
 ;
@@ -829,6 +867,9 @@ L_04D9:
 ;   [error/early exit] L_04E7
 L_04E7:
         ret                                     ; C3
+; Description (heuristic):
+;   Internal helper (19 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_04E8   offset=0x04E8  size=19 instr  segment=seg1.asm
 ;
@@ -857,6 +898,9 @@ L_04E8:
         pop     si                              ; 5E
         pop     bp                              ; 5D
         ret     8                               ; C2 08 00
+; Description (heuristic):
+;   Internal helper (10 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_050E   offset=0x050E  size=10 instr  segment=seg1.asm
 ;

@@ -34,6 +34,9 @@
 
 TERMINAL_TEXT SEGMENT BYTE PUBLIC 'CODE'
 
+; Description (heuristic):
+;   Thin wrapper around CHECKDLGBUTTON.
+
 ;-------------------------------------------------------------------------
 ; sub_0000   offset=0x0000  size=24 instr  segment=seg5.asm
 ;
@@ -72,6 +75,10 @@ L_0031:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     6                               ; C2 06 00
+; Description (heuristic):
+;   Mixed routine using: MAKEPROCINSTANCE, OPENFILE, CHECKDLGBUTTON (+4 more).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0038   offset=0x0038  size=266 instr  segment=seg5.asm
 ;
@@ -448,6 +455,10 @@ L_02AC:
 L_02DB:
         sub     ax, ax                          ; 2B C0
         jmp     L_02F7                          ; EB 18
+; Description (heuristic):
+;   Mixed routine using: ENDDIALOG.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_02DF   offset=0x02DF  size=35 instr  segment=seg5.asm
 ;
@@ -507,6 +518,10 @@ L_02F7:
 L_0326:
         sub     ax, ax                          ; 2B C0
         jmp     L_0342                          ; EB 18
+; Description (heuristic):
+;   Dialog procedure (DlgProc). Handles dialog messages.
+;   Reads/writes dialog item text.
+
 ;-------------------------------------------------------------------------
 ; sub_032A   offset=0x032A  size=200 instr  segment=seg5.asm
 ;
@@ -815,6 +830,10 @@ L_0527:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     4                               ; C2 04 00
+; Description (heuristic):
+;   String manipulation routine (2 string APIs).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_052D   offset=0x052D  size=64 instr  segment=seg5.asm
 ;
@@ -909,6 +928,14 @@ L_0589:
         cmp     ax, 0x111                       ; 3D 11 01
         je      L_05DE                          ; 74 34
         jmp     L_05F6                          ; EB 4A
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0xe]  HWND      (1 use)
+
+; Description (heuristic):
+;   Mixed routine using: SENDDLGITEMMESSAGE.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_05AC   offset=0x05AC  size=31 instr  segment=seg5.asm
 ;
@@ -970,6 +997,14 @@ L_05EE:
 L_05F6:
         sub     ax, ax                          ; 2B C0
         jmp     L_070A                          ; E9 0F 01
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0xe]  HWND      (1 use)
+
+; Description (heuristic):
+;   Small helper using 2 API(s): GETDLGITEM, ISWINDOWENABLED.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_05FB   offset=0x05FB  size=9 instr  segment=seg5.asm
 ;
@@ -995,6 +1030,16 @@ L_05FB:
         or      ax, ax                          ; 0B C0
         jne     L_0614                          ; 75 03
         jmp     L_06C7                          ; E9 B3 00
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0xe]  HWND      (1 use)
+;   Locals:
+;     [bp-0x86]   HFILE     (2 uses)
+
+; Description (heuristic):
+;   File I/O routine (3 file APIs).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0614   offset=0x0614  size=84 instr  segment=seg5.asm
 ;
@@ -1142,6 +1187,9 @@ L_06EB:
         push    word ptr [bp + 0xe]             ; FF 76 0E
         sub     ax, ax                          ; 2B C0
         jmp     L_06CD                          ; EB D5
+; Description (heuristic):
+;   Dialog procedure (DlgProc). Handles dialog messages.
+
 ;-------------------------------------------------------------------------
 ; sub_06F8   offset=0x06F8  size=380 instr  segment=seg5.asm
 ;
@@ -1692,6 +1740,9 @@ L_0AD5:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0xa                             ; CA 0A 00
+; Description (heuristic):
+;   Pure computation / dispatcher (59 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0AE0   offset=0x0AE0  size=59 instr  segment=seg5.asm
 ;
@@ -1785,6 +1836,9 @@ L_0B6C:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Dialog procedure (DlgProc). Handles dialog messages.
+
 ;-------------------------------------------------------------------------
 ; sub_0B75   offset=0x0B75  size=333 instr  segment=seg5.asm
 ;

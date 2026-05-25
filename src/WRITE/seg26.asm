@@ -186,6 +186,14 @@ WRITE_TEXT SEGMENT BYTE PUBLIC 'CODE'
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0xe                             ; CA 0E 00
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x12]  INT       (1 use)
+;     [bp+0x14]  HWND      (1 use)
+
+; Description (heuristic):
+;   Mixed routine using: GETDLGITEM, GETDLGITEMTEXT, SENDDLGITEMMESSAGE (+1 more).
+
 ;-------------------------------------------------------------------------
 ; sub_0114   offset=0x0114  size=195 instr  segment=seg26.asm
 ;
@@ -450,6 +458,9 @@ L_030E:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0x12                            ; CA 12 00
+; Description (heuristic):
+;   Pure computation / dispatcher (36 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_031A   offset=0x031A  size=36 instr  segment=seg26.asm
 ;
@@ -505,6 +516,9 @@ L_035B:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    4                               ; CA 04 00
+; Description (heuristic):
+;   Pure computation / dispatcher (95 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0366   offset=0x0366  size=95 instr  segment=seg26.asm
 ;
@@ -641,6 +655,9 @@ L_045E:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    8                               ; CA 08 00
+; Description (heuristic):
+;   Mixed routine using: DIALOGBOX, ENABLEWINDOW, ISWINDOW (+2 more).
+
 ;-------------------------------------------------------------------------
 ; sub_0469   offset=0x0469  size=145 instr  segment=seg26.asm
 ;
@@ -842,6 +859,14 @@ L_0586:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0xc                             ; CA 0C 00
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x6]  INT       (1 use)
+;     [bp+0x8]  HWND      (1 use)
+
+; Description (heuristic):
+;   Thin wrapper around ENDDIALOG(hDlg, nResult) -> BOOL.
+
 ;-------------------------------------------------------------------------
 ; sub_05C2   offset=0x05C2  size=27 instr  segment=seg26.asm
 ;

@@ -27,6 +27,9 @@
 
 WRITE_TEXT SEGMENT BYTE PUBLIC 'CODE'
 
+; Description (heuristic):
+;   Pure computation / dispatcher (29 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0000   offset=0x0000  size=29 instr  segment=seg9.asm
 ;
@@ -66,6 +69,9 @@ L_0033:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf                                    ; CB
+; Description (heuristic):
+;   Pure computation / dispatcher (46 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_003F   offset=0x003F  size=46 instr  segment=seg9.asm
 ;
@@ -128,6 +134,9 @@ L_0094:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    4                               ; CA 04 00
+; Description (heuristic):
+;   Cleanup / deallocation routine.
+
 ;-------------------------------------------------------------------------
 ; sub_00A0   offset=0x00A0  size=124 instr  segment=seg9.asm
 ;
@@ -280,6 +289,9 @@ L_01AD:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    4                               ; CA 04 00
+; Description (heuristic):
+;   Pure computation / dispatcher (34 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_01B8   offset=0x01B8  size=34 instr  segment=seg9.asm
 ;
@@ -326,6 +338,10 @@ L_01EF:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    4                               ; CA 04 00
+; Description (heuristic):
+;   Cleanup / deallocation routine.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_01FE   offset=0x01FE  size=161 instr  segment=seg9.asm
 ;

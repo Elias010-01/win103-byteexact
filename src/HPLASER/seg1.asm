@@ -28,6 +28,9 @@
 
 HPLASER_TEXT SEGMENT BYTE PUBLIC 'CODE'
 
+; Description (heuristic):
+;   Pure computation / dispatcher (25 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0000   offset=0x0000  size=25 instr  segment=seg1.asm
 ;
@@ -67,6 +70,10 @@ L_0032:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     8                               ; C2 08 00
+; Description (heuristic):
+;   Mixed routine using: STARTSPOOLPAGE, SETRECT.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0039   offset=0x0039  size=215 instr  segment=seg1.asm
 ;

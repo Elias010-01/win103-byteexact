@@ -205,6 +205,9 @@ L_010B:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    4                               ; CA 04 00
+; Description (heuristic):
+;   Pure computation / dispatcher (37 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0174   offset=0x0174  size=37 instr  segment=seg8.asm
 ;
@@ -257,6 +260,15 @@ L_01C8:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     6                               ; C2 06 00
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x4]  HDC       (6 uses)
+;   Locals:
+;     [bp-0x2]   HDC       (3 uses)
+
+; Description (heuristic):
+;   Drawing routine (4 GDI APIs).
+
 ;-------------------------------------------------------------------------
 ; sub_01CF   offset=0x01CF  size=106 instr  segment=seg8.asm
 ;
@@ -431,6 +443,9 @@ L_01CF:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     4                               ; C2 04 00
+; Description (heuristic):
+;   Mixed routine using: DELETEDC, GETPIXEL, GETSTOCKOBJECT (+2 more).
+
 ;-------------------------------------------------------------------------
 ; sub_02D7   offset=0x02D7  size=96 instr  segment=seg8.asm
 ;
@@ -591,6 +606,9 @@ L_03D2:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     8                               ; C2 08 00
+; Description (heuristic):
+;   Mixed routine using: BITBLT, DELETEDC.
+
 ;-------------------------------------------------------------------------
 ; sub_03D8   offset=0x03D8  size=112 instr  segment=seg8.asm
 ;
@@ -766,6 +784,9 @@ L_0519:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     8                               ; C2 08 00
+; Description (heuristic):
+;   Mixed routine using: GETDC, GETKEYSTATE, GETPARENT (+4 more).
+
 ;-------------------------------------------------------------------------
 ; sub_051F   offset=0x051F  size=205 instr  segment=seg8.asm
 ;
@@ -1074,6 +1095,9 @@ L_075C:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     8                               ; C2 08 00
+; Description (heuristic):
+;   Mixed routine using: CLIENTTOSCREEN, GETCURSORPOS, SCREENTOCLIENT (+2 more).
+
 ;-------------------------------------------------------------------------
 ; sub_0762   offset=0x0762  size=153 instr  segment=seg8.asm
 ;
@@ -1306,6 +1330,10 @@ L_0920:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     8                               ; C2 08 00
+; Description (heuristic):
+;   Drawing routine (6 GDI APIs).
+;   Acquires a device context, draws, releases.
+
 ;-------------------------------------------------------------------------
 ; sub_0926   offset=0x0926  size=278 instr  segment=seg8.asm
 ;
@@ -1715,6 +1743,14 @@ L_0A94:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Inferred stack frame (pass18, heuristic):
+;   Locals:
+;     [bp-0x4]   HDC       (2 uses)
+;     [bp-0x6]   HDC       (2 uses)
+
+; Description (heuristic):
+;   Mixed routine using: BITBLT, DELETEDC.
+
 ;-------------------------------------------------------------------------
 ; sub_0BFF   offset=0x0BFF  size=42 instr  segment=seg8.asm
 ;

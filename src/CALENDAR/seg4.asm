@@ -140,6 +140,13 @@ L_00C7:
         push    ax                              ; 50
         call    far KERNEL.ANSINEXT             ; 9A 56 01 00 00 [FIXUP]
         jmp     L_007B                          ; EB 98
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0xc]  HWND      (1 use)
+
+; Description (heuristic):
+;   Small helper using 2 API(s): ENABLEWINDOW, GETDLGITEM.
+
 ;-------------------------------------------------------------------------
 ; sub_00E3   offset=0x00E3  size=15 instr  segment=seg4.asm
 ;
@@ -173,6 +180,9 @@ L_00F8:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    8                               ; CA 08 00
+; Description (heuristic):
+;   Mixed routine using: ANSINEXT, ANSIPREV, LSTRLEN.
+
 ;-------------------------------------------------------------------------
 ; sub_0104   offset=0x0104  size=50 instr  segment=seg4.asm
 ;

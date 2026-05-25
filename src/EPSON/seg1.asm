@@ -29,6 +29,10 @@
 
 EPSON_TEXT SEGMENT BYTE PUBLIC 'CODE'
 
+; Description (heuristic):
+;   Mixed routine using: STARTSPOOLPAGE, SETRECT, SETRECTEMPTY.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0000   offset=0x0000  size=274 instr  segment=seg1.asm
 ;

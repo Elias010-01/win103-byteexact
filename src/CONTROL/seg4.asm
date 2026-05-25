@@ -48,6 +48,10 @@ CONTROL_TEXT SEGMENT BYTE PUBLIC 'CODE'
         cmp     ax, 0x111                       ; 3D 11 01
         je      L_0028                          ; 74 11
         jmp     L_0037                          ; EB 1E
+; Description (heuristic):
+;   Pure computation / dispatcher (33 instructions, no FAR API calls).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0019   offset=0x0019  size=33 instr  segment=seg4.asm
 ;
@@ -102,6 +106,9 @@ L_0039:
         cmp     ax, 0x111                       ; 3D 11 01
         je      L_006C                          ; 74 11
         jmp     L_007B                          ; EB 1E
+; Description (heuristic):
+;   Internal helper (19 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_005D   offset=0x005D  size=19 instr  segment=seg4.asm
 ;
@@ -140,6 +147,14 @@ L_007D:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0xa                             ; CA 0A 00
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x4]  WORD      (1 use)
+
+; Description (heuristic):
+;   Mixed routine using: FINDRESOURCE, GETCODEHANDLE, LOADRESOURCE (+5 more).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0088   offset=0x0088  size=151 instr  segment=seg4.asm
 ;
@@ -377,6 +392,13 @@ L_01C7:
         ; --> ENDDIALOG(HWND hDlg, INT nResult) -> BOOL
         call    far USER.ENDDIALOG              ; 9A 9A 02 00 00 [FIXUP]
         jmp     L_020A                          ; EB 0C
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x6]  HWND      (1 use)
+
+; Description (heuristic):
+;   Thin wrapper around SHOWWINDOW(hWnd, nCmdShow) -> BOOL.
+
 ;-------------------------------------------------------------------------
 ; sub_01FE   offset=0x01FE  size=7 instr  segment=seg4.asm
 ;
@@ -401,6 +423,14 @@ L_020A:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     4                               ; C2 04 00
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x6]  WORD      (1 use)
+
+; Description (heuristic):
+;   Internal helper (7 instructions).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0210   offset=0x0210  size=7 instr  segment=seg4.asm
 ;
@@ -417,6 +447,14 @@ L_0210:
         cmp     word ptr [bp + 6], 1            ; 83 7E 06 01
         je      L_0224                          ; 74 03
         jmp     L_0389                          ; E9 65 01
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x8]  HWND      (1 use)
+
+; Description (heuristic):
+;   String manipulation routine (2 string APIs).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0224   offset=0x0224  size=165 instr  segment=seg4.asm
 ;
@@ -693,6 +731,10 @@ L_03AC:
         cmp     ax, 0x111                       ; 3D 11 01
         je      L_03DD                          ; 74 11
         jmp     L_03F2                          ; EB 24
+; Description (heuristic):
+;   Pure computation / dispatcher (36 instructions, no FAR API calls).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_03CE   offset=0x03CE  size=36 instr  segment=seg4.asm
 ;
@@ -750,6 +792,9 @@ L_03F4:
         cmp     ax, 0x111                       ; 3D 11 01
         je      L_042A                          ; 74 11
         jmp     L_043F                          ; EB 24
+; Description (heuristic):
+;   Pure computation / dispatcher (21 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_041B   offset=0x041B  size=21 instr  segment=seg4.asm
 ;
@@ -790,6 +835,14 @@ L_0441:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0xa                             ; CA 0A 00
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x6]  HWND      (1 use)
+
+; Description (heuristic):
+;   Cleanup / deallocation routine.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_044C   offset=0x044C  size=169 instr  segment=seg4.asm
 ;
@@ -1084,6 +1137,13 @@ L_05E2:
         ; --> ENDDIALOG(HWND hDlg, INT nResult) -> BOOL
         call    far USER.ENDDIALOG              ; 9A 12 07 00 00 [FIXUP]
         jmp     L_0616                          ; EB 0C
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x6]  HWND      (1 use)
+
+; Description (heuristic):
+;   Thin wrapper around SHOWWINDOW(hWnd, nCmdShow) -> BOOL.
+
 ;-------------------------------------------------------------------------
 ; sub_060A   offset=0x060A  size=7 instr  segment=seg4.asm
 ;
@@ -1108,6 +1168,10 @@ L_0616:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     4                               ; C2 04 00
+; Description (heuristic):
+;   Allocation / initialization routine (2 alloc APIs).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_061C   offset=0x061C  size=50 instr  segment=seg4.asm
 ;
@@ -1200,6 +1264,15 @@ L_065C:
         ; --> SETDLGITEMTEXT(HWND hDlg, INT nIDItem, LPSTR lpszText) -> VOID
         call    far USER.SETDLGITEMTEXT         ; 9A C3 00 00 00 [FIXUP]
         jmp     L_0716                          ; EB 79
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0xc]  HWND      (2 uses)
+;   Locals:
+;     [bp-0x56]   WPARAM    (2 uses)
+
+; Description (heuristic):
+;   Cleanup / deallocation routine.
+
 ;-------------------------------------------------------------------------
 ; sub_069D   offset=0x069D  size=50 instr  segment=seg4.asm
 ;
@@ -1294,6 +1367,10 @@ L_0716:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     0xa                             ; C2 0A 00
+; Description (heuristic):
+;   String manipulation routine (4 string APIs).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_071C   offset=0x071C  size=392 instr  segment=seg4.asm
 ;
@@ -1901,6 +1978,10 @@ L_0B2D:
         cmp     ax, 0x111                       ; 3D 11 01
         je      L_0B5B                          ; 74 11
         jmp     L_0B6A                          ; EB 1E
+; Description (heuristic):
+;   Pure computation / dispatcher (33 instructions, no FAR API calls).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0B4C   offset=0x0B4C  size=33 instr  segment=seg4.asm
 ;
@@ -1955,6 +2036,9 @@ L_0B6C:
         cmp     ax, 0x111                       ; 3D 11 01
         je      L_0B9F                          ; 74 11
         jmp     L_0BAE                          ; EB 1E
+; Description (heuristic):
+;   Internal helper (19 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_0B90   offset=0x0B90  size=19 instr  segment=seg4.asm
 ;
@@ -1993,6 +2077,9 @@ L_0BB0:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0xa                             ; CA 0A 00
+; Description (heuristic):
+;   String manipulation routine (2 string APIs).
+
 ;-------------------------------------------------------------------------
 ; sub_0BBB   offset=0x0BBB  size=117 instr  segment=seg4.asm
 ;
@@ -2205,6 +2292,9 @@ L_0CDD:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     4                               ; C2 04 00
+; Description (heuristic):
+;   Mixed routine using: ENDDIALOG, LOADCURSOR, SETCURSOR (+1 more).
+
 ;-------------------------------------------------------------------------
 ; sub_0CE4   offset=0x0CE4  size=102 instr  segment=seg4.asm
 ;
@@ -2371,6 +2461,13 @@ L_0DEC:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     6                               ; C2 06 00
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x6]  HWND      (1 use)
+
+; Description (heuristic):
+;   String manipulation routine (3 string APIs).
+
 ;-------------------------------------------------------------------------
 ; sub_0DF2   offset=0x0DF2  size=178 instr  segment=seg4.asm
 ;
@@ -2658,6 +2755,10 @@ L_0FA4:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     4                               ; C2 04 00
+; Description (heuristic):
+;   String manipulation routine (3 string APIs).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0FAB   offset=0x0FAB  size=241 instr  segment=seg4.asm
 ;
@@ -3006,6 +3107,10 @@ L_11B9:
         cmp     ax, 0x111                       ; 3D 11 01
         je      L_11EA                          ; 74 11
         jmp     L_11FF                          ; EB 24
+; Description (heuristic):
+;   Pure computation / dispatcher (36 instructions, no FAR API calls).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_11DB   offset=0x11DB  size=36 instr  segment=seg4.asm
 ;
@@ -3061,6 +3166,9 @@ L_1201:
         cmp     ax, 0x111                       ; 3D 11 01
         je      L_1237                          ; 74 11
         jmp     L_124C                          ; EB 24
+; Description (heuristic):
+;   Pure computation / dispatcher (21 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_1228   offset=0x1228  size=21 instr  segment=seg4.asm
 ;
@@ -3101,6 +3209,17 @@ L_124E:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0xa                             ; CA 0A 00
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x4]  WORD      (1 use)
+;     [bp+0x6]  HWND      (1 use)
+;   Locals:
+;     [bp-0x60]   HWND      (1 use)
+
+; Description (heuristic):
+;   Dialog procedure (DlgProc). Handles dialog messages.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_1259   offset=0x1259  size=26 instr  segment=seg4.asm
 ;
@@ -3154,6 +3273,14 @@ L_1299:
         cmp     word ptr [bp + 4], 0x20         ; 83 7E 04 20
         je      L_12A2                          ; 74 03
         jmp     L_1388                          ; E9 E6 00
+; Inferred stack frame (pass18, heuristic):
+;   Locals:
+;     [bp-0x60]   HWND      (1 use)
+
+; Description (heuristic):
+;   Mixed routine using: LOADSTRING, SENDMESSAGE, SETDLGITEMTEXT.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_12A2   offset=0x12A2  size=83 instr  segment=seg4.asm
 ;
@@ -3309,6 +3436,13 @@ L_134A:
         push    word ptr [bp + 6]               ; FF 76 06
         mov     ax, 0xffff                      ; B8 FF FF
         jmp     L_1288                          ; E9 1B FF
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x6]  HWND      (1 use)
+
+; Description (heuristic):
+;   Mixed routine using: GETSYSTEMMETRICS, GETWINDOWRECT, MOVEWINDOW (+2 more).
+
 ;-------------------------------------------------------------------------
 ; sub_136D   offset=0x136D  size=75 instr  segment=seg4.asm
 ;
@@ -3432,6 +3566,9 @@ L_142D:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     4                               ; C2 04 00
+; Description (heuristic):
+;   Mixed routine using: ENDDIALOG, LOADSTRING, MESSAGEBOX (+1 more).
+
 ;-------------------------------------------------------------------------
 ; sub_1433   offset=0x1433  size=104 instr  segment=seg4.asm
 ;
@@ -3605,6 +3742,16 @@ L_153F:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     0xa                             ; C2 0A 00
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x6]  HWND      (1 use)
+;   Locals:
+;     [bp-0x56]   LRESULT   (1 use)
+
+; Description (heuristic):
+;   Thin wrapper around SENDDLGITEMMESSAGE(hDlg, nIDItem, wMsg, wParam, lParam) -> LRESULT.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_1545   offset=0x1545  size=17 instr  segment=seg4.asm
 ;
@@ -3641,6 +3788,16 @@ L_1545:
         cmp     ax, 0xffff                      ; 3D FF FF
         jne     L_156B                          ; 75 03
         jmp     L_166B                          ; E9 00 01
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x4]  WORD      (1 use)
+;     [bp+0x6]  HWND      (1 use)
+;   Locals:
+;     [bp-0x56]   WPARAM    (1 use)
+
+; Description (heuristic):
+;   String manipulation routine (4 string APIs).
+
 ;-------------------------------------------------------------------------
 ; sub_156B   offset=0x156B  size=113 instr  segment=seg4.asm
 ;
@@ -3810,6 +3967,14 @@ L_166B:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     4                               ; C2 04 00
+; Inferred stack frame (pass18, heuristic):
+;   Locals:
+;     [bp-0x88]   HANDLE    (1 use)
+
+; Description (heuristic):
+;   String manipulation routine (3 string APIs).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_1671   offset=0x1671  size=174 instr  segment=seg4.asm
 ;
@@ -4064,6 +4229,10 @@ L_1801:
         cmp     ax, 0x111                       ; 3D 11 01
         je      L_182D                          ; 74 11
         jmp     L_1842                          ; EB 24
+; Description (heuristic):
+;   Pure computation / dispatcher (35 instructions, no FAR API calls).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_181E   offset=0x181E  size=35 instr  segment=seg4.asm
 ;
@@ -4118,6 +4287,9 @@ L_1844:
         cmp     ax, 0x111                       ; 3D 11 01
         je      L_1877                          ; 74 11
         jmp     L_188C                          ; EB 24
+; Description (heuristic):
+;   Pure computation / dispatcher (21 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_1868   offset=0x1868  size=21 instr  segment=seg4.asm
 ;
@@ -4158,6 +4330,9 @@ L_188E:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0xa                             ; CA 0A 00
+; Description (heuristic):
+;   String manipulation routine (3 string APIs).
+
 ;-------------------------------------------------------------------------
 ; sub_1899   offset=0x1899  size=145 instr  segment=seg4.asm
 ;
@@ -4415,6 +4590,10 @@ L_1A02:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     4                               ; C2 04 00
+; Description (heuristic):
+;   Internal helper (16 instructions).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_1A09   offset=0x1A09  size=16 instr  segment=seg4.asm
 ;
@@ -4444,6 +4623,14 @@ L_1A25:
 ;   [conditional branch target (if/else)] L_1A32
 L_1A32:
         jmp     L_1D13                          ; E9 DE 02
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0xc]  HWND      (1 use)
+
+; Description (heuristic):
+;   String manipulation routine (4 string APIs).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_1A35   offset=0x1A35  size=128 instr  segment=seg4.asm
 ;
@@ -4670,6 +4857,9 @@ L_1B66:
         push    word ptr [bp + 0xc]             ; FF 76 0C
         call    far _entry_43                   ; 9A 84 1D 00 00 [FIXUP]
         jmp     L_1D13                          ; E9 A2 01
+; Description (heuristic):
+;   String manipulation routine (2 string APIs).
+
 ;-------------------------------------------------------------------------
 ; sub_1B71   offset=0x1B71  size=168 instr  segment=seg4.asm
 ;
@@ -4932,6 +5122,10 @@ L_1D13:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     0xa                             ; C2 0A 00
+; Description (heuristic):
+;   Mixed routine using: ANSIUPPER, 5, LOADSTRING.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_1D19   offset=0x1D19  size=43 instr  segment=seg4.asm
 ;
@@ -5003,6 +5197,9 @@ L_1D6D:
         push    word ptr [bp + 6]               ; FF 76 06
         call    far _entry_43                   ; 9A D3 14 00 00 [FIXUP]
         jmp     L_1DA6                          ; EB 1C
+; Description (heuristic):
+;   Internal helper (19 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_1D8A   offset=0x1D8A  size=19 instr  segment=seg4.asm
 ;
@@ -5037,6 +5234,9 @@ L_1DAD:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     4                               ; C2 04 00
+; Description (heuristic):
+;   String manipulation routine (3 string APIs).
+
 ;-------------------------------------------------------------------------
 ; sub_1DB3   offset=0x1DB3  size=246 instr  segment=seg4.asm
 ;
@@ -5397,6 +5597,9 @@ L_202F:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     2                               ; C2 02 00
+; Description (heuristic):
+;   String manipulation routine (3 string APIs).
+
 ;-------------------------------------------------------------------------
 ; sub_2035   offset=0x2035  size=85 instr  segment=seg4.asm
 ;
@@ -5539,6 +5742,14 @@ L_20F9:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     2                               ; C2 02 00
+; Inferred stack frame (pass18, heuristic):
+;   Locals:
+;     [bp-0x60]   HANDLE    (1 use)
+
+; Description (heuristic):
+;   Cleanup / deallocation routine.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_20FF   offset=0x20FF  size=125 instr  segment=seg4.asm
 ;
@@ -5733,6 +5944,13 @@ L_222F:
         ; --> LOCALFREE(HANDLE hMem) -> HANDLE
         call    far KERNEL.LOCALFREE            ; 9A 9F 17 00 00 [FIXUP]
         jmp     L_213F                          ; E9 05 FF
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x4]  HWND      (1 use)
+
+; Description (heuristic):
+;   Cleanup / deallocation routine.
+
 ;-------------------------------------------------------------------------
 ; sub_223A   offset=0x223A  size=97 instr  segment=seg4.asm
 ;
@@ -5917,6 +6135,10 @@ L_2320:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     2                               ; C2 02 00
+; Description (heuristic):
+;   Mixed routine using: REMOVEFONTRESOURCE, WRITEPROFILESTRING, ENABLEMENUITEM (+2 more).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_2326   offset=0x2326  size=59 instr  segment=seg4.asm
 ;

@@ -134,6 +134,10 @@ L_00D0:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    8                               ; CA 08 00
+; Description (heuristic):
+;   Mixed routine using: SETTEXTJUSTIFICATION, TEXTOUT.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_00DC   offset=0x00DC  size=259 instr  segment=seg51.asm
 ;

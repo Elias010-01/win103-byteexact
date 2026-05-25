@@ -377,6 +377,9 @@ L_02D0:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Description (heuristic):
+;   Cleanup / deallocation routine.
+
 ;-------------------------------------------------------------------------
 ; sub_02DD   offset=0x02DD  size=278 instr  segment=seg50.asm
 ;
@@ -721,6 +724,9 @@ L_05BA:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    6                               ; CA 06 00
+; Description (heuristic):
+;   Pure computation / dispatcher (42 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_05C6   offset=0x05C6  size=42 instr  segment=seg50.asm
 ;
@@ -779,6 +785,9 @@ L_0610:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    4                               ; CA 04 00
+; Description (heuristic):
+;   Pure computation / dispatcher (26 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_061B   offset=0x061B  size=26 instr  segment=seg50.asm
 ;
@@ -817,6 +826,9 @@ L_0643:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Description (heuristic):
+;   Cleanup / deallocation routine.
+
 ;-------------------------------------------------------------------------
 ; sub_064E   offset=0x064E  size=114 instr  segment=seg50.asm
 ;
@@ -961,6 +973,10 @@ L_076C:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    6                               ; CA 06 00
+; Description (heuristic):
+;   Cleanup / deallocation routine.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0778   offset=0x0778  size=146 instr  segment=seg50.asm
 ;

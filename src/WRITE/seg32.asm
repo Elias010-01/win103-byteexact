@@ -128,6 +128,9 @@ L_00BF:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf                                    ; CB
+; Description (heuristic):
+;   Mixed routine using: GETWINDOWTEXT, SETWINDOWTEXT.
+
 ;-------------------------------------------------------------------------
 ; sub_00C8   offset=0x00C8  size=205 instr  segment=seg32.asm
 ;
@@ -388,6 +391,9 @@ L_0312:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Cleanup / deallocation routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0318   offset=0x0318  size=383 instr  segment=seg32.asm
 ;
@@ -894,6 +900,10 @@ L_0736:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0xa                             ; CA 0A 00
+; Description (heuristic):
+;   Pure computation / dispatcher (301 instructions, no FAR API calls).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0742   offset=0x0742  size=301 instr  segment=seg32.asm
 ;

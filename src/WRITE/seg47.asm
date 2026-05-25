@@ -172,6 +172,9 @@ L_0110:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf                                    ; CB
+; Description (heuristic):
+;   Mixed routine using: GLOBALCOMPACT, LOCKSEGMENT, UNLOCKSEGMENT.
+
 ;-------------------------------------------------------------------------
 ; sub_0119   offset=0x0119  size=177 instr  segment=seg47.asm
 ;
@@ -407,6 +410,9 @@ L_0316:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf                                    ; CB
+; Description (heuristic):
+;   Mixed routine using: GETUPDATERECT, VALIDATERECT.
+
 ;-------------------------------------------------------------------------
 ; sub_031F   offset=0x031F  size=57 instr  segment=seg47.asm
 ;
@@ -488,6 +494,9 @@ L_03A2:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf                                    ; CB
+; Description (heuristic):
+;   Pure computation / dispatcher (132 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_03AB   offset=0x03AB  size=132 instr  segment=seg47.asm
 ;
@@ -649,6 +658,9 @@ L_04FB:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf                                    ; CB
+; Description (heuristic):
+;   Pure computation / dispatcher (27 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0505   offset=0x0505  size=27 instr  segment=seg47.asm
 ;
@@ -696,6 +708,10 @@ L_0546:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (110 instructions, no FAR API calls).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_054B   offset=0x054B  size=110 instr  segment=seg47.asm
 ;

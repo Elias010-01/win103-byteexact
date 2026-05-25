@@ -34,6 +34,14 @@
 
 CONTROL_TEXT SEGMENT BYTE PUBLIC 'CODE'
 
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0xc]  HANDLE    (9 uses)
+
+; Description (heuristic):
+;   Mixed routine using: CREATEWINDOW, LOADSTRING, MESSAGEBOX.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0000   offset=0x0000  size=144 instr  segment=seg1.asm
 ;
@@ -286,6 +294,14 @@ L_0128:
         ; --> MESSAGEBOX(HWND hWndOwner, LPSTR lpszText, LPSTR lpszTitle, WORD wStyle) -> INT
         call    far USER.MESSAGEBOX             ; 9A FF FF 00 00 [FIXUP]
         jmp     L_030F                          ; E9 CE 01
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0xc]  HANDLE    (2 uses)
+
+; Description (heuristic):
+;   Drawing routine (4 GDI APIs).
+;   Acquires a device context, draws, releases.
+
 ;-------------------------------------------------------------------------
 ; sub_0141   offset=0x0141  size=369 instr  segment=seg1.asm
 ;
@@ -870,6 +886,9 @@ L_04F4:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0xa                             ; CA 0A 00
+; Description (heuristic):
+;   Cleanup / deallocation routine.
+
 ;-------------------------------------------------------------------------
 ; sub_04FF   offset=0x04FF  size=7 instr  segment=seg1.asm
 ;
@@ -891,6 +910,9 @@ L_04FF:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Mixed routine using: GETCARETBLINKTIME, KILLTIMER, MESSAGEBOX (+2 more).
+
 ;-------------------------------------------------------------------------
 ; sub_050F   offset=0x050F  size=108 instr  segment=seg1.asm
 ;
@@ -1052,6 +1074,9 @@ L_062A:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     8                               ; C2 08 00
+; Description (heuristic):
+;   Internal helper (6 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_0630   offset=0x0630  size=6 instr  segment=seg1.asm
 ;
@@ -1067,6 +1092,10 @@ L_0630:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     6                               ; C2 06 00
+; Description (heuristic):
+;   Drawing routine (7 GDI APIs).
+;   Acquires a device context, draws, releases.
+
 ;-------------------------------------------------------------------------
 ; sub_063C   offset=0x063C  size=540 instr  segment=seg1.asm
 ;
@@ -1849,6 +1878,13 @@ L_0BA6:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0xa                             ; CA 0A 00
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x8]  HDC       (2 uses)
+
+; Description (heuristic):
+;   Mixed routine using: SETBKMODE, SETTEXTCOLOR, DRAWTEXT.
+
 ;-------------------------------------------------------------------------
 ; sub_0BB1   offset=0x0BB1  size=88 instr  segment=seg1.asm
 ;
@@ -1970,6 +2006,13 @@ L_0C7B:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    6                               ; CA 06 00
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x8]  HDC       (2 uses)
+
+; Description (heuristic):
+;   Mixed routine using: SETBKMODE, SETTEXTCOLOR, DRAWTEXT (+2 more).
+
 ;-------------------------------------------------------------------------
 ; sub_0C86   offset=0x0C86  size=55 instr  segment=seg1.asm
 ;
@@ -2052,6 +2095,9 @@ L_0CEA:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    4                               ; CA 04 00
+; Description (heuristic):
+;   String manipulation routine (2 string APIs).
+
 ;-------------------------------------------------------------------------
 ; sub_0D06   offset=0x0D06  size=179 instr  segment=seg1.asm
 ;
@@ -2307,6 +2353,9 @@ L_0EC2:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Description (heuristic):
+;   Mixed routine using: GETDC, GETKEYSTATE, RELEASEDC (+1 more).
+
 ;-------------------------------------------------------------------------
 ; sub_0EDA   offset=0x0EDA  size=241 instr  segment=seg1.asm
 ;
@@ -2686,6 +2735,13 @@ L_118F:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    4                               ; CA 04 00
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x6]  WORD      (1 use)
+
+; Description (heuristic):
+;   Mixed routine using: GETDLGITEM, GETFOCUS, GETPARENT (+2 more).
+
 ;-------------------------------------------------------------------------
 ; sub_119A   offset=0x119A  size=51 instr  segment=seg1.asm
 ;
@@ -2763,6 +2819,9 @@ L_121A:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    4                               ; CA 04 00
+; Description (heuristic):
+;   Pure computation / dispatcher (27 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_1225   offset=0x1225  size=27 instr  segment=seg1.asm
 ;
@@ -2800,6 +2859,9 @@ L_1225:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf                                    ; CB
+; Description (heuristic):
+;   Pure computation / dispatcher (26 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_1257   offset=0x1257  size=26 instr  segment=seg1.asm
 ;
@@ -2836,6 +2898,9 @@ L_1257:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf                                    ; CB
+; Description (heuristic):
+;   Pure computation / dispatcher (30 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_1288   offset=0x1288  size=30 instr  segment=seg1.asm
 ;
@@ -2876,6 +2941,9 @@ L_12BC:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf                                    ; CB
+; Description (heuristic):
+;   Pure computation / dispatcher (51 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_12C7   offset=0x12C7  size=51 instr  segment=seg1.asm
 ;
@@ -2941,6 +3009,18 @@ L_1323:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    4                               ; CA 04 00
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x6]  HANDLE    (1 use)
+;     [bp+0xc]  HDC       (6 uses)
+;   Locals:
+;     [bp-0x4]   HANDLE    (2 uses)
+;     [bp-0x6]   INT       (2 uses)
+;     [bp-0x8]   INT       (2 uses)
+
+; Description (heuristic):
+;   Mixed routine using: PATBLT, SELECTOBJECT.
+
 ;-------------------------------------------------------------------------
 ; sub_1337   offset=0x1337  size=80 instr  segment=seg1.asm
 ;
@@ -3071,6 +3151,13 @@ L_1337:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    8                               ; CA 08 00
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x6]  HWND      (1 use)
+
+; Description (heuristic):
+;   Thin wrapper around MESSAGEBOX(hWndOwner, lpszText, lpszTitle, wStyle) -> INT.
+
 ;-------------------------------------------------------------------------
 ; sub_140D   offset=0x140D  size=24 instr  segment=seg1.asm
 ;
@@ -3113,6 +3200,20 @@ L_140D:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x6]  FARPROC   (1 use)
+;     [bp+0x8]  FARPROC   (1 use)
+;     [bp+0xa]  HWND      (1 use)
+;     [bp+0xc]  LPSTR     (1 use)
+;     [bp+0xe]  LPSTR     (1 use)
+;     [bp+0x10]  HANDLE    (1 use)
+;   Locals:
+;     [bp-0x4]   INT       (1 use)
+
+; Description (heuristic):
+;   Mixed routine using: DIALOGBOX, MESSAGEBOX.
+
 ;-------------------------------------------------------------------------
 ; sub_1438   offset=0x1438  size=61 instr  segment=seg1.asm
 ;
@@ -3204,6 +3305,10 @@ L_146C:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0x10                            ; CA 10 00
+; Description (heuristic):
+;   Mixed routine using: FATALEXIT, INITTASK, WAITEVENT (+1 more).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_14BA   offset=0x14BA  size=92 instr  segment=seg1.asm
 ;
@@ -3333,6 +3438,16 @@ L_153D:
 L_1580:
         mov     ax, 0x4cff                      ; B8 FF 4C
         int     0x21                            ; CD 21
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x4]  HANDLE    (7 uses)
+;     [bp+0x6]  HANDLE    (3 uses)
+;   Locals:
+;     [bp-0x2]   HANDLE    (2 uses)
+
+; Description (heuristic):
+;   Mixed routine using: GLOBALALLOC, GLOBALCOMPACT, GLOBALFREE (+5 more).
+
 ;-------------------------------------------------------------------------
 ; sub_1585   offset=0x1585  size=130 instr  segment=seg1.asm
 ;
@@ -3520,6 +3635,9 @@ L_1675:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (59 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_168E   offset=0x168E  size=59 instr  segment=seg1.asm
 ;
@@ -3604,6 +3722,9 @@ L_171C:
         inc     bx                              ; 43
         loop    L_1711                          ; E2 F2
         ret                                     ; C3
+; Description (heuristic):
+;   Internal helper (8 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_1720   offset=0x1720  size=8 instr  segment=seg1.asm
 ;
@@ -3623,6 +3744,9 @@ L_1720:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Internal helper (6 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_1730   offset=0x1730  size=6 instr  segment=seg1.asm
 ;
@@ -3641,6 +3765,9 @@ L_1734:
 ;   [error/early exit] L_173A
 L_173A:
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (21 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_173B   offset=0x173B  size=21 instr  segment=seg1.asm
 ;
@@ -3677,6 +3804,9 @@ L_176A:
         mov     ax, word ptr [bp + 4]           ; 8B 46 04
         mov     ah, 0x4c                        ; B4 4C
         int     0x21                            ; CD 21
+; Description (heuristic):
+;   Internal helper (10 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_1771   offset=0x1771  size=10 instr  segment=seg1.asm
 ;
@@ -3699,6 +3829,9 @@ L_1774:
 ;   [error/early exit] L_1782
 L_1782:
         ret                                     ; C3
+; Description (heuristic):
+;   Internal helper (10 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_1783   offset=0x1783  size=10 instr  segment=seg1.asm
 ;

@@ -212,6 +212,10 @@ L_0182:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    4                               ; CA 04 00
+; Description (heuristic):
+;   Pure computation / dispatcher (262 instructions, no FAR API calls).
+;   Interrupt handler.
+
 ;-------------------------------------------------------------------------
 ; sub_018D   offset=0x018D  size=262 instr  segment=seg1.asm
 ;

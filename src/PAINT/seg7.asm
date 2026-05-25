@@ -331,6 +331,10 @@ L_0258:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0xa                             ; CA 0A 00
+; Description (heuristic):
+;   Drawing routine (3 GDI APIs).
+;   Acquires a device context, draws, releases.
+
 ;-------------------------------------------------------------------------
 ; sub_0263   offset=0x0263  size=103 instr  segment=seg7.asm
 ;
@@ -488,6 +492,9 @@ L_039E:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     8                               ; C2 08 00
+; Description (heuristic):
+;   Mixed routine using: CLIENTTOSCREEN, GETCURSORPOS, GETKEYSTATE (+3 more).
+
 ;-------------------------------------------------------------------------
 ; sub_03A4   offset=0x03A4  size=168 instr  segment=seg7.asm
 ;
@@ -745,6 +752,9 @@ L_059B:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     8                               ; C2 08 00
+; Description (heuristic):
+;   Mixed routine using: CLIENTTOSCREEN, GETCURSORPOS, GETSYSTEMMETRICS (+3 more).
+
 ;-------------------------------------------------------------------------
 ; sub_05A1   offset=0x05A1  size=60 instr  segment=seg7.asm
 ;
@@ -833,6 +843,13 @@ L_0639:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     4                               ; C2 04 00
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x4]  HDC       (1 use)
+
+; Description (heuristic):
+;   Mixed routine using: GETSTOCKOBJECT, RECTANGLE, SELECTOBJECT (+1 more).
+
 ;-------------------------------------------------------------------------
 ; sub_063F   offset=0x063F  size=27 instr  segment=seg7.asm
 ;
@@ -888,6 +905,13 @@ L_063F:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     2                               ; C2 02 00
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x4]  HDC       (1 use)
+
+; Description (heuristic):
+;   Mixed routine using: BITBLT, CREATEBITMAP, DELETEDC (+9 more).
+
 ;-------------------------------------------------------------------------
 ; sub_0690   offset=0x0690  size=303 instr  segment=seg7.asm
 ;
@@ -1282,6 +1306,10 @@ L_09B1:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     4                               ; C2 04 00
+; Description (heuristic):
+;   Pure computation / dispatcher (232 instructions, no FAR API calls).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_09C7   offset=0x09C7  size=232 instr  segment=seg7.asm
 ;

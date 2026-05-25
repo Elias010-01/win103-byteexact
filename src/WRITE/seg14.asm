@@ -28,6 +28,15 @@
 
 WRITE_TEXT SEGMENT BYTE PUBLIC 'CODE'
 
+; Inferred stack frame (pass18, heuristic):
+;   Locals:
+;     [bp-0x4]   HANDLE    (1 use)
+;     [bp-0x6]   WORD      (2 uses)
+
+; Description (heuristic):
+;   Mixed routine using: LOCALALLOC, LOCALREALLOC.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0000   offset=0x0000  size=104 instr  segment=seg14.asm
 ;
@@ -174,6 +183,9 @@ L_00AC:
         jne     L_00E6                          ; 75 05
         mov     ax, 0xffff                      ; B8 FF FF
         jmp     L_00F9                          ; EB 13
+; Description (heuristic):
+;   Internal helper (13 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_00E6   offset=0x00E6  size=13 instr  segment=seg14.asm
 ;

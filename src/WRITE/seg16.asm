@@ -520,6 +520,9 @@ L_03A9:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    6                               ; CA 06 00
+; Description (heuristic):
+;   Pure computation / dispatcher (33 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_03B6   offset=0x03B6  size=33 instr  segment=seg16.asm
 ;
@@ -565,6 +568,10 @@ L_03E4:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    6                               ; CA 06 00
+; Description (heuristic):
+;   Pure computation / dispatcher (59 instructions, no FAR API calls).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_03F7   offset=0x03F7  size=59 instr  segment=seg16.asm
 ;

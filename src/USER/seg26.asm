@@ -742,6 +742,9 @@ L_0574:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    8                               ; CA 08 00
+; Description (heuristic):
+;   Internal helper (17 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_05A5   offset=0x05A5  size=17 instr  segment=seg26.asm
 ;
@@ -775,6 +778,9 @@ L_05CA:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     6                               ; C2 06 00
+; Description (heuristic):
+;   Mixed routine using: INQUIRESYSTEM.
+
 ;-------------------------------------------------------------------------
 ; sub_05D0   offset=0x05D0  size=59 instr  segment=seg26.asm
 ;
@@ -857,6 +863,9 @@ L_0651:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     2                               ; C2 02 00
+; Description (heuristic):
+;   Pure computation / dispatcher (30 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0662   offset=0x0662  size=30 instr  segment=seg26.asm
 ;
@@ -897,6 +906,9 @@ L_068A:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0xa                             ; CA 0A 00
+; Description (heuristic):
+;   Pure computation / dispatcher (27 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0698   offset=0x0698  size=27 instr  segment=seg26.asm
 ;
@@ -934,6 +946,9 @@ L_06B7:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    4                               ; CA 04 00
+; Description (heuristic):
+;   Internal helper (17 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_06C5   offset=0x06C5  size=17 instr  segment=seg26.asm
 ;
@@ -960,6 +975,9 @@ L_06C5:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Description (heuristic):
+;   Internal helper (20 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_06E3   offset=0x06E3  size=20 instr  segment=seg26.asm
 ;
@@ -990,6 +1008,9 @@ L_06F9:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    4                               ; CA 04 00
+; Description (heuristic):
+;   Pure computation / dispatcher (37 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0705   offset=0x0705  size=37 instr  segment=seg26.asm
 ;
@@ -1039,6 +1060,9 @@ L_0734:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    6                               ; CA 06 00
+; Description (heuristic):
+;   Internal helper (16 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_0742   offset=0x0742  size=16 instr  segment=seg26.asm
 ;
@@ -1063,6 +1087,9 @@ L_0742:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf                                    ; CB
+; Description (heuristic):
+;   Internal helper (17 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_075B   offset=0x075B  size=17 instr  segment=seg26.asm
 ;
@@ -1089,6 +1116,9 @@ L_075B:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Description (heuristic):
+;   Internal helper (16 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_0779   offset=0x0779  size=16 instr  segment=seg26.asm
 ;

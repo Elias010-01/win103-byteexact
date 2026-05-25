@@ -91,6 +91,9 @@ L_0035:
         mov     word ptr [0xba0], ax            ; A3 A0 0B
         mov     word ptr [0xc94], 0             ; C7 06 94 0C 00 00
         jmp     L_009C                          ; EB 11
+; Description (heuristic):
+;   Drawing routine (3 GDI APIs).
+
 ;-------------------------------------------------------------------------
 ; sub_008B   offset=0x008B  size=105 instr  segment=seg29.asm
 ;
@@ -243,6 +246,9 @@ L_01BD:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    8                               ; CA 08 00
+; Description (heuristic):
+;   Pure computation / dispatcher (90 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_01C8   offset=0x01C8  size=90 instr  segment=seg29.asm
 ;
@@ -348,6 +354,9 @@ L_028B:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     8                               ; C2 08 00
+; Description (heuristic):
+;   Mixed routine using: GETSTOCKOBJECT, LINETO, MOVETO (+2 more).
+
 ;-------------------------------------------------------------------------
 ; sub_0293   offset=0x0293  size=96 instr  segment=seg29.asm
 ;

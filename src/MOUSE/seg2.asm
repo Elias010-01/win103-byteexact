@@ -85,6 +85,10 @@ ENABLE PROC FAR
         jmp     L_0057                          ; EB 01
 ENABLE ENDP
 
+; Description (heuristic):
+;   Pure computation / dispatcher (29 instructions, no FAR API calls).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0056   offset=0x0056  size=29 instr  segment=seg2.asm
 ;
@@ -128,6 +132,9 @@ L_0075:
         out     0x21, al                        ; E6 21
         mov     word ptr [0x12], 0xffff         ; C7 06 12 00 FF FF
         jmp     L_00A1                          ; EB 01
+; Description (heuristic):
+;   Internal helper (11 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_00A0   offset=0x00A0  size=11 instr  segment=seg2.asm
 ;
@@ -200,6 +207,9 @@ L_00FA:
         jmp     L_00FD                          ; EB 01
 DISABLE ENDP
 
+; Description (heuristic):
+;   Internal helper (11 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_00FC   offset=0x00FC  size=11 instr  segment=seg2.asm
 ;
@@ -223,6 +233,9 @@ L_00FD:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf                                    ; CB
+; Description (heuristic):
+;   Pure computation / dispatcher (94 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_010C   offset=0x010C  size=94 instr  segment=seg2.asm
 ;

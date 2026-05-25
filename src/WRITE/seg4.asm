@@ -143,6 +143,9 @@ L_00AB:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Description (heuristic):
+;   Mixed routine using: GLOBALALLOC, GLOBALFREE, GLOBALLOCK (+1 more).
+
 ;-------------------------------------------------------------------------
 ; sub_00B8   offset=0x00B8  size=395 instr  segment=seg4.asm
 ;
@@ -644,6 +647,10 @@ L_0429:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    8                               ; CA 08 00
+; Description (heuristic):
+;   Pure computation / dispatcher (48 instructions, no FAR API calls).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0436   offset=0x0436  size=48 instr  segment=seg4.asm
 ;

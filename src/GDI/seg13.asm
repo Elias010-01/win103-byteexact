@@ -422,6 +422,10 @@ L_02C3:
         retf    4                               ; CA 04 00
 PLAYMETAFILE ENDP
 
+; Description (heuristic):
+;   File I/O routine (4 file APIs).
+;   Reads from file handle.
+
 ;-------------------------------------------------------------------------
 ; sub_02D2   offset=0x02D2  size=164 instr  segment=seg13.asm
 ;
@@ -676,6 +680,10 @@ L_049E:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     0xa                             ; C2 0A 00
+; Description (heuristic):
+;   Pure computation / dispatcher (228 instructions, no FAR API calls).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_04A4   offset=0x04A4  size=228 instr  segment=seg13.asm
 ;
@@ -981,6 +989,10 @@ L_071D:
         push    ax                              ; 50
         call    far _SEG1_08C1                  ; 9A FF FF 00 00 [FIXUP]
         jmp     L_0659                          ; E9 29 FF
+; Description (heuristic):
+;   Internal helper (10 instructions).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0730   offset=0x0730  size=10 instr  segment=seg13.asm
 ;
@@ -999,6 +1011,9 @@ L_0730:
         push    word ptr es:[bx + 6]            ; 26 FF 77 06
         call    far _entry_37                   ; 9A FF FF 00 00 [FIXUP]
         jmp     L_09D3                          ; E9 86 02
+; Description (heuristic):
+;   Mixed routine using: GETPROCADDRESS.
+
 ;-------------------------------------------------------------------------
 ; sub_074D   offset=0x074D  size=244 instr  segment=seg13.asm
 ;
@@ -1322,6 +1337,9 @@ L_09D3:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     0xa                             ; C2 0A 00
+; Description (heuristic):
+;   Pure computation / dispatcher (27 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_09DB   offset=0x09DB  size=27 instr  segment=seg13.asm
 ;
@@ -1366,6 +1384,9 @@ L_0A06:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     6                               ; C2 06 00
+; Description (heuristic):
+;   File I/O routine (3 file APIs).
+
 ;-------------------------------------------------------------------------
 ; sub_0A10   offset=0x0A10  size=160 instr  segment=seg13.asm
 ;
@@ -1598,6 +1619,17 @@ L_0BA8:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0xa                             ; CA 0A 00
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x4]  LPCVOID   (1 use)
+;     [bp+0x6]  LPCVOID   (1 use)
+;     [bp+0xa]  HFILE     (1 use)
+;   Locals:
+;     [bp-0xa]   WORD      (1 use)
+
+; Description (heuristic):
+;   Mixed routine using: _LWRITE.
+
 ;-------------------------------------------------------------------------
 ; sub_0BB5   offset=0x0BB5  size=67 instr  segment=seg13.asm
 ;
@@ -1703,6 +1735,10 @@ L_0C62:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     0xa                             ; C2 0A 00
+; Description (heuristic):
+;   File I/O routine (2 file APIs).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0C69   offset=0x0C69  size=547 instr  segment=seg13.asm
 ;
@@ -2401,6 +2437,9 @@ L_121B:
         cmp     ax, 0xffff                      ; 3D FF FF
         jne     L_1234                          ; 75 03
         jmp     L_0E1D                          ; E9 E9 FB
+; Description (heuristic):
+;   Pure computation / dispatcher (38 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_1234   offset=0x1234  size=38 instr  segment=seg13.asm
 ;
@@ -2468,6 +2507,10 @@ L_1283:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0xa                             ; CA 0A 00
+; Description (heuristic):
+;   Pure computation / dispatcher (37 instructions, no FAR API calls).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_1290   offset=0x1290  size=37 instr  segment=seg13.asm
 ;
@@ -2518,6 +2561,10 @@ L_12B8:
         cmp     ax, 5                           ; 3D 05 00
         je      L_1328                          ; 74 40
         jmp     L_1302                          ; EB 18
+; Description (heuristic):
+;   Pure computation / dispatcher (21 instructions, no FAR API calls).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_12EA   offset=0x12EA  size=21 instr  segment=seg13.asm
 ;
@@ -2559,6 +2606,10 @@ L_130D:
         je      L_138F                          ; 74 78
         mov     ax, word ptr [bp - 8]           ; 8B 46 F8
         jmp     L_1392                          ; EB 76
+; Description (heuristic):
+;   Internal helper (5 instructions).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_131C   offset=0x131C  size=5 instr  segment=seg13.asm
 ;
@@ -2572,6 +2623,9 @@ L_131C:
         push    ax                              ; 50
         mov     ax, 0x19                        ; B8 19 00
         jmp     L_12F4                          ; EB CC
+; Description (heuristic):
+;   Allocation / initialization routine (2 alloc APIs).
+
 ;-------------------------------------------------------------------------
 ; sub_1328   offset=0x1328  size=48 instr  segment=seg13.asm
 ;
@@ -2646,6 +2700,9 @@ L_1392:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     0xa                             ; C2 0A 00
+; Description (heuristic):
+;   Mixed routine using: GLOBALREALLOC.
+
 ;-------------------------------------------------------------------------
 ; sub_139A   offset=0x139A  size=80 instr  segment=seg13.asm
 ;
@@ -2765,6 +2822,10 @@ L_146D:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     4                               ; C2 04 00
+; Description (heuristic):
+;   Pure computation / dispatcher (53 instructions, no FAR API calls).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_1475   offset=0x1475  size=53 instr  segment=seg13.asm
 ;
@@ -2837,6 +2898,13 @@ L_14EB:
         mov     word ptr [bp - 0xc], ax         ; 89 46 F4
         mov     word ptr [si + 0xac], ax        ; 89 84 AC 00
         jmp     L_151D                          ; EB 1A
+; Inferred stack frame (pass18, heuristic):
+;   Locals:
+;     [bp-0xc]   HANDLE    (2 uses)
+
+; Description (heuristic):
+;   Mixed routine using: LOCALREALLOC.
+
 ;-------------------------------------------------------------------------
 ; sub_1503   offset=0x1503  size=35 instr  segment=seg13.asm
 ;
@@ -3550,6 +3618,9 @@ SETMETAFILEBITS PROC FAR
         retf    2                               ; CA 02 00
 SETMETAFILEBITS ENDP
 
+; Description (heuristic):
+;   Pure computation / dispatcher (24 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_19C2   offset=0x19C2  size=24 instr  segment=seg13.asm
 ;
@@ -3585,6 +3656,9 @@ L_19E5:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     0xc                             ; C2 0C 00
+; Description (heuristic):
+;   Internal helper (14 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_19F0   offset=0x19F0  size=14 instr  segment=seg13.asm
 ;

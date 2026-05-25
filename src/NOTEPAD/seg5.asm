@@ -104,6 +104,9 @@ L_0088:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Description (heuristic):
+;   Mixed routine using: LSTRCPY.
+
 ;-------------------------------------------------------------------------
 ; sub_0094   offset=0x0094  size=153 instr  segment=seg5.asm
 ;
@@ -316,6 +319,10 @@ L_01E2:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     2                               ; C2 02 00
+; Description (heuristic):
+;   Pure computation / dispatcher (25 instructions, no FAR API calls).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_021C   offset=0x021C  size=25 instr  segment=seg5.asm
 ;

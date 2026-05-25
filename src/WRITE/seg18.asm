@@ -527,6 +527,9 @@ L_040B:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0xa                             ; CA 0A 00
+; Description (heuristic):
+;   Mixed routine using: GETUPDATERECT, UPDATEWINDOW, VALIDATERECT.
+
 ;-------------------------------------------------------------------------
 ; sub_0416   offset=0x0416  size=34 instr  segment=seg18.asm
 ;
@@ -596,6 +599,13 @@ L_0471:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     2                               ; C2 02 00
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x8]  WORD      (1 use)
+
+; Description (heuristic):
+;   Pure computation / dispatcher (89 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0483   offset=0x0483  size=89 instr  segment=seg18.asm
 ;
@@ -715,6 +725,14 @@ L_055A:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    6                               ; CA 06 00
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x6]  WORD      (1 use)
+
+; Description (heuristic):
+;   Pure computation / dispatcher (41 instructions, no FAR API calls).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0565   offset=0x0565  size=41 instr  segment=seg18.asm
 ;

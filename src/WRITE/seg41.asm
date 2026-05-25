@@ -118,6 +118,9 @@ L_00AB:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    6                               ; CA 06 00
+; Description (heuristic):
+;   Pure computation / dispatcher (480 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_00B6   offset=0x00B6  size=480 instr  segment=seg41.asm
 ;
@@ -687,6 +690,9 @@ L_0425:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    8                               ; CA 08 00
+; Description (heuristic):
+;   Pure computation / dispatcher (24 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0576   offset=0x0576  size=24 instr  segment=seg41.asm
 ;
@@ -723,6 +729,9 @@ L_0597:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Description (heuristic):
+;   Pure computation / dispatcher (74 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_05A2   offset=0x05A2  size=74 instr  segment=seg41.asm
 ;
@@ -835,6 +844,14 @@ L_064C:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    4                               ; CA 04 00
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x8]  WORD      (1 use)
+
+; Description (heuristic):
+;   Pure computation / dispatcher (41 instructions, no FAR API calls).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0658   offset=0x0658  size=41 instr  segment=seg41.asm
 ;

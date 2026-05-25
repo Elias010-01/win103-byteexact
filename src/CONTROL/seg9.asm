@@ -432,6 +432,9 @@ L_02B6:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Description (heuristic):
+;   Pure computation / dispatcher (43 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_02C1   offset=0x02C1  size=43 instr  segment=seg9.asm
 ;
@@ -497,6 +500,10 @@ L_0317:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    4                               ; CA 04 00
+; Description (heuristic):
+;   Mixed routine using: LSTRCPY, LOADSTRING, MESSAGEBOX.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0322   offset=0x0322  size=88 instr  segment=seg9.asm
 ;

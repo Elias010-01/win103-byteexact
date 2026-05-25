@@ -76,6 +76,14 @@ L_0046:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Inferred stack frame (pass18, heuristic):
+;   Locals:
+;     [bp-0x2a]   INT       (1 use)
+;     [bp-0x2c]   INT       (1 use)
+
+; Description (heuristic):
+;   Mixed routine using: ENUMFONTS, GETDEVICECAPS.
+
 ;-------------------------------------------------------------------------
 ; sub_0054   offset=0x0054  size=122 instr  segment=seg7.asm
 ;
@@ -235,6 +243,9 @@ L_015F:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    4                               ; CA 04 00
+; Description (heuristic):
+;   Pure computation / dispatcher (42 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_016A   offset=0x016A  size=42 instr  segment=seg7.asm
 ;
@@ -289,6 +300,9 @@ L_01BC:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    4                               ; CA 04 00
+; Description (heuristic):
+;   Pure computation / dispatcher (68 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_01C7   offset=0x01C7  size=68 instr  segment=seg7.asm
 ;

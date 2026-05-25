@@ -478,6 +478,9 @@ L_0307:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    4                               ; CA 04 00
+; Description (heuristic):
+;   Mixed routine using: ADDATOM, GETPROFILESTRING.
+
 ;-------------------------------------------------------------------------
 ; sub_037C   offset=0x037C  size=68 instr  segment=seg26.asm
 ;
@@ -568,6 +571,10 @@ L_0409:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf                                    ; CB
+; Description (heuristic):
+;   Allocation / initialization routine (2 alloc APIs).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_041C   offset=0x041C  size=194 instr  segment=seg26.asm
 ;

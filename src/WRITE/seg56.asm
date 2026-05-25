@@ -25,6 +25,9 @@
 
 WRITE_TEXT SEGMENT BYTE PUBLIC 'CODE'
 
+; Description (heuristic):
+;   Pure computation / dispatcher (110 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0000   offset=0x0000  size=110 instr  segment=seg56.asm
 ;
@@ -158,6 +161,9 @@ L_00BA:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    6                               ; CA 06 00
+; Description (heuristic):
+;   Pure computation / dispatcher (64 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0127   offset=0x0127  size=64 instr  segment=seg56.asm
 ;
@@ -245,6 +251,9 @@ L_01C5:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    4                               ; CA 04 00
+; Description (heuristic):
+;   Pure computation / dispatcher (99 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_01D0   offset=0x01D0  size=99 instr  segment=seg56.asm
 ;
@@ -368,6 +377,9 @@ L_024B:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    6                               ; CA 06 00
+; Description (heuristic):
+;   Pure computation / dispatcher (261 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_02D5   offset=0x02D5  size=261 instr  segment=seg56.asm
 ;
@@ -713,6 +725,9 @@ L_05A4:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    8                               ; CA 08 00
+; Description (heuristic):
+;   Pure computation / dispatcher (96 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_05AF   offset=0x05AF  size=96 instr  segment=seg56.asm
 ;
@@ -830,6 +845,9 @@ L_06A9:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    4                               ; CA 04 00
+; Description (heuristic):
+;   Pure computation / dispatcher (642 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_06B4   offset=0x06B4  size=642 instr  segment=seg56.asm
 ;

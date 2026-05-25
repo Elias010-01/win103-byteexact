@@ -183,6 +183,9 @@ L_010D:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    4                               ; CA 04 00
+; Description (heuristic):
+;   Mixed routine using: SETRECT, SETSCROLLPOS.
+
 ;-------------------------------------------------------------------------
 ; sub_011A   offset=0x011A  size=58 instr  segment=seg33.asm
 ;
@@ -258,6 +261,10 @@ L_019D:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Description (heuristic):
+;   Mixed routine using: BITBLT, PATBLT, MAKEPROCINSTANCE (+8 more).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_01A8   offset=0x01A8  size=322 instr  segment=seg33.asm
 ;

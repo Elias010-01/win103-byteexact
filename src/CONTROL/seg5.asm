@@ -160,6 +160,16 @@ L_00BE:
         cmp     word ptr [bp - 0x4a], 0x454e    ; 81 7E B6 4E 45
         je      L_00EC                          ; 74 03
         jmp     L_0192                          ; E9 A6 00
+; Inferred stack frame (pass18, heuristic):
+;   Locals:
+;     [bp-0x1c]   LONG      (1 use)
+;     [bp-0x1e]   LONG      (1 use)
+;     [bp-0x8c]   HFILE     (2 uses)
+
+; Description (heuristic):
+;   File I/O routine (2 file APIs).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_00EC   offset=0x00EC  size=313 instr  segment=seg5.asm
 ;
@@ -619,6 +629,10 @@ L_03CE:
         push    word ptr [bp + 0xa]             ; FF 76 0A
         call    far _entry_43                   ; 9A 2C 02 00 00 [FIXUP]
         jmp     L_0409                          ; EB 1D
+; Description (heuristic):
+;   Mixed routine using: ANSIUPPER, GLOBALUNLOCK, LOADSTRING.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_03EC   offset=0x03EC  size=42 instr  segment=seg5.asm
 ;
@@ -696,6 +710,9 @@ L_0440:
         cmp     word ptr [bp - 4], 0            ; 83 7E FC 00
         je      L_0457                          ; 74 03
         jmp     L_02A8                          ; E9 51 FE
+; Description (heuristic):
+;   Cleanup / deallocation routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0457   offset=0x0457  size=23 instr  segment=seg5.asm
 ;
@@ -737,6 +754,16 @@ L_0483:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    6                               ; CA 06 00
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x6]  LPSTR     (1 use)
+;     [bp+0x8]  LPSTR     (1 use)
+;     [bp+0xa]  LPSTR     (1 use)
+;     [bp+0xc]  LPSTR     (1 use)
+
+; Description (heuristic):
+;   Mixed routine using: LSTRCPY, OPENFILE, 6.
+
 ;-------------------------------------------------------------------------
 ; sub_048E   offset=0x048E  size=89 instr  segment=seg5.asm
 ;
@@ -859,6 +886,9 @@ L_0531:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Description (heuristic):
+;   Internal helper (20 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_053E   offset=0x053E  size=20 instr  segment=seg5.asm
 ;
@@ -889,6 +919,9 @@ L_0554:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    4                               ; CA 04 00
+; Description (heuristic):
+;   Pure computation / dispatcher (22 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0560   offset=0x0560  size=22 instr  segment=seg5.asm
 ;
@@ -921,6 +954,9 @@ L_057C:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    8                               ; CA 08 00
+; Description (heuristic):
+;   Pure computation / dispatcher (22 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0588   offset=0x0588  size=22 instr  segment=seg5.asm
 ;
@@ -953,6 +989,9 @@ L_05A4:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    8                               ; CA 08 00
+; Description (heuristic):
+;   Pure computation / dispatcher (95 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_05B0   offset=0x05B0  size=95 instr  segment=seg5.asm
 ;
@@ -1064,6 +1103,9 @@ L_063E:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    6                               ; CA 06 00
+; Description (heuristic):
+;   Internal helper (17 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_064C   offset=0x064C  size=17 instr  segment=seg5.asm
 ;
@@ -1089,6 +1131,9 @@ L_064C:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Description (heuristic):
+;   Internal helper (19 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_066B   offset=0x066B  size=19 instr  segment=seg5.asm
 ;

@@ -252,6 +252,9 @@ L_01F1:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Description (heuristic):
+;   Pure computation / dispatcher (40 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_01FC   offset=0x01FC  size=40 instr  segment=seg31.asm
 ;
@@ -312,6 +315,9 @@ L_0257:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    4                               ; CA 04 00
+; Description (heuristic):
+;   Allocation / initialization routine (2 alloc APIs).
+
 ;-------------------------------------------------------------------------
 ; sub_0262   offset=0x0262  size=46 instr  segment=seg31.asm
 ;
@@ -387,6 +393,9 @@ L_02DC:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Allocation / initialization routine (2 alloc APIs).
+
 ;-------------------------------------------------------------------------
 ; sub_02E1   offset=0x02E1  size=154 instr  segment=seg31.asm
 ;
@@ -608,6 +617,15 @@ L_0477:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0xa                             ; CA 0A 00
+; Inferred stack frame (pass18, heuristic):
+;   Locals:
+;     [bp-0x6]   LPVOID    (1 use)
+;     [bp-0x18]   LPVOID    (1 use)
+
+; Description (heuristic):
+;   Mixed routine using: GETTEXTEXTENT, GLOBALLOCK.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0493   offset=0x0493  size=95 instr  segment=seg31.asm
 ;
@@ -738,6 +756,9 @@ L_059B:
         push    word ptr [bp + 8]               ; FF 76 08
         mov     ax, 2                           ; B8 02 00
         jmp     L_05B0                          ; EB 06
+; Description (heuristic):
+;   Mixed routine using: GETBKMODE, GETTEXTCOLOR, PATBLT (+5 more).
+
 ;-------------------------------------------------------------------------
 ; sub_05AA   offset=0x05AA  size=172 instr  segment=seg31.asm
 ;
@@ -1009,6 +1030,16 @@ L_076A:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     8                               ; C2 08 00
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x4]  HDC       (1 use)
+;     [bp+0x6]  HWND      (1 use)
+;   Locals:
+;     [bp-0xa]   HDC       (3 uses)
+
+; Description (heuristic):
+;   Small helper using 3 API(s): BITBLT, DELETEDC, GETCLIENTRECT.
+
 ;-------------------------------------------------------------------------
 ; sub_07A5   offset=0x07A5  size=30 instr  segment=seg31.asm
 ;
@@ -1070,6 +1101,18 @@ L_07A5:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     4                               ; C2 04 00
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x4]  INT       (1 use)
+;     [bp+0x6]  INT       (2 uses)
+;     [bp+0x8]  HDC       (1 use)
+;   Locals:
+;     [bp-0x2]   HDC       (2 uses)
+
+; Description (heuristic):
+;   Mixed routine using: BITBLT, CREATEBITMAP, DELETEDC (+10 more).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_07F3   offset=0x07F3  size=366 instr  segment=seg31.asm
 ;
@@ -1580,6 +1623,21 @@ L_0BE1:
         cmp     word ptr [0xdb2], 0             ; 83 3E B2 0D 00
         jne     L_0BEB                          ; 75 03
         jmp     L_0D1A                          ; E9 2F 01
+; Inferred stack frame (pass18, heuristic):
+;   Locals:
+;     [bp-0x4]   INT       (2 uses)
+;     [bp-0x8]   HDC       (7 uses)
+;     [bp-0x10]   DWORD     (1 use)
+;     [bp-0x12]   DWORD     (1 use)
+;     [bp-0x1c]   LPSTR     (4 uses)
+;     [bp-0x1e]   LPSTR     (4 uses)
+;     [bp-0xac]   INT       (2 uses)
+
+; Description (heuristic):
+;   Drawing routine (4 GDI APIs).
+;   Acquires a device context, draws, releases.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0BEB   offset=0x0BEB  size=219 instr  segment=seg31.asm
 ;

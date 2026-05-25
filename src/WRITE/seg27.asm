@@ -90,6 +90,13 @@ L_0044:
 ;   [conditional branch target (if/else)] L_0068
 L_0068:
         jmp     L_0083                          ; EB 19
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0xe]  HWND      (1 use)
+
+; Description (heuristic):
+;   Mixed routine using: GETDLGITEM, GETDLGITEMTEXT, SENDDLGITEMMESSAGE (+3 more).
+
 ;-------------------------------------------------------------------------
 ; sub_006A   offset=0x006A  size=213 instr  segment=seg27.asm
 ;
@@ -414,6 +421,16 @@ L_02A3:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0xa                             ; CA 0A 00
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x4]  HWND      (1 use)
+;   Locals:
+;     [bp-0x86]   LRESULT   (1 use)
+
+; Description (heuristic):
+;   Thin wrapper around SENDDLGITEMMESSAGE(hDlg, nIDItem, wMsg, wParam, lParam) -> LRESULT.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_02AE   offset=0x02AE  size=21 instr  segment=seg27.asm
 ;
@@ -454,6 +471,16 @@ L_02AE:
         mov     bx, word ptr [bp - 0xac]        ; 8B 9E 54 FF
         mov     byte ptr [bx + 1], 0            ; C6 47 01 00
         jmp     L_02FF                          ; EB 1B
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x4]  HWND      (1 use)
+;   Locals:
+;     [bp-0x86]   WPARAM    (1 use)
+
+; Description (heuristic):
+;   Mixed routine using: SENDDLGITEMMESSAGE, SETDLGITEMTEXT.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_02E4   offset=0x02E4  size=50 instr  segment=seg27.asm
 ;
@@ -547,6 +574,13 @@ L_02FF:
         push    ax                              ; 50
         call    L_04CD                          ; E8 72 01
         jmp     L_0376                          ; EB 19
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x4]  HWND      (1 use)
+
+; Description (heuristic):
+;   Mixed routine using: GETDLGITEM, GETDLGITEMINT, INVALIDATERECT (+2 more).
+
 ;-------------------------------------------------------------------------
 ; sub_035D   offset=0x035D  size=71 instr  segment=seg27.asm
 ;
@@ -675,6 +709,15 @@ L_0402:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     2                               ; C2 02 00
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x4]  HWND      (3 uses)
+;   Locals:
+;     [bp-0x2]   WPARAM    (2 uses)
+
+; Description (heuristic):
+;   Mixed routine using: SENDDLGITEMMESSAGE, SETDLGITEMTEXT.
+
 ;-------------------------------------------------------------------------
 ; sub_0408   offset=0x0408  size=86 instr  segment=seg27.asm
 ;
@@ -809,6 +852,13 @@ L_04C1:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Inferred stack frame (pass18, heuristic):
+;   Locals:
+;     [bp-0x4]   INT       (1 use)
+
+; Description (heuristic):
+;   Mixed routine using: ENUMFONTS, GETDEVICECAPS.
+
 ;-------------------------------------------------------------------------
 ; sub_04CD   offset=0x04CD  size=47 instr  segment=seg27.asm
 ;
@@ -878,6 +928,9 @@ L_053E:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     6                               ; C2 06 00
+; Description (heuristic):
+;   Pure computation / dispatcher (24 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_054D   offset=0x054D  size=24 instr  segment=seg27.asm
 ;
@@ -916,6 +969,9 @@ L_0585:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     2                               ; C2 02 00
+; Description (heuristic):
+;   Pure computation / dispatcher (33 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_058B   offset=0x058B  size=33 instr  segment=seg27.asm
 ;
@@ -958,6 +1014,10 @@ L_058B:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     6                               ; C2 06 00
+; Description (heuristic):
+;   Pure computation / dispatcher (32 instructions, no FAR API calls).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_05E4   offset=0x05E4  size=32 instr  segment=seg27.asm
 ;

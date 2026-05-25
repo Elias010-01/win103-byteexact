@@ -945,6 +945,13 @@ L_04CE:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x8]  HWND      (1 use)
+
+; Description (heuristic):
+;   Thin wrapper around GETWINDOWRECT(hWnd, lpRect) -> VOID.
+
 ;-------------------------------------------------------------------------
 ; sub_07D8   offset=0x07D8  size=30 instr  segment=seg2.asm
 ;

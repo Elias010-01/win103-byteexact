@@ -1303,6 +1303,10 @@ L_0B6A:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0x12                            ; CA 12 00
+; Description (heuristic):
+;   Pure computation / dispatcher (86 instructions, no FAR API calls).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0B77   offset=0x0B77  size=86 instr  segment=seg17.asm
 ;

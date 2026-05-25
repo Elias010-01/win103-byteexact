@@ -112,6 +112,9 @@ L_0086:
         retf    8                               ; CA 08 00
 GETTEXTFACE ENDP
 
+; Description (heuristic):
+;   Pure computation / dispatcher (34 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0091   offset=0x0091  size=34 instr  segment=seg3.asm
 ;
@@ -156,6 +159,9 @@ L_00CF:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    4                               ; CA 04 00
+; Description (heuristic):
+;   Pure computation / dispatcher (34 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_00DA   offset=0x00DA  size=34 instr  segment=seg3.asm
 ;
@@ -590,6 +596,9 @@ L_0482:
         dec     bp                              ; 4D
         retf    0xe                             ; CA 0E 00
 ENUMFONTS ENDP
+
+; Description (heuristic):
+;   Mixed routine using: GLOBALUNLOCK.
 
 ;-------------------------------------------------------------------------
 ; sub_048E   offset=0x048E  size=236 instr  segment=seg3.asm

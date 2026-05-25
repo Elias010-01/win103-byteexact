@@ -334,6 +334,9 @@ L_0238:
         or      ax, ax                          ; 0B C0
         jne     L_0262                          ; 75 1A
         jmp     L_00B3                          ; E9 68 FE
+; Description (heuristic):
+;   Cleanup / deallocation routine.
+
 ;-------------------------------------------------------------------------
 ; sub_024B   offset=0x024B  size=94 instr  segment=seg2.asm
 ;
@@ -506,6 +509,13 @@ L_0351:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0xa                             ; CA 0A 00
+; Inferred stack frame (pass18, heuristic):
+;   Locals:
+;     [bp-0xe]   HICON     (1 use)
+
+; Description (heuristic):
+;   Mixed routine using: LOADICON, REGISTERCLASS.
+
 ;-------------------------------------------------------------------------
 ; sub_035C   offset=0x035C  size=108 instr  segment=seg2.asm
 ;
@@ -642,6 +652,14 @@ L_0483:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     2                               ; C2 02 00
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x4]  HANDLE    (1 use)
+
+; Description (heuristic):
+;   Mixed routine using: CREATESOLIDBRUSH, DELETEOBJECT, SELECTOBJECT (+8 more).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0489   offset=0x0489  size=482 instr  segment=seg2.asm
 ;
@@ -1382,6 +1400,13 @@ L_092B:
         ; --> DELETEOBJECT(HANDLE hObj) -> BOOL
         call    far GDI.DELETEOBJECT            ; 9A FF FF 00 00 [FIXUP]
         jmp     L_09AB                          ; EB 69
+; Inferred stack frame (pass18, heuristic):
+;   Locals:
+;     [bp-0x8]   HDC       (1 use)
+
+; Description (heuristic):
+;   Mixed routine using: SELECTOBJECT, SETBKCOLOR, SETBKMODE (+5 more).
+
 ;-------------------------------------------------------------------------
 ; sub_0942   offset=0x0942  size=87 instr  segment=seg2.asm
 ;
@@ -1520,6 +1545,14 @@ L_0A23:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    6                               ; CA 06 00
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x4]  WORD      (1 use)
+
+; Description (heuristic):
+;   Thin wrapper around LOADSTRING(hInstance, wID, lpBuffer, cbBuffer) -> INT.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0A2F   offset=0x0A2F  size=21 instr  segment=seg2.asm
 ;

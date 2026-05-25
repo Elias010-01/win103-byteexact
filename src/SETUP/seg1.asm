@@ -342,6 +342,9 @@ L_0272:
 L_027B:
         mov     word ptr [0x10], bx             ; 89 1E 10 00
         call    L_03BC                          ; E8 3A 01
+; Description (heuristic):
+;   Pure computation / dispatcher (23 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0282   offset=0x0282  size=23 instr  segment=seg1.asm
 ;
@@ -377,6 +380,10 @@ L_0286:
         push    0x6769                          ; 68 69 67
         push    0x7265                          ; 68 65 72
         or      ax, 0x240a                      ; 0D 0A 24
+; Description (heuristic):
+;   Internal helper (7 instructions).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_02B4   offset=0x02B4  size=7 instr  segment=seg1.asm
 ;
@@ -393,6 +400,9 @@ L_02B4:
         ; constant WM_CREATE
         mov     al, 1                           ; B0 01
         jmp     L_0282                          ; EB C3
+; Description (heuristic):
+;   Internal helper (6 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_02BF   offset=0x02BF  size=6 instr  segment=seg1.asm
 ;
@@ -409,6 +419,9 @@ L_02BF:
 ;   [error/early exit] L_02C9
 L_02C9:
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (36 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_02CA   offset=0x02CA  size=36 instr  segment=seg1.asm
 ;
@@ -465,6 +478,9 @@ L_02FB:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     2                               ; C2 02 00
+; Description (heuristic):
+;   Pure computation / dispatcher (37 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_030A   offset=0x030A  size=37 instr  segment=seg1.asm
 ;
@@ -515,6 +531,9 @@ L_0329:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     6                               ; C2 06 00
+; Description (heuristic):
+;   Pure computation / dispatcher (45 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_034C   offset=0x034C  size=45 instr  segment=seg1.asm
 ;
@@ -581,6 +600,9 @@ L_03B8:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (48 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_03BC   offset=0x03BC  size=48 instr  segment=seg1.asm
 ;
@@ -654,6 +676,9 @@ L_0439:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (41 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_043D   offset=0x043D  size=41 instr  segment=seg1.asm
 ;
@@ -716,6 +741,9 @@ L_04A6:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (62 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_04AA   offset=0x04AA  size=62 instr  segment=seg1.asm
 ;
@@ -806,6 +834,9 @@ L_053A:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (60 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_053E   offset=0x053E  size=60 instr  segment=seg1.asm
 ;
@@ -886,6 +917,9 @@ L_05BF:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Internal helper (16 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_05C3   offset=0x05C3  size=16 instr  segment=seg1.asm
 ;
@@ -919,6 +953,9 @@ L_05E1:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (131 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_05E9   offset=0x05E9  size=131 instr  segment=seg1.asm
 ;
@@ -1094,6 +1131,9 @@ L_074A:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Internal helper (13 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_074E   offset=0x074E  size=13 instr  segment=seg1.asm
 ;
@@ -1120,6 +1160,9 @@ L_0765:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (22 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_076F   offset=0x076F  size=22 instr  segment=seg1.asm
 ;
@@ -1159,6 +1202,9 @@ L_079F:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (335 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_07A9   offset=0x07A9  size=335 instr  segment=seg1.asm
 ;
@@ -1580,6 +1626,9 @@ L_0AEF:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (213 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0B1A   offset=0x0B1A  size=213 instr  segment=seg1.asm
 ;
@@ -1872,6 +1921,9 @@ L_0D59:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (77 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0D5D   offset=0x0D5D  size=77 instr  segment=seg1.asm
 ;
@@ -1982,6 +2034,9 @@ L_0E22:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Internal helper (15 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_0E26   offset=0x0E26  size=15 instr  segment=seg1.asm
 ;
@@ -2010,6 +2065,9 @@ L_0E2F:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (181 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0E44   offset=0x0E44  size=181 instr  segment=seg1.asm
 ;
@@ -2250,6 +2308,9 @@ L_1032:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (44 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_1037   offset=0x1037  size=44 instr  segment=seg1.asm
 ;
@@ -2314,6 +2375,13 @@ L_10A3:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x4]  WORD      (1 use)
+
+; Description (heuristic):
+;   Pure computation / dispatcher (34 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_10AD   offset=0x10AD  size=34 instr  segment=seg1.asm
 ;
@@ -2367,6 +2435,9 @@ L_10F8:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Internal helper (17 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_10FF   offset=0x10FF  size=17 instr  segment=seg1.asm
 ;
@@ -2395,6 +2466,9 @@ L_1103:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (65 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_1122   offset=0x1122  size=65 instr  segment=seg1.asm
 ;
@@ -2481,6 +2555,9 @@ L_11AE:
 L_11CD:
         jnp     L_6FB6                          ; 0F 8B E5 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (86 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_11D2   offset=0x11D2  size=86 instr  segment=seg1.asm
 ;
@@ -2598,6 +2675,9 @@ L_12B1:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (101 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_12BD   offset=0x12BD  size=101 instr  segment=seg1.asm
 ;
@@ -2732,6 +2812,9 @@ L_13BD:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (109 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_13CC   offset=0x13CC  size=109 instr  segment=seg1.asm
 ;
@@ -2872,6 +2955,9 @@ L_14D7:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (36 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_14E5   offset=0x14E5  size=36 instr  segment=seg1.asm
 ;
@@ -2921,6 +3007,9 @@ L_1514:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (23 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_1534   offset=0x1534  size=23 instr  segment=seg1.asm
 ;
@@ -2961,6 +3050,10 @@ L_156D:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (57 instructions, no FAR API calls).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_1571   offset=0x1571  size=57 instr  segment=seg1.asm
 ;
@@ -3042,6 +3135,13 @@ L_15C5:
         mov     ax, word ptr [0x352]            ; A1 52 03
         mov     word ptr [0x3a3a], ax           ; A3 3A 3A
         jmp     L_167A                          ; EB 68
+; Inferred stack frame (pass18, heuristic):
+;   Locals:
+;     [bp-0x4]   WORD      (1 use)
+
+; Description (heuristic):
+;   Pure computation / dispatcher (185 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_1612   offset=0x1612  size=185 instr  segment=seg1.asm
 ;
@@ -3289,6 +3389,9 @@ L_17EC:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Internal helper (17 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_17F1   offset=0x17F1  size=17 instr  segment=seg1.asm
 ;
@@ -3318,6 +3421,9 @@ L_17FD:
         mov     word ptr [0x352], dx            ; 89 16 52 03
         pop     di                              ; 5F
         ret                                     ; C3
+; Description (heuristic):
+;   Internal helper (9 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_181F   offset=0x181F  size=9 instr  segment=seg1.asm
 ;
@@ -3339,6 +3445,9 @@ L_182A:
         mov     byte ptr [0x352], 0             ; C6 06 52 03 00
         pop     di                              ; 5F
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (22 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_1836   offset=0x1836  size=22 instr  segment=seg1.asm
 ;
@@ -3376,6 +3485,9 @@ L_184F:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     4                               ; C2 04 00
+; Description (heuristic):
+;   Pure computation / dispatcher (100 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_185E   offset=0x185E  size=100 instr  segment=seg1.asm
 ;
@@ -3515,6 +3627,9 @@ L_1934:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     4                               ; C2 04 00
+; Description (heuristic):
+;   Pure computation / dispatcher (26 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_193E   offset=0x193E  size=26 instr  segment=seg1.asm
 ;
@@ -3557,6 +3672,9 @@ L_1969:
         mov     al, 1                           ; B0 01
         pop     cx                              ; 59
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (26 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_1973   offset=0x1973  size=26 instr  segment=seg1.asm
 ;
@@ -3598,6 +3716,9 @@ L_19A8:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (25 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_19AC   offset=0x19AC  size=25 instr  segment=seg1.asm
 ;
@@ -3641,6 +3762,9 @@ L_19EC:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (102 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_19F0   offset=0x19F0  size=102 instr  segment=seg1.asm
 ;
@@ -3785,6 +3909,9 @@ L_1B01:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         retf    2                               ; CA 02 00
+; Description (heuristic):
+;   Pure computation / dispatcher (30 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_1B07   offset=0x1B07  size=30 instr  segment=seg1.asm
 ;
@@ -3831,6 +3958,9 @@ L_1B51:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (180 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_1B55   offset=0x1B55  size=180 instr  segment=seg1.asm
 ;
@@ -4054,6 +4184,9 @@ L_1D01:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (33 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_1D06   offset=0x1D06  size=33 instr  segment=seg1.asm
 ;
@@ -4107,6 +4240,9 @@ L_1D51:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (75 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_1D55   offset=0x1D55  size=75 instr  segment=seg1.asm
 ;
@@ -4214,6 +4350,9 @@ L_1E16:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (51 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_1E1A   offset=0x1E1A  size=51 instr  segment=seg1.asm
 ;
@@ -4286,6 +4425,9 @@ L_1E8F:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (80 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_1E9F   offset=0x1E9F  size=80 instr  segment=seg1.asm
 ;
@@ -4398,6 +4540,9 @@ L_1F6C:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (306 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_1F74   offset=0x1F74  size=306 instr  segment=seg1.asm
 ;
@@ -4782,6 +4927,9 @@ L_227B:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (102 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_2283   offset=0x2283  size=102 instr  segment=seg1.asm
 ;
@@ -4914,6 +5062,9 @@ L_238F:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (58 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_2393   offset=0x2393  size=58 instr  segment=seg1.asm
 ;
@@ -5000,6 +5151,9 @@ L_2416:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (193 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_241A   offset=0x241A  size=193 instr  segment=seg1.asm
 ;
@@ -5253,6 +5407,9 @@ L_2640:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (35 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_2644   offset=0x2644  size=35 instr  segment=seg1.asm
 ;
@@ -5303,6 +5460,9 @@ L_2691:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (69 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_2698   offset=0x2698  size=69 instr  segment=seg1.asm
 ;
@@ -5406,6 +5566,9 @@ L_274D:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (64 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_2751   offset=0x2751  size=64 instr  segment=seg1.asm
 ;
@@ -5497,6 +5660,9 @@ L_27EC:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (47 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_27F0   offset=0x27F0  size=47 instr  segment=seg1.asm
 ;
@@ -5567,6 +5733,9 @@ L_2856:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (81 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_285D   offset=0x285D  size=81 instr  segment=seg1.asm
 ;
@@ -5681,6 +5850,9 @@ L_2922:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (36 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_2926   offset=0x2926  size=36 instr  segment=seg1.asm
 ;
@@ -5734,6 +5906,9 @@ L_297A:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (128 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_297E   offset=0x297E  size=128 instr  segment=seg1.asm
 ;
@@ -5905,6 +6080,9 @@ L_2AB0:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (33 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_2AB4   offset=0x2AB4  size=33 instr  segment=seg1.asm
 ;
@@ -5959,6 +6137,9 @@ L_2AF2:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Internal helper (11 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_2AF6   offset=0x2AF6  size=11 instr  segment=seg1.asm
 ;
@@ -5982,6 +6163,9 @@ L_2AF6:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Internal helper (11 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_2B14   offset=0x2B14  size=11 instr  segment=seg1.asm
 ;
@@ -6005,6 +6189,9 @@ L_2B14:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (70 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_2B32   offset=0x2B32  size=70 instr  segment=seg1.asm
 ;
@@ -6102,6 +6289,9 @@ L_2BED:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (34 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_2BF1   offset=0x2BF1  size=34 instr  segment=seg1.asm
 ;
@@ -6158,6 +6348,9 @@ L_2C40:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (35 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_2C44   offset=0x2C44  size=35 instr  segment=seg1.asm
 ;
@@ -6213,6 +6406,9 @@ L_2C96:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (134 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_2C9A   offset=0x2C9A  size=134 instr  segment=seg1.asm
 ;
@@ -6378,6 +6574,9 @@ L_2DE4:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (23 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_2DE9   offset=0x2DE9  size=23 instr  segment=seg1.asm
 ;
@@ -6414,6 +6613,9 @@ L_2E0D:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (44 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_2E19   offset=0x2E19  size=44 instr  segment=seg1.asm
 ;
@@ -6479,6 +6681,9 @@ L_2E7C:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (46 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_2E83   offset=0x2E83  size=46 instr  segment=seg1.asm
 ;
@@ -6550,6 +6755,9 @@ L_2EE9:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (101 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_2EF8   offset=0x2EF8  size=101 instr  segment=seg1.asm
 ;
@@ -6674,6 +6882,9 @@ L_2FD0:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (53 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_2FDD   offset=0x2FDD  size=53 instr  segment=seg1.asm
 ;
@@ -6749,6 +6960,9 @@ L_3052:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (62 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_3057   offset=0x3057  size=62 instr  segment=seg1.asm
 ;
@@ -6834,6 +7048,9 @@ L_30E2:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (41 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_30E6   offset=0x30E6  size=41 instr  segment=seg1.asm
 ;
@@ -6891,6 +7108,9 @@ L_3120:
         xchg    word ptr [0x280], ax            ; 87 06 80 02
         sub     ax, word ptr [0x298]            ; 2B 06 98 02
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (26 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_3138   offset=0x3138  size=26 instr  segment=seg1.asm
 ;
@@ -6925,6 +7145,9 @@ L_3138:
         mov     ah, 0x40                        ; B4 40
         int     0x21                            ; CD 21
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (35 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_3166   offset=0x3166  size=35 instr  segment=seg1.asm
 ;
@@ -6974,6 +7197,9 @@ L_31A0:
 L_31AB:
         xor     ax, ax                          ; 33 C0
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (60 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_31AE   offset=0x31AE  size=60 instr  segment=seg1.asm
 ;
@@ -7048,6 +7274,9 @@ L_3239:
         mov     word ptr [0x27e], es            ; 8C 06 7E 02
         or      bx, bx                          ; 0B DB
         ret                                     ; C3
+; Description (heuristic):
+;   Internal helper (17 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_3244   offset=0x3244  size=17 instr  segment=seg1.asm
 ;
@@ -7075,6 +7304,9 @@ L_3244:
         mov     word ptr es:[di + 8], di        ; 26 89 7D 08
         mov     word ptr es:[di + 0xa], di      ; 26 89 7D 0A
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (38 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_3273   offset=0x3273  size=38 instr  segment=seg1.asm
 ;
@@ -7125,6 +7357,10 @@ L_32BE:
         pop     cx                              ; 59
         xor     ax, ax                          ; 33 C0
         ret                                     ; C3
+; Description (heuristic):
+;   Internal helper (19 instructions).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_32C2   offset=0x32C2  size=19 instr  segment=seg1.asm
 ;
@@ -7156,6 +7392,9 @@ L_32E3:
 L_32F0:
         pop     cx                              ; 59
         jmp     L_3273                          ; EB 80
+; Description (heuristic):
+;   Pure computation / dispatcher (64 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_32F3   offset=0x32F3  size=64 instr  segment=seg1.asm
 ;
@@ -7244,6 +7483,9 @@ L_339C:
 L_33A0:
         xor     ax, ax                          ; 33 C0
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (86 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_33A3   offset=0x33A3  size=86 instr  segment=seg1.asm
 ;
@@ -7352,6 +7594,9 @@ L_3465:
         pop     cx                              ; 59
         or      ax, ax                          ; 0B C0
         ret                                     ; C3
+; Description (heuristic):
+;   Internal helper (12 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_346A   offset=0x346A  size=12 instr  segment=seg1.asm
 ;
@@ -7378,6 +7623,9 @@ L_3481:
 ;   [error/early exit] L_3488
 L_3488:
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (35 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_3489   offset=0x3489  size=35 instr  segment=seg1.asm
 ;
@@ -7427,6 +7675,9 @@ L_34D7:
         pop     cx                              ; 59
         or      ax, ax                          ; 0B C0
         ret                                     ; C3
+; Description (heuristic):
+;   Internal helper (14 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_34DB   offset=0x34DB  size=14 instr  segment=seg1.asm
 ;
@@ -7455,6 +7706,9 @@ L_34F7:
 ;   [error/early exit] L_34FE
 L_34FE:
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (209 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_34FF   offset=0x34FF  size=209 instr  segment=seg1.asm
 ;
@@ -7725,6 +7979,9 @@ L_370E:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     2                               ; C2 02 00
+; Description (heuristic):
+;   Pure computation / dispatcher (51 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_3716   offset=0x3716  size=51 instr  segment=seg1.asm
 ;
@@ -7789,6 +8046,9 @@ L_377B:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     4                               ; C2 04 00
+; Description (heuristic):
+;   Internal helper (20 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_3783   offset=0x3783  size=20 instr  segment=seg1.asm
 ;
@@ -7821,6 +8081,9 @@ L_3783:
 ;   [error/early exit] L_37B0
 L_37B0:
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (87 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_37B1   offset=0x37B1  size=87 instr  segment=seg1.asm
 ;
@@ -7935,6 +8198,9 @@ L_386E:
 L_3870:
         pop     di                              ; 5F
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (22 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_3872   offset=0x3872  size=22 instr  segment=seg1.asm
 ;
@@ -7968,6 +8234,9 @@ L_3895:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     2                               ; C2 02 00
+; Description (heuristic):
+;   Internal helper (10 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_389C   offset=0x389C  size=10 instr  segment=seg1.asm
 ;
@@ -7987,6 +8256,9 @@ L_389C:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     2                               ; C2 02 00
+; Description (heuristic):
+;   Internal helper (13 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_38AF   offset=0x38AF  size=13 instr  segment=seg1.asm
 ;
@@ -8008,6 +8280,9 @@ L_38AF:
         mov     word ptr [0x292], ax            ; A3 92 02
         mov     word ptr [0x294], ax            ; A3 94 02
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (32 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_38D0   offset=0x38D0  size=32 instr  segment=seg1.asm
 ;
@@ -8052,6 +8327,9 @@ L_3918:
         mov     word ptr [0x298], ax            ; A3 98 02
         mov     word ptr [0x29a], ax            ; A3 9A 02
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (78 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_3921   offset=0x3921  size=78 instr  segment=seg1.asm
 ;
@@ -8140,6 +8418,10 @@ L_3973:
         mov     al, byte ptr [0x350]            ; A0 50 03
         mov     byte ptr [0x352], al            ; A2 52 03
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (147 instructions, no FAR API calls).
+;   Interrupt handler.
+
 ;-------------------------------------------------------------------------
 ; sub_39D8   offset=0x39D8  size=147 instr  segment=seg1.asm
 ;
@@ -8321,6 +8603,9 @@ L_3AC3:
 L_3AF7:
         pop     ds                              ; 1F
         iret                                    ; CF
+; Description (heuristic):
+;   Pure computation / dispatcher (33 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_3AF9   offset=0x3AF9  size=33 instr  segment=seg1.asm
 ;
@@ -8363,6 +8648,10 @@ L_3AF9:
         mov     ax, 0x3301                      ; B8 01 33
         int     0x21                            ; CD 21
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (79 instructions, no FAR API calls).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_3B55   offset=0x3B55  size=79 instr  segment=seg1.asm
 ;
@@ -8453,6 +8742,9 @@ L_3B7D:
         inc     byte ptr cs:[0x3982]            ; 2E FE 06 82 39
         jne     L_3C5C                          ; 75 48
         jmp     L_3C17                          ; EB 01
+; Description (heuristic):
+;   Pure computation / dispatcher (51 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_3C16   offset=0x3C16  size=51 instr  segment=seg1.asm
 ;
@@ -8522,6 +8814,9 @@ L_3C78:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     8                               ; C2 08 00
+; Description (heuristic):
+;   Internal helper (20 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_3C80   offset=0x3C80  size=20 instr  segment=seg1.asm
 ;
@@ -8554,6 +8849,9 @@ L_3C99:
         mov     ax, word ptr [0x350]            ; A1 50 03
         mov     word ptr [0x352], ax            ; A3 52 03
         ret                                     ; C3
+; Description (heuristic):
+;   Internal helper (4 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_3CB8   offset=0x3CB8  size=4 instr  segment=seg1.asm
 ;
@@ -8566,6 +8864,9 @@ L_3CB8:
         mov     ah, 0                           ; B4 00
         int     0x10                            ; CD 10
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (21 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_3CC0   offset=0x3CC0  size=21 instr  segment=seg1.asm
 ;
@@ -8599,6 +8900,9 @@ L_3CD0:
 ;   [error/early exit] L_3CF5
 L_3CF5:
         ret                                     ; C3
+; Description (heuristic):
+;   Internal helper (20 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_3CF6   offset=0x3CF6  size=20 instr  segment=seg1.asm
 ;
@@ -8633,6 +8937,9 @@ L_3D09:
 ;   [error/early exit] L_3D22
 L_3D22:
         ret                                     ; C3
+; Description (heuristic):
+;   Internal helper (5 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_3D23   offset=0x3D23  size=5 instr  segment=seg1.asm
 ;
@@ -8646,6 +8953,9 @@ L_3D23:
         mov     ah, 2                           ; B4 02
         int     0x10                            ; CD 10
         ret                                     ; C3
+; Description (heuristic):
+;   Internal helper (11 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_3D30   offset=0x3D30  size=11 instr  segment=seg1.asm
 ;
@@ -8671,6 +8981,9 @@ L_3D44:
 ;   [error/early exit] L_3D50
 L_3D50:
         ret                                     ; C3
+; Description (heuristic):
+;   Internal helper (14 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_3D51   offset=0x3D51  size=14 instr  segment=seg1.asm
 ;
@@ -8698,6 +9011,9 @@ L_3D74:
 ;   [error/early exit] L_3D77
 L_3D77:
         ret                                     ; C3
+; Description (heuristic):
+;   Internal helper (9 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_3D78   offset=0x3D78  size=9 instr  segment=seg1.asm
 ;
@@ -8717,6 +9033,9 @@ L_3D78:
 L_3D86:
         xor     ah, ah                          ; 32 E4
         ret                                     ; C3
+; Description (heuristic):
+;   Internal helper (11 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_3D89   offset=0x3D89  size=11 instr  segment=seg1.asm
 ;
@@ -8739,6 +9058,9 @@ L_3D95:
         add     byte ptr [bx + si], al          ; 00 00
         add     byte ptr [bx + si], al          ; 00 00
         add     byte ptr [bx + si], al          ; 00 00
+; Description (heuristic):
+;   Pure computation / dispatcher (81 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_3D9E   offset=0x3D9E  size=81 instr  segment=seg1.asm
 ;
@@ -8844,6 +9166,9 @@ L_3E33:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0x12                            ; CA 12 00
+; Description (heuristic):
+;   Pure computation / dispatcher (79 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_3E45   offset=0x3E45  size=79 instr  segment=seg1.asm
 ;
@@ -8960,6 +9285,9 @@ L_3ED4:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     0xa                             ; C2 0A 00
+; Description (heuristic):
+;   Pure computation / dispatcher (58 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_3EDE   offset=0x3EDE  size=58 instr  segment=seg1.asm
 ;
@@ -9042,6 +9370,9 @@ L_3F49:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     8                               ; C2 08 00
+; Description (heuristic):
+;   Internal helper (16 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_3F53   offset=0x3F53  size=16 instr  segment=seg1.asm
 ;
@@ -9072,6 +9403,10 @@ L_3F60:
 ;   [fall-through exit] L_3F72
 L_3F72:
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (59 instructions, no FAR API calls).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_3F73   offset=0x3F73  size=59 instr  segment=seg1.asm
 ;
@@ -9154,6 +9489,10 @@ L_3FEF:
 ;   [conditional branch target (if/else)] L_3FF1
 L_3FF1:
         call    L_4081                          ; E8 8D 00
+; Description (heuristic):
+;   Pure computation / dispatcher (64 instructions, no FAR API calls).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_3FF4   offset=0x3FF4  size=64 instr  segment=seg1.asm
 ;
@@ -9246,6 +9585,9 @@ L_4055:
         push    si                              ; 56
         lcall   0, 0x378c                       ; 9A 8C 37 00 00
         mov     ax, si                          ; 8B C6
+; Description (heuristic):
+;   Internal helper (6 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_4071   offset=0x4071  size=6 instr  segment=seg1.asm
 ;
@@ -9260,6 +9602,9 @@ L_4071:
         mov     word ptr [0x3b9a], ax           ; A3 9A 3B
         mov     word ptr [0x3b9c], dx           ; 89 16 9C 3B
         ret                                     ; C3
+; Description (heuristic):
+;   Internal helper (11 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_4081   offset=0x4081  size=11 instr  segment=seg1.asm
 ;
@@ -9281,6 +9626,9 @@ L_4081:
 ;   [error/early exit] L_409A
 L_409A:
         ret                                     ; C3
+; Description (heuristic):
+;   Internal helper (1 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_409B   offset=0x409B  size=1 instr  segment=seg1.asm
 ;
@@ -9290,6 +9638,9 @@ L_409A:
 ;   [sub-routine] L_409B
 L_409B:
         mov     ax, 0x4200                      ; B8 00 42
+; Description (heuristic):
+;   Pure computation / dispatcher (189 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_409E   offset=0x409E  size=189 instr  segment=seg1.asm
 ;
@@ -9529,6 +9880,10 @@ L_4246:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0xc                             ; CA 0C 00
+; Description (heuristic):
+;   Internal helper (9 instructions).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_4253   offset=0x4253  size=9 instr  segment=seg1.asm
 ;
@@ -9548,6 +9903,9 @@ L_4253:
 L_4261:
         pop     ax                              ; 58
         jmp     L_416B                          ; E9 06 FF
+; Description (heuristic):
+;   Pure computation / dispatcher (812 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_4265   offset=0x4265  size=812 instr  segment=seg1.asm
 ;
@@ -10539,6 +10897,9 @@ L_4A6B:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    4                               ; CA 04 00
+; Description (heuristic):
+;   Pure computation / dispatcher (43 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_4A7B   offset=0x4A7B  size=43 instr  segment=seg1.asm
 ;
@@ -10610,6 +10971,9 @@ L_4AE9:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Internal helper (9 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_4AED   offset=0x4AED  size=9 instr  segment=seg1.asm
 ;
@@ -10628,6 +10992,9 @@ L_4AED:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     4                               ; C2 04 00
+; Description (heuristic):
+;   Internal helper (7 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_4B00   offset=0x4B00  size=7 instr  segment=seg1.asm
 ;
@@ -10643,6 +11010,9 @@ L_4B00:
         mov     dx, word ptr [0x7a]             ; 8B 16 7A 00
         pop     ds                              ; 1F
         ret                                     ; C3
+; Description (heuristic):
+;   Internal helper (4 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_4B0E   offset=0x4B0E  size=4 instr  segment=seg1.asm
 ;
@@ -10655,6 +11025,9 @@ L_4B0E:
         int     0x21                            ; CD 21
         xchg    al, ah                          ; 86 E0
         ret                                     ; C3
+; Description (heuristic):
+;   Internal helper (11 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_4B15   offset=0x4B15  size=11 instr  segment=seg1.asm
 ;
@@ -10675,6 +11048,9 @@ L_4B15:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     4                               ; C2 04 00
+; Description (heuristic):
+;   Internal helper (6 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_4B2D   offset=0x4B2D  size=6 instr  segment=seg1.asm
 ;
@@ -10689,6 +11065,9 @@ L_4B2D:
         and     ax, 3                           ; 25 03 00
         inc     ax                              ; 40
         ret                                     ; C3
+; Description (heuristic):
+;   Internal helper (12 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_4B38   offset=0x4B38  size=12 instr  segment=seg1.asm
 ;
@@ -10712,6 +11091,9 @@ L_4B47:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     2                               ; C2 02 00
+; Description (heuristic):
+;   Internal helper (4 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_4B4E   offset=0x4B4E  size=4 instr  segment=seg1.asm
 ;
@@ -10724,6 +11106,9 @@ L_4B4E:
         int     0x21                            ; CD 21
         xor     ah, ah                          ; 32 E4
         ret                                     ; C3
+; Description (heuristic):
+;   Internal helper (9 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_4B55   offset=0x4B55  size=9 instr  segment=seg1.asm
 ;
@@ -10743,6 +11128,9 @@ L_4B55:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     2                               ; C2 02 00
+; Description (heuristic):
+;   Internal helper (12 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_4B67   offset=0x4B67  size=12 instr  segment=seg1.asm
 ;
@@ -10766,6 +11154,9 @@ L_4B77:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     2                               ; C2 02 00
+; Description (heuristic):
+;   Internal helper (3 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_4B7D   offset=0x4B7D  size=3 instr  segment=seg1.asm
 ;
@@ -10778,6 +11169,9 @@ L_4B7D:
         mov     ah, 0xd                         ; B4 0D
         int     0x21                            ; CD 21
         ret                                     ; C3
+; Description (heuristic):
+;   Internal helper (17 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_4B82   offset=0x4B82  size=17 instr  segment=seg1.asm
 ;
@@ -10804,6 +11198,9 @@ L_4B82:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     6                               ; C2 06 00
+; Description (heuristic):
+;   Pure computation / dispatcher (24 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_4BA2   offset=0x4BA2  size=24 instr  segment=seg1.asm
 ;
@@ -10839,6 +11236,9 @@ L_4BC3:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     4                               ; C2 04 00
+; Description (heuristic):
+;   Pure computation / dispatcher (22 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_4BCC   offset=0x4BCC  size=22 instr  segment=seg1.asm
 ;
@@ -10870,6 +11270,9 @@ L_4BCC:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     0xa                             ; C2 0A 00
+; Description (heuristic):
+;   Pure computation / dispatcher (22 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_4BF4   offset=0x4BF4  size=22 instr  segment=seg1.asm
 ;
@@ -10901,6 +11304,9 @@ L_4BF4:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     0xa                             ; C2 0A 00
+; Description (heuristic):
+;   Pure computation / dispatcher (85 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_4C1C   offset=0x4C1C  size=85 instr  segment=seg1.asm
 ;
@@ -11008,6 +11414,9 @@ L_4CBB:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     0xc                             ; C2 0C 00
+; Description (heuristic):
+;   Pure computation / dispatcher (28 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_4CDF   offset=0x4CDF  size=28 instr  segment=seg1.asm
 ;
@@ -11057,6 +11466,9 @@ L_4D1A:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     2                               ; C2 02 00
+; Description (heuristic):
+;   Pure computation / dispatcher (63 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_4D20   offset=0x4D20  size=63 instr  segment=seg1.asm
 ;
@@ -11137,6 +11549,9 @@ L_4D88:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     4                               ; C2 04 00
+; Description (heuristic):
+;   Pure computation / dispatcher (71 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_4D98   offset=0x4D98  size=71 instr  segment=seg1.asm
 ;
@@ -11230,6 +11645,9 @@ L_4E1E:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     0xc                             ; C2 0C 00
+; Description (heuristic):
+;   Pure computation / dispatcher (55 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_4E26   offset=0x4E26  size=55 instr  segment=seg1.asm
 ;
@@ -11305,6 +11723,9 @@ L_4E98:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     0xa                             ; C2 0A 00
+; Description (heuristic):
+;   Internal helper (12 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_4EA0   offset=0x4EA0  size=12 instr  segment=seg1.asm
 ;
@@ -11329,6 +11750,9 @@ L_4EB2:
 L_4EB9:
         add     ax, word ptr [di + 6]           ; 03 45 06
         ret                                     ; C3
+; Description (heuristic):
+;   Internal helper (9 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_4EBD   offset=0x4EBD  size=9 instr  segment=seg1.asm
 ;
@@ -11347,6 +11771,13 @@ L_4EBD:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     2                               ; C2 02 00
+; Inferred stack frame (pass18, heuristic):
+;   Locals:
+;     [bp-0x1]   WORD      (1 use)
+
+; Description (heuristic):
+;   Pure computation / dispatcher (61 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_4ED4   offset=0x4ED4  size=61 instr  segment=seg1.asm
 ;
@@ -11423,6 +11854,9 @@ L_4F48:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     6                               ; C2 06 00
+; Description (heuristic):
+;   Pure computation / dispatcher (47 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_4F50   offset=0x4F50  size=47 instr  segment=seg1.asm
 ;
@@ -11489,6 +11923,9 @@ L_4FB2:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     8                               ; C2 08 00
+; Description (heuristic):
+;   Pure computation / dispatcher (52 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_4FBA   offset=0x4FBA  size=52 instr  segment=seg1.asm
 ;
@@ -11560,6 +11997,9 @@ L_5025:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     0xa                             ; C2 0A 00
+; Description (heuristic):
+;   Internal helper (17 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_502D   offset=0x502D  size=17 instr  segment=seg1.asm
 ;
@@ -11591,6 +12031,9 @@ L_5039:
 L_5048:
         pop     si                              ; 5E
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (76 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_504A   offset=0x504A  size=76 instr  segment=seg1.asm
 ;
@@ -11699,6 +12142,9 @@ L_50ED:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     6                               ; C2 06 00
+; Description (heuristic):
+;   Pure computation / dispatcher (71 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_50F5   offset=0x50F5  size=71 instr  segment=seg1.asm
 ;
@@ -11794,6 +12240,9 @@ L_5185:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     6                               ; C2 06 00
+; Description (heuristic):
+;   Internal helper (19 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_518D   offset=0x518D  size=19 instr  segment=seg1.asm
 ;
@@ -11826,6 +12275,9 @@ L_51B0:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     2                               ; C2 02 00
+; Description (heuristic):
+;   Internal helper (17 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_51B6   offset=0x51B6  size=17 instr  segment=seg1.asm
 ;
@@ -11858,6 +12310,9 @@ L_51D5:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     2                               ; C2 02 00
+; Description (heuristic):
+;   Internal helper (16 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_51DB   offset=0x51DB  size=16 instr  segment=seg1.asm
 ;
@@ -11885,6 +12340,9 @@ L_51F6:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     6                               ; C2 06 00
+; Description (heuristic):
+;   Internal helper (14 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_51FC   offset=0x51FC  size=14 instr  segment=seg1.asm
 ;
@@ -11910,6 +12368,9 @@ L_5211:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     2                               ; C2 02 00
+; Description (heuristic):
+;   Internal helper (11 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_5217   offset=0x5217  size=11 instr  segment=seg1.asm
 ;
@@ -11932,6 +12393,9 @@ L_5229:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     4                               ; C2 04 00
+; Description (heuristic):
+;   Pure computation / dispatcher (31 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_522F   offset=0x522F  size=31 instr  segment=seg1.asm
 ;
@@ -11980,6 +12444,9 @@ L_5270:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     4                               ; C2 04 00
+; Description (heuristic):
+;   Internal helper (15 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_5276   offset=0x5276  size=15 instr  segment=seg1.asm
 ;
@@ -12006,6 +12473,9 @@ L_5290:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     2                               ; C2 02 00
+; Description (heuristic):
+;   Internal helper (14 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_5296   offset=0x5296  size=14 instr  segment=seg1.asm
 ;
@@ -12032,6 +12502,9 @@ L_52B0:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     8                               ; C2 08 00
+; Description (heuristic):
+;   Internal helper (14 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_52B6   offset=0x52B6  size=14 instr  segment=seg1.asm
 ;
@@ -12057,6 +12530,9 @@ L_52CB:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     8                               ; C2 08 00
+; Description (heuristic):
+;   Internal helper (14 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_52D2   offset=0x52D2  size=14 instr  segment=seg1.asm
 ;
@@ -12082,6 +12558,9 @@ L_52E7:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     8                               ; C2 08 00
+; Description (heuristic):
+;   Internal helper (13 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_52EE   offset=0x52EE  size=13 instr  segment=seg1.asm
 ;
@@ -12106,6 +12585,9 @@ L_5302:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     2                               ; C2 02 00
+; Description (heuristic):
+;   Pure computation / dispatcher (62 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_530A   offset=0x530A  size=62 instr  segment=seg1.asm
 ;
@@ -12191,6 +12673,9 @@ L_5376:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     0xc                             ; C2 0C 00
+; Description (heuristic):
+;   Pure computation / dispatcher (34 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_5388   offset=0x5388  size=34 instr  segment=seg1.asm
 ;
@@ -12238,6 +12723,9 @@ L_53C4:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     2                               ; C2 02 00
+; Description (heuristic):
+;   Internal helper (11 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_53CC   offset=0x53CC  size=11 instr  segment=seg1.asm
 ;
@@ -12260,6 +12748,9 @@ L_53DE:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     2                               ; C2 02 00
+; Description (heuristic):
+;   Pure computation / dispatcher (175 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_53E4   offset=0x53E4  size=175 instr  segment=seg1.asm
 ;
@@ -12491,6 +12982,9 @@ L_5540:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     4                               ; C2 04 00
+; Description (heuristic):
+;   Internal helper (6 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_5549   offset=0x5549  size=6 instr  segment=seg1.asm
 ;
@@ -12509,6 +13003,9 @@ L_554D:
 ;   [error/early exit] L_5553
 L_5553:
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (27 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_5554   offset=0x5554  size=27 instr  segment=seg1.asm
 ;
@@ -12545,6 +13042,9 @@ L_5554:
         pop     di                              ; 5F
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (29 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_5583   offset=0x5583  size=29 instr  segment=seg1.asm
 ;
@@ -12587,6 +13087,9 @@ L_55B0:
         pop     di                              ; 5F
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (45 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_55B6   offset=0x55B6  size=45 instr  segment=seg1.asm
 ;
@@ -12655,6 +13158,9 @@ L_5600:
         pop     di                              ; 5F
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (21 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_5606   offset=0x5606  size=21 instr  segment=seg1.asm
 ;
@@ -12685,6 +13191,9 @@ L_5606:
         pop     di                              ; 5F
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Internal helper (16 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_5629   offset=0x5629  size=16 instr  segment=seg1.asm
 ;
@@ -12710,6 +13219,10 @@ L_5629:
         pop     di                              ; 5F
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (7046 instructions, no FAR API calls).
+;   Interrupt handler.
+
 ;-------------------------------------------------------------------------
 ; sub_5642   offset=0x5642  size=7046 instr  segment=seg1.asm
 ;

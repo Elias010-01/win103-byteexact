@@ -27,6 +27,9 @@
 
 WRITE_TEXT SEGMENT BYTE PUBLIC 'CODE'
 
+; Description (heuristic):
+;   Mixed routine using: GETKEYSTATE.
+
 ;-------------------------------------------------------------------------
 ; sub_0000   offset=0x0000  size=226 instr  segment=seg38.asm
 ;
@@ -366,6 +369,9 @@ L_028C:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Description (heuristic):
+;   Mixed routine using: GETKEYSTATE.
+
 ;-------------------------------------------------------------------------
 ; sub_0297   offset=0x0297  size=596 instr  segment=seg38.asm
 ;
@@ -1172,6 +1178,10 @@ L_090E:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Description (heuristic):
+;   Pure computation / dispatcher (93 instructions, no FAR API calls).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_091B   offset=0x091B  size=93 instr  segment=seg38.asm
 ;

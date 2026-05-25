@@ -34,6 +34,9 @@
 
 GDI_TEXT SEGMENT BYTE PUBLIC 'CODE'
 
+; Description (heuristic):
+;   Mixed routine using: FATALEXIT, FREERESOURCE, GLOBALFREE (+7 more).
+
 ;-------------------------------------------------------------------------
 ; sub_0000   offset=0x0000  size=244 instr  segment=seg6.asm
 ;
@@ -770,6 +773,9 @@ L_0597:
         retf    4                               ; CA 04 00
 ADDFONTRESOURCE ENDP
 
+; Description (heuristic):
+;   Mixed routine using: ADDATOM.
+
 ;-------------------------------------------------------------------------
 ; sub_05A4   offset=0x05A4  size=81 instr  segment=seg6.asm
 ;
@@ -1032,6 +1038,13 @@ L_0797:
         retf    4                               ; CA 04 00
 REMOVEFONTRESOURCE ENDP
 
+; Inferred stack frame (pass18, heuristic):
+;   Locals:
+;     [bp-0x6]   PSTR      (1 use)
+
+; Description (heuristic):
+;   Allocation / initialization routine (4 alloc APIs).
+
 ;-------------------------------------------------------------------------
 ; sub_07A3   offset=0x07A3  size=109 instr  segment=seg6.asm
 ;
@@ -1191,6 +1204,9 @@ L_08C3:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     4                               ; C2 04 00
+; Description (heuristic):
+;   Allocation / initialization routine (2 alloc APIs).
+
 ;-------------------------------------------------------------------------
 ; sub_08E4   offset=0x08E4  size=92 instr  segment=seg6.asm
 ;
@@ -1326,6 +1342,14 @@ L_09C5:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Inferred stack frame (pass18, heuristic):
+;   Locals:
+;     [bp-0x6]   PSTR      (1 use)
+
+; Description (heuristic):
+;   Allocation / initialization routine (2 alloc APIs).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_09D1   offset=0x09D1  size=36 instr  segment=seg6.asm
 ;

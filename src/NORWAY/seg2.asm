@@ -156,6 +156,9 @@ L_00FD:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    8                               ; CA 08 00
+; Description (heuristic):
+;   Pure computation / dispatcher (21 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_010A   offset=0x010A  size=21 instr  segment=seg2.asm
 ;
@@ -192,6 +195,10 @@ L_010A:
         call    L_013A                          ; E8 04 00
         mov     ah, 0x40                        ; B4 40
         mov     bl, 0x14                        ; B3 14
+; Description (heuristic):
+;   Pure computation / dispatcher (138 instructions, no FAR API calls).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_013A   offset=0x013A  size=138 instr  segment=seg2.asm
 ;
@@ -348,6 +355,10 @@ L_0200:
         outsb   dx, byte ptr [si]               ; 6E
         mov     dl, 0x5f                        ; B2 5F
         pop     di                              ; 5F
+; Description (heuristic):
+;   Pure computation / dispatcher (27 instructions, no FAR API calls).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0222   offset=0x0222  size=27 instr  segment=seg2.asm
 ;
@@ -391,6 +402,9 @@ L_024D:
         or      al, al                          ; 0A C0
         jne     L_0244                          ; 75 F2
         jmp     L_0235                          ; EB E1
+; Description (heuristic):
+;   Pure computation / dispatcher (191 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0254   offset=0x0254  size=191 instr  segment=seg2.asm
 ;
@@ -652,6 +666,9 @@ L_0405:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0xe                             ; CA 0E 00
+; Description (heuristic):
+;   Internal helper (14 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_0412   offset=0x0412  size=14 instr  segment=seg2.asm
 ;
@@ -678,6 +695,9 @@ L_0412:
         pushf                                   ; 9C
         lcall   [0x14]                          ; FF 1E 14 00
         ret                                     ; C3
+; Description (heuristic):
+;   Internal helper (10 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_0431   offset=0x0431  size=10 instr  segment=seg2.asm
 ;

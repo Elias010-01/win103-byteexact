@@ -34,6 +34,9 @@
 
 WRITE_TEXT SEGMENT BYTE PUBLIC 'CODE'
 
+; Description (heuristic):
+;   Thin wrapper around DELETEOBJECT(hObj) -> BOOL.
+
 ;-------------------------------------------------------------------------
 ; sub_0000   offset=0x0000  size=20 instr  segment=seg72.asm
 ;
@@ -68,6 +71,9 @@ L_0026:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf                                    ; CB
+; Description (heuristic):
+;   Drawing routine (4 GDI APIs).
+
 ;-------------------------------------------------------------------------
 ; sub_002F   offset=0x002F  size=745 instr  segment=seg72.asm
 ;
@@ -1103,6 +1109,9 @@ L_0859:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    6                               ; CA 06 00
+; Description (heuristic):
+;   Pure computation / dispatcher (278 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0865   offset=0x0865  size=278 instr  segment=seg72.asm
 ;
@@ -1436,6 +1445,9 @@ L_0AB9:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Description (heuristic):
+;   Pure computation / dispatcher (23 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0B0A   offset=0x0B0A  size=23 instr  segment=seg72.asm
 ;

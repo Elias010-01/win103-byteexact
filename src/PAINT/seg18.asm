@@ -77,6 +77,10 @@ PAINT_TEXT SEGMENT BYTE PUBLIC 'CODE'
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    8                               ; CA 08 00
+; Description (heuristic):
+;   Mixed routine using: GETSTOCKOBJECT, MULDIV, SELECTOBJECT.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_004F   offset=0x004F  size=59 instr  segment=seg18.asm
 ;
@@ -157,6 +161,14 @@ L_004F:
         cmp     word ptr [bp + 6], 0            ; 83 7E 06 00
         jne     L_0113                          ; 75 03
         jmp     L_0269                          ; E9 56 01
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0xa]  HDC       (2 uses)
+
+; Description (heuristic):
+;   Mixed routine using: ELLIPSE, GETBKMODE, MULDIV (+3 more).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0113   offset=0x0113  size=109 instr  segment=seg18.asm
 ;
@@ -309,6 +321,13 @@ L_0269:
         cmp     word ptr [bp + 8], 0            ; 83 7E 08 00
         je      L_0272                          ; 74 03
         jmp     L_035B                          ; E9 E9 00
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0xa]  HDC       (2 uses)
+
+; Description (heuristic):
+;   Mixed routine using: ELLIPSE, MULDIV, SETROP2.
+
 ;-------------------------------------------------------------------------
 ; sub_0272   offset=0x0272  size=77 instr  segment=seg18.asm
 ;

@@ -132,6 +132,13 @@ L_00CD:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x4]  HANDLE    (1 use)
+
+; Description (heuristic):
+;   Mixed routine using: CREATEBITMAP, CREATEPEN, GETSTOCKOBJECT (+1 more).
+
 ;-------------------------------------------------------------------------
 ; sub_00DB   offset=0x00DB  size=74 instr  segment=seg3.asm
 ;
@@ -268,6 +275,9 @@ L_017B:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     2                               ; C2 02 00
+; Description (heuristic):
+;   Mixed routine using: BITBLT, DELETEDC, GETOBJECT (+3 more).
+
 ;-------------------------------------------------------------------------
 ; sub_0181   offset=0x0181  size=266 instr  segment=seg3.asm
 ;
@@ -695,6 +705,13 @@ L_0424:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     2                               ; C2 02 00
+; Inferred stack frame (pass18, heuristic):
+;   Locals:
+;     [bp-0x4]   HDC       (1 use)
+
+; Description (heuristic):
+;   Mixed routine using: DELETEDC, GETSTOCKOBJECT, PATBLT (+1 more).
+
 ;-------------------------------------------------------------------------
 ; sub_042C   offset=0x042C  size=115 instr  segment=seg3.asm
 ;
@@ -872,6 +889,9 @@ L_053F:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Mixed routine using: LOADCURSOR.
+
 ;-------------------------------------------------------------------------
 ; sub_054B   offset=0x054B  size=52 instr  segment=seg3.asm
 ;
@@ -952,6 +972,9 @@ L_05A6:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     2                               ; C2 02 00
+; Description (heuristic):
+;   Pure computation / dispatcher (87 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_05DB   offset=0x05DB  size=87 instr  segment=seg3.asm
 ;
@@ -1061,6 +1084,9 @@ L_05DB:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Mixed routine using: SETRECT.
+
 ;-------------------------------------------------------------------------
 ; sub_068B   offset=0x068B  size=34 instr  segment=seg3.asm
 ;
@@ -1107,6 +1133,9 @@ L_068B:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     0x12                            ; C2 12 00
+; Description (heuristic):
+;   Mixed routine using: DELETEDC, STRETCHBLT.
+
 ;-------------------------------------------------------------------------
 ; sub_06E3   offset=0x06E3  size=53 instr  segment=seg3.asm
 ;
@@ -1184,6 +1213,14 @@ L_0764:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Inferred stack frame (pass18, heuristic):
+;   Locals:
+;     [bp-0x2]   HBITMAP   (1 use)
+;     [bp-0x1c]   HDC       (1 use)
+
+; Description (heuristic):
+;   Mixed routine using: CREATEBITMAP, CREATECOMPATIBLEDC, CREATEPATTERNBRUSH (+5 more).
+
 ;-------------------------------------------------------------------------
 ; sub_0768   offset=0x0768  size=349 instr  segment=seg3.asm
 ;

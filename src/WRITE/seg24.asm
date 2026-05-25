@@ -116,6 +116,14 @@ L_0093:
 ;   [conditional branch target (if/else)] L_00A0
 L_00A0:
         jmp     L_0184                          ; E9 E1 00
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0xe]  HWND      (1 use)
+
+; Description (heuristic):
+;   Mixed routine using: ESCAPE, CHECKDLGBUTTON, SETDLGITEMINT (+1 more).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_00A3   offset=0x00A3  size=61 instr  segment=seg24.asm
 ;
@@ -207,6 +215,14 @@ L_0124:
         push    ax                              ; 50
         call    far USER.CHECKDLGBUTTON         ; 9A 66 01 00 00 [FIXUP]
         jmp     L_0159                          ; EB 15
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0xe]  HWND      (1 use)
+
+; Description (heuristic):
+;   Mixed routine using: CHECKDLGBUTTON, ENABLEWINDOW, GETDLGITEM (+1 more).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0144   offset=0x0144  size=128 instr  segment=seg24.asm
 ;
@@ -391,6 +407,14 @@ L_0275:
         cmp     word ptr [bp + 8], 0x300        ; 81 7E 08 00 03
         je      L_0293                          ; 74 03
         jmp     L_0184                          ; E9 F1 FE
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x6]  HWND      (1 use)
+
+; Description (heuristic):
+;   Mixed routine using: CHECKDLGBUTTON, SENDMESSAGE.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0293   offset=0x0293  size=285 instr  segment=seg24.asm
 ;

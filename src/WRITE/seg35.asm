@@ -174,6 +174,14 @@ L_0108:
 ;   [conditional branch target (if/else)] L_0110
 L_0110:
         jmp     L_00CE                          ; EB BC
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0xe]  HWND      (1 use)
+
+; Description (heuristic):
+;   Cleanup / deallocation routine.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0112   offset=0x0112  size=234 instr  segment=seg35.asm
 ;
@@ -494,6 +502,17 @@ L_036B:
 ;   [conditional branch target (if/else)] L_037B
 L_037B:
         jmp     L_0490                          ; E9 12 01
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0xe]  HWND      (1 use)
+;   Locals:
+;     [bp-0x48]   INT       (1 use)
+;     [bp-0x4c]   INT       (1 use)
+
+; Description (heuristic):
+;   Mixed routine using: LSTRLEN, DLGDIRLIST, DLGDIRSELECT (+2 more).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_037E   offset=0x037E  size=85 instr  segment=seg35.asm
 ;
@@ -633,6 +652,13 @@ L_0430:
         or      ax, ax                          ; 0B C0
         jne     L_0455                          ; 75 03
         jmp     L_01B2                          ; E9 5D FD
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0xe]  HWND      (1 use)
+
+; Description (heuristic):
+;   Small helper using 2 API(s): GETDLGITEM, SETDLGITEMTEXT.
+
 ;-------------------------------------------------------------------------
 ; sub_0455   offset=0x0455  size=30 instr  segment=seg35.asm
 ;
@@ -695,6 +721,10 @@ L_0493:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0xa                             ; CA 0A 00
+; Description (heuristic):
+;   Cleanup / deallocation routine.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_049F   offset=0x049F  size=145 instr  segment=seg35.asm
 ;
@@ -888,6 +918,10 @@ L_05E9:
         push    ax                              ; 50
         lea     ax, [bp - 0x116]                ; 8D 86 EA FE
         jmp     L_062F                          ; EB 0A
+; Description (heuristic):
+;   Mixed routine using: CHECKDLGBUTTON, ENABLEWINDOW, GETDLGITEM (+2 more).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0625   offset=0x0625  size=133 instr  segment=seg35.asm
 ;
@@ -1091,6 +1125,13 @@ L_078D:
 ;   [conditional branch target (if/else)] L_0795
 L_0795:
         jmp     L_0743                          ; EB AC
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0xe]  HWND      (1 use)
+
+; Description (heuristic):
+;   Mixed routine using: WRITEPROFILESTRING, CHECKDLGBUTTON, ENABLEWINDOW (+7 more).
+
 ;-------------------------------------------------------------------------
 ; sub_0797   offset=0x0797  size=349 instr  segment=seg35.asm
 ;
@@ -1582,6 +1623,9 @@ L_0B48:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0xa                             ; CA 0A 00
+; Description (heuristic):
+;   Pure computation / dispatcher (58 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0B53   offset=0x0B53  size=58 instr  segment=seg35.asm
 ;
@@ -1655,6 +1699,10 @@ L_0BA6:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf                                    ; CB
+; Description (heuristic):
+;   Pure computation / dispatcher (24 instructions, no FAR API calls).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0BD5   offset=0x0BD5  size=24 instr  segment=seg35.asm
 ;
@@ -1687,6 +1735,9 @@ L_0BD5:
         push    ax                              ; 50
         call    far _entry_196                  ; 9A 15 08 00 00 [FIXUP]
         jmp     L_0C4E                          ; EB 46
+; Description (heuristic):
+;   Pure computation / dispatcher (30 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0C08   offset=0x0C08  size=30 instr  segment=seg35.asm
 ;
@@ -1729,6 +1780,13 @@ L_0C4E:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    6                               ; CA 06 00
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x8]  HWND      (1 use)
+
+; Description (heuristic):
+;   Mixed routine using: ENABLEWINDOW, SENDMESSAGE.
+
 ;-------------------------------------------------------------------------
 ; sub_0C5A   offset=0x0C5A  size=68 instr  segment=seg35.asm
 ;
@@ -1820,6 +1878,9 @@ L_0CD4:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Description (heuristic):
+;   Mixed routine using: GLOBALFREE, GLOBALLOCK, GLOBALUNLOCK (+1 more).
+
 ;-------------------------------------------------------------------------
 ; sub_0CEB   offset=0x0CEB  size=281 instr  segment=seg35.asm
 ;
@@ -2188,6 +2249,9 @@ L_0FAA:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    4                               ; CA 04 00
+; Description (heuristic):
+;   Mixed routine using: MAKEPROCINSTANCE, ENUMCHILDWINDOWS, ENUMWINDOWS (+1 more).
+
 ;-------------------------------------------------------------------------
 ; sub_0FB6   offset=0x0FB6  size=120 instr  segment=seg35.asm
 ;
@@ -2352,6 +2416,9 @@ L_10C8:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    6                               ; CA 06 00
+; Description (heuristic):
+;   Mixed routine using: GETCLASSNAME.
+
 ;-------------------------------------------------------------------------
 ; sub_10D3   offset=0x10D3  size=39 instr  segment=seg35.asm
 ;
@@ -2407,6 +2474,9 @@ L_1118:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    4                               ; CA 04 00
+; Description (heuristic):
+;   Pure computation / dispatcher (75 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_1124   offset=0x1124  size=75 instr  segment=seg35.asm
 ;
@@ -2514,6 +2584,9 @@ L_11D9:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf                                    ; CB
+; Description (heuristic):
+;   Mixed routine using: GETCODEHANDLE.
+
 ;-------------------------------------------------------------------------
 ; sub_11E2   offset=0x11E2  size=44 instr  segment=seg35.asm
 ;
@@ -2569,6 +2642,9 @@ L_11E2:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf                                    ; CB
+; Description (heuristic):
+;   Pure computation / dispatcher (34 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_1243   offset=0x1243  size=34 instr  segment=seg35.asm
 ;
@@ -2615,6 +2691,9 @@ L_1263:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    4                               ; CA 04 00
+; Description (heuristic):
+;   Pure computation / dispatcher (66 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_1285   offset=0x1285  size=66 instr  segment=seg35.asm
 ;
@@ -2710,6 +2789,9 @@ L_1326:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     4                               ; C2 04 00
+; Description (heuristic):
+;   Internal helper (19 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_132E   offset=0x132E  size=19 instr  segment=seg35.asm
 ;
@@ -2749,6 +2831,9 @@ L_134E:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     2                               ; C2 02 00
+; Description (heuristic):
+;   Pure computation / dispatcher (41 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_1355   offset=0x1355  size=41 instr  segment=seg35.asm
 ;
@@ -2806,6 +2891,9 @@ L_1389:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    4                               ; CA 04 00
+; Description (heuristic):
+;   Pure computation / dispatcher (30 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_13B1   offset=0x13B1  size=30 instr  segment=seg35.asm
 ;
@@ -2851,6 +2939,9 @@ L_13E2:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Description (heuristic):
+;   Pure computation / dispatcher (30 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_13EE   offset=0x13EE  size=30 instr  segment=seg35.asm
 ;
@@ -2890,6 +2981,9 @@ L_13EE:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Description (heuristic):
+;   Pure computation / dispatcher (84 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_1435   offset=0x1435  size=84 instr  segment=seg35.asm
 ;
@@ -2998,6 +3092,10 @@ L_14B7:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf                                    ; CB
+; Description (heuristic):
+;   Pure computation / dispatcher (57 instructions, no FAR API calls).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_14EC   offset=0x14EC  size=57 instr  segment=seg35.asm
 ;

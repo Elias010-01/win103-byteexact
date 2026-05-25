@@ -671,6 +671,10 @@ L_04DC:
         retf    8                               ; CA 08 00
 WRITESPOOL ENDP
 
+; Description (heuristic):
+;   File I/O routine (4 file APIs).
+;   Writes to file handle.
+
 ;-------------------------------------------------------------------------
 ; sub_04E9   offset=0x04E9  size=60 instr  segment=seg25.asm
 ;

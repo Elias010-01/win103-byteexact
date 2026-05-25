@@ -34,6 +34,10 @@
 
 CARDFILE_TEXT SEGMENT BYTE PUBLIC 'CODE'
 
+; Description (heuristic):
+;   Mixed routine using: FATALEXIT, INITTASK, WAITEVENT (+10 more).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0000   offset=0x0000  size=137 instr  segment=seg1.asm
 ;
@@ -247,6 +251,16 @@ L_011D:
 L_0160:
         mov     ax, 0x4cff                      ; B8 FF 4C
         int     0x21                            ; CD 21
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x4]  HANDLE    (7 uses)
+;     [bp+0x6]  HANDLE    (3 uses)
+;   Locals:
+;     [bp-0x2]   HANDLE    (2 uses)
+
+; Description (heuristic):
+;   Mixed routine using: GLOBALALLOC, GLOBALCOMPACT, GLOBALFREE (+5 more).
+
 ;-------------------------------------------------------------------------
 ; sub_0165   offset=0x0165  size=130 instr  segment=seg1.asm
 ;
@@ -434,6 +448,9 @@ L_0255:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (59 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_026E   offset=0x026E  size=59 instr  segment=seg1.asm
 ;
@@ -518,6 +535,9 @@ L_02FC:
         inc     bx                              ; 43
         loop    L_02F1                          ; E2 F2
         ret                                     ; C3
+; Description (heuristic):
+;   Internal helper (8 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_0300   offset=0x0300  size=8 instr  segment=seg1.asm
 ;
@@ -537,6 +557,9 @@ L_0300:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
+; Description (heuristic):
+;   Internal helper (6 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_0310   offset=0x0310  size=6 instr  segment=seg1.asm
 ;
@@ -555,6 +578,9 @@ L_0314:
 ;   [error/early exit] L_031A
 L_031A:
         ret                                     ; C3
+; Description (heuristic):
+;   Pure computation / dispatcher (21 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_031B   offset=0x031B  size=21 instr  segment=seg1.asm
 ;
@@ -591,6 +617,9 @@ L_034A:
         mov     ax, word ptr [bp + 4]           ; 8B 46 04
         mov     ah, 0x4c                        ; B4 4C
         int     0x21                            ; CD 21
+; Description (heuristic):
+;   Internal helper (10 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_0351   offset=0x0351  size=10 instr  segment=seg1.asm
 ;
@@ -613,6 +642,9 @@ L_0354:
 ;   [error/early exit] L_0362
 L_0362:
         ret                                     ; C3
+; Description (heuristic):
+;   Internal helper (10 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_0363   offset=0x0363  size=10 instr  segment=seg1.asm
 ;

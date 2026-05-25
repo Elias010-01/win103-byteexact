@@ -153,6 +153,9 @@ L_00E3:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    6                               ; CA 06 00
+; Description (heuristic):
+;   Mixed routine using: SETSCROLLPOS.
+
 ;-------------------------------------------------------------------------
 ; sub_00EF   offset=0x00EF  size=188 instr  segment=seg10.asm
 ;
@@ -373,6 +376,9 @@ L_02EC:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    8                               ; CA 08 00
+; Description (heuristic):
+;   Cleanup / deallocation routine.
+
 ;-------------------------------------------------------------------------
 ; sub_02F7   offset=0x02F7  size=238 instr  segment=seg10.asm
 ;
@@ -692,6 +698,9 @@ L_0572:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    6                               ; CA 06 00
+; Description (heuristic):
+;   Pure computation / dispatcher (56 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_057F   offset=0x057F  size=56 instr  segment=seg10.asm
 ;
@@ -764,6 +773,9 @@ L_05F7:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Description (heuristic):
+;   Pure computation / dispatcher (50 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0603   offset=0x0603  size=50 instr  segment=seg10.asm
 ;
@@ -832,6 +844,9 @@ L_0673:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf                                    ; CB
+; Description (heuristic):
+;   Pure computation / dispatcher (122 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_067C   offset=0x067C  size=122 instr  segment=seg10.asm
 ;
@@ -983,6 +998,9 @@ L_07B7:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    4                               ; CA 04 00
+; Description (heuristic):
+;   Pure computation / dispatcher (101 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_07C3   offset=0x07C3  size=101 instr  segment=seg10.asm
 ;
@@ -1106,6 +1124,10 @@ L_089A:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf                                    ; CB
+; Description (heuristic):
+;   Pure computation / dispatcher (68 instructions, no FAR API calls).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_08A3   offset=0x08A3  size=68 instr  segment=seg10.asm
 ;
@@ -1198,6 +1220,9 @@ L_093E:
         cmp     word ptr [bp - 6], ax           ; 39 46 FA
         jb      L_0989                          ; 72 3B
         jmp     L_08BB                          ; E9 6A FF
+; Description (heuristic):
+;   Pure computation / dispatcher (48 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0951   offset=0x0951  size=48 instr  segment=seg10.asm
 ;
@@ -1269,6 +1294,9 @@ L_09BD:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    4                               ; CA 04 00
+; Description (heuristic):
+;   Pure computation / dispatcher (76 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_09C8   offset=0x09C8  size=76 instr  segment=seg10.asm
 ;
@@ -1362,6 +1390,9 @@ L_0A82:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Description (heuristic):
+;   Pure computation / dispatcher (44 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0A8D   offset=0x0A8D  size=44 instr  segment=seg10.asm
 ;
@@ -1422,6 +1453,9 @@ L_0AE2:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Description (heuristic):
+;   Mixed routine using: SETWINDOWTEXT.
+
 ;-------------------------------------------------------------------------
 ; sub_0AED   offset=0x0AED  size=49 instr  segment=seg10.asm
 ;
@@ -1493,6 +1527,10 @@ L_0B40:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Description (heuristic):
+;   Pure computation / dispatcher (167 instructions, no FAR API calls).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0B62   offset=0x0B62  size=167 instr  segment=seg10.asm
 ;

@@ -34,6 +34,13 @@
 
 NOTEPAD_TEXT SEGMENT BYTE PUBLIC 'CODE'
 
+; Inferred stack frame (pass18, heuristic):
+;   Locals:
+;     [bp-0x6]   HANDLE    (1 use)
+
+; Description (heuristic):
+;   String manipulation routine (2 string APIs).
+
 ;-------------------------------------------------------------------------
 ; sub_0000   offset=0x0000  size=291 instr  segment=seg2.asm
 ;
@@ -472,6 +479,15 @@ L_02BD:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0xa                             ; CA 0A 00
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x4]  HANDLE    (1 use)
+;   Locals:
+;     [bp-0x2]   HANDLE    (1 use)
+
+; Description (heuristic):
+;   Cleanup / deallocation routine.
+
 ;-------------------------------------------------------------------------
 ; sub_02C9   offset=0x02C9  size=50 instr  segment=seg2.asm
 ;
@@ -557,6 +573,9 @@ L_034B:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     2                               ; C2 02 00
+; Description (heuristic):
+;   Mixed routine using: GETPROFILEINT, GETPROFILESTRING.
+
 ;-------------------------------------------------------------------------
 ; sub_0351   offset=0x0351  size=123 instr  segment=seg2.asm
 ;

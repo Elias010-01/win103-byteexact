@@ -153,6 +153,9 @@ L_0114:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    4                               ; CA 04 00
+; Description (heuristic):
+;   Mixed routine using: SETSCROLLPOS.
+
 ;-------------------------------------------------------------------------
 ; sub_0120   offset=0x0120  size=89 instr  segment=seg55.asm
 ;
@@ -268,6 +271,9 @@ L_01F0:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf                                    ; CB
+; Description (heuristic):
+;   Pure computation / dispatcher (274 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_01FA   offset=0x01FA  size=274 instr  segment=seg55.asm
 ;
@@ -610,6 +616,9 @@ L_049B:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Description (heuristic):
+;   Pure computation / dispatcher (273 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_04A6   offset=0x04A6  size=273 instr  segment=seg55.asm
 ;
@@ -960,6 +969,9 @@ L_07DA:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    4                               ; CA 04 00
+; Description (heuristic):
+;   Pure computation / dispatcher (41 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_07E6   offset=0x07E6  size=41 instr  segment=seg55.asm
 ;
@@ -1016,6 +1028,9 @@ L_0824:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Description (heuristic):
+;   Pure computation / dispatcher (57 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_084A   offset=0x084A  size=57 instr  segment=seg55.asm
 ;
@@ -1092,6 +1107,9 @@ L_08BE:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    4                               ; CA 04 00
+; Description (heuristic):
+;   Internal helper (20 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_08D5   offset=0x08D5  size=20 instr  segment=seg55.asm
 ;
@@ -1120,6 +1138,9 @@ L_08D5:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf                                    ; CB
+; Description (heuristic):
+;   Pure computation / dispatcher (26 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_08FC   offset=0x08FC  size=26 instr  segment=seg55.asm
 ;
@@ -1160,6 +1181,10 @@ L_0929:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    4                               ; CA 04 00
+; Description (heuristic):
+;   Pure computation / dispatcher (52 instructions, no FAR API calls).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0934   offset=0x0934  size=52 instr  segment=seg55.asm
 ;

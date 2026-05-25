@@ -142,6 +142,9 @@ L_0096:
         push    word ptr [bp - 0xc]             ; FF 76 F4
         call    far USER.SETCLIPBOARDDATA       ; 9A FF FF 00 00 [FIXUP]
         jmp     L_00E8                          ; EB 10
+; Description (heuristic):
+;   Cleanup / deallocation routine.
+
 ;-------------------------------------------------------------------------
 ; sub_00D8   offset=0x00D8  size=69 instr  segment=seg4.asm
 ;
@@ -250,6 +253,14 @@ L_0185:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
+; Inferred stack frame (pass18, heuristic):
+;   Locals:
+;     [bp-0x2]   HCURSOR   (1 use)
+
+; Description (heuristic):
+;   Mixed routine using: GETTICKCOUNT, GETTIMERRESOLUTION, LOADCURSOR (+1 more).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_0190   offset=0x0190  size=128 instr  segment=seg4.asm
 ;

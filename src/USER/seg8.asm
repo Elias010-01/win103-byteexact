@@ -30,6 +30,9 @@
 
 USER_TEXT SEGMENT BYTE PUBLIC 'CODE'
 
+; Description (heuristic):
+;   Pure computation / dispatcher (31 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0000   offset=0x0000  size=31 instr  segment=seg8.asm
 ;
@@ -75,6 +78,9 @@ L_0040:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     4                               ; C2 04 00
+; Description (heuristic):
+;   Pure computation / dispatcher (70 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0048   offset=0x0048  size=70 instr  segment=seg8.asm
 ;
@@ -172,6 +178,9 @@ L_00DB:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     4                               ; C2 04 00
+; Description (heuristic):
+;   Pure computation / dispatcher (153 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_00F9   offset=0x00F9  size=153 instr  segment=seg8.asm
 ;
@@ -358,6 +367,9 @@ L_0279:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0xa                             ; CA 0A 00
+; Description (heuristic):
+;   Pure computation / dispatcher (48 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0285   offset=0x0285  size=48 instr  segment=seg8.asm
 ;
@@ -430,6 +442,9 @@ L_02FD:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     6                               ; C2 06 00
+; Description (heuristic):
+;   Internal helper (18 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_0303   offset=0x0303  size=18 instr  segment=seg8.asm
 ;
@@ -457,6 +472,9 @@ L_0303:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     2                               ; C2 02 00
+; Description (heuristic):
+;   Pure computation / dispatcher (200 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0331   offset=0x0331  size=200 instr  segment=seg8.asm
 ;
@@ -765,6 +783,9 @@ L_05C1:
         retf    0xa                             ; CA 0A 00
 CONTSCROLL ENDP
 
+; Description (heuristic):
+;   Pure computation / dispatcher (72 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_05CD   offset=0x05CD  size=72 instr  segment=seg8.asm
 ;
@@ -859,6 +880,9 @@ L_0673:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0xa                             ; CA 0A 00
+; Description (heuristic):
+;   Pure computation / dispatcher (50 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_067E   offset=0x067E  size=50 instr  segment=seg8.asm
 ;
@@ -926,6 +950,10 @@ L_069E:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    6                               ; CA 06 00
+; Description (heuristic):
+;   Mixed routine using: PATBLT, SELECTOBJECT, STRETCHBLT.
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_06ED   offset=0x06ED  size=166 instr  segment=seg8.asm
 ;
@@ -1154,6 +1182,15 @@ L_083B:
         push    word ptr [bp - 0x1c]            ; FF 76 E4
         push    word ptr [0x480]                ; FF 36 80 04
         jmp     L_092B                          ; EB 58
+; Inferred stack frame (pass18, heuristic):
+;   Arguments:
+;     [bp+0x4]  HDC       (1 use)
+;   Locals:
+;     [bp-0xa]   INT       (2 uses)
+
+; Description (heuristic):
+;   Mixed routine using: PATBLT, SELECTOBJECT, STRETCHBLT.
+
 ;-------------------------------------------------------------------------
 ; sub_08D3   offset=0x08D3  size=69 instr  segment=seg8.asm
 ;
@@ -1262,6 +1299,9 @@ L_0983:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     4                               ; C2 04 00
+; Description (heuristic):
+;   Internal helper (14 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_098B   offset=0x098B  size=14 instr  segment=seg8.asm
 ;
@@ -1287,6 +1327,9 @@ L_09A6:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     2                               ; C2 02 00
+; Description (heuristic):
+;   Pure computation / dispatcher (35 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_09AC   offset=0x09AC  size=35 instr  segment=seg8.asm
 ;
@@ -1334,6 +1377,9 @@ L_09AC:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     4                               ; C2 04 00
+; Description (heuristic):
+;   Pure computation / dispatcher (96 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_09FD   offset=0x09FD  size=96 instr  segment=seg8.asm
 ;
@@ -1457,6 +1503,9 @@ L_0AE3:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     6                               ; C2 06 00
+; Description (heuristic):
+;   Internal helper (18 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_0AEB   offset=0x0AEB  size=18 instr  segment=seg8.asm
 ;
@@ -1486,6 +1535,9 @@ L_0AEB:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     2                               ; C2 02 00
+; Description (heuristic):
+;   Pure computation / dispatcher (26 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0B15   offset=0x0B15  size=26 instr  segment=seg8.asm
 ;
@@ -1520,6 +1572,9 @@ L_0B15:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    6                               ; CA 06 00
+; Description (heuristic):
+;   Pure computation / dispatcher (27 instructions, no FAR API calls).
+
 ;-------------------------------------------------------------------------
 ; sub_0B4A   offset=0x0B4A  size=27 instr  segment=seg8.asm
 ;
@@ -1555,6 +1610,9 @@ L_0B4A:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    8                               ; CA 08 00
+; Description (heuristic):
+;   Mixed routine using: SELECTOBJECT.
+
 ;-------------------------------------------------------------------------
 ; sub_0B82   offset=0x0B82  size=39 instr  segment=seg8.asm
 ;
@@ -1621,6 +1679,9 @@ L_0BE3:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     6                               ; C2 06 00
+; Description (heuristic):
+;   Internal helper (11 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_0BEC   offset=0x0BEC  size=11 instr  segment=seg8.asm
 ;
@@ -1645,6 +1706,9 @@ L_0BFF:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     4                               ; C2 04 00
+; Description (heuristic):
+;   Internal helper (11 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_0C05   offset=0x0C05  size=11 instr  segment=seg8.asm
 ;
@@ -2669,6 +2733,10 @@ L_137C:
         pop     bp                              ; 5D
         ret     2                               ; C2 02 00
 SETSCROLLRANGE ENDP
+
+; Description (heuristic):
+;   Pure computation / dispatcher (90 instructions, no FAR API calls).
+;   Tail-calls into another routine.
 
 ;-------------------------------------------------------------------------
 ; sub_1382   offset=0x1382  size=90 instr  segment=seg8.asm

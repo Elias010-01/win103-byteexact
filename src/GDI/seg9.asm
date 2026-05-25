@@ -84,6 +84,9 @@ L_0021:
         mov     ax, word ptr [bp - 0xc]         ; 8B 46 F4
 SETTEXTCHARACTEREXTRA ENDP
 
+; Description (heuristic):
+;   Internal helper (8 instructions).
+
 ;-------------------------------------------------------------------------
 ; sub_0071   offset=0x0071  size=8 instr  segment=seg9.asm
 ;
@@ -398,6 +401,10 @@ L_0279:
         or      ax, ax                          ; 0B C0
         jne     L_028C                          ; 75 03
         jmp     L_065E                          ; E9 D2 03
+; Description (heuristic):
+;   Pure computation / dispatcher (384 instructions, no FAR API calls).
+;   Tail-calls into another routine.
+
 ;-------------------------------------------------------------------------
 ; sub_028C   offset=0x028C  size=384 instr  segment=seg9.asm
 ;
