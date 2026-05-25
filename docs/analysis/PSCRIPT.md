@@ -1,13 +1,13 @@
 # Module `PSCRIPT`
 
 - Functions: **41**
-- Confidence: high=0, medium=15, low=19, unknown=7
+- Confidence: high=1, medium=14, low=19, unknown=7
 
 ## Functions
 
 | Offset | Name | Kind | Instr | Description | Conf |
 |--------|------|------|-------|-------------|------|
-| `0x0473` | `sub_0473` | NEAR | 192 | Dispatcher: cmp+jcc decision table (192 instr). | medium |
+| `0x0473` | `CONTROL` (E) | NEAR | 192 | Dispatcher: cmp+jcc decision table (192 instr). | high |
 | `0x0655` | `sub_0655` | NEAR | 74 | Mid-size function (74 instr, 1 calls). | low |
 | `0x0703` | `sub_0703` | FAR | 298 | Dispatcher: cmp+jcc decision table (298 instr). | medium |
 | `0x0A2D` | `sub_0A2D` | FAR | 229 | Complex function: 229 instructions, 11 calls, 10 branches. | low |
