@@ -29,7 +29,7 @@ SRC = REPO / 'src'
 ORIG = REPO / 'original'
 OUT = REPO / 'state' / 'analyze' / 'pass23'
 
-MAX_INSTRUCTIONS = 25
+MAX_INSTRUCTIONS = 60
 
 
 def parse_def_exports(def_path):
@@ -151,12 +151,21 @@ def parse_proc_blocks(asm_path):
 
 
 def classify_block(body_lines):
-    """Return dict with body analysis."""
+    """Return dict with body analysis.
+
+    Truncates the instruction list at the FIRST retf encountered: code
+    after a retf inside the same PROC FAR block is usually dead data, a
+    fall-through pad, or a secondary entry point, and shouldn't be
+    considered part of this function for byte-exact verification.
+    """
     instructions = []
     has_frame = False
     has_retf = False
     label_offsets = []
+    truncated = False
     for ln in body_lines:
+        if truncated:
+            break
         if LABEL_RE.match(ln):
             m = re.match(r'^L_([0-9A-Fa-f]+):', ln)
             if m:
@@ -170,6 +179,7 @@ def classify_block(body_lines):
                 has_frame = True
             if mnem == 'retf':
                 has_retf = True
+                truncated = True  # stop after the first far return
     return {
         'instructions': instructions,
         'instruction_count': len(instructions),
@@ -217,8 +227,8 @@ def main():
             seg_bytes = get_segment_bytes(exe, seg_num)
             for name, body in parse_proc_blocks(asm_p):
                 info = classify_block(body)
-                if info['has_frame']:
-                    continue
+                # Allow stack-frame functions too: the iterative refinement
+                # in pass24 will handle any encoding quirks via `db` fallback.
                 if not info['has_retf']:
                     continue
                 if info['instruction_count'] == 0:
