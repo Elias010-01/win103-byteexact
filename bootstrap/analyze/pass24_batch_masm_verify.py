@@ -346,9 +346,31 @@ def patch_ambiguous_xchg(asm_lines, byte_seq):
             line_lower = line.lower()
             has_seg = any(s in line_lower for s in
                            ('cs:', 'ds:', 'es:', 'ss:', 'fs:', 'gs:'))
-            if not has_seg:
+            # FS (64h) and GS (65h) are 386+ segment registers. MASM 4.0
+            # doesn't know them, so even if the line has `fs:`/`gs:` we
+            # must db the raw bytes.
+            is_fs_gs = ib[0] in (0x64, 0x65)
+            if not has_seg or is_fs_gs:
                 line = db_directive(
                     ib, f'was {ins.mnemonic} with seg override prefix')
+                replaced = True
+        # 2b) F2/F3 prefix (REP/REPNE/LOCK-like) on an instruction that
+        #     ISN'T a string op. Capstone emits the bare mnemonic without
+        #     a `rep`/`repne`/`repe` keyword in the source line, and MASM
+        #     happily strips the redundant prefix byte. Detect by
+        #     checking the leading byte is F2/F3 and the mnemonic isn't
+        #     a recognised string op.
+        if not replaced and ib and ib[0] in (0xF2, 0xF3):
+            string_ops = {'movsb', 'movsw', 'movsd', 'cmpsb', 'cmpsw',
+                            'scasb', 'scasw', 'stosb', 'stosw', 'lodsb',
+                            'lodsw', 'insb', 'insw', 'outsb', 'outsw'}
+            line_lower = line.lower()
+            has_rep = any(s in line_lower for s in
+                           ('rep ', 'repe ', 'repne ', 'repz ', 'repnz ',
+                            'lock '))
+            if ins.mnemonic not in string_ops and not has_rep:
+                line = db_directive(
+                    ib, f'was {ins.mnemonic} with f2/f3 prefix')
                 replaced = True
         # 3) Instruction Capstone disassembled using 32-bit registers
         #    (eax/ebx/ecx/edx/esp/ebp/esi/edi). This happens when there's
@@ -394,6 +416,34 @@ def patch_ambiguous_xchg(asm_lines, byte_seq):
                 line = db_directive(
                     ib, f'was {ins.mnemonic} {ins.op_str} (FPU - MASM 4.0 reenc)')
                 replaced = True
+        # 6b) Instructions MASM 4.0 doesn't know:
+        #     - int3 (CC) - the canonical mnemonic is `int 3` (CD 03);
+        #       Capstone uses the short form. We pick the original byte.
+        #     - pushaw (60) / popaw (61) - 286+ instructions.
+        #     - ud0 (0F FF) - undefined-instruction trap (Pentium MMX+),
+        #       in 16-bit code this is just data.
+        #     - arpl (63) - 286 protected-mode-only; rarely a real op.
+        #     - bound (62) - 186/286 array index check.
+        #     - enter (C8) / leave (C9) - 186+; .186 covers them but
+        #       Capstone's encoding may differ on edge cases.
+        #     - insb/outsb/insw/outsw (6C-6F) - 186+ port I/O strings.
+        unknown_mnemonics = {
+            'int3', 'ud0', 'ud1', 'ud2',
+            'pushaw', 'popaw', 'pusha', 'popa',
+            'arpl', 'bound',
+        }
+        if not replaced and ins.mnemonic in unknown_mnemonics:
+            line = db_directive(
+                ib, f'was {ins.mnemonic} {ins.op_str} (286+/unknown to MASM 4.0)')
+            replaced = True
+        # 6c) `ptr [...]` standalone (no size keyword) in Capstone's output.
+        #     This happens for `les`/`lds` instructions and similar, where
+        #     Capstone prints `les bx, ptr [bp + 0x10]`. MASM parses
+        #     `ptr` as a symbol name there, leading to wrong encoding.
+        #     The size for les/lds is always dword.
+        if not replaced and ', ptr [' in line.lower():
+            line = re.sub(r',\s*ptr\s*\[', ', dword ptr [', line,
+                          flags=re.IGNORECASE)
         # 7) non-minimal ModRM displacement (disp16 fits in disp8, etc.)
         if not replaced and _shorter_encoding_exists(ib):
             line = db_directive(
