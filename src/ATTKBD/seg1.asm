@@ -1,3 +1,17 @@
+; ======================================================================
+; ATTKBD / seg1.asm   (segment 1 of ATTKBD)
+; ----------------------------------------------------------------------
+; Functions discovered (pass1b):         0
+; Total instructions:                    0
+; 
+; Classification (pass8):
+;   C-origin (high+medium):              0
+;   ASM-origin (high+medium):            0
+;   Unclear:                             0
+;   Tiny / unclassified:                 0
+; 
+; Far API calls in this segment:     0 (0 unique)
+; ======================================================================
 ; AUTO-GENERATED from original ATTKBD segment 1
 ; segment_size=52 bytes, flags=0xf070
 ; mode: humano legible - instrucciones x86 + bytes raw en comentario (autoritativo)
@@ -30,6 +44,7 @@ ATTKBD_TEXT SEGMENT BYTE PUBLIC 'CODE'
         jne     L_0027                          ; 75 06
         mov     byte ptr [0x20], 1              ; C6 06 20 00 01
         nop                                     ; 90
+;   [conditional branch target (if/else)] L_0027
 L_0027:
         xor     ax, ax                          ; 33 C0
         not     ax                              ; F7 D0

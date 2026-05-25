@@ -1,3 +1,17 @@
+; ======================================================================
+; WRITE / seg52.asm   (segment 52 of WRITE)
+; ----------------------------------------------------------------------
+; Functions discovered (pass1b):         1
+; Total instructions:                   59
+; 
+; Classification (pass8):
+;   C-origin (high+medium):              0
+;   ASM-origin (high+medium):            0
+;   Unclear:                             1
+;   Tiny / unclassified:                 0
+; 
+; Far API calls in this segment:     0 (0 unique)
+; ======================================================================
 ; AUTO-GENERATED from original WRITE segment 52
 ; segment_size=472 bytes, flags=0xf130
 ; mode: humano legible - instrucciones x86 + bytes raw en comentario (autoritativo)
@@ -22,6 +36,7 @@ WRITE_TEXT SEGMENT BYTE PUBLIC 'CODE'
         call    far _entry_141                  ; 9A FF FF 00 00 [FIXUP]
         or      ax, ax                          ; 0B C0
         je      L_002C                          ; 74 19
+        ; constant WM_CREATE
         mov     ax, 1                           ; B8 01 00
         push    ax                              ; 50
         call    far _entry_54                   ; 9A 7D 00 00 00 [FIXUP]
@@ -30,19 +45,25 @@ WRITE_TEXT SEGMENT BYTE PUBLIC 'CODE'
         call    far _entry_334                  ; 9A FF FF 00 00 [FIXUP]
         or      ax, ax                          ; 0B C0
         jne     L_0030                          ; 75 04
+;   [conditional branch target (if/else)] L_002C
 L_002C:
         sub     ax, ax                          ; 2B C0
         jmp     L_0049                          ; EB 19
+;   [conditional branch target (if/else)] L_0030
 L_0030:
         mov     word ptr [0x706], 1             ; C7 06 06 07 01 00
         push    word ptr [bp + 6]               ; FF 76 06
+        ;   ^ arg hWnd
+        ; --> DESTROYWINDOW(HWND hWnd) -> BOOL
         call    far USER.DESTROYWINDOW          ; 9A FF FF 00 00 [FIXUP]
         sub     ax, ax                          ; 2B C0
         push    ax                              ; 50
         nop                                     ; 90
         push    cs                              ; 0E
         call    L_014C                          ; E8 06 01
+        ; constant WM_CREATE
         mov     ax, 1                           ; B8 01 00
+;   [unconditional branch target] L_0049
 L_0049:
         sub     bp, 2                           ; 83 ED 02
         mov     sp, bp                          ; 8B E5
@@ -61,70 +82,116 @@ L_0049:
         sub     sp, 6                           ; 83 EC 06
         sub     ax, ax                          ; 2B C0
         push    ax                              ; 50
+        ;   ^ arg iObject
+        ; --> GETSTOCKOBJECT(INT iObject) -> HANDLE
         call    far GDI.GETSTOCKOBJECT          ; 9A DB 00 00 00 [FIXUP]
         mov     word ptr [bp - 6], ax           ; 89 46 FA
         push    word ptr [0x13ca]               ; FF 36 CA 13
+        ;   ^ arg hWnd
+        ; --> GETDC(HWND hWnd) -> HDC
         call    far USER.GETDC                  ; 9A 86 00 00 00 [FIXUP]
         mov     word ptr [bp - 4], ax           ; 89 46 FC
+        ; constant WM_CREATE
         mov     ax, 1                           ; B8 01 00
         push    ax                              ; 50
         call    far _entry_54                   ; 9A FF FF 00 00 [FIXUP]
         push    word ptr [0x780]                ; FF 36 80 07
+        ;   ^ arg hWnd
+        ; --> GETDC(HWND hWnd) -> HDC
         call    far USER.GETDC                  ; 9A FF FF 00 00 [FIXUP]
         push    ax                              ; 50
+        ;   ^ arg hDC
         push    word ptr [bp - 6]               ; FF 76 FA
+        ;   ^ arg hObj
+        ; --> SELECTOBJECT(HDC hDC, HANDLE hObj) -> HANDLE
         call    far GDI.SELECTOBJECT            ; 9A 9B 00 00 00 [FIXUP]
         push    word ptr [0x10b0]               ; FF 36 B0 10
+        ;   ^ arg hDC
         push    word ptr [bp - 6]               ; FF 76 FA
+        ;   ^ arg hObj
+        ; --> SELECTOBJECT(HDC hDC, HANDLE hObj) -> HANDLE
         call    far GDI.SELECTOBJECT            ; 9A AE 00 00 00 [FIXUP]
         cmp     word ptr [0x7ba], 0             ; 83 3E BA 07 00
         je      L_00B2                          ; 74 0C
         push    word ptr [0x7ba]                ; FF 36 BA 07
+        ;   ^ arg hDC
         push    word ptr [bp - 6]               ; FF 76 FA
+        ;   ^ arg hObj
+        ; --> SELECTOBJECT(HDC hDC, HANDLE hObj) -> HANDLE
         call    far GDI.SELECTOBJECT            ; 9A C2 00 00 00 [FIXUP]
+;   [conditional branch target (if/else)] L_00B2
 L_00B2:
         push    word ptr [0x78c]                ; FF 36 8C 07
+        ;   ^ arg hObj
+        ; --> DELETEOBJECT(HANDLE hObj) -> BOOL
         call    far GDI.DELETEOBJECT            ; 9A C8 00 00 00 [FIXUP]
         push    word ptr [bp - 4]               ; FF 76 FC
+        ;   ^ arg hDC
         push    word ptr [bp - 6]               ; FF 76 FA
+        ;   ^ arg hObj
+        ; --> SELECTOBJECT(HDC hDC, HANDLE hObj) -> HANDLE
         call    far GDI.SELECTOBJECT            ; 9A E1 00 00 00 [FIXUP]
         push    ax                              ; 50
+        ;   ^ arg hObj
+        ; --> DELETEOBJECT(HANDLE hObj) -> BOOL
         call    far GDI.DELETEOBJECT            ; 9A E7 00 00 00 [FIXUP]
         cmp     word ptr [0x7b2], 0             ; 83 3E B2 07 00
         je      L_00EB                          ; 74 18
         push    word ptr [bp - 4]               ; FF 76 FC
+        ; constant VK_RETURN
         mov     ax, 0xd                         ; B8 0D 00
         push    ax                              ; 50
+        ;   ^ arg iObject
+        ; --> GETSTOCKOBJECT(INT iObject) -> HANDLE
         call    far GDI.GETSTOCKOBJECT          ; 9A FF FF 00 00 [FIXUP]
         push    ax                              ; 50
+        ; --> SELECTOBJECT(HDC hDC, HANDLE hObj) -> HANDLE
         call    far GDI.SELECTOBJECT            ; 9A FF FF 00 00 [FIXUP]
         push    ax                              ; 50
+        ;   ^ arg hObj
+        ; --> DELETEOBJECT(HANDLE hObj) -> BOOL
         call    far GDI.DELETEOBJECT            ; 9A F7 00 00 00 [FIXUP]
+;   [conditional branch target (if/else)] L_00EB
 L_00EB:
         cmp     word ptr [0x7c0], 0             ; 83 3E C0 07 00
         je      L_00FB                          ; 74 09
         push    word ptr [0x7c0]                ; FF 36 C0 07
+        ;   ^ arg hObj
+        ; --> DELETEOBJECT(HANDLE hObj) -> BOOL
         call    far GDI.DELETEOBJECT            ; 9A 07 01 00 00 [FIXUP]
+;   [conditional branch target (if/else)] L_00FB
 L_00FB:
         cmp     word ptr [0x7c2], 0             ; 83 3E C2 07 00
         je      L_010B                          ; 74 09
         push    word ptr [0x7c2]                ; FF 36 C2 07
+        ;   ^ arg hObj
+        ; --> DELETEOBJECT(HANDLE hObj) -> BOOL
         call    far GDI.DELETEOBJECT            ; 9A FF FF 00 00 [FIXUP]
+;   [conditional branch target (if/else)] L_010B
 L_010B:
         cmp     word ptr [0x6e8], 0             ; 83 3E E8 06 00
         je      L_011B                          ; 74 09
         push    word ptr [0x6e8]                ; FF 36 E8 06
+        ;   ^ arg hMem
+        ; --> GLOBALFREE(HANDLE hMem) -> HANDLE
         call    far KERNEL.GLOBALFREE           ; 9A 27 01 00 00 [FIXUP]
+;   [conditional branch target (if/else)] L_011B
 L_011B:
         cmp     word ptr [0x6ea], 0             ; 83 3E EA 06 00
         je      L_012B                          ; 74 09
         push    word ptr [0x6ea]                ; FF 36 EA 06
+        ;   ^ arg hMem
+        ; --> GLOBALFREE(HANDLE hMem) -> HANDLE
         call    far KERNEL.GLOBALFREE           ; 9A 37 01 00 00 [FIXUP]
+;   [conditional branch target (if/else)] L_012B
 L_012B:
         cmp     word ptr [0x6ec], 0             ; 83 3E EC 06 00
         je      L_013B                          ; 74 09
         push    word ptr [0x6ea]                ; FF 36 EA 06
+        ;   ^ arg hMem
+        ; --> GLOBALFREE(HANDLE hMem) -> HANDLE
         call    far KERNEL.GLOBALFREE           ; 9A FF FF 00 00 [FIXUP]
+;   [conditional branch target (if/else)] L_013B
 L_013B:
         sub     ax, ax                          ; 2B C0
         push    ax                              ; 50
@@ -135,12 +202,13 @@ L_013B:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf                                    ; CB
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_014C -- offset 0x014C -- 59 instr
-; Funcion mediana (59 instr, 0 calls).
-; tags: medium
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_014C   offset=0x014C  size=59 instr  segment=seg52.asm
+;
+; Classification (pass8): unclear  (score C=4, ASM=2)
+; Prologue: saves_regs     Epilogue: jmp_tail
+;-------------------------------------------------------------------------
+;   [sub-routine] L_014C
 L_014C:
         push    ds                              ; 1E
         pop     ax                              ; 58
@@ -152,11 +220,13 @@ L_014C:
         mov     ds, ax                          ; 8E D8
         sub     sp, 0xc                         ; 83 EC 0C
         push    si                              ; 56
+        ; constant WM_CREATE
         mov     ax, 1                           ; B8 01 00
         push    ax                              ; 50
         call    far _entry_53                   ; 9A FF FF 00 00 [FIXUP]
         mov     word ptr [bp - 4], 0            ; C7 46 FC 00 00
         jmp     L_01C5                          ; EB 5B
+;   [loop start] L_016A
 L_016A:
         mov     ax, 0xa2                        ; B8 A2 00
         imul    word ptr [bp - 4]               ; F7 6E FC
@@ -176,11 +246,13 @@ L_016A:
         push    word ptr [bx]                   ; FF 37
         call    far _entry_204                  ; 9A FF FF 00 00 [FIXUP]
         jmp     L_01A9                          ; EB 0D
+;   [conditional branch target (if/else)] L_019C
 L_019C:
         mov     bx, word ptr [bp - 0xa]         ; 8B 5E F6
         mov     bx, word ptr [bx + 0x1e]        ; 8B 5F 1E
         push    word ptr [bx]                   ; FF 37
         call    far _entry_333                  ; 9A FF FF 00 00 [FIXUP]
+;   [unconditional branch target] L_01A9
 L_01A9:
         mov     ax, 0xa2                        ; B8 A2 00
         imul    word ptr [bp - 4]               ; F7 6E FC
@@ -192,8 +264,10 @@ L_01A9:
         and     al, 0x80                        ; 24 80
         or      al, 0xb                         ; 0C 0B
         mov     byte ptr [si], al               ; 88 04
+;   [conditional branch target (if/else)] L_01C2
 L_01C2:
         inc     word ptr [bp - 4]               ; FF 46 FC
+;   [unconditional branch target] L_01C5
 L_01C5:
         mov     ax, word ptr [0xc18]            ; A1 18 0C
         cmp     word ptr [bp - 4], ax           ; 39 46 FC

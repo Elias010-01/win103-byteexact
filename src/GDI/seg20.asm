@@ -1,3 +1,17 @@
+; ======================================================================
+; GDI / seg20.asm   (segment 20 of GDI)
+; ----------------------------------------------------------------------
+; Functions discovered (pass1b):         1
+; Total instructions:                  113
+; 
+; Classification (pass8):
+;   C-origin (high+medium):              1
+;   ASM-origin (high+medium):            0
+;   Unclear:                             0
+;   Tiny / unclassified:                 0
+; 
+; Far API calls in this segment:     0 (0 unique)
+; ======================================================================
 ; AUTO-GENERATED from original GDI segment 20
 ; segment_size=623 bytes, flags=0xf130
 ; mode: humano legible - instrucciones x86 + bytes raw en comentario (autoritativo)
@@ -39,6 +53,7 @@ GDI_TEXT SEGMENT BYTE PUBLIC 'CODE'
         lea     ax, [si + 0xa]                  ; 8D 44 0A
         mov     word ptr [bp - 4], ax           ; 89 46 FC
         sub     di, di                          ; 2B FF
+;   [loop start] L_0044
 L_0044:
         mov     ax, word ptr [bp - 0x10]        ; 8B 46 F0
         dec     ax                              ; 48
@@ -48,10 +63,12 @@ L_0044:
         mov     ax, word ptr [bp + 6]           ; 8B 46 06
         cmp     word ptr es:[bx], ax            ; 26 39 07
         jl      L_007A                          ; 7C 23
+;   [conditional branch target (if/else)] L_0057
 L_0057:
         cmp     word ptr [bp - 8], 0            ; 83 7E F8 00
         jne     L_0060                          ; 75 03
         jmp     L_0112                          ; E9 B2 00
+;   [conditional branch target (if/else)] L_0060
 L_0060:
         les     bx, ptr [bp - 0xe]              ; C4 5E F2
         mov     ax, word ptr es:[bx + 0xa]      ; 26 8B 47 0A
@@ -60,6 +77,7 @@ L_0060:
         mov     word ptr es:[bx + 0xa], di      ; 26 89 7F 0A
         mov     word ptr es:[bx + 0x16], 2      ; 26 C7 47 16 02 00
         jmp     L_0125                          ; E9 AB 00
+;   [conditional branch target (if/else)] L_007A
 L_007A:
         mov     bx, word ptr [bp - 4]           ; 8B 5E FC
         mov     ax, word ptr [bx + 2]           ; 8B 47 02
@@ -83,9 +101,11 @@ L_007A:
         les     bx, ptr [bp - 0xe]              ; C4 5E F2
         mov     word ptr es:[bx + 0xa], di      ; 26 89 7F 0A
         mov     word ptr [bp - 8], 0            ; C7 46 F8 00 00
+;   [conditional branch target (if/else)] L_00BE
 L_00BE:
         mov     word ptr [bp - 6], 1            ; C7 46 FA 01 00
         jmp     L_010A                          ; EB 45
+;   [conditional branch target (if/else)] L_00C5
 L_00C5:
         mov     bx, word ptr [bp - 4]           ; 8B 5E FC
         mov     ax, word ptr [bx + 2]           ; 8B 47 02
@@ -108,18 +128,22 @@ L_00C5:
         les     bx, ptr [bp - 0xe]              ; C4 5E F2
         mov     word ptr es:[bx + 0xa], di      ; 26 89 7F 0A
         mov     word ptr [bp - 6], 0            ; C7 46 FA 00 00
+;   [conditional branch target (if/else)] L_0105
 L_0105:
         mov     word ptr [bp - 8], 1            ; C7 46 F8 01 00
+;   [branch target] L_010A
 L_010A:
         inc     di                              ; 47
         add     word ptr [bp - 4], 4            ; 83 46 FC 04
         jmp     L_0044                          ; E9 32 FF
+;   [unconditional branch target] L_0112
 L_0112:
         les     bx, ptr [bp - 0xe]              ; C4 5E F2
         mov     ax, di                          ; 8B C7
         sub     ax, word ptr es:[bx + 0xa]      ; 26 2B 47 0A
         mov     word ptr es:[bx + 0xc], ax      ; 26 89 47 0C
         mov     word ptr es:[bx + 0x16], 1      ; 26 C7 47 16 01 00
+;   [unconditional branch target] L_0125
 L_0125:
         push    word ptr [bp - 0xc]             ; FF 76 F4
         push    word ptr [bp - 0xe]             ; FF 76 F2
@@ -133,13 +157,15 @@ L_0125:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0xc                             ; CA 0C 00
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_013C -- offset 0x013C -- 113 instr
-; Funcion compleja: 113 instrucciones, 0 llamadas, 3 branches.
-; tags: complex
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_013C   offset=0x013C  size=113 instr  segment=seg20.asm
+;
+; Classification (pass8): c_medium  (score C=6, ASM=2)
+; Prologue: standard_bp     Epilogue: jmp_tail
+;-------------------------------------------------------------------------
+;   [sub-routine] L_013C
 L_013C:
+        ;   = cProc <10> ; NEAR PASCAL prologue
         push    bp                              ; 55
         mov     bp, sp                          ; 8B EC
         sub     sp, 0xa                         ; 83 EC 0A
@@ -151,8 +177,11 @@ L_013C:
         jl      L_0156                          ; 7C 04
         sub     ax, ax                          ; 2B C0
         jmp     L_0159                          ; EB 03
+;   [conditional branch target (if/else)] L_0156
 L_0156:
+        ; constant WM_CREATE
         mov     ax, 1                           ; B8 01 00
+;   [unconditional branch target] L_0159
 L_0159:
         sub     si, ax                          ; 2B F0
         les     bx, ptr [bp + 6]                ; C4 5E 06
@@ -204,6 +233,7 @@ L_0159:
         mov     ax, word ptr [di + 0xa]         ; 8B 45 0A
         mov     word ptr es:[bx], ax            ; 26 89 07
         jmp     L_0218                          ; EB 3D
+;   [conditional branch target (if/else)] L_01DB
 L_01DB:
         les     bx, ptr [bp + 6]                ; C4 5E 06
         mov     si, word ptr es:[bx + 0xe]      ; 26 8B 77 0E
@@ -227,6 +257,7 @@ L_01DB:
         neg     dx                              ; F7 DA
         mov     word ptr [bp - 0xa], ax         ; 89 46 F6
         mov     word ptr [bp - 8], dx           ; 89 56 F8
+;   [unconditional branch target] L_0218
 L_0218:
         les     bx, ptr [bp + 6]                ; C4 5E 06
         mov     ax, word ptr es:[bx + 0x10]     ; 26 8B 47 10
@@ -251,6 +282,7 @@ L_0218:
         call    far _SEG1_3E8A                  ; 9A FF FF 00 00 [FIXUP]
         les     bx, ptr [bp + 6]                ; C4 5E 06
         mov     word ptr es:[bx + 4], ax        ; 26 89 47 04
+;   [conditional branch target (if/else)] L_0268
 L_0268:
         pop     si                              ; 5E
         pop     di                              ; 5F

@@ -1,3 +1,17 @@
+; ======================================================================
+; USER / seg27.asm   (segment 27 of USER)
+; ----------------------------------------------------------------------
+; Functions discovered (pass1b):         0
+; Total instructions:                    0
+; 
+; Classification (pass8):
+;   C-origin (high+medium):              0
+;   ASM-origin (high+medium):            0
+;   Unclear:                             0
+;   Tiny / unclassified:                 0
+; 
+; Far API calls in this segment:     0 (0 unique)
+; ======================================================================
 ; AUTO-GENERATED from original USER segment 27
 ; segment_size=279 bytes, flags=0xf130
 ; mode: humano legible - instrucciones x86 + bytes raw en comentario (autoritativo)
@@ -27,6 +41,7 @@ USER_TEXT SEGMENT BYTE PUBLIC 'CODE'
         je      L_001C                          ; 74 04
         sub     di, di                          ; 2B FF
         jmp     L_002E                          ; EB 12
+;   [conditional branch target (if/else)] L_001C
 L_001C:
         push    si                              ; 56
         push    word ptr [bp + 6]               ; FF 76 06
@@ -35,14 +50,18 @@ L_001C:
         shl     bx, 1                           ; D1 E3
         add     bx, word ptr [si + 0x38]        ; 03 5C 38
         mov     di, word ptr [bx]               ; 8B 3F
+;   [unconditional branch target] L_002E
 L_002E:
         mov     word ptr [bp - 4], di           ; 89 7E FC
         push    word ptr [si]                   ; FF 34
+        ;   ^ arg hMem
+        ; --> LOCALLOCK(HANDLE hMem) -> PSTR
         call    far KERNEL.LOCALLOCK            ; 9A 8E 00 00 00 [FIXUP]
         add     ax, di                          ; 03 C7
         mov     word ptr [bp - 8], ax           ; 89 46 F8
         mov     word ptr [bp - 6], ds           ; 8C 5E FA
         jmp     L_005E                          ; EB 1C
+;   [loop start] L_0042
 L_0042:
         mov     word ptr [bp - 4], di           ; 89 7E FC
         mov     bx, word ptr [bp - 8]           ; 8B 5E F8
@@ -54,13 +73,17 @@ L_0042:
         je      L_005A                          ; 74 04
         inc     word ptr [bp - 8]               ; FF 46 F8
         inc     di                              ; 47
+;   [conditional branch target (if/else)] L_005A
 L_005A:
         inc     word ptr [bp - 8]               ; FF 46 F8
         inc     di                              ; 47
+;   [unconditional branch target] L_005E
 L_005E:
         cmp     word ptr [bp + 6], di           ; 39 7E 06
         jge     L_0042                          ; 7D DF
         push    word ptr [si]                   ; FF 34
+        ;   ^ arg hMem
+        ; --> LOCALUNLOCK(HANDLE hMem) -> BOOL
         call    far KERNEL.LOCALUNLOCK          ; 9A B1 00 00 00 [FIXUP]
         mov     ax, word ptr [bp - 4]           ; 8B 46 FC
         pop     si                              ; 5E
@@ -83,6 +106,8 @@ L_005E:
         push    si                              ; 56
         mov     si, word ptr [bp + 8]           ; 8B 76 08
         push    word ptr [si]                   ; FF 34
+        ;   ^ arg hMem
+        ; --> LOCALLOCK(HANDLE hMem) -> PSTR
         call    far KERNEL.LOCALLOCK            ; 9A FF FF 00 00 [FIXUP]
         add     ax, word ptr [si + 0x12]        ; 03 44 12
         mov     word ptr [bp - 4], ax           ; 89 46 FC
@@ -95,8 +120,11 @@ L_005E:
         je      L_00AE                          ; 74 06
         mov     ax, word ptr [si + 0x1e]        ; 8B 44 1E
         add     word ptr [bp + 6], ax           ; 01 46 06
+;   [conditional branch target (if/else)] L_00AE
 L_00AE:
         push    word ptr [si]                   ; FF 34
+        ;   ^ arg hMem
+        ; --> LOCALUNLOCK(HANDLE hMem) -> BOOL
         call    far KERNEL.LOCALUNLOCK          ; 9A FF FF 00 00 [FIXUP]
         mov     ax, word ptr [bp + 6]           ; 8B 46 06
         pop     si                              ; 5E
@@ -119,13 +147,17 @@ L_00AE:
         mov     si, word ptr [bp + 8]           ; 8B 76 08
         mov     word ptr [bp - 4], 0xa          ; C7 46 FC 0A 00
         jmp     L_00EA                          ; EB 0E
+;   [loop start] L_00DC
 L_00DC:
         dec     word ptr [bp - 4]               ; FF 4E FC
         jne     L_00E5                          ; 75 04
         sub     ax, ax                          ; 2B C0
         jmp     L_010C                          ; EB 27
+;   [conditional branch target (if/else)] L_00E5
 L_00E5:
+        ; --> YIELD(void) -> VOID
         call    far KERNEL.YIELD                ; 9A FF FF 00 00 [FIXUP]
+;   [unconditional branch target] L_00EA
 L_00EA:
         lea     ax, [bp - 0x16]                 ; 8D 46 EA
         push    ss                              ; 16
@@ -134,6 +166,7 @@ L_00EA:
         mov     ax, 0x102                       ; B8 02 01
         push    ax                              ; 50
         push    ax                              ; 50
+        ; constant WM_CREATE
         mov     ax, 1                           ; B8 01 00
         push    ax                              ; 50
         call    far _SEG1_22B8                  ; 9A FF FF 00 00 [FIXUP]
@@ -143,6 +176,7 @@ L_00EA:
         mov     cl, 8                           ; B1 08
         shl     ax, cl                          ; D3 E0
         or      ax, word ptr [bp + 6]           ; 0B 46 06
+;   [unconditional branch target] L_010C
 L_010C:
         pop     si                              ; 5E
         sub     bp, 2                           ; 83 ED 02

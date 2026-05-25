@@ -1,3 +1,19 @@
+; ======================================================================
+; CALENDAR / seg8.asm   (segment 8 of CALENDAR)
+; ----------------------------------------------------------------------
+; Functions discovered (pass1b):         1
+; Total instructions:                   18
+; 
+; Classification (pass8):
+;   C-origin (high+medium):              1
+;   ASM-origin (high+medium):            0
+;   Unclear:                             0
+;   Tiny / unclassified:                 0
+; 
+; Far API calls in this segment:     1 (1 unique)
+;   Top:
+;        1  LOADSTRING
+; ======================================================================
 ; AUTO-GENERATED from original CALENDAR segment 8
 ; segment_size=310 bytes, flags=0x0110
 ; mode: humano legible - instrucciones x86 + bytes raw en comentario (autoritativo)
@@ -24,11 +40,14 @@ CALENDAR_TEXT SEGMENT BYTE PUBLIC 'CODE'
         push    si                              ; 56
         mov     si, word ptr [bp + 8]           ; 8B 76 08
         mov     word ptr [bp - 0x10], si        ; 89 76 F0
+        ; constant WM_CREATE
         mov     di, 1                           ; BF 01 00
+;   [loop start] L_0018
 L_0018:
         cmp     di, 4                           ; 83 FF 04
         jle     L_0020                          ; 7E 03
         jmp     L_00FE                          ; E9 DE 00
+;   [conditional branch target (if/else)] L_0020
 L_0020:
         mov     bx, word ptr [0x140]            ; 8B 1E 40 01
         shl     bx, 1                           ; D1 E3
@@ -44,8 +63,10 @@ L_0020:
         cmp     ax, 3                           ; 3D 03 00
         jne     L_0044                          ; 75 03
         jmp     L_00C5                          ; E9 81 00
+;   [conditional branch target (if/else)] L_0044
 L_0044:
         jmp     L_0086                          ; EB 40
+;   [conditional branch target (if/else)] L_0046
 L_0046:
         test    byte ptr [bp + 6], 4            ; F6 46 06 04
         je      L_0086                          ; 74 3A
@@ -58,6 +79,7 @@ L_0046:
         jge     L_0063                          ; 7D 05
         sub     ax, ax                          ; 2B C0
         jmp     L_0106                          ; E9 A3 00
+;   [conditional branch target (if/else)] L_0063
 L_0063:
         push    si                              ; 56
         mov     bx, word ptr [bp + 0xa]         ; 8B 5E 0A
@@ -71,15 +93,19 @@ L_0063:
         jne     L_007D                          ; 75 04
         mov     byte ptr [si], 0x2c             ; C6 04 2C
         inc     si                              ; 46
+;   [loop start (also forward branch)] L_007D
 L_007D:
         cmp     di, 4                           ; 83 FF 04
         je      L_0086                          ; 74 04
+;   [loop start] L_0082
 L_0082:
         mov     byte ptr [si], 0x20             ; C6 04 20
         inc     si                              ; 46
+;   [loop start (also forward branch)] L_0086
 L_0086:
         inc     di                              ; 47
         jmp     L_0018                          ; EB 8F
+;   [conditional branch target (if/else)] L_0089
 L_0089:
         push    si                              ; 56
         mov     bx, word ptr [bp + 0xa]         ; 8B 5E 0A
@@ -90,6 +116,7 @@ L_0089:
         call    L_0113                          ; E8 7A 00
         mov     si, ax                          ; 8B F0
         jmp     L_0082                          ; EB E5
+;   [conditional branch target (if/else)] L_009D
 L_009D:
         test    byte ptr [bp + 6], 8            ; F6 46 06 08
         jne     L_0086                          ; 75 E3
@@ -106,6 +133,7 @@ L_009D:
         mov     byte ptr [si], 0x2c             ; C6 04 2C
         inc     si                              ; 46
         jmp     L_0082                          ; EB BD
+;   [unconditional branch target] L_00C5
 L_00C5:
         mov     bx, word ptr [bp + 0xa]         ; 8B 5E 0A
         mov     ax, word ptr [bx + 3]           ; 8B 47 03
@@ -116,6 +144,7 @@ L_00C5:
         idiv    cx                              ; F7 F9
         push    ax                              ; 50
         push    si                              ; 56
+        ; constant WM_CREATE
         mov     ax, 1                           ; B8 01 00
         push    ax                              ; 50
         call    far _entry_44                   ; 9A F5 00 00 00 [FIXUP]
@@ -126,15 +155,18 @@ L_00C5:
         idiv    cx                              ; F7 F9
         push    dx                              ; 52
         push    si                              ; 56
+        ; constant WM_CREATE
         mov     ax, 1                           ; B8 01 00
         push    ax                              ; 50
         call    far _entry_44                   ; 9A FF FF 00 00 [FIXUP]
         mov     si, ax                          ; 8B F0
         jmp     L_007D                          ; E9 7F FF
+;   [unconditional branch target] L_00FE
 L_00FE:
         mov     byte ptr [si], 0                ; C6 04 00
         mov     ax, si                          ; 8B C6
         sub     ax, word ptr [bp - 0x10]        ; 2B 46 F0
+;   [unconditional branch target] L_0106
 L_0106:
         pop     si                              ; 5E
         pop     di                              ; 5F
@@ -144,25 +176,35 @@ L_0106:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    6                               ; CA 06 00
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_0113 -- offset 0x0113 -- 18 instr
-; Funcion sin clasificar definitiva (18 instr).
-; tags: calls_user, small
-; calls (inter): USER.LOADSTRING
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_0113   offset=0x0113  size=18 instr  segment=seg8.asm
+;
+; Classification (pass8): c_high  (score C=6, ASM=0)
+; Prologue: standard_bp     Epilogue: unknown
+;
+; Far API calls:
+;   LOADSTRING(HANDLE hInstance, WORD wID, LPSTR lpBuffer, INT cbBuffer) -> INT
+;-------------------------------------------------------------------------
+;   [sub-routine] L_0113
 L_0113:
+        ;   = cProc <0> ; NEAR PASCAL prologue
         push    bp                              ; 55
         mov     bp, sp                          ; 8B EC
         push    si                              ; 56
         mov     si, word ptr [bp + 6]           ; 8B 76 06
         push    word ptr [0x2fe]                ; FF 36 FE 02
+        ;   ^ arg hInstance
         push    word ptr [bp + 4]               ; FF 76 04
+        ;   ^ arg wID
         mov     ax, si                          ; 8B C6
         push    ds                              ; 1E
+        ;   ^ arg lpBuffer (high/segment)
         push    ax                              ; 50
+        ;   ^ arg lpBuffer (low/offset)
         mov     ax, 0x1e                        ; B8 1E 00
         push    ax                              ; 50
+        ;   ^ arg cbBuffer
+        ; --> LOADSTRING(HANDLE hInstance, WORD wID, LPSTR lpBuffer, INT cbBuffer) -> INT
         call    far USER.LOADSTRING             ; 9A FF FF 00 00 [FIXUP]
         add     ax, si                          ; 03 C6
         pop     si                              ; 5E

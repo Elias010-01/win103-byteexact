@@ -1,3 +1,17 @@
+; ======================================================================
+; SPAIN / seg1.asm   (segment 1 of SPAIN)
+; ----------------------------------------------------------------------
+; Functions discovered (pass1b):         0
+; Total instructions:                    0
+; 
+; Classification (pass8):
+;   C-origin (high+medium):              0
+;   ASM-origin (high+medium):            0
+;   Unclear:                             0
+;   Tiny / unclassified:                 0
+; 
+; Far API calls in this segment:     0 (0 unique)
+; ======================================================================
 ; AUTO-GENERATED from original SPAIN segment 1
 ; segment_size=448 bytes, flags=0xf070
 ; mode: humano legible - instrucciones x86 + bytes raw en comentario (autoritativo)
@@ -100,6 +114,7 @@ SPAIN_TEXT SEGMENT BYTE PUBLIC 'CODE'
         xor     word ptr [si + 0x7c], di        ; 31 7C 7C
         xor     al, byte ptr [bx + si + 0x40]   ; 32 40 40
         xor     sp, word ptr [bp + di]          ; 33 23
+;   [loop start] L_00A1
 L_00A1:
         and     si, word ptr [0xacac]           ; 23 36 AC AC
         rcr     byte ptr [bp + di + 0x5b], 0xdb ; C0 5B 5B DB
@@ -148,6 +163,7 @@ L_00A1:
         jbe     L_016E                          ; 76 77
         js      L_0172                          ; 78 79
         nop                                     ; 90
+;   [conditional branch target (if/else)] L_00FA
 L_00FA:
         xchg    cx, ax                          ; 91
         and     al, 0x26                        ; 24 26
@@ -168,6 +184,7 @@ L_00FA:
         mov     es, ax                          ; 8E C0
         mov     ax, 0xff                        ; B8 FF 00
         cld                                     ; FC
+;   [conditional branch target (if/else)] L_0126
 L_0126:
         mov     di, 0x338                       ; BF 38 03
         mov     cx, 0x59                        ; B9 59 00
@@ -193,6 +210,7 @@ L_0126:
         mov     si, 0x40                        ; BE 40 00
         mov     di, 0x338                       ; BF 38 03
         rep movsb byte ptr es:[di], byte ptr [si] ; F3 A4
+;   [conditional branch target (if/else)] L_0162
 L_0162:
         mov     cx, 0x1b                        ; B9 1B 00
         mov     si, 0x99                        ; BE 99 00
@@ -201,6 +219,7 @@ L_0162:
         mov     ax, es                          ; 8C C0
         mov     ds, ax                          ; 8E D8
         jmp     L_01B3                          ; EB 40
+;   [conditional branch target (if/else)] L_0173
 L_0173:
         push    ds                              ; 1E
         mov     ax, 0xf000                      ; B8 00 F0
@@ -210,6 +229,7 @@ L_0173:
         mov     al, byte ptr cs:[0xdd]          ; 2E A0 DD 00
         xchg    byte ptr cs:[0xdf], al          ; 2E 86 06 DF 00
         mov     byte ptr cs:[0xdd], al          ; 2E A2 DD 00
+;   [conditional branch target (if/else)] L_018D
 L_018D:
         mov     ax, cs                          ; 8C C8
         mov     ds, ax                          ; 8E D8
@@ -226,6 +246,7 @@ L_018D:
         mov     di, 0x39e                       ; BF 9E 03
         rep movsb byte ptr es:[di], byte ptr [si] ; F3 A4
         pop     ds                              ; 1F
+;   [unconditional branch target] L_01B3
 L_01B3:
         xor     ax, ax                          ; 33 C0
         not     ax                              ; F7 D0

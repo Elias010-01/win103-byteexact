@@ -1,3 +1,17 @@
+; ======================================================================
+; PSCRIPT / seg3.asm   (segment 3 of PSCRIPT)
+; ----------------------------------------------------------------------
+; Functions discovered (pass1b):         0
+; Total instructions:                    0
+; 
+; Classification (pass8):
+;   C-origin (high+medium):              0
+;   ASM-origin (high+medium):            0
+;   Unclear:                             0
+;   Tiny / unclassified:                 0
+; 
+; Far API calls in this segment:     0 (0 unique)
+; ======================================================================
 ; AUTO-GENERATED from original PSCRIPT segment 3
 ; segment_size=323 bytes, flags=0x1d70
 ; mode: humano legible - instrucciones x86 + bytes raw en comentario (autoritativo)
@@ -123,8 +137,10 @@ PSCRIPT_TEXT SEGMENT BYTE PUBLIC 'CODE'
         jl      L_0103                          ; 7C 03
         inc     dx                              ; 42
         jmp     L_0105                          ; EB 02
+;   [branch target] L_0103
 L_0103:
         neg     ax                              ; F7 D8
+;   [branch target] L_0105
 L_0105:
         push    dx                              ; 52
         push    di                              ; 57

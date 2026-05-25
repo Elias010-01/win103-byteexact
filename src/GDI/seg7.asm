@@ -1,3 +1,23 @@
+; ======================================================================
+; GDI / seg7.asm   (segment 7 of GDI)
+; ----------------------------------------------------------------------
+; Functions discovered (pass1b):         7
+; Total instructions:                  348
+; 
+; Classification (pass8):
+;   C-origin (high+medium):              2
+;   ASM-origin (high+medium):            0
+;   Unclear:                             5
+;   Tiny / unclassified:                 0
+; 
+; Far API calls in this segment:     12 (5 unique)
+;   Top:
+;        3  GLOBALLOCK
+;        3  GLOBALUNLOCK
+;        2  FINDATOM
+;        2  DELETEATOM
+;        2  GLOBALFREE
+; ======================================================================
 ; AUTO-GENERATED from original GDI segment 7
 ; segment_size=1840 bytes, flags=0xf170
 ; mode: humano legible - instrucciones x86 + bytes raw en comentario (autoritativo)
@@ -10,13 +30,13 @@
 ; el binario original).
 
 GDI_TEXT SEGMENT BYTE PUBLIC 'CODE'
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_0000 -- offset 0x0000 -- 17 instr
-; Funcion hoja (no llama a otras, 17 instr): probable helper aritmetico/conversion.
-; tags: leaf
-;----------------------------------------------------------------------
 
+;-------------------------------------------------------------------------
+; sub_0000   offset=0x0000  size=17 instr  segment=seg7.asm
+;
+; Classification (pass8): unclear  (score C=1, ASM=0)
+; Prologue: saves_regs     Epilogue: ret
+;-------------------------------------------------------------------------
 L_0000:
         push    bx                              ; 53
 L_0001:
@@ -29,22 +49,19 @@ L_0001:
         je      L_0014                          ; 74 04
         mov     byte ptr [bx], al               ; 88 07
         jmp     L_0016                          ; EB 02
+;   [conditional branch target (if/else)] L_0014
 L_0014:
         mov     word ptr [bx], ax               ; 89 07
+;   [unconditional branch target] L_0016
 L_0016:
         sub     bl, cl                          ; 2A D9
         sbb     bh, 0                           ; 80 DF 00
         mov     bx, word ptr [bx]               ; 8B 1F
         jmp     1                               ; EB E2
+;   [error/early exit] L_001F
 L_001F:
         pop     bx                              ; 5B
         ret                                     ; C3
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; ESCAPE -- 24 instr
-; Funcion sin clasificar definitiva (24 instr).
-; tags: far, small
-;----------------------------------------------------------------------
 
 ;-----------------------------------------------------------------------
 ; ESCAPE  (offset 0x0021, size 54 bytes)
@@ -66,6 +83,7 @@ ESCAPE PROC FAR
         jne     L_0043                          ; 75 07
         call    far _SEG1_3794                  ; 9A FF FF 00 00 [FIXUP]
         push    es                              ; 26 06
+;   [conditional branch target (if/else)] L_0043
 L_0043:
         mov     di, word ptr [bp + 0x12]        ; 8B 7E 12
         or      di, di                          ; 0B FF
@@ -73,8 +91,10 @@ L_0043:
         mov     si, word ptr [di]               ; 8B 35
         test    byte ptr [si + 8], 1            ; F6 44 08 01
         je      L_0055                          ; 74 03
+;   [conditional branch target (if/else)] L_0052
 L_0052:
         jmp     L_0407                          ; E9 B2 03
+;   [conditional branch target (if/else)] L_0055
 L_0055:
         mov     di, word ptr [si + 0x2a]        ; 8B 7C 2A
 ESCAPE ENDP
@@ -89,10 +109,12 @@ ESCAPE ENDP
         cmp     word ptr es:[bx], 0             ; 26 83 3F 00
         jne     L_0073                          ; 75 02
         and     al, 0xfe                        ; 24 FE
+;   [conditional branch target (if/else)] L_0073
 L_0073:
         mov     bx, word ptr [bp + 0x12]        ; 8B 5E 12
         call    0                               ; E8 87 FF
         jmp     L_00A6                          ; EB 2B
+;   [conditional branch target (if/else)] L_007B
 L_007B:
         cmp     word ptr [bp + 0x10], 9         ; 83 7E 10 09
         jne     L_00A0                          ; 75 1F
@@ -108,21 +130,26 @@ L_007B:
         mov     word ptr [bp + 0xa], bx         ; 89 5E 0A
         mov     word ptr [bp + 0xc], ss         ; 8C 56 0C
         jmp     L_00A6                          ; EB 06
+;   [conditional branch target (if/else)] L_00A0
 L_00A0:
         cmp     word ptr [si + 2], 6            ; 83 7C 02 06
         jne     L_00A9                          ; 75 03
+;   [loop start (also forward branch)] L_00A6
 L_00A6:
         jmp     L_0366                          ; E9 BD 02
+;   [conditional branch target (if/else)] L_00A9
 L_00A9:
         cmp     word ptr [bp + 0x10], 1         ; 83 7E 10 01
         je      L_00E3                          ; 74 34
         cmp     word ptr [bp + 0x10], 3         ; 83 7E 10 03
         jne     L_00B8                          ; 75 03
         jmp     L_021C                          ; E9 64 01
+;   [conditional branch target (if/else)] L_00B8
 L_00B8:
         cmp     word ptr [bp + 0x10], 2         ; 83 7E 10 02
         je      L_00C0                          ; 74 02
         jmp     L_00A6                          ; EB E6
+;   [conditional branch target (if/else)] L_00C0
 L_00C0:
         xor     ax, ax                          ; 33 C0
         push    word ptr [bp + 0x12]            ; FF 76 12
@@ -135,12 +162,15 @@ L_00C0:
         call    far _entry_126                  ; 9A FF FF 00 00 [FIXUP]
         mov     word ptr [bp - 6], ax           ; 89 46 FA
         jmp     L_01CF                          ; E9 EF 00
+;   [conditional branch target (if/else)] L_00E0
 L_00E0:
         jmp     L_02BE                          ; E9 DB 01
+;   [conditional branch target (if/else)] L_00E3
 L_00E3:
         cmp     word ptr [si + 2], 7            ; 83 7C 02 07
         jne     L_00EB                          ; 75 02
         jmp     L_00A6                          ; EB BB
+;   [conditional branch target (if/else)] L_00EB
 L_00EB:
         mov     bx, word ptr [bp + 0x12]        ; 8B 5E 12
         mov     cx, 2                           ; B9 02 00
@@ -153,6 +183,7 @@ L_00EB:
         push    word ptr [si + 0xa]             ; FF 74 0A
         call    far _entry_126                  ; 9A D6 00 00 00 [FIXUP]
         mov     word ptr [bp - 6], ax           ; 89 46 FA
+;   [loop start] L_010D
 L_010D:
         push    word ptr [bp + 0x12]            ; FF 76 12
         call    far _SEG1_051E                  ; 9A FF FF 00 00 [FIXUP]
@@ -178,6 +209,7 @@ L_010D:
         mov     word ptr [si + 0x9c], ax        ; 89 84 9C 00
         mov     ax, word ptr [bp - 0x10]        ; 8B 46 F0
         mov     word ptr [si + 0x9e], ax        ; 89 84 9E 00
+;   [conditional branch target (if/else)] L_0152
 L_0152:
         mov     ax, word ptr [bp - 0xe]         ; 8B 46 F2
         or      ax, word ptr [bp - 0xc]         ; 0B 46 F4
@@ -209,8 +241,10 @@ L_0152:
         push    word ptr [bp + 0x12]            ; FF 76 12
         call    far _SEG1_0695                  ; 9A FF FF 00 00 [FIXUP]
         jmp     L_010D                          ; E9 5E FF
+;   [conditional branch target (if/else)] L_01AF
 L_01AF:
         mov     word ptr [bp + 0x10], 2         ; C7 46 10 02 00
+;   [conditional branch target (if/else)] L_01B4
 L_01B4:
         push    word ptr [bp + 0x12]            ; FF 76 12
         call    far _SEG1_0695                  ; 9A A8 01 00 00 [FIXUP]
@@ -220,6 +254,7 @@ L_01B4:
         push    word ptr [bp + 0x12]            ; FF 76 12
         push    ax                              ; 50
         call    far _SEG1_05C5                  ; 9A A0 01 00 00 [FIXUP]
+;   [unconditional branch target] L_01CF
 L_01CF:
         push    word ptr [bp - 6]               ; FF 76 FA
         call    far _entry_353                  ; 9A FF FF 00 00 [FIXUP]
@@ -250,6 +285,7 @@ L_01CF:
         mov     ax, 8                           ; B8 08 00
         call    0                               ; E8 E7 FD
         jmp     L_0366                          ; E9 4A 01
+;   [unconditional branch target] L_021C
 L_021C:
         mov     ax, word ptr [si + 0xa]         ; 8B 44 0A
         or      ax, ax                          ; 0B C0
@@ -271,12 +307,15 @@ L_021C:
         call    far _SEG1_05C5                  ; 9A CB 01 00 00 [FIXUP]
         push    word ptr [bp + 0x12]            ; FF 76 12
         call    far _SEG1_051E                  ; 9A 09 02 00 00 [FIXUP]
+;   [conditional branch target (if/else)] L_0254
 L_0254:
         push    word ptr [bp + 0x12]            ; FF 76 12
         call    far _SEG1_0695                  ; 9A B8 01 00 00 [FIXUP]
         push    word ptr [bp + 0x12]            ; FF 76 12
         call    far _SEG1_065C                  ; 9A 19 01 00 00 [FIXUP]
         push    word ptr [bp + 8]               ; FF 76 08
+        ;   ^ arg wSeg
+        ; --> GLOBALHANDLE(WORD wSeg) -> DWORD
         call    far KERNEL.GLOBALHANDLE         ; 9A FF FF 00 00 [FIXUP]
         push    ax                              ; 50
         lea     cx, [bp - 0x12]                 ; 8D 4E EE
@@ -287,8 +326,10 @@ L_0254:
         push    cx                              ; 51
         push    word ptr [bp + 8]               ; FF 76 08
         push    word ptr [bp + 6]               ; FF 76 06
+        ;   ^ arg wSeg
         lcall   [di + 8]                        ; FF 5D 08
         mov     word ptr [bp - 4], ax           ; 89 46 FC
+        ; --> GLOBALHANDLE(WORD wSeg) -> DWORD
         call    far KERNEL.GLOBALHANDLE         ; 9A 68 02 00 00 [FIXUP]
         mov     word ptr [bp + 8], dx           ; 89 56 08
         mov     bx, word ptr [si + 0xc]         ; 8B 5C 0C
@@ -299,6 +340,7 @@ L_0254:
         mov     word ptr [si + 0x9c], ax        ; 89 84 9C 00
         mov     ax, word ptr [bp - 0x10]        ; 8B 46 F0
         mov     word ptr [si + 0x9e], ax        ; 89 84 9E 00
+;   [conditional branch target (if/else)] L_02AA
 L_02AA:
         les     bx, ptr [bp + 6]                ; C4 5E 06
         mov     ax, word ptr es:[bx]            ; 26 8B 07
@@ -306,6 +348,7 @@ L_02AA:
         or      ax, word ptr es:[bx + 4]        ; 26 0B 47 04
         or      ax, word ptr es:[bx + 6]        ; 26 0B 47 06
         jne     L_031D                          ; 75 5F
+;   [unconditional branch target] L_02BE
 L_02BE:
         mov     word ptr [si + 0x9c], ax        ; 89 84 9C 00
         mov     word ptr [si + 0x9e], ax        ; 89 84 9E 00
@@ -342,6 +385,7 @@ L_02BE:
         jne     L_0363                          ; 75 4B
         mov     di, word ptr [si + 0x2a]        ; 8B 7C 2A
         jmp     L_0366                          ; EB 49
+;   [conditional branch target (if/else)] L_031D
 L_031D:
         mov     ax, word ptr es:[bx]            ; 26 8B 07
         mov     word ptr [bp - 0xe], ax         ; 89 46 F2
@@ -364,8 +408,10 @@ L_031D:
         push    word ptr [bp - 8]               ; FF 76 F8
         call    far _SEG1_103D                  ; 9A 84 01 00 00 [FIXUP]
         mov     ax, word ptr [bp - 4]           ; 8B 46 FC
+;   [conditional branch target (if/else)] L_0363
 L_0363:
         jmp     L_03FA                          ; E9 94 00
+;   [unconditional branch target] L_0366
 L_0366:
         cmp     word ptr [bp + 0x10], 0x100     ; 81 7E 10 00 01
         jl      L_03D4                          ; 7C 67
@@ -384,6 +430,7 @@ L_0366:
         jge     L_03FA                          ; 7D 62
         cmp     word ptr [bp + 0x10], 0x400     ; 81 7E 10 00 04
         jge     L_03D4                          ; 7D 35
+;   [conditional branch target (if/else)] L_039F
 L_039F:
         push    di                              ; 57
         cld                                     ; FC
@@ -413,6 +460,7 @@ L_039F:
         push    ss                              ; 16
         pop     word ptr [bp + 0xc]             ; 8F 46 0C
         pop     di                              ; 5F
+;   [conditional branch target (if/else)] L_03D4
 L_03D4:
         push    ax                              ; 50
         call    far _SEG1_1662                  ; 9A FF FF 00 00 [FIXUP]
@@ -428,6 +476,7 @@ L_03D4:
         push    ax                              ; 50
         call    far _SEG1_1694                  ; 9A FF FF 00 00 [FIXUP]
         pop     ax                              ; 58
+;   [loop start (also forward branch)] L_03FA
 L_03FA:
         pop     di                              ; 5F
         pop     si                              ; 5E
@@ -437,15 +486,10 @@ L_03FA:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0xe                             ; CA 0E 00
+;   [unconditional branch target] L_0407
 L_0407:
         xor     ax, ax                          ; 33 C0
         jmp     L_03FA                          ; EB EF
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; QUERYABORT -- 25 instr
-; Funcion sin clasificar definitiva (25 instr).
-; tags: far, small
-;----------------------------------------------------------------------
 
 ;-----------------------------------------------------------------------
 ; QUERYABORT  (offset 0x040B, size 53 bytes)
@@ -470,6 +514,7 @@ QUERYABORT PROC FAR
         push    word ptr [bp + 8]               ; FF 76 08
         push    word ptr [bp + 6]               ; FF 76 06
         lcall   [bx + 0x92]                     ; FF 9F 92 00
+;   [conditional branch target (if/else)] L_0435
 L_0435:
         sub     bp, 2                           ; 83 ED 02
         mov     sp, bp                          ; 8B E5
@@ -478,13 +523,6 @@ L_0435:
         dec     bp                              ; 4D
         retf    4                               ; CA 04 00
 QUERYABORT ENDP
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; GETENVIRONMENT -- 48 instr
-; Getter: devuelve environment.
-; tags: calls_kernel, far, medium
-; calls (inter): KERNEL.FINDATOM, KERNEL.GLOBALLOCK, KERNEL.GLOBALUNLOCK
-;----------------------------------------------------------------------
 
 
 ;-----------------------------------------------------------------------
@@ -514,12 +552,15 @@ GETENVIRONMENT PROC FAR
         call    far KERNEL.FINDATOM             ; 9A FF FF 00 00 [FIXUP]
         or      ax, ax                          ; 0B C0
         je      L_04A0                          ; 74 2D
+;   [conditional branch target (if/else)] L_0473
 L_0473:
         call    far _SEG1_2EC4                  ; 9A FF FF 00 00 [FIXUP]
         mov     ax, 0                           ; B8 00 00
         jne     L_04A0                          ; 75 23
         mov     di, word ptr [bx + 2]           ; 8B 7F 02
         push    di                              ; 57
+        ;   ^ arg hMem
+        ; --> GLOBALLOCK(HANDLE hMem) -> LPVOID
         call    far KERNEL.GLOBALLOCK           ; 9A FF FF 00 00 [FIXUP]
         jcxz    L_04A0                          ; E3 18
         mov     ds, dx                          ; 8E DA
@@ -530,8 +571,11 @@ L_0473:
         cld                                     ; FC
         rep movsb byte ptr es:[di], byte ptr [si] ; F3 A4
         push    bx                              ; 53
+        ;   ^ arg hMem
+        ; --> GLOBALUNLOCK(HANDLE hMem) -> BOOL
         call    far KERNEL.GLOBALUNLOCK         ; 9A FF FF 00 00 [FIXUP]
         mov     ax, word ptr [bp + 6]           ; 8B 46 06
+;   [conditional branch target (if/else)] L_04A0
 L_04A0:
         pop     di                              ; 5F
         pop     si                              ; 5E
@@ -542,13 +586,6 @@ L_04A0:
         dec     bp                              ; 4D
         retf    0xa                             ; CA 0A 00
 GETENVIRONMENT ENDP
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; SETENVIRONMENT -- 81 instr
-; Setter: cambia environment.
-; tags: calls_kernel, complex, far
-; calls (inter): KERNEL.DELETEATOM, KERNEL.FINDATOM, KERNEL.GLOBALFREE, KERNEL.GLOBALLOCK, KERNEL.GLOBALUNLOCK
-;----------------------------------------------------------------------
 
 
 ;-----------------------------------------------------------------------
@@ -581,6 +618,7 @@ SETENVIRONMENT PROC FAR
         call    far KERNEL.FINDATOM             ; 9A 6B 04 00 00 [FIXUP]
         or      ax, ax                          ; 0B C0
         je      L_0505                          ; 74 1B
+;   [conditional branch target (if/else)] L_04EA
 L_04EA:
         mov     di, ax                          ; 8B F8
         call    far _SEG1_2EC4                  ; 9A 74 04 00 00 [FIXUP]
@@ -588,18 +626,23 @@ L_04EA:
         xor     ax, ax                          ; 33 C0
         mov     word ptr [bx], ax               ; 89 07
         push    word ptr [bx + 2]               ; FF 77 02
+        ;   ^ arg hMem
+        ; --> GLOBALFREE(HANDLE hMem) -> HANDLE
         call    far KERNEL.GLOBALFREE           ; 9A FF FF 00 00 [FIXUP]
         push    di                              ; 57
         call    far KERNEL.DELETEATOM           ; 9A FF FF 00 00 [FIXUP]
+;   [conditional branch target (if/else)] L_0505
 L_0505:
         mov     si, word ptr [bp + 6]           ; 8B 76 06
         or      si, si                          ; 0B F6
         je      L_0565                          ; 74 59
+        ; constant WM_CREATE
         mov     ax, 1                           ; B8 01 00
         les     bx, ptr [bp + 0xc]              ; C4 5E 0C
         cmp     byte ptr [bp - 5], al           ; 38 46 FB
         jne     L_051A                          ; 75 03
         les     bx, ptr [bp + 8]                ; C4 5E 08
+;   [conditional branch target (if/else)] L_051A
 L_051A:
         push    es                              ; 06
         push    bx                              ; 53
@@ -615,6 +658,8 @@ L_051A:
         jcxz    L_057B                          ; E3 48
         mov     word ptr [bp - 4], ax           ; 89 46 FC
         push    ax                              ; 50
+        ;   ^ arg hMem
+        ; --> GLOBALLOCK(HANDLE hMem) -> LPVOID
         call    far KERNEL.GLOBALLOCK           ; 9A 82 04 00 00 [FIXUP]
         jcxz    L_0573                          ; E3 35
         mov     es, dx                          ; 8E C2
@@ -633,31 +678,49 @@ L_051A:
         rep movsb byte ptr es:[di], byte ptr [si] ; F3 A4
         pop     ds                              ; 1F
         push    ax                              ; 50
+        ;   ^ arg hMem
+        ; --> GLOBALUNLOCK(HANDLE hMem) -> BOOL
         call    far KERNEL.GLOBALUNLOCK         ; 9A 99 04 00 00 [FIXUP]
+;   [conditional branch target (if/else)] L_0565
 L_0565:
+        ; constant WM_CREATE
         mov     al, 1                           ; B0 01
         jmp     L_0583                          ; EB 1A
+;   [conditional branch target (if/else)] L_0569
 L_0569:
         mov     di, dx                          ; 8B FA
         push    word ptr [bp - 4]               ; FF 76 FC
+        ;   ^ arg hMem
+        ; --> GLOBALUNLOCK(HANDLE hMem) -> BOOL
         call    far KERNEL.GLOBALUNLOCK         ; 9A 61 05 00 00 [FIXUP]
 SETENVIRONMENT ENDP
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_0573 -- offset 0x0573 -- 102 instr
-; Iterador con instrucciones de string (movsb/scasb/...) (102 instr).
-; tags: calls_kernel, complex_iterator, far, string_op
-; calls (inter): KERNEL.DELETEATOM, KERNEL.GLOBALFREE, KERNEL.GLOBALLOCK, KERNEL.GLOBALUNLOCK
-;----------------------------------------------------------------------
 
+;-------------------------------------------------------------------------
+; sub_0573   offset=0x0573  size=102 instr  segment=seg7.asm
+;
+; Classification (pass8): unclear  (score C=5, ASM=4)
+; Prologue: saves_regs     Epilogue: jmp_tail
+;
+; Far API calls:
+;   DELETEATOM
+;   GLOBALFREE(HANDLE hMem) -> HANDLE
+;   GLOBALLOCK(HANDLE hMem) -> LPVOID
+;   GLOBALUNLOCK(HANDLE hMem) -> BOOL
+;-------------------------------------------------------------------------
+;   [conditional branch target (if/else)] L_0573
 L_0573:
         push    word ptr [bp - 4]               ; FF 76 FC
+        ;   ^ arg hMem
+        ; --> GLOBALFREE(HANDLE hMem) -> HANDLE
         call    far KERNEL.GLOBALFREE           ; 9A FB 04 00 00 [FIXUP]
+;   [conditional branch target (if/else)] L_057B
 L_057B:
         push    di                              ; 57
         call    far KERNEL.DELETEATOM           ; 9A 01 05 00 00 [FIXUP]
+;   [conditional branch target (if/else)] L_0581
 L_0581:
         xor     ax, ax                          ; 33 C0
+;   [unconditional branch target] L_0583
 L_0583:
         pop     di                              ; 5F
         pop     si                              ; 5E
@@ -704,6 +767,7 @@ GETOBJECT PROC FAR
         call    far _SEG1_15D9                  ; 9A FF FF 00 00 [FIXUP]
         add     cx, 0x12                        ; 83 C1 12
         jmp     L_05FE                          ; EB 29
+;   [conditional branch target (if/else)] L_05D5
 L_05D5:
         mov     cx, 0xa                         ; B9 0A 00
         cmp     bl, 2                           ; 80 FB 02
@@ -714,6 +778,7 @@ L_05D5:
         cmp     dx, cx                          ; 3B D1
         jl      L_05FE                          ; 7C 14
         les     di, ptr [bp + 6]                ; C4 7E 06
+        ; constant WM_MOVE
         mov     ax, 3                           ; B8 03 00
         stosw   word ptr es:[di], ax            ; AB
         xor     ax, ax                          ; 33 C0
@@ -722,18 +787,22 @@ L_05D5:
         mov     ax, word ptr [si + 0x14]        ; 8B 44 14
         stosw   word ptr es:[di], ax            ; AB
         mov     ax, cx                          ; 8B C1
+;   [conditional branch target (if/else)] L_05FB
 L_05FB:
         jmp     L_060E                          ; EB 11
         nop                                     ; 90
+;   [branch target] L_05FE
 L_05FE:
         les     di, ptr [bp + 6]                ; C4 7E 06
         cmp     dx, cx                          ; 3B D1
         jge     L_0607                          ; 7D 02
         xchg    cx, dx                          ; 87 D1
+;   [conditional branch target (if/else)] L_0607
 L_0607:
         add     si, 8                           ; 83 C6 08
         mov     ax, cx                          ; 8B C1
         rep movsb byte ptr es:[di], byte ptr [si] ; F3 A4
+;   [loop start (also forward branch)] L_060E
 L_060E:
         pop     di                              ; 5F
         pop     si                              ; 5E
@@ -743,9 +812,12 @@ L_060E:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    8                               ; CA 08 00
+;   [conditional branch target (if/else)] L_061B
 L_061B:
         mov     si, word ptr [si + 8]           ; 8B 74 08
         push    si                              ; 56
+        ;   ^ arg hMem
+        ; --> GLOBALLOCK(HANDLE hMem) -> LPVOID
         call    far KERNEL.GLOBALLOCK           ; 9A 38 05 00 00 [FIXUP]
         jcxz    L_060E                          ; E3 E8
         mov     bx, si                          ; 8B DE
@@ -757,6 +829,7 @@ L_061B:
         cmp     dx, cx                          ; 3B D1
         jge     L_063B                          ; 7D 02
         mov     cx, dx                          ; 8B CA
+;   [conditional branch target (if/else)] L_063B
 L_063B:
         sub     dx, cx                          ; 2B D1
         cld                                     ; FC
@@ -765,15 +838,11 @@ L_063B:
         xor     ax, ax                          ; 33 C0
         rep stosb byte ptr es:[di], al          ; F3 AA
         push    bx                              ; 53
+        ;   ^ arg hMem
+        ; --> GLOBALUNLOCK(HANDLE hMem) -> BOOL
         call    far KERNEL.GLOBALUNLOCK         ; 9A 6F 05 00 00 [FIXUP]
         mov     ax, word ptr [bp + 0xa]         ; 8B 46 0A
         jmp     L_060E                          ; EB BD
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; ENUMOBJECTS -- 51 instr
-; Enumerador: itera sobre objects.
-; tags: far, medium
-;----------------------------------------------------------------------
 
 ;-----------------------------------------------------------------------
 ; ENUMOBJECTS  (offset 0x0651, size 124 bytes)
@@ -792,6 +861,7 @@ ENUMOBJECTS PROC FAR
         jne     L_0668                          ; 75 04
         sub     ax, ax                          ; 2B C0
         jmp     L_06C2                          ; EB 5A
+;   [conditional branch target (if/else)] L_0668
 L_0668:
         mov     ax, word ptr [bp + 6]           ; 8B 46 06
         mov     dx, word ptr [bp + 8]           ; 8B 56 08
@@ -825,6 +895,7 @@ L_0668:
         mov     word ptr [bp - 0x10], ax        ; 89 46 F0
         call    far _SEG1_1694                  ; 9A F5 03 00 00 [FIXUP]
         mov     ax, word ptr [bp - 0x10]        ; 8B 46 F0
+;   [unconditional branch target] L_06C2
 L_06C2:
         sub     bp, 2                           ; 83 ED 02
         mov     sp, bp                          ; 8B E5
@@ -858,6 +929,7 @@ ENUMOBJECTS ENDP
         call    far _entry_377                  ; 9A FF FF 00 00 [FIXUP]
         les     bx, ptr [bp + 0xa]              ; C4 5E 0A
         mov     word ptr es:[bx + 4], ax        ; 26 89 47 04
+;   [conditional branch target (if/else)] L_0712
 L_0712:
         push    word ptr [bp + 0xc]             ; FF 76 0C
         push    word ptr [bp + 0xa]             ; FF 76 0A

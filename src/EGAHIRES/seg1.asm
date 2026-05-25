@@ -1,3 +1,17 @@
+; ======================================================================
+; EGAHIRES / seg1.asm   (segment 1 of EGAHIRES)
+; ----------------------------------------------------------------------
+; Functions discovered (pass1b):        45
+; Total instructions:                 4356
+; 
+; Classification (pass8):
+;   C-origin (high+medium):              1
+;   ASM-origin (high+medium):           23
+;   Unclear:                            20
+;   Tiny / unclassified:                 1
+; 
+; Far API calls in this segment:     0 (0 unique)
+; ======================================================================
 ; AUTO-GENERATED from original EGAHIRES segment 1
 ; segment_size=10288 bytes, flags=0x0040
 ; mode: humano legible - instrucciones x86 + bytes raw en comentario (autoritativo)
@@ -131,6 +145,7 @@ EGAHIRES_TEXT SEGMENT BYTE PUBLIC 'CODE'
         db      0feh                            ; FE
         ja      L_0105                          ; 77 01
         cli                                     ; FA
+;   [conditional branch target (if/else)] L_0105
 L_0105:
         add     dh, bh                          ; 00 FE
         add     byte ptr [bx + di - 0x5901], al ; 00 81 FF A6
@@ -153,8 +168,10 @@ L_0105:
         add     word ptr [bx + si + 0xf00], di  ; 01 B8 00 0F
         int     0x10                            ; CD 10
         stosb   byte ptr es:[di], al            ; AA
+        ; constant VK_SHIFT
         mov     ax, 0x10                        ; B8 10 00
         int     0x10                            ; CD 10
+        ; constant GMEM_DISCARDABLE
         mov     ax, 0xf00                       ; B8 00 0F
         int     0x10                            ; CD 10
         cmp     al, 0x10                        ; 3C 10
@@ -168,20 +185,23 @@ L_0105:
         mov     dx, 0x3ce                       ; BA CE 03
         mov     ax, 0x707                       ; B8 07 07
         out     dx, ax                          ; EF
+;   [error/early exit] L_015C
 L_015C:
         ret                                     ; C3
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_015D -- offset 0x015D -- 36 instr
-; Llama a servicios BIOS via INT 10h (video, 36 instr).
-; tags: bios_caller, int_10
-; callers: sub_2552
-; calls (intra): sub_01AA
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_015D   offset=0x015D  size=36 instr  segment=seg1.asm
+;
+; Classification (pass8): asm_medium  (score C=0, ASM=5)
+; Prologue: none     Epilogue: ret
+;
+; Near calls (internal): L_01AA
+;-------------------------------------------------------------------------
+;   [sub-routine] L_015D
 L_015D:
         mov     al, byte ptr [si + 0x20]        ; 8A 44 20
         xor     ah, ah                          ; 32 E4
         int     0x10                            ; CD 10
+        ; constant WM_CREATE
         mov     al, 1                           ; B0 01
         ret                                     ; C3
         add     byte ptr [bx + si], al          ; 00 00
@@ -215,15 +235,17 @@ L_015D:
         mov     di, 0xc8                        ; BF C8 00
         xor     al, al                          ; 32 C0
         mov     byte ptr es:[0x10], al          ; 26 A2 10 00
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_01AA -- offset 0x01AA -- 9 instr
-; Iterador con instrucciones de string (movsb/scasb/...) (9 instr).
-; tags: iterator, loop, string_op
-; callers: sub_015D
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_01AA   offset=0x01AA  size=9 instr  segment=seg1.asm
+;
+; Classification (pass8): asm_medium  (score C=0, ASM=5)
+; Prologue: none     Epilogue: ret
+;-------------------------------------------------------------------------
+;   [sub-routine] L_01AA
 L_01AA:
+        ; constant VK_SHIFT
         mov     cx, 0x10                        ; B9 10 00
+;   [loop iteration target] L_01AD
 L_01AD:
         movsw   word ptr es:[di], word ptr [si] ; A5
         movsw   word ptr es:[di], word ptr [si] ; A5
@@ -233,14 +255,15 @@ L_01AD:
         stosb   byte ptr es:[di], al            ; AA
         loop    L_01AD                          ; E2 F8
         ret                                     ; C3
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_01B6 -- offset 0x01B6 -- 14 instr
-; Funcion sin clasificar definitiva (14 instr).
-; tags: small
-; callers: sub_26A5, sub_271F
-; calls (intra): sub_0210, sub_0258, sub_031B, sub_03A7, sub_043D, sub_051C (+2 mas)
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_01B6   offset=0x01B6  size=14 instr  segment=seg1.asm
+;
+; Classification (pass8): unclear  (score C=0, ASM=2)
+; Prologue: none     Epilogue: ret
+;
+; Near calls (internal): L_0210, L_0258, L_031B, L_03A7, L_043D, L_051C, L_052A, L_0541
+;-------------------------------------------------------------------------
+;   [sub-routine] L_01B6
 L_01B6:
         mov     ax, ds                          ; 8C D8
         mov     es, ax                          ; 8E C0
@@ -256,14 +279,15 @@ L_01B6:
         call    L_0541                          ; E8 6D 03
         pop     bp                              ; 5D
         ret                                     ; C3
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_01D6 -- offset 0x01D6 -- 12 instr
-; Funcion sin clasificar definitiva (12 instr).
-; tags: small
-; callers: sub_2426, sub_24B2, sub_2682, sub_2769
-; calls (intra): sub_01F3, sub_051C, sub_0541
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_01D6   offset=0x01D6  size=12 instr  segment=seg1.asm
+;
+; Classification (pass8): unclear  (score C=0, ASM=2)
+; Prologue: none     Epilogue: ret
+;
+; Near calls (internal): L_01F3, L_051C, L_0541
+;-------------------------------------------------------------------------
+;   [sub-routine] L_01D6
 L_01D6:
         cmp     byte ptr [0x11], 1              ; 80 3E 11 00 01
         jne     L_01F2                          ; 75 15
@@ -276,16 +300,18 @@ L_01D6:
         call    L_01F3                          ; E8 05 00
         call    L_0541                          ; E8 50 03
         pop     bp                              ; 5D
+;   [error/early exit] L_01F2
 L_01F2:
         ret                                     ; C3
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_01F3 -- offset 0x01F3 -- 11 instr
-; Wrapper que delega en sub_04F2.
-; tags: wrapper
-; callers: sub_01D6, sub_043D
-; calls (intra): sub_04F2
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_01F3   offset=0x01F3  size=11 instr  segment=seg1.asm
+;
+; Classification (pass8): asm_medium  (score C=0, ASM=4)
+; Prologue: none     Epilogue: jmp_tail
+;
+; Near calls (internal): L_04F2
+;-------------------------------------------------------------------------
+;   [sub-routine] L_01F3
 L_01F3:
         mov     di, 0x6d60                      ; BF 60 6D
         mov     ax, word ptr [0x12]             ; A1 12 00
@@ -295,17 +321,19 @@ L_01F3:
         call    L_04F2                          ; E8 F0 02
         xchg    di, si                          ; 87 F7
         mov     ax, 0x4b                        ; B8 4B 00
+        ; constant WM_SIZE
         mov     cx, 5                           ; B9 05 00
         mov     bp, 0x20                        ; BD 20 00
         jmp     L_03C0                          ; E9 B0 01
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_0210 -- offset 0x0210 -- 16 instr
-; Funcion sin clasificar definitiva (16 instr).
-; tags: small
-; callers: sub_01B6
-; calls (intra): sub_023B, sub_0385, sub_0536
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_0210   offset=0x0210  size=16 instr  segment=seg1.asm
+;
+; Classification (pass8): unclear  (score C=0, ASM=2)
+; Prologue: none     Epilogue: unknown
+;
+; Near calls (internal): L_023B, L_0385, L_0536
+;-------------------------------------------------------------------------
+;   [sub-routine] L_0210
 L_0210:
         mov     ax, word ptr [0x16]             ; A1 16 00
         mov     si, word ptr [0x18]             ; 8B 36 18 00
@@ -323,16 +351,17 @@ L_0210:
         mov     di, bx                          ; 8B FB
         mov     cx, 0x20                        ; B9 20 00
         mov     si, 0xc8                        ; BE C8 00
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_023B -- offset 0x023B -- 15 instr
-; Iterador con instrucciones de string (movsb/scasb/...) (15 instr).
-; tags: iterator, loop, string_op
-; callers: sub_0210
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_023B   offset=0x023B  size=15 instr  segment=seg1.asm
+;
+; Classification (pass8): asm_medium  (score C=0, ASM=5)
+; Prologue: none     Epilogue: ret
+;-------------------------------------------------------------------------
+;   [sub-routine] L_023B
 L_023B:
         cld                                     ; FC
         mov     dx, 4                           ; BA 04 00
+;   [loop iteration target] L_023F
 L_023F:
         mov     al, byte ptr es:[di]            ; 26 8A 05
         movsb   byte ptr es:[di], byte ptr [si] ; A4
@@ -346,16 +375,18 @@ L_023F:
         movsb   byte ptr es:[di], byte ptr [si] ; A4
         add     di, dx                          ; 03 FA
         loop    L_023F                          ; E2 E8
+;   [loop start] L_0257
 L_0257:
         ret                                     ; C3
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_0258 -- offset 0x0258 -- 15 instr
-; Wrapper que delega en sub_027D.
-; tags: wrapper
-; callers: sub_01B6
-; calls (intra): sub_027D
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_0258   offset=0x0258  size=15 instr  segment=seg1.asm
+;
+; Classification (pass8): unclear  (score C=0, ASM=2)
+; Prologue: none     Epilogue: unknown
+;
+; Near calls (internal): L_027D
+;-------------------------------------------------------------------------
+;   [sub-routine] L_0258
 L_0258:
         mov     ax, ds                          ; 8C D8
         mov     es, ax                          ; 8E C0
@@ -372,21 +403,24 @@ L_0258:
         call    L_027D                          ; E8 05 00
         mov     al, bh                          ; 8A C7
         mov     si, 0xc8                        ; BE C8 00
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_027D -- offset 0x027D -- 39 instr
-; Iterador con instrucciones de string (movsb/scasb/...) (39 instr).
-; tags: iterator, loop, string_op
-; callers: sub_0258
-; calls (intra): sub_02CB
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_027D   offset=0x027D  size=39 instr  segment=seg1.asm
+;
+; Classification (pass8): asm_medium  (score C=0, ASM=5)
+; Prologue: none     Epilogue: ret
+;
+; Near calls (internal): L_02CB
+;-------------------------------------------------------------------------
+;   [sub-routine] L_027D
 L_027D:
         cmp     al, 3                           ; 3C 03
         jae     L_02A0                          ; 73 1F
         mov     bl, al                          ; 8A D8
+;   [loop start] L_0283
 L_0283:
         mov     di, si                          ; 8B FE
         mov     cx, 0x50                        ; B9 50 00
+;   [loop iteration target] L_0288
 L_0288:
         mov     ax, word ptr [di]               ; 8B 05
         xchg    al, ah                          ; 86 E0
@@ -401,11 +435,13 @@ L_0288:
         dec     bl                              ; FE CB
         jne     L_0283                          ; 75 E4
         ret                                     ; C3
+;   [conditional branch target (if/else)] L_02A0
 L_02A0:
         mov     cl, al                          ; 8A C8
         mov     di, si                          ; 8B FE
         mov     dx, 0xa0                        ; BA A0 00
         xor     bl, bl                          ; 32 DB
+;   [loop start] L_02A9
 L_02A9:
         xor     ax, ax                          ; 33 C0
         mov     ah, byte ptr [di]               ; 8A 25
@@ -418,6 +454,7 @@ L_02A9:
         jne     L_02A9                          ; 75 F0
         or      byte ptr [si], bl               ; 08 1C
         ret                                     ; C3
+;   [conditional branch target (if/else)] L_02BC
 L_02BC:
         neg     al                              ; F6 D8
         mov     bh, al                          ; 8A F8
@@ -425,18 +462,19 @@ L_02BC:
         call    L_02CB                          ; E8 05 00
         mov     al, bh                          ; 8A C7
         mov     si, 0xc8                        ; BE C8 00
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_02CB -- offset 0x02CB -- 42 instr
-; Iterador con instrucciones de string (movsb/scasb/...) (42 instr).
-; tags: iterator, loop, string_op
-; callers: sub_027D
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_02CB   offset=0x02CB  size=42 instr  segment=seg1.asm
+;
+; Classification (pass8): asm_medium  (score C=0, ASM=3)
+; Prologue: none     Epilogue: ret
+;-------------------------------------------------------------------------
+;   [sub-routine] L_02CB
 L_02CB:
         std                                     ; FD
         cmp     al, 3                           ; 3C 03
         jae     L_02FD                          ; 73 2D
         mov     bl, al                          ; 8A D8
+;   [loop start] L_02D2
 L_02D2:
         mov     di, si                          ; 8B FE
         mov     cx, 0xa0                        ; B9 A0 00
@@ -444,6 +482,7 @@ L_02D2:
         sub     di, 2                           ; 83 EF 02
         mov     dx, di                          ; 8B D7
         shr     cx, 1                           ; D1 E9
+;   [loop iteration target] L_02E0
 L_02E0:
         mov     ax, word ptr [di]               ; 8B 05
         xchg    al, ah                          ; 86 E0
@@ -460,6 +499,7 @@ L_02E0:
         jne     L_02D2                          ; 75 D7
         cld                                     ; FC
         ret                                     ; C3
+;   [conditional branch target (if/else)] L_02FD
 L_02FD:
         mov     cl, al                          ; 8A C8
         mov     dx, 0xa0                        ; BA A0 00
@@ -467,6 +507,7 @@ L_02FD:
         dec     si                              ; 4E
         mov     di, si                          ; 8B FE
         xor     bl, bl                          ; 32 DB
+;   [loop start] L_0309
 L_0309:
         xor     ax, ax                          ; 33 C0
         mov     al, byte ptr [di]               ; 8A 05
@@ -479,14 +520,15 @@ L_0309:
         or      byte ptr [si], bl               ; 08 1C
         cld                                     ; FC
         ret                                     ; C3
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_031B -- offset 0x031B -- 28 instr
-; Iterador con instrucciones de string (movsb/scasb/...) (28 instr).
-; tags: iterator, loop, string_op
-; callers: sub_01B6
-; calls (intra): sub_0385
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_031B   offset=0x031B  size=28 instr  segment=seg1.asm
+;
+; Classification (pass8): asm_medium  (score C=0, ASM=5)
+; Prologue: none     Epilogue: ret
+;
+; Near calls (internal): L_0385
+;-------------------------------------------------------------------------
+;   [sub-routine] L_031B
 L_031B:
         mov     di, 0x6d60                      ; BF 60 6D
         mov     ax, word ptr [0x16]             ; A1 16 00
@@ -501,6 +543,7 @@ L_031B:
         mov     ax, 0xa000                      ; B8 00 A0
         mov     es, ax                          ; 8E C0
         mov     ds, ax                          ; 8E D8
+;   [loop iteration target] L_0342
 L_0342:
         movsb   byte ptr es:[di], byte ptr [si] ; A4
         movsb   byte ptr es:[di], byte ptr [si] ; A4
@@ -517,14 +560,15 @@ L_0342:
         loop    L_0342                          ; E2 F0
         mov     ds, bx                          ; 8E DB
         ret                                     ; C3
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_0355 -- offset 0x0355 -- 26 instr
-; Iterador con instrucciones de string (movsb/scasb/...) (26 instr).
-; tags: iterator, loop, string_op
-; callers: sub_043D
-; calls (intra): sub_0385
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_0355   offset=0x0355  size=26 instr  segment=seg1.asm
+;
+; Classification (pass8): asm_medium  (score C=0, ASM=5)
+; Prologue: none     Epilogue: ret
+;
+; Near calls (internal): L_0385
+;-------------------------------------------------------------------------
+;   [sub-routine] L_0355
 L_0355:
         mov     di, 0x6d60                      ; BF 60 6D
         mov     ax, word ptr [0x12]             ; A1 12 00
@@ -537,6 +581,7 @@ L_0355:
         mov     ax, 0xa000                      ; B8 00 A0
         mov     es, ax                          ; 8E C0
         mov     ds, ax                          ; 8E D8
+;   [loop iteration target] L_0372
 L_0372:
         movsb   byte ptr es:[di], byte ptr [si] ; A4
         movsb   byte ptr es:[di], byte ptr [si] ; A4
@@ -553,13 +598,13 @@ L_0372:
         loop    L_0372                          ; E2 F0
         mov     ds, bx                          ; 8E DB
         ret                                     ; C3
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_0385 -- offset 0x0385 -- 14 instr
-; Funcion hoja (no llama a otras, 14 instr): probable helper aritmetico/conversion.
-; tags: leaf
-; callers: sub_0210, sub_031B, sub_0355
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_0385   offset=0x0385  size=14 instr  segment=seg1.asm
+;
+; Classification (pass8): unclear  (score C=0, ASM=2)
+; Prologue: none     Epilogue: ret
+;-------------------------------------------------------------------------
+;   [sub-routine] L_0385
 L_0385:
         sub     ax, word ptr [0x1a]             ; 2B 06 1A 00
         sar     ax, 1                           ; D1 F8
@@ -575,13 +620,13 @@ L_0385:
         add     si, 0x6e00                      ; 81 C6 00 6E
         mov     cx, 0x20                        ; B9 20 00
         ret                                     ; C3
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_03A7 -- offset 0x03A7 -- 63 instr
-; Iterador con bucle (63 instr).
-; tags: complex_iterator, loop
-; callers: sub_01B6
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_03A7   offset=0x03A7  size=63 instr  segment=seg1.asm
+;
+; Classification (pass8): unclear  (score C=0, ASM=2)
+; Prologue: none     Epilogue: ret
+;-------------------------------------------------------------------------
+;   [sub-routine] L_03A7
 L_03A7:
         mov     ax, 0x47                        ; B8 47 00
         mov     si, 0x6e00                      ; BE 00 6E
@@ -590,6 +635,7 @@ L_03A7:
         mov     bp, word ptr [0x1e]             ; 8B 2E 1E 00
         push    word ptr [0x1c]                 ; FF 36 1C 00
         push    word ptr [0x1a]                 ; FF 36 1A 00
+;   [unconditional branch target] L_03C0
 L_03C0:
         mov     dx, cx                          ; 8B D1
         mov     word ptr [0x20], cx             ; 89 0E 20 00
@@ -605,10 +651,12 @@ L_03C0:
         add     di, cx                          ; 03 F9
         add     si, cx                          ; 03 F1
         jmp     L_03E8                          ; EB 09
+;   [conditional branch target (if/else)] L_03DF
 L_03DF:
         add     cx, word ptr [0x20]             ; 03 0E 20 00
         sub     cx, 0x50                        ; 83 E9 50
         jle     L_03F3                          ; 7E 0B
+;   [unconditional branch target] L_03E8
 L_03E8:
         mov     bp, cx                          ; 8B E9
         add     ax, cx                          ; 03 C1
@@ -616,12 +664,14 @@ L_03E8:
         jg      L_03F3                          ; 7F 03
         jmp     L_0436                          ; EB 44
         nop                                     ; 90
+;   [conditional branch target (if/else)] L_03F3
 L_03F3:
         pop     cx                              ; 59
         or      cx, cx                          ; 0B C9
         jge     L_040A                          ; 7D 12
         neg     cx                              ; F7 D9
         mov     bx, cx                          ; 8B D9
+;   [loop iteration target] L_03FC
 L_03FC:
         add     si, word ptr [0x20]             ; 03 36 20 00
         add     di, ax                          ; 03 F8
@@ -629,13 +679,16 @@ L_03FC:
         loop    L_03FC                          ; E2 F6
         mov     cx, bx                          ; 8B CB
         jmp     L_0414                          ; EB 0A
+;   [conditional branch target (if/else)] L_040A
 L_040A:
         add     cx, word ptr [0x22]             ; 03 0E 22 00
         sub     cx, 0x15e                       ; 81 E9 5E 01
         jle     L_041A                          ; 7E 06
+;   [unconditional branch target] L_0414
 L_0414:
         sub     word ptr [0x22], cx             ; 29 0E 22 00
         jle     L_0437                          ; 7E 1D
+;   [conditional branch target (if/else)] L_041A
 L_041A:
         mov     dh, byte ptr [0x22]             ; 8A 36 22 00
         push    ds                              ; 1E
@@ -643,6 +696,7 @@ L_041A:
         mov     es, cx                          ; 8E C1
         mov     ds, cx                          ; 8E D9
         xor     ch, ch                          ; 32 ED
+;   [loop start] L_0428
 L_0428:
         mov     cl, dl                          ; 8A CA
         rep movsb byte ptr es:[di], byte ptr [si] ; F3 A4
@@ -652,19 +706,22 @@ L_0428:
         jne     L_0428                          ; 75 F4
         pop     ds                              ; 1F
         ret                                     ; C3
+;   [fall-through exit] L_0436
 L_0436:
         pop     cx                              ; 59
+;   [error/early exit] L_0437
 L_0437:
         mov     byte ptr [0x11], 0              ; C6 06 11 00 00
         ret                                     ; C3
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_043D -- offset 0x043D -- 14 instr
-; Funcion sin clasificar definitiva (14 instr).
-; tags: small
-; callers: sub_01B6
-; calls (intra): sub_01F3, sub_0355, sub_045D, sub_0492
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_043D   offset=0x043D  size=14 instr  segment=seg1.asm
+;
+; Classification (pass8): unclear  (score C=0, ASM=2)
+; Prologue: none     Epilogue: ret
+;
+; Near calls (internal): L_01F3, L_0355, L_045D, L_0492
+;-------------------------------------------------------------------------
+;   [sub-routine] L_043D
 L_043D:
         call    L_0492                          ; E8 52 00
         xor     ax, ax                          ; 33 C0
@@ -675,20 +732,22 @@ L_043D:
         or      bp, bp                          ; 0B ED
         je      L_0456                          ; 74 07
         call    L_01F3                          ; E8 A1 FD
+;   [conditional branch target (if/else)] L_0452
 L_0452:
         call    L_045D                          ; E8 08 00
         ret                                     ; C3
+;   [conditional branch target (if/else)] L_0456
 L_0456:
         call    L_045D                          ; E8 04 00
         call    L_0355                          ; E8 F9 FE
         ret                                     ; C3
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_045D -- offset 0x045D -- 33 instr
-; Iterador con instrucciones de string (movsb/scasb/...) (33 instr).
-; tags: iterator, loop, string_op
-; callers: sub_043D
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_045D   offset=0x045D  size=33 instr  segment=seg1.asm
+;
+; Classification (pass8): asm_medium  (score C=0, ASM=5)
+; Prologue: none     Epilogue: ret
+;-------------------------------------------------------------------------
+;   [sub-routine] L_045D
 L_045D:
         mov     ax, 0x47                        ; B8 47 00
         mov     cx, word ptr [0x1e]             ; 8B 0E 1E 00
@@ -700,6 +759,7 @@ L_045D:
         mov     ds, di                          ; 8E DF
         mov     es, di                          ; 8E C7
         mov     di, 0x6e00                      ; BF 00 6E
+;   [loop iteration target] L_0477
 L_0477:
         movsb   byte ptr es:[di], byte ptr [si] ; A4
         movsb   byte ptr es:[di], byte ptr [si] ; A4
@@ -724,14 +784,15 @@ L_0477:
         loop    L_0477                          ; E2 E8
         mov     ds, dx                          ; 8E DA
         ret                                     ; C3
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_0492 -- offset 0x0492 -- 36 instr
-; Dispatcher: tabla de decisiones cmp+jcc (36 instr).
-; tags: dispatcher
-; callers: sub_043D
-; calls (intra): sub_04F2
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_0492   offset=0x0492  size=36 instr  segment=seg1.asm
+;
+; Classification (pass8): unclear  (score C=0, ASM=2)
+; Prologue: none     Epilogue: ret
+;
+; Near calls (internal): L_04F2
+;-------------------------------------------------------------------------
+;   [sub-routine] L_0492
 L_0492:
         xor     bp, bp                          ; 33 ED
         cmp     byte ptr [0x11], 0              ; 80 3E 11 00 00
@@ -741,6 +802,7 @@ L_0492:
         cmp     ax, bx                          ; 3B C3
         jge     L_04A7                          ; 7D 01
         xchg    bx, ax                          ; 93
+;   [conditional branch target (if/else)] L_04A7
 L_04A7:
         and     bl, 0xf8                        ; 80 E3 F8
         sub     ax, bx                          ; 2B C3
@@ -754,9 +816,11 @@ L_04A7:
         jge     L_04C6                          ; 7D 04
         neg     ax                              ; F7 D8
         mov     bx, cx                          ; 8B D9
+;   [conditional branch target (if/else)] L_04C6
 L_04C6:
         cmp     ax, 0x20                        ; 3D 20 00
         jle     L_04DB                          ; 7E 10
+;   [conditional branch target (if/else)] L_04CB
 L_04CB:
         mov     ax, word ptr [0x16]             ; A1 16 00
         and     al, 0xf8                        ; 24 F8
@@ -764,6 +828,7 @@ L_04CB:
         mov     bx, word ptr [0x18]             ; 8B 1E 18 00
         xor     ax, ax                          ; 33 C0
         not     bp                              ; F7 D5
+;   [conditional branch target (if/else)] L_04DB
 L_04DB:
         mov     word ptr [0x1c], bx             ; 89 1E 1C 00
         add     ax, 0x20                        ; 05 20 00
@@ -773,13 +838,13 @@ L_04DB:
         call    L_04F2                          ; E8 05 00
         mov     word ptr [0x24], si             ; 89 36 24 00
         ret                                     ; C3
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_04F2 -- offset 0x04F2 -- 23 instr
-; Funcion sin clasificar definitiva (23 instr).
-; tags: small
-; callers: sub_01F3, sub_0492
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_04F2   offset=0x04F2  size=23 instr  segment=seg1.asm
+;
+; Classification (pass8): unclear  (score C=1, ASM=2)
+; Prologue: none     Epilogue: ret
+;-------------------------------------------------------------------------
+;   [sub-routine] L_04F2
 L_04F2:
         xchg    si, ax                          ; 96
         sar     si, 1                           ; D1 FE
@@ -804,13 +869,13 @@ L_04F2:
         add     ax, word ptr [bp + si]          ; 03 02
         pop     es                              ; 07
         add     byte ptr [bx + si], al          ; 00 00
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_051C -- offset 0x051C -- 6 instr
-; Funcion hoja (no llama a otras, 6 instr): probable helper aritmetico/conversion.
-; tags: leaf
-; callers: sub_01B6, sub_01D6
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_051C   offset=0x051C  size=6 instr  segment=seg1.asm
+;
+; Classification (pass8): unclear  (score C=0, ASM=2)
+; Prologue: none     Epilogue: unknown
+;-------------------------------------------------------------------------
+;   [sub-routine] L_051C
 L_051C:
         mov     ax, 0x702                       ; B8 02 07
         mov     dx, 0x3c4                       ; BA C4 03
@@ -818,53 +883,59 @@ L_051C:
         mov     ax, 0xff08                      ; B8 08 FF
         mov     dx, 0x3ce                       ; BA CE 03
         out     dx, ax                          ; EF
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_052A -- offset 0x052A -- 6 instr
-; Funcion hoja (no llama a otras, 6 instr): probable helper aritmetico/conversion.
-; tags: leaf
-; callers: sub_01B6
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_052A   offset=0x052A  size=6 instr  segment=seg1.asm
+;
+; Classification (pass8): unclear  (score C=0, ASM=2)
+; Prologue: none     Epilogue: ret
+;-------------------------------------------------------------------------
+;   [sub-routine] L_052A
 L_052A:
+        ; constant WM_MOVE
         mov     ax, 3                           ; B8 03 00
         mov     dx, 0x3ce                       ; BA CE 03
         out     dx, ax                          ; EF
         mov     ax, 0x105                       ; B8 05 01
         out     dx, ax                          ; EF
         ret                                     ; C3
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_0536 -- offset 0x0536 -- 6 instr
-; Funcion hoja (no llama a otras, 6 instr): probable helper aritmetico/conversion.
-; tags: leaf
-; callers: sub_0210, sub_0EC6, sub_1CEE
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_0536   offset=0x0536  size=6 instr  segment=seg1.asm
+;
+; Classification (pass8): unclear  (score C=0, ASM=2)
+; Prologue: none     Epilogue: ret
+;-------------------------------------------------------------------------
+;   [sub-routine] L_0536
 L_0536:
+        ; constant WM_MOVE
         mov     al, 3                           ; B0 03
         mov     dx, 0x3ce                       ; BA CE 03
         out     dx, ax                          ; EF
+        ; constant WM_SIZE
         mov     ax, 5                           ; B8 05 00
         out     dx, ax                          ; EF
         ret                                     ; C3
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_0541 -- offset 0x0541 -- 1093 instr
-; Iterador con instrucciones de string (movsb/scasb/...) (1093 instr).
-; tags: complex_iterator, far, loop, string_op
-; callers: sub_01B6, sub_01D6
-; calls (intra): sub_0EC6, sub_2426, sub_24B2, sub_2802
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_0541   offset=0x0541  size=1093 instr  segment=seg1.asm
+;
+; Classification (pass8): asm_medium  (score C=1, ASM=6)
+; Prologue: none     Epilogue: jmp_tail
+;
+; Near calls (internal): L_0EC6, L_2426, L_24B2, L_2802
+;-------------------------------------------------------------------------
+;   [sub-routine] L_0541
 L_0541:
         mov     cx, word ptr cs:[0x51a]         ; 2E 8B 0E 1A 05
         jcxz    L_0555                          ; E3 0D
         mov     si, 0x50a                       ; BE 0A 05
         cld                                     ; FC
+;   [loop iteration target] L_054C
 L_054C:
         lodsw   ax, word ptr cs:[si]            ; 2E AD
         mov     dx, ax                          ; 8B D0
         lodsw   ax, word ptr cs:[si]            ; 2E AD
         out     dx, ax                          ; EF
         loop    L_054C                          ; E2 F7
+;   [error/early exit] L_0555
 L_0555:
         ret                                     ; C3
         add     word ptr [bx + si], ax          ; 01 00
@@ -905,6 +976,7 @@ L_0555:
         dec     cx                              ; 49
         je      L_059C                          ; 74 03
         jmp     0xffffe626                      ; E9 8A E0
+;   [conditional branch target (if/else)] L_059C
 L_059C:
         and     ax, bp                          ; 23 C5
         or      al, bh                          ; 0A C7
@@ -953,6 +1025,7 @@ L_059C:
         add     ax, 0x50a                       ; 05 0A 05
         and     al, byte ptr [di]               ; 22 05
         xor     al, bl                          ; 32 C3
+;   [loop start] L_05F8
 L_05F8:
         xor     al, dl                          ; 32 C2
         xor     al, ah                          ; 32 C4
@@ -986,6 +1059,7 @@ L_05F8:
         push    di                              ; 57
         jae     L_0635                          ; 73 03
         jmp     L_0E20                          ; E9 EB 07
+;   [conditional branch target (if/else)] L_0635
 L_0635:
         cld                                     ; FC
         mov     cx, 0x100                       ; B9 00 01
@@ -998,21 +1072,25 @@ L_0635:
         mov     byte ptr [bp - 0x31], cl        ; 88 4E CF
         mov     dx, 0xc0                        ; BA C0 00
         xchg    cl, ch                          ; 86 E9
+;   [loop start] L_0651
 L_0651:
         inc     ch                              ; FE C5
         test    dx, ax                          ; 85 C2
         je      L_065B                          ; 74 04
         inc     cl                              ; FE C1
         xor     ch, ch                          ; 32 ED
+;   [conditional branch target (if/else)] L_065B
 L_065B:
         shl     dx, 1                           ; D1 E2
         shl     dx, 1                           ; D1 E2
         jae     L_0651                          ; 73 F0
+        ; constant WM_SIZE
         mov     dl, 5                           ; B2 05
         test    ax, 0x20                        ; A9 20 00
         je      L_066C                          ; 74 04
         inc     ch                              ; FE C5
         inc     dl                              ; FE C2
+;   [conditional branch target (if/else)] L_066C
 L_066C:
         and     ch, 0xfe                        ; 80 E5 FE
         sub     dl, ch                          ; 2A D5
@@ -1024,6 +1102,7 @@ L_066C:
         cmp     bl, 5                           ; 80 FB 05
         jb      L_0686                          ; 72 03
         add     cl, 2                           ; 80 C1 02
+;   [conditional branch target (if/else)] L_0686
 L_0686:
         mov     dl, cl                          ; 8A D1
         add     cl, al                          ; 02 C8
@@ -1031,6 +1110,7 @@ L_0686:
         mov     bx, word ptr cs:[bx + 0x60e]    ; 2E 8B 9F 0E 06
         rol     bx, cl                          ; D3 C3
         mov     word ptr [bp - 0x26], bx        ; 89 5E DA
+;   [loop start] L_0696
 L_0696:
         mov     si, bx                          ; 8B F3
         and     si, 3                           ; 81 E6 03 00
@@ -1041,14 +1121,18 @@ L_0696:
         jne     L_0696                          ; 75 EF
         test    byte ptr [bp - 0x32], 1         ; F6 46 CE 01
         je      L_06B2                          ; 74 05
+;   [loop start] L_06AD
 L_06AD:
         xor     ax, ax                          ; 33 C0
         jmp     L_0E17                          ; E9 65 07
+;   [conditional branch target (if/else)] L_06B2
 L_06B2:
         xor     cx, cx                          ; 33 C9
+        ; constant WM_CREATE
         mov     dx, 1                           ; BA 01 00
         cmp     byte ptr [bp - 0x31], cl        ; 38 4E CF
         je      L_06E7                          ; 74 2B
+        ; constant WM_CREATE
         mov     ch, 1                           ; B5 01
         lds     si, ptr [bp + 0x1a]             ; C5 76 1A
         lodsw   ax, word ptr [si]               ; AD
@@ -1065,6 +1149,7 @@ L_06B2:
         cmp     ax, 0x103                       ; 3D 03 01
         jne     L_06AD                          ; 75 D5
         stc                                     ; F9
+;   [conditional branch target (if/else)] L_06D9
 L_06D9:
         rcl     ch, 1                           ; D0 D5
         lodsw   ax, word ptr [si]               ; AD
@@ -1073,6 +1158,7 @@ L_06D9:
         mov     word ptr [bp + 0x1c], ax        ; 89 46 1C
         lodsw   ax, word ptr [si]               ; AD
         mov     word ptr [bp - 0x1c], ax        ; 89 46 E4
+;   [conditional branch target (if/else)] L_06E7
 L_06E7:
         lds     si, ptr [bp + 0x22]             ; C5 76 22
         lodsw   ax, word ptr [si]               ; AD
@@ -1090,6 +1176,7 @@ L_06E7:
         cmp     ax, 0x103                       ; 3D 03 01
         jne     L_06AD                          ; 75 A9
         stc                                     ; F9
+;   [conditional branch target (if/else)] L_0705
 L_0705:
         rcl     ch, 1                           ; D0 D5
         lodsw   ax, word ptr [si]               ; AD
@@ -1100,12 +1187,14 @@ L_0705:
         mov     word ptr [bp - 0x22], ax        ; 89 46 DE
         test    ch, 0x10                        ; F6 C5 10
         je      L_0725                          ; 74 0D
+        ; constant WM_SETTEXT
         mov     al, ch                          ; 8A C5
         and     al, 5                           ; 24 05
         je      L_0725                          ; 74 07
         xor     al, 5                           ; 34 05
         je      L_0725                          ; 74 03
         or      ch, 0x80                        ; 80 CD 80
+;   [conditional branch target (if/else)] L_0725
 L_0725:
         mov     byte ptr [bp - 9], ch           ; 88 6E F7
         cmp     byte ptr [bp - 0x2f], dh        ; 38 76 D1
@@ -1126,6 +1215,7 @@ L_0725:
         mov     es, ax                          ; 8E C0
         lea     di, [bp - 0x3a]                 ; 8D 7E C6
         mov     cx, 8                           ; B9 08 00
+;   [loop iteration target] L_075B
 L_075B:
         lodsb   al, byte ptr [si]               ; AC
         mov     ah, byte ptr [si + 7]           ; 8A 64 07
@@ -1139,12 +1229,15 @@ L_075B:
         loop    L_075B                          ; E2 EC
         mov     word ptr [bp + 0xc], es         ; 8C 46 0C
         lea     si, [di - 0x20]                 ; 8D 75 E0
+;   [conditional branch target (if/else)] L_0775
 L_0775:
         add     si, 0x18                        ; 83 C6 18
         mov     word ptr [bp + 0xa], si         ; 89 76 0A
         jmp     L_0780                          ; EB 03
+;   [loop start (also forward branch)] L_077D
 L_077D:
         jmp     L_06AD                          ; E9 2D FF
+;   [branch target] L_0780
 L_0780:
         mov     si, word ptr [bp + 0x14]        ; 8B 76 14
         or      si, si                          ; 0B F6
@@ -1170,19 +1263,24 @@ L_0780:
         cmp     cx, ax                          ; 3B C8
         jle     L_07B4                          ; 7E 01
         xchg    cx, ax                          ; 91
+;   [conditional branch target (if/else)] L_07B4
 L_07B4:
         cmp     dx, bx                          ; 3B D3
         jle     L_07BA                          ; 7E 02
         xchg    bx, dx                          ; 87 D3
+;   [conditional branch target (if/else)] L_07BA
 L_07BA:
         add     si, ax                          ; 03 F0
         add     di, bx                          ; 03 FB
         jmp     L_07C4                          ; EB 04
+;   [conditional branch target (if/else)] L_07C0
 L_07C0:
         add     si, cx                          ; 03 F1
         add     di, dx                          ; 03 FA
+;   [unconditional branch target] L_07C4
 L_07C4:
         call    L_2426                          ; E8 5F 1C
+        ; constant WM_MOVE
         mov     ax, 3                           ; B8 03 00
         mov     dx, 0x3ce                       ; BA CE 03
         mov     word ptr cs:[0x50c], ax         ; 2E A3 0C 05
@@ -1191,9 +1289,11 @@ L_07C4:
         mov     ax, 0xff08                      ; B8 08 FF
         mov     word ptr cs:[0x514], ax         ; 2E A3 14 05
         out     dx, ax                          ; EF
+        ; constant WM_SIZE
         mov     ax, 5                           ; B8 05 00
         mov     word ptr cs:[0x510], ax         ; 2E A3 10 05
         out     dx, ax                          ; EF
+;   [conditional branch target (if/else)] L_07E8
 L_07E8:
         mov     dx, word ptr [bp + 0x14]        ; 8B 56 14
         dec     dx                              ; 4A
@@ -1205,6 +1305,7 @@ L_07E8:
         je      L_0803                          ; 74 07
         mov     ax, word ptr [bp + 0x18]        ; 8B 46 18
         mov     byte ptr [bp - 6], 2            ; C6 46 FA 02
+;   [conditional branch target (if/else)] L_0803
 L_0803:
         mov     si, ax                          ; 8B F0
         and     ax, 7                           ; 25 07 00
@@ -1215,6 +1316,7 @@ L_0803:
         mov     ch, byte ptr cs:[bx + 0x5ce]    ; 2E 8A AF CE 05
         ja      L_081D                          ; 77 04
         mov     byte ptr [bp - 6], 1            ; C6 46 FA 01
+;   [conditional branch target (if/else)] L_081D
 L_081D:
         add     al, 8                           ; 04 08
         and     al, 7                           ; 24 07
@@ -1226,6 +1328,7 @@ L_081D:
         add     bx, bx                          ; 03 DB
         mov     bx, word ptr cs:[bx + 0x5de]    ; 2E 8B 9F DE 05
         jmp     L_086E                          ; EB 35
+;   [conditional branch target (if/else)] L_0839
 L_0839:
         mov     byte ptr [bp - 7], ah           ; 88 66 F9
         mov     cl, byte ptr cs:[bx + 0x5ce]    ; 2E 8A 8F CE 05
@@ -1240,6 +1343,7 @@ L_0839:
         sub     al, bl                          ; 2A C3
         jb      L_085F                          ; 72 04
         mov     byte ptr [bp - 6], 1            ; C6 46 FA 01
+;   [conditional branch target (if/else)] L_085F
 L_085F:
         add     al, 8                           ; 04 08
         and     al, 7                           ; 24 07
@@ -1248,6 +1352,7 @@ L_085F:
         mov     bx, 0xff                        ; BB FF 00
         shl     bx, cl                          ; D3 E3
         mov     cl, ah                          ; 8A CC
+;   [unconditional branch target] L_086E
 L_086E:
         mov     byte ptr [bp - 3], al           ; 88 46 FD
         mov     word ptr [bp - 0x12], bx        ; 89 5E EE
@@ -1258,9 +1363,11 @@ L_086E:
         and     ch, cl                          ; 22 E9
         xor     cl, cl                          ; 32 C9
         inc     dx                              ; 42
+;   [conditional branch target (if/else)] L_0881
 L_0881:
         dec     dx                              ; 4A
         mov     word ptr [bp - 0x18], dx        ; 89 56 E8
+        ; constant WM_SETTEXT
         mov     bl, ch                          ; 8A DD
         mov     ch, cl                          ; 8A E9
         not     cl                              ; F6 D1
@@ -1281,8 +1388,10 @@ L_0881:
         shr     si, 1                           ; D1 EE
         add     word ptr [bp + 0x1a], si        ; 01 76 1A
         mov     cx, word ptr [bp + 0x16]        ; 8B 4E 16
+;   [conditional branch target (if/else)] L_08B5
 L_08B5:
         mov     ax, word ptr [bp + 0x12]        ; 8B 46 12
+        ; constant WM_CREATE
         mov     dh, 1                           ; B6 01
         cmp     cx, bx                          ; 3B CB
         jge     L_08C5                          ; 7D 07
@@ -1290,6 +1399,7 @@ L_08B5:
         add     bx, ax                          ; 03 D8
         add     cx, ax                          ; 03 C8
         mov     dh, 0xff                        ; B6 FF
+;   [conditional branch target (if/else)] L_08C5
 L_08C5:
         mov     byte ptr [bp - 4], bl           ; 88 5E FC
         mov     byte ptr [bp - 5], dh           ; 88 76 FB
@@ -1300,6 +1410,7 @@ L_08C5:
         test    byte ptr [bp - 5], 0x80         ; F6 46 FB 80
         je      L_08DD                          ; 74 02
         neg     di                              ; F7 DF
+;   [conditional branch target (if/else)] L_08DD
 L_08DD:
         mov     word ptr [bp - 0x20], di        ; 89 7E E0
         cmp     byte ptr [bp - 0x31], 0         ; 80 7E CF 00
@@ -1311,8 +1422,10 @@ L_08DD:
         test    byte ptr [bp - 5], 0x80         ; F6 46 FB 80
         je      L_08F8                          ; 74 02
         neg     di                              ; F7 DF
+;   [conditional branch target (if/else)] L_08F8
 L_08F8:
         mov     word ptr [bp - 0x1a], di        ; 89 7E E6
+;   [conditional branch target (if/else)] L_08FB
 L_08FB:
         mov     dh, byte ptr [bp - 9]           ; 8A 76 F7
         mov     al, byte ptr [bp + 0xe]         ; 8A 46 0E
@@ -1325,29 +1438,35 @@ L_08FB:
         jns     L_0916                          ; 79 06
         mov     bl, 0x87                        ; B3 87
         mov     byte ptr [bp - 8], 0x80         ; C6 46 F8 80
+;   [conditional branch target (if/else)] L_0916
 L_0916:
         or      bl, bl                          ; 0A DB
         js      L_092E                          ; 78 14
         test    bl, 0x40                        ; F6 C3 40
         je      L_0954                          ; 74 35
         mov     ds, word ptr [bp + 0xc]         ; 8E 5E 0C
+        ; constant WM_SIZE
         mov     cx, 5                           ; B9 05 00
         shl     al, 1                           ; D0 E0
         cwde                                    ; 98
         not     ah                              ; F6 D4
         mov     bl, ah                          ; 8A DC
         jmp     L_093B                          ; EB 0D
+;   [conditional branch target (if/else)] L_092E
 L_092E:
         shl     al, 1                           ; D0 E0
         cwde                                    ; 98
         not     ah                              ; F6 D4
         xor     bl, ah                          ; 32 DC
         and     bl, 7                           ; 80 E3 07
+        ; constant WM_RBUTTONUP
         mov     cx, 0x205                       ; B9 05 02
+;   [unconditional branch target] L_093B
 L_093B:
         test    dh, 2                           ; F6 C6 02
         je      L_0954                          ; 74 14
         jmp     L_0EFF                          ; E9 BC 05
+;   [conditional branch target (if/else)] L_0943
 L_0943:
         test    byte ptr [bp - 3], 0xff         ; F6 46 FD FF
         jne     L_0954                          ; 75 0B
@@ -1355,11 +1474,13 @@ L_0943:
         cmp     dh, 0xa                         ; 80 FE 0A
         jne     L_0954                          ; 75 03
         jmp     L_0E2D                          ; E9 D9 04
+;   [conditional branch target (if/else)] L_0954
 L_0954:
         mov     ax, 0x188                       ; B8 88 01
         call    L_2802                          ; E8 A8 1E
         jae     L_095F                          ; 73 03
         jmp     L_0E17                          ; E9 B8 04
+;   [conditional branch target (if/else)] L_095F
 L_095F:
         add     sp, 0x20                        ; 83 C4 20
         mov     di, sp                          ; 8B FC
@@ -1377,6 +1498,7 @@ L_095F:
         je      L_0983                          ; 74 03
         mov     al, 0x56                        ; B0 56
         stosb   byte ptr es:[di], al            ; AA
+;   [conditional branch target (if/else)] L_0983
 L_0983:
         test    bl, 1                           ; F6 C3 01
         je      L_09A6                          ; 74 1E
@@ -1389,10 +1511,12 @@ L_0983:
         mov     ax, cs                          ; 8C C8
         stosw   word ptr es:[di], ax            ; AB
         mov     si, 0x5a8                       ; BE A8 05
+        ; constant VK_RETURN
         mov     cx, 0xd                         ; B9 0D 00
         rep movsw word ptr es:[di], word ptr [si] ; F3 A5
         lea     ax, [0x518]                     ; 8D 06 18 05
         mov     word ptr es:[di - 0xd], ax      ; 26 89 45 F3
+;   [conditional branch target (if/else)] L_09A6
 L_09A6:
         test    bl, 0x20                        ; F6 C3 20
         je      L_09F8                          ; 74 4D
@@ -1426,6 +1550,7 @@ L_09A6:
         mov     ah, 8                           ; B4 08
         mov     word ptr [bp - 0x2e], dx        ; 89 56 D2
         mov     bh, 0x1f                        ; B7 1F
+;   [conditional branch target (if/else)] L_09E7
 L_09E7:
         stosw   word ptr es:[di], ax            ; AB
         mov     ah, bh                          ; 8A E7
@@ -1437,6 +1562,7 @@ L_09E7:
         stosw   word ptr es:[di], ax            ; AB
         mov     ax, 0xd98e                      ; B8 8E D9
         stosw   word ptr es:[di], ax            ; AB
+;   [conditional branch target (if/else)] L_09F8
 L_09F8:
         xor     dx, dx                          ; 33 D2
         or      dh, byte ptr [bp - 3]           ; 0A 76 FD
@@ -1447,15 +1573,18 @@ L_09F8:
         stosw   word ptr es:[di], ax            ; AB
         mov     ax, 0xff32                      ; B8 32 FF
         stosw   word ptr es:[di], ax            ; AB
+;   [conditional branch target (if/else)] L_0A0A
 L_0A0A:
         mov     word ptr [bp - 0x28], di        ; 89 7E D8
         or      dl, byte ptr [bp - 0x31]        ; 0A 56 CF
         jne     L_0A15                          ; 75 03
         jmp     L_0AFA                          ; E9 E5 00
+;   [conditional branch target (if/else)] L_0A15
 L_0A15:
         shl     bl, 1                           ; D0 E3
         jb      L_0A1C                          ; 72 03
         jmp     L_0ABF                          ; E9 A3 00
+;   [conditional branch target (if/else)] L_0A1C
 L_0A1C:
         mov     byte ptr [bp - 0xa], 0          ; C6 46 F6 00
         lds     si, ptr [bp + 6]                ; C5 76 06
@@ -1475,6 +1604,7 @@ L_0A1C:
         out     dx, ax                          ; EF
         mov     dx, cx                          ; 8B D1
         jmp     L_0ABF                          ; EB 74
+;   [conditional branch target (if/else)] L_0A4B
 L_0A4B:
         mov     ax, 0x848a                      ; B8 8A 84
         stosw   word ptr es:[di], ax            ; AB
@@ -1500,6 +1630,7 @@ L_0A4B:
         mov     ax, 0xd0f6                      ; B8 F6 D0
         stosw   word ptr es:[di], ax            ; AB
         jmp     L_0AC2                          ; EB 4A
+;   [conditional branch target (if/else)] L_0A78
 L_0A78:
         mov     ah, byte ptr [si + 3]           ; 8A 64 03
         xor     ah, 0x47                        ; 80 F4 47
@@ -1507,6 +1638,7 @@ L_0A78:
         jne     L_0A89                          ; 75 06
         mov     byte ptr [bp - 0xa], 0xc0       ; C6 46 F6 C0
         jmp     L_0ABF                          ; EB 36
+;   [conditional branch target (if/else)] L_0A89
 L_0A89:
         mov     ah, byte ptr [si + 4]           ; 8A 64 04
         lodsb   al, byte ptr [si]               ; AC
@@ -1534,15 +1666,18 @@ L_0A89:
         lea     ax, [bx + 1]                    ; 8D 47 01
         stosw   word ptr es:[di], ax            ; AB
         jmp     L_0AC2                          ; EB 03
+;   [unconditional branch target] L_0ABF
 L_0ABF:
         mov     al, 0xac                        ; B0 AC
         stosb   byte ptr es:[di], al            ; AA
+;   [unconditional branch target] L_0AC2
 L_0AC2:
         mov     ax, cs                          ; 8C C8
         mov     ds, ax                          ; 8E D8
         xor     cx, cx                          ; 33 C9
         or      dh, dh                          ; 0A F6
         je      L_0AE6                          ; 74 1A
+        ; constant VK_RETURN
         mov     cl, dh                          ; 8A CE
         mov     ax, 0xc0d0                      ; B8 D0 C0
         cmp     cl, 5                           ; 80 F9 05
@@ -1550,11 +1685,13 @@ L_0AC2:
         neg     cl                              ; F6 D9
         add     cl, 8                           ; 80 C1 08
         mov     ah, 0xc8                        ; B4 C8
+;   [conditional branch target (if/else)] L_0ADD
 L_0ADD:
         rep stosw word ptr es:[di], ax          ; F3 AB
         mov     si, 0x59a                       ; BE 9A 05
         mov     cl, 4                           ; B1 04
         rep movsw word ptr es:[di], word ptr [si] ; F3 A5
+;   [conditional branch target (if/else)] L_0AE6
 L_0AE6:
         dec     byte ptr [bp - 6]               ; FE 4E FA
         je      L_0AFA                          ; 74 0F
@@ -1565,12 +1702,14 @@ L_0AE6:
         mov     ax, es                          ; 8C C0
         mov     ds, ax                          ; 8E D8
         rep movsb byte ptr es:[di], byte ptr [si] ; F3 A4
+;   [branch target] L_0AFA
 L_0AFA:
         xor     dh, dh                          ; 32 F6
         mov     cx, word ptr [bp + 0xe]         ; 8B 4E 0E
         cmp     cx, 0x20                        ; 83 F9 20
         jne     L_0B07                          ; 75 03
         jmp     L_0BB4                          ; E9 AD 00
+;   [conditional branch target (if/else)] L_0B07
 L_0B07:
         shr     cx, 1                           ; D1 E9
         shr     cx, 1                           ; D1 E9
@@ -1583,9 +1722,11 @@ L_0B07:
         and     al, 3                           ; 24 03
         cmp     al, 1                           ; 3C 01
         je      L_0B25                          ; 74 04
+;   [conditional branch target (if/else)] L_0B21
 L_0B21:
         mov     ax, 0xd08a                      ; B8 8A D0
         stosw   word ptr es:[di], ax            ; AB
+;   [conditional branch target (if/else)] L_0B25
 L_0B25:
         cmp     byte ptr [bp - 0x30], 2         ; 80 7E D0 02
         jb      L_0B35                          ; 72 0A
@@ -1594,6 +1735,7 @@ L_0B25:
         mov     ax, 0x258a                      ; B8 8A 25
         stosw   word ptr es:[di], ax            ; AB
         or      dh, 2                           ; 80 CE 02
+;   [loop start (also forward branch)] L_0B35
 L_0B35:
         mov     ax, si                          ; 8B C6
         and     ax, 3                           ; 25 03 00
@@ -1604,6 +1746,7 @@ L_0B35:
         and     dh, 0xfe                        ; 80 E6 FE
         mov     ax, 0xc28a                      ; B8 8A C2
         jmp     L_0BAF                          ; EB 65
+;   [conditional branch target (if/else)] L_0B4A
 L_0B4A:
         dec     ax                              ; 48
         mov     ax, 0xc68a                      ; B8 8A C6
@@ -1615,6 +1758,7 @@ L_0B4A:
         stosb   byte ptr es:[di], al            ; AA
         mov     ax, 0x58a                       ; B8 8A 05
         jmp     L_0BAC                          ; EB 4C
+;   [loop start] L_0B60
 L_0B60:
         shr     cx, 1                           ; D1 E9
         shr     cx, 1                           ; D1 E9
@@ -1638,6 +1782,7 @@ L_0B60:
         ror     si, 1                           ; D1 CE
         inc     dl                              ; FE C2
         jmp     L_0B35                          ; EB A3
+;   [conditional branch target (if/else)] L_0B92
 L_0B92:
         or      bx, ax                          ; 0B D8
         cmp     ax, 2                           ; 3D 02 00
@@ -1648,16 +1793,21 @@ L_0B92:
         stosb   byte ptr es:[di], al            ; AA
         shr     bx, 1                           ; D1 EB
         shr     bx, 1                           ; D1 EB
+;   [conditional branch target (if/else)] L_0BA5
 L_0BA5:
         add     bx, bx                          ; 03 DB
         mov     ax, word ptr cs:[bx + 0x5ee]    ; 2E 8B 87 EE 05
+;   [branch target] L_0BAC
 L_0BAC:
         or      dh, 1                           ; 80 CE 01
+;   [unconditional branch target] L_0BAF
 L_0BAF:
         stosw   word ptr es:[di], ax            ; AB
+;   [conditional branch target (if/else)] L_0BB0
 L_0BB0:
         dec     dl                              ; FE CA
         jge     L_0B60                          ; 7D AC
+;   [unconditional branch target] L_0BB4
 L_0BB4:
         mov     word ptr [bp - 0x2a], di        ; 89 7E D6
         test    dh, 2                           ; F6 C6 02
@@ -1666,6 +1816,7 @@ L_0BB4:
         stosb   byte ptr es:[di], al            ; AA
         mov     ax, 0x258a                      ; B8 8A 25
         stosw   word ptr es:[di], ax            ; AB
+;   [conditional branch target (if/else)] L_0BC3
 L_0BC3:
         mov     ax, cs                          ; 8C C8
         mov     ds, ax                          ; 8E D8
@@ -1691,6 +1842,7 @@ L_0BC3:
         test    bl, 1                           ; F6 C3 01
         je      L_0BFC                          ; 74 03
         mov     ax, 0xc68a                      ; B8 8A C6
+;   [conditional branch target (if/else)] L_0BFC
 L_0BFC:
         stosw   word ptr es:[di], ax            ; AB
         mov     ax, 0xe08a                      ; B8 8A E0
@@ -1701,6 +1853,7 @@ L_0BFC:
         mov     ax, 0xd0f7                      ; B8 F7 D0
         stosw   word ptr es:[di], ax            ; AB
         jmp     L_0C24                          ; EB 15
+;   [conditional branch target (if/else)] L_0C0F
 L_0C0F:
         test    byte ptr [bp - 3], 0xff         ; F6 46 FD FF
         jne     L_0C57                          ; 75 42
@@ -1709,11 +1862,13 @@ L_0C0F:
         je      L_0C24                          ; 74 06
         test    byte ptr [bp - 0xa], 0x80       ; F6 46 F6 80
         je      L_0C57                          ; 74 33
+;   [branch target] L_0C24
 L_0C24:
         shr     dx, 1                           ; D1 EA
         jae     L_0C2B                          ; 73 03
         mov     ax, si                          ; 8B C6
         stosb   byte ptr es:[di], al            ; AA
+;   [conditional branch target (if/else)] L_0C2B
 L_0C2B:
         je      L_0C55                          ; 74 28
         xor     bx, bx                          ; 33 DB
@@ -1722,15 +1877,18 @@ L_0C2B:
         mov     ax, 0x4f4e                      ; B8 4E 4F
         stosw   word ptr es:[di], ax            ; AB
         mov     bx, 0x4746                      ; BB 46 47
+;   [conditional branch target (if/else)] L_0C3B
 L_0C3B:
         cmp     dx, 1                           ; 83 FA 01
         je      L_0C4A                          ; 74 0A
         mov     al, 0xb9                        ; B0 B9
         mov     ah, dl                          ; 8A E2
         stosw   word ptr es:[di], ax            ; AB
+        ; constant VK_RETURN
         mov     al, dh                          ; 8A C6
         mov     ah, 0xf3                        ; B4 F3
         stosw   word ptr es:[di], ax            ; AB
+;   [conditional branch target (if/else)] L_0C4A
 L_0C4A:
         mov     ax, si                          ; 8B C6
         inc     ax                              ; 40
@@ -1739,8 +1897,10 @@ L_0C4A:
         je      L_0C55                          ; 74 03
         mov     ax, bx                          ; 8B C3
         stosw   word ptr es:[di], ax            ; AB
+;   [conditional branch target (if/else)] L_0C55
 L_0C55:
         jmp     L_0CD4                          ; EB 7D
+;   [conditional branch target (if/else)] L_0C57
 L_0C57:
         mov     bx, word ptr [bp - 0x2a]        ; 8B 5E D6
         sub     bx, word ptr [bp - 0x28]        ; 2B 5E D8
@@ -1751,6 +1911,7 @@ L_0C57:
         jb      L_0C6B                          ; 72 03
         shr     si, 1                           ; D1 EE
         dec     cx                              ; 49
+;   [conditional branch target (if/else)] L_0C6B
 L_0C6B:
         cmp     dx, si                          ; 3B D6
         jle     L_0C8D                          ; 7E 1E
@@ -1770,12 +1931,14 @@ L_0C6B:
         stosb   byte ptr es:[di], al            ; AA
         mov     ax, cx                          ; 8B C1
         stosw   word ptr es:[di], ax            ; AB
+;   [conditional branch target (if/else)] L_0C8D
 L_0C8D:
         mov     cx, bx                          ; 8B CB
         mov     bx, dx                          ; 8B DA
         cmp     bx, si                          ; 3B DE
         jle     L_0C97                          ; 7E 02
         mov     bx, si                          ; 8B DE
+;   [conditional branch target (if/else)] L_0C97
 L_0C97:
         sub     dx, si                          ; 2B D6
         mov     si, word ptr [bp - 0x28]        ; 8B 76 D8
@@ -1800,12 +1963,14 @@ L_0C97:
         mov     al, 0xe2                        ; B0 E2
         stosw   word ptr es:[di], ax            ; AB
         jmp     L_0CD4                          ; EB 0B
+;   [conditional branch target (if/else)] L_0CC9
 L_0CC9:
         mov     si, 0x596                       ; BE 96 05
         movsw   word ptr es:[di], word ptr cs:[si] ; 2E A5
         movsw   word ptr es:[di], word ptr cs:[si] ; 2E A5
         sub     ax, 6                           ; 2D 06 00
         stosw   word ptr es:[di], ax            ; AB
+;   [branch target] L_0CD4
 L_0CD4:
         mov     dx, word ptr [bp - 0x10]        ; 8B 56 F0
         or      dh, dh                          ; 0A F6
@@ -1816,6 +1981,7 @@ L_0CD4:
         rep movsb byte ptr es:[di], byte ptr [si] ; F3 A4
         xchg    dl, dh                          ; 86 F2
         mov     word ptr [di - 5], dx           ; 89 55 FB
+;   [conditional branch target (if/else)] L_0CEA
 L_0CEA:
         mov     ax, cs                          ; 8C C8
         mov     ds, ax                          ; 8E D8
@@ -1824,17 +1990,20 @@ L_0CEA:
         je      L_0CF9                          ; 74 03
         mov     al, 0x5b                        ; B0 5B
         stosb   byte ptr es:[di], al            ; AA
+;   [conditional branch target (if/else)] L_0CF9
 L_0CF9:
         test    bh, 0x10                        ; F6 C7 10
         je      L_0D01                          ; 74 03
         mov     al, 0x5e                        ; B0 5E
         stosb   byte ptr es:[di], al            ; AA
+;   [conditional branch target (if/else)] L_0D01
 L_0D01:
         mov     ax, 0x595f                      ; B8 5F 59
         stosw   word ptr es:[di], ax            ; AB
         test    bh, 1                           ; F6 C7 01
         jne     L_0D0D                          ; 75 03
         jmp     L_0D94                          ; E9 87 00
+;   [conditional branch target (if/else)] L_0D0D
 L_0D0D:
         or      bh, bh                          ; 0A FF
         jns     L_0D29                          ; 79 18
@@ -1848,6 +2017,7 @@ L_0D0D:
         mov     cx, 6                           ; B9 06 00
         rep movsw word ptr es:[di], word ptr [si] ; F3 A5
         jmp     L_0D3B                          ; EB 12
+;   [conditional branch target (if/else)] L_0D29
 L_0D29:
         test    bh, 0x10                        ; F6 C7 10
         je      L_0D3B                          ; 74 0D
@@ -1857,6 +2027,7 @@ L_0D29:
         stosw   word ptr es:[di], ax            ; AB
         mov     ax, word ptr [bp - 0x1c]        ; 8B 46 E4
         stosw   word ptr es:[di], ax            ; AB
+;   [branch target] L_0D3B
 L_0D3B:
         test    bh, 2                           ; F6 C7 02
         jne     L_0D48                          ; 75 08
@@ -1864,6 +2035,7 @@ L_0D3B:
         stosw   word ptr es:[di], ax            ; AB
         mov     ax, word ptr [bp - 0x22]        ; 8B 46 DE
         stosw   word ptr es:[di], ax            ; AB
+;   [conditional branch target (if/else)] L_0D48
 L_0D48:
         mov     ax, 0xe3d0                      ; B8 D0 E3
         stosw   word ptr es:[di], ax            ; AB
@@ -1876,6 +2048,7 @@ L_0D48:
         mov     al, 0x73                        ; B0 73
         stosw   word ptr es:[di], ax            ; AB
         jmp     L_0D6D                          ; EB 0D
+;   [conditional branch target (if/else)] L_0D60
 L_0D60:
         mov     ax, 0x372                       ; B8 72 03
         stosw   word ptr es:[di], ax            ; AB
@@ -1884,6 +2057,7 @@ L_0D60:
         sub     dx, 5                           ; 83 EA 05
         mov     ax, dx                          ; 8B C2
         stosw   word ptr es:[di], ax            ; AB
+;   [unconditional branch target] L_0D6D
 L_0D6D:
         mov     ax, 0x21b3                      ; B8 B3 21
         stosw   word ptr es:[di], ax            ; AB
@@ -1904,6 +2078,7 @@ L_0D6D:
         stosw   word ptr es:[di], ax            ; AB
         mov     ax, dx                          ; 8B C2
         stosw   word ptr es:[di], ax            ; AB
+;   [branch target] L_0D94
 L_0D94:
         test    bh, 0x10                        ; F6 C7 10
         je      L_0DB4                          ; 74 1B
@@ -1918,8 +2093,10 @@ L_0D94:
         sub     ax, dx                          ; 2B C2
         shl     dx, 1                           ; D1 E2
         sub     ax, dx                          ; 2B C2
+;   [conditional branch target (if/else)] L_0DB3
 L_0DB3:
         stosw   word ptr es:[di], ax            ; AB
+;   [conditional branch target (if/else)] L_0DB4
 L_0DB4:
         mov     ax, 0xc781                      ; B8 81 C7
         stosw   word ptr es:[di], ax            ; AB
@@ -1932,6 +2109,7 @@ L_0DB4:
         sub     ax, dx                          ; 2B C2
         shl     dx, 1                           ; D1 E2
         sub     ax, dx                          ; 2B C2
+;   [conditional branch target (if/else)] L_0DCE
 L_0DCE:
         stosw   word ptr es:[di], ax            ; AB
         mov     ax, word ptr [bp - 0x16]        ; 8B 46 EA
@@ -1943,12 +2121,14 @@ L_0DCE:
         mov     al, 0xe2                        ; B0 E2
         stosw   word ptr es:[di], ax            ; AB
         jmp     L_0DEB                          ; EB 09
+;   [conditional branch target (if/else)] L_0DE2
 L_0DE2:
         mov     si, 0x596                       ; BE 96 05
         movsw   word ptr es:[di], word ptr [si] ; A5
         movsw   word ptr es:[di], word ptr [si] ; A5
         sub     ax, 6                           ; 2D 06 00
         stosw   word ptr es:[di], ax            ; AB
+;   [unconditional branch target] L_0DEB
 L_0DEB:
         mov     al, 0xcb                        ; B0 CB
         stosb   byte ptr es:[di], al            ; AA
@@ -1957,6 +2137,7 @@ L_0DEB:
         test    bh, 0x10                        ; F6 C7 10
         je      L_0DFA                          ; 74 03
         lds     si, ptr [bp + 0x1a]             ; C5 76 1A
+;   [conditional branch target (if/else)] L_0DFA
 L_0DFA:
         les     di, ptr [bp + 0x22]             ; C4 7E 22
         mov     cx, word ptr [bp + 0x12]        ; 8B 4E 12
@@ -1964,6 +2145,7 @@ L_0DFA:
         cmp     byte ptr [bp - 7], 1            ; 80 7E F9 01
         je      L_0E08                          ; 74 01
         std                                     ; FD
+;   [conditional branch target (if/else)] L_0E08
 L_0E08:
         mov     bl, 0x21                        ; B3 21
         push    bp                              ; 55
@@ -1971,12 +2153,16 @@ L_0E08:
         pop     bp                              ; 5D
         pop     bx                              ; 5B
         add     sp, 0x168                       ; 81 C4 68 01
+;   [loop start] L_0E14
 L_0E14:
+        ; constant WM_CREATE
         mov     ax, 1                           ; B8 01 00
+;   [unconditional branch target] L_0E17
 L_0E17:
         cld                                     ; FC
         mov     byte ptr cs:[0x51a], ah         ; 2E 88 26 1A 05
         call    L_24B2                          ; E8 92 16
+;   [unconditional branch target] L_0E20
 L_0E20:
         pop     di                              ; 5F
         pop     si                              ; 5E
@@ -1986,6 +2172,7 @@ L_0E20:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0x20                            ; CA 20 00
+;   [unconditional branch target] L_0E2D
 L_0E2D:
         mov     bx, word ptr [bp - 0x18]        ; 8B 5E E8
         mov     cx, bx                          ; 8B CB
@@ -1999,6 +2186,7 @@ L_0E2D:
         je      L_0E46                          ; 74 03
         std                                     ; FD
         neg     bx                              ; F7 DB
+;   [conditional branch target (if/else)] L_0E46
 L_0E46:
         sub     di, bx                          ; 2B FB
         mov     bx, di                          ; 8B DF
@@ -2008,23 +2196,27 @@ L_0E46:
         jne     L_0E56                          ; 75 04
         mov     byte ptr [bp - 0xf], al         ; 88 46 F1
         inc     cx                              ; 41
+;   [conditional branch target (if/else)] L_0E56
 L_0E56:
         mov     ah, byte ptr [bp - 0xd]         ; 8A 66 F3
         inc     ah                              ; FE C4
         jne     L_0E61                          ; 75 04
         mov     byte ptr [bp - 0xd], ah         ; 88 66 F3
         inc     cx                              ; 41
+;   [conditional branch target (if/else)] L_0E61
 L_0E61:
         mov     word ptr [bp - 0x18], cx        ; 89 4E E8
         mov     word ptr [bp - 0x12], ax        ; 89 46 EE
         lds     si, ptr [bp + 0x1a]             ; C5 76 1A
         les     di, ptr [bp + 0x22]             ; C4 7E 22
         mov     dx, 0x3ce                       ; BA CE 03
+;   [loop start] L_0E70
 L_0E70:
         xor     cx, cx                          ; 33 C9
         mov     ch, byte ptr [bp - 0xd]         ; 8A 6E F3
         jcxz    L_0E7A                          ; E3 03
         call    L_0EC6                          ; E8 4C 00
+;   [conditional branch target (if/else)] L_0E7A
 L_0E7A:
         mov     cx, word ptr [bp - 0x18]        ; 8B 4E E8
         jcxz    L_0EB0                          ; E3 31
@@ -2039,6 +2231,7 @@ L_0E7A:
         mov     ax, 0xff08                      ; B8 08 FF
         mov     word ptr cs:[0x514], ax         ; 2E A3 14 05
         out     dx, ax                          ; EF
+;   [loop start] L_0E9B
 L_0E9B:
         rep movsb byte ptr es:[di], byte ptr [si] ; F3 A4
         cmp     word ptr [bp - 0x12], cx        ; 39 4E EE
@@ -2049,41 +2242,49 @@ L_0E9B:
         dec     word ptr [bp + 0x12]            ; FF 4E 12
         jne     L_0E9B                          ; 75 ED
         jmp     L_0EC1                          ; EB 11
+;   [conditional branch target (if/else)] L_0EB0
 L_0EB0:
         mov     ch, byte ptr [bp - 0xf]         ; 8A 6E F1
         jcxz    L_0EB8                          ; E3 03
         call    L_0EC6                          ; E8 0E 00
+;   [conditional branch target (if/else)] L_0EB8
 L_0EB8:
         add     si, bx                          ; 03 F3
         add     di, bx                          ; 03 FB
         dec     word ptr [bp + 0x12]            ; FF 4E 12
         jne     L_0E70                          ; 75 AF
+;   [unconditional branch target] L_0EC1
 L_0EC1:
         xor     bx, bx                          ; 33 DB
         jmp     L_0E14                          ; E9 4E FF
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_0EC6 -- offset 0x0EC6 -- 1459 instr
-; Iterador con instrucciones de string (movsb/scasb/...) (1459 instr).
-; tags: complex_iterator, far, loop, string_op
-; callers: sub_0541
-; calls (intra): sub_0536, sub_1C1F, sub_1CEE, sub_2327, sub_2426, sub_24B2 (+1 mas)
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_0EC6   offset=0x0EC6  size=1459 instr  segment=seg1.asm
+;
+; Classification (pass8): unclear  (score C=2, ASM=4)
+; Prologue: none     Epilogue: jmp_tail
+;
+; Near calls (internal): L_0536, L_1C1F, L_1CEE, L_2327, L_2426, L_24B2, L_2802
+;-------------------------------------------------------------------------
+;   [sub-routine] L_0EC6
 L_0EC6:
+        ; constant WM_SETTEXT
         mov     ah, ch                          ; 8A E5
         mov     al, 8                           ; B0 08
         mov     word ptr cs:[0x514], ax         ; 2E A3 14 05
         out     dx, ax                          ; EF
+        ; constant WM_SIZE
         mov     ax, 5                           ; B8 05 00
         mov     word ptr cs:[0x510], ax         ; 2E A3 10 05
         out     dx, ax                          ; EF
         mov     cx, 0x402                       ; B9 02 04
         jmp     L_0EE3                          ; EB 07
+;   [loop start] L_0EDC
 L_0EDC:
         mov     al, byte ptr [si]               ; 8A 04
         cli                                     ; FA
         xchg    byte ptr es:[di], al            ; 26 86 05
         sti                                     ; FB
+;   [unconditional branch target] L_0EE3
 L_0EE3:
         mov     ax, cx                          ; 8B C1
         mov     dl, 0xc4                        ; B2 C4
@@ -2101,6 +2302,7 @@ L_0EE3:
         stosb   byte ptr es:[di], al            ; AA
         sti                                     ; FB
         ret                                     ; C3
+;   [unconditional branch target] L_0EFF
 L_0EFF:
         mov     si, di                          ; 8B F7
         sub     si, word ptr [bp - 0x18]        ; 2B 76 E8
@@ -2119,6 +2321,7 @@ L_0EFF:
         mov     byte ptr [bp - 0xe], 8          ; C6 46 F2 08
         mov     byte ptr [bp - 0x10], 8         ; C6 46 F0 08
         mov     byte ptr [bp - 3], bl           ; 88 5E FD
+;   [loop start] L_0F32
 L_0F32:
         mov     al, byte ptr [bp - 3]           ; 8A 46 FD
         test    byte ptr [bp - 8], 0x80         ; F6 46 F8 80
@@ -2130,6 +2333,7 @@ L_0F32:
         and     bx, 7                           ; 81 E3 07 00
         add     bx, word ptr [bp + 0xa]         ; 03 5E 0A
         xor     al, byte ptr [bx]               ; 32 07
+;   [conditional branch target (if/else)] L_0F4E
 L_0F4E:
         mov     bl, al                          ; 8A D8
         mov     ax, word ptr [bp - 0xe]         ; 8B 46 F2
@@ -2145,6 +2349,7 @@ L_0F4E:
         out     dx, ax                          ; EF
         mov     al, bl                          ; 8A C3
         rep stosb byte ptr es:[di], al          ; F3 AA
+;   [conditional branch target (if/else)] L_0F69
 L_0F69:
         mov     ax, word ptr [bp - 0x10]        ; 8B 46 F0
         or      ah, ah                          ; 0A E4
@@ -2155,6 +2360,7 @@ L_0F69:
         mov     al, bl                          ; 8A C3
         stosb   byte ptr es:[di], al            ; AA
         sti                                     ; FB
+;   [conditional branch target (if/else)] L_0F79
 L_0F79:
         add     di, si                          ; 03 FE
         dec     word ptr [bp + 0x12]            ; FF 4E 12
@@ -2182,8 +2388,10 @@ L_0F79:
         mov     cx, ax                          ; 8B C8
         call    L_2802                          ; E8 57 18
         jae     L_0FB0                          ; 73 03
+;   [conditional branch target (if/else)] L_0FAD
 L_0FAD:
         jmp     L_14F8                          ; E9 48 05
+;   [conditional branch target (if/else)] L_0FB0
 L_0FB0:
         add     sp, cx                          ; 03 E1
         mov     word ptr [bp - 8], sp           ; 89 66 F8
@@ -2197,6 +2405,7 @@ L_0FB0:
         neg     ax                              ; F7 D8
         xor     bx, bx                          ; 33 DB
         mov     word ptr [bp + 0x18], bx        ; 89 5E 18
+;   [conditional branch target (if/else)] L_0FCD
 L_0FCD:
         mov     word ptr [bp - 6], ax           ; 89 46 FA
         mov     cx, word ptr es:[di + 0x21]     ; 26 8B 4D 21
@@ -2212,6 +2421,7 @@ L_0FCD:
         jge     L_0FF2                          ; 7D 04
         sub     dx, bx                          ; 2B D3
         xor     bx, bx                          ; 33 DB
+;   [conditional branch target (if/else)] L_0FF2
 L_0FF2:
         mov     word ptr [bp - 0x1e], dx        ; 89 56 E2
         mov     word ptr [bp - 0x20], dx        ; 89 56 E0
@@ -2223,20 +2433,24 @@ L_0FF2:
         cmp     ax, dx                          ; 3B C2
         jl      L_100C                          ; 7C 02
         mov     ax, dx                          ; 8B C2
+;   [conditional branch target (if/else)] L_100C
 L_100C:
         or      ax, ax                          ; 0B C0
         jle     L_1016                          ; 7E 06
         cmp     ax, bx                          ; 3B C3
         jle     L_1016                          ; 7E 02
         jmp     L_1028                          ; EB 12
+;   [conditional branch target (if/else)] L_1016
 L_1016:
         jmp     L_14EC                          ; E9 D3 04
+;   [conditional branch target (if/else)] L_1019
 L_1019:
         mov     bx, word ptr [bp + 0x1c]        ; 8B 5E 1C
         mov     word ptr [bp - 0x1e], bx        ; 89 5E E2
         mov     word ptr [bp - 0x20], bx        ; 89 5E E0
         xor     bx, bx                          ; 33 DB
         mov     ax, word ptr es:[di + 0x16]     ; 26 8B 45 16
+;   [unconditional branch target] L_1028
 L_1028:
         sub     ax, bx                          ; 2B C3
         mov     word ptr [bp - 0x22], ax        ; 89 46 DE
@@ -2275,6 +2489,7 @@ L_1028:
         mov     word ptr [bp - 0x2c], dx        ; 89 56 D4
         xor     dx, dx                          ; 33 D2
         mov     word ptr [bp - 0x24], dx        ; 89 56 DC
+;   [conditional branch target (if/else)] L_108C
 L_108C:
         mov     dx, word ptr [si + 0x16]        ; 8B 54 16
         mov     si, 0x1511                      ; BE 11 15
@@ -2285,6 +2500,7 @@ L_108C:
         xor     dx, dx                          ; 33 D2
         mov     word ptr [bp - 0x24], dx        ; 89 56 DC
         jmp     L_10E7                          ; EB 44
+;   [conditional branch target (if/else)] L_10A3
 L_10A3:
         mov     dx, 0x158e                      ; BA 8E 15
         mov     word ptr [bp - 0x10], dx        ; 89 56 F0
@@ -2302,6 +2518,7 @@ L_10A3:
         mov     word ptr [bp - 0x2c], dx        ; 89 56 D4
         xor     dx, dx                          ; 33 D2
         mov     word ptr [bp - 0x24], dx        ; 89 56 DC
+;   [conditional branch target (if/else)] L_10D2
 L_10D2:
         mov     dx, word ptr [si + 0x16]        ; 8B 54 16
         mov     si, 0x1576                      ; BE 76 15
@@ -2311,6 +2528,7 @@ L_10D2:
         mov     word ptr [bp - 0x2e], dx        ; 89 56 D2
         xor     dx, dx                          ; 33 D2
         mov     word ptr [bp - 0x24], dx        ; 89 56 DC
+;   [branch target] L_10E7
 L_10E7:
         mov     word ptr [bp - 0xe], si         ; 89 76 F2
         xor     si, 0x15af                      ; 81 F6 AF 15
@@ -2336,6 +2554,7 @@ L_10E7:
         mov     cx, di                          ; 8B CF
         sub     dx, bx                          ; 2B D3
         xor     bx, bx                          ; 33 DB
+;   [conditional branch target (if/else)] L_1125
 L_1125:
         mov     di, cx                          ; 8B F9
         and     di, 7                           ; 81 E7 07 00
@@ -2351,6 +2570,7 @@ L_1125:
         jge     L_11B9                          ; 7D 77
         lds     si, ptr [bp + 0x14]             ; C5 76 14
         les     di, ptr [bp + 0xe]              ; C4 7E 0E
+;   [loop start] L_1148
 L_1148:
         call    word ptr [bp - 0xe]             ; FF 56 F2
         jle     L_1148                          ; 7E FB
@@ -2360,6 +2580,7 @@ L_1148:
         sub     ax, bx                          ; 2B C3
         mov     cx, bx                          ; 8B CB
         sub     bx, dx                          ; 2B DA
+;   [loop start] L_1159
 L_1159:
         jge     L_11CA                          ; 7D 6F
         mov     ch, cl                          ; 8A E9
@@ -2372,6 +2593,7 @@ L_1159:
         push    cx                              ; 51
         call    word ptr [bp - 0xe]             ; FF 56 F2
         jmp     L_1159                          ; EB EA
+;   [conditional branch target (if/else)] L_116F
 L_116F:
         add     ax, cx                          ; 03 C1
         sub     ax, bx                          ; 2B C3
@@ -2379,6 +2601,7 @@ L_116F:
         mov     cx, bx                          ; 8B CB
         sub     bx, dx                          ; 2B DA
         jmp     L_1159                          ; EB DD
+;   [conditional branch target (if/else)] L_117C
 L_117C:
         mov     word ptr [bp - 0x1a], bx        ; 89 5E E6
         mov     word ptr [bp - 0x1c], bx        ; 89 5E E4
@@ -2396,6 +2619,7 @@ L_117C:
         lds     si, ptr [bp + 0x14]             ; C5 76 14
         les     di, ptr [bp + 0xe]              ; C4 7E 0E
         xor     bx, bx                          ; 33 DB
+;   [loop start] L_11A5
 L_11A5:
         call    word ptr [bp - 0xe]             ; FF 56 F2
         mov     ch, cl                          ; 8A E9
@@ -2407,9 +2631,11 @@ L_11A5:
         and     cl, 7                           ; 80 E1 07
         push    cx                              ; 51
         jmp     L_11A5                          ; EB EC
+;   [loop start (also forward branch)] L_11B9
 L_11B9:
         jmp     L_14EC                          ; E9 30 03
         jmp     L_13C9                          ; E9 0A 02
+;   [loop start] L_11BF
 L_11BF:
         pop     dx                              ; 5A
         pop     si                              ; 5E
@@ -2420,6 +2646,7 @@ L_11BF:
         push    si                              ; 56
         push    dx                              ; 52
         jmp     L_11E8                          ; EB 1E
+;   [conditional branch target (if/else)] L_11CA
 L_11CA:
         sub     cx, bx                          ; 2B CB
         jle     L_11DD                          ; 7E 0F
@@ -2431,11 +2658,13 @@ L_11CA:
         push    ax                              ; 50
         and     cl, 7                           ; 80 E1 07
         push    cx                              ; 51
+;   [loop start (also forward branch)] L_11DD
 L_11DD:
         cmp     sp, word ptr [bp - 8]           ; 3B 66 F8
         je      L_11B9                          ; 74 D7
         cmp     word ptr [bp - 0x24], 8         ; 83 7E DC 08
         je      L_11BF                          ; 74 D7
+;   [unconditional branch target] L_11E8
 L_11E8:
         xor     ax, ax                          ; 33 C0
         push    ax                              ; 50
@@ -2448,12 +2677,14 @@ L_11E8:
         jcxz    L_11FF                          ; E3 06
         lds     si, ptr [bp + 0xa]              ; C5 76 0A
         mov     word ptr [si + 0x10], ax        ; 89 44 10
+;   [conditional branch target (if/else)] L_11FF
 L_11FF:
         mov     ax, word ptr [bp - 0x1c]        ; 8B 46 E4
         sub     ax, word ptr [bp - 0x1a]        ; 2B 46 E6
         mov     dx, word ptr [bp - 0x20]        ; 8B 56 E0
         sub     dx, word ptr [bp - 0x1e]        ; 2B 56 E2
         jmp     L_14EC                          ; E9 DE 02
+;   [conditional branch target (if/else)] L_120E
 L_120E:
         lds     si, ptr [bp + 0x20]             ; C5 76 20
         mov     cx, word ptr [si]               ; 8B 0C
@@ -2463,11 +2694,13 @@ L_120E:
         mov     si, word ptr [bp - 0x1c]        ; 8B 76 E4
         mov     di, word ptr [bp - 0x20]        ; 8B 7E E0
         call    L_2426                          ; E8 02 12
+        ; constant WM_MOVE
         mov     ax, 3                           ; B8 03 00
         mov     dx, 0x3ce                       ; BA CE 03
         mov     word ptr cs:[0x50c], ax         ; 2E A3 0C 05
         mov     byte ptr cs:[0x51a], 2          ; 2E C6 06 1A 05 02
         out     dx, ax                          ; EF
+        ; constant WM_RBUTTONUP
         mov     ax, 0x205                       ; B8 05 02
         mov     word ptr cs:[0x510], ax         ; 2E A3 10 05
         out     dx, ax                          ; EF
@@ -2487,9 +2720,11 @@ L_120E:
         mov     byte ptr [bp - 0x38], al        ; 88 46 C8
         mov     cx, 0x1313                      ; B9 13 13
         jmp     L_12CE                          ; EB 66
+;   [loop start (also forward branch)] L_1268
 L_1268:
         mov     word ptr [bp - 0x30], dx        ; 89 56 D0
         jmp     L_13C9                          ; E9 5B 01
+;   [conditional branch target (if/else)] L_126E
 L_126E:
         mov     ax, word ptr [si + 0xe]         ; 8B 44 0E
         cmp     word ptr [si + 8], 0x103        ; 81 7C 08 03 01
@@ -2508,6 +2743,7 @@ L_126E:
         mov     byte ptr [bp - 0x38], ah        ; 88 66 C8
         mov     cx, 0x1357                      ; B9 57 13
         jmp     L_12CE                          ; EB 33
+;   [conditional branch target (if/else)] L_129B
 L_129B:
         mov     word ptr [bp - 0x32], ax        ; 89 46 CE
         mov     bx, ax                          ; 8B D8
@@ -2527,6 +2763,7 @@ L_129B:
         mov     al, byte ptr [si + 6]           ; 8A 44 06
         mov     byte ptr [bp - 0x36], al        ; 88 46 CA
         mov     cx, 0x138a                      ; B9 8A 13
+;   [unconditional branch target] L_12CE
 L_12CE:
         mov     word ptr [bp - 0x30], dx        ; 89 56 D0
         push    cx                              ; 51
@@ -2553,6 +2790,7 @@ L_12CE:
         sub     bx, ax                          ; 2B D8
         jge     L_1305                          ; 7D 02
         and     dl, dh                          ; 22 D6
+;   [conditional branch target (if/else)] L_1305
 L_1305:
         mov     word ptr [bp - 0x1a], bx        ; 89 5E E6
         les     di, ptr [bp + 0x20]             ; C4 7E 20
@@ -2564,6 +2802,7 @@ L_1305:
         sub     si, 2                           ; 83 EE 02
         mov     bx, dx                          ; 8B DA
         mov     dx, 0x3ce                       ; BA CE 03
+;   [loop start] L_1320
 L_1320:
         mov     ah, bl                          ; 8A E3
         mov     al, 8                           ; B0 08
@@ -2581,6 +2820,7 @@ L_1320:
         out     dx, ax                          ; EF
         mov     al, byte ptr [bp - 0x38]        ; 8A 46 C8
         rep stosb byte ptr es:[di], al          ; F3 AA
+;   [conditional branch target (if/else)] L_1340
 L_1340:
         mov     ah, bh                          ; 8A E7
         mov     al, 8                           ; B0 08
@@ -2590,6 +2830,7 @@ L_1340:
         mov     al, byte ptr [bp - 0x38]        ; 8A 46 C8
         stosb   byte ptr es:[di], al            ; AA
         sti                                     ; FB
+;   [conditional branch target (if/else)] L_134E
 L_134E:
         add     di, si                          ; 03 FE
         dec     word ptr [bp - 0x22]            ; FF 4E DE
@@ -2600,6 +2841,7 @@ L_134E:
         sub     si, bx                          ; 2B F3
         dec     si                              ; 4E
         mov     bx, word ptr [bp - 0x22]        ; 8B 5E DE
+;   [loop start] L_1363
 L_1363:
         mov     al, byte ptr es:[di]            ; 26 8A 05
         xor     al, ah                          ; 32 C4
@@ -2615,6 +2857,7 @@ L_1363:
         xor     al, ah                          ; 32 C4
         and     al, dh                          ; 22 C6
         xor     byte ptr es:[di], al            ; 26 30 05
+;   [conditional branch target (if/else)] L_1383
 L_1383:
         add     di, si                          ; 03 FE
         dec     bx                              ; 4B
@@ -2623,8 +2866,10 @@ L_1383:
         mov     ax, word ptr [bp - 0x32]        ; 8B 46 CE
         add     ax, ax                          ; 03 C0
         add     di, ax                          ; 03 F8
+;   [loop start] L_1391
 L_1391:
         mov     si, 2                           ; BE 02 00
+;   [loop start] L_1394
 L_1394:
         mov     bx, di                          ; 8B DF
         mov     ah, byte ptr [bp + si - 0x38]   ; 8A 62 C8
@@ -2642,6 +2887,7 @@ L_1394:
         xor     al, ah                          ; 32 C4
         and     al, dh                          ; 22 C6
         xor     byte ptr es:[di], al            ; 26 30 05
+;   [conditional branch target (if/else)] L_13B9
 L_13B9:
         mov     di, bx                          ; 8B FB
         sub     di, word ptr [bp - 0x32]        ; 2B 7E CE
@@ -2650,6 +2896,7 @@ L_13B9:
         add     di, word ptr [bp - 0x34]        ; 03 7E CC
         dec     word ptr [bp - 0x22]            ; FF 4E DE
         jg      L_1391                          ; 7F C8
+;   [unconditional branch target] L_13C9
 L_13C9:
         lds     si, ptr [bp + 0xe]              ; C5 76 0E
         lds     si, ptr [si + 0x2b]             ; C5 74 2B
@@ -2658,18 +2905,22 @@ L_13C9:
         add     di, word ptr [bp - 0xa]         ; 03 7E F6
         mov     word ptr [bp - 0xa], di         ; 89 7E F6
         jmp     L_1461                          ; E9 82 00
+;   [loop start] L_13DF
 L_13DF:
         add     cl, dh                          ; 02 CE
         shl     ax, cl                          ; D3 E0
+        ; constant VK_RETURN
         mov     cl, dh                          ; 8A CE
         call    word ptr [bp - 0x30]            ; FF 56 D0
         mov     dh, 8                           ; B6 08
         neg     cl                              ; F6 D9
         je      L_13F4                          ; 74 06
+;   [loop start] L_13EE
 L_13EE:
         sub     dh, cl                          ; 2A F1
         jle     L_13DF                          ; 7E ED
         shl     ax, cl                          ; D3 E0
+;   [conditional branch target (if/else)] L_13F4
 L_13F4:
         cmp     ch, 8                           ; 80 FD 08
         ja      L_140A                          ; 77 11
@@ -2679,19 +2930,24 @@ L_13F4:
         or      si, si                          ; 0B F6
         je      L_1404                          ; 74 01
         lodsb   al, byte ptr [si]               ; AC
+;   [conditional branch target (if/else)] L_1404
 L_1404:
+        ; constant WM_SETTEXT
         mov     cl, ch                          ; 8A CD
         xor     ch, ch                          ; 32 ED
         jmp     L_13EE                          ; EB E4
+;   [conditional branch target (if/else)] L_140A
 L_140A:
         xor     al, al                          ; 32 C0
         or      si, si                          ; 0B F6
         je      L_1411                          ; 74 01
         lodsb   al, byte ptr [si]               ; AC
+;   [conditional branch target (if/else)] L_1411
 L_1411:
         mov     cl, 8                           ; B1 08
         sub     ch, cl                          ; 2A E9
         jmp     L_13EE                          ; EB D7
+;   [loop start (also forward branch)] L_1417
 L_1417:
         dec     bx                              ; 4B
         dec     bx                              ; 4B
@@ -2706,6 +2962,7 @@ L_1417:
         je      L_142F                          ; 74 04
         add     si, word ptr [bp - 0x14]        ; 03 76 EC
         lodsb   al, byte ptr [si]               ; AC
+;   [conditional branch target (if/else)] L_142F
 L_142F:
         shl     al, cl                          ; D2 E0
         sub     cl, 8                           ; 80 E9 08
@@ -2715,8 +2972,10 @@ L_142F:
         add     cl, ch                          ; 02 CD
         xor     ch, ch                          ; 32 ED
         jmp     L_13EE                          ; EB AE
+;   [conditional branch target (if/else)] L_1440
 L_1440:
         add     si, word ptr [bp - 0x14]        ; 03 76 EC
+        ; constant VK_RETURN
         mov     cl, dh                          ; 8A CE
         shl     ah, cl                          ; D2 E4
         call    word ptr [bp - 0x30]            ; FF 56 D0
@@ -2728,6 +2987,7 @@ L_1440:
         mov     di, word ptr [bp - 0xc]         ; 8B 7E F4
         add     di, word ptr [bp - 0xa]         ; 03 7E F6
         mov     word ptr [bp - 0xa], di         ; 89 7E F6
+;   [unconditional branch target] L_1461
 L_1461:
         mov     bx, word ptr [bp - 8]           ; 8B 5E F8
         xor     ax, ax                          ; 33 C0
@@ -2735,11 +2995,14 @@ L_1461:
         cmp     word ptr [bp - 0x24], 8         ; 83 7E DC 08
         je      L_1474                          ; 74 05
         jmp     L_1417                          ; EB A6
+;   [conditional branch target (if/else)] L_1471
 L_1471:
         jmp     L_14EC                          ; EB 79
         nop                                     ; 90
+;   [conditional branch target (if/else)] L_1474
 L_1474:
         xor     cx, cx                          ; 33 C9
+        ; constant VK_RETURN
         mov     cl, dh                          ; 8A CE
         dec     bx                              ; 4B
         dec     bx                              ; 4B
@@ -2761,13 +3024,16 @@ L_1474:
         jne     L_14C9                          ; 75 2B
         mov     cl, 8                           ; B1 08
         jmp     L_14AC                          ; EB 0A
+;   [conditional branch target (if/else)] L_14A2
 L_14A2:
         rol     ax, cl                          ; D3 C0
         sub     cl, dh                          ; 2A CE
         jmp     L_14D7                          ; EB 2F
+;   [loop start] L_14A8
 L_14A8:
         add     si, word ptr [bp - 0x14]        ; 03 76 EC
         lodsb   al, byte ptr [si]               ; AC
+;   [unconditional branch target] L_14AC
 L_14AC:
         xchg    ah, al                          ; 86 C4
         call    word ptr [bp - 0x30]            ; FF 56 D0
@@ -2777,11 +3043,13 @@ L_14AC:
         or      si, si                          ; 0B F6
         jne     L_14A8                          ; 75 EB
         jmp     L_14E3                          ; EB 24
+;   [loop start] L_14BF
 L_14BF:
         add     si, word ptr [bp - 0x14]        ; 03 76 EC
         mov     ah, byte ptr [si]               ; 8A 24
         rol     ax, cl                          ; D3 C0
         sub     cl, 8                           ; 80 E9 08
+;   [conditional branch target (if/else)] L_14C9
 L_14C9:
         neg     cl                              ; F6 D9
         xchg    ah, al                          ; 86 C4
@@ -2789,22 +3057,26 @@ L_14C9:
         xchg    ah, al                          ; 86 C4
         rol     ax, cl                          ; D3 C0
         sub     cl, 8                           ; 80 E9 08
+;   [unconditional branch target] L_14D7
 L_14D7:
         neg     cl                              ; F6 D9
         sub     bx, 4                           ; 83 EB 04
         mov     si, word ptr ss:[bx]            ; 36 8B 37
         or      si, si                          ; 0B F6
         jne     L_14BF                          ; 75 DC
+;   [branch target] L_14E3
 L_14E3:
         dec     bx                              ; 4B
         dec     bx                              ; 4B
         mov     ah, al                          ; 8A E0
         mov     dh, cl                          ; 8A F1
         jmp     L_1417                          ; E9 2B FF
+;   [unconditional branch target] L_14EC
 L_14EC:
         mov     sp, word ptr [bp - 8]           ; 8B 66 F8
         mov     byte ptr cs:[0x51a], 0          ; 2E C6 06 1A 05 00
         call    L_24B2                          ; E8 BA 0F
+;   [unconditional branch target] L_14F8
 L_14F8:
         pop     di                              ; 5F
         pop     si                              ; 5E
@@ -2814,6 +3086,7 @@ L_14F8:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0x1e                            ; CA 1E 00
+;   [loop start] L_1505
 L_1505:
         mov     al, byte ptr es:[di + 0x1f]     ; 26 8A 45 1F
         jmp     L_1523                          ; EB 18
@@ -2826,6 +3099,7 @@ L_1505:
         ja      L_1505                          ; 77 E8
         sub     al, byte ptr es:[di + 0x1d]     ; 26 2A 45 1D
         jb      L_1505                          ; 72 E2
+;   [unconditional branch target] L_1523
 L_1523:
         mov     cx, word ptr es:[di + 0x14]     ; 26 8B 4D 14
         cmp     al, byte ptr es:[di + 0x20]     ; 26 3A 45 20
@@ -2834,10 +3108,12 @@ L_1523:
         add     ax, 8                           ; 05 08 00
         add     bx, cx                          ; 03 D9
         ret                                     ; C3
+;   [conditional branch target (if/else)] L_1535
 L_1535:
         add     word ptr [bp - 0x1c], bx        ; 01 5E E4
         pop     ax                              ; 58
         jmp     L_11DD                          ; E9 A1 FC
+;   [loop start (also forward branch)] L_153C
 L_153C:
         jmp     word ptr [bp - 0x10]            ; FF 66 F0
         xor     ah, ah                          ; 32 E4
@@ -2855,16 +3131,19 @@ L_153C:
         jg      L_1562                          ; 7F 04
         add     ax, word ptr [bp - 0x2c]        ; 03 46 D4
         inc     cx                              ; 41
+;   [conditional branch target (if/else)] L_1562
 L_1562:
         mov     word ptr [bp - 0x28], ax        ; 89 46 D8
         xor     ax, ax                          ; 33 C0
         add     bx, cx                          ; 03 D9
         ret                                     ; C3
+;   [loop start] L_156A
 L_156A:
         mov     al, byte ptr es:[di + 0x1f]     ; 26 8A 45 1F
         jmp     L_1588                          ; EB 18
         mov     cx, word ptr [bp - 0x12]        ; 8B 4E EE
         xor     word ptr [bp - 0xe], cx         ; 31 4E F2
+;   [loop start (also forward branch)] L_1576
 L_1576:
         lodsb   al, byte ptr [si]               ; AC
         dec     word ptr [bp - 6]               ; FF 4E FA
@@ -2873,6 +3152,7 @@ L_1576:
         ja      L_156A                          ; 77 E8
         sub     al, byte ptr es:[di + 0x1d]     ; 26 2A 45 1D
         jb      L_156A                          ; 72 E2
+;   [unconditional branch target] L_1588
 L_1588:
         cmp     al, byte ptr es:[di + 0x20]     ; 26 3A 45 20
         je      L_153C                          ; 74 AE
@@ -2888,6 +3168,7 @@ L_1588:
         je      L_1576                          ; 74 D1
         add     bx, cx                          ; 03 D9
         ret                                     ; C3
+;   [conditional branch target (if/else)] L_15A8
 L_15A8:
         add     word ptr [bp - 0x1c], bx        ; 01 5E E4
         pop     ax                              ; 58
@@ -2966,9 +3247,11 @@ L_15A8:
         je      L_1652                          ; 74 04
         mov     si, cx                          ; 8B F1
         xor     cx, cx                          ; 33 C9
+;   [conditional branch target (if/else)] L_1652
 L_1652:
         call    L_2426                          ; E8 D1 0D
         mov     ax, 0x4001                      ; B8 01 40
+;   [conditional branch target (if/else)] L_1658
 L_1658:
         mov     byte ptr [bp - 3], al           ; 88 46 FD
         cmp     al, 3                           ; 3C 03
@@ -2976,6 +3259,7 @@ L_1658:
         add     ax, ax                          ; 03 C0
         cdq                                     ; 99
         mov     word ptr [bp + 8], dx           ; 89 56 08
+;   [conditional branch target (if/else)] L_1665
 L_1665:
         les     di, ptr [bp + 0x10]             ; C4 7E 10
         lds     si, ptr es:[di + 0xa]           ; 26 C5 75 0A
@@ -2996,6 +3280,7 @@ L_1665:
         mov     bl, byte ptr cs:[bx + 0x12a]    ; 2E 8A 9F 2A 01
         dec     bl                              ; FE CB
         std                                     ; FD
+        ; constant WM_CREATE
         mov     dx, 1                           ; BA 01 00
         test    byte ptr [bp + 6], 2            ; F6 46 06 02
         jne     L_16AC                          ; 75 0E
@@ -3007,6 +3292,7 @@ L_1665:
         neg     cx                              ; F7 D9
         inc     cx                              ; 41
         neg     dx                              ; F7 DA
+;   [conditional branch target (if/else)] L_16AC
 L_16AC:
         not     bl                              ; F6 D3
         shl     di, 1                           ; D1 E7
@@ -3032,6 +3318,7 @@ L_16AC:
         test    byte ptr [bp + 6], 1            ; F6 46 06 01
         je      L_16E3                          ; 74 02
         dec     ah                              ; FE CC
+;   [conditional branch target (if/else)] L_16E3
 L_16E3:
         xor     al, ah                          ; 32 C4
         and     al, dl                          ; 22 C2
@@ -3042,6 +3329,7 @@ L_16E3:
         mov     bp, bx                          ; 8B EB
         shr     bx, 1                           ; D1 EB
         mov     dl, ah                          ; 8A D4
+;   [loop iteration target] L_16F3
 L_16F3:
         mov     al, byte ptr [bx + si]          ; 8A 00
         mov     ah, byte ptr ds:[bp + si]       ; 3E 8A 22
@@ -3053,18 +3341,22 @@ L_16F3:
         xor     al, dl                          ; 32 C2
         jne     L_1707                          ; 75 02
         loop    L_16F3                          ; E2 EC
+;   [conditional branch target (if/else)] L_1707
 L_1707:
         pop     bp                              ; 5D
+;   [conditional branch target (if/else)] L_1708
 L_1708:
         pop     di                              ; 5F
         jne     L_1734                          ; 75 29
         jmp     L_176F                          ; EB 62
+;   [conditional branch target (if/else)] L_170D
 L_170D:
         mov     ax, word ptr [bp + 8]           ; 8B 46 08
         test    byte ptr [bp + 6], 1            ; F6 46 06 01
         je      L_171A                          ; 74 04
         not     ax                              ; F7 D0
         not     bh                              ; F6 D7
+;   [conditional branch target (if/else)] L_171A
 L_171A:
         lodsb   al, byte ptr [si]               ; AC
         xor     al, ah                          ; 32 C4
@@ -3081,6 +3373,7 @@ L_171A:
         add     si, dx                          ; 03 F2
         lodsb   al, byte ptr [si]               ; AC
         xor     al, ah                          ; 32 C4
+;   [conditional branch target (if/else)] L_1734
 L_1734:
         shl     cx, 1                           ; D1 E1
         shl     cx, 1                           ; D1 E1
@@ -3090,6 +3383,7 @@ L_1734:
         sub     cx, di                          ; 2B CF
         neg     cx                              ; F7 D9
         dec     cx                              ; 49
+;   [loop start] L_1745
 L_1745:
         inc     cx                              ; 41
         shl     al, 1                           ; D0 E0
@@ -3097,12 +3391,15 @@ L_1745:
         cmp     cx, word ptr [bp - 6]           ; 3B 4E FA
         jge     L_176F                          ; 7D 20
         jmp     L_1756                          ; EB 05
+;   [loop start (also forward branch)] L_1751
 L_1751:
         dec     cx                              ; 49
         shr     ax, 1                           ; D1 E8
         jae     L_1751                          ; 73 FB
+;   [unconditional branch target] L_1756
 L_1756:
         mov     ax, cx                          ; 8B C1
+;   [loop start] L_1758
 L_1758:
         cld                                     ; FC
         mov     byte ptr cs:[0x51a], 0          ; 2E C6 06 1A 05 00
@@ -3115,6 +3412,7 @@ L_1758:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0xe                             ; CA 0E 00
+;   [branch target] L_176F
 L_176F:
         mov     ax, 0xffff                      ; B8 FF FF
         jmp     L_1758                          ; EB E4
@@ -3131,6 +3429,7 @@ L_176F:
         call    L_2802                          ; E8 7D 10
         jae     L_178A                          ; 73 03
         jmp     L_18EC                          ; E9 62 01
+;   [conditional branch target (if/else)] L_178A
 L_178A:
         lds     si, ptr [bp + 0x12]             ; C5 76 12
         mov     cx, word ptr [si]               ; 8B 0C
@@ -3141,7 +3440,9 @@ L_178A:
         mov     di, dx                          ; 8B FA
         call    L_2426                          ; E8 88 0C
         lds     si, ptr [bp + 0x12]             ; C5 76 12
+;   [conditional branch target (if/else)] L_17A1
 L_17A1:
+        ; constant WM_CREATE
         mov     cl, 1                           ; B1 01
         cmp     word ptr [si + 8], 0x103        ; 81 7C 08 03 01
         je      L_17B5                          ; 74 0B
@@ -3150,6 +3451,7 @@ L_17A1:
         cwde                                    ; 98
         mov     byte ptr [bp + 0xa], ah         ; 88 66 0A
         mov     cl, 4                           ; B1 04
+;   [conditional branch target (if/else)] L_17B5
 L_17B5:
         mov     ax, word ptr [si + 6]           ; 8B 44 06
         mul     word ptr [bp + 0xe]             ; F7 66 0E
@@ -3170,6 +3472,7 @@ L_17B5:
         or      ax, di                          ; 0B C7
         jne     L_17E8                          ; 75 03
         jmp     L_18A5                          ; E9 BD 00
+;   [conditional branch target (if/else)] L_17E8
 L_17E8:
         mov     es, bx                          ; 8E C3
         mov     bx, word ptr es:[di]            ; 26 8B 1D
@@ -3180,14 +3483,17 @@ L_17E8:
         test    byte ptr cs:[bx + 0x556], 1     ; 2E F6 87 56 05 01
         je      L_1842                          ; 74 44
         mov     ah, byte ptr cs:[bx + 0x566]    ; 2E 8A A7 66 05
+        ; constant WM_MOVE
         mov     al, 3                           ; B0 03
         mov     dx, 0x3ce                       ; BA CE 03
         mov     word ptr cs:[0x50c], ax         ; 2E A3 0C 05
         mov     byte ptr cs:[0x51a], 3          ; 2E C6 06 1A 05 03
         out     dx, ax                          ; EF
+        ; constant WM_RBUTTONUP
         mov     ax, 0x205                       ; B8 05 02
         mov     word ptr cs:[0x510], ax         ; 2E A3 10 05
         out     dx, ax                          ; EF
+        ; constant WM_SETTEXT
         mov     ah, ch                          ; 8A E5
         mov     al, 8                           ; B0 08
         mov     word ptr cs:[0x514], ax         ; 2E A3 14 05
@@ -3204,7 +3510,9 @@ L_17E8:
         mov     byte ptr [si], al               ; 88 04
         sti                                     ; FB
         jmp     L_18E3                          ; E9 A1 00
+;   [conditional branch target (if/else)] L_1842
 L_1842:
+        ; constant WM_MOVE
         mov     ax, 3                           ; B8 03 00
         mov     word ptr cs:[0x50c], ax         ; 2E A3 0C 05
         mov     word ptr cs:[0x510], 5          ; 2E C7 06 10 05 05 00
@@ -3214,11 +3522,13 @@ L_1842:
         mov     word ptr cs:[0x514], ax         ; 2E A3 14 05
         out     dx, ax                          ; EF
         xor     dx, dx                          ; 33 D2
+;   [conditional branch target (if/else)] L_1863
 L_1863:
         lea     di, [bp + 0xa]                  ; 8D 7E 0A
         push    bp                              ; 55
         shl     bx, 1                           ; D1 E3
         mov     bp, word ptr cs:[bx + 0x25ac]   ; 2E 8B AF AC 25
+;   [loop start] L_186E
 L_186E:
         or      dx, dx                          ; 0B D2
         jne     L_1887                          ; 75 15
@@ -3232,6 +3542,7 @@ L_186E:
         shr     ah, 1                           ; D0 EC
         out     dx, ax                          ; EF
         xor     dx, dx                          ; 33 D2
+;   [conditional branch target (if/else)] L_1887
 L_1887:
         mov     al, byte ptr ss:[di]            ; 36 8A 05
         mov     bh, al                          ; 8A F8
@@ -3248,6 +3559,7 @@ L_1887:
         je      L_186E                          ; 74 CC
         pop     bp                              ; 5D
         jmp     L_18E3                          ; EB 3E
+;   [unconditional branch target] L_18A5
 L_18A5:
         cmp     cl, 4                           ; 80 F9 04
         jne     L_18B8                          ; 75 0E
@@ -3258,6 +3570,7 @@ L_18A5:
         dec     ax                              ; 48
         mov     dx, 0x47ff                      ; BA FF 47
         jmp     L_18E3                          ; EB 2B
+;   [loop start (also forward branch)] L_18B8
 L_18B8:
         mov     bl, bh                          ; 8A DF
         mov     bh, al                          ; 8A F8
@@ -3269,11 +3582,13 @@ L_18B8:
         shr     ah, 1                           ; D0 EC
         out     dx, ax                          ; EF
         xor     dx, dx                          ; 33 D2
+;   [conditional branch target (if/else)] L_18CC
 L_18CC:
         xor     ax, ax                          ; 33 C0
         test    byte ptr [si], ch               ; 84 2C
         je      L_18D3                          ; 74 01
         dec     ax                              ; 48
+;   [conditional branch target (if/else)] L_18D3
 L_18D3:
         add     si, dx                          ; 03 F2
         rol     cl, 1                           ; D0 C1
@@ -3282,9 +3597,11 @@ L_18D3:
         mov     dx, ax                          ; 8B D0
         mov     ax, bx                          ; 8B C3
         call    L_2327                          ; E8 44 0A
+;   [branch target] L_18E3
 L_18E3:
         call    L_24B2                          ; E8 CC 0B
         mov     byte ptr cs:[0x51a], 0          ; 2E C6 06 1A 05 00
+;   [unconditional branch target] L_18EC
 L_18EC:
         pop     di                              ; 5F
         pop     si                              ; 5E
@@ -3304,6 +3621,7 @@ L_18EC:
         or      ch, ch                          ; 0A ED
         js      L_1910                          ; 78 04
         mov     al, byte ptr ss:[0x1234]        ; 36 A0 34 12
+;   [conditional branch target (if/else)] L_1910
 L_1910:
         or      ch, ch                          ; 0A ED
         jns     L_191C                          ; 79 08
@@ -3311,27 +3629,34 @@ L_1910:
         and     al, bl                          ; 22 C3
         xor     al, ah                          ; 32 C4
         mov     byte ptr [di], al               ; 88 05
+;   [conditional branch target (if/else)] L_191C
 L_191C:
         xor     ax, ax                          ; 33 C0
         jns     L_1925                          ; 79 05
         add     cl, 0x7a                        ; 80 C1 7A
         rol     ch, 1                           ; D0 C5
+;   [conditional branch target (if/else)] L_1925
 L_1925:
         dec     bp                              ; 4D
+;   [loop start] L_1926
 L_1926:
         jg      L_1926                          ; 7F FE
         retf                                    ; CB
+;   [loop start] L_1929
 L_1929:
         ror     bl, 1                           ; D0 CB
         jb      L_1931                          ; 72 04
         dec     bp                              ; 4D
         jg      L_1929                          ; 7F F9
+;   [loop start] L_1930
 L_1930:
         retf                                    ; CB
+;   [conditional branch target (if/else)] L_1931
 L_1931:
         inc     di                              ; 47
         dec     bp                              ; 4D
         jle     L_1930                          ; 7E FB
+;   [loop start] L_1935
 L_1935:
         cmp     bp, 8                           ; 83 FD 08
         jl      L_1929                          ; 7C EF
@@ -3342,17 +3667,21 @@ L_1935:
         sub     bp, 8                           ; 83 ED 08
         jg      L_1935                          ; 7F EF
         retf                                    ; CB
+;   [loop start] L_1947
 L_1947:
         ror     bl, 1                           ; D0 CB
         jb      L_194F                          ; 72 04
         dec     bp                              ; 4D
         jg      L_1947                          ; 7F F9
+;   [loop start] L_194E
 L_194E:
         retf                                    ; CB
+;   [conditional branch target (if/else)] L_194F
 L_194F:
         inc     di                              ; 47
         dec     bp                              ; 4D
         jle     L_194E                          ; 7E FB
+;   [loop start] L_1953
 L_1953:
         cmp     bp, 8                           ; 83 FD 08
         jl      L_1947                          ; 7C EF
@@ -3381,6 +3710,7 @@ L_1953:
         sti                                     ; FB
         mov     bl, ah                          ; 8A DC
         pop     dx                              ; 5A
+;   [conditional branch target (if/else)] L_1984
 L_1984:
         xor     ax, ax                          ; 33 C0
         mov     ax, ds                          ; 8C D8
@@ -3396,6 +3726,7 @@ L_1984:
         push    di                              ; 57
         jae     L_199D                          ; 73 03
         jmp     L_1A1D                          ; E9 80 00
+;   [conditional branch target (if/else)] L_199D
 L_199D:
         cld                                     ; FC
         mov     byte ptr [bp - 0x15], 0xff      ; C6 46 EB FF
@@ -3420,6 +3751,7 @@ L_199D:
         cmp     cx, 0x103                       ; 81 F9 03 01
         jne     L_1A12                          ; 75 36
         or      bh, 2                           ; 80 CF 02
+;   [conditional branch target (if/else)] L_19DF
 L_19DF:
         mov     cx, word ptr [si + 0xe]         ; 8B 4C 0E
         mov     word ptr [bp - 0x1e], cx        ; 89 4E E2
@@ -3438,14 +3770,19 @@ L_19DF:
         cmp     ax, 4                           ; 3D 04 00
         jne     L_1A12                          ; 75 08
         jmp     L_1DBD                          ; E9 B0 03
+;   [loop start] L_1A0D
 L_1A0D:
+        ; constant WM_CREATE
         mov     ax, 1                           ; B8 01 00
         jmp     L_1A14                          ; EB 02
+;   [loop start (also forward branch)] L_1A12
 L_1A12:
         xor     ax, ax                          ; 33 C0
+;   [loop start (also forward branch)] L_1A14
 L_1A14:
         call    L_24B2                          ; E8 9B 0A
         mov     byte ptr cs:[0x51a], 0          ; 2E C6 06 1A 05 00
+;   [unconditional branch target] L_1A1D
 L_1A1D:
         pop     di                              ; 5F
         pop     si                              ; 5E
@@ -3455,6 +3792,7 @@ L_1A1D:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0x1c                            ; CA 1C 00
+;   [conditional branch target (if/else)] L_1A2A
 L_1A2A:
         test    bh, 0x80                        ; F6 C7 80
         je      L_1A71                          ; 74 42
@@ -3472,8 +3810,10 @@ L_1A2A:
         mov     dx, word ptr [bx + 2]           ; 8B 57 02
         mov     si, word ptr [bx + 4]           ; 8B 77 04
         mov     di, word ptr [bx + 6]           ; 8B 7F 06
+;   [conditional branch target (if/else)] L_1A4F
 L_1A4F:
         call    L_2426                          ; E8 D4 09
+        ; constant WM_MOVE
         mov     ax, 3                           ; B8 03 00
         mov     word ptr cs:[0x50c], ax         ; 2E A3 0C 05
         mov     word ptr cs:[0x510], 5          ; 2E C7 06 10 05 05 00
@@ -3482,6 +3822,7 @@ L_1A4F:
         mov     ax, 0xff08                      ; B8 08 FF
         mov     word ptr cs:[0x514], ax         ; 2E A3 14 05
         out     dx, ax                          ; EF
+;   [conditional branch target (if/else)] L_1A71
 L_1A71:
         lds     si, ptr [bp + 0x12]             ; C5 76 12
         mov     ax, word ptr [si]               ; 8B 04
@@ -3502,6 +3843,7 @@ L_1A71:
         shl     al, 1                           ; D0 E0
         cwde                                    ; 98
         mov     byte ptr [bp - 0x24], ah        ; 88 66 DC
+;   [conditional branch target (if/else)] L_1AA0
 L_1AA0:
         mov     ah, byte ptr cs:[bx + 0x18f9]   ; 2E 8A A7 F9 18
         mov     al, 0x7a                        ; B0 7A
@@ -3522,10 +3864,12 @@ L_1AA0:
         and     bx, 7                           ; 81 E3 07 00
         mov     bl, byte ptr cs:[bx + 0x12a]    ; 2E 8A 9F 2A 01
         mov     ax, word ptr [bp + 0x1a]        ; 8B 46 1A
+;   [loop start] L_1AD1
 L_1AD1:
         dec     ax                              ; 48
         jg      L_1AD7                          ; 7F 03
         jmp     L_1A0D                          ; E9 36 FF
+;   [conditional branch target (if/else)] L_1AD7
 L_1AD7:
         push    ax                              ; 50
         push    ds                              ; 1E
@@ -3539,6 +3883,7 @@ L_1AD7:
         jae     L_1AEF                          ; 73 04
         mov     bl, 2                           ; B3 02
         neg     ax                              ; F7 D8
+;   [conditional branch target (if/else)] L_1AEF
 L_1AEF:
         mov     dx, ax                          ; 8B D0
         mov     ax, di                          ; 8B C7
@@ -3552,12 +3897,14 @@ L_1AEF:
         neg     si                              ; F7 DE
         mov     byte ptr [bp - 0x17], 0x7f      ; C6 46 E9 7F
         mov     byte ptr [bp - 0xbc], 0x46      ; C6 86 44 FF 46
+;   [conditional branch target (if/else)] L_1B13
 L_1B13:
         mov     cx, ax                          ; 8B C8
         cmp     cx, dx                          ; 3B CA
         jb      L_1B1E                          ; 72 05
         or      bl, 4                           ; 80 CB 04
         xchg    dx, cx                          ; 87 CA
+;   [conditional branch target (if/else)] L_1B1E
 L_1B1E:
         mov     word ptr [bp - 0x10], si        ; 89 76 F0
         or      dx, dx                          ; 0B D2
@@ -3565,6 +3912,7 @@ L_1B1E:
         mov     di, word ptr [bp - 0xe]         ; 8B 7E F2
         mov     bl, byte ptr [bp - 0x16]        ; 8A 5E EA
         jmp     L_1C12                          ; E9 E4 00
+;   [conditional branch target (if/else)] L_1B2E
 L_1B2E:
         mov     ax, cs                          ; 8C C8
         mov     ds, ax                          ; 8E D8
@@ -3583,6 +3931,7 @@ L_1B2E:
         call    L_1CEE                          ; E8 9B 01
         pop     dx                              ; 5A
         jmp     L_1BAD                          ; EB 57
+;   [conditional branch target (if/else)] L_1B56
 L_1B56:
         test    bl, 8                           ; F6 C3 08
         jne     L_1B75                          ; 75 1A
@@ -3598,6 +3947,7 @@ L_1B56:
         stosw   word ptr es:[di], ax            ; AB
         mov     ax, dx                          ; 8B C2
         stosw   word ptr es:[di], ax            ; AB
+;   [conditional branch target (if/else)] L_1B75
 L_1B75:
         cmp     byte ptr [bp - 0x15], bl        ; 38 5E EB
         je      L_1BAD                          ; 74 33
@@ -3614,15 +3964,18 @@ L_1B75:
         je      L_1B9F                          ; 74 05
         mov     si, 0x191e                      ; BE 1E 19
         mov     cl, 0xb                         ; B1 0B
+;   [conditional branch target (if/else)] L_1B9F
 L_1B9F:
         rep movsb byte ptr es:[di], byte ptr [si] ; F3 A4
         mov     ax, word ptr [bp - 8]           ; 8B 46 F8
         sub     ax, di                          ; 2B C7
         add     ax, 6                           ; 05 06 00
         mov     byte ptr es:[di - 2], al        ; 26 88 45 FE
+;   [branch target] L_1BAD
 L_1BAD:
         mov     word ptr [bp - 0x20], dx        ; 89 56 E0
         mov     byte ptr [bp - 0x19], 0x21      ; C6 46 E7 21
+;   [loop start] L_1BB4
 L_1BB4:
         cmp     byte ptr [bp - 0x18], 0x81      ; 80 7E E8 81
         jne     L_1BD1                          ; 75 17
@@ -3636,6 +3989,7 @@ L_1BB4:
         mov     al, 4                           ; B0 04
         mov     dl, 0xce                        ; B2 CE
         out     dx, ax                          ; EF
+;   [conditional branch target (if/else)] L_1BD1
 L_1BD1:
         lds     di, ptr [bp - 0xe]              ; C5 7E F2
         mov     dx, word ptr [bp - 0x10]        ; 8B 56 F0
@@ -3660,8 +4014,10 @@ L_1BD1:
         jae     L_1BB4                          ; 73 A9
         shl     dx, 1                           ; D1 E2
         sub     di, dx                          ; 2B FA
+;   [conditional branch target (if/else)] L_1C0F
 L_1C0F:
         mov     word ptr [bp - 0xa], cx         ; 89 4E F6
+;   [unconditional branch target] L_1C12
 L_1C12:
         pop     si                              ; 5E
         pop     ds                              ; 1F
@@ -3672,13 +4028,13 @@ L_1C12:
         mov     cx, ax                          ; 8B C8
         pop     ax                              ; 58
         jmp     L_1AD1                          ; E9 B2 FE
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_1C1F -- offset 0x1C1F -- 71 instr
-; Dispatcher: tabla de decisiones cmp+jcc (71 instr).
-; tags: dispatcher
-; callers: sub_0EC6
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_1C1F   offset=0x1C1F  size=71 instr  segment=seg1.asm
+;
+; Classification (pass8): unclear  (score C=1, ASM=2)
+; Prologue: none     Epilogue: ret
+;-------------------------------------------------------------------------
+;   [sub-routine] L_1C1F
 L_1C1F:
         lea     di, [bp - 0xbe]                 ; 8D BE 42 FF
         mov     cx, ss                          ; 8C D1
@@ -3700,6 +4056,7 @@ L_1C1F:
         rep movsw word ptr es:[di], word ptr [si] ; F3 A5
         lea     si, [bp - 0x24]                 ; 8D 76 DC
         mov     word ptr es:[di - 2], si        ; 26 89 75 FE
+;   [conditional branch target (if/else)] L_1C54
 L_1C54:
         mov     bx, word ptr [bp - 0x12]        ; 8B 5E EE
         test    byte ptr [bp - 0x18], 0x80      ; F6 46 E8 80
@@ -3715,10 +4072,12 @@ L_1C54:
         xor     al, byte ptr cs:[bx + 0x586]    ; 2E 32 87 86 05
         mov     byte ptr [bp - 0x28], al        ; 88 46 D8
         mov     ah, byte ptr cs:[bx + 0x566]    ; 2E 8A A7 66 05
+        ; constant WM_MOVE
         mov     al, 3                           ; B0 03
         mov     dx, 0x3ce                       ; BA CE 03
         mov     word ptr cs:[0x50c], ax         ; 2E A3 0C 05
         out     dx, ax                          ; EF
+        ; constant WM_RBUTTONUP
         mov     ax, 0x205                       ; B8 05 02
         mov     word ptr cs:[0x510], ax         ; 2E A3 10 05
         out     dx, ax                          ; EF
@@ -3735,15 +4094,18 @@ L_1C54:
         je      L_1CC2                          ; 74 06
         mov     si, 0x196c                      ; BE 6C 19
         mov     cx, 0x1a                        ; B9 1A 00
+;   [conditional branch target (if/else)] L_1CC2
 L_1CC2:
         rep movsb byte ptr es:[di], byte ptr [si] ; F3 A4
         jmp     L_1CEA                          ; EB 24
+;   [conditional branch target (if/else)] L_1CC6
 L_1CC6:
         mov     cl, byte ptr cs:[bx + 0x25cc]   ; 2E 8A 8F CC 25
         add     bx, bx                          ; 03 DB
         mov     si, word ptr cs:[bx + 0x25ac]   ; 2E 8B B7 AC 25
         rep movsb byte ptr es:[di], byte ptr [si] ; F3 A4
         mov     si, 0x1914                      ; BE 14 19
+        ; constant WM_SIZE
         mov     cl, 5                           ; B1 05
         cmp     byte ptr [bp - 9], 0xff         ; 80 7E F7 FF
         je      L_1CE8                          ; 74 09
@@ -3751,19 +4113,22 @@ L_1CC6:
         je      L_1CE8                          ; 74 05
         mov     si, 0x1910                      ; BE 10 19
         mov     cl, 7                           ; B1 07
+;   [conditional branch target (if/else)] L_1CE8
 L_1CE8:
         rep movsw word ptr es:[di], word ptr [si] ; F3 A5
+;   [fall-through exit] L_1CEA
 L_1CEA:
         mov     word ptr [bp - 4], di           ; 89 7E FC
         ret                                     ; C3
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_1CEE -- offset 0x1CEE -- 348 instr
-; Iterador con instrucciones de string (movsb/scasb/...) (348 instr).
-; tags: complex_iterator, far, loop, string_op
-; callers: sub_0EC6
-; calls (intra): sub_0536, sub_2426
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_1CEE   offset=0x1CEE  size=348 instr  segment=seg1.asm
+;
+; Classification (pass8): unclear  (score C=4, ASM=2)
+; Prologue: none     Epilogue: retf_n   (PASCAL FAR, callee cleans args)
+;
+; Near calls (internal): L_0536, L_2426
+;-------------------------------------------------------------------------
+;   [sub-routine] L_1CEE
 L_1CEE:
         lea     ax, [bp - 0xb9]                 ; 8D 86 47 FF
         sub     ax, di                          ; 2B C7
@@ -3778,6 +4143,7 @@ L_1CEE:
         je      L_1D19                          ; 74 0A
         mov     byte ptr es:[di - 0x14], 0xc3   ; 26 C6 45 EC C3
         mov     byte ptr es:[di - 0xd], 0x4f    ; 26 C6 45 F3 4F
+;   [conditional branch target (if/else)] L_1D19
 L_1D19:
         mov     ah, bl                          ; 8A E3
         mov     bx, word ptr [bp - 0x12]        ; 8B 5E EE
@@ -3793,9 +4159,11 @@ L_1D19:
         test    bl, 2                           ; F6 C3 02
         je      L_1D41                          ; 74 05
         mov     byte ptr es:[di - 7], 0x4f      ; 26 C6 45 F9 4F
+;   [error/early exit] L_1D41
 L_1D41:
         sub     byte ptr es:[di - 2], al        ; 26 28 45 FE
         ret                                     ; C3
+;   [conditional branch target (if/else)] L_1D46
 L_1D46:
         mov     si, 0x1947                      ; BE 47 19
         mov     cx, 0x25                        ; B9 25 00
@@ -3807,6 +4175,7 @@ L_1D46:
         mov     byte ptr es:[di - 0x1d], 0x4f   ; 26 C6 45 E3 4F
         mov     byte ptr es:[di - 7], 0x4f      ; 26 C6 45 F9 4F
         mov     byte ptr es:[di - 0x24], 0xc3   ; 26 C6 45 DC C3
+;   [error/early exit] L_1D6A
 L_1D6A:
         ret                                     ; C3
         mov     al, 8                           ; B0 08
@@ -3822,12 +4191,14 @@ L_1D6A:
         mov     word ptr cs:[0x514], ax         ; 2E A3 14 05
         out     dx, ax                          ; EF
         mov     al, bh                          ; 8A C7
+;   [loop iteration target] L_1D83
 L_1D83:
         cli                                     ; FA
         mov     ah, byte ptr [di]               ; 8A 25
         stosb   byte ptr es:[di], al            ; AA
         sti                                     ; FB
         loop    L_1D83                          ; E2 F9
+;   [conditional branch target (if/else)] L_1D8A
 L_1D8A:
         mov     ax, si                          ; 8B C6
         mov     al, 8                           ; B0 08
@@ -3838,7 +4209,9 @@ L_1D8A:
         sti                                     ; FB
         retf                                    ; CB
         mov     dh, ah                          ; 8A F4
+        ; constant WM_CREATE
         mov     dl, 1                           ; B2 01
+;   [loop start] L_1D9A
 L_1D9A:
         mov     ah, byte ptr [di]               ; 8A 25
         mov     al, bh                          ; 8A C7
@@ -3849,9 +4222,11 @@ L_1D9A:
         or      dl, dl                          ; 0A D2
         jne     L_1DAA                          ; 75 01
         retf                                    ; CB
+;   [loop start (also forward branch)] L_1DAA
 L_1DAA:
         mov     dx, si                          ; 8B D6
         jcxz    L_1D9A                          ; E3 EC
+;   [loop iteration target] L_1DAE
 L_1DAE:
         mov     ah, byte ptr [di]               ; 8A 25
         mov     al, bh                          ; 8A C7
@@ -3861,6 +4236,7 @@ L_1DAE:
         stosb   byte ptr es:[di], al            ; AA
         loop    L_1DAE                          ; E2 F3
         jmp     L_1DAA                          ; EB ED
+;   [unconditional branch target] L_1DBD
 L_1DBD:
         test    bh, 0x80                        ; F6 C7 80
         je      L_1DFC                          ; 74 3A
@@ -3875,6 +4251,7 @@ L_1DBD:
         shl     si, 1                           ; D1 E6
         mov     si, word ptr [bx + si + 2]      ; 8B 70 02
         call    L_2426                          ; E8 49 06
+        ; constant WM_MOVE
         mov     ax, 3                           ; B8 03 00
         mov     word ptr cs:[0x50c], ax         ; 2E A3 0C 05
         mov     word ptr cs:[0x510], 5          ; 2E C7 06 10 05 05 00
@@ -3883,6 +4260,7 @@ L_1DBD:
         mov     ax, 0xff08                      ; B8 08 FF
         mov     word ptr cs:[0x514], ax         ; 2E A3 14 05
         out     dx, ax                          ; EF
+;   [conditional branch target (if/else)] L_1DFC
 L_1DFC:
         mov     di, word ptr [bp + 0xe]         ; 8B 7E 0E
         mov     ax, word ptr [bp + 0x10]        ; 8B 46 10
@@ -3895,15 +4273,19 @@ L_1DFC:
         je      L_1E26                          ; 74 13
         mov     ax, word ptr [di]               ; 8B 05
         mov     dx, word ptr [di + 2]           ; 8B 55 02
+        ; constant VK_RETURN
         mov     ch, dh                          ; 8A EE
         or      ch, 0x80                        ; 80 CD 80
         shl     dh, 1                           ; D0 E6
         sar     dh, cl                          ; D2 FE
         jmp     L_1E50                          ; EB 2D
+;   [loop start (also forward branch)] L_1E23
 L_1E23:
         jmp     L_1A12                          ; E9 EC FB
+;   [loop start (also forward branch)] L_1E26
 L_1E26:
         jmp     L_1A14                          ; E9 EB FB
+;   [conditional branch target (if/else)] L_1E29
 L_1E29:
         lds     si, ptr [bp + 0x16]             ; C5 76 16
         mov     bx, word ptr [si + 2]           ; 8B 5C 02
@@ -3919,6 +4301,7 @@ L_1E29:
         mov     ah, byte ptr [bx + di + 8]      ; 8A 61 08
         mov     dl, byte ptr [bx + di + 0x10]   ; 8A 51 10
         mov     dh, byte ptr [bx + di + 0x18]   ; 8A 71 18
+;   [unconditional branch target] L_1E50
 L_1E50:
         mov     word ptr [bp - 0x28], ax        ; 89 46 D8
         mov     word ptr [bp - 0x26], dx        ; 89 56 DA
@@ -3936,12 +4319,14 @@ L_1E50:
         or      al, dl                          ; 0A C2
         je      L_1E26                          ; 74 AD
         jmp     L_1E86                          ; EB 0B
+;   [conditional branch target (if/else)] L_1E7B
 L_1E7B:
         mov     al, byte ptr [bp - 0x21]        ; 8A 46 DF
         shl     al, 1                           ; D0 E0
         sar     al, cl                          ; D2 F8
         xor     al, dh                          ; 32 C6
         je      L_1E26                          ; 74 A0
+;   [branch target] L_1E86
 L_1E86:
         mov     byte ptr [bp - 0x1a], al        ; 88 46 E6
         mov     bx, word ptr [bp - 0x12]        ; 8B 5E EE
@@ -3959,10 +4344,12 @@ L_1E86:
         xor     al, byte ptr cs:[bx + 0x586]    ; 2E 32 87 86 05
         mov     byte ptr [bp - 0x25], al        ; 88 46 DB
         mov     ah, byte ptr cs:[bx + 0x566]    ; 2E 8A A7 66 05
+        ; constant WM_MOVE
         mov     al, 3                           ; B0 03
         mov     dx, 0x3ce                       ; BA CE 03
         mov     word ptr cs:[0x50c], ax         ; 2E A3 0C 05
         out     dx, ax                          ; EF
+        ; constant WM_RBUTTONUP
         mov     ax, 0x205                       ; B8 05 02
         mov     word ptr cs:[0x510], ax         ; 2E A3 10 05
         out     dx, ax                          ; EF
@@ -3972,6 +4359,7 @@ L_1E86:
         mov     word ptr cs:[0x518], ax         ; 2E A3 18 05
         out     dx, ax                          ; EF
         jmp     L_1F2F                          ; EB 4F
+;   [conditional branch target (if/else)] L_1EE0
 L_1EE0:
         lea     di, [bp - 0xbe]                 ; 8D BE 42 FF
         mov     cx, ss                          ; 8C D1
@@ -4000,14 +4388,17 @@ L_1EE0:
         rep movsb byte ptr es:[di], byte ptr [si] ; F3 A4
         sub     byte ptr es:[di - 3], al        ; 26 28 45 FD
         sub     byte ptr es:[di - 1], al        ; 26 28 45 FF
+;   [unconditional branch target] L_1F2F
 L_1F2F:
         mov     ax, word ptr [bp + 0x1a]        ; 8B 46 1A
         lds     si, ptr [bp + 0x16]             ; C5 76 16
         add     si, 4                           ; 83 C6 04
+;   [loop start] L_1F38
 L_1F38:
         dec     ax                              ; 48
         jg      L_1F3E                          ; 7F 03
         jmp     L_1A0D                          ; E9 CF FA
+;   [conditional branch target (if/else)] L_1F3E
 L_1F3E:
         push    ax                              ; 50
         lodsw   ax, word ptr [si]               ; AD
@@ -4019,6 +4410,7 @@ L_1F3E:
         sub     dx, bx                          ; 2B D3
         jne     L_1F4E                          ; 75 03
         jmp     L_1FE7                          ; E9 99 00
+;   [conditional branch target (if/else)] L_1F4E
 L_1F4E:
         dec     dx                              ; 4A
         mov     di, bx                          ; 8B FB
@@ -4041,11 +4433,13 @@ L_1F4E:
         and     ch, cl                          ; 22 E9
         xor     cl, cl                          ; 32 C9
         inc     dx                              ; 42
+;   [conditional branch target (if/else)] L_1F83
 L_1F83:
         dec     dx                              ; 4A
         mov     bl, byte ptr [bp - 0x1a]        ; 8A 5E E6
         and     ch, bl                          ; 22 EB
         and     cl, bl                          ; 22 CB
+        ; constant WM_SETTEXT
         mov     ah, ch                          ; 8A E5
         mov     ch, cl                          ; 8A E9
         xor     cl, cl                          ; 32 C9
@@ -4057,6 +4451,7 @@ L_1F83:
         jne     L_1FA5                          ; 75 05
         lcall   [bp - 8]                        ; FF 5E F8
         jmp     L_1FE7                          ; EB 42
+;   [loop start (also forward branch)] L_1FA5
 L_1FA5:
         push    di                              ; 57
         push    si                              ; 56
@@ -4079,6 +4474,7 @@ L_1FA5:
         out     dx, ax                          ; EF
         mov     al, ah                          ; 8A C4
         shl     al, 1                           ; D0 E0
+;   [conditional branch target (if/else)] L_1FCC
 L_1FCC:
         shr     al, 1                           ; D0 E8
         and     ax, 3                           ; 25 03 00
@@ -4095,6 +4491,7 @@ L_1FCC:
         add     di, word ptr [bp - 0x1e]        ; 03 7E E2
         rol     al, 1                           ; D0 C0
         jae     L_1FA5                          ; 73 BE
+;   [unconditional branch target] L_1FE7
 L_1FE7:
         pop     si                              ; 5E
         pop     ds                              ; 1F
@@ -4107,6 +4504,7 @@ L_1FE7:
         mov     bp, sp                          ; 8B EC
         push    ds                              ; 1E
         mov     ds, ax                          ; 8E D8
+        ; constant WM_CREATE
         mov     ax, 1                           ; B8 01 00
         sub     bp, 2                           ; 83 ED 02
         mov     sp, bp                          ; 8B E5
@@ -4129,7 +4527,9 @@ L_1FE7:
         je      L_2049                          ; 74 2C
         cmp     word ptr [bp + 0xe], 2          ; 83 7E 0E 02
         je      L_2062                          ; 74 3F
+        ; constant WM_CREATE
         mov     ax, 1                           ; B8 01 00
+;   [loop start] L_2026
 L_2026:
         mov     sp, word ptr [bp - 4]           ; 8B 66 FC
         pop     di                              ; 5F
@@ -4140,14 +4540,15 @@ L_2026:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0xe                             ; CA 0E 00
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_2036 -- offset 0x2036 -- 49 instr
-; Funcion mediana (49 instr, 1 calls).
-; tags: medium
-; callers: sub_20B4
-; calls (intra): sub_20B4
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_2036   offset=0x2036  size=49 instr  segment=seg1.asm
+;
+; Classification (pass8): unclear  (score C=3, ASM=4)
+; Prologue: none     Epilogue: jmp_tail
+;
+; Near calls (internal): L_2036, L_20B4
+;-------------------------------------------------------------------------
+;   [sub-routine] L_2036
 L_2036:
         lea     ax, [bp - 0x10]                 ; 8D 46 F0
         push    ss                              ; 16
@@ -4158,10 +4559,12 @@ L_2036:
         or      ax, ax                          ; 0B C0
         je      L_2026                          ; 74 DE
         ret                                     ; C3
+;   [conditional branch target (if/else)] L_2049
 L_2049:
         xor     si, si                          ; 33 F6
         mov     word ptr [bp - 0xe], si         ; 89 76 F2
         mov     word ptr [bp - 0xc], si         ; 89 76 F4
+;   [loop start] L_2051
 L_2051:
         mov     word ptr [bp - 0x10], si        ; 89 76 F0
         lea     di, [bp - 0xa]                  ; 8D 7E F6
@@ -4169,17 +4572,22 @@ L_2051:
         inc     si                              ; 46
         cmp     si, 5                           ; 83 FE 05
         jb      L_2051                          ; 72 F1
+;   [loop start] L_2060
 L_2060:
         jmp     L_2026                          ; EB C4
+;   [conditional branch target (if/else)] L_2062
 L_2062:
         xor     ax, ax                          ; 33 C0
         mov     word ptr [bp - 0x10], ax        ; 89 46 F0
         mov     word ptr [bp - 0xa], ax         ; 89 46 F6
         mov     si, 0xa                         ; BE 0A 00
+;   [loop start] L_206D
 L_206D:
         mov     di, 0xa                         ; BF 0A 00
+;   [loop start] L_2070
 L_2070:
         mov     bx, 0xa                         ; BB 0A 00
+;   [loop start] L_2073
 L_2073:
         mov     al, byte ptr cs:[si - 2]        ; 2E 8A 84 FE FF
         mov     ah, byte ptr cs:[di - 2]        ; 2E 8A A5 FE FF
@@ -4198,7 +4606,9 @@ L_2073:
         sub     si, dx                          ; 2B F2
         jne     L_206D                          ; 75 CF
         mov     word ptr [bp - 0x10], 2         ; C7 46 F0 02 00
+        ; constant WM_SIZE
         mov     si, 5                           ; BE 05 00
+;   [loop start] L_20A6
 L_20A6:
         mov     word ptr [bp - 0xa], si         ; 89 76 F6
         lea     di, [bp - 0xe]                  ; 8D 7E F2
@@ -4206,17 +4616,19 @@ L_20A6:
         dec     si                              ; 4E
         jns     L_20A6                          ; 79 F4
         jmp     L_2060                          ; EB AC
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_20B4 -- offset 0x20B4 -- 177 instr
-; Iterador con instrucciones de string (movsb/scasb/...) (177 instr).
-; tags: complex_iterator, loop, string_op
-; callers: sub_2036
-; calls (intra): sub_2036, sub_225F, sub_2322, sub_27A6
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_20B4   offset=0x20B4  size=177 instr  segment=seg1.asm
+;
+; Classification (pass8): asm_medium  (score C=1, ASM=4)
+; Prologue: saves_regs     Epilogue: jmp_tail
+;
+; Near calls (internal): L_2036, L_225F, L_2322, L_27A6
+;-------------------------------------------------------------------------
+;   [sub-routine] L_20B4
 L_20B4:
         push    si                              ; 56
         mov     si, 0x1c                        ; BE 1C 00
+;   [loop start] L_20B8
 L_20B8:
         mov     ax, word ptr cs:[si + 0x167]    ; 2E 8B 84 67 01
         mov     word ptr es:[di], ax            ; 26 89 05
@@ -4242,6 +4654,7 @@ L_20B8:
         or      bx, bx                          ; 0B DB
         jns     L_20ED                          ; 79 03
         jmp     L_230F                          ; E9 22 02
+;   [conditional branch target (if/else)] L_20ED
 L_20ED:
         lds     si, ptr [bp + 0xe]              ; C5 76 0E
         dec     bx                              ; 4B
@@ -4252,9 +4665,11 @@ L_20ED:
         or      ax, word ptr [bp + 0xc]         ; 0B 46 0C
         je      L_2105                          ; 74 05
         jmp     word ptr cs:[bx + 0x2391]       ; 2E FF A7 91 23
+;   [conditional branch target (if/else)] L_2105
 L_2105:
         mov     ax, word ptr cs:[bx + 0x2397]   ; 2E 8B 87 97 23
         jmp     L_2315                          ; E9 08 02
+;   [conditional branch target (if/else)] L_210D
 L_210D:
         jmp     L_2313                          ; E9 03 02
         mov     cx, word ptr [si]               ; 8B 0C
@@ -4262,11 +4677,14 @@ L_210D:
         je      L_2125                          ; 74 0E
         cmp     word ptr [si + 2], 2            ; 83 7C 02 02
         jb      L_2120                          ; 72 03
+;   [loop start] L_211D
 L_211D:
         mov     cx, 0                           ; B9 00 00
+;   [conditional branch target (if/else)] L_2120
 L_2120:
         cmp     cx, 5                           ; 83 F9 05
         jg      L_211D                          ; 7F F8
+;   [conditional branch target (if/else)] L_2125
 L_2125:
         lea     si, [si + 6]                    ; 8D 74 06
         call    L_2322                          ; E8 F7 01
@@ -4284,12 +4702,15 @@ L_2125:
         cmp     bx, 3                           ; 83 FB 03
         jle     L_2149                          ; 7E 03
         mov     bx, 0                           ; BB 00 00
+;   [conditional branch target (if/else)] L_2149
 L_2149:
         add     bx, bx                          ; 03 DB
         jmp     word ptr cs:[bx + 0x2351]       ; 2E FF A7 51 23
         lea     di, [di + 0x20]                 ; 8D 7D 20
+        ; constant WM_CREATE
         mov     bx, 1                           ; BB 01 00
         jmp     L_227A                          ; E9 21 01
+;   [loop start] L_2159
 L_2159:
         lea     si, [si + 2]                    ; 8D 74 02
         xor     cx, cx                          ; 33 C9
@@ -4318,6 +4739,7 @@ L_2159:
         je      L_2197                          ; 74 05
         cmp     si, 0x3f                        ; 83 FE 3F
         jne     L_21AB                          ; 75 14
+;   [conditional branch target (if/else)] L_2197
 L_2197:
         add     si, si                          ; 03 F6
         and     si, 7                           ; 81 E6 07 00
@@ -4326,9 +4748,11 @@ L_2197:
         sub     di, cx                          ; 2B F9
         shr     cx, 1                           ; D1 E9
         rep stosw word ptr es:[di], ax          ; F3 AB
+;   [conditional branch target (if/else)] L_21AB
 L_21AB:
         mov     ax, word ptr [bp - 8]           ; 8B 46 F8
         cdq                                     ; 99
+        ; constant WM_MOVE
         mov     si, 3                           ; BE 03 00
         div     si                              ; F7 F6
         mov     dx, ax                          ; 8B D0
@@ -4343,6 +4767,7 @@ L_21AB:
         stosw   word ptr es:[di], ax            ; AB
         stosw   word ptr es:[di], ax            ; AB
         stosw   word ptr es:[di], ax            ; AB
+;   [conditional branch target (if/else)] L_21CD
 L_21CD:
         mov     bx, 0                           ; BB 00 00
         jmp     L_227A                          ; E9 A7 00
@@ -4354,14 +4779,17 @@ L_21CD:
         mov     dx, word ptr [si + 6]           ; 8B 54 06
         dec     dx                              ; 4A
         mov     bx, word ptr [si + 0xe]         ; 8B 5C 0E
+        ; constant WM_MOVE
         mov     ah, 3                           ; B4 03
         cmp     byte ptr [si + 8], 3            ; 80 7C 08 03
         lds     si, ptr [si + 0xa]              ; C5 74 0A
         je      L_21F0                          ; 74 02
         xor     bx, bx                          ; 33 DB
+;   [loop start (also forward branch)] L_21F0
 L_21F0:
         mov     word ptr [bp - 4], si           ; 89 76 FC
         mov     cx, 8                           ; B9 08 00
+;   [loop iteration target] L_21F6
 L_21F6:
         movsb   byte ptr es:[di], byte ptr [si] ; A4
         add     si, dx                          ; 03 F2
@@ -4374,19 +4802,23 @@ L_21F6:
         or      bx, bx                          ; 0B DB
         je      L_21F0                          ; 74 E5
         mov     cl, 8                           ; B1 08
+;   [loop iteration target] L_220D
 L_220D:
         mov     al, byte ptr es:[di - 8]        ; 26 8A 45 F8
         and     al, byte ptr es:[di - 0x10]     ; 26 22 45 F0
         and     al, byte ptr es:[di - 0x18]     ; 26 22 45 E8
         stosb   byte ptr es:[di], al            ; AA
         loop    L_220D                          ; E2 F1
+;   [conditional branch target (if/else)] L_221C
 L_221C:
+        ; constant WM_MOVE
         mov     bx, 3                           ; BB 03 00
         jmp     L_227A                          ; EB 59
         mov     cx, word ptr [si + 6]           ; 8B 4C 06
         cmp     cx, 5                           ; 83 F9 05
         jle     L_222C                          ; 7E 03
         jmp     L_2159                          ; E9 2D FF
+;   [conditional branch target (if/else)] L_222C
 L_222C:
         lea     si, [si + 8]                    ; 8D 74 08
         call    L_2322                          ; E8 F0 00
@@ -4403,35 +4835,39 @@ L_222C:
         call    L_225F                          ; E8 14 00
         call    L_225F                          ; E8 11 00
         call    L_225F                          ; E8 0E 00
+        ; constant WM_MOVE
         mov     cl, 3                           ; B1 03
         ror     dh, cl                          ; D2 CE
         ror     dl, cl                          ; D2 CA
         call    L_225F                          ; E8 05 00
         mov     bx, 2                           ; BB 02 00
         jmp     L_227A                          ; EB 1B
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_225F -- offset 0x225F -- 90 instr
-; Iterador con instrucciones de string (movsb/scasb/...) (90 instr).
-; tags: complex_iterator, far, loop, string_op
-; callers: sub_20B4
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_225F   offset=0x225F  size=90 instr  segment=seg1.asm
+;
+; Classification (pass8): unclear  (score C=3, ASM=5)
+; Prologue: none     Epilogue: retf_n   (PASCAL FAR, callee cleans args)
+;-------------------------------------------------------------------------
+;   [sub-routine] L_225F
 L_225F:
         mov     si, bx                          ; 8B F3
         mov     cx, 8                           ; B9 08 00
         ror     dh, 1                           ; D0 CE
         ror     dl, 1                           ; D0 CA
+        ; constant VK_RETURN
         mov     al, dh                          ; 8A C6
         cwde                                    ; 98
         xor     al, dl                          ; 32 C2
         js      L_2272                          ; 78 03
         mov     si, 0x2359                      ; BE 59 23
+;   [loop iteration target] L_2272
 L_2272:
         lodsb   al, byte ptr cs:[si]            ; 2E AC
         xor     al, ah                          ; 32 C4
         stosb   byte ptr es:[di], al            ; AA
         loop    L_2272                          ; E2 F9
         ret                                     ; C3
+;   [unconditional branch target] L_227A
 L_227A:
         lea     si, [di - 0x20]                 ; 8D 75 E0
         les     di, ptr [bp + 0xa]              ; C4 7E 0A
@@ -4441,8 +4877,10 @@ L_227A:
         mov     word ptr es:[di + 0x20], bx     ; 26 89 5D 20
         mov     bx, word ptr [bp + 8]           ; 8B 5E 08
         mov     ah, 4                           ; B4 04
+;   [loop start] L_2291
 L_2291:
         mov     ch, 8                           ; B5 08
+;   [loop start] L_2293
 L_2293:
         lodsb   al, byte ptr ss:[si]            ; 36 AC
         ror     al, cl                          ; D2 C8
@@ -4462,6 +4900,7 @@ L_2293:
         xor     dx, dx                          ; 33 D2
         xor     di, di                          ; 33 FF
         mov     cx, 0x4008                      ; B9 08 40
+;   [loop start] L_22B9
 L_22B9:
         xor     ax, ax                          ; 33 C0
         mov     al, byte ptr [si + 0x10]        ; 8A 44 10
@@ -4476,6 +4915,7 @@ L_22B9:
         cmp     al, byte ptr [si + 0xf]         ; 3A 44 0F
         jne     L_22D6                          ; 75 02
         not     ah                              ; F6 D4
+;   [conditional branch target (if/else)] L_22D6
 L_22D6:
         and     ch, ah                          ; 22 EC
         dec     cl                              ; FE C9
@@ -4485,16 +4925,19 @@ L_22D6:
         je      L_22E7                          ; 74 04
         cmp     bx, ax                          ; 3B D8
         jne     L_230A                          ; 75 23
+;   [conditional branch target (if/else)] L_22E7
 L_22E7:
         or      dx, dx                          ; 0B D2
         je      L_22EF                          ; 74 04
         cmp     dx, ax                          ; 3B D0
         jne     L_230A                          ; 75 1B
+;   [conditional branch target (if/else)] L_22EF
 L_22EF:
         or      di, di                          ; 0B FF
         je      L_22F7                          ; 74 04
         cmp     di, ax                          ; 3B F8
         jne     L_230A                          ; 75 13
+;   [conditional branch target (if/else)] L_22F7
 L_22F7:
         and     di, 0x100                       ; 81 E7 00 01
         or      cx, di                          ; 0B CF
@@ -4503,14 +4946,19 @@ L_22F7:
         and     bh, 4                           ; 80 E7 04
         or      ch, bh                          ; 0A EF
         or      ch, 0x80                        ; 80 CD 80
+;   [conditional branch target (if/else)] L_230A
 L_230A:
         pop     di                              ; 5F
         mov     byte ptr es:[di + 2], ch        ; 26 88 6D 02
+;   [unconditional branch target] L_230F
 L_230F:
+        ; constant WM_CREATE
         mov     al, 1                           ; B0 01
         jmp     L_2315                          ; EB 02
+;   [unconditional branch target] L_2313
 L_2313:
         xor     ax, ax                          ; 33 C0
+;   [unconditional branch target] L_2315
 L_2315:
         pop     di                              ; 5F
         pop     si                              ; 5E
@@ -4520,23 +4968,25 @@ L_2315:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0x12                            ; CA 12 00
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_2322 -- offset 0x2322 -- 2 instr
-; Stub trivial (2 instrucciones, sin logica significativa).
-; tags: trivial_stub
-; callers: sub_20B4
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_2322   offset=0x2322  size=2 instr  segment=seg1.asm
+;
+; Classification (pass8): tiny  (score C=0, ASM=0)
+; Prologue: none     Epilogue: unknown
+;-------------------------------------------------------------------------
+;   [sub-routine] L_2322
 L_2322:
         mov     ax, word ptr [si]               ; 8B 04
         mov     dl, byte ptr [si + 2]           ; 8A 54 02
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_2327 -- offset 0x2327 -- 128 instr
-; Iterador con instrucciones de string (movsb/scasb/...) (128 instr).
-; tags: complex_iterator, far, string_op
-; callers: sub_0EC6
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_2327   offset=0x2327  size=128 instr  segment=seg1.asm
+;
+; Classification (pass8): c_medium  (score C=4, ASM=1)
+; Prologue: saves_regs     Epilogue: retf_n   (PASCAL FAR, callee cleans args)
+;
+; Near calls (internal): L_2327
+;-------------------------------------------------------------------------
+;   [sub-routine] L_2327
 L_2327:
         push    cx                              ; 51
         xor     dh, dh                          ; 32 F6
@@ -4557,6 +5007,7 @@ L_2327:
         cmp     bx, 0x17e                       ; 81 FB 7E 01
         jl      L_234F                          ; 7C 03
         or      dh, 0x40                        ; 80 CE 40
+;   [error/early exit] L_234F
 L_234F:
         pop     cx                              ; 59
         ret                                     ; C3
@@ -4615,15 +5066,18 @@ L_234F:
         cld                                     ; FC
         stosw   word ptr es:[di], ax            ; AB
         mov     word ptr es:[di], dx            ; 26 89 15
+;   [conditional branch target (if/else)] L_23C1
 L_23C1:
         les     di, ptr [bp + 0xe]              ; C4 7E 0E
         cmp     byte ptr es:[di + 8], 3         ; 26 80 7D 08 03
         je      L_23D3                          ; 74 08
+        ; constant VK_RETURN
         mov     al, dh                          ; 8A C6
         shl     al, 1                           ; D0 E0
         cwde                                    ; 98
         cdq                                     ; 99
         mov     ax, dx                          ; 8B C2
+;   [conditional branch target (if/else)] L_23D3
 L_23D3:
         xor     dh, dh                          ; 32 F6
         pop     di                              ; 5F
@@ -4647,6 +5101,7 @@ L_23D3:
         je      L_23FB                          ; 74 06
         cmp     word ptr [bp + 0xe], 5          ; 83 7E 0E 05
         jne     L_2419                          ; 75 1E
+;   [conditional branch target (if/else)] L_23FB
 L_23FB:
         lds     di, ptr [bp + 0xa]              ; C5 7E 0A
         mov     si, word ptr [di]               ; 8B 35
@@ -4661,7 +5116,9 @@ L_23FB:
         cld                                     ; FC
         movsw   word ptr es:[di], word ptr [si] ; A5
         movsw   word ptr es:[di], word ptr [si] ; A5
+        ; constant WM_CREATE
         mov     al, 1                           ; B0 01
+;   [conditional branch target (if/else)] L_2419
 L_2419:
         pop     di                              ; 5F
         pop     si                              ; 5E
@@ -4671,14 +5128,15 @@ L_2419:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0xe                             ; CA 0E 00
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_2426 -- offset 0x2426 -- 26 instr
-; Funcion sin clasificar definitiva (26 instr).
-; tags: small
-; callers: sub_0541, sub_0EC6, sub_1CEE
-; calls (intra): sub_01D6, sub_247A
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_2426   offset=0x2426  size=26 instr  segment=seg1.asm
+;
+; Classification (pass8): asm_medium  (score C=0, ASM=4)
+; Prologue: none     Epilogue: jmp_tail
+;
+; Near calls (internal): L_01D6, L_247A
+;-------------------------------------------------------------------------
+;   [sub-routine] L_2426
 L_2426:
         mov     ds, word ptr cs:[0x25f5]        ; 2E 8E 1E F5 25
         and     cl, 0xf8                        ; 80 E1 F8
@@ -4705,27 +5163,32 @@ L_2426:
         mov     ds, word ptr cs:[0x25f5]        ; 2E 8E 1E F5 25
         pop     ax                              ; 58
         mov     byte ptr [0x17a], al            ; A2 7A 01
+;   [conditional branch target (if/else)] L_2472
 L_2472:
         jmp     L_2475                          ; EB 01
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_2474 -- offset 0x2474 -- 4 instr
-; Funcion sin clasificar definitiva (4 instr).
-; tags: wrapper
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_2474   offset=0x2474  size=4 instr  segment=seg1.asm
+;
+; Classification (pass8): unclear  (score C=0, ASM=2)
+; Prologue: none     Epilogue: ret
+;
+; Near calls (internal): L_2474
+;-------------------------------------------------------------------------
+;   [sub-routine] L_2474
 L_2474:
         iret                                    ; CF
+;   [unconditional branch target] L_2475
 L_2475:
         push    cs                              ; 0E
         call    L_2474                          ; E8 FB FF
         ret                                     ; C3
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_247A -- offset 0x247A -- 20 instr
-; Funcion hoja (no llama a otras, 20 instr): probable helper aritmetico/conversion.
-; tags: leaf
-; callers: sub_2426, sub_2682, sub_271F
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_247A   offset=0x247A  size=20 instr  segment=seg1.asm
+;
+; Classification (pass8): unclear  (score C=0, ASM=2)
+; Prologue: none     Epilogue: ret
+;-------------------------------------------------------------------------
+;   [sub-routine] L_247A
 L_247A:
         mov     ds, word ptr cs:[0x25f5]        ; 2E 8E 1E F5 25
         test    byte ptr [0x168], cl            ; 84 0E 68 01
@@ -4744,19 +5207,22 @@ L_247A:
         cmp     bx, word ptr [0x16c]            ; 3B 1E 6C 01
         jl      L_24AE                          ; 7C 01
         inc     cx                              ; 41
+;   [conditional branch target (if/else)] L_24AE
 L_24AE:
         or      cx, cx                          ; 0B C9
         stc                                     ; F9
+;   [error/early exit] L_24B1
 L_24B1:
         ret                                     ; C3
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_24B2 -- offset 0x24B2 -- 69 instr
-; Funcion mediana (69 instr, 1 calls).
-; tags: far, medium
-; callers: sub_0541, sub_0EC6
-; calls (intra): sub_01D6
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_24B2   offset=0x24B2  size=69 instr  segment=seg1.asm
+;
+; Classification (pass8): asm_medium  (score C=1, ASM=4)
+; Prologue: none     Epilogue: jmp_tail
+;
+; Near calls (internal): L_0198, L_01D6
+;-------------------------------------------------------------------------
+;   [sub-routine] L_24B2
 L_24B2:
         mov     ds, word ptr cs:[0x25f5]        ; 2E 8E 1E F5 25
         mov     byte ptr [0x169], 0             ; C6 06 69 01 00
@@ -4771,6 +5237,7 @@ L_24B2:
         push    si                              ; 56
         push    di                              ; 57
         les     di, ptr [bp + 6]                ; C4 7E 06
+        ; constant WM_SETTEXT
         mov     si, 0xc                         ; BE 0C 00
         mov     ax, 4                           ; B8 04 00
         mov     cx, ax                          ; 8B C8
@@ -4826,21 +5293,26 @@ L_24B2:
         mov     word ptr [0x178], ax            ; A3 78 01
         sub     word ptr [0x174], ax            ; 29 06 74 01
         mov     byte ptr [0x168], 0x40          ; C6 06 68 01 40
+;   [conditional branch target (if/else)] L_2550
 L_2550:
         jmp     L_2553                          ; EB 01
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_2552 -- offset 0x2552 -- 163 instr
-; Funcion compleja: 163 instrucciones, 1 llamadas, 4 branches.
-; tags: complex, far
-; calls (intra): sub_015D
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_2552   offset=0x2552  size=163 instr  segment=seg1.asm
+;
+; Classification (pass8): asm_medium  (score C=0, ASM=4)
+; Prologue: none     Epilogue: jmp_tail
+;
+; Near calls (internal): L_0132, L_015D, L_2552
+;-------------------------------------------------------------------------
+;   [sub-routine] L_2552
 L_2552:
         iret                                    ; CF
+;   [unconditional branch target] L_2553
 L_2553:
         push    cs                              ; 0E
         call    L_2552                          ; E8 FB FF
         mov     byte ptr es:[0x17a], 1          ; 26 C6 06 7A 01 01
+;   [conditional branch target (if/else)] L_255D
 L_255D:
         pop     di                              ; 5F
         pop     si                              ; 5E
@@ -4949,11 +5421,13 @@ L_255D:
         rep movsb byte ptr es:[di], byte ptr [si] ; F3 A4
         call    L_0132                          ; E8 17 DB
         jmp     L_2628                          ; EB 0B
+;   [conditional branch target (if/else)] L_261D
 L_261D:
         lea     si, [0xc2]                      ; 8D 36 C2 00
         mov     cx, 0x68                        ; B9 68 00
         mov     ax, cx                          ; 8B C1
         rep movsb byte ptr es:[di], byte ptr [si] ; F3 A4
+;   [unconditional branch target] L_2628
 L_2628:
         pop     di                              ; 5F
         pop     si                              ; 5E
@@ -5002,17 +5476,21 @@ L_2628:
         mov     word ptr [0x174], bx            ; 89 1E 74 01
         xor     cx, cx                          ; 33 C9
         xchg    byte ptr [0x17a], cl            ; 86 0E 7A 01
+;   [loop start] L_2680
 L_2680:
         jmp     L_2683                          ; EB 01
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_2682 -- offset 0x2682 -- 15 instr
-; Funcion sin clasificar definitiva (15 instr).
-; tags: small
-; calls (intra): sub_01D6, sub_247A
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_2682   offset=0x2682  size=15 instr  segment=seg1.asm
+;
+; Classification (pass8): asm_medium  (score C=0, ASM=4)
+; Prologue: none     Epilogue: jmp_tail
+;
+; Near calls (internal): L_01D6, L_247A, L_2682
+;-------------------------------------------------------------------------
+;   [sub-routine] L_2682
 L_2682:
         iret                                    ; CF
+;   [unconditional branch target] L_2683
 L_2683:
         push    cs                              ; 0E
         call    L_2682                          ; E8 FB FF
@@ -5028,41 +5506,51 @@ L_2683:
         sti                                     ; FB
         call    L_01D6                          ; E8 33 DB
         jmp     L_26A6                          ; EB 01
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_26A5 -- offset 0x26A5 -- 10 instr
-; Funcion sin clasificar definitiva (10 instr).
-; tags: small
-; calls (intra): sub_01B6
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_26A5   offset=0x26A5  size=10 instr  segment=seg1.asm
+;
+; Classification (pass8): asm_medium  (score C=0, ASM=4)
+; Prologue: none     Epilogue: jmp_tail
+;
+; Near calls (internal): L_01B6, L_26A5
+;-------------------------------------------------------------------------
+;   [sub-routine] L_26A5
 L_26A5:
         iret                                    ; CF
+;   [unconditional branch target] L_26A6
 L_26A6:
         push    cs                              ; 0E
         call    L_26A5                          ; E8 FB FF
         mov     ds, word ptr cs:[0x25f5]        ; 2E 8E 1E F5 25
+;   [conditional branch target (if/else)] L_26AF
 L_26AF:
         mov     byte ptr [0x17a], 1             ; C6 06 7A 01 01
         jmp     L_26E9                          ; EB 33
+;   [conditional branch target (if/else)] L_26B6
 L_26B6:
         pushf                                   ; 9C
         sti                                     ; FB
         call    L_01B6                          ; E8 FB DA
         jmp     L_26BE                          ; EB 01
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_26BD -- offset 0x26BD -- 15 instr
-; Funcion sin clasificar definitiva (15 instr).
-; tags: wrapper
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_26BD   offset=0x26BD  size=15 instr  segment=seg1.asm
+;
+; Classification (pass8): asm_medium  (score C=0, ASM=4)
+; Prologue: none     Epilogue: jmp_tail
+;
+; Near calls (internal): L_26BD
+;-------------------------------------------------------------------------
+;   [sub-routine] L_26BD
 L_26BD:
         iret                                    ; CF
+;   [unconditional branch target] L_26BE
 L_26BE:
         push    cs                              ; 0E
         call    L_26BD                          ; E8 FB FF
         mov     ds, word ptr cs:[0x25f5]        ; 2E 8E 1E F5 25
         pushf                                   ; 9C
         cli                                     ; FA
+        ; constant WM_CREATE
         mov     cl, 1                           ; B1 01
         mov     ax, word ptr [0x172]            ; A1 72 01
         mov     bx, word ptr [0x174]            ; 8B 1E 74 01
@@ -5072,17 +5560,22 @@ L_26BE:
         jne     L_2680                          ; 75 A2
         mov     byte ptr [0x17a], cl            ; 88 0E 7A 01
         jmp     L_26E5                          ; EB 01
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_26E4 -- offset 0x26E4 -- 33 instr
-; Funcion mediana (33 instr, 0 calls).
-; tags: far, medium
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_26E4   offset=0x26E4  size=33 instr  segment=seg1.asm
+;
+; Classification (pass8): asm_medium  (score C=0, ASM=4)
+; Prologue: none     Epilogue: jmp_tail
+;
+; Near calls (internal): L_26E4
+;-------------------------------------------------------------------------
+;   [sub-routine] L_26E4
 L_26E4:
         iret                                    ; CF
+;   [unconditional branch target] L_26E5
 L_26E5:
         push    cs                              ; 0E
         call    L_26E4                          ; E8 FB FF
+;   [branch target] L_26E9
 L_26E9:
         pop     di                              ; 5F
         pop     si                              ; 5E
@@ -5113,17 +5606,21 @@ L_26E9:
         cli                                     ; FA
         mov     ax, word ptr [0x172]            ; A1 72 01
         mov     bx, word ptr [0x174]            ; 8B 1E 74 01
+;   [loop start] L_271D
 L_271D:
         jmp     L_2720                          ; EB 01
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_271F -- offset 0x271F -- 14 instr
-; Funcion sin clasificar definitiva (14 instr).
-; tags: small
-; calls (intra): sub_01B6, sub_247A
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_271F   offset=0x271F  size=14 instr  segment=seg1.asm
+;
+; Classification (pass8): asm_medium  (score C=0, ASM=4)
+; Prologue: none     Epilogue: jmp_tail
+;
+; Near calls (internal): L_01B6, L_247A, L_271F
+;-------------------------------------------------------------------------
+;   [sub-routine] L_271F
 L_271F:
         iret                                    ; CF
+;   [unconditional branch target] L_2720
 L_2720:
         push    cs                              ; 0E
         call    L_271F                          ; E8 FB FF
@@ -5138,14 +5635,18 @@ L_2720:
         sti                                     ; FB
         call    L_01B6                          ; E8 7A DA
         jmp     L_273F                          ; EB 01
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_273E -- offset 0x273E -- 15 instr
-; Funcion sin clasificar definitiva (15 instr).
-; tags: wrapper
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_273E   offset=0x273E  size=15 instr  segment=seg1.asm
+;
+; Classification (pass8): asm_medium  (score C=0, ASM=4)
+; Prologue: none     Epilogue: jmp_tail
+;
+; Near calls (internal): L_273E
+;-------------------------------------------------------------------------
+;   [sub-routine] L_273E
 L_273E:
         iret                                    ; CF
+;   [unconditional branch target] L_273F
 L_273F:
         push    cs                              ; 0E
         call    L_273E                          ; E8 FB FF
@@ -5161,20 +5662,25 @@ L_273F:
         jne     L_271D                          ; 75 BB
         mov     byte ptr [0x17a], 1             ; C6 06 7A 01 01
         jmp     L_276A                          ; EB 01
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_2769 -- offset 0x2769 -- 10 instr
-; Funcion sin clasificar definitiva (10 instr).
-; tags: small
-; calls (intra): sub_01D6
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_2769   offset=0x2769  size=10 instr  segment=seg1.asm
+;
+; Classification (pass8): asm_medium  (score C=0, ASM=4)
+; Prologue: none     Epilogue: jmp_tail
+;
+; Near calls (internal): L_01D6, L_2769
+;-------------------------------------------------------------------------
+;   [sub-routine] L_2769
 L_2769:
         iret                                    ; CF
+;   [unconditional branch target] L_276A
 L_276A:
         push    cs                              ; 0E
         call    L_2769                          ; E8 FB FF
+;   [conditional branch target (if/else)] L_276E
 L_276E:
         jmp     L_2792                          ; EB 22
+;   [conditional branch target (if/else)] L_2770
 L_2770:
         test    byte ptr [0x168], 0x40          ; F6 06 68 01 40
         jne     L_278D                          ; 75 16
@@ -5182,21 +5688,27 @@ L_2770:
         sti                                     ; FB
         call    L_01D6                          ; E8 5A DA
         jmp     L_277F                          ; EB 01
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_277E -- offset 0x277E -- 19 instr
-; Funcion sin clasificar definitiva (19 instr).
-; tags: far, small
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_277E   offset=0x277E  size=19 instr  segment=seg1.asm
+;
+; Classification (pass8): unclear  (score C=1, ASM=2)
+; Prologue: none     Epilogue: retf
+;
+; Near calls (internal): L_277E
+;-------------------------------------------------------------------------
+;   [sub-routine] L_277E
 L_277E:
         iret                                    ; CF
+;   [unconditional branch target] L_277F
 L_277F:
         push    cs                              ; 0E
         call    L_277E                          ; E8 FB FF
         mov     ds, word ptr cs:[0x25f5]        ; 2E 8E 1E F5 25
         mov     byte ptr [0x168], 0x40          ; C6 06 68 01 40
+;   [conditional branch target (if/else)] L_278D
 L_278D:
         mov     byte ptr [0x17a], 1             ; C6 06 7A 01 01
+;   [unconditional branch target] L_2792
 L_2792:
         pop     es                              ; 07
         pop     di                              ; 5F
@@ -5211,13 +5723,13 @@ L_2792:
         add     word ptr [bx + si], ax          ; 01 00
         add     byte ptr [bx + di], al          ; 00 01
         add     byte ptr [bx + di], al          ; 00 01
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_27A6 -- offset 0x27A6 -- 44 instr
-; Iterador con instrucciones de string (movsb/scasb/...) (44 instr).
-; tags: iterator, loop, string_op
-; callers: sub_20B4
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_27A6   offset=0x27A6  size=44 instr  segment=seg1.asm
+;
+; Classification (pass8): asm_medium  (score C=0, ASM=5)
+; Prologue: none     Epilogue: ret
+;-------------------------------------------------------------------------
+;   [sub-routine] L_27A6
 L_27A6:
         mov     ax, cs                          ; 8C C8
         mov     ds, ax                          ; 8E D8
@@ -5231,26 +5743,34 @@ L_27A6:
         shr     dl, 1                           ; D0 EA
         adc     dl, al                          ; 12 D0
         shr     dl, 1                           ; D0 EA
+        ; constant WM_MOVE
         mov     dh, 3                           ; B6 03
+        ; constant WM_CREATE
         mov     al, 1                           ; B0 01
         cmp     dl, 0x10                        ; 80 FA 10
         je      L_27CD                          ; 74 09
+        ; constant WM_MOVE
         mov     al, 3                           ; B0 03
         cmp     dl, 0x30                        ; 80 FA 30
         je      L_27CD                          ; 74 02
         xor     ax, ax                          ; 33 C0
+;   [conditional branch target (if/else)] L_27CD
 L_27CD:
         shl     si, 1                           ; D1 E6
         shl     si, 1                           ; D1 E6
         or      si, ax                          ; 0B F0
+;   [loop start] L_27D3
 L_27D3:
         dec     dl                              ; FE CA
         jl      L_27FE                          ; 7C 27
         xor     ax, ax                          ; 33 C0
+        ; constant VK_RETURN
         mov     cl, dh                          ; 8A CE
         mov     ch, dl                          ; 8A EA
+;   [loop iteration target] L_27DD
 L_27DD:
         shl     ax, 1                           ; D1 E0
+        ; constant WM_SETTEXT
         mov     bl, ch                          ; 8A DD
         and     bl, dh                          ; 22 DE
         add     ah, byte ptr [bx + 0x279e]      ; 02 A7 9E 27
@@ -5260,20 +5780,22 @@ L_27DD:
         loop    L_27DD                          ; E2 EC
         mov     bl, al                          ; 8A D8
         mov     cl, ah                          ; 8A CC
+        ; constant GMEM_ZEROINIT
         mov     al, 0x80                        ; B0 80
         shr     al, cl                          ; D2 E8
         or      byte ptr es:[bx + di], al       ; 26 08 01
         jmp     L_27D3                          ; EB D5
+;   [error/early exit] L_27FE
 L_27FE:
         add     di, 8                           ; 83 C7 08
         ret                                     ; C3
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_2802 -- offset 0x2802 -- 18 instr
-; Funcion hoja (no llama a otras, 18 instr): probable helper aritmetico/conversion.
-; tags: leaf
-; callers: sub_0541, sub_0EC6
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_2802   offset=0x2802  size=18 instr  segment=seg1.asm
+;
+; Classification (pass8): asm_medium  (score C=0, ASM=4)
+; Prologue: none     Epilogue: jmp_tail
+;-------------------------------------------------------------------------
+;   [sub-routine] L_2802
 L_2802:
         pop     bx                              ; 5B
         sub     ax, sp                          ; 2B C4
@@ -5284,10 +5806,12 @@ L_2802:
         cmp     word ptr ss:[0xc], ax           ; 36 39 06 0C 00
         jbe     L_281B                          ; 76 04
         mov     word ptr ss:[0xc], ax           ; 36 A3 0C 00
+;   [conditional branch target (if/else)] L_281B
 L_281B:
         mov     sp, ax                          ; 8B E0
         clc                                     ; F8
         jmp     bx                              ; FF E3
+;   [conditional branch target (if/else)] L_2820
 L_2820:
         mov     ax, word ptr ss:[0xa]           ; 36 A1 0A 00
         mov     word ptr ss:[0xc], ax           ; 36 A3 0C 00

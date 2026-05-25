@@ -1,3 +1,17 @@
+; ======================================================================
+; COMM / seg2.asm   (segment 2 of COMM)
+; ----------------------------------------------------------------------
+; Functions discovered (pass1b):         0
+; Total instructions:                    0
+; 
+; Classification (pass8):
+;   C-origin (high+medium):              0
+;   ASM-origin (high+medium):            0
+;   Unclear:                             0
+;   Tiny / unclassified:                 0
+; 
+; Far API calls in this segment:     0 (0 unique)
+; ======================================================================
 ; AUTO-GENERATED from original COMM segment 2
 ; segment_size=252 bytes, flags=0x0041
 ; mode: humano legible - instrucciones x86 + bytes raw en comentario (autoritativo)

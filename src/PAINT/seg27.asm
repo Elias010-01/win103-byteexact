@@ -1,3 +1,17 @@
+; ======================================================================
+; PAINT / seg27.asm   (segment 27 of PAINT)
+; ----------------------------------------------------------------------
+; Functions discovered (pass1b):         0
+; Total instructions:                    0
+; 
+; Classification (pass8):
+;   C-origin (high+medium):              0
+;   ASM-origin (high+medium):            0
+;   Unclear:                             0
+;   Tiny / unclassified:                 0
+; 
+; Far API calls in this segment:     0 (0 unique)
+; ======================================================================
 ; AUTO-GENERATED from original PAINT segment 27
 ; segment_size=102 bytes, flags=0xf130
 ; mode: humano legible - instrucciones x86 + bytes raw en comentario (autoritativo)
@@ -35,6 +49,7 @@ PAINT_TEXT SEGMENT BYTE PUBLIC 'CODE'
         sub     ax, ax                          ; 2B C0
         push    ax                              ; 50
         jmp     L_004E                          ; EB 12
+;   [conditional branch target (if/else)] L_003C
 L_003C:
         push    word ptr [bp + 0xa]             ; FF 76 0A
         push    word ptr [0xc8a]                ; FF 36 8A 0C
@@ -42,11 +57,13 @@ L_003C:
         mov     ax, 0xffff                      ; B8 FF FF
         mov     dx, 0xff                        ; BA FF 00
         push    dx                              ; 52
+;   [unconditional branch target] L_004E
 L_004E:
         push    ax                              ; 50
         call    far GDI.FLOODFILL               ; 9A FF FF 00 00 [FIXUP]
         push    word ptr [bp + 0xa]             ; FF 76 0A
         call    far _entry_130                  ; 9A FF FF 00 00 [FIXUP]
+;   [conditional branch target (if/else)] L_005C
 L_005C:
         sub     bp, 2                           ; 83 ED 02
         mov     sp, bp                          ; 8B E5

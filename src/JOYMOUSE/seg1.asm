@@ -1,3 +1,22 @@
+; ======================================================================
+; JOYMOUSE / seg1.asm   (segment 1 of JOYMOUSE)
+; ----------------------------------------------------------------------
+; Functions discovered (pass1b):         7
+; Total instructions:                  318
+; 
+; Classification (pass8):
+;   C-origin (high+medium):              2
+;   ASM-origin (high+medium):            0
+;   Unclear:                             5
+;   Tiny / unclassified:                 0
+; 
+; Far API calls in this segment:     4 (4 unique)
+;   Top:
+;        1  CREATESYSTEMTIMER
+;        1  ENABLESYSTEMTIMERS
+;        1  DISABLESYSTEMTIMERS
+;        1  KILLSYSTEMTIMER
+; ======================================================================
 ; AUTO-GENERATED from original JOYMOUSE segment 1
 ; segment_size=815 bytes, flags=0x0140
 ; mode: humano legible - instrucciones x86 + bytes raw en comentario (autoritativo)
@@ -30,13 +49,16 @@ JOYMOUSE_TEXT SEGMENT BYTE PUBLIC 'CODE'
         xor     bx, bx                          ; 33 DB
         xor     cx, cx                          ; 33 C9
         jmp     L_0031                          ; EB 0B
+;   [conditional branch target (if/else)] L_0026
 L_0026:
         xor     ax, ax                          ; 33 C0
         cmp     byte ptr [0x14], 1              ; 80 3E 14 00 01
         jne     L_0035                          ; 75 06
         or      al, 1                           ; 0C 01
+;   [unconditional branch target] L_0031
 L_0031:
         lcall   [0x10]                          ; FF 1E 10 00
+;   [conditional branch target (if/else)] L_0035
 L_0035:
         xor     ax, ax                          ; 33 C0
         mov     byte ptr [0x14], al             ; A2 14 00
@@ -51,13 +73,15 @@ L_0035:
         pop     bx                              ; 5B
         pop     ax                              ; 58
         retf                                    ; CB
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_0047 -- offset 0x0047 -- 28 instr
-; Funcion sin clasificar definitiva (28 instr).
-; tags: small
-; calls (intra): sub_0085, sub_00D0, sub_011D
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_0047   offset=0x0047  size=28 instr  segment=seg1.asm
+;
+; Classification (pass8): unclear  (score C=1, ASM=0)
+; Prologue: saves_regs     Epilogue: ret
+;
+; Near calls (internal): L_0085, L_00D0, L_011D
+;-------------------------------------------------------------------------
+;   [sub-routine] L_0047
 L_0047:
         push    bx                              ; 53
         push    cx                              ; 51
@@ -76,28 +100,32 @@ L_0047:
         mov     byte ptr [0x1a], 1              ; C6 06 1A 00 01
         mov     ax, 2                           ; B8 02 00
         jmp     L_0081                          ; EB 12
+;   [conditional branch target (if/else)] L_006F
 L_006F:
         call    L_011D                          ; E8 AB 00
         cmp     bl, 2                           ; 80 FB 02
         je      L_007C                          ; 74 05
         mov     ax, 2                           ; B8 02 00
         jmp     L_0081                          ; EB 05
+;   [conditional branch target (if/else)] L_007C
 L_007C:
         xor     ax, ax                          ; 33 C0
         mov     byte ptr [0x1a], al             ; A2 1A 00
+;   [error/early exit] L_0081
 L_0081:
         pop     dx                              ; 5A
         pop     cx                              ; 59
         pop     bx                              ; 5B
         ret                                     ; C3
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_0085 -- offset 0x0085 -- 25 instr
-; Dispatcher: tabla de decisiones cmp+jcc (25 instr).
-; tags: dispatcher
-; callers: sub_0047
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_0085   offset=0x0085  size=25 instr  segment=seg1.asm
+;
+; Classification (pass8): unclear  (score C=0, ASM=2)
+; Prologue: none     Epilogue: ret
+;-------------------------------------------------------------------------
+;   [sub-routine] L_0085
 L_0085:
+        ; constant WM_LBUTTONDOWN
         mov     dx, 0x201                       ; BA 01 02
         in      al, dx                          ; EC
         and     al, 0x30                        ; 24 30
@@ -111,6 +139,7 @@ L_0085:
         mov     byte ptr [0x18], 0              ; C6 06 18 00 00
         mov     byte ptr [0x15], 1              ; C6 06 15 00 01
         jmp     L_00CF                          ; EB 27
+;   [conditional branch target (if/else)] L_00A8
 L_00A8:
         inc     byte ptr [0x16]                 ; FE 06 16 00
         cmp     byte ptr [0x16], 1              ; 80 3E 16 00 01
@@ -122,18 +151,21 @@ L_00A8:
         mov     byte ptr [0x18], 1              ; C6 06 18 00 01
         mov     byte ptr [0x15], 1              ; C6 06 15 00 01
         jmp     L_00CF                          ; EB 02
+;   [conditional branch target (if/else)] L_00CD
 L_00CD:
         xor     bx, bx                          ; 33 DB
+;   [fall-through exit] L_00CF
 L_00CF:
         ret                                     ; C3
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_00D0 -- offset 0x00D0 -- 27 instr
-; Dispatcher: tabla de decisiones cmp+jcc (27 instr).
-; tags: dispatcher
-; callers: sub_0047
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_00D0   offset=0x00D0  size=27 instr  segment=seg1.asm
+;
+; Classification (pass8): unclear  (score C=0, ASM=2)
+; Prologue: none     Epilogue: ret
+;-------------------------------------------------------------------------
+;   [sub-routine] L_00D0
 L_00D0:
+        ; constant WM_LBUTTONDOWN
         mov     dx, 0x201                       ; BA 01 02
         in      al, dx                          ; EC
         and     al, 0x30                        ; 24 30
@@ -142,12 +174,14 @@ L_00D0:
         xor     cx, cx                          ; 33 C9
         cmp     al, 0                           ; 3C 00
         je      L_00F4                          ; 74 15
+        ; constant VK_SHIFT
         mov     cl, 0x10                        ; B1 10
         cmp     byte ptr [0x19], 0              ; 80 3E 19 00 00
         je      L_0119                          ; 74 31
         mov     byte ptr [0x19], 0              ; C6 06 19 00 00
         mov     byte ptr [0x15], 1              ; C6 06 15 00 01
         jmp     L_011B                          ; EB 27
+;   [conditional branch target (if/else)] L_00F4
 L_00F4:
         inc     byte ptr [0x17]                 ; FE 06 17 00
         cmp     byte ptr [0x17], 1              ; 80 3E 17 00 01
@@ -159,21 +193,28 @@ L_00F4:
         mov     byte ptr [0x19], 1              ; C6 06 19 00 01
         mov     byte ptr [0x15], 1              ; C6 06 15 00 01
         jmp     L_011B                          ; EB 02
+;   [conditional branch target (if/else)] L_0119
 L_0119:
         xor     cx, cx                          ; 33 C9
+;   [fall-through exit] L_011B
 L_011B:
         pop     bx                              ; 5B
         ret                                     ; C3
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_011D -- offset 0x011D -- 137 instr
-; Funcion compleja: 137 instrucciones, 4 llamadas, 5 branches.
-; tags: calls_system, complex, far
-; callers: sub_0047
-; calls (intra): sub_0250, sub_027D
-; calls (inter): SYSTEM.CREATESYSTEMTIMER, SYSTEM.ENABLESYSTEMTIMERS
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_011D   offset=0x011D  size=137 instr  segment=seg1.asm
+;
+; Classification (pass8): c_medium  (score C=5, ASM=2)
+; Prologue: none     Epilogue: retf_n   (PASCAL FAR, callee cleans args)
+;
+; Far API calls:
+;   CREATESYSTEMTIMER
+;   ENABLESYSTEMTIMERS
+;
+; Near calls (internal): L_0250, L_027D
+;-------------------------------------------------------------------------
+;   [sub-routine] L_011D
 L_011D:
+        ; constant WM_LBUTTONDOWN
         mov     dx, 0x201                       ; BA 01 02
         in      al, dx                          ; EC
         and     al, 0x30                        ; 24 30
@@ -182,6 +223,7 @@ L_011D:
         cmp     al, 0                           ; 3C 00
         jne     L_012D                          ; 75 02
         mov     bl, 2                           ; B3 02
+;   [error/early exit] L_012D
 L_012D:
         ret                                     ; C3
         mov     ax, ds                          ; 8C D8
@@ -198,8 +240,10 @@ L_012D:
         cmp     ax, 0xffff                      ; 3D FF FF
         je      L_014A                          ; 74 05
         mov     byte ptr [0], 1                 ; C6 06 00 00 01
+;   [conditional branch target (if/else)] L_014A
 L_014A:
         les     di, ptr [bp + 6]                ; C4 7E 06
+        ; constant WM_GETTEXTLENGTH
         mov     ax, 0xe                         ; B8 0E 00
         mov     cx, ax                          ; 8B C8
         rep movsb byte ptr es:[di], byte ptr [si] ; F3 A4
@@ -260,10 +304,13 @@ L_014A:
         add     al, cl                          ; 02 C1
         mov     byte ptr [0x2e], al             ; A2 2E 00
         jmp     L_01D7                          ; EB 02
+;   [conditional branch target (if/else)] L_01D5
 L_01D5:
         jmp     L_0243                          ; EB 6C
+;   [unconditional branch target] L_01D7
 L_01D7:
         mov     bx, 0x14                        ; BB 14 00
+        ; constant WM_SETTEXT
         mov     al, ch                          ; 8A C5
         call    L_027D                          ; E8 9E 00
         push    cx                              ; 51
@@ -271,9 +318,11 @@ L_01D7:
         mov     byte ptr [0x2c], ch             ; 88 2E 2C 00
         pop     cx                              ; 59
         mov     bx, 0x14                        ; BB 14 00
+        ; constant WM_SETTEXT
         mov     al, ch                          ; 8A C5
         call    L_027D                          ; E8 8E 00
         add     al, ch                          ; 02 C5
+;   [conditional branch target (if/else)] L_01F1
 L_01F1:
         mov     byte ptr [0x30], al             ; A2 30 00
         mov     bx, 0x50                        ; BB 50 00
@@ -289,6 +338,7 @@ L_01F1:
         add     al, cl                          ; 02 C1
         mov     byte ptr [0x26], al             ; A2 26 00
         mov     bx, 0x50                        ; BB 50 00
+        ; constant WM_SETTEXT
         mov     al, ch                          ; 8A C5
         call    L_027D                          ; E8 64 00
         push    cx                              ; 51
@@ -296,6 +346,7 @@ L_01F1:
         mov     byte ptr [0x24], ch             ; 88 2E 24 00
         pop     cx                              ; 59
         mov     bx, 0x50                        ; BB 50 00
+        ; constant WM_SETTEXT
         mov     al, ch                          ; 8A C5
         call    L_027D                          ; E8 54 00
         add     al, ch                          ; 02 C5
@@ -308,6 +359,7 @@ L_01F1:
         push    ax                              ; 50
         call    far SYSTEM.CREATESYSTEMTIMER    ; 9A FF FF 00 00 [FIXUP]
         mov     word ptr [0x20], ax             ; A3 20 00
+;   [unconditional branch target] L_0243
 L_0243:
         pop     di                              ; 5F
         pop     si                              ; 5E
@@ -317,18 +369,19 @@ L_0243:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    4                               ; CA 04 00
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_0250 -- offset 0x0250 -- 27 instr
-; Iterador con bucle (27 instr).
-; tags: iterator, loop
-; callers: sub_011D, sub_02B7
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_0250   offset=0x0250  size=27 instr  segment=seg1.asm
+;
+; Classification (pass8): unclear  (score C=3, ASM=1)
+; Prologue: saves_regs     Epilogue: ret
+;-------------------------------------------------------------------------
+;   [sub-routine] L_0250
 L_0250:
         push    si                              ; 56
         push    di                              ; 57
         push    bp                              ; 55
         mov     cx, 0xff                        ; B9 FF 00
+        ; constant WM_LBUTTONDOWN
         mov     dx, 0x201                       ; BA 01 02
         xor     si, si                          ; 33 F6
         xor     di, di                          ; 33 FF
@@ -336,6 +389,7 @@ L_0250:
         mov     bx, bp                          ; 8B DD
         cli                                     ; FA
         out     dx, al                          ; EE
+;   [loop iteration target] L_0264
 L_0264:
         in      al, dx                          ; EC
         mov     ah, al                          ; 8A E0
@@ -353,14 +407,17 @@ L_0264:
         pop     di                              ; 5F
         pop     si                              ; 5E
         ret                                     ; C3
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_027D -- offset 0x027D -- 28 instr
-; Funcion sin clasificar definitiva (28 instr).
-; tags: calls_system, far, small
-; callers: sub_011D
-; calls (inter): SYSTEM.DISABLESYSTEMTIMERS, SYSTEM.KILLSYSTEMTIMER
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_027D   offset=0x027D  size=28 instr  segment=seg1.asm
+;
+; Classification (pass8): unclear  (score C=3, ASM=2)
+; Prologue: none     Epilogue: retf
+;
+; Far API calls:
+;   DISABLESYSTEMTIMERS
+;   KILLSYSTEMTIMER
+;-------------------------------------------------------------------------
+;   [sub-routine] L_027D
 L_027D:
         mul     bx                              ; F7 E3
         mov     bx, 0x64                        ; BB 64 00
@@ -382,6 +439,7 @@ L_027D:
         push    ax                              ; 50
         call    far SYSTEM.KILLSYSTEMTIMER      ; 9A FF FF 00 00 [FIXUP]
         call    far SYSTEM.DISABLESYSTEMTIMERS  ; 9A FF FF 00 00 [FIXUP]
+;   [conditional branch target (if/else)] L_02AC
 L_02AC:
         pop     di                              ; 5F
         pop     si                              ; 5E
@@ -391,13 +449,15 @@ L_02AC:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf                                    ; CB
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_02B7 -- offset 0x02B7 -- 46 instr
-; Dispatcher: tabla de decisiones cmp+jcc (46 instr).
-; tags: dispatcher
-; calls (intra): sub_0250
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_02B7   offset=0x02B7  size=46 instr  segment=seg1.asm
+;
+; Classification (pass8): c_medium  (score C=3, ASM=0)
+; Prologue: saves_regs     Epilogue: ret
+;
+; Near calls (internal): L_0250
+;-------------------------------------------------------------------------
+;   [sub-routine] L_02B7
 L_02B7:
         push    di                              ; 57
         push    si                              ; 56
@@ -412,9 +472,11 @@ L_02B7:
         cmp     ax, word ptr [0x28]             ; 3B 06 28 00
         jl      L_02D6                          ; 7C 03
         add     cx, 5                           ; 83 C1 05
+;   [conditional branch target (if/else)] L_02D6
 L_02D6:
         mov     byte ptr [0x14], 1              ; C6 06 14 00 01
         inc     cx                              ; 41
+;   [conditional branch target (if/else)] L_02DC
 L_02DC:
         mov     ax, word ptr [0x32]             ; A1 32 00
         xor     ah, ah                          ; 32 E4
@@ -423,9 +485,11 @@ L_02DC:
         cmp     ax, word ptr [0x26]             ; 3B 06 26 00
         jl      L_02F0                          ; 7C 03
         add     bx, 5                           ; 83 C3 05
+;   [conditional branch target (if/else)] L_02F0
 L_02F0:
         mov     byte ptr [0x14], 1              ; C6 06 14 00 01
         inc     bx                              ; 43
+;   [conditional branch target (if/else)] L_02F6
 L_02F6:
         mov     ax, word ptr [0x32]             ; A1 32 00
         xor     al, al                          ; 32 C0
@@ -435,9 +499,11 @@ L_02F6:
         cmp     ax, word ptr [0x24]             ; 3B 06 24 00
         jg      L_030C                          ; 7F 03
         sub     cx, 5                           ; 83 E9 05
+;   [conditional branch target (if/else)] L_030C
 L_030C:
         mov     byte ptr [0x14], 1              ; C6 06 14 00 01
         dec     cx                              ; 49
+;   [conditional branch target (if/else)] L_0312
 L_0312:
         mov     ax, word ptr [0x32]             ; A1 32 00
         xor     ah, ah                          ; 32 E4
@@ -446,9 +512,11 @@ L_0312:
         cmp     ax, word ptr [0x22]             ; 3B 06 22 00
         jg      L_0326                          ; 7F 03
         sub     bx, 5                           ; 83 EB 05
+;   [conditional branch target (if/else)] L_0326
 L_0326:
         mov     byte ptr [0x14], 1              ; C6 06 14 00 01
         dec     bx                              ; 4B
+;   [error/early exit] L_032C
 L_032C:
         pop     si                              ; 5E
         pop     di                              ; 5F

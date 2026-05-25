@@ -1,3 +1,17 @@
+; ======================================================================
+; GERMANY / seg1.asm   (segment 1 of GERMANY)
+; ----------------------------------------------------------------------
+; Functions discovered (pass1b):         0
+; Total instructions:                    0
+; 
+; Classification (pass8):
+;   C-origin (high+medium):              0
+;   ASM-origin (high+medium):            0
+;   Unclear:                             0
+;   Tiny / unclassified:                 0
+; 
+; Far API calls in this segment:     0 (0 unique)
+; ======================================================================
 ; AUTO-GENERATED from original GERMANY segment 1
 ; segment_size=216 bytes, flags=0xf070
 ; mode: humano legible - instrucciones x86 + bytes raw en comentario (autoritativo)
@@ -71,10 +85,12 @@ GERMANY_TEXT SEGMENT BYTE PUBLIC 'CODE'
         mov     ax, es                          ; 8C C0
         mov     ds, ax                          ; 8E D8
         jmp     L_00CB                          ; EB 49
+;   [conditional branch target (if/else)] L_0082
 L_0082:
         mov     byte ptr [0x3ff], 0xba          ; C6 06 FF 03 BA
         nop                                     ; 90
         mov     byte ptr [0x431], 0xff          ; C6 06 31 04 FF
+;   [conditional branch target (if/else)] L_008D
 L_008D:
         nop                                     ; 90
         push    ds                              ; 1E
@@ -84,6 +100,7 @@ L_008D:
         mov     si, 0                           ; BE 00 00
         mov     di, 0x3aa                       ; BF AA 03
         rep movsb byte ptr es:[di], byte ptr [si] ; F3 A4
+        ; constant WM_SIZE
         mov     cx, 5                           ; B9 05 00
         mov     si, 4                           ; BE 04 00
         mov     di, 0x470                       ; BF 70 04
@@ -100,6 +117,7 @@ L_008D:
         mov     al, byte ptr [0x3ff]            ; A0 FF 03
         xchg    byte ptr [0x401], al            ; 86 06 01 04
         mov     byte ptr [0x3ff], al            ; A2 FF 03
+;   [branch target] L_00CB
 L_00CB:
         xor     ax, ax                          ; 33 C0
         not     ax                              ; F7 D0

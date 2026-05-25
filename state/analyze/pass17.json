@@ -1,0 +1,423 @@
+{
+  "pass": "pass17_macro_annotations",
+  "total_prologues": 1708,
+  "total_epilogues": 2,
+  "total_files_modified": 164,
+  "backup_dir": "C:\\Users\\Elias\\CascadeProjects\\modern-personality-agent\\backups\\pass17-2026-05-25-150604",
+  "results": [
+    {
+      "module": "ATTDC",
+      "prologues": 0,
+      "epilogues": 0,
+      "files": 0
+    },
+    {
+      "module": "ATTDEB",
+      "prologues": 0,
+      "epilogues": 0,
+      "files": 0
+    },
+    {
+      "module": "ATTKBD",
+      "prologues": 0,
+      "epilogues": 0,
+      "files": 0
+    },
+    {
+      "module": "ATTMOUSE",
+      "prologues": 0,
+      "epilogues": 0,
+      "files": 0
+    },
+    {
+      "module": "CALC",
+      "prologues": 74,
+      "epilogues": 0,
+      "files": 1
+    },
+    {
+      "module": "CALENDAR",
+      "prologues": 11,
+      "epilogues": 0,
+      "files": 6
+    },
+    {
+      "module": "CARDFILE",
+      "prologues": 50,
+      "epilogues": 1,
+      "files": 5
+    },
+    {
+      "module": "CGA",
+      "prologues": 0,
+      "epilogues": 0,
+      "files": 0
+    },
+    {
+      "module": "CITOH",
+      "prologues": 22,
+      "epilogues": 0,
+      "files": 2
+    },
+    {
+      "module": "CLIPBRD",
+      "prologues": 20,
+      "epilogues": 0,
+      "files": 1
+    },
+    {
+      "module": "CLOCK",
+      "prologues": 18,
+      "epilogues": 0,
+      "files": 1
+    },
+    {
+      "module": "COMM",
+      "prologues": 0,
+      "epilogues": 0,
+      "files": 0
+    },
+    {
+      "module": "CONTROL",
+      "prologues": 56,
+      "epilogues": 0,
+      "files": 7
+    },
+    {
+      "module": "DENMARK",
+      "prologues": 0,
+      "epilogues": 0,
+      "files": 0
+    },
+    {
+      "module": "EGAHIBW",
+      "prologues": 0,
+      "epilogues": 0,
+      "files": 0
+    },
+    {
+      "module": "EGAHIRES",
+      "prologues": 0,
+      "epilogues": 0,
+      "files": 0
+    },
+    {
+      "module": "EGALORES",
+      "prologues": 0,
+      "epilogues": 0,
+      "files": 0
+    },
+    {
+      "module": "EGAMONO",
+      "prologues": 0,
+      "epilogues": 0,
+      "files": 0
+    },
+    {
+      "module": "EPSON",
+      "prologues": 21,
+      "epilogues": 0,
+      "files": 2
+    },
+    {
+      "module": "EPSONMX",
+      "prologues": 22,
+      "epilogues": 0,
+      "files": 2
+    },
+    {
+      "module": "FRANCE",
+      "prologues": 0,
+      "epilogues": 0,
+      "files": 0
+    },
+    {
+      "module": "FTG",
+      "prologues": 0,
+      "epilogues": 0,
+      "files": 0
+    },
+    {
+      "module": "GDI",
+      "prologues": 88,
+      "epilogues": 0,
+      "files": 21
+    },
+    {
+      "module": "GENIUS",
+      "prologues": 0,
+      "epilogues": 0,
+      "files": 0
+    },
+    {
+      "module": "GERMANY",
+      "prologues": 0,
+      "epilogues": 0,
+      "files": 0
+    },
+    {
+      "module": "HERCULES",
+      "prologues": 0,
+      "epilogues": 0,
+      "files": 0
+    },
+    {
+      "module": "HP7470A",
+      "prologues": 5,
+      "epilogues": 0,
+      "files": 1
+    },
+    {
+      "module": "HP7475A",
+      "prologues": 10,
+      "epilogues": 0,
+      "files": 1
+    },
+    {
+      "module": "HP7550A",
+      "prologues": 10,
+      "epilogues": 0,
+      "files": 1
+    },
+    {
+      "module": "HPLASER",
+      "prologues": 28,
+      "epilogues": 0,
+      "files": 1
+    },
+    {
+      "module": "HPLASERP",
+      "prologues": 31,
+      "epilogues": 0,
+      "files": 1
+    },
+    {
+      "module": "IBMGRX",
+      "prologues": 22,
+      "epilogues": 0,
+      "files": 2
+    },
+    {
+      "module": "ITALY",
+      "prologues": 0,
+      "epilogues": 0,
+      "files": 0
+    },
+    {
+      "module": "JOYMOUSE",
+      "prologues": 0,
+      "epilogues": 0,
+      "files": 0
+    },
+    {
+      "module": "KERNEL",
+      "prologues": 77,
+      "epilogues": 0,
+      "files": 1
+    },
+    {
+      "module": "LMOUSE",
+      "prologues": 0,
+      "epilogues": 0,
+      "files": 0
+    },
+    {
+      "module": "LPC",
+      "prologues": 0,
+      "epilogues": 0,
+      "files": 0
+    },
+    {
+      "module": "LQ1500",
+      "prologues": 23,
+      "epilogues": 0,
+      "files": 2
+    },
+    {
+      "module": "MOUSE",
+      "prologues": 0,
+      "epilogues": 0,
+      "files": 0
+    },
+    {
+      "module": "MSDOS",
+      "prologues": 86,
+      "epilogues": 0,
+      "files": 3
+    },
+    {
+      "module": "MSDOSD",
+      "prologues": 26,
+      "epilogues": 0,
+      "files": 1
+    },
+    {
+      "module": "MSMOUSE1",
+      "prologues": 0,
+      "epilogues": 0,
+      "files": 0
+    },
+    {
+      "module": "MSMOUSE2",
+      "prologues": 0,
+      "epilogues": 0,
+      "files": 0
+    },
+    {
+      "module": "NEC3550",
+      "prologues": 21,
+      "epilogues": 0,
+      "files": 1
+    },
+    {
+      "module": "NECP2",
+      "prologues": 21,
+      "epilogues": 0,
+      "files": 2
+    },
+    {
+      "module": "NOMOUSE",
+      "prologues": 0,
+      "epilogues": 0,
+      "files": 0
+    },
+    {
+      "module": "NORWAY",
+      "prologues": 0,
+      "epilogues": 0,
+      "files": 0
+    },
+    {
+      "module": "NOTEPAD",
+      "prologues": 19,
+      "epilogues": 0,
+      "files": 7
+    },
+    {
+      "module": "OKI92",
+      "prologues": 21,
+      "epilogues": 0,
+      "files": 2
+    },
+    {
+      "module": "PAINT",
+      "prologues": 119,
+      "epilogues": 0,
+      "files": 21
+    },
+    {
+      "module": "PSCRIPT",
+      "prologues": 46,
+      "epilogues": 0,
+      "files": 1
+    },
+    {
+      "module": "REVERSI",
+      "prologues": 32,
+      "epilogues": 0,
+      "files": 1
+    },
+    {
+      "module": "SETUP",
+      "prologues": 108,
+      "epilogues": 1,
+      "files": 1
+    },
+    {
+      "module": "SG10",
+      "prologues": 21,
+      "epilogues": 0,
+      "files": 2
+    },
+    {
+      "module": "SOUND",
+      "prologues": 0,
+      "epilogues": 0,
+      "files": 0
+    },
+    {
+      "module": "SPAIN",
+      "prologues": 0,
+      "epilogues": 0,
+      "files": 0
+    },
+    {
+      "module": "SPOOLER",
+      "prologues": 28,
+      "epilogues": 0,
+      "files": 1
+    },
+    {
+      "module": "SWEDEN",
+      "prologues": 0,
+      "epilogues": 0,
+      "files": 0
+    },
+    {
+      "module": "SYSTEM",
+      "prologues": 0,
+      "epilogues": 0,
+      "files": 0
+    },
+    {
+      "module": "TERMINAL",
+      "prologues": 138,
+      "epilogues": 0,
+      "files": 6
+    },
+    {
+      "module": "THINKJET",
+      "prologues": 21,
+      "epilogues": 0,
+      "files": 2
+    },
+    {
+      "module": "TI850",
+      "prologues": 21,
+      "epilogues": 0,
+      "files": 2
+    },
+    {
+      "module": "TOSH",
+      "prologues": 23,
+      "epilogues": 0,
+      "files": 2
+    },
+    {
+      "module": "TTY",
+      "prologues": 8,
+      "epilogues": 0,
+      "files": 1
+    },
+    {
+      "module": "UK",
+      "prologues": 0,
+      "epilogues": 0,
+      "files": 0
+    },
+    {
+      "module": "USA",
+      "prologues": 0,
+      "epilogues": 0,
+      "files": 0
+    },
+    {
+      "module": "USER",
+      "prologues": 250,
+      "epilogues": 0,
+      "files": 23
+    },
+    {
+      "module": "WRITE",
+      "prologues": 88,
+      "epilogues": 0,
+      "files": 25
+    },
+    {
+      "module": "XER4020",
+      "prologues": 23,
+      "epilogues": 0,
+      "files": 2
+    }
+  ]
+}

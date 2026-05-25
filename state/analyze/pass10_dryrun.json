@@ -1,0 +1,29 @@
+{
+  "pass": "pass10_annotate_api_calls",
+  "dry_run": true,
+  "modules_processed": 1,
+  "total_annotations_added": 68,
+  "total_files_modified": 0,
+  "backup_dir": null,
+  "results": [
+    {
+      "module": "CLOCK",
+      "files_modified": 0,
+      "total_annotations_added": 68,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "annotations_would_add": 68,
+          "already_annotated": 0,
+          "modified": false
+        },
+        {
+          "file": "seg2.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        }
+      ]
+    }
+  ]
+}

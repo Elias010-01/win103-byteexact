@@ -1,3 +1,17 @@
+; ======================================================================
+; NOTEPAD / seg9.asm   (segment 9 of NOTEPAD)
+; ----------------------------------------------------------------------
+; Functions discovered (pass1b):         0
+; Total instructions:                    0
+; 
+; Classification (pass8):
+;   C-origin (high+medium):              0
+;   ASM-origin (high+medium):            0
+;   Unclear:                             0
+;   Tiny / unclassified:                 0
+; 
+; Far API calls in this segment:     0 (0 unique)
+; ======================================================================
 ; AUTO-GENERATED from original NOTEPAD segment 9
 ; segment_size=396 bytes, flags=0xf130
 ; mode: humano legible - instrucciones x86 + bytes raw en comentario (autoritativo)
@@ -32,6 +46,7 @@ NOTEPAD_TEXT SEGMENT BYTE PUBLIC 'CODE'
         lea     ax, [bp - 0x8c]                 ; 8D 86 74 FF
         push    ss                              ; 16
         push    ax                              ; 50
+        ; constant GMEM_ZEROINIT
         mov     ax, 0x80                        ; B8 80 00
         push    ax                              ; 50
         call    far KERNEL.GETPROFILESTRING     ; 9A FF FF 00 00 [FIXUP]
@@ -39,11 +54,13 @@ NOTEPAD_TEXT SEGMENT BYTE PUBLIC 'CODE'
         jne     L_0036                          ; 75 06
         mov     ax, 0xffff                      ; B8 FF FF
         jmp     L_0183                          ; E9 4D 01
+;   [conditional branch target (if/else)] L_0036
 L_0036:
         lea     ax, [bp - 0x8c]                 ; 8D 86 74 FF
         mov     word ptr [bp - 0xc], ax         ; 89 46 F4
         mov     word ptr [bp - 0xa], ss         ; 8C 56 F6
         jmp     L_005A                          ; EB 18
+;   [loop start] L_0042
 L_0042:
         cmp     byte ptr [bp - 0x92], 0x2c      ; 80 BE 6E FF 2C
         je      L_0068                          ; 74 1F
@@ -52,12 +69,14 @@ L_0042:
         call    far KERNEL.ANSINEXT             ; 9A 88 00 00 00 [FIXUP]
         mov     word ptr [bp - 0xc], ax         ; 89 46 F4
         mov     word ptr [bp - 0xa], dx         ; 89 56 F6
+;   [unconditional branch target] L_005A
 L_005A:
         les     bx, ptr [bp - 0xc]              ; C4 5E F4
         mov     al, byte ptr es:[bx]            ; 26 8A 07
         mov     byte ptr [bp - 0x92], al        ; 88 86 6E FF
         or      al, al                          ; 0A C0
         jne     L_0042                          ; 75 DA
+;   [conditional branch target (if/else)] L_0068
 L_0068:
         les     bx, ptr [bp - 0xc]              ; C4 5E F4
         cmp     byte ptr es:[bx], 0             ; 26 80 3F 00
@@ -65,6 +84,7 @@ L_0068:
         inc     word ptr [bp - 0xc]             ; FF 46 F4
         mov     byte ptr es:[bx], 0             ; 26 C6 07 00
         jmp     L_0092                          ; EB 18
+;   [loop start] L_007A
 L_007A:
         cmp     byte ptr [bp - 0x92], 0x20      ; 80 BE 6E FF 20
         jg      L_00A0                          ; 7F 1F
@@ -73,18 +93,21 @@ L_007A:
         call    far KERNEL.ANSINEXT             ; 9A C3 00 00 00 [FIXUP]
         mov     word ptr [bp - 0xc], ax         ; 89 46 F4
         mov     word ptr [bp - 0xa], dx         ; 89 56 F6
+;   [branch target] L_0092
 L_0092:
         les     bx, ptr [bp - 0xc]              ; C4 5E F4
         mov     al, byte ptr es:[bx]            ; 26 8A 07
         mov     byte ptr [bp - 0x92], al        ; 88 86 6E FF
         or      al, al                          ; 0A C0
         jne     L_007A                          ; 75 DA
+;   [conditional branch target (if/else)] L_00A0
 L_00A0:
         mov     ax, word ptr [bp - 0xc]         ; 8B 46 F4
         mov     dx, word ptr [bp - 0xa]         ; 8B 56 F6
         mov     word ptr [bp - 6], ax           ; 89 46 FA
         mov     word ptr [bp - 4], dx           ; 89 56 FC
         jmp     L_00CD                          ; EB 1F
+;   [loop start] L_00AE
 L_00AE:
         cmp     byte ptr [bp - 0x92], 0x2c      ; 80 BE 6E FF 2C
         je      L_00DB                          ; 74 26
@@ -95,12 +118,14 @@ L_00AE:
         call    far KERNEL.ANSINEXT             ; 9A 02 01 00 00 [FIXUP]
         mov     word ptr [bp - 0xc], ax         ; 89 46 F4
         mov     word ptr [bp - 0xa], dx         ; 89 56 F6
+;   [unconditional branch target] L_00CD
 L_00CD:
         les     bx, ptr [bp - 0xc]              ; C4 5E F4
         mov     al, byte ptr es:[bx]            ; 26 8A 07
         mov     byte ptr [bp - 0x92], al        ; 88 86 6E FF
         or      al, al                          ; 0A C0
         jne     L_00AE                          ; 75 D3
+;   [conditional branch target (if/else)] L_00DB
 L_00DB:
         les     bx, ptr [bp - 0xc]              ; C4 5E F4
         cmp     byte ptr es:[bx], 0             ; 26 80 3F 00
@@ -108,29 +133,34 @@ L_00DB:
         inc     word ptr [bp - 0xc]             ; FF 46 F4
         mov     byte ptr es:[bx], 0             ; 26 C6 07 00
         jmp     L_010C                          ; EB 1F
+;   [loop start] L_00ED
 L_00ED:
         cmp     byte ptr [bp - 0x92], 0x20      ; 80 BE 6E FF 20
         jle     L_00FB                          ; 7E 07
         cmp     byte ptr [bp - 0x92], 0x2c      ; 80 BE 6E FF 2C
         jne     L_011A                          ; 75 1F
+;   [conditional branch target (if/else)] L_00FB
 L_00FB:
         push    word ptr [bp - 0xa]             ; FF 76 F6
         push    word ptr [bp - 0xc]             ; FF 76 F4
         call    far KERNEL.ANSINEXT             ; 9A 38 01 00 00 [FIXUP]
         mov     word ptr [bp - 0xc], ax         ; 89 46 F4
         mov     word ptr [bp - 0xa], dx         ; 89 56 F6
+;   [branch target] L_010C
 L_010C:
         les     bx, ptr [bp - 0xc]              ; C4 5E F4
         mov     al, byte ptr es:[bx]            ; 26 8A 07
         mov     byte ptr [bp - 0x92], al        ; 88 86 6E FF
         or      al, al                          ; 0A C0
         jne     L_00ED                          ; 75 D3
+;   [conditional branch target (if/else)] L_011A
 L_011A:
         mov     ax, word ptr [bp - 0xc]         ; 8B 46 F4
         mov     dx, word ptr [bp - 0xa]         ; 8B 56 F6
         mov     word ptr [bp - 0x90], ax        ; 89 86 70 FF
         mov     word ptr [bp - 0x8e], dx        ; 89 96 72 FF
         jmp     L_0142                          ; EB 18
+;   [loop start] L_012A
 L_012A:
         cmp     byte ptr [bp - 0x92], 0x20      ; 80 BE 6E FF 20
         jle     L_0150                          ; 7E 1F
@@ -139,33 +169,46 @@ L_012A:
         call    far KERNEL.ANSINEXT             ; 9A FF FF 00 00 [FIXUP]
         mov     word ptr [bp - 0xc], ax         ; 89 46 F4
         mov     word ptr [bp - 0xa], dx         ; 89 56 F6
+;   [unconditional branch target] L_0142
 L_0142:
         les     bx, ptr [bp - 0xc]              ; C4 5E F4
         mov     al, byte ptr es:[bx]            ; 26 8A 07
         mov     byte ptr [bp - 0x92], al        ; 88 86 6E FF
         or      al, al                          ; 0A C0
         jne     L_012A                          ; 75 DA
+;   [conditional branch target (if/else)] L_0150
 L_0150:
         les     bx, ptr [bp - 0xc]              ; C4 5E F4
         mov     byte ptr es:[bx], 0             ; 26 C6 07 00
         push    word ptr [bp - 4]               ; FF 76 FC
+        ;   ^ arg lpszDriver (high/segment)
         push    word ptr [bp - 6]               ; FF 76 FA
+        ;   ^ arg lpszDriver (low/offset)
         lea     ax, [bp - 0x8c]                 ; 8D 86 74 FF
         push    ss                              ; 16
+        ;   ^ arg lpszDevice (high/segment)
         push    ax                              ; 50
+        ;   ^ arg lpszDevice (low/offset)
         push    word ptr [bp - 0x8e]            ; FF B6 72 FF
+        ;   ^ arg lpszOutput (high/segment)
         push    word ptr [bp - 0x90]            ; FF B6 70 FF
+        ;   ^ arg lpszOutput (low/offset)
         sub     ax, ax                          ; 2B C0
         push    ax                              ; 50
+        ;   ^ arg lpInitData (high/segment)
         push    ax                              ; 50
+        ;   ^ arg lpInitData (low/offset)
+        ; --> CREATEDC(LPSTR lpszDriver, LPSTR lpszDevice, LPSTR lpszOutput, LPVOID lpInitData) -> HDC
         call    far GDI.CREATEDC                ; 9A FF FF 00 00 [FIXUP]
         mov     word ptr [bp - 8], ax           ; 89 46 F8
         or      ax, ax                          ; 0B C0
         jne     L_0180                          ; 75 05
         mov     ax, 0xfffe                      ; B8 FE FF
         jmp     L_0183                          ; EB 03
+;   [conditional branch target (if/else)] L_0180
 L_0180:
         mov     ax, word ptr [bp - 8]           ; 8B 46 F8
+;   [unconditional branch target] L_0183
 L_0183:
         sub     bp, 2                           ; 83 ED 02
         mov     sp, bp                          ; 8B E5

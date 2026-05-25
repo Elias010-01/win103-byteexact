@@ -1,0 +1,83 @@
+{
+  "module": "LPC",
+  "num_functions": 3,
+  "verdict_counts": {
+    "asm_high": 1,
+    "unclear": 1,
+    "c_medium": 1
+  },
+  "c_count": 1,
+  "asm_count": 1,
+  "unclear_count": 1,
+  "tiny_count": 0,
+  "c_ratio_overall": 0.333,
+  "c_ratio_of_classified": 0.5,
+  "expected_c_ratio": null,
+  "expected_confidence": null,
+  "consistency": "no_expectation",
+  "functions": [
+    {
+      "name": "sub_002F",
+      "segment_file": "seg1.asm",
+      "offset": 47,
+      "size_bytes": null,
+      "num_instructions": 154,
+      "prologue": "none",
+      "epilogue": "retf",
+      "classification": {
+        "verdict": "asm_high",
+        "score_c": 1,
+        "score_asm": 7,
+        "score_diff": -6,
+        "signals": [
+          "no BP-frame prologue [+2 ASM]",
+          "retf without args [+1 C]",
+          "6 DOS/BIOS int call(s) [+5 ASM]"
+        ],
+        "confidence": "high"
+      }
+    },
+    {
+      "name": "sub_0227",
+      "segment_file": "seg1.asm",
+      "offset": 551,
+      "size_bytes": null,
+      "num_instructions": 38,
+      "prologue": "none",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "unclear",
+        "score_c": 0,
+        "score_asm": 2,
+        "score_diff": -2,
+        "signals": [
+          "no BP-frame prologue [+2 ASM]",
+          "ret without args [neutral]"
+        ],
+        "confidence": "low"
+      }
+    },
+    {
+      "name": "sub_0269",
+      "segment_file": "seg1.asm",
+      "offset": 617,
+      "size_bytes": null,
+      "num_instructions": 201,
+      "prologue": "saves_regs",
+      "epilogue": "retf",
+      "classification": {
+        "verdict": "c_medium",
+        "score_c": 4,
+        "score_asm": 0,
+        "score_diff": 4,
+        "signals": [
+          "saves registers at entry but no full BP frame [+1 C]",
+          "retf without args [+1 C]",
+          "0 `loop` instruction(s) (MSC rarely emits) [+0 ASM]",
+          "4 FAR-API calls (heavy API user) [+2 C]"
+        ],
+        "confidence": "medium"
+      }
+    }
+  ]
+}

@@ -1,3 +1,17 @@
+; ======================================================================
+; ITALY / seg1.asm   (segment 1 of ITALY)
+; ----------------------------------------------------------------------
+; Functions discovered (pass1b):         0
+; Total instructions:                    0
+; 
+; Classification (pass8):
+;   C-origin (high+medium):              0
+;   ASM-origin (high+medium):            0
+;   Unclear:                             0
+;   Tiny / unclassified:                 0
+; 
+; Far API calls in this segment:     0 (0 unique)
+; ======================================================================
 ; AUTO-GENERATED from original ITALY segment 1
 ; segment_size=116 bytes, flags=0xf070
 ; mode: humano legible - instrucciones x86 + bytes raw en comentario (autoritativo)
@@ -35,6 +49,7 @@ ITALY_TEXT SEGMENT BYTE PUBLIC 'CODE'
         mov     byte ptr [0x20], 1              ; C6 06 20 00 01
         nop                                     ; 90
         jmp     L_0067                          ; EB 32
+;   [conditional branch target (if/else)] L_0035
 L_0035:
         mov     byte ptr [0x361], 0xba          ; C6 06 61 03 BA
         nop                                     ; 90
@@ -44,6 +59,7 @@ L_0035:
         mov     ax, cs                          ; 8C C8
         mov     ds, ax                          ; 8E D8
         cld                                     ; FC
+        ; constant WM_SETTEXT
         mov     cx, 0xc                         ; B9 0C 00
         mov     si, 0                           ; BE 00 00
         mov     di, 0x328                       ; BF 28 03
@@ -56,6 +72,7 @@ L_0035:
         mov     al, byte ptr [0x361]            ; A0 61 03
         xchg    byte ptr [0x363], al            ; 86 06 63 03
         mov     byte ptr [0x361], al            ; A2 61 03
+;   [branch target] L_0067
 L_0067:
         xor     ax, ax                          ; 33 C0
         not     ax                              ; F7 D0

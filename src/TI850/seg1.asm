@@ -1,3 +1,21 @@
+; ======================================================================
+; TI850 / seg1.asm   (segment 1 of TI850)
+; ----------------------------------------------------------------------
+; Functions discovered (pass1b):         1
+; Total instructions:                  253
+; 
+; Classification (pass8):
+;   C-origin (high+medium):              1
+;   ASM-origin (high+medium):            0
+;   Unclear:                             0
+;   Tiny / unclassified:                 0
+; 
+; Far API calls in this segment:     3 (3 unique)
+;   Top:
+;        1  STARTSPOOLPAGE
+;        1  SETRECT
+;        1  SETRECTEMPTY
+; ======================================================================
 ; AUTO-GENERATED from original TI850 segment 1
 ; segment_size=5002 bytes, flags=0xf130
 ; mode: humano legible - instrucciones x86 + bytes raw en comentario (autoritativo)
@@ -10,14 +28,22 @@
 ; el binario original).
 
 TI850_TEXT SEGMENT BYTE PUBLIC 'CODE'
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_0000 -- offset 0x0000 -- 253 instr
-; Dispatcher: tabla de decisiones cmp+jcc (253 instr).
-; tags: dispatcher, far
-;----------------------------------------------------------------------
 
+;-------------------------------------------------------------------------
+; sub_0000   offset=0x0000  size=253 instr  segment=seg1.asm
+;
+; Classification (pass8): c_medium  (score C=6, ASM=2)
+; Prologue: standard_bp     Epilogue: jmp_tail
+;
+; Far API calls:
+;   STARTSPOOLPAGE
+;   SETRECT
+;   SETRECTEMPTY
+;
+; Near calls (internal): L_0444, L_07DE, L_092D, L_0A75
+;-------------------------------------------------------------------------
 L_0000:
+        ;   = cProc <0> ; NEAR PASCAL prologue
         push    bp                              ; 55
         mov     bp, sp                          ; 8B EC
         push    ds                              ; 1E
@@ -28,10 +54,12 @@ L_0000:
         sub     word ptr [bx], cx               ; 29 0F
         jns     L_0015                          ; 79 02
         mov     word ptr [bx], ax               ; 89 07
+;   [conditional branch target (if/else)] L_0015
 L_0015:
         sub     word ptr [bx + 2], dx           ; 29 57 02
         jns     L_001D                          ; 79 03
         mov     word ptr [bx + 2], ax           ; 89 47 02
+;   [conditional branch target (if/else)] L_001D
 L_001D:
         mov     ax, word ptr [bx + 4]           ; 8B 47 04
         sub     ax, cx                          ; 2B C1
@@ -41,11 +69,13 @@ L_001D:
         sub     word ptr [bx + 6], dx           ; 29 57 06
         mov     ax, word ptr [bx + 6]           ; 8B 47 06
         sub     ax, word ptr [bx + 2]           ; 2B 47 02
+;   [error/early exit] L_0032
 L_0032:
         pop     ds                              ; 1F
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     8                               ; C2 08 00
+;   [sub-routine] L_0039
 L_0039:
         mov     ax, ds                          ; 8C D8
         nop                                     ; 90
@@ -86,6 +116,7 @@ L_0039:
         cmp     ax, 0xc                         ; 3D 0C 00
         jbe     L_007C                          ; 76 03
         jmp     L_0303                          ; E9 87 02
+;   [conditional branch target (if/else)] L_007C
 L_007C:
         add     ax, ax                          ; 03 C0
         xchg    bx, ax                          ; 93
@@ -94,6 +125,7 @@ L_007C:
         cmp     word ptr es:[bx + 0x32], 1      ; 26 83 7F 32 01
         je      L_0091                          ; 74 03
         jmp     L_0293                          ; E9 02 02
+;   [conditional branch target (if/else)] L_0091
 L_0091:
         mov     ax, word ptr es:[bx + 0x28]     ; 26 8B 47 28
         inc     word ptr es:[bx + 0x28]         ; 26 FF 47 28
@@ -107,6 +139,7 @@ L_0091:
         cmp     ax, 1                           ; 3D 01 00
         je      L_00B7                          ; 74 03
         jmp     L_0293                          ; E9 DC 01
+;   [conditional branch target (if/else)] L_00B7
 L_00B7:
         mov     word ptr es:[bx + 0x3e], 0      ; 26 C7 47 3E 00 00
         push    es                              ; 06
@@ -137,6 +170,7 @@ L_00B7:
         push    es                              ; 06
         push    bx                              ; 53
         call    L_0444                          ; E8 48 03
+;   [conditional branch target (if/else)] L_00FC
 L_00FC:
         les     bx, ptr [bp + 0x10]             ; C4 5E 10
         test    byte ptr es:[bx + 0x26], 1      ; 26 F6 47 26 01
@@ -154,6 +188,7 @@ L_00FC:
         push    ax                              ; 50
         call    far USER.SETRECT                ; 9A AA 01 00 00 [FIXUP]
         jmp     L_03BE                          ; E9 9A 02
+;   [conditional branch target (if/else)] L_0124
 L_0124:
         les     bx, ptr [bp + 0x10]             ; C4 5E 10
         cmp     word ptr es:[bx + 0x38], 0xc    ; 26 83 7F 38 0C
@@ -171,12 +206,15 @@ L_0124:
         call    L_092D                          ; E8 ED 07
         les     bx, ptr [bp + 0x10]             ; C4 5E 10
         mov     word ptr es:[bx + 0x38], 0xc    ; 26 C7 47 38 0C 00
+;   [conditional branch target (if/else)] L_0149
 L_0149:
         mov     si, 0x12                        ; BE 12 00
         jmp     L_0157                          ; EB 09
+;   [conditional branch target (if/else)] L_014E
 L_014E:
         les     bx, ptr [bp + 0x10]             ; C4 5E 10
         mov     word ptr es:[bx + 0x30], 0      ; 26 C7 47 30 00 00
+;   [unconditional branch target] L_0157
 L_0157:
         les     bx, ptr [bp + 0x10]             ; C4 5E 10
         cmp     word ptr es:[bx], 0x8889        ; 26 81 3F 89 88
@@ -195,6 +233,7 @@ L_0157:
         push    ax                              ; 50
         mov     ax, 0x3c0                       ; B8 C0 03
         jmp     L_01A8                          ; EB 25
+;   [conditional branch target (if/else)] L_0183
 L_0183:
         mov     ax, 0x28                        ; B8 28 00
         imul    si                              ; F7 EE
@@ -210,6 +249,7 @@ L_0183:
         push    ax                              ; 50
         mov     ax, word ptr [bp - 6]           ; 8B 46 FA
         add     ax, 0x28                        ; 05 28 00
+;   [unconditional branch target] L_01A8
 L_01A8:
         push    ax                              ; 50
         call    far USER.SETRECT                ; 9A FF FF 00 00 [FIXUP]
@@ -222,12 +262,14 @@ L_01A8:
         test    byte ptr es:[bx + 0x26], 4      ; 26 F6 47 26 04
         jne     L_01C6                          ; 75 03
         jmp     L_02C7                          ; E9 01 01
+;   [conditional branch target (if/else)] L_01C6
 L_01C6:
         push    es                              ; 06
         push    bx                              ; 53
         call    L_07DE                          ; E8 13 06
         les     bx, ptr [bp + 0x10]             ; C4 5E 10
         and     byte ptr es:[bx + 0x26], 0xfb   ; 26 80 67 26 FB
+;   [conditional branch target (if/else)] L_01D3
 L_01D3:
         mov     ax, word ptr [bp + 0x10]        ; 8B 46 10
         mov     dx, word ptr [bp + 0x12]        ; 8B 56 12
@@ -235,16 +277,19 @@ L_01D3:
         mov     word ptr [bp - 0xa], ax         ; 89 46 F6
         mov     word ptr [bp - 8], dx           ; 89 56 F8
         mov     word ptr [bp - 0xc], 0          ; C7 46 F4 00 00
+;   [loop start] L_01E7
 L_01E7:
         cmp     word ptr [bp - 0xc], 0x12c0     ; 81 7E F4 C0 12
         jb      L_01F1                          ; 72 03
         jmp     L_02DE                          ; E9 ED 00
+;   [conditional branch target (if/else)] L_01F1
 L_01F1:
         les     bx, ptr [bp - 0xa]              ; C4 5E F6
         inc     word ptr [bp - 0xa]             ; FF 46 F6
         mov     byte ptr es:[bx], 0xff          ; 26 C6 07 FF
         inc     word ptr [bp - 0xc]             ; FF 46 F4
         jmp     L_01E7                          ; EB E7
+;   [conditional branch target (if/else)] L_0200
 L_0200:
         push    word ptr [bp + 8]               ; FF 76 08
         push    word ptr [bp + 6]               ; FF 76 06
@@ -255,6 +300,7 @@ L_0200:
         push    es                              ; 06
         push    bx                              ; 53
         call    L_07DE                          ; E8 C4 05
+;   [conditional branch target (if/else)] L_021A
 L_021A:
         les     bx, ptr [bp + 0x10]             ; C4 5E 10
         mov     word ptr es:[bx + 0x28], 0      ; 26 C7 47 28 00 00
@@ -274,17 +320,20 @@ L_021A:
         push    cs                              ; 0E
         call    L_0A75                          ; E8 2B 08
         jmp     L_0260                          ; EB 14
+;   [conditional branch target (if/else)] L_024C
 L_024C:
         push    word ptr [bp + 0x12]            ; FF 76 12
         push    word ptr [bp + 0x10]            ; FF 76 10
         mov     ax, 0xe0                        ; B8 E0 00
         push    ds                              ; 1E
         push    ax                              ; 50
+        ; constant WM_CREATE
         mov     ax, 1                           ; B8 01 00
         push    ax                              ; 50
         nop                                     ; 90
         push    cs                              ; 0E
         call    L_092D                          ; E8 CD 06
+;   [unconditional branch target] L_0260
 L_0260:
         push    word ptr [bp + 0x12]            ; FF 76 12
         push    word ptr [bp + 0x10]            ; FF 76 10
@@ -296,11 +345,13 @@ L_0260:
         call    far GDI.ENDSPOOLPAGE            ; 9A FF FF 00 00 [FIXUP]
         les     bx, ptr [bp + 0x10]             ; C4 5E 10
         mov     word ptr es:[bx + 0x32], ax     ; 26 89 47 32
+;   [loop start (also forward branch)] L_0283
 L_0283:
         les     bx, ptr [bp + 0x10]             ; C4 5E 10
         mov     word ptr es:[bx + 0x44], 0      ; 26 C7 47 44 00 00
         cmp     word ptr es:[bx + 0x32], 1      ; 26 83 7F 32 01
         je      L_02BD                          ; 74 2A
+;   [unconditional branch target] L_0293
 L_0293:
         push    word ptr [bp + 8]               ; FF 76 08
         push    word ptr [bp + 6]               ; FF 76 06
@@ -314,10 +365,12 @@ L_0293:
         call    far GDI.DELETEJOB               ; 9A 34 03 00 00 [FIXUP]
         les     bx, ptr [bp + 0x10]             ; C4 5E 10
         mov     word ptr es:[bx + 0x2e], 0      ; 26 C7 47 2E 00 00
+;   [conditional branch target (if/else)] L_02BD
 L_02BD:
         les     bx, ptr [bp + 0x10]             ; C4 5E 10
         mov     ax, word ptr es:[bx + 0x32]     ; 26 8B 47 32
         jmp     L_0438                          ; E9 71 01
+;   [unconditional branch target] L_02C7
 L_02C7:
         les     bx, ptr [bp + 0x10]             ; C4 5E 10
         test    byte ptr es:[bx + 0x26], 0x10   ; 26 F6 47 26 10
@@ -327,6 +380,7 @@ L_02C7:
         push    bx                              ; 53
         push    word ptr [bp - 6]               ; FF 76 FA
         call    L_09AA                          ; E8 CC 06
+;   [unconditional branch target] L_02DE
 L_02DE:
         push    word ptr [bp + 0x12]            ; FF 76 12
         push    word ptr [bp + 0x10]            ; FF 76 10
@@ -340,17 +394,22 @@ L_02DE:
         les     bx, ptr [bp + 0x10]             ; C4 5E 10
         cmp     word ptr es:[bx], 0x8889        ; 26 81 3F 89 88
         jne     L_0308                          ; 75 05
+;   [loop start (also forward branch)] L_0303
 L_0303:
         sub     ax, ax                          ; 2B C0
         jmp     L_0438                          ; E9 30 01
+;   [conditional branch target (if/else)] L_0308
 L_0308:
         les     bx, ptr [bp + 0xa]              ; C4 5E 0A
         cmp     word ptr es:[bx], 0             ; 26 83 3F 00
         je      L_0316                          ; 74 05
+        ; constant WM_CREATE
         mov     ax, 1                           ; B8 01 00
         jmp     L_0318                          ; EB 02
+;   [conditional branch target (if/else)] L_0316
 L_0316:
         sub     ax, ax                          ; 2B C0
+;   [unconditional branch target] L_0318
 L_0318:
         les     bx, ptr [bp + 0x10]             ; C4 5E 10
         or      word ptr es:[bx + 0x26], ax     ; 26 09 47 26
@@ -380,6 +439,7 @@ L_0318:
         or      ax, ax                          ; 0B C0
         jle     L_036D                          ; 7E 06
         mov     word ptr es:[bx + 0x32], 1      ; 26 C7 47 32 01 00
+;   [conditional branch target (if/else)] L_036D
 L_036D:
         les     bx, ptr [bp + 0x10]             ; C4 5E 10
         mov     ax, word ptr es:[bx + 0x2e]     ; 26 8B 47 2E
@@ -389,6 +449,7 @@ L_036D:
         jne     L_038A                          ; 75 09
         push    word ptr es:[bx + 0x2e]         ; 26 FF 77 2E
         call    far GDI.CLOSEJOB                ; 9A FF FF 00 00 [FIXUP]
+;   [branch target] L_038A
 L_038A:
         les     bx, ptr [bp + 0x10]             ; C4 5E 10
         mov     word ptr es:[bx + 0x32], 0      ; 26 C7 47 32 00 00
@@ -400,6 +461,7 @@ L_038A:
         cmp     ax, 0xc                         ; 3D 0C 00
         jbe     L_03A9                          ; 76 03
         jmp     L_0303                          ; E9 5A FF
+;   [conditional branch target (if/else)] L_03A9
 L_03A9:
         add     ax, ax                          ; 03 C0
         xchg    bx, ax                          ; 93
@@ -408,7 +470,9 @@ L_03A9:
         cmp     word ptr es:[bx], 0x8888        ; 26 81 3F 88 88
         je      L_03BE                          ; 74 03
         jmp     L_0303                          ; E9 45 FF
+;   [loop start (also forward branch)] L_03BE
 L_03BE:
+        ; constant WM_CREATE
         mov     ax, 1                           ; B8 01 00
         jmp     L_0438                          ; EB 75
         mov     si, 0xbe03                      ; BE 03 BE
@@ -437,6 +501,7 @@ L_03BE:
         les     bx, ptr [bp + 0x10]             ; C4 5E 10
         mov     bx, word ptr es:[bx + 0x22]     ; 26 8B 5F 22
         mov     ax, word ptr [bx + 8]           ; 8B 47 08
+;   [unconditional branch target] L_0413
 L_0413:
         les     bx, ptr [bp + 6]                ; C4 5E 06
         mov     word ptr es:[bx + 2], ax        ; 26 89 47 02
@@ -458,7 +523,9 @@ L_0413:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0xe                             ; CA 0E 00
+;   [sub-routine] L_0444
 L_0444:
+        ;   = cProc <2> ; NEAR PASCAL prologue
         push    bp                              ; 55
         mov     bp, sp                          ; 8B EC
         sub     sp, 2                           ; 83 EC 02
@@ -467,9 +534,11 @@ L_0444:
         je      L_045B                          ; 74 07
         cmp     word ptr es:[bx + 0x32], 1      ; 26 83 7F 32 01
         je      L_045F                          ; 74 04
+;   [conditional branch target (if/else)] L_045B
 L_045B:
         sub     ax, ax                          ; 2B C0
         jmp     L_0494                          ; EB 35
+;   [conditional branch target (if/else)] L_045F
 L_045F:
         les     bx, ptr [bp + 4]                ; C4 5E 04
         push    word ptr es:[bx + 0x2e]         ; 26 FF 77 2E
@@ -485,10 +554,12 @@ L_045F:
         cmp     ax, word ptr es:[bx + 0x30]     ; 26 3B 47 30
         je      L_0488                          ; 74 04
         mov     word ptr es:[bx + 0x32], ax     ; 26 89 47 32
+;   [conditional branch target (if/else)] L_0488
 L_0488:
         les     bx, ptr [bp + 4]                ; C4 5E 04
         mov     word ptr es:[bx + 0x30], 0      ; 26 C7 47 30 00 00
         mov     ax, word ptr [bp - 2]           ; 8B 46 FE
+;   [fall-through exit] L_0494
 L_0494:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
@@ -507,9 +578,14 @@ L_0494:
         or      ax, word ptr [bp + 8]           ; 0B 46 08
         je      L_04DD                          ; 74 29
         push    word ptr [bp + 0x10]            ; FF 76 10
+        ;   ^ arg lpsz1 (high/segment)
         push    word ptr [bp + 0xe]             ; FF 76 0E
+        ;   ^ arg lpsz1 (low/offset)
         push    word ptr [bp + 8]               ; FF 76 08
+        ;   ^ arg lpsz2 (high/segment)
         push    word ptr [bp + 6]               ; FF 76 06
+        ;   ^ arg lpsz2 (low/offset)
+        ; --> LSTRCMP(LPSTR lpsz1, LPSTR lpsz2) -> INT
         call    far KERNEL.LSTRCMP              ; 9A FF FF 00 00 [FIXUP]
         or      ax, ax                          ; 0B C0
         je      L_04D3                          ; 74 0A
@@ -517,10 +593,12 @@ L_0494:
         mov     word ptr [bp + 8], ax           ; 89 46 08
         mov     word ptr [bp + 6], ax           ; 89 46 06
         jmp     L_04DD                          ; EB 0A
+;   [conditional branch target (if/else)] L_04D3
 L_04D3:
         les     bx, ptr [bp + 6]                ; C4 5E 06
         mov     ax, word ptr es:[bx + 0x20]     ; 26 8B 47 20
         mov     word ptr [bp - 6], ax           ; 89 46 FA
+;   [branch target] L_04DD
 L_04DD:
         test    byte ptr [bp + 0x12], 1         ; F6 46 12 01
         je      L_0520                          ; 74 3D
@@ -528,10 +606,13 @@ L_04DD:
         push    word ptr [bp + 0x14]            ; FF 76 14
         cmp     word ptr [bp - 6], 0xb          ; 83 7E FA 0B
         jne     L_04F4                          ; 75 05
+        ; constant VK_SHIFT
         mov     ax, 0x10                        ; B8 10 00
         jmp     L_04F7                          ; EB 03
+;   [conditional branch target (if/else)] L_04F4
 L_04F4:
         mov     ax, 0x78                        ; B8 78 00
+;   [unconditional branch target] L_04F7
 L_04F7:
         mov     dx, ds                          ; 8C DA
         push    dx                              ; 52
@@ -545,13 +626,16 @@ L_04F7:
         je      L_0510                          ; 74 05
         mov     ax, 0x48                        ; B8 48 00
         jmp     L_0513                          ; EB 03
+;   [conditional branch target (if/else)] L_0510
 L_0510:
         mov     ax, 0x2048                      ; B8 48 20
+;   [unconditional branch target] L_0513
 L_0513:
         les     bx, ptr [bp + 0x14]             ; C4 5E 14
         mov     word ptr es:[bx + 0x1a], ax     ; 26 89 47 1A
         mov     ax, 0x68                        ; B8 68 00
         jmp     L_05C2                          ; E9 A2 00
+;   [conditional branch target (if/else)] L_0520
 L_0520:
         push    word ptr [bp + 0x16]            ; FF 76 16
         push    word ptr [bp + 0x14]            ; FF 76 14
@@ -559,8 +643,10 @@ L_0520:
         jne     L_0531                          ; 75 05
         mov     ax, 0x220                       ; B8 20 02
         jmp     L_0534                          ; EB 03
+;   [conditional branch target (if/else)] L_0531
 L_0531:
         mov     ax, 0x268                       ; B8 68 02
+;   [unconditional branch target] L_0534
 L_0534:
         mov     dx, ds                          ; 8C DA
         push    dx                              ; 52
@@ -584,9 +670,14 @@ L_0534:
         mov     dx, es                          ; 8C C2
         add     ax, 0x48                        ; 05 48 00
         push    dx                              ; 52
+        ;   ^ arg lpszDest (high/segment)
         push    ax                              ; 50
+        ;   ^ arg lpszDest (low/offset)
         push    word ptr [bp + 0xc]             ; FF 76 0C
+        ;   ^ arg lpszSrc (high/segment)
         push    word ptr [bp + 0xa]             ; FF 76 0A
+        ;   ^ arg lpszSrc (low/offset)
+        ; --> LSTRCPY(LPSTR lpszDest, LPSTR lpszSrc) -> LPSTR
         call    far KERNEL.LSTRCPY              ; 9A FF FF 00 00 [FIXUP]
         les     bx, ptr [bp + 0x14]             ; C4 5E 14
         cmp     word ptr es:[bx], 0x8888        ; 26 81 3F 88 88
@@ -603,20 +694,28 @@ L_0534:
         mov     word ptr es:[bx + 0x34], ax     ; 26 89 47 34
         or      ax, ax                          ; 0B C0
         je      L_05A8                          ; 74 05
+;   [loop start (also forward branch)] L_05A3
 L_05A3:
+        ; constant WM_CREATE
         mov     ax, 1                           ; B8 01 00
         jmp     L_05C2                          ; EB 1A
+;   [conditional branch target (if/else)] L_05A8
 L_05A8:
         les     bx, ptr [bp + 0x14]             ; C4 5E 14
         push    word ptr es:[bx + 0x40]         ; 26 FF 77 40
+        ;   ^ arg hMem
+        ; --> GLOBALFREE(HANDLE hMem) -> HANDLE
         call    far KERNEL.GLOBALFREE           ; 9A F2 05 00 00 [FIXUP]
+;   [conditional branch target (if/else)] L_05B4
 L_05B4:
         sub     ax, ax                          ; 2B C0
         jmp     L_05C2                          ; EB 0A
+;   [conditional branch target (if/else)] L_05B8
 L_05B8:
         les     bx, ptr [bp + 0x14]             ; C4 5E 14
         or      byte ptr es:[bx + 0x26], 0x20   ; 26 80 4F 26 20
         jmp     L_05A3                          ; EB E1
+;   [unconditional branch target] L_05C2
 L_05C2:
         sub     bp, 2                           ; 83 ED 02
         mov     sp, bp                          ; 8B E5
@@ -639,8 +738,12 @@ L_05C2:
         call    far GDI.DELETEPQ                ; 9A FF FF 00 00 [FIXUP]
         les     bx, ptr [bp + 6]                ; C4 5E 06
         push    word ptr es:[bx + 0x40]         ; 26 FF 77 40
+        ;   ^ arg hMem
+        ; --> GLOBALFREE(HANDLE hMem) -> HANDLE
         call    far KERNEL.GLOBALFREE           ; 9A FF FF 00 00 [FIXUP]
+;   [conditional branch target (if/else)] L_05F6
 L_05F6:
+        ; constant WM_CREATE
         mov     ax, 1                           ; B8 01 00
         sub     bp, 2                           ; 83 ED 02
         mov     sp, bp                          ; 8B E5
@@ -648,7 +751,9 @@ L_05F6:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    4                               ; CA 04 00
+;   [sub-routine] L_0604
 L_0604:
+        ;   = cProc <0> ; NEAR PASCAL prologue
         push    bp                              ; 55
         mov     bp, sp                          ; 8B EC
         mov     ax, word ptr [bp + 4]           ; 8B 46 04
@@ -662,32 +767,40 @@ L_0604:
         les     bx, ptr [bp + 8]                ; C4 5E 08
         mov     word ptr es:[bx + 0x22], 0x1b2  ; 26 C7 47 22 B2 01
         jmp     L_065C                          ; EB 39
+;   [conditional branch target (if/else)] L_0623
 L_0623:
         les     bx, ptr [bp + 4]                ; C4 5E 04
         cmp     word ptr es:[bx + 0x26], 0x11   ; 26 83 7F 26 11
         jne     L_0635                          ; 75 08
         les     bx, ptr [bp + 8]                ; C4 5E 08
         or      byte ptr es:[bx + 0x26], 8      ; 26 80 4F 26 08
+;   [conditional branch target (if/else)] L_0635
 L_0635:
         les     bx, ptr [bp + 4]                ; C4 5E 04
         cmp     word ptr es:[bx + 0x20], 0xb    ; 26 83 7F 20 0B
         jne     L_0644                          ; 75 05
+        ; constant WM_MOVE
         mov     ax, 3                           ; B8 03 00
         jmp     L_0646                          ; EB 02
+;   [conditional branch target (if/else)] L_0644
 L_0644:
         sub     ax, ax                          ; 2B C0
+;   [unconditional branch target] L_0646
 L_0646:
         les     bx, ptr [bp + 4]                ; C4 5E 04
         add     ax, word ptr es:[bx + 0x24]     ; 26 03 47 24
+        ; constant WM_GETTEXTLENGTH
         mov     cx, 0xe                         ; B9 0E 00
         imul    cx                              ; F7 E9
         add     ax, 0x8c                        ; 05 8C 00
         les     bx, ptr [bp + 8]                ; C4 5E 08
         mov     word ptr es:[bx + 0x22], ax     ; 26 89 47 22
+;   [error/early exit] L_065C
 L_065C:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     8                               ; C2 08 00
+;   [sub-routine] L_0662
 L_0662:
         push    ds                              ; 1E
         pop     ax                              ; 58
@@ -723,8 +836,11 @@ L_0662:
         je      L_06A1                          ; 74 04
         sub     ax, ax                          ; 2B C0
         jmp     L_06A4                          ; EB 03
+;   [conditional branch target (if/else)] L_06A1
 L_06A1:
+        ; constant WM_CREATE
         mov     ax, 1                           ; B8 01 00
+;   [unconditional branch target] L_06A4
 L_06A4:
         sub     bp, 2                           ; 83 ED 02
         mov     sp, bp                          ; 8B E5
@@ -732,7 +848,9 @@ L_06A4:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf                                    ; CB
+;   [sub-routine] L_06AD
 L_06AD:
+        ;   = cProc <4> ; NEAR PASCAL prologue
         push    bp                              ; 55
         mov     bp, sp                          ; 8B EC
         sub     sp, 4                           ; 83 EC 04
@@ -741,10 +859,12 @@ L_06AD:
         mov     word ptr [bp - 2], ax           ; 89 46 FE
         mov     word ptr [bp - 4], ax           ; 89 46 FC
         jmp     L_06C7                          ; EB 09
+;   [loop start] L_06BE
 L_06BE:
         mov     ax, 0xa                         ; B8 0A 00
         imul    word ptr [bp - 2]               ; F7 6E FE
         mov     word ptr [bp - 2], ax           ; 89 46 FE
+;   [unconditional branch target] L_06C7
 L_06C7:
         mov     bx, word ptr [bp - 4]           ; 8B 5E FC
         les     si, ptr [bp + 4]                ; C4 76 04
@@ -761,7 +881,9 @@ L_06C7:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     4                               ; C2 04 00
+;   [sub-routine] L_06EE
 L_06EE:
+        ;   = cProc <6> ; NEAR PASCAL prologue
         push    bp                              ; 55
         mov     bp, sp                          ; 8B EC
         sub     sp, 6                           ; 83 EC 06
@@ -771,6 +893,7 @@ L_06EE:
         mov     dx, word ptr [bp + 0xa]         ; 8B 56 0A
         mov     word ptr [bp - 6], ax           ; 89 46 FA
         mov     word ptr [bp - 4], dx           ; 89 56 FC
+;   [loop start] L_0704
 L_0704:
         cmp     word ptr [bp + 6], 0            ; 83 7E 06 00
         je      L_0719                          ; 74 0F
@@ -780,6 +903,7 @@ L_0704:
         not     al                              ; F6 D0
         or      al, al                          ; 0A C0
         je      L_0757                          ; 74 3E
+;   [conditional branch target (if/else)] L_0719
 L_0719:
         les     bx, ptr [bp + 0xc]              ; C4 5E 0C
         test    byte ptr es:[bx + 0x26], 8      ; 26 F6 47 26 08
@@ -788,6 +912,7 @@ L_0719:
         cmp     word ptr [bp + 6], 0            ; 83 7E 06 00
         jne     L_072F                          ; 75 03
         jmp     L_07B5                          ; E9 86 00
+;   [conditional branch target (if/else)] L_072F
 L_072F:
         push    word ptr [bp + 0xa]             ; FF 76 0A
         push    word ptr [bp + 8]               ; FF 76 08
@@ -804,11 +929,14 @@ L_072F:
         mov     word ptr [bp - 6], ax           ; 89 46 FA
         mov     word ptr [bp - 4], dx           ; 89 56 FC
         jmp     L_075F                          ; EB 08
+;   [conditional branch target (if/else)] L_0757
 L_0757:
         dec     word ptr [bp + 6]               ; FF 4E 06
         jmp     L_0704                          ; EB A8
+;   [loop start] L_075C
 L_075C:
         inc     word ptr [bp - 6]               ; FF 46 FA
+;   [unconditional branch target] L_075F
 L_075F:
         les     bx, ptr [bp - 6]                ; C4 5E FA
         cmp     byte ptr es:[bx], 0             ; 26 80 3F 00
@@ -848,6 +976,7 @@ L_075F:
         nop                                     ; 90
         push    cs                              ; 0E
         call    L_092D                          ; E8 78 01
+;   [unconditional branch target] L_07B5
 L_07B5:
         les     bx, ptr [bp + 0xc]              ; C4 5E 0C
         test    byte ptr es:[bx + 0x26], 0x10   ; 26 F6 47 26 10
@@ -862,12 +991,15 @@ L_07B5:
         jne     L_07D7                          ; 75 08
         les     bx, ptr [bp + 0xc]              ; C4 5E 0C
         and     byte ptr es:[bx + 0x26], 0xef   ; 26 80 67 26 EF
+;   [error/early exit] L_07D7
 L_07D7:
         pop     si                              ; 5E
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     0xc                             ; C2 0C 00
+;   [sub-routine] L_07DE
 L_07DE:
+        ;   = cProc <18> ; NEAR PASCAL prologue
         push    bp                              ; 55
         mov     bp, sp                          ; 8B EC
         sub     sp, 0x12                        ; 83 EC 12
@@ -883,10 +1015,12 @@ L_07DE:
         sub     ax, 0x28                        ; 2D 28 00
         mov     word ptr [bp - 0xc], ax         ; 89 46 F4
         mov     word ptr [bp - 0x12], 0         ; C7 46 EE 00 00
+;   [loop start] L_080C
 L_080C:
         cmp     word ptr [bp - 0x12], 5         ; 83 7E EE 05
         jl      L_0815                          ; 7C 03
         jmp     L_08DC                          ; E9 C7 00
+;   [conditional branch target (if/else)] L_0815
 L_0815:
         mov     ax, word ptr [bp - 0xa]         ; 8B 46 F6
         mov     dx, word ptr [bp - 8]           ; 8B 56 F8
@@ -900,6 +1034,7 @@ L_0815:
         mov     word ptr [bp - 6], ax           ; 89 46 FA
         mov     word ptr [bp - 4], dx           ; 89 56 FC
         mov     word ptr [bp - 2], 0x3c0        ; C7 46 FE C0 03
+;   [loop start] L_083B
 L_083B:
         les     bx, ptr [bp - 6]                ; C4 5E FA
         mov     al, byte ptr es:[bx]            ; 26 8A 07
@@ -917,6 +1052,7 @@ L_083B:
         mov     ax, 0x3c0                       ; B8 C0 03
         push    ax                              ; 50
         mov     ax, word ptr [bp - 0x12]        ; 8B 46 EE
+        ; constant WM_MOVE
         mov     cl, 3                           ; B1 03
         shl     ax, cl                          ; D3 E0
         add     ax, word ptr [bp - 0xc]         ; 03 46 F4
@@ -924,6 +1060,7 @@ L_083B:
         call    L_06EE                          ; E8 79 FE
         inc     word ptr [bp - 0x12]            ; FF 46 EE
         jmp     L_080C                          ; EB 92
+;   [conditional branch target (if/else)] L_087A
 L_087A:
         mov     ax, word ptr [bp + 4]           ; 8B 46 04
         mov     dx, word ptr [bp + 6]           ; 8B 56 06
@@ -935,6 +1072,7 @@ L_087A:
         sub     ax, 0x28                        ; 2D 28 00
         mov     word ptr [bp - 0xc], ax         ; 89 46 F4
         mov     word ptr [bp - 0x12], 0         ; C7 46 EE 00 00
+;   [loop start] L_089B
 L_089B:
         push    word ptr [bp - 4]               ; FF 76 FC
         push    word ptr [bp - 6]               ; FF 76 FA
@@ -950,6 +1088,7 @@ L_089B:
         mov     ax, 0x3c0                       ; B8 C0 03
         push    ax                              ; 50
         mov     ax, word ptr [bp - 0x12]        ; 8B 46 EE
+        ; constant WM_MOVE
         mov     cl, 3                           ; B1 03
         shl     ax, cl                          ; D3 E0
         add     ax, word ptr [bp - 0xc]         ; 03 46 F4
@@ -959,6 +1098,7 @@ L_089B:
         inc     word ptr [bp - 0x12]            ; FF 46 EE
         cmp     word ptr [bp - 0x12], 5         ; 83 7E EE 05
         jl      L_089B                          ; 7C BF
+;   [unconditional branch target] L_08DC
 L_08DC:
         les     bx, ptr [bp + 4]                ; C4 5E 04
         push    word ptr es:[bx + 0x34]         ; 26 FF 77 34
@@ -970,22 +1110,27 @@ L_08DC:
         call    far GDI.MINPQ                   ; 9A CD 09 00 00 [FIXUP]
         push    ax                              ; 50
         call    far KERNEL.FATALEXIT            ; 9A FF FF 00 00 [FIXUP]
+;   [error/early exit] L_08FD
 L_08FD:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     4                               ; C2 04 00
+;   [sub-routine] L_0903
 L_0903:
+        ;   = cProc <2> ; NEAR PASCAL prologue
         push    bp                              ; 55
         mov     bp, sp                          ; 8B EC
         sub     sp, 2                           ; 83 EC 02
         mov     byte ptr [bp - 2], 0x1a         ; C6 46 FE 1A
         jmp     L_091D                          ; EB 0E
+;   [loop start] L_090F
 L_090F:
         les     bx, ptr [bp + 6]                ; C4 5E 06
         mov     al, byte ptr es:[bx]            ; 26 8A 07
         not     al                              ; F6 D0
         mov     byte ptr es:[bx], al            ; 26 88 07
         inc     word ptr [bp + 6]               ; FF 46 06
+;   [unconditional branch target] L_091D
 L_091D:
         mov     ax, word ptr [bp + 4]           ; 8B 46 04
         dec     word ptr [bp + 4]               ; FF 4E 04
@@ -994,6 +1139,7 @@ L_091D:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     6                               ; C2 06 00
+;   [sub-routine] L_092D
 L_092D:
         push    ds                              ; 1E
         pop     ax                              ; 58
@@ -1026,6 +1172,7 @@ L_092D:
         jge     L_0971                          ; 7D 05
         mov     ax, 0xffff                      ; B8 FF FF
         jmp     L_099E                          ; EB 2D
+;   [conditional branch target (if/else)] L_0971
 L_0971:
         mov     ax, word ptr [bp + 0xc]         ; 8B 46 0C
         mov     dx, word ptr [bp + 0xe]         ; 8B 56 0E
@@ -1033,6 +1180,7 @@ L_0971:
         mov     word ptr [bp - 6], ax           ; 89 46 FA
         mov     word ptr [bp - 4], dx           ; 89 56 FC
         mov     si, word ptr [bp + 6]           ; 8B 76 06
+;   [conditional branch target (if/else)] L_0983
 L_0983:
         les     bx, ptr [bp + 0xc]              ; C4 5E 0C
         mov     word ptr es:[bx + 0x30], si     ; 26 89 77 30
@@ -1044,6 +1192,7 @@ L_0983:
         nop                                     ; 90
         push    cs                              ; 0E
         call    L_0039                          ; E8 9B F6
+;   [branch target] L_099E
 L_099E:
         pop     si                              ; 5E
         sub     bp, 2                           ; 83 ED 02
@@ -1052,7 +1201,9 @@ L_099E:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0xa                             ; CA 0A 00
+;   [sub-routine] L_09AA
 L_09AA:
+        ;   = cProc <12> ; NEAR PASCAL prologue
         push    bp                              ; 55
         mov     bp, sp                          ; 8B EC
         sub     sp, 0xc                         ; 83 EC 0C
@@ -1060,25 +1211,33 @@ L_09AA:
         mov     ax, word ptr es:[bx + 0x34]     ; 26 8B 47 34
         mov     word ptr [bp - 0xa], ax         ; 89 46 F6
         push    word ptr es:[bx + 0x40]         ; 26 FF 77 40
+        ;   ^ arg hMem
+        ; --> GLOBALLOCK(HANDLE hMem) -> LPVOID
         call    far KERNEL.GLOBALLOCK           ; 9A FF FF 00 00 [FIXUP]
         mov     word ptr [bp - 8], ax           ; 89 46 F8
         mov     word ptr [bp - 6], dx           ; 89 56 FA
+;   [loop start] L_09C9
 L_09C9:
         push    word ptr [bp - 0xa]             ; FF 76 F6
         call    far GDI.MINPQ                   ; 9A FF FF 00 00 [FIXUP]
         mov     word ptr [bp - 0xc], ax         ; 89 46 F4
         inc     ax                              ; 40
         jne     L_09F0                          ; 75 19
+;   [loop start] L_09D7
 L_09D7:
         les     bx, ptr [bp + 6]                ; C4 5E 06
         push    word ptr es:[bx + 0x40]         ; 26 FF 77 40
+        ;   ^ arg hMem
+        ; --> GLOBALUNLOCK(HANDLE hMem) -> BOOL
         call    far KERNEL.GLOBALUNLOCK         ; 9A FF FF 00 00 [FIXUP]
         cmp     word ptr [bp - 0xc], -1         ; 83 7E F4 FF
         je      L_09EC                          ; 74 03
         jmp     L_0A6C                          ; E9 80 00
+;   [conditional branch target (if/else)] L_09EC
 L_09EC:
         sub     ax, ax                          ; 2B C0
         jmp     L_0A6F                          ; EB 7F
+;   [conditional branch target (if/else)] L_09F0
 L_09F0:
         mov     ax, word ptr [bp - 0xc]         ; 8B 46 F4
         add     ax, word ptr [bp - 8]           ; 03 46 F8
@@ -1104,6 +1263,7 @@ L_09F0:
         push    word ptr [bp + 6]               ; FF 76 06
         les     bx, ptr [bp - 4]                ; C4 5E FC
         push    word ptr es:[bx + 2]            ; 26 FF 77 02
+        ; constant WM_CREATE
         mov     ax, 1                           ; B8 01 00
         push    ax                              ; 50
         nop                                     ; 90
@@ -1126,12 +1286,16 @@ L_09F0:
         les     bx, ptr [bp + 6]                ; C4 5E 06
         add     word ptr es:[bx + 0x3c], ax     ; 26 01 47 3C
         jmp     L_09C9                          ; E9 5D FF
+;   [unconditional branch target] L_0A6C
 L_0A6C:
+        ; constant WM_CREATE
         mov     ax, 1                           ; B8 01 00
+;   [fall-through exit] L_0A6F
 L_0A6F:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     6                               ; C2 06 00
+;   [sub-routine] L_0A75
 L_0A75:
         push    ds                              ; 1E
         pop     ax                              ; 58
@@ -1149,25 +1313,32 @@ L_0A75:
         mov     word ptr [bp - 4], ax           ; 89 46 FC
         or      ax, ax                          ; 0B C0
         jne     L_0A99                          ; 75 05
+;   [loop start] L_0A94
 L_0A94:
+        ; constant WM_CREATE
         mov     ax, 1                           ; B8 01 00
         jmp     L_0B0F                          ; EB 76
+;   [conditional branch target (if/else)] L_0A99
 L_0A99:
         les     bx, ptr [bp + 8]                ; C4 5E 08
         test    byte ptr es:[bx + 0x26], 1      ; 26 F6 47 26 01
         je      L_0AA9                          ; 74 06
         cmp     word ptr [bp - 4], 9            ; 83 7E FC 09
         jl      L_0A94                          ; 7C EB
+;   [conditional branch target (if/else)] L_0AA9
 L_0AA9:
         mov     byte ptr [0x1fe], 0             ; C6 06 FE 01 00
         jmp     L_0AE2                          ; EB 32
+;   [loop start] L_0AB0
 L_0AB0:
         cmp     word ptr [bp - 4], 0x55         ; 83 7E FC 55
         jl      L_0ABB                          ; 7C 05
         mov     ax, 0x55                        ; B8 55 00
         jmp     L_0ABE                          ; EB 03
+;   [conditional branch target (if/else)] L_0ABB
 L_0ABB:
         mov     ax, word ptr [bp - 4]           ; 8B 46 FC
+;   [unconditional branch target] L_0ABE
 L_0ABE:
         mov     si, ax                          ; 8B F0
         mov     al, byte ptr [0x201]            ; A0 01 02
@@ -1186,6 +1357,7 @@ L_0ABE:
         push    cs                              ; 0E
         call    L_092D                          ; E8 4F FE
         sub     word ptr [bp - 4], 0x55         ; 83 6E FC 55
+;   [unconditional branch target] L_0AE2
 L_0AE2:
         cmp     word ptr [bp - 4], 0            ; 83 7E FC 00
         jg      L_0AB0                          ; 7F C8
@@ -1206,6 +1378,7 @@ L_0AE2:
         les     bx, ptr [bp + 8]                ; C4 5E 08
         mov     word ptr es:[bx + 0x3c], 0      ; 26 C7 47 3C 00 00
         jmp     L_0A94                          ; EB 85
+;   [unconditional branch target] L_0B0F
 L_0B0F:
         pop     si                              ; 5E
         sub     bp, 2                           ; 83 ED 02
@@ -1214,6 +1387,7 @@ L_0B0F:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    6                               ; CA 06 00
+;   [sub-routine] L_0B1B
 L_0B1B:
         push    ds                              ; 1E
         pop     ax                              ; 58
@@ -1230,9 +1404,11 @@ L_0B1B:
         jl      L_0B37                          ; 7C 07
         cmp     word ptr [bp + 8], 0x3c0        ; 81 7E 08 C0 03
         jle     L_0B3C                          ; 7E 05
+;   [loop start (also forward branch)] L_0B37
 L_0B37:
         sub     ax, ax                          ; 2B C0
         jmp     L_0BF4                          ; E9 B8 00
+;   [conditional branch target (if/else)] L_0B3C
 L_0B3C:
         les     bx, ptr [bp + 0xa]              ; C4 5E 0A
         mov     ax, word ptr [bp + 8]           ; 8B 46 08
@@ -1255,28 +1431,33 @@ L_0B3C:
         mov     word ptr es:[bx + 0x3c], 0      ; 26 C7 47 3C 00 00
         mov     di, word ptr [bp + 8]           ; 8B 7E 08
         jmp     L_0B79                          ; EB 0A
+;   [conditional branch target (if/else)] L_0B6F
 L_0B6F:
         mov     di, word ptr [bp + 8]           ; 8B 7E 08
         les     bx, ptr [bp + 0xa]              ; C4 5E 0A
         sub     di, word ptr es:[bx + 0x3c]     ; 26 2B 7F 3C
+;   [unconditional branch target] L_0B79
 L_0B79:
         or      di, di                          ; 0B FF
         je      L_0B37                          ; 74 BA
         les     bx, ptr [bp + 0xa]              ; C4 5E 0A
         mov     si, word ptr es:[bx + 0x38]     ; 26 8B 77 38
         jmp     L_0B9C                          ; EB 16
+;   [loop start] L_0B86
 L_0B86:
         push    word ptr [bp + 0xc]             ; FF 76 0C
         push    word ptr [bp + 0xa]             ; FF 76 0A
         mov     ax, 0xf2                        ; B8 F2 00
         push    ds                              ; 1E
         push    ax                              ; 50
+        ; constant WM_CREATE
         mov     ax, 1                           ; B8 01 00
         push    ax                              ; 50
         nop                                     ; 90
         push    cs                              ; 0E
         call    L_092D                          ; E8 93 FD
         sub     di, si                          ; 2B FE
+;   [unconditional branch target] L_0B9C
 L_0B9C:
         cmp     di, si                          ; 3B FE
         jge     L_0B86                          ; 7D E6
@@ -1299,27 +1480,32 @@ L_0B9C:
         push    cs                              ; 0E
         call    L_092D                          ; E8 62 FD
         jmp     L_0BE2                          ; EB 15
+;   [loop start] L_0BCD
 L_0BCD:
         push    word ptr [bp + 0xc]             ; FF 76 0C
         push    word ptr [bp + 0xa]             ; FF 76 0A
         mov     ax, 0xf4                        ; B8 F4 00
         push    ds                              ; 1E
         push    ax                              ; 50
+        ; constant WM_CREATE
         mov     ax, 1                           ; B8 01 00
         push    ax                              ; 50
         nop                                     ; 90
         push    cs                              ; 0E
         call    L_092D                          ; E8 4C FD
         dec     di                              ; 4F
+;   [unconditional branch target] L_0BE2
 L_0BE2:
         or      di, di                          ; 0B FF
         jne     L_0BCD                          ; 75 E7
+;   [conditional branch target (if/else)] L_0BE6
 L_0BE6:
         les     bx, ptr [bp + 0xa]              ; C4 5E 0A
         mov     ax, word ptr [bp + 8]           ; 8B 46 08
         sub     ax, di                          ; 2B C7
         mov     word ptr es:[bx + 0x3c], ax     ; 26 89 47 3C
         mov     ax, di                          ; 8B C7
+;   [unconditional branch target] L_0BF4
 L_0BF4:
         pop     si                              ; 5E
         pop     di                              ; 5F
@@ -1340,9 +1526,11 @@ L_0BF4:
         sub     sp, 4                           ; 83 EC 04
         cmp     word ptr [0xfe], 0              ; 83 3E FE 00 00
         je      L_0C1A                          ; 74 05
+;   [loop start] L_0C15
 L_0C15:
         sub     ax, ax                          ; 2B C0
         jmp     L_0CE0                          ; E9 C6 00
+;   [conditional branch target (if/else)] L_0C1A
 L_0C1A:
         mov     word ptr [0xfe], 1              ; C7 06 FE 00 01 00
         push    word ptr [bp + 8]               ; FF 76 08
@@ -1355,21 +1543,30 @@ L_0C1A:
         call    far GDI.GETENVIRONMENT          ; 9A FF FF 00 00 [FIXUP]
         or      ax, ax                          ; 0B C0
         jne     L_0C3D                          ; 75 05
+        ; constant WM_CREATE
         mov     ax, 1                           ; B8 01 00
         jmp     L_0C3F                          ; EB 02
+;   [conditional branch target (if/else)] L_0C3D
 L_0C3D:
         sub     ax, ax                          ; 2B C0
+;   [unconditional branch target] L_0C3F
 L_0C3F:
         or      ax, ax                          ; 0B C0
         jne     L_0C57                          ; 75 14
         push    word ptr [bp + 0xc]             ; FF 76 0C
+        ;   ^ arg lpsz1 (high/segment)
         push    word ptr [bp + 0xa]             ; FF 76 0A
+        ;   ^ arg lpsz1 (low/offset)
         mov     ax, 0x370                       ; B8 70 03
         push    ds                              ; 1E
+        ;   ^ arg lpsz2 (high/segment)
         push    ax                              ; 50
+        ;   ^ arg lpsz2 (low/offset)
+        ; --> LSTRCMP(LPSTR lpsz1, LPSTR lpsz2) -> INT
         call    far KERNEL.LSTRCMP              ; 9A C1 04 00 00 [FIXUP]
         or      ax, ax                          ; 0B C0
         je      L_0C87                          ; 74 30
+;   [conditional branch target (if/else)] L_0C57
 L_0C57:
         mov     word ptr [0x390], 0xa           ; C7 06 90 03 0A 00
         mov     word ptr [0x396], 0x10          ; C7 06 96 03 10 00
@@ -1380,31 +1577,47 @@ L_0C57:
         je      L_0C71                          ; 74 05
         mov     ax, 0x14                        ; B8 14 00
         jmp     L_0C74                          ; EB 03
+;   [conditional branch target (if/else)] L_0C71
 L_0C71:
         mov     ax, 0x15                        ; B8 15 00
+;   [unconditional branch target] L_0C74
 L_0C74:
         mov     word ptr [0x394], ax            ; A3 94 03
         mov     ax, 0x370                       ; B8 70 03
         push    ds                              ; 1E
+        ;   ^ arg lpszDest (high/segment)
         push    ax                              ; 50
+        ;   ^ arg lpszDest (low/offset)
         push    word ptr [bp + 0xc]             ; FF 76 0C
+        ;   ^ arg lpszSrc (high/segment)
         push    word ptr [bp + 0xa]             ; FF 76 0A
+        ;   ^ arg lpszSrc (low/offset)
+        ; --> LSTRCPY(LPSTR lpszDest, LPSTR lpszSrc) -> LPSTR
         call    far KERNEL.LSTRCPY              ; 9A 76 05 00 00 [FIXUP]
+;   [conditional branch target (if/else)] L_0C87
 L_0C87:
         push    word ptr [bp + 0xe]             ; FF 76 0E
+        ;   ^ arg hInstance
         mov     ax, 0xf6                        ; B8 F6 00
         push    ds                              ; 1E
+        ;   ^ arg lpszTemplate (high/segment)
         push    ax                              ; 50
+        ;   ^ arg lpszTemplate (low/offset)
         push    word ptr [bp + 0x10]            ; FF 76 10
+        ;   ^ arg hWndOwner
         mov     ax, OFFSET _entry_100           ; B8 FF FF [FIXUP]
         mov     dx, OFFSET _entry_100           ; BA FF FF [FIXUP]
         push    dx                              ; 52
+        ;   ^ arg lpDialogFunc (high/segment)
         push    ax                              ; 50
+        ;   ^ arg lpDialogFunc (low/offset)
+        ; --> DIALOGBOX(HANDLE hInstance, LPSTR lpszTemplate, HWND hWndOwner, FARPROC lpDialogFunc) -> INT
         call    far USER.DIALOGBOX              ; 9A FF FF 00 00 [FIXUP]
         cmp     ax, 2                           ; 3D 02 00
         jne     L_0CAD                          ; 75 09
         mov     word ptr [0xfe], 0              ; C7 06 FE 00 00 00
         jmp     L_0C15                          ; E9 68 FF
+;   [conditional branch target (if/else)] L_0CAD
 L_0CAD:
         push    word ptr [bp + 8]               ; FF 76 08
         push    word ptr [bp + 6]               ; FF 76 06
@@ -1416,15 +1629,23 @@ L_0CAD:
         call    far GDI.SETENVIRONMENT          ; 9A FF FF 00 00 [FIXUP]
         mov     ax, 0xffff                      ; B8 FF FF
         push    ax                              ; 50
+        ;   ^ arg hWnd
         mov     ax, 0x1b                        ; B8 1B 00
         push    ax                              ; 50
+        ;   ^ arg wMsg
         sub     ax, ax                          ; 2B C0
         push    ax                              ; 50
+        ;   ^ arg wParam
         push    word ptr [bp + 0xc]             ; FF 76 0C
+        ;   ^ arg lParam (high/segment)
         push    word ptr [bp + 0xa]             ; FF 76 0A
+        ;   ^ arg lParam (low/offset)
+        ; --> SENDMESSAGE(HWND hWnd, WORD wMsg, WPARAM wParam, LPARAM lParam) -> LRESULT
         call    far USER.SENDMESSAGE            ; 9A FF FF 00 00 [FIXUP]
         mov     word ptr [0xfe], 0              ; C7 06 FE 00 00 00
+        ; constant WM_CREATE
         mov     ax, 1                           ; B8 01 00
+;   [unconditional branch target] L_0CE0
 L_0CE0:
         sub     bp, 2                           ; 83 ED 02
         mov     sp, bp                          ; 8B E5
@@ -1448,16 +1669,20 @@ L_0CE0:
         cmp     ax, 0x111                       ; 3D 11 01
         jne     L_0D09                          ; 75 03
         jmp     L_0D9C                          ; E9 93 00
+;   [conditional branch target (if/else)] L_0D09
 L_0D09:
         jmp     L_0D97                          ; E9 8B 00
+;   [conditional branch target (if/else)] L_0D0C
 L_0D0C:
         mov     word ptr [bp - 8], 0            ; C7 46 F8 00 00
         mov     ax, 0x370                       ; B8 70 03
         mov     word ptr [bp - 6], ax           ; 89 46 FA
         mov     word ptr [bp - 4], ds           ; 8C 5E FC
         jmp     L_0D1F                          ; EB 03
+;   [loop start] L_0D1C
 L_0D1C:
         inc     word ptr [bp - 8]               ; FF 46 F8
+;   [unconditional branch target] L_0D1F
 L_0D1F:
         les     bx, ptr [bp - 6]                ; C4 5E FA
         inc     word ptr [bp - 6]               ; FF 46 FA
@@ -1467,42 +1692,59 @@ L_0D1F:
         or      al, al                          ; 0A C0
         jne     L_0D1C                          ; 75 EA
         push    word ptr [bp + 0xe]             ; FF 76 0E
+        ;   ^ arg hWnd
         mov     si, word ptr [bp - 8]           ; 8B 76 F8
         lea     ax, [bp + si - 0x3c]            ; 8D 42 C4
         push    ss                              ; 16
+        ;   ^ arg lpszText (high/segment)
         push    ax                              ; 50
+        ;   ^ arg lpszText (low/offset)
         mov     ax, 0x32                        ; B8 32 00
         sub     ax, si                          ; 2B C6
         push    ax                              ; 50
+        ;   ^ arg cbMax
+        ; --> GETWINDOWTEXT(HWND hWnd, LPSTR lpszText, INT cbMax) -> INT
         call    far USER.GETWINDOWTEXT          ; 9A FF FF 00 00 [FIXUP]
         push    word ptr [bp + 0xe]             ; FF 76 0E
+        ;   ^ arg hWnd
         lea     ax, [bp - 0x3c]                 ; 8D 46 C4
         push    ss                              ; 16
+        ;   ^ arg lpszText (high/segment)
         push    ax                              ; 50
+        ;   ^ arg lpszText (low/offset)
+        ; --> SETWINDOWTEXT(HWND hWnd, LPSTR lpszText) -> VOID
         call    far USER.SETWINDOWTEXT          ; 9A FF FF 00 00 [FIXUP]
         push    word ptr [bp + 0xe]             ; FF 76 0E
         push    word ptr [0x390]                ; FF 36 90 03
+        ; constant WM_CREATE
         mov     ax, 1                           ; B8 01 00
         push    ax                              ; 50
         call    far USER.CHECKDLGBUTTON         ; 9A 71 0D 00 00 [FIXUP]
         push    word ptr [bp + 0xe]             ; FF 76 0E
         push    word ptr [0x394]                ; FF 36 94 03
+        ; constant WM_CREATE
         mov     ax, 1                           ; B8 01 00
         push    ax                              ; 50
         call    far USER.CHECKDLGBUTTON         ; 9A 81 0D 00 00 [FIXUP]
         push    word ptr [bp + 0xe]             ; FF 76 0E
         push    word ptr [0x396]                ; FF 36 96 03
+        ; constant WM_CREATE
         mov     ax, 1                           ; B8 01 00
         push    ax                              ; 50
         call    far USER.CHECKDLGBUTTON         ; 9A FF FF 00 00 [FIXUP]
         push    word ptr [bp + 0xe]             ; FF 76 0E
+        ;   ^ arg hDlg
         push    word ptr [0x394]                ; FF 36 94 03
+        ;   ^ arg nIDItem
+        ; --> GETDLGITEM(HWND hDlg, INT nIDItem) -> HWND
         call    far USER.GETDLGITEM             ; 9A FF FF 00 00 [FIXUP]
         push    ax                              ; 50
         call    far USER.SETFOCUS               ; 9A FF FF 00 00 [FIXUP]
+;   [loop start (also forward branch)] L_0D97
 L_0D97:
         sub     ax, ax                          ; 2B C0
         jmp     L_0E2D                          ; E9 91 00
+;   [unconditional branch target] L_0D9C
 L_0D9C:
         mov     ax, word ptr [bp + 0xa]         ; 8B 46 0A
         sub     ax, 1                           ; 2D 01 00
@@ -1528,19 +1770,25 @@ L_0D9C:
         mov     word ptr [0x394], ax            ; A3 94 03
         jmp     L_0DE6                          ; EB 11
         push    word ptr [bp + 0xe]             ; FF 76 0E
+        ; constant VK_SHIFT
         mov     ax, 0x10                        ; B8 10 00
         push    ax                              ; 50
         mov     ax, 0x11                        ; B8 11 00
         push    ax                              ; 50
         mov     ax, word ptr [bp + 0xa]         ; 8B 46 0A
         mov     word ptr [0x396], ax            ; A3 96 03
+;   [unconditional branch target] L_0DE6
 L_0DE6:
         push    ax                              ; 50
         call    far USER.CHECKRADIOBUTTON       ; 9A FF FF 00 00 [FIXUP]
         jmp     L_0D97                          ; EB A9
         push    word ptr [bp + 0xe]             ; FF 76 0E
+        ;   ^ arg hDlg
         push    word ptr [bp + 0xa]             ; FF 76 0A
+        ;   ^ arg nResult
+        ; --> ENDDIALOG(HWND hDlg, INT nResult) -> BOOL
         call    far USER.ENDDIALOG              ; 9A FF FF 00 00 [FIXUP]
+        ; constant WM_CREATE
         mov     ax, 1                           ; B8 01 00
         jmp     L_0E2D                          ; EB 2F
         out     dx, al                          ; EE
@@ -1565,6 +1813,7 @@ L_0DE6:
         ret     0xc20d                          ; C2 0D C2
         or      ax, 0xdc2                       ; 0D C2 0D
         jmp     L_0D97                          ; E9 6A FF
+;   [unconditional branch target] L_0E2D
 L_0E2D:
         pop     si                              ; 5E
         sub     bp, 2                           ; 83 ED 02
@@ -1597,6 +1846,7 @@ L_0E2D:
         jne     L_0E61                          ; 75 04
         sub     ax, ax                          ; 2B C0
         jmp     L_0E98                          ; EB 37
+;   [conditional branch target (if/else)] L_0E61
 L_0E61:
         push    word ptr [bp + 0x24]            ; FF 76 24
         push    word ptr [bp + 0x22]            ; FF 76 22
@@ -1616,6 +1866,7 @@ L_0E61:
         push    word ptr [bp + 6]               ; FF 76 06
         call    far GDI.DMBITBLT                ; 9A FF FF 00 00 [FIXUP]
         mov     si, ax                          ; 8B F0
+;   [unconditional branch target] L_0E98
 L_0E98:
         pop     si                              ; 5E
         sub     bp, 2                           ; 83 ED 02
@@ -1648,6 +1899,7 @@ L_0E98:
         jne     L_0ECC                          ; 75 04
         sub     ax, ax                          ; 2B C0
         jmp     L_0EEB                          ; EB 1F
+;   [conditional branch target (if/else)] L_0ECC
 L_0ECC:
         push    word ptr [bp + 0x14]            ; FF 76 14
         push    word ptr [bp + 0x12]            ; FF 76 12
@@ -1659,6 +1911,7 @@ L_0ECC:
         push    word ptr [bp + 6]               ; FF 76 06
         call    far GDI.DMPIXEL                 ; 9A FF FF 00 00 [FIXUP]
         mov     si, ax                          ; 8B F0
+;   [unconditional branch target] L_0EEB
 L_0EEB:
         pop     si                              ; 5E
         sub     bp, 2                           ; 83 ED 02
@@ -1683,26 +1936,35 @@ L_0EEB:
         cmp     word ptr es:[bx], 0             ; 26 83 3F 00
         jne     L_0F1B                          ; 75 03
         jmp     L_0FCB                          ; E9 B0 00
+;   [conditional branch target (if/else)] L_0F1B
 L_0F1B:
         test    byte ptr es:[bx + 0x26], 1      ; 26 F6 47 26 01
         je      L_0F27                          ; 74 05
+;   [loop start] L_0F22
 L_0F22:
         sub     ax, ax                          ; 2B C0
         jmp     L_1018                          ; E9 F1 00
+;   [conditional branch target (if/else)] L_0F27
 L_0F27:
         mov     ax, 2                           ; B8 02 00
         push    ax                              ; 50
+        ;   ^ arg wFlags
         mov     ax, word ptr [bp + 0x1a]        ; 8B 46 1A
         shl     ax, 1                           ; D1 E0
         shl     ax, 1                           ; D1 E0
         cdq                                     ; 99
         push    dx                              ; 52
+        ;   ^ arg dwBytes (high/segment)
         push    ax                              ; 50
+        ;   ^ arg dwBytes (low/offset)
+        ; --> GLOBALALLOC(WORD wFlags, DWORD dwBytes) -> HANDLE
         call    far KERNEL.GLOBALALLOC          ; 9A FF FF 00 00 [FIXUP]
         mov     word ptr [bp - 4], ax           ; 89 46 FC
         or      ax, ax                          ; 0B C0
         je      L_0F22                          ; 74 E1
         push    ax                              ; 50
+        ;   ^ arg hMem
+        ; --> GLOBALLOCK(HANDLE hMem) -> LPVOID
         call    far KERNEL.GLOBALLOCK           ; 9A BF 09 00 00 [FIXUP]
         mov     word ptr [bp - 0xa], ax         ; 89 46 F6
         mov     word ptr [bp - 8], dx           ; 89 56 F8
@@ -1724,6 +1986,7 @@ L_0F27:
         cmp     word ptr [bp + 0x1c], 4         ; 83 7E 1C 04
         je      L_0F77                          ; 74 03
         jmp     L_0FFF                          ; E9 88 00
+;   [conditional branch target (if/else)] L_0F77
 L_0F77:
         add     word ptr [bp - 0xa], 2          ; 83 46 F6 02
         les     bx, ptr [bp + 0x1e]             ; C4 5E 1E
@@ -1735,6 +1998,7 @@ L_0F77:
         shl     si, 1                           ; D1 E6
         sub     si, 2                           ; 83 EE 02
         jmp     L_0FA8                          ; EB 12
+;   [loop start] L_0F96
 L_0F96:
         les     bx, ptr [bp + 0x1e]             ; C4 5E 1E
         mov     ax, word ptr es:[bx + 0x2a]     ; 26 8B 47 2A
@@ -1742,6 +2006,7 @@ L_0F96:
         add     word ptr [bp - 0xa], 2          ; 83 46 F6 02
         sub     word ptr es:[bx], ax            ; 26 29 07
         dec     si                              ; 4E
+;   [unconditional branch target] L_0FA8
 L_0FA8:
         or      si, si                          ; 0B F6
         jne     L_0F96                          ; 75 EA
@@ -1755,6 +2020,7 @@ L_0FA8:
         mov     ax, bx                          ; 8B C3
         add     ax, 2                           ; 05 02 00
         mov     word ptr [bp + 0x1e], ax        ; 89 46 1E
+;   [unconditional branch target] L_0FCB
 L_0FCB:
         push    word ptr [bp + 0x20]            ; FF 76 20
         push    word ptr [bp + 0x1e]            ; FF 76 1E
@@ -1772,15 +2038,22 @@ L_0FCB:
         push    word ptr [0x100]                ; FF 36 00 01
         call    far GDI.DMOUTPUT                ; 9A FF FF 00 00 [FIXUP]
         mov     word ptr [bp - 6], ax           ; 89 46 FA
+;   [unconditional branch target] L_0FFF
 L_0FFF:
         cmp     word ptr [bp - 4], 0            ; 83 7E FC 00
         je      L_1015                          ; 74 10
         push    word ptr [bp - 4]               ; FF 76 FC
+        ;   ^ arg hMem
+        ; --> GLOBALUNLOCK(HANDLE hMem) -> BOOL
         call    far KERNEL.GLOBALUNLOCK         ; 9A DF 09 00 00 [FIXUP]
         push    word ptr [bp - 4]               ; FF 76 FC
+        ;   ^ arg hMem
+        ; --> GLOBALFREE(HANDLE hMem) -> HANDLE
         call    far KERNEL.GLOBALFREE           ; 9A B0 05 00 00 [FIXUP]
+;   [conditional branch target (if/else)] L_1015
 L_1015:
         mov     ax, word ptr [bp - 6]           ; 8B 46 FA
+;   [unconditional branch target] L_1018
 L_1018:
         pop     si                              ; 5E
         sub     bp, 2                           ; 83 ED 02
@@ -1821,9 +2094,11 @@ L_1018:
         push    word ptr [bp + 0x1a]            ; FF 76 1A
         push    word ptr [bp + 0x18]            ; FF 76 18
         call    far _entry_103                  ; 9A FF FF 00 00 [FIXUP]
+;   [loop start] L_1075
 L_1075:
         cdq                                     ; 99
         jmp     L_1179                          ; E9 00 01
+;   [conditional branch target (if/else)] L_1079
 L_1079:
         lea     ax, [bp - 0xe]                  ; 8D 46 F2
         push    ss                              ; 16
@@ -1846,9 +2121,11 @@ L_1079:
         call    0                               ; E8 5A EF
         or      ax, ax                          ; 0B C0
         jg      L_10AE                          ; 7F 04
+;   [loop start] L_10AA
 L_10AA:
         sub     ax, ax                          ; 2B C0
         jmp     L_1075                          ; EB C7
+;   [conditional branch target (if/else)] L_10AE
 L_10AE:
         les     bx, ptr [bp + 0xe]              ; C4 5E 0E
         mov     ax, word ptr es:[bx + 0x23]     ; 26 8B 47 23
@@ -1866,6 +2143,7 @@ L_10AE:
         jle     L_10AA                          ; 7E D1
         cmp     word ptr [bp + 0x1e], 0x3c0     ; 81 7E 1E C0 03
         jge     L_10AA                          ; 7D CA
+;   [conditional branch target (if/else)] L_10E0
 L_10E0:
         push    word ptr [bp + 0x22]            ; FF 76 22
         push    word ptr [bp + 0x20]            ; FF 76 20
@@ -1884,6 +2162,7 @@ L_10E0:
         push    word ptr [bp + 0x18]            ; FF 76 18
         call    far _entry_102                  ; 9A FF FF 00 00 [FIXUP]
         jmp     L_1179                          ; EB 65
+;   [conditional branch target (if/else)] L_1114
 L_1114:
         les     bx, ptr [bp + 0x20]             ; C4 5E 20
         cmp     word ptr es:[bx], 0             ; 26 83 3F 00
@@ -1901,6 +2180,7 @@ L_1114:
         mov     ax, bx                          ; 8B C3
         add     ax, 2                           ; 05 02 00
         mov     word ptr [bp + 0x20], ax        ; 89 46 20
+;   [conditional branch target (if/else)] L_1147
 L_1147:
         push    word ptr [bp + 0x22]            ; FF 76 22
         push    word ptr [bp + 0x20]            ; FF 76 20
@@ -1918,6 +2198,7 @@ L_1147:
         push    word ptr [bp + 8]               ; FF 76 08
         push    word ptr [bp + 6]               ; FF 76 06
         call    far GDI.DMSTRBLT                ; 9A FF FF 00 00 [FIXUP]
+;   [unconditional branch target] L_1179
 L_1179:
         sub     bp, 2                           ; 83 ED 02
         mov     sp, bp                          ; 8B E5
@@ -1948,6 +2229,7 @@ L_1179:
         jne     L_11AB                          ; 75 04
         sub     ax, ax                          ; 2B C0
         jmp     L_11C5                          ; EB 1A
+;   [conditional branch target (if/else)] L_11AB
 L_11AB:
         push    word ptr [bp + 0x12]            ; FF 76 12
         push    word ptr [bp + 0x10]            ; FF 76 10
@@ -1957,6 +2239,7 @@ L_11AB:
         push    word ptr [bp + 8]               ; FF 76 08
         push    word ptr [bp + 6]               ; FF 76 06
         call    far GDI.DMSCANLR                ; 9A FF FF 00 00 [FIXUP]
+;   [unconditional branch target] L_11C5
 L_11C5:
         sub     bp, 2                           ; 83 ED 02
         mov     sp, bp                          ; 8B E5
@@ -1979,9 +2262,11 @@ L_11C5:
         mov     dx, es                          ; 8C C2
         add     ax, 2                           ; 05 02 00
         jmp     L_11F2                          ; EB 06
+;   [conditional branch target (if/else)] L_11EC
 L_11EC:
         mov     ax, word ptr [bp + 0x10]        ; 8B 46 10
         mov     dx, word ptr [bp + 0x12]        ; 8B 56 12
+;   [unconditional branch target] L_11F2
 L_11F2:
         push    dx                              ; 52
         push    ax                              ; 50
@@ -2012,9 +2297,11 @@ L_11F2:
         mov     dx, es                          ; 8C C2
         add     ax, 2                           ; 05 02 00
         jmp     L_1235                          ; EB 06
+;   [conditional branch target (if/else)] L_122F
 L_122F:
         mov     ax, word ptr [bp + 0xe]         ; 8B 46 0E
         mov     dx, word ptr [bp + 0x10]        ; 8B 56 10
+;   [unconditional branch target] L_1235
 L_1235:
         push    dx                              ; 52
         push    ax                              ; 50
@@ -2039,9 +2326,11 @@ L_1235:
         mov     ds, ax                          ; 8E D8
         cmp     word ptr [bp + 0x12], -3        ; 83 7E 12 FD
         jne     L_1267                          ; 75 04
+;   [loop start] L_1263
 L_1263:
         sub     ax, ax                          ; 2B C0
         jmp     L_12C6                          ; EB 5F
+;   [conditional branch target (if/else)] L_1267
 L_1267:
         cmp     word ptr [bp + 0x12], 3         ; 83 7E 12 03
         jne     L_1292                          ; 75 25
@@ -2058,6 +2347,7 @@ L_1267:
         push    word ptr [bp + 6]               ; FF 76 06
         call    far _entry_104                  ; 9A FF FF 00 00 [FIXUP]
         jmp     L_12C6                          ; EB 34
+;   [conditional branch target (if/else)] L_1292
 L_1292:
         les     bx, ptr [bp + 0x14]             ; C4 5E 14
         cmp     word ptr es:[bx], 0             ; 26 83 3F 00
@@ -2066,9 +2356,11 @@ L_1292:
         mov     dx, es                          ; 8C C2
         add     ax, 2                           ; 05 02 00
         jmp     L_12AA                          ; EB 06
+;   [conditional branch target (if/else)] L_12A4
 L_12A4:
         mov     ax, word ptr [bp + 0x14]        ; 8B 46 14
         mov     dx, word ptr [bp + 0x16]        ; 8B 56 16
+;   [unconditional branch target] L_12AA
 L_12AA:
         push    dx                              ; 52
         push    ax                              ; 50
@@ -2080,6 +2372,7 @@ L_12AA:
         push    word ptr [bp + 8]               ; FF 76 08
         push    word ptr [bp + 6]               ; FF 76 06
         call    far GDI.DMREALIZEOBJECT         ; 9A FF FF 00 00 [FIXUP]
+;   [unconditional branch target] L_12C6
 L_12C6:
         sub     bp, 2                           ; 83 ED 02
         mov     sp, bp                          ; 8B E5
@@ -2087,7 +2380,9 @@ L_12C6:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0x12                            ; CA 12 00
+;   [sub-routine] L_12D1
 L_12D1:
+        ;   = cProc <4> ; NEAR PASCAL prologue
         push    bp                              ; 55
         mov     bp, sp                          ; 8B EC
         sub     sp, 4                           ; 83 EC 04
@@ -2103,6 +2398,7 @@ L_12D1:
         je      L_12FB                          ; 74 04
         sub     ax, ax                          ; 2B C0
         jmp     L_134F                          ; EB 54
+;   [conditional branch target (if/else)] L_12FB
 L_12FB:
         les     bx, ptr [bp - 4]                ; C4 5E FC
         mov     ax, bx                          ; 8B C3
@@ -2117,6 +2413,7 @@ L_12FB:
         mov     ax, word ptr es:[bx + 0x2c]     ; 26 8B 47 2C
         les     bx, ptr [bp + 4]                ; C4 5E 04
         sub     word ptr es:[bx], ax            ; 26 29 07
+;   [conditional branch target (if/else)] L_1324
 L_1324:
         mov     ax, word ptr [bp + 8]           ; 8B 46 08
         or      ax, word ptr [bp + 0xa]         ; 0B 46 0A
@@ -2125,6 +2422,7 @@ L_1324:
         mov     ax, word ptr es:[bx + 0x2a]     ; 26 8B 47 2A
         les     bx, ptr [bp + 8]                ; C4 5E 08
         sub     word ptr es:[bx], ax            ; 26 29 07
+;   [conditional branch target (if/else)] L_1339
 L_1339:
         les     bx, ptr [bp + 0xc]              ; C4 5E 0C
         mov     ax, word ptr [bp - 4]           ; 8B 46 FC
@@ -2132,8 +2430,11 @@ L_1339:
         add     ax, 2                           ; 05 02 00
         mov     word ptr es:[bx], ax            ; 26 89 07
         mov     word ptr es:[bx + 2], dx        ; 26 89 57 02
+;   [conditional branch target (if/else)] L_134C
 L_134C:
+        ; constant WM_CREATE
         mov     ax, 1                           ; B8 01 00
+;   [fall-through exit] L_134F
 L_134F:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
@@ -2151,9 +2452,11 @@ L_134F:
         cmp     word ptr ss:[0xc], ax           ; 36 39 06 0C 00
         jbe     L_1379                          ; 76 04
         mov     word ptr ss:[0xc], ax           ; 36 A3 0C 00
+;   [conditional branch target (if/else)] L_1379
 L_1379:
         mov     sp, ax                          ; 8B E0
         jmp     bx                              ; FF E3
+;   [conditional branch target (if/else)] L_137D
 L_137D:
         mov     al, 0xff                        ; B0 FF
         mov     bx, 0xfeb0                      ; BB B0 FE

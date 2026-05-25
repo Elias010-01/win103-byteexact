@@ -1,3 +1,17 @@
+; ======================================================================
+; CONTROL / seg10.asm   (segment 10 of CONTROL)
+; ----------------------------------------------------------------------
+; Functions discovered (pass1b):         0
+; Total instructions:                    0
+; 
+; Classification (pass8):
+;   C-origin (high+medium):              0
+;   ASM-origin (high+medium):            0
+;   Unclear:                             0
+;   Tiny / unclassified:                 0
+; 
+; Far API calls in this segment:     0 (0 unique)
+; ======================================================================
 ; AUTO-GENERATED from original CONTROL segment 10
 ; segment_size=1590 bytes, flags=0x0011
 ; mode: humano legible - instrucciones x86 + bytes raw en comentario (autoritativo)

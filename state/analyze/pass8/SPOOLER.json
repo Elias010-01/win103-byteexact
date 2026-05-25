@@ -1,0 +1,990 @@
+{
+  "module": "SPOOLER",
+  "num_functions": 44,
+  "verdict_counts": {
+    "c_medium": 10,
+    "c_high": 26,
+    "unclear": 6,
+    "asm_high": 1,
+    "asm_medium": 1
+  },
+  "c_count": 36,
+  "asm_count": 2,
+  "unclear_count": 6,
+  "tiny_count": 0,
+  "c_ratio_overall": 0.818,
+  "c_ratio_of_classified": 0.947,
+  "expected_c_ratio": 0.7,
+  "expected_confidence": "medium",
+  "consistency": "ok",
+  "functions": [
+    {
+      "name": "sub_0036",
+      "segment_file": "seg1.asm",
+      "offset": 54,
+      "size_bytes": null,
+      "num_instructions": 294,
+      "prologue": "standard_bp",
+      "epilogue": "jmp_tail",
+      "classification": {
+        "verdict": "c_medium",
+        "score_c": 6,
+        "score_asm": 2,
+        "score_diff": 4,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "jmp tail-call (no proper return) [+2 ASM]",
+          "[bp+N] references in entry/exit (3) [+1 C]",
+          "15 FAR-API calls (heavy API user) [+2 C]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_0330",
+      "segment_file": "seg1.asm",
+      "offset": 816,
+      "size_bytes": null,
+      "num_instructions": 214,
+      "prologue": "standard_bp",
+      "epilogue": "retf_n",
+      "classification": {
+        "verdict": "c_high",
+        "score_c": 9,
+        "score_asm": 0,
+        "score_diff": 9,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "PASCAL epilogue: retf with arg cleanup [+3 C]",
+          "[bp+N] references in entry/exit (1) [+1 C]",
+          "10 FAR-API calls (heavy API user) [+2 C]"
+        ],
+        "confidence": "high"
+      }
+    },
+    {
+      "name": "sub_0583",
+      "segment_file": "seg1.asm",
+      "offset": 1411,
+      "size_bytes": null,
+      "num_instructions": 23,
+      "prologue": "standard_bp",
+      "epilogue": "ret_n",
+      "classification": {
+        "verdict": "c_high",
+        "score_c": 7,
+        "score_asm": 0,
+        "score_diff": 7,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "PASCAL epilogue: ret with arg cleanup [+2 C]",
+          "[bp+N] references in entry/exit (1) [+1 C]",
+          "1 FAR-API call(s) [+1 C]"
+        ],
+        "confidence": "high"
+      }
+    },
+    {
+      "name": "sub_05B9",
+      "segment_file": "seg1.asm",
+      "offset": 1465,
+      "size_bytes": null,
+      "num_instructions": 204,
+      "prologue": "standard_bp",
+      "epilogue": "ret_n",
+      "classification": {
+        "verdict": "c_high",
+        "score_c": 8,
+        "score_asm": 1,
+        "score_diff": 7,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "PASCAL epilogue: ret with arg cleanup [+2 C]",
+          "[bp+N] references in entry/exit (1) [+1 C]",
+          "9 other int call(s) [+1 ASM]",
+          "7 FAR-API calls (heavy API user) [+2 C]"
+        ],
+        "confidence": "high"
+      }
+    },
+    {
+      "name": "sub_07D5",
+      "segment_file": "seg1.asm",
+      "offset": 2005,
+      "size_bytes": null,
+      "num_instructions": 271,
+      "prologue": "standard_bp",
+      "epilogue": "ret_n",
+      "classification": {
+        "verdict": "c_high",
+        "score_c": 7,
+        "score_asm": 0,
+        "score_diff": 7,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "PASCAL epilogue: ret with arg cleanup [+2 C]",
+          "19 FAR-API calls (heavy API user) [+2 C]"
+        ],
+        "confidence": "high"
+      }
+    },
+    {
+      "name": "sub_0A97",
+      "segment_file": "seg1.asm",
+      "offset": 2711,
+      "size_bytes": null,
+      "num_instructions": 60,
+      "prologue": "standard_bp",
+      "epilogue": "ret_n",
+      "classification": {
+        "verdict": "c_high",
+        "score_c": 8,
+        "score_asm": 0,
+        "score_diff": 8,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "PASCAL epilogue: ret with arg cleanup [+2 C]",
+          "[bp+N] references in entry/exit (1) [+1 C]",
+          "5 FAR-API calls (heavy API user) [+2 C]"
+        ],
+        "confidence": "high"
+      }
+    },
+    {
+      "name": "sub_0B3A",
+      "segment_file": "seg1.asm",
+      "offset": 2874,
+      "size_bytes": null,
+      "num_instructions": 29,
+      "prologue": "saves_regs",
+      "epilogue": "retf_n",
+      "classification": {
+        "verdict": "c_medium",
+        "score_c": 5,
+        "score_asm": 0,
+        "score_diff": 5,
+        "signals": [
+          "saves registers at entry but no full BP frame [+1 C]",
+          "PASCAL epilogue: retf with arg cleanup [+3 C]",
+          "1 FAR-API call(s) [+1 C]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_0B77",
+      "segment_file": "seg1.asm",
+      "offset": 2935,
+      "size_bytes": null,
+      "num_instructions": 156,
+      "prologue": "standard_bp",
+      "epilogue": "ret_n",
+      "classification": {
+        "verdict": "c_high",
+        "score_c": 9,
+        "score_asm": 0,
+        "score_diff": 9,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "PASCAL epilogue: ret with arg cleanup [+2 C]",
+          "[bp+N] references in entry/exit (1) [+1 C]",
+          "4 FAR-API calls (heavy API user) [+2 C]",
+          "high mov+push density (compiler-like) [+1 C]"
+        ],
+        "confidence": "high"
+      }
+    },
+    {
+      "name": "sub_0D1E",
+      "segment_file": "seg1.asm",
+      "offset": 3358,
+      "size_bytes": null,
+      "num_instructions": 15,
+      "prologue": "standard_bp",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "c_medium",
+        "score_c": 5,
+        "score_asm": 0,
+        "score_diff": 5,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "ret without args [neutral]",
+          "1 FAR-API call(s) [+1 C]",
+          "high mov+push density (compiler-like) [+1 C]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_0D3C",
+      "segment_file": "seg1.asm",
+      "offset": 3388,
+      "size_bytes": null,
+      "num_instructions": 53,
+      "prologue": "standard_bp",
+      "epilogue": "ret_n",
+      "classification": {
+        "verdict": "c_high",
+        "score_c": 7,
+        "score_asm": 0,
+        "score_diff": 7,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "PASCAL epilogue: ret with arg cleanup [+2 C]",
+          "[bp-N] references in entry/exit (1) [+1 C]",
+          "[bp+N] references in entry/exit (2) [+1 C]"
+        ],
+        "confidence": "high"
+      }
+    },
+    {
+      "name": "sub_0DCE",
+      "segment_file": "seg1.asm",
+      "offset": 3534,
+      "size_bytes": null,
+      "num_instructions": 51,
+      "prologue": "standard_bp",
+      "epilogue": "ret_n",
+      "classification": {
+        "verdict": "c_high",
+        "score_c": 10,
+        "score_asm": 0,
+        "score_diff": 10,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "PASCAL epilogue: ret with arg cleanup [+2 C]",
+          "[bp+N] references in entry/exit (1) [+1 C]",
+          "canonical SI/DI save/restore (1 push / 1 pop) [+2 C]",
+          "4 FAR-API calls (heavy API user) [+2 C]"
+        ],
+        "confidence": "high"
+      }
+    },
+    {
+      "name": "sub_0E43",
+      "segment_file": "seg1.asm",
+      "offset": 3651,
+      "size_bytes": null,
+      "num_instructions": 66,
+      "prologue": "standard_bp",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "c_medium",
+        "score_c": 5,
+        "score_asm": 0,
+        "score_diff": 5,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "ret without args [neutral]",
+          "[bp-N] references in entry/exit (1) [+1 C]",
+          "high mov+push density (compiler-like) [+1 C]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_0EE1",
+      "segment_file": "seg1.asm",
+      "offset": 3809,
+      "size_bytes": null,
+      "num_instructions": 233,
+      "prologue": "standard_bp",
+      "epilogue": "ret_n",
+      "classification": {
+        "verdict": "c_high",
+        "score_c": 12,
+        "score_asm": 0,
+        "score_diff": 12,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "PASCAL epilogue: ret with arg cleanup [+2 C]",
+          "[bp-N] references in entry/exit (1) [+1 C]",
+          "[bp+N] references in entry/exit (1) [+1 C]",
+          "canonical SI/DI save/restore (1 push / 1 pop) [+2 C]",
+          "7 FAR-API calls (heavy API user) [+2 C]",
+          "high mov+push density (compiler-like) [+1 C]"
+        ],
+        "confidence": "high"
+      }
+    },
+    {
+      "name": "sub_117B",
+      "segment_file": "seg1.asm",
+      "offset": 4475,
+      "size_bytes": null,
+      "num_instructions": 53,
+      "prologue": "standard_bp",
+      "epilogue": "jmp_tail",
+      "classification": {
+        "verdict": "c_medium",
+        "score_c": 6,
+        "score_asm": 2,
+        "score_diff": 4,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "jmp tail-call (no proper return) [+2 ASM]",
+          "[bp+N] references in entry/exit (2) [+1 C]",
+          "5 FAR-API calls (heavy API user) [+2 C]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_1211",
+      "segment_file": "seg1.asm",
+      "offset": 4625,
+      "size_bytes": null,
+      "num_instructions": 13,
+      "prologue": "standard_bp",
+      "epilogue": "ret_n",
+      "classification": {
+        "verdict": "c_high",
+        "score_c": 7,
+        "score_asm": 0,
+        "score_diff": 7,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "PASCAL epilogue: ret with arg cleanup [+2 C]",
+          "[bp+N] references in entry/exit (1) [+1 C]",
+          "1 FAR-API call(s) [+1 C]"
+        ],
+        "confidence": "high"
+      }
+    },
+    {
+      "name": "sub_122B",
+      "segment_file": "seg1.asm",
+      "offset": 4651,
+      "size_bytes": null,
+      "num_instructions": 33,
+      "prologue": "standard_bp",
+      "epilogue": "ret_n",
+      "classification": {
+        "verdict": "c_high",
+        "score_c": 6,
+        "score_asm": 0,
+        "score_diff": 6,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "PASCAL epilogue: ret with arg cleanup [+2 C]",
+          "[bp+N] references in entry/exit (1) [+1 C]"
+        ],
+        "confidence": "high"
+      }
+    },
+    {
+      "name": "sub_1281",
+      "segment_file": "seg1.asm",
+      "offset": 4737,
+      "size_bytes": null,
+      "num_instructions": 115,
+      "prologue": "standard_bp",
+      "epilogue": "ret_n",
+      "classification": {
+        "verdict": "c_high",
+        "score_c": 11,
+        "score_asm": 0,
+        "score_diff": 11,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "PASCAL epilogue: ret with arg cleanup [+2 C]",
+          "[bp-N] references in entry/exit (1) [+1 C]",
+          "[bp+N] references in entry/exit (1) [+1 C]",
+          "canonical SI/DI save/restore (1 push / 1 pop) [+2 C]",
+          "2 FAR-API call(s) [+1 C]",
+          "high mov+push density (compiler-like) [+1 C]"
+        ],
+        "confidence": "high"
+      }
+    },
+    {
+      "name": "sub_13C6",
+      "segment_file": "seg1.asm",
+      "offset": 5062,
+      "size_bytes": null,
+      "num_instructions": 54,
+      "prologue": "standard_bp",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "c_medium",
+        "score_c": 4,
+        "score_asm": 0,
+        "score_diff": 4,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "ret without args [neutral]",
+          "2 FAR-API call(s) [+1 C]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_144B",
+      "segment_file": "seg1.asm",
+      "offset": 5195,
+      "size_bytes": null,
+      "num_instructions": 14,
+      "prologue": "standard_bp",
+      "epilogue": "ret_n",
+      "classification": {
+        "verdict": "unclear",
+        "score_c": 6,
+        "score_asm": 5,
+        "score_diff": 1,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "PASCAL epilogue: ret with arg cleanup [+2 C]",
+          "[bp+N] references in entry/exit (1) [+1 C]",
+          "2 DOS/BIOS int call(s) [+5 ASM]"
+        ],
+        "confidence": "low"
+      }
+    },
+    {
+      "name": "sub_146C",
+      "segment_file": "seg1.asm",
+      "offset": 5228,
+      "size_bytes": null,
+      "num_instructions": 13,
+      "prologue": "standard_bp",
+      "epilogue": "ret_n",
+      "classification": {
+        "verdict": "c_high",
+        "score_c": 6,
+        "score_asm": 0,
+        "score_diff": 6,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "PASCAL epilogue: ret with arg cleanup [+2 C]",
+          "[bp+N] references in entry/exit (2) [+1 C]"
+        ],
+        "confidence": "high"
+      }
+    },
+    {
+      "name": "sub_1484",
+      "segment_file": "seg1.asm",
+      "offset": 5252,
+      "size_bytes": null,
+      "num_instructions": 149,
+      "prologue": "saves_regs",
+      "epilogue": "retf_n",
+      "classification": {
+        "verdict": "c_high",
+        "score_c": 6,
+        "score_asm": 0,
+        "score_diff": 6,
+        "signals": [
+          "saves registers at entry but no full BP frame [+1 C]",
+          "PASCAL epilogue: retf with arg cleanup [+3 C]",
+          "7 FAR-API calls (heavy API user) [+2 C]"
+        ],
+        "confidence": "high"
+      }
+    },
+    {
+      "name": "sub_15E9",
+      "segment_file": "seg1.asm",
+      "offset": 5609,
+      "size_bytes": null,
+      "num_instructions": 95,
+      "prologue": "saves_regs",
+      "epilogue": "retf_n",
+      "classification": {
+        "verdict": "c_medium",
+        "score_c": 5,
+        "score_asm": 0,
+        "score_diff": 5,
+        "signals": [
+          "saves registers at entry but no full BP frame [+1 C]",
+          "PASCAL epilogue: retf with arg cleanup [+3 C]",
+          "2 FAR-API call(s) [+1 C]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_16D3",
+      "segment_file": "seg1.asm",
+      "offset": 5843,
+      "size_bytes": null,
+      "num_instructions": 142,
+      "prologue": "saves_regs",
+      "epilogue": "retf_n",
+      "classification": {
+        "verdict": "c_high",
+        "score_c": 7,
+        "score_asm": 0,
+        "score_diff": 7,
+        "signals": [
+          "saves registers at entry but no full BP frame [+1 C]",
+          "PASCAL epilogue: retf with arg cleanup [+3 C]",
+          "5 FAR-API calls (heavy API user) [+2 C]",
+          "high mov+push density (compiler-like) [+1 C]"
+        ],
+        "confidence": "high"
+      }
+    },
+    {
+      "name": "sub_185B",
+      "segment_file": "seg1.asm",
+      "offset": 6235,
+      "size_bytes": null,
+      "num_instructions": 120,
+      "prologue": "saves_regs",
+      "epilogue": "retf_n",
+      "classification": {
+        "verdict": "c_high",
+        "score_c": 6,
+        "score_asm": 0,
+        "score_diff": 6,
+        "signals": [
+          "saves registers at entry but no full BP frame [+1 C]",
+          "PASCAL epilogue: retf with arg cleanup [+3 C]",
+          "5 FAR-API calls (heavy API user) [+2 C]"
+        ],
+        "confidence": "high"
+      }
+    },
+    {
+      "name": "sub_196D",
+      "segment_file": "seg1.asm",
+      "offset": 6509,
+      "size_bytes": null,
+      "num_instructions": 31,
+      "prologue": "saves_regs",
+      "epilogue": "retf_n",
+      "classification": {
+        "verdict": "c_high",
+        "score_c": 6,
+        "score_asm": 0,
+        "score_diff": 6,
+        "signals": [
+          "saves registers at entry but no full BP frame [+1 C]",
+          "PASCAL epilogue: retf with arg cleanup [+3 C]",
+          "3 FAR-API calls (heavy API user) [+2 C]"
+        ],
+        "confidence": "high"
+      }
+    },
+    {
+      "name": "sub_19B9",
+      "segment_file": "seg1.asm",
+      "offset": 6585,
+      "size_bytes": null,
+      "num_instructions": 26,
+      "prologue": "saves_regs",
+      "epilogue": "retf_n",
+      "classification": {
+        "verdict": "c_medium",
+        "score_c": 5,
+        "score_asm": 0,
+        "score_diff": 5,
+        "signals": [
+          "saves registers at entry but no full BP frame [+1 C]",
+          "PASCAL epilogue: retf with arg cleanup [+3 C]",
+          "2 FAR-API call(s) [+1 C]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_19F0",
+      "segment_file": "seg1.asm",
+      "offset": 6640,
+      "size_bytes": null,
+      "num_instructions": 145,
+      "prologue": "standard_bp",
+      "epilogue": "ret_n",
+      "classification": {
+        "verdict": "c_high",
+        "score_c": 9,
+        "score_asm": 0,
+        "score_diff": 9,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "PASCAL epilogue: ret with arg cleanup [+2 C]",
+          "[bp-N] references in entry/exit (2) [+1 C]",
+          "canonical SI/DI save/restore (1 push / 1 pop) [+2 C]",
+          "2 FAR-API call(s) [+1 C]"
+        ],
+        "confidence": "high"
+      }
+    },
+    {
+      "name": "sub_1B8B",
+      "segment_file": "seg1.asm",
+      "offset": 7051,
+      "size_bytes": null,
+      "num_instructions": 22,
+      "prologue": "standard_bp",
+      "epilogue": "ret_n",
+      "classification": {
+        "verdict": "c_high",
+        "score_c": 6,
+        "score_asm": 0,
+        "score_diff": 6,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "PASCAL epilogue: ret with arg cleanup [+2 C]",
+          "[bp-N] references in entry/exit (2) [+1 C]"
+        ],
+        "confidence": "high"
+      }
+    },
+    {
+      "name": "sub_1BC4",
+      "segment_file": "seg1.asm",
+      "offset": 7108,
+      "size_bytes": null,
+      "num_instructions": 40,
+      "prologue": "standard_bp",
+      "epilogue": "ret_n",
+      "classification": {
+        "verdict": "c_high",
+        "score_c": 8,
+        "score_asm": 0,
+        "score_diff": 8,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "PASCAL epilogue: ret with arg cleanup [+2 C]",
+          "[bp-N] references in entry/exit (1) [+1 C]",
+          "[bp+N] references in entry/exit (1) [+1 C]",
+          "2 FAR-API call(s) [+1 C]"
+        ],
+        "confidence": "high"
+      }
+    },
+    {
+      "name": "sub_1C26",
+      "segment_file": "seg1.asm",
+      "offset": 7206,
+      "size_bytes": null,
+      "num_instructions": 100,
+      "prologue": "standard_bp",
+      "epilogue": "ret_n",
+      "classification": {
+        "verdict": "c_high",
+        "score_c": 9,
+        "score_asm": 0,
+        "score_diff": 9,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "PASCAL epilogue: ret with arg cleanup [+2 C]",
+          "[bp-N] references in entry/exit (1) [+1 C]",
+          "[bp+N] references in entry/exit (1) [+1 C]",
+          "4 FAR-API calls (heavy API user) [+2 C]"
+        ],
+        "confidence": "high"
+      }
+    },
+    {
+      "name": "sub_1CF8",
+      "segment_file": "seg1.asm",
+      "offset": 7416,
+      "size_bytes": null,
+      "num_instructions": 59,
+      "prologue": "saves_regs",
+      "epilogue": "retf_n",
+      "classification": {
+        "verdict": "c_high",
+        "score_c": 7,
+        "score_asm": 0,
+        "score_diff": 7,
+        "signals": [
+          "saves registers at entry but no full BP frame [+1 C]",
+          "PASCAL epilogue: retf with arg cleanup [+3 C]",
+          "5 FAR-API calls (heavy API user) [+2 C]",
+          "high mov+push density (compiler-like) [+1 C]"
+        ],
+        "confidence": "high"
+      }
+    },
+    {
+      "name": "sub_1D87",
+      "segment_file": "seg1.asm",
+      "offset": 7559,
+      "size_bytes": null,
+      "num_instructions": 40,
+      "prologue": "saves_regs",
+      "epilogue": "retf_n",
+      "classification": {
+        "verdict": "c_high",
+        "score_c": 7,
+        "score_asm": 0,
+        "score_diff": 7,
+        "signals": [
+          "saves registers at entry but no full BP frame [+1 C]",
+          "PASCAL epilogue: retf with arg cleanup [+3 C]",
+          "4 FAR-API calls (heavy API user) [+2 C]",
+          "high mov+push density (compiler-like) [+1 C]"
+        ],
+        "confidence": "high"
+      }
+    },
+    {
+      "name": "sub_1DED",
+      "segment_file": "seg1.asm",
+      "offset": 7661,
+      "size_bytes": null,
+      "num_instructions": 45,
+      "prologue": "standard_bp",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "c_medium",
+        "score_c": 4,
+        "score_asm": 0,
+        "score_diff": 4,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "ret without args [neutral]",
+          "2 FAR-API call(s) [+1 C]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_1E44",
+      "segment_file": "seg1.asm",
+      "offset": 7748,
+      "size_bytes": null,
+      "num_instructions": 68,
+      "prologue": "standard_bp",
+      "epilogue": "ret_n",
+      "classification": {
+        "verdict": "c_high",
+        "score_c": 8,
+        "score_asm": 0,
+        "score_diff": 8,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "PASCAL epilogue: ret with arg cleanup [+2 C]",
+          "[bp-N] references in entry/exit (1) [+1 C]",
+          "[bp+N] references in entry/exit (1) [+1 C]",
+          "1 FAR-API call(s) [+1 C]"
+        ],
+        "confidence": "high"
+      }
+    },
+    {
+      "name": "sub_1EE3",
+      "segment_file": "seg1.asm",
+      "offset": 7907,
+      "size_bytes": null,
+      "num_instructions": 97,
+      "prologue": "standard_bp",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "c_high",
+        "score_c": 7,
+        "score_asm": 0,
+        "score_diff": 7,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "ret without args [neutral]",
+          "[bp-N] references in entry/exit (1) [+1 C]",
+          "4 FAR-API calls (heavy API user) [+2 C]",
+          "high mov+push density (compiler-like) [+1 C]"
+        ],
+        "confidence": "high"
+      }
+    },
+    {
+      "name": "sub_1FEB",
+      "segment_file": "seg1.asm",
+      "offset": 8171,
+      "size_bytes": null,
+      "num_instructions": 12,
+      "prologue": "standard_bp",
+      "epilogue": "ret_n",
+      "classification": {
+        "verdict": "c_high",
+        "score_c": 9,
+        "score_asm": 0,
+        "score_diff": 9,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "PASCAL epilogue: ret with arg cleanup [+2 C]",
+          "[bp+N] references in entry/exit (1) [+1 C]",
+          "canonical SI/DI save/restore (1 push / 1 pop) [+2 C]",
+          "1 FAR-API call(s) [+1 C]"
+        ],
+        "confidence": "high"
+      }
+    },
+    {
+      "name": "sub_200A",
+      "segment_file": "seg1.asm",
+      "offset": 8202,
+      "size_bytes": null,
+      "num_instructions": 148,
+      "prologue": "standard_bp",
+      "epilogue": "jmp_tail",
+      "classification": {
+        "verdict": "unclear",
+        "score_c": 5,
+        "score_asm": 5,
+        "score_diff": 0,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "jmp tail-call (no proper return) [+2 ASM]",
+          "1 DOS/BIOS int call(s) [+3 ASM]",
+          "7 FAR-API calls (heavy API user) [+2 C]"
+        ],
+        "confidence": "low"
+      }
+    },
+    {
+      "name": "sub_2175",
+      "segment_file": "seg1.asm",
+      "offset": 8565,
+      "size_bytes": null,
+      "num_instructions": 130,
+      "prologue": "none",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "unclear",
+        "score_c": 3,
+        "score_asm": 2,
+        "score_diff": 1,
+        "signals": [
+          "no BP-frame prologue [+2 ASM]",
+          "ret without args [neutral]",
+          "8 FAR-API calls (heavy API user) [+2 C]",
+          "high mov+push density (compiler-like) [+1 C]"
+        ],
+        "confidence": "low"
+      }
+    },
+    {
+      "name": "sub_227E",
+      "segment_file": "seg1.asm",
+      "offset": 8830,
+      "size_bytes": null,
+      "num_instructions": 59,
+      "prologue": "none",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "asm_high",
+        "score_c": 1,
+        "score_asm": 7,
+        "score_diff": -6,
+        "signals": [
+          "no BP-frame prologue [+2 ASM]",
+          "ret without args [neutral]",
+          "5 DOS/BIOS int call(s) [+5 ASM]",
+          "0 `loop` instruction(s) (MSC rarely emits) [+0 ASM]",
+          "1 FAR-API call(s) [+1 C]"
+        ],
+        "confidence": "high"
+      }
+    },
+    {
+      "name": "sub_2310",
+      "segment_file": "seg1.asm",
+      "offset": 8976,
+      "size_bytes": null,
+      "num_instructions": 8,
+      "prologue": "standard_bp",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "c_medium",
+        "score_c": 4,
+        "score_asm": 0,
+        "score_diff": 4,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "ret without args [neutral]",
+          "[bp+N] references in entry/exit (1) [+1 C]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_2320",
+      "segment_file": "seg1.asm",
+      "offset": 8992,
+      "size_bytes": null,
+      "num_instructions": 6,
+      "prologue": "none",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "asm_medium",
+        "score_c": 0,
+        "score_asm": 4,
+        "score_diff": -4,
+        "signals": [
+          "no BP-frame prologue [+2 ASM]",
+          "ret without args [neutral]",
+          "1 bit-twiddle(s) [+1 ASM]",
+          "1 `loop` instruction(s) (MSC rarely emits) [+1 ASM]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_232B",
+      "segment_file": "seg1.asm",
+      "offset": 9003,
+      "size_bytes": null,
+      "num_instructions": 21,
+      "prologue": "standard_bp",
+      "epilogue": "unknown",
+      "classification": {
+        "verdict": "unclear",
+        "score_c": 4,
+        "score_asm": 5,
+        "score_diff": -1,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "[bp+N] references in entry/exit (1) [+1 C]",
+          "2 DOS/BIOS int call(s) [+5 ASM]"
+        ],
+        "confidence": "low"
+      }
+    },
+    {
+      "name": "sub_2361",
+      "segment_file": "seg1.asm",
+      "offset": 9057,
+      "size_bytes": null,
+      "num_instructions": 10,
+      "prologue": "none",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "unclear",
+        "score_c": 1,
+        "score_asm": 2,
+        "score_diff": -1,
+        "signals": [
+          "no BP-frame prologue [+2 ASM]",
+          "ret without args [neutral]",
+          "1 FAR-API call(s) [+1 C]"
+        ],
+        "confidence": "low"
+      }
+    },
+    {
+      "name": "sub_2373",
+      "segment_file": "seg1.asm",
+      "offset": 9075,
+      "size_bytes": null,
+      "num_instructions": 10,
+      "prologue": "none",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "unclear",
+        "score_c": 1,
+        "score_asm": 2,
+        "score_diff": -1,
+        "signals": [
+          "no BP-frame prologue [+2 ASM]",
+          "ret without args [neutral]",
+          "1 FAR-API call(s) [+1 C]"
+        ],
+        "confidence": "low"
+      }
+    }
+  ]
+}

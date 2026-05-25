@@ -1,3 +1,20 @@
+; ======================================================================
+; NOTEPAD / seg3.asm   (segment 3 of NOTEPAD)
+; ----------------------------------------------------------------------
+; Functions discovered (pass1b):         1
+; Total instructions:                   12
+; 
+; Classification (pass8):
+;   C-origin (high+medium):              1
+;   ASM-origin (high+medium):            0
+;   Unclear:                             0
+;   Tiny / unclassified:                 0
+; 
+; Far API calls in this segment:     2 (2 unique)
+;   Top:
+;        1  DESTROYWINDOW
+;        1  ENABLEWINDOW
+; ======================================================================
 ; AUTO-GENERATED from original NOTEPAD segment 3
 ; segment_size=984 bytes, flags=0xf130
 ; mode: humano legible - instrucciones x86 + bytes raw en comentario (autoritativo)
@@ -21,16 +38,25 @@ NOTEPAD_TEXT SEGMENT BYTE PUBLIC 'CODE'
         mov     ds, ax                          ; 8E D8
         sub     sp, 0x14                        ; 83 EC 14
         jmp     L_0053                          ; EB 44
+;   [loop start] L_000F
 L_000F:
         lea     ax, [bp - 0x14]                 ; 8D 46 EC
         push    ss                              ; 16
+        ;   ^ arg lpMsg (high/segment)
         push    ax                              ; 50
+        ;   ^ arg lpMsg (low/offset)
         sub     ax, ax                          ; 2B C0
         push    ax                              ; 50
+        ;   ^ arg hWnd
         push    ax                              ; 50
+        ;   ^ arg wMsgFilterMin
         push    ax                              ; 50
+        ;   ^ arg wMsgFilterMax
+        ; constant WM_CREATE
         mov     ax, 1                           ; B8 01 00
         push    ax                              ; 50
+        ;   ^ arg wRemoveMsg
+        ; --> PEEKMESSAGE(LPMSG lpMsg, HWND hWnd, WORD wMsgFilterMin, WORD wMsgFilterMax, WORD wRemoveMsg) -> BOOL
         call    far USER.PEEKMESSAGE            ; 9A FF FF 00 00 [FIXUP]
         or      ax, ax                          ; 0B C0
         je      L_005A                          ; 74 34
@@ -43,25 +69,37 @@ L_000F:
         call    far USER.ISDIALOGMESSAGE        ; 9A FF FF 00 00 [FIXUP]
         or      ax, ax                          ; 0B C0
         jne     L_0053                          ; 75 14
+;   [conditional branch target (if/else)] L_003F
 L_003F:
         lea     ax, [bp - 0x14]                 ; 8D 46 EC
         push    ss                              ; 16
+        ;   ^ arg lpMsg (high/segment)
         push    ax                              ; 50
+        ;   ^ arg lpMsg (low/offset)
+        ; --> TRANSLATEMESSAGE(LPMSG lpMsg) -> BOOL
         call    far USER.TRANSLATEMESSAGE       ; 9A FF FF 00 00 [FIXUP]
         lea     ax, [bp - 0x14]                 ; 8D 46 EC
         push    ss                              ; 16
+        ;   ^ arg lpMsg (high/segment)
         push    ax                              ; 50
+        ;   ^ arg lpMsg (low/offset)
+        ; --> DISPATCHMESSAGE(LPMSG lpMsg) -> LRESULT
         call    far USER.DISPATCHMESSAGE        ; 9A FF FF 00 00 [FIXUP]
+;   [branch target] L_0053
 L_0053:
         cmp     word ptr [0x276], 0             ; 83 3E 76 02 00
         je      L_000F                          ; 74 B5
+;   [conditional branch target (if/else)] L_005A
 L_005A:
         cmp     word ptr [0x276], 0             ; 83 3E 76 02 00
         jne     L_0066                          ; 75 05
+        ; constant WM_CREATE
         mov     ax, 1                           ; B8 01 00
         jmp     L_0068                          ; EB 02
+;   [conditional branch target (if/else)] L_0066
 L_0066:
         sub     ax, ax                          ; 2B C0
+;   [unconditional branch target] L_0068
 L_0068:
         sub     bp, 2                           ; 83 ED 02
         mov     sp, bp                          ; 8B E5
@@ -85,12 +123,16 @@ L_0068:
         cmp     ax, 0x116                       ; 3D 16 01
         je      L_00E3                          ; 74 54
         jmp     L_00F6                          ; EB 65
+;   [conditional branch target (if/else)] L_0091
 L_0091:
         mov     word ptr [0x276], 1             ; C7 06 76 02 01 00
         call    L_03B5                          ; E8 1B 03
+;   [loop start] L_009A
 L_009A:
+        ; constant WM_CREATE
         mov     ax, 1                           ; B8 01 00
         jmp     L_00F8                          ; EB 59
+;   [conditional branch target (if/else)] L_009F
 L_009F:
         push    word ptr [bp + 0xe]             ; FF 76 0E
         sub     ax, ax                          ; 2B C0
@@ -106,29 +148,41 @@ L_009F:
         je      L_00C7                          ; 74 05
         mov     ax, word ptr [0x32]             ; A1 32 00
         jmp     L_00D0                          ; EB 09
+;   [conditional branch target (if/else)] L_00C7
 L_00C7:
         mov     ax, 0x1c4                       ; B8 C4 01
         push    ax                              ; 50
         call    far _entry_25                   ; 9A FF FF 00 00 [FIXUP]
+;   [unconditional branch target] L_00D0
 L_00D0:
         mov     dx, ds                          ; 8C DA
         push    dx                              ; 52
         push    ax                              ; 50
+        ; --> SETDLGITEMTEXT(HWND hDlg, INT nIDItem, LPSTR lpszText) -> VOID
         call    far USER.SETDLGITEMTEXT         ; 9A FF FF 00 00 [FIXUP]
+;   [conditional branch target (if/else)] L_00D9
 L_00D9:
         push    word ptr [bp + 0xe]             ; FF 76 0E
         call    far USER.SETFOCUS               ; 9A FF FF 00 00 [FIXUP]
         jmp     L_009A                          ; EB B7
+;   [conditional branch target (if/else)] L_00E3
 L_00E3:
         push    word ptr [0x246]                ; FF 36 46 02
+        ;   ^ arg hMenu
         mov     ax, 0xf060                      ; B8 60 F0
         push    ax                              ; 50
+        ;   ^ arg wIDItem
+        ; constant WM_CREATE
         mov     ax, 1                           ; B8 01 00
         push    ax                              ; 50
+        ;   ^ arg wEnable
+        ; --> ENABLEMENUITEM(HMENU hMenu, WORD wIDItem, WORD wEnable) -> BOOL
         call    far USER.ENABLEMENUITEM         ; 9A FF FF 00 00 [FIXUP]
         jmp     L_009A                          ; EB A4
+;   [unconditional branch target] L_00F6
 L_00F6:
         sub     ax, ax                          ; 2B C0
+;   [unconditional branch target] L_00F8
 L_00F8:
         sub     bp, 2                           ; 83 ED 02
         mov     sp, bp                          ; 8B E5
@@ -154,6 +208,7 @@ L_00F8:
         jge     L_0132                          ; 7D 06
         mov     ax, 0xffff                      ; B8 FF FF
         jmp     L_03AC                          ; E9 7A 02
+;   [conditional branch target (if/else)] L_0132
 L_0132:
         push    word ptr [bp - 0x3c]            ; FF 76 C4
         lea     ax, [bp - 0x2c]                 ; 8D 46 D4
@@ -166,8 +221,11 @@ L_0132:
         mov     ax, word ptr [bp - 0x22]        ; 8B 46 DE
         mov     word ptr [0x24a], ax            ; A3 4A 02
         push    word ptr [bp - 0x3c]            ; FF 76 C4
+        ;   ^ arg hDC
         mov     ax, 0xa                         ; B8 0A 00
         push    ax                              ; 50
+        ;   ^ arg iCap
+        ; --> GETDEVICECAPS(HDC hDC, INT iCap) -> INT
         call    far GDI.GETDEVICECAPS           ; 9A FF FF 00 00 [FIXUP]
         mov     word ptr [bp - 0xd4], ax        ; 89 86 2C FF
         cdq                                     ; 99
@@ -182,8 +240,12 @@ L_0132:
         mov     ax, OFFSET _entry_12            ; B8 FF FF [FIXUP]
         mov     dx, OFFSET _entry_12            ; BA FF FF [FIXUP]
         push    dx                              ; 52
+        ;   ^ arg lpProc (high/segment)
         push    ax                              ; 50
+        ;   ^ arg lpProc (low/offset)
         push    word ptr [0x27e]                ; FF 36 7E 02
+        ;   ^ arg hInstance
+        ; --> MAKEPROCINSTANCE(FARPROC lpProc, HANDLE hInstance) -> FARPROC
         call    far KERNEL.MAKEPROCINSTANCE     ; 9A 0B 02 00 00 [FIXUP]
         push    dx                              ; 52
         push    ax                              ; 50
@@ -193,10 +255,15 @@ L_0132:
         call    far GDI.ESCAPE                  ; 9A D7 01 00 00 [FIXUP]
         lea     ax, [bp - 0xc6]                 ; 8D 86 3A FF
         push    ss                              ; 16
+        ;   ^ arg lpszDest (high/segment)
         push    ax                              ; 50
+        ;   ^ arg lpszDest (low/offset)
         mov     ax, word ptr [0x38]             ; A1 38 00
         push    ds                              ; 1E
+        ;   ^ arg lpszSrc (high/segment)
         push    ax                              ; 50
+        ;   ^ arg lpszSrc (low/offset)
+        ; --> LSTRCPY(LPSTR lpszDest, LPSTR lpszSrc) -> LPSTR
         call    far KERNEL.LSTRCPY              ; 9A B5 01 00 00 [FIXUP]
         push    dx                              ; 52
         push    ax                              ; 50
@@ -204,19 +271,25 @@ L_0132:
         je      L_01AD                          ; 74 05
         mov     ax, word ptr [0x32]             ; A1 32 00
         jmp     L_01B0                          ; EB 03
+;   [conditional branch target (if/else)] L_01AD
 L_01AD:
         mov     ax, 0x1c4                       ; B8 C4 01
+;   [unconditional branch target] L_01B0
 L_01B0:
         mov     dx, ds                          ; 8C DA
         push    dx                              ; 52
         push    ax                              ; 50
+        ; --> LSTRCPY(LPSTR lpszDest, LPSTR lpszSrc) -> LPSTR
         call    far KERNEL.LSTRCPY              ; 9A FF FF 00 00 [FIXUP]
         push    word ptr [bp - 0x3c]            ; FF 76 C4
         mov     ax, 0xa                         ; B8 0A 00
         push    ax                              ; 50
         lea     ax, [bp - 0xc6]                 ; 8D 86 3A FF
         push    ss                              ; 16
+        ;   ^ arg lpsz (high/segment)
         push    ax                              ; 50
+        ;   ^ arg lpsz (low/offset)
+        ; --> LSTRLEN(LPSTR lpsz) -> INT
         call    far KERNEL.LSTRLEN              ; 9A FF FF 00 00 [FIXUP]
         push    ax                              ; 50
         lea     ax, [bp - 0xc6]                 ; 8D 86 3A FF
@@ -230,12 +303,17 @@ L_01B0:
         or      ax, ax                          ; 0B C0
         jge     L_01F0                          ; 7D 0E
         push    word ptr [bp - 0x3c]            ; FF 76 C4
+        ;   ^ arg hDC
+        ; --> DELETEDC(HDC hDC) -> BOOL
         call    far GDI.DELETEDC                ; 9A 35 02 00 00 [FIXUP]
+;   [loop start] L_01EA
 L_01EA:
         mov     ax, word ptr [bp - 0x44]        ; 8B 46 BC
         jmp     L_03AC                          ; E9 BC 01
+;   [conditional branch target (if/else)] L_01F0
 L_01F0:
         push    word ptr [0x27e]                ; FF 36 7E 02
+        ; constant WM_SETTEXT
         mov     ax, 0xc                         ; B8 0C 00
         cdq                                     ; 99
         push    dx                              ; 52
@@ -244,8 +322,12 @@ L_01F0:
         mov     ax, OFFSET _entry_11            ; B8 FF FF [FIXUP]
         mov     dx, OFFSET _entry_11            ; BA FF FF [FIXUP]
         push    dx                              ; 52
+        ;   ^ arg lpProc (high/segment)
         push    ax                              ; 50
+        ;   ^ arg lpProc (low/offset)
         push    word ptr [0x27e]                ; FF 36 7E 02
+        ;   ^ arg hInstance
+        ; --> MAKEPROCINSTANCE(FARPROC lpProc, HANDLE hInstance) -> FARPROC
         call    far KERNEL.MAKEPROCINSTANCE     ; 9A FF FF 00 00 [FIXUP]
         mov     word ptr [0x286], ax            ; A3 86 02
         mov     word ptr [0x288], dx            ; 89 16 88 02
@@ -256,54 +338,84 @@ L_01F0:
         or      ax, ax                          ; 0B C0
         jne     L_023F                          ; 75 1B
         push    word ptr [0x288]                ; FF 36 88 02
+        ;   ^ arg lpProc (high/segment)
         push    word ptr [0x286]                ; FF 36 86 02
+        ;   ^ arg lpProc (low/offset)
+        ; --> FREEPROCINSTANCE(FARPROC lpProc) -> VOID
         call    far KERNEL.FREEPROCINSTANCE     ; 9A 0E 03 00 00 [FIXUP]
         push    word ptr [bp - 0x3c]            ; FF 76 C4
+        ;   ^ arg hDC
+        ; --> DELETEDC(HDC hDC) -> BOOL
         call    far GDI.DELETEDC                ; 9A F7 02 00 00 [FIXUP]
         mov     ax, 0xfffb                      ; B8 FB FF
         jmp     L_03AC                          ; E9 6D 01
+;   [conditional branch target (if/else)] L_023F
 L_023F:
         push    word ptr [0x18]                 ; FF 36 18 00
         sub     ax, ax                          ; 2B C0
         push    ax                              ; 50
         call    far USER.ENABLEWINDOW           ; 9A C1 03 00 00 [FIXUP]
         push    word ptr [0x1a]                 ; FF 36 1A 00
+        ;   ^ arg hWnd
         mov     ax, 0x40d                       ; B8 0D 04
         push    ax                              ; 50
+        ;   ^ arg wMsg
         sub     ax, ax                          ; 2B C0
         push    ax                              ; 50
+        ;   ^ arg wParam
         push    ax                              ; 50
+        ;   ^ arg lParam (high/segment)
         push    ax                              ; 50
+        ;   ^ arg lParam (low/offset)
+        ; --> SENDMESSAGE(HWND hWnd, WORD wMsg, WPARAM wParam, LPARAM lParam) -> LRESULT
         call    far USER.SENDMESSAGE            ; 9A 86 02 00 00 [FIXUP]
         mov     word ptr [bp - 0xc8], ax        ; 89 86 38 FF
         mov     word ptr [bp - 4], 0            ; C7 46 FC 00 00
         mov     word ptr [bp - 0x3a], 0         ; C7 46 C6 00 00
         mov     word ptr [bp - 0xd2], 0         ; C7 86 2E FF 00 00
         mov     word ptr [bp - 0xc], 0          ; C7 46 F4 00 00
+;   [loop start] L_0276
 L_0276:
         push    word ptr [0x1a]                 ; FF 36 1A 00
+        ;   ^ arg hWnd
         mov     ax, 0x411                       ; B8 11 04
         push    ax                              ; 50
+        ;   ^ arg wMsg
         push    word ptr [bp - 0x3a]            ; FF 76 C6
+        ;   ^ arg wParam
         sub     ax, ax                          ; 2B C0
         push    ax                              ; 50
+        ;   ^ arg lParam (high/segment)
         push    ax                              ; 50
+        ;   ^ arg lParam (low/offset)
+        ; --> SENDMESSAGE(HWND hWnd, WORD wMsg, WPARAM wParam, LPARAM lParam) -> LRESULT
         call    far USER.SENDMESSAGE            ; 9A 31 03 00 00 [FIXUP]
         mov     word ptr [bp - 0x38], ax        ; 89 46 C8
         push    word ptr [bp - 0xc8]            ; FF B6 38 FF
+        ;   ^ arg hMem
+        ; --> LOCALLOCK(HANDLE hMem) -> PSTR
         call    far KERNEL.LOCALLOCK            ; 9A FF FF 00 00 [FIXUP]
         add     ax, word ptr [bp - 0x3a]        ; 03 46 C6
         mov     word ptr [bp - 0xd6], ax        ; 89 86 2A FF
         push    word ptr [bp - 0x3c]            ; FF 76 C4
+        ;   ^ arg hDC
         sub     ax, ax                          ; 2B C0
         push    ax                              ; 50
+        ;   ^ arg x
         push    word ptr [bp - 4]               ; FF 76 FC
+        ;   ^ arg y
         mov     ax, word ptr [bp - 0xd6]        ; 8B 86 2A FF
         push    ds                              ; 1E
+        ;   ^ arg lpszStr (high/segment)
         push    ax                              ; 50
+        ;   ^ arg lpszStr (low/offset)
         push    word ptr [bp - 0x38]            ; FF 76 C8
+        ;   ^ arg cbStr
+        ; --> TEXTOUT(HDC hDC, INT x, INT y, LPSTR lpszStr, INT cbStr) -> BOOL
         call    far GDI.TEXTOUT                 ; 9A FF FF 00 00 [FIXUP]
         push    word ptr [bp - 0xc8]            ; FF B6 38 FF
+        ;   ^ arg hMem
+        ; --> LOCALUNLOCK(HANDLE hMem) -> BOOL
         call    far KERNEL.LOCALUNLOCK          ; 9A FF FF 00 00 [FIXUP]
         mov     ax, word ptr [0x254]            ; A1 54 02
         add     word ptr [bp - 4], ax           ; 01 46 FC
@@ -314,6 +426,7 @@ L_0276:
         mov     word ptr [bp - 0xc], 0          ; C7 46 F4 00 00
         mov     word ptr [bp - 4], 0            ; C7 46 FC 00 00
         push    word ptr [bp - 0x3c]            ; FF 76 C4
+        ; constant WM_CREATE
         mov     ax, 1                           ; B8 01 00
         push    ax                              ; 50
         sub     ax, ax                          ; 2B C0
@@ -327,35 +440,50 @@ L_0276:
         or      ax, ax                          ; 0B C0
         jge     L_0315                          ; 7D 22
         push    word ptr [bp - 0x3c]            ; FF 76 C4
+        ;   ^ arg hDC
+        ; --> DELETEDC(HDC hDC) -> BOOL
         call    far GDI.DELETEDC                ; 9A 72 03 00 00 [FIXUP]
         cmp     word ptr [0x276], 0             ; 83 3E 76 02 00
         jne     L_0305                          ; 75 03
         call    L_03B5                          ; E8 B0 00
+;   [loop start (also forward branch)] L_0305
 L_0305:
         push    word ptr [0x288]                ; FF 36 88 02
+        ;   ^ arg lpProc (high/segment)
         push    word ptr [0x286]                ; FF 36 86 02
+        ;   ^ arg lpProc (low/offset)
+        ; --> FREEPROCINSTANCE(FARPROC lpProc) -> VOID
         call    far KERNEL.FREEPROCINSTANCE     ; 9A A6 03 00 00 [FIXUP]
         jmp     L_01EA                          ; E9 D5 FE
+;   [conditional branch target (if/else)] L_0315
 L_0315:
         cmp     word ptr [0x276], 0             ; 83 3E 76 02 00
         jne     L_033F                          ; 75 23
         push    word ptr [0x1a]                 ; FF 36 1A 00
+        ;   ^ arg hWnd
         mov     ax, 0x40b                       ; B8 0B 04
         push    ax                              ; 50
+        ;   ^ arg wMsg
         inc     word ptr [bp - 0xd2]            ; FF 86 2E FF
         push    word ptr [bp - 0xd2]            ; FF B6 2E FF
+        ;   ^ arg wParam
         sub     ax, ax                          ; 2B C0
         push    ax                              ; 50
+        ;   ^ arg lParam (high/segment)
         push    ax                              ; 50
+        ;   ^ arg lParam (low/offset)
+        ; --> SENDMESSAGE(HWND hWnd, WORD wMsg, WPARAM wParam, LPARAM lParam) -> LRESULT
         call    far USER.SENDMESSAGE            ; 9A FF FF 00 00 [FIXUP]
         mov     word ptr [bp - 0x3a], ax        ; 89 46 C6
         or      ax, ax                          ; 0B C0
         jl      L_033F                          ; 7C 03
         jmp     L_0276                          ; E9 37 FF
+;   [conditional branch target (if/else)] L_033F
 L_033F:
         cmp     word ptr [0x276], 0             ; 83 3E 76 02 00
         jne     L_0378                          ; 75 32
         push    word ptr [bp - 0x3c]            ; FF 76 C4
+        ; constant WM_CREATE
         mov     ax, 1                           ; B8 01 00
         push    ax                              ; 50
         sub     ax, ax                          ; 2B C0
@@ -367,18 +495,24 @@ L_033F:
         call    far GDI.ESCAPE                  ; 9A 8E 03 00 00 [FIXUP]
         or      ax, ax                          ; 0B C0
         jge     L_0362                          ; 7D 05
+        ; constant WM_CREATE
         mov     ax, 1                           ; B8 01 00
         jmp     L_0364                          ; EB 02
+;   [conditional branch target (if/else)] L_0362
 L_0362:
         sub     ax, ax                          ; 2B C0
+;   [unconditional branch target] L_0364
 L_0364:
         mov     word ptr [bp - 0x44], ax        ; 89 46 BC
         or      ax, ax                          ; 0B C0
         je      L_0378                          ; 74 0D
         call    L_03B5                          ; E8 47 00
         push    word ptr [bp - 0x3c]            ; FF 76 C4
+        ;   ^ arg hDC
+        ; --> DELETEDC(HDC hDC) -> BOOL
         call    far GDI.DELETEDC                ; 9A 99 03 00 00 [FIXUP]
         jmp     L_0305                          ; EB 8D
+;   [conditional branch target (if/else)] L_0378
 L_0378:
         cmp     word ptr [0x276], 0             ; 83 3E 76 02 00
         jne     L_0395                          ; 75 16
@@ -393,13 +527,20 @@ L_0378:
         push    ax                              ; 50
         call    far GDI.ESCAPE                  ; 9A FF FF 00 00 [FIXUP]
         call    L_03B5                          ; E8 20 00
+;   [conditional branch target (if/else)] L_0395
 L_0395:
         push    word ptr [bp - 0x3c]            ; FF 76 C4
+        ;   ^ arg hDC
+        ; --> DELETEDC(HDC hDC) -> BOOL
         call    far GDI.DELETEDC                ; 9A FF FF 00 00 [FIXUP]
         push    word ptr [0x288]                ; FF 36 88 02
+        ;   ^ arg lpProc (high/segment)
         push    word ptr [0x286]                ; FF 36 86 02
+        ;   ^ arg lpProc (low/offset)
+        ; --> FREEPROCINSTANCE(FARPROC lpProc) -> VOID
         call    far KERNEL.FREEPROCINSTANCE     ; 9A FF FF 00 00 [FIXUP]
         sub     ax, ax                          ; 2B C0
+;   [unconditional branch target] L_03AC
 L_03AC:
         sub     bp, 2                           ; 83 ED 02
         mov     sp, bp                          ; 8B E5
@@ -407,21 +548,29 @@ L_03AC:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf                                    ; CB
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_03B5 -- offset 0x03B5 -- 12 instr
-; Funcion sin clasificar definitiva (12 instr).
-; tags: calls_user, small
-; calls (inter): USER.DESTROYWINDOW, USER.ENABLEWINDOW
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_03B5   offset=0x03B5  size=12 instr  segment=seg3.asm
+;
+; Classification (pass8): c_medium  (score C=4, ASM=0)
+; Prologue: standard_bp     Epilogue: ret
+;
+; Far API calls:
+;   DESTROYWINDOW(HWND hWnd) -> BOOL
+;   ENABLEWINDOW
+;-------------------------------------------------------------------------
+;   [sub-routine] L_03B5
 L_03B5:
+        ;   = cProc <0> ; NEAR PASCAL prologue
         push    bp                              ; 55
         mov     bp, sp                          ; 8B EC
         push    word ptr [0x18]                 ; FF 36 18 00
+        ; constant WM_CREATE
         mov     ax, 1                           ; B8 01 00
         push    ax                              ; 50
         call    far USER.ENABLEWINDOW           ; 9A FF FF 00 00 [FIXUP]
         push    word ptr [0x27c]                ; FF 36 7C 02
+        ;   ^ arg hWnd
+        ; --> DESTROYWINDOW(HWND hWnd) -> BOOL
         call    far USER.DESTROYWINDOW          ; 9A FF FF 00 00 [FIXUP]
         mov     word ptr [0x27c], 0             ; C7 06 7C 02 00 00
         mov     sp, bp                          ; 8B E5

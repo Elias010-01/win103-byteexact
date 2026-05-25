@@ -1,3 +1,17 @@
+; ======================================================================
+; PAINT / seg15.asm   (segment 15 of PAINT)
+; ----------------------------------------------------------------------
+; Functions discovered (pass1b):         0
+; Total instructions:                    0
+; 
+; Classification (pass8):
+;   C-origin (high+medium):              0
+;   ASM-origin (high+medium):            0
+;   Unclear:                             0
+;   Tiny / unclassified:                 0
+; 
+; Far API calls in this segment:     0 (0 unique)
+; ======================================================================
 ; AUTO-GENERATED from original PAINT segment 15
 ; segment_size=149 bytes, flags=0xf130
 ; mode: humano legible - instrucciones x86 + bytes raw en comentario (autoritativo)
@@ -23,22 +37,33 @@ PAINT_TEXT SEGMENT BYTE PUBLIC 'CODE'
         push    word ptr [bp + 0xa]             ; FF 76 0A
         sub     ax, ax                          ; 2B C0
         push    ax                              ; 50
+        ;   ^ arg iObject
+        ; --> GETSTOCKOBJECT(INT iObject) -> HANDLE
         call    far GDI.GETSTOCKOBJECT          ; 9A 54 00 00 00 [FIXUP]
         push    ax                              ; 50
+        ; --> SELECTOBJECT(HDC hDC, HANDLE hObj) -> HANDLE
         call    far GDI.SELECTOBJECT            ; 9A 5A 00 00 00 [FIXUP]
         push    word ptr [bp + 0xa]             ; FF 76 0A
+        ;   ^ arg hDC
         push    word ptr [0xc8a]                ; FF 36 8A 0C
+        ;   ^ arg x
         push    word ptr [0xc8c]                ; FF 36 8C 0C
+        ;   ^ arg y
         push    word ptr [0xae8]                ; FF 36 E8 0A
+        ;   ^ arg nWidth
         mov     ax, word ptr [0xbea]            ; A1 EA 0B
         cdq                                     ; 99
         sub     ax, dx                          ; 2B C2
         sar     ax, 1                           ; D1 F8
         push    ax                              ; 50
+        ;   ^ arg nHeight
         mov     ax, 0x21                        ; B8 21 00
         mov     dx, 0xf0                        ; BA F0 00
         push    dx                              ; 52
+        ;   ^ arg dwRop (high/segment)
         push    ax                              ; 50
+        ;   ^ arg dwRop (low/offset)
+        ; --> PATBLT(HDC hDC, INT x, INT y, INT nWidth, INT nHeight, DWORD dwRop) -> BOOL
         call    far GDI.PATBLT                  ; 9A 7F 00 00 00 [FIXUP]
         push    word ptr [0xe92]                ; FF 36 92 0E
         call    far _entry_27                   ; 9A FF FF 00 00 [FIXUP]
@@ -46,24 +71,37 @@ PAINT_TEXT SEGMENT BYTE PUBLIC 'CODE'
         push    ax                              ; 50
         sub     ax, ax                          ; 2B C0
         push    ax                              ; 50
+        ;   ^ arg iObject
+        ; --> GETSTOCKOBJECT(INT iObject) -> HANDLE
         call    far GDI.GETSTOCKOBJECT          ; 9A FF FF 00 00 [FIXUP]
         push    ax                              ; 50
+        ; --> SELECTOBJECT(HDC hDC, HANDLE hObj) -> HANDLE
         call    far GDI.SELECTOBJECT            ; 9A FF FF 00 00 [FIXUP]
         push    word ptr [bp - 4]               ; FF 76 FC
+        ;   ^ arg hDC
         push    word ptr [0xc8a]                ; FF 36 8A 0C
+        ;   ^ arg x
         push    word ptr [0xc8c]                ; FF 36 8C 0C
+        ;   ^ arg y
         push    word ptr [0xae8]                ; FF 36 E8 0A
+        ;   ^ arg nWidth
         mov     ax, word ptr [0xbea]            ; A1 EA 0B
         cdq                                     ; 99
         sub     ax, dx                          ; 2B C2
         sar     ax, 1                           ; D1 F8
         push    ax                              ; 50
+        ;   ^ arg nHeight
         mov     ax, 0x21                        ; B8 21 00
         mov     dx, 0xf0                        ; BA F0 00
         push    dx                              ; 52
+        ;   ^ arg dwRop (high/segment)
         push    ax                              ; 50
+        ;   ^ arg dwRop (low/offset)
+        ; --> PATBLT(HDC hDC, INT x, INT y, INT nWidth, INT nHeight, DWORD dwRop) -> BOOL
         call    far GDI.PATBLT                  ; 9A FF FF 00 00 [FIXUP]
         push    word ptr [bp - 4]               ; FF 76 FC
+        ;   ^ arg hDC
+        ; --> DELETEDC(HDC hDC) -> BOOL
         call    far GDI.DELETEDC                ; 9A FF FF 00 00 [FIXUP]
         sub     bp, 2                           ; 83 ED 02
         mov     sp, bp                          ; 8B E5

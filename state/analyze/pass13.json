@@ -1,0 +1,2233 @@
+{
+  "pass": "pass13_file_headers",
+  "dry_run": false,
+  "modules_processed": 69,
+  "total_files_enriched": 362,
+  "backup_dir": "C:\\Users\\Elias\\CascadeProjects\\modern-personality-agent\\backups\\pass13-2026-05-25-144000",
+  "results": [
+    {
+      "module": "ATTDC",
+      "files_modified": 2,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "modified": true,
+          "lines_added": 16
+        },
+        {
+          "file": "seg2.asm",
+          "modified": true,
+          "lines_added": 14
+        }
+      ]
+    },
+    {
+      "module": "ATTDEB",
+      "files_modified": 2,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "modified": true,
+          "lines_added": 16
+        },
+        {
+          "file": "seg2.asm",
+          "modified": true,
+          "lines_added": 14
+        }
+      ]
+    },
+    {
+      "module": "ATTKBD",
+      "files_modified": 3,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg2.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg3.asm",
+          "modified": true,
+          "lines_added": 14
+        }
+      ]
+    },
+    {
+      "module": "ATTMOUSE",
+      "files_modified": 2,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg2.asm",
+          "modified": true,
+          "lines_added": 14
+        }
+      ]
+    },
+    {
+      "module": "CALC",
+      "files_modified": 2,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg2.asm",
+          "modified": true,
+          "lines_added": 14
+        }
+      ]
+    },
+    {
+      "module": "CALENDAR",
+      "files_modified": 10,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg10.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg2.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg3.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg4.asm",
+          "modified": true,
+          "lines_added": 20
+        },
+        {
+          "file": "seg5.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg6.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg7.asm",
+          "modified": true,
+          "lines_added": 16
+        },
+        {
+          "file": "seg8.asm",
+          "modified": true,
+          "lines_added": 16
+        },
+        {
+          "file": "seg9.asm",
+          "modified": true,
+          "lines_added": 19
+        }
+      ]
+    },
+    {
+      "module": "CARDFILE",
+      "files_modified": 7,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg2.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg3.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg4.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg5.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg6.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg7.asm",
+          "modified": true,
+          "lines_added": 14
+        }
+      ]
+    },
+    {
+      "module": "CGA",
+      "files_modified": 2,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg2.asm",
+          "modified": true,
+          "lines_added": 14
+        }
+      ]
+    },
+    {
+      "module": "CITOH",
+      "files_modified": 3,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "modified": true,
+          "lines_added": 18
+        },
+        {
+          "file": "seg2.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg3.asm",
+          "modified": true,
+          "lines_added": 14
+        }
+      ]
+    },
+    {
+      "module": "CLIPBRD",
+      "files_modified": 2,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg2.asm",
+          "modified": true,
+          "lines_added": 14
+        }
+      ]
+    },
+    {
+      "module": "CLOCK",
+      "files_modified": 2,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg2.asm",
+          "modified": true,
+          "lines_added": 14
+        }
+      ]
+    },
+    {
+      "module": "COMM",
+      "files_modified": 2,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "modified": true,
+          "lines_added": 17
+        },
+        {
+          "file": "seg2.asm",
+          "modified": true,
+          "lines_added": 14
+        }
+      ]
+    },
+    {
+      "module": "CONTROL",
+      "files_modified": 10,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg10.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg2.asm",
+          "modified": true,
+          "lines_added": 16
+        },
+        {
+          "file": "seg3.asm",
+          "modified": true,
+          "lines_added": 18
+        },
+        {
+          "file": "seg4.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg5.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg6.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg7.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg8.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg9.asm",
+          "modified": true,
+          "lines_added": 18
+        }
+      ]
+    },
+    {
+      "module": "DENMARK",
+      "files_modified": 3,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg2.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg3.asm",
+          "modified": true,
+          "lines_added": 14
+        }
+      ]
+    },
+    {
+      "module": "EGAHIBW",
+      "files_modified": 2,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg2.asm",
+          "modified": true,
+          "lines_added": 14
+        }
+      ]
+    },
+    {
+      "module": "EGAHIRES",
+      "files_modified": 2,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg2.asm",
+          "modified": true,
+          "lines_added": 14
+        }
+      ]
+    },
+    {
+      "module": "EGALORES",
+      "files_modified": 2,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg2.asm",
+          "modified": true,
+          "lines_added": 14
+        }
+      ]
+    },
+    {
+      "module": "EGAMONO",
+      "files_modified": 2,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg2.asm",
+          "modified": true,
+          "lines_added": 14
+        }
+      ]
+    },
+    {
+      "module": "EPSON",
+      "files_modified": 3,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "modified": true,
+          "lines_added": 18
+        },
+        {
+          "file": "seg2.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg3.asm",
+          "modified": true,
+          "lines_added": 14
+        }
+      ]
+    },
+    {
+      "module": "EPSONMX",
+      "files_modified": 3,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "modified": true,
+          "lines_added": 18
+        },
+        {
+          "file": "seg2.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg3.asm",
+          "modified": true,
+          "lines_added": 14
+        }
+      ]
+    },
+    {
+      "module": "FRANCE",
+      "files_modified": 3,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg2.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg3.asm",
+          "modified": true,
+          "lines_added": 14
+        }
+      ]
+    },
+    {
+      "module": "FTG",
+      "files_modified": 2,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg2.asm",
+          "modified": true,
+          "lines_added": 14
+        }
+      ]
+    },
+    {
+      "module": "GDI",
+      "files_modified": 31,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg10.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg11.asm",
+          "modified": true,
+          "lines_added": 16
+        },
+        {
+          "file": "seg12.asm",
+          "modified": true,
+          "lines_added": 16
+        },
+        {
+          "file": "seg13.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg14.asm",
+          "modified": true,
+          "lines_added": 17
+        },
+        {
+          "file": "seg15.asm",
+          "modified": true,
+          "lines_added": 16
+        },
+        {
+          "file": "seg16.asm",
+          "modified": true,
+          "lines_added": 16
+        },
+        {
+          "file": "seg17.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg18.asm",
+          "modified": true,
+          "lines_added": 16
+        },
+        {
+          "file": "seg19.asm",
+          "modified": true,
+          "lines_added": 18
+        },
+        {
+          "file": "seg2.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg20.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg21.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg22.asm",
+          "modified": true,
+          "lines_added": 16
+        },
+        {
+          "file": "seg23.asm",
+          "modified": true,
+          "lines_added": 19
+        },
+        {
+          "file": "seg24.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg25.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg26.asm",
+          "modified": true,
+          "lines_added": 20
+        },
+        {
+          "file": "seg27.asm",
+          "modified": true,
+          "lines_added": 17
+        },
+        {
+          "file": "seg28.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg29.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg3.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg30.asm",
+          "modified": true,
+          "lines_added": 16
+        },
+        {
+          "file": "seg31.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg4.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg5.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg6.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg7.asm",
+          "modified": true,
+          "lines_added": 20
+        },
+        {
+          "file": "seg8.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg9.asm",
+          "modified": true,
+          "lines_added": 14
+        }
+      ]
+    },
+    {
+      "module": "GENIUS",
+      "files_modified": 2,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg2.asm",
+          "modified": true,
+          "lines_added": 14
+        }
+      ]
+    },
+    {
+      "module": "GERMANY",
+      "files_modified": 3,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg2.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg3.asm",
+          "modified": true,
+          "lines_added": 14
+        }
+      ]
+    },
+    {
+      "module": "HERCULES",
+      "files_modified": 2,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg2.asm",
+          "modified": true,
+          "lines_added": 14
+        }
+      ]
+    },
+    {
+      "module": "HP7470A",
+      "files_modified": 2,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg2.asm",
+          "modified": true,
+          "lines_added": 14
+        }
+      ]
+    },
+    {
+      "module": "HP7475A",
+      "files_modified": 2,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "modified": true,
+          "lines_added": 17
+        },
+        {
+          "file": "seg2.asm",
+          "modified": true,
+          "lines_added": 14
+        }
+      ]
+    },
+    {
+      "module": "HP7550A",
+      "files_modified": 2,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg2.asm",
+          "modified": true,
+          "lines_added": 14
+        }
+      ]
+    },
+    {
+      "module": "HPLASER",
+      "files_modified": 2,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "modified": true,
+          "lines_added": 17
+        },
+        {
+          "file": "seg2.asm",
+          "modified": true,
+          "lines_added": 14
+        }
+      ]
+    },
+    {
+      "module": "HPLASERP",
+      "files_modified": 2,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "modified": true,
+          "lines_added": 17
+        },
+        {
+          "file": "seg2.asm",
+          "modified": true,
+          "lines_added": 14
+        }
+      ]
+    },
+    {
+      "module": "IBMGRX",
+      "files_modified": 3,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "modified": true,
+          "lines_added": 18
+        },
+        {
+          "file": "seg2.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg3.asm",
+          "modified": true,
+          "lines_added": 14
+        }
+      ]
+    },
+    {
+      "module": "ITALY",
+      "files_modified": 3,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg2.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg3.asm",
+          "modified": true,
+          "lines_added": 14
+        }
+      ]
+    },
+    {
+      "module": "JOYMOUSE",
+      "files_modified": 2,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "modified": true,
+          "lines_added": 19
+        },
+        {
+          "file": "seg2.asm",
+          "modified": true,
+          "lines_added": 14
+        }
+      ]
+    },
+    {
+      "module": "KERNEL",
+      "files_modified": 1,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "modified": true,
+          "lines_added": 14
+        }
+      ]
+    },
+    {
+      "module": "LMOUSE",
+      "files_modified": 2,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg2.asm",
+          "modified": true,
+          "lines_added": 14
+        }
+      ]
+    },
+    {
+      "module": "LPC",
+      "files_modified": 2,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "modified": true,
+          "lines_added": 19
+        },
+        {
+          "file": "seg2.asm",
+          "modified": true,
+          "lines_added": 14
+        }
+      ]
+    },
+    {
+      "module": "LQ1500",
+      "files_modified": 3,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "modified": true,
+          "lines_added": 18
+        },
+        {
+          "file": "seg2.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg3.asm",
+          "modified": true,
+          "lines_added": 14
+        }
+      ]
+    },
+    {
+      "module": "MOUSE",
+      "files_modified": 3,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg2.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg3.asm",
+          "modified": true,
+          "lines_added": 14
+        }
+      ]
+    },
+    {
+      "module": "MSDOS",
+      "files_modified": 5,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg2.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg3.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg4.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg5.asm",
+          "modified": true,
+          "lines_added": 14
+        }
+      ]
+    },
+    {
+      "module": "MSDOSD",
+      "files_modified": 2,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "modified": true,
+          "lines_added": 19
+        },
+        {
+          "file": "seg2.asm",
+          "modified": true,
+          "lines_added": 14
+        }
+      ]
+    },
+    {
+      "module": "MSMOUSE1",
+      "files_modified": 2,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg2.asm",
+          "modified": true,
+          "lines_added": 14
+        }
+      ]
+    },
+    {
+      "module": "MSMOUSE2",
+      "files_modified": 2,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg2.asm",
+          "modified": true,
+          "lines_added": 14
+        }
+      ]
+    },
+    {
+      "module": "NEC3550",
+      "files_modified": 2,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg2.asm",
+          "modified": true,
+          "lines_added": 14
+        }
+      ]
+    },
+    {
+      "module": "NECP2",
+      "files_modified": 3,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "modified": true,
+          "lines_added": 18
+        },
+        {
+          "file": "seg2.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg3.asm",
+          "modified": true,
+          "lines_added": 14
+        }
+      ]
+    },
+    {
+      "module": "NOMOUSE",
+      "files_modified": 1,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "modified": true,
+          "lines_added": 14
+        }
+      ]
+    },
+    {
+      "module": "NORWAY",
+      "files_modified": 3,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg2.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg3.asm",
+          "modified": true,
+          "lines_added": 14
+        }
+      ]
+    },
+    {
+      "module": "NOTEPAD",
+      "files_modified": 10,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg10.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg2.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg3.asm",
+          "modified": true,
+          "lines_added": 17
+        },
+        {
+          "file": "seg4.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg5.asm",
+          "modified": true,
+          "lines_added": 16
+        },
+        {
+          "file": "seg6.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg7.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg8.asm",
+          "modified": true,
+          "lines_added": 20
+        },
+        {
+          "file": "seg9.asm",
+          "modified": true,
+          "lines_added": 14
+        }
+      ]
+    },
+    {
+      "module": "OKI92",
+      "files_modified": 3,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "modified": true,
+          "lines_added": 18
+        },
+        {
+          "file": "seg2.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg3.asm",
+          "modified": true,
+          "lines_added": 14
+        }
+      ]
+    },
+    {
+      "module": "PAINT",
+      "files_modified": 33,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg10.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg11.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg12.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg13.asm",
+          "modified": true,
+          "lines_added": 19
+        },
+        {
+          "file": "seg14.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg15.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg16.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg17.asm",
+          "modified": true,
+          "lines_added": 22
+        },
+        {
+          "file": "seg18.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg19.asm",
+          "modified": true,
+          "lines_added": 22
+        },
+        {
+          "file": "seg2.asm",
+          "modified": true,
+          "lines_added": 20
+        },
+        {
+          "file": "seg20.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg21.asm",
+          "modified": true,
+          "lines_added": 21
+        },
+        {
+          "file": "seg22.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg23.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg24.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg25.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg26.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg27.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg28.asm",
+          "modified": true,
+          "lines_added": 20
+        },
+        {
+          "file": "seg29.asm",
+          "modified": true,
+          "lines_added": 21
+        },
+        {
+          "file": "seg3.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg30.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg31.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg32.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg33.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg4.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg5.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg6.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg7.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg8.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg9.asm",
+          "modified": true,
+          "lines_added": 23
+        }
+      ]
+    },
+    {
+      "module": "PSCRIPT",
+      "files_modified": 4,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg2.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg3.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg4.asm",
+          "modified": true,
+          "lines_added": 14
+        }
+      ]
+    },
+    {
+      "module": "REVERSI",
+      "files_modified": 2,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg2.asm",
+          "modified": true,
+          "lines_added": 14
+        }
+      ]
+    },
+    {
+      "module": "SETUP",
+      "files_modified": 1,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "modified": true,
+          "lines_added": 14
+        }
+      ]
+    },
+    {
+      "module": "SG10",
+      "files_modified": 3,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "modified": true,
+          "lines_added": 18
+        },
+        {
+          "file": "seg2.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg3.asm",
+          "modified": true,
+          "lines_added": 14
+        }
+      ]
+    },
+    {
+      "module": "SOUND",
+      "files_modified": 3,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "modified": true,
+          "lines_added": 19
+        },
+        {
+          "file": "seg2.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg3.asm",
+          "modified": true,
+          "lines_added": 14
+        }
+      ]
+    },
+    {
+      "module": "SPAIN",
+      "files_modified": 3,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg2.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg3.asm",
+          "modified": true,
+          "lines_added": 14
+        }
+      ]
+    },
+    {
+      "module": "SPOOLER",
+      "files_modified": 2,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg2.asm",
+          "modified": true,
+          "lines_added": 14
+        }
+      ]
+    },
+    {
+      "module": "SWEDEN",
+      "files_modified": 3,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg2.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg3.asm",
+          "modified": true,
+          "lines_added": 14
+        }
+      ]
+    },
+    {
+      "module": "SYSTEM",
+      "files_modified": 1,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "modified": true,
+          "lines_added": 14
+        }
+      ]
+    },
+    {
+      "module": "TERMINAL",
+      "files_modified": 9,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg2.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg3.asm",
+          "modified": true,
+          "lines_added": 16
+        },
+        {
+          "file": "seg4.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg5.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg6.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg7.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg8.asm",
+          "modified": true,
+          "lines_added": 20
+        },
+        {
+          "file": "seg9.asm",
+          "modified": true,
+          "lines_added": 14
+        }
+      ]
+    },
+    {
+      "module": "THINKJET",
+      "files_modified": 3,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "modified": true,
+          "lines_added": 18
+        },
+        {
+          "file": "seg2.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg3.asm",
+          "modified": true,
+          "lines_added": 14
+        }
+      ]
+    },
+    {
+      "module": "TI850",
+      "files_modified": 3,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "modified": true,
+          "lines_added": 18
+        },
+        {
+          "file": "seg2.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg3.asm",
+          "modified": true,
+          "lines_added": 14
+        }
+      ]
+    },
+    {
+      "module": "TOSH",
+      "files_modified": 3,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "modified": true,
+          "lines_added": 18
+        },
+        {
+          "file": "seg2.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg3.asm",
+          "modified": true,
+          "lines_added": 14
+        }
+      ]
+    },
+    {
+      "module": "TTY",
+      "files_modified": 2,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "modified": true,
+          "lines_added": 17
+        },
+        {
+          "file": "seg2.asm",
+          "modified": true,
+          "lines_added": 14
+        }
+      ]
+    },
+    {
+      "module": "UK",
+      "files_modified": 3,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg2.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg3.asm",
+          "modified": true,
+          "lines_added": 14
+        }
+      ]
+    },
+    {
+      "module": "USA",
+      "files_modified": 3,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg2.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg3.asm",
+          "modified": true,
+          "lines_added": 14
+        }
+      ]
+    },
+    {
+      "module": "USER",
+      "files_modified": 28,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg10.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg11.asm",
+          "modified": true,
+          "lines_added": 17
+        },
+        {
+          "file": "seg12.asm",
+          "modified": true,
+          "lines_added": 20
+        },
+        {
+          "file": "seg13.asm",
+          "modified": true,
+          "lines_added": 21
+        },
+        {
+          "file": "seg14.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg15.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg16.asm",
+          "modified": true,
+          "lines_added": 20
+        },
+        {
+          "file": "seg17.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg18.asm",
+          "modified": true,
+          "lines_added": 22
+        },
+        {
+          "file": "seg19.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg2.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg20.asm",
+          "modified": true,
+          "lines_added": 19
+        },
+        {
+          "file": "seg21.asm",
+          "modified": true,
+          "lines_added": 20
+        },
+        {
+          "file": "seg22.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg23.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg24.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg25.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg26.asm",
+          "modified": true,
+          "lines_added": 20
+        },
+        {
+          "file": "seg27.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg28.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg3.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg4.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg5.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg6.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg7.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg8.asm",
+          "modified": true,
+          "lines_added": 19
+        },
+        {
+          "file": "seg9.asm",
+          "modified": true,
+          "lines_added": 23
+        }
+      ]
+    },
+    {
+      "module": "WRITE",
+      "files_modified": 79,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg10.asm",
+          "modified": true,
+          "lines_added": 18
+        },
+        {
+          "file": "seg11.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg12.asm",
+          "modified": true,
+          "lines_added": 18
+        },
+        {
+          "file": "seg13.asm",
+          "modified": true,
+          "lines_added": 20
+        },
+        {
+          "file": "seg14.asm",
+          "modified": true,
+          "lines_added": 17
+        },
+        {
+          "file": "seg15.asm",
+          "modified": true,
+          "lines_added": 19
+        },
+        {
+          "file": "seg16.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg17.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg18.asm",
+          "modified": true,
+          "lines_added": 18
+        },
+        {
+          "file": "seg19.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg2.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg20.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg21.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg22.asm",
+          "modified": true,
+          "lines_added": 17
+        },
+        {
+          "file": "seg23.asm",
+          "modified": true,
+          "lines_added": 21
+        },
+        {
+          "file": "seg24.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg25.asm",
+          "modified": true,
+          "lines_added": 20
+        },
+        {
+          "file": "seg26.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg27.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg28.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg29.asm",
+          "modified": true,
+          "lines_added": 17
+        },
+        {
+          "file": "seg3.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg30.asm",
+          "modified": true,
+          "lines_added": 17
+        },
+        {
+          "file": "seg31.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg32.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg33.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg34.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg35.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg36.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg37.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg38.asm",
+          "modified": true,
+          "lines_added": 16
+        },
+        {
+          "file": "seg39.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg4.asm",
+          "modified": true,
+          "lines_added": 19
+        },
+        {
+          "file": "seg40.asm",
+          "modified": true,
+          "lines_added": 16
+        },
+        {
+          "file": "seg41.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg42.asm",
+          "modified": true,
+          "lines_added": 16
+        },
+        {
+          "file": "seg43.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg44.asm",
+          "modified": true,
+          "lines_added": 20
+        },
+        {
+          "file": "seg45.asm",
+          "modified": true,
+          "lines_added": 19
+        },
+        {
+          "file": "seg46.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg47.asm",
+          "modified": true,
+          "lines_added": 20
+        },
+        {
+          "file": "seg48.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg49.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg5.asm",
+          "modified": true,
+          "lines_added": 19
+        },
+        {
+          "file": "seg50.asm",
+          "modified": true,
+          "lines_added": 16
+        },
+        {
+          "file": "seg51.asm",
+          "modified": true,
+          "lines_added": 17
+        },
+        {
+          "file": "seg52.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg53.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg54.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg55.asm",
+          "modified": true,
+          "lines_added": 16
+        },
+        {
+          "file": "seg56.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg57.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg58.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg59.asm",
+          "modified": true,
+          "lines_added": 21
+        },
+        {
+          "file": "seg6.asm",
+          "modified": true,
+          "lines_added": 22
+        },
+        {
+          "file": "seg60.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg61.asm",
+          "modified": true,
+          "lines_added": 16
+        },
+        {
+          "file": "seg62.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg63.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg64.asm",
+          "modified": true,
+          "lines_added": 20
+        },
+        {
+          "file": "seg65.asm",
+          "modified": true,
+          "lines_added": 17
+        },
+        {
+          "file": "seg66.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg67.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg68.asm",
+          "modified": true,
+          "lines_added": 16
+        },
+        {
+          "file": "seg69.asm",
+          "modified": true,
+          "lines_added": 18
+        },
+        {
+          "file": "seg7.asm",
+          "modified": true,
+          "lines_added": 17
+        },
+        {
+          "file": "seg70.asm",
+          "modified": true,
+          "lines_added": 17
+        },
+        {
+          "file": "seg71.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg72.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg73.asm",
+          "modified": true,
+          "lines_added": 17
+        },
+        {
+          "file": "seg74.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg75.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg76.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg77.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg78.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg79.asm",
+          "modified": true,
+          "lines_added": 14
+        },
+        {
+          "file": "seg8.asm",
+          "modified": true,
+          "lines_added": 17
+        },
+        {
+          "file": "seg9.asm",
+          "modified": true,
+          "lines_added": 16
+        }
+      ]
+    },
+    {
+      "module": "XER4020",
+      "files_modified": 3,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "modified": true,
+          "lines_added": 18
+        },
+        {
+          "file": "seg2.asm",
+          "modified": true,
+          "lines_added": 23
+        },
+        {
+          "file": "seg3.asm",
+          "modified": true,
+          "lines_added": 14
+        }
+      ]
+    }
+  ]
+}

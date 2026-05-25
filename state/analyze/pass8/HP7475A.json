@@ -1,0 +1,104 @@
+{
+  "module": "HP7475A",
+  "num_functions": 4,
+  "verdict_counts": {
+    "c_high": 1,
+    "c_medium": 2,
+    "unclear": 1
+  },
+  "c_count": 3,
+  "asm_count": 0,
+  "unclear_count": 1,
+  "tiny_count": 0,
+  "c_ratio_overall": 0.75,
+  "c_ratio_of_classified": 1.0,
+  "expected_c_ratio": null,
+  "expected_confidence": null,
+  "consistency": "no_expectation",
+  "functions": [
+    {
+      "name": "sub_0052",
+      "segment_file": "seg1.asm",
+      "offset": 82,
+      "size_bytes": null,
+      "num_instructions": 185,
+      "prologue": "saves_regs",
+      "epilogue": "retf_n",
+      "classification": {
+        "verdict": "c_high",
+        "score_c": 6,
+        "score_asm": 0,
+        "score_diff": 6,
+        "signals": [
+          "saves registers at entry but no full BP frame [+1 C]",
+          "PASCAL epilogue: retf with arg cleanup [+3 C]",
+          "2 FAR-API call(s) [+1 C]",
+          "high mov+push density (compiler-like) [+1 C]"
+        ],
+        "confidence": "high"
+      }
+    },
+    {
+      "name": "sub_0253",
+      "segment_file": "seg1.asm",
+      "offset": 595,
+      "size_bytes": null,
+      "num_instructions": 157,
+      "prologue": "saves_regs",
+      "epilogue": "retf_n",
+      "classification": {
+        "verdict": "c_medium",
+        "score_c": 4,
+        "score_asm": 0,
+        "score_diff": 4,
+        "signals": [
+          "saves registers at entry but no full BP frame [+1 C]",
+          "PASCAL epilogue: retf with arg cleanup [+3 C]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_04B8",
+      "segment_file": "seg1.asm",
+      "offset": 1208,
+      "size_bytes": null,
+      "num_instructions": 137,
+      "prologue": "saves_regs",
+      "epilogue": "retf_n",
+      "classification": {
+        "verdict": "c_medium",
+        "score_c": 4,
+        "score_asm": 0,
+        "score_diff": 4,
+        "signals": [
+          "saves registers at entry but no full BP frame [+1 C]",
+          "PASCAL epilogue: retf with arg cleanup [+3 C]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_05F0",
+      "segment_file": "seg1.asm",
+      "offset": 1520,
+      "size_bytes": null,
+      "num_instructions": 121,
+      "prologue": "saves_regs",
+      "epilogue": "jmp_tail",
+      "classification": {
+        "verdict": "unclear",
+        "score_c": 3,
+        "score_asm": 2,
+        "score_diff": 1,
+        "signals": [
+          "saves registers at entry but no full BP frame [+1 C]",
+          "jmp tail-call (no proper return) [+2 ASM]",
+          "[bp+N] references in entry/exit (1) [+1 C]",
+          "high mov+push density (compiler-like) [+1 C]"
+        ],
+        "confidence": "low"
+      }
+    }
+  ]
+}

@@ -1,3 +1,17 @@
+; ======================================================================
+; GDI / seg29.asm   (segment 29 of GDI)
+; ----------------------------------------------------------------------
+; Functions discovered (pass1b):         3
+; Total instructions:                   70
+; 
+; Classification (pass8):
+;   C-origin (high+medium):              0
+;   ASM-origin (high+medium):            2
+;   Unclear:                             1
+;   Tiny / unclassified:                 0
+; 
+; Far API calls in this segment:     0 (0 unique)
+; ======================================================================
 ; AUTO-GENERATED from original GDI segment 29
 ; segment_size=324 bytes, flags=0xf130
 ; mode: humano legible - instrucciones x86 + bytes raw en comentario (autoritativo)
@@ -85,12 +99,6 @@ GDI_TEXT SEGMENT BYTE PUBLIC 'CODE'
         push    cs                              ; 0E
         daa                                     ; 27
         adc     byte ptr [bx], ah               ; 10 27
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; RSIN -- 19 instr
-; Funcion hoja (no llama a otras, 19 instr): probable helper aritmetico/conversion.
-; tags: far, leaf
-;----------------------------------------------------------------------
 
 ;-----------------------------------------------------------------------
 ; RSIN  (offset 0x00B6, size 40 bytes)
@@ -116,12 +124,6 @@ RSIN PROC FAR
         sub     ax, 0x708                       ; 2D 08 07
         jmp     L_0103                          ; EB 25
 RSIN ENDP
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; RCOS -- 19 instr
-; Funcion hoja (no llama a otras, 19 instr): probable helper aritmetico/conversion.
-; tags: far, leaf
-;----------------------------------------------------------------------
 
 
 ;-----------------------------------------------------------------------
@@ -148,15 +150,17 @@ RCOS PROC FAR
         inc     dx                              ; 42
         jmp     L_0105                          ; EB 02
 RCOS ENDP
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_0103 -- offset 0x0103 -- 32 instr
-; Funcion mediana (32 instr, 0 calls).
-; tags: medium
-;----------------------------------------------------------------------
 
+;-------------------------------------------------------------------------
+; sub_0103   offset=0x0103  size=32 instr  segment=seg29.asm
+;
+; Classification (pass8): unclear  (score C=1, ASM=2)
+; Prologue: none     Epilogue: unknown
+;-------------------------------------------------------------------------
+;   [branch target] L_0103
 L_0103:
         neg     ax                              ; F7 D8
+;   [branch target] L_0105
 L_0105:
         push    dx                              ; 52
         push    di                              ; 57

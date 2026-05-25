@@ -1,3 +1,17 @@
+; ======================================================================
+; GDI / seg10.asm   (segment 10 of GDI)
+; ----------------------------------------------------------------------
+; Functions discovered (pass1b):         3
+; Total instructions:                   91
+; 
+; Classification (pass8):
+;   C-origin (high+medium):              2
+;   ASM-origin (high+medium):            0
+;   Unclear:                             1
+;   Tiny / unclassified:                 0
+; 
+; Far API calls in this segment:     0 (0 unique)
+; ======================================================================
 ; AUTO-GENERATED from original GDI segment 10
 ; segment_size=187 bytes, flags=0xf130
 ; mode: humano legible - instrucciones x86 + bytes raw en comentario (autoritativo)
@@ -10,12 +24,6 @@
 ; el binario original).
 
 GDI_TEXT SEGMENT BYTE PUBLIC 'CODE'
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; CREATEELLIPTICRGN -- 37 instr
-; Constructor: crea ellipticrgn.
-; tags: far, medium
-;----------------------------------------------------------------------
 
 
 ;-----------------------------------------------------------------------
@@ -53,8 +61,10 @@ L_0000:
         je      L_0042                          ; 74 05
         mov     ax, word ptr [bp - 4]           ; 8B 46 FC
         jmp     L_0044                          ; EB 02
+;   [conditional branch target (if/else)] L_0042
 L_0042:
         sub     ax, ax                          ; 2B C0
+;   [unconditional branch target] L_0044
 L_0044:
         sub     bp, 2                           ; 83 ED 02
         mov     sp, bp                          ; 8B E5
@@ -63,12 +73,6 @@ L_0044:
         dec     bp                              ; 4D
         retf    8                               ; CA 08 00
 CREATEELLIPTICRGN ENDP
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; CREATEELLIPTICRGNINDIRECT -- 22 instr
-; Constructor: crea ellipticrgnindirect.
-; tags: far, small
-;----------------------------------------------------------------------
 
 
 ;-----------------------------------------------------------------------
@@ -98,12 +102,6 @@ CREATEELLIPTICRGNINDIRECT PROC FAR
         dec     bp                              ; 4D
         retf    4                               ; CA 04 00
 CREATEELLIPTICRGNINDIRECT ENDP
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; CREATEPOLYGONRGN -- 32 instr
-; Constructor: crea polygonrgn.
-; tags: far, medium
-;----------------------------------------------------------------------
 
 
 ;-----------------------------------------------------------------------
@@ -134,8 +132,10 @@ CREATEPOLYGONRGN PROC FAR
         je      L_00AF                          ; 74 05
         mov     ax, word ptr [bp - 4]           ; 8B 46 FC
         jmp     L_00B1                          ; EB 02
+;   [conditional branch target (if/else)] L_00AF
 L_00AF:
         sub     ax, ax                          ; 2B C0
+;   [unconditional branch target] L_00B1
 L_00B1:
         sub     bp, 2                           ; 83 ED 02
         mov     sp, bp                          ; 8B E5

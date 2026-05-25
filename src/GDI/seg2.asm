@@ -1,3 +1,26 @@
+; ======================================================================
+; GDI / seg2.asm   (segment 2 of GDI)
+; ----------------------------------------------------------------------
+; Functions discovered (pass1b):         3
+; Total instructions:                  216
+; 
+; Classification (pass8):
+;   C-origin (high+medium):              1
+;   ASM-origin (high+medium):            0
+;   Unclear:                             2
+;   Tiny / unclassified:                 0
+; 
+; Far API calls in this segment:     9 (9 unique)
+;   Top:
+;        1  LOCALINIT
+;        1  ADDATOM
+;        1  FINDRESOURCE
+;        1  FREERESOURCE
+;        1  GETMODULEHANDLE
+;        1  GETPROFILESTRING
+;        1  GLOBALLOCK
+;        1  GLOBALUNLOCK
+; ======================================================================
 ; AUTO-GENERATED from original GDI segment 2
 ; segment_size=479 bytes, flags=0xf170
 ; mode: humano legible - instrucciones x86 + bytes raw en comentario (autoritativo)
@@ -10,14 +33,6 @@
 ; el binario original).
 
 GDI_TEXT SEGMENT BYTE PUBLIC 'CODE'
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; entry -- 46 instr
-; Funcion mediana (46 instr, 3 calls).
-; tags: calls_kernel, far, medium
-; calls (intra): sub_005C, sub_0195
-; calls (inter): KERNEL.LOCALINIT
-;----------------------------------------------------------------------
 
 
 ;-----------------------------------------------------------------------
@@ -38,8 +53,12 @@ entry PROC FAR
         xor     ax, ax                          ; 33 C0
         jcxz    L_0051                          ; E3 3A
         push    ax                              ; 50
+        ;   ^ arg wSegment
         push    ax                              ; 50
+        ;   ^ arg wStart
         push    cx                              ; 51
+        ;   ^ arg wEnd
+        ; --> LOCALINIT(WORD wSegment, WORD wStart, WORD wEnd) -> BOOL
         call    far KERNEL.LOCALINIT            ; 9A FF FF 00 00 [FIXUP]
         jcxz    L_0051                          ; E3 30
         xor     ax, ax                          ; 33 C0
@@ -62,6 +81,7 @@ entry PROC FAR
         xor     ax, ax                          ; 33 C0
         rep stosw word ptr es:[di], ax          ; F3 AB
         not     ax                              ; F7 D0
+;   [conditional branch target (if/else)] L_0051
 L_0051:
         pop     di                              ; 5F
         pop     si                              ; 5E
@@ -72,15 +92,24 @@ L_0051:
         dec     bp                              ; 4D
         retf                                    ; CB
 entry ENDP
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_005C -- offset 0x005C -- 138 instr
-; Iterador con bucle (138 instr).
-; tags: calls_kernel, complex_iterator, loop
-; callers: entry
-; calls (inter): KERNEL.ADDATOM, KERNEL.FINDRESOURCE, KERNEL.FREERESOURCE, KERNEL.GETMODULEHANDLE, KERNEL.GETPROFILESTRING, KERNEL.GLOBALLOCK (+2 mas)
-;----------------------------------------------------------------------
 
+;-------------------------------------------------------------------------
+; sub_005C   offset=0x005C  size=138 instr  segment=seg2.asm
+;
+; Classification (pass8): unclear  (score C=2, ASM=3)
+; Prologue: none     Epilogue: ret
+;
+; Far API calls:
+;   ADDATOM
+;   FINDRESOURCE
+;   FREERESOURCE
+;   GETMODULEHANDLE(LPSTR lpszModule) -> HANDLE
+;   GETPROFILESTRING
+;   GLOBALLOCK(HANDLE hMem) -> LPVOID
+;   GLOBALUNLOCK(HANDLE hMem) -> BOOL
+;   LOADRESOURCE
+;-------------------------------------------------------------------------
+;   [sub-routine] L_005C
 L_005C:
         lea     ax, [0xab]                      ; 8D 06 AB 00
         push    ds                              ; 1E
@@ -108,9 +137,11 @@ L_005C:
         mov     word ptr [0x12], ax             ; A3 12 00
         lea     di, [0x14]                      ; 8D 3E 14 00
         xor     si, si                          ; 33 F6
+;   [loop start] L_009A
 L_009A:
         mov     cx, word ptr cs:[si + 0x15f]    ; 2E 8B 8C 5F 01
         jcxz    L_00C7                          ; E3 26
+;   [loop iteration target] L_00A1
 L_00A1:
         push    cx                              ; 51
         push    ds                              ; 1E
@@ -131,11 +162,16 @@ L_00A1:
         inc     si                              ; 46
         inc     si                              ; 46
         jmp     L_009A                          ; EB D4
+;   [loop start (also forward branch)] L_00C6
 L_00C6:
         ret                                     ; C3
+;   [conditional branch target (if/else)] L_00C7
 L_00C7:
         push    ds                              ; 1E
+        ;   ^ arg lpszModule (high/segment)
         push    word ptr [di]                   ; FF 35
+        ;   ^ arg lpszModule (low/offset)
+        ; --> GETMODULEHANDLE(LPSTR lpszModule) -> HANDLE
         call    far KERNEL.GETMODULEHANDLE      ; 9A FF FF 00 00 [FIXUP]
         or      ax, ax                          ; 0B C0
         je      L_00C6                          ; 74 F3
@@ -157,10 +193,13 @@ L_00C7:
         je      L_00C6                          ; 74 D0
         push    ax                              ; 50
         push    ax                              ; 50
+        ;   ^ arg hMem
+        ; --> GLOBALLOCK(HANDLE hMem) -> LPVOID
         call    far KERNEL.GLOBALLOCK           ; 9A FF FF 00 00 [FIXUP]
         jcxz    L_0130                          ; E3 31
         mov     si, ax                          ; 8B F0
         mov     es, dx                          ; 8E C2
+;   [loop start] L_0103
 L_0103:
         push    es                              ; 06
         push    es                              ; 06
@@ -183,10 +222,13 @@ L_0103:
         inc     di                              ; 47
         cmp     di, 0x30                        ; 81 FF 30 00
         jle     L_0103                          ; 7E D3
+;   [conditional branch target (if/else)] L_0130
 L_0130:
         pop     di                              ; 5F
         je      L_0158                          ; 74 25
         push    di                              ; 57
+        ;   ^ arg hMem
+        ; --> GLOBALUNLOCK(HANDLE hMem) -> BOOL
         call    far KERNEL.GLOBALUNLOCK         ; 9A FF FF 00 00 [FIXUP]
         push    di                              ; 57
         call    far KERNEL.FREERESOURCE         ; 9A FF FF 00 00 [FIXUP]
@@ -200,6 +242,7 @@ L_0130:
         mov     bx, ax                          ; 8B D8
         mov     bx, word ptr [bx]               ; 8B 1F
         or      byte ptr [bx + 3], 0x80         ; 80 4F 03 80
+;   [error/early exit] L_0158
 L_0158:
         ret                                     ; C3
         add     word ptr [ecx + eax + 0x71], bp ; 67 01 6C 01 71
@@ -226,16 +269,18 @@ L_0158:
         call    far _SEG1_15F6                  ; 9A 7B 01 00 00 [FIXUP]
         or      ax, ax                          ; 0B C0
         mov     word ptr [0x36], ax             ; A3 36 00
+;   [error/early exit] L_0194
 L_0194:
         ret                                     ; C3
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_0195 -- offset 0x0195 -- 32 instr
-; Funcion mediana (32 instr, 0 calls).
-; tags: medium
-; callers: entry
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_0195   offset=0x0195  size=32 instr  segment=seg2.asm
+;
+; Classification (pass8): c_high  (score C=6, ASM=0)
+; Prologue: standard_bp     Epilogue: ret
+;-------------------------------------------------------------------------
+;   [sub-routine] L_0195
 L_0195:
+        ;   = cProc <0> ; NEAR PASCAL prologue
         push    bp                              ; 55
         mov     bp, sp                          ; 8B EC
         mov     ax, 0x69                        ; B8 69 00
@@ -244,9 +289,11 @@ L_0195:
         mov     word ptr [0x394], ax            ; A3 94 03
         or      ax, ax                          ; 0B C0
         jne     L_01AC                          ; 75 04
+;   [loop start] L_01A8
 L_01A8:
         sub     ax, ax                          ; 2B C0
         jmp     L_01DB                          ; EB 2F
+;   [conditional branch target (if/else)] L_01AC
 L_01AC:
         mov     ax, 0x5a                        ; B8 5A 00
         cdq                                     ; 99
@@ -266,7 +313,9 @@ L_01AC:
         push    ds                              ; 1E
         push    ax                              ; 50
         call    far _entry_119                  ; 9A FF FF 00 00 [FIXUP]
+        ; constant WM_CREATE
         mov     ax, 1                           ; B8 01 00
+;   [fall-through exit] L_01DB
 L_01DB:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D

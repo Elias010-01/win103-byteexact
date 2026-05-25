@@ -1,3 +1,17 @@
+; ======================================================================
+; GDI / seg24.asm   (segment 24 of GDI)
+; ----------------------------------------------------------------------
+; Functions discovered (pass1b):        11
+; Total instructions:                  177
+; 
+; Classification (pass8):
+;   C-origin (high+medium):              0
+;   ASM-origin (high+medium):            0
+;   Unclear:                             2
+;   Tiny / unclassified:                 9
+; 
+; Far API calls in this segment:     0 (0 unique)
+; ======================================================================
 ; AUTO-GENERATED from original GDI segment 24
 ; segment_size=400 bytes, flags=0xf030
 ; mode: humano legible - instrucciones x86 + bytes raw en comentario (autoritativo)
@@ -10,12 +24,6 @@
 ; el binario original).
 
 GDI_TEXT SEGMENT BYTE PUBLIC 'CODE'
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; DMTRANSPOSE -- 80 instr
-; Iterador con instrucciones de string (movsb/scasb/...) (80 instr).
-; tags: complex_iterator, far, string_op
-;----------------------------------------------------------------------
 
 
 ;-----------------------------------------------------------------------
@@ -50,12 +58,14 @@ DMTRANSPOSE PROC FAR
         add     si, ax                          ; 03 F0
         mov     word ptr [bp - 8], si           ; 89 76 F8
         jmp     L_0043                          ; EB 0C
+;   [loop start] L_0037
 L_0037:
         dec     word ptr [bp - 4]               ; FF 4E FC
         jle     L_0095                          ; 7E 59
         mov     si, word ptr [bp - 8]           ; 8B 76 F8
         inc     si                              ; 46
         mov     word ptr [bp - 8], si           ; 89 76 F8
+;   [branch target] L_0043
 L_0043:
         mov     ax, 8                           ; B8 08 00
         mov     word ptr [bp - 6], ax           ; 89 46 FA
@@ -77,6 +87,7 @@ L_0043:
         mov     dl, byte ptr [si]               ; 8A 14
         mov     si, ax                          ; 8B F0
         mov     ah, al                          ; 8A E0
+;   [loop start] L_006F
 L_006F:
         dec     word ptr [bp - 6]               ; FF 4E FA
         jl      L_0037                          ; 7C C3
@@ -97,6 +108,7 @@ L_006F:
         rcl     al, 1                           ; D0 D0
         stosb   byte ptr es:[di], al            ; AA
         jmp     L_006F                          ; EB DA
+;   [conditional branch target (if/else)] L_0095
 L_0095:
         pop     di                              ; 5F
         pop     si                              ; 5E
@@ -107,12 +119,6 @@ L_0095:
         dec     bp                              ; 4D
         retf    0xa                             ; CA 0A 00
 DMTRANSPOSE ENDP
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; DMBITBLT -- 2 instr
-; Stub trivial (2 instrucciones, sin logica significativa).
-; tags: far, trivial_stub
-;----------------------------------------------------------------------
 
 
 ;-----------------------------------------------------------------------
@@ -122,12 +128,6 @@ DMBITBLT PROC FAR
         mov     cx, 0x14                        ; B9 14 00
         jmp     L_00CE                          ; EB 27
 DMBITBLT ENDP
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; DMSTRBLT -- 2 instr
-; Stub trivial (2 instrucciones, sin logica significativa).
-; tags: far, trivial_stub
-;----------------------------------------------------------------------
 
 
 ;-----------------------------------------------------------------------
@@ -137,12 +137,6 @@ DMSTRBLT PROC FAR
         mov     cx, 0x2813                      ; B9 13 28
         jmp     L_00CE                          ; EB 22
 DMSTRBLT ENDP
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; DMCOLORINFO -- 2 instr
-; Stub trivial (2 instrucciones, sin logica significativa).
-; tags: far, trivial_stub
-;----------------------------------------------------------------------
 
 
 ;-----------------------------------------------------------------------
@@ -152,12 +146,6 @@ DMCOLORINFO PROC FAR
         mov     cx, 0x40a                       ; B9 0A 04
         jmp     L_00CE                          ; EB 1D
 DMCOLORINFO ENDP
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; DMPIXEL -- 2 instr
-; Stub trivial (2 instrucciones, sin logica significativa).
-; tags: far, trivial_stub
-;----------------------------------------------------------------------
 
 
 ;-----------------------------------------------------------------------
@@ -167,12 +155,6 @@ DMPIXEL PROC FAR
         mov     cx, 0x200c                      ; B9 0C 20
         jmp     L_00CE                          ; EB 18
 DMPIXEL ENDP
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; DMOUTPUT -- 2 instr
-; Stub trivial (2 instrucciones, sin logica significativa).
-; tags: far, trivial_stub
-;----------------------------------------------------------------------
 
 
 ;-----------------------------------------------------------------------
@@ -182,12 +164,6 @@ DMOUTPUT PROC FAR
         mov     cx, 0x1c12                      ; B9 12 1C
         jmp     L_00CE                          ; EB 13
 DMOUTPUT ENDP
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; DMREALIZEOBJECT -- 2 instr
-; Stub trivial (2 instrucciones, sin logica significativa).
-; tags: far, trivial_stub
-;----------------------------------------------------------------------
 
 
 ;-----------------------------------------------------------------------
@@ -197,27 +173,16 @@ DMREALIZEOBJECT PROC FAR
         mov     cx, 0x240d                      ; B9 0D 24
         jmp     L_00CE                          ; EB 0E
 DMREALIZEOBJECT ENDP
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; DMENUMDFONTS -- 2 instr
-; Stub trivial (2 instrucciones, sin logica significativa).
-; tags: far, trivial_stub
-;----------------------------------------------------------------------
 
 
 ;-----------------------------------------------------------------------
 ; DMENUMDFONTS  (offset 0x00C0, size 6 bytes)
 ;-----------------------------------------------------------------------
 DMENUMDFONTS PROC FAR
+        ; constant WM_CREATE
         mov     ax, 1                           ; B8 01 00
         retf    0x10                            ; CA 10 00
 DMENUMDFONTS ENDP
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; DMENUMOBJ -- 2 instr
-; Stub trivial (2 instrucciones, sin logica significativa).
-; tags: far, trivial_stub
-;----------------------------------------------------------------------
 
 
 ;-----------------------------------------------------------------------
@@ -227,12 +192,6 @@ DMENUMOBJ PROC FAR
         mov     cx, 0x180b                      ; B9 0B 18
         jmp     L_00CE                          ; EB 03
 DMENUMOBJ ENDP
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; DMSCANLR -- 1 instr
-; Stub trivial (1 instrucciones, sin logica significativa).
-; tags: far, trivial_stub
-;----------------------------------------------------------------------
 
 
 ;-----------------------------------------------------------------------
@@ -241,18 +200,13 @@ DMENUMOBJ ENDP
 DMSCANLR PROC FAR
         mov     cx, 0x2c0b                      ; B9 0B 2C
 DMSCANLR ENDP
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; BRUTE -- 80 instr
-; Iterador con instrucciones de string (movsb/scasb/...) (80 instr).
-; tags: complex_iterator, far, loop, string_op
-;----------------------------------------------------------------------
 
 
 ;-----------------------------------------------------------------------
 ; BRUTE  (offset 0x00CE, size 194 bytes)
 ;-----------------------------------------------------------------------
 BRUTE PROC FAR
+;   [unconditional branch target] L_00CE
 L_00CE:
         mov     ax, ds                          ; 8C D8
         nop                                     ; 90
@@ -265,6 +219,7 @@ L_00CE:
         mov     di, sp                          ; 8B FC
         xor     dx, dx                          ; 33 D2
         xchg    dl, ch                          ; 86 EA
+;   [loop iteration target] L_00E2
 L_00E2:
         movsw   word ptr es:[di], word ptr ss:[si] ; 36 A5
         loop    L_00E2                          ; E2 FC
@@ -290,6 +245,7 @@ L_00E2:
         or      ax, si                          ; 0B C6
         je      L_0120                          ; 74 03
         call    L_016E                          ; E8 4E 00
+;   [conditional branch target (if/else)] L_0120
 L_0120:
         mov     bx, word ptr [bx + 0x1a]        ; 8B 5F 1A
         mov     bx, word ptr [bx]               ; 8B 1F
@@ -306,6 +262,7 @@ L_0120:
         mov     word ptr es:[di + 0x12], ax     ; 26 89 45 12
         mov     ax, word ptr [bp - 4]           ; 8B 46 FC
         mov     word ptr es:[di + 0x14], ax     ; 26 89 45 14
+;   [conditional branch target (if/else)] L_0147
 L_0147:
         les     di, ptr [bp - 0x12]             ; C4 7E EE
         mov     ax, word ptr [bp - 0xe]         ; 8B 46 F2
@@ -313,6 +270,7 @@ L_0147:
         mov     ax, word ptr [bp - 0xc]         ; 8B 46 F4
         mov     word ptr es:[di + 0x14], ax     ; 26 89 45 14
         mov     ax, bx                          ; 8B C3
+;   [loop start] L_015A
 L_015A:
         lea     sp, [bp - 0x1a]                 ; 8D 66 E6
         pop     di                              ; 5F
@@ -323,10 +281,12 @@ L_015A:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf                                    ; CB
+;   [sub-routine] L_0168
 L_0168:
         cld                                     ; FC
         mov     word ptr [bp + di], si          ; 89 33
         mov     word ptr [bp + di + 2], es      ; 8C 43 02
+;   [sub-routine] L_016E
 L_016E:
         xor     ax, ax                          ; 33 C0
         cmp     word ptr es:[si], ax            ; 26 39 04

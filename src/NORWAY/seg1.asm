@@ -1,3 +1,17 @@
+; ======================================================================
+; NORWAY / seg1.asm   (segment 1 of NORWAY)
+; ----------------------------------------------------------------------
+; Functions discovered (pass1b):         0
+; Total instructions:                    0
+; 
+; Classification (pass8):
+;   C-origin (high+medium):              0
+;   ASM-origin (high+medium):            0
+;   Unclear:                             0
+;   Tiny / unclassified:                 0
+; 
+; Far API calls in this segment:     0 (0 unique)
+; ======================================================================
 ; AUTO-GENERATED from original NORWAY segment 1
 ; segment_size=78 bytes, flags=0xf070
 ; mode: humano legible - instrucciones x86 + bytes raw en comentario (autoritativo)
@@ -31,6 +45,7 @@ NORWAY_TEXT SEGMENT BYTE PUBLIC 'CODE'
         mov     byte ptr [0x20], 1              ; C6 06 20 00 01
         nop                                     ; 90
         jmp     L_0041                          ; EB 18
+;   [conditional branch target (if/else)] L_0029
 L_0029:
         push    ds                              ; 1E
         mov     ax, 0xf000                      ; B8 00 F0
@@ -41,6 +56,7 @@ L_0029:
         mov     al, byte ptr [0x359]            ; A0 59 03
         xchg    byte ptr [0x35b], al            ; 86 06 5B 03
         mov     byte ptr [0x359], al            ; A2 59 03
+;   [branch target] L_0041
 L_0041:
         xor     ax, ax                          ; 33 C0
         not     ax                              ; F7 D0

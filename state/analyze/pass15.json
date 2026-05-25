@@ -1,0 +1,3098 @@
+{
+  "pass": "pass15_arg_labels",
+  "dry_run": false,
+  "modules_processed": 69,
+  "total_labels_added": 16819,
+  "total_calls_annotated": 5851,
+  "total_files_modified": 221,
+  "backup_dir": "C:\\Users\\Elias\\CascadeProjects\\modern-personality-agent\\backups\\pass15-2026-05-25-150304",
+  "results": [
+    {
+      "module": "ATTDC",
+      "files_modified": 0,
+      "total_labels_added": 0,
+      "total_calls_annotated": 0,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        },
+        {
+          "file": "seg2.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "ATTDEB",
+      "files_modified": 0,
+      "total_labels_added": 0,
+      "total_calls_annotated": 0,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        },
+        {
+          "file": "seg2.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "ATTKBD",
+      "files_modified": 0,
+      "total_labels_added": 0,
+      "total_calls_annotated": 0,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        },
+        {
+          "file": "seg2.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        },
+        {
+          "file": "seg3.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "ATTMOUSE",
+      "files_modified": 1,
+      "total_labels_added": 3,
+      "total_calls_annotated": 1,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "calls_seen": 1,
+          "calls_annotated": 1,
+          "labels_added": 3,
+          "modified": true
+        },
+        {
+          "file": "seg2.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "CALC",
+      "files_modified": 1,
+      "total_labels_added": 379,
+      "total_calls_annotated": 127,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "calls_seen": 134,
+          "calls_annotated": 127,
+          "labels_added": 379,
+          "modified": true
+        },
+        {
+          "file": "seg2.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "CALENDAR",
+      "files_modified": 8,
+      "total_labels_added": 899,
+      "total_calls_annotated": 259,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "calls_seen": 17,
+          "calls_annotated": 16,
+          "labels_added": 31,
+          "modified": true
+        },
+        {
+          "file": "seg10.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        },
+        {
+          "file": "seg2.asm",
+          "calls_seen": 23,
+          "calls_annotated": 20,
+          "labels_added": 68,
+          "modified": true
+        },
+        {
+          "file": "seg3.asm",
+          "calls_seen": 235,
+          "calls_annotated": 212,
+          "labels_added": 762,
+          "modified": true
+        },
+        {
+          "file": "seg4.asm",
+          "calls_seen": 4,
+          "calls_annotated": 4,
+          "labels_added": 13,
+          "modified": true
+        },
+        {
+          "file": "seg5.asm",
+          "calls_seen": 1,
+          "calls_annotated": 1,
+          "labels_added": 8,
+          "modified": true
+        },
+        {
+          "file": "seg6.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        },
+        {
+          "file": "seg7.asm",
+          "calls_seen": 1,
+          "calls_annotated": 1,
+          "labels_added": 2,
+          "modified": true
+        },
+        {
+          "file": "seg8.asm",
+          "calls_seen": 1,
+          "calls_annotated": 1,
+          "labels_added": 5,
+          "modified": true
+        },
+        {
+          "file": "seg9.asm",
+          "calls_seen": 4,
+          "calls_annotated": 4,
+          "labels_added": 10,
+          "modified": true
+        }
+      ]
+    },
+    {
+      "module": "CARDFILE",
+      "files_modified": 6,
+      "total_labels_added": 1483,
+      "total_calls_annotated": 510,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "calls_seen": 19,
+          "calls_annotated": 19,
+          "labels_added": 44,
+          "modified": true
+        },
+        {
+          "file": "seg2.asm",
+          "calls_seen": 38,
+          "calls_annotated": 38,
+          "labels_added": 138,
+          "modified": true
+        },
+        {
+          "file": "seg3.asm",
+          "calls_seen": 101,
+          "calls_annotated": 99,
+          "labels_added": 270,
+          "modified": true
+        },
+        {
+          "file": "seg4.asm",
+          "calls_seen": 195,
+          "calls_annotated": 179,
+          "labels_added": 495,
+          "modified": true
+        },
+        {
+          "file": "seg5.asm",
+          "calls_seen": 81,
+          "calls_annotated": 76,
+          "labels_added": 232,
+          "modified": true
+        },
+        {
+          "file": "seg6.asm",
+          "calls_seen": 104,
+          "calls_annotated": 99,
+          "labels_added": 304,
+          "modified": true
+        },
+        {
+          "file": "seg7.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "CGA",
+      "files_modified": 0,
+      "total_labels_added": 0,
+      "total_calls_annotated": 0,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        },
+        {
+          "file": "seg2.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "CITOH",
+      "files_modified": 2,
+      "total_labels_added": 81,
+      "total_calls_annotated": 34,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "calls_seen": 10,
+          "calls_annotated": 10,
+          "labels_added": 18,
+          "modified": true
+        },
+        {
+          "file": "seg2.asm",
+          "calls_seen": 24,
+          "calls_annotated": 24,
+          "labels_added": 63,
+          "modified": true
+        },
+        {
+          "file": "seg3.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "CLIPBRD",
+      "files_modified": 1,
+      "total_labels_added": 249,
+      "total_calls_annotated": 84,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "calls_seen": 89,
+          "calls_annotated": 84,
+          "labels_added": 249,
+          "modified": true
+        },
+        {
+          "file": "seg2.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "CLOCK",
+      "files_modified": 0,
+      "total_labels_added": 0,
+      "total_calls_annotated": 65,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "calls_seen": 68,
+          "calls_annotated": 65,
+          "labels_added": 0,
+          "modified": false,
+          "already_annotated": true
+        },
+        {
+          "file": "seg2.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "COMM",
+      "files_modified": 0,
+      "total_labels_added": 0,
+      "total_calls_annotated": 0,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        },
+        {
+          "file": "seg2.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "CONTROL",
+      "files_modified": 9,
+      "total_labels_added": 2314,
+      "total_calls_annotated": 680,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "calls_seen": 104,
+          "calls_annotated": 101,
+          "labels_added": 313,
+          "modified": true
+        },
+        {
+          "file": "seg10.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        },
+        {
+          "file": "seg2.asm",
+          "calls_seen": 51,
+          "calls_annotated": 51,
+          "labels_added": 120,
+          "modified": true
+        },
+        {
+          "file": "seg3.asm",
+          "calls_seen": 10,
+          "calls_annotated": 9,
+          "labels_added": 27,
+          "modified": true
+        },
+        {
+          "file": "seg4.asm",
+          "calls_seen": 225,
+          "calls_annotated": 217,
+          "labels_added": 780,
+          "modified": true
+        },
+        {
+          "file": "seg5.asm",
+          "calls_seen": 23,
+          "calls_annotated": 23,
+          "labels_added": 84,
+          "modified": true
+        },
+        {
+          "file": "seg6.asm",
+          "calls_seen": 128,
+          "calls_annotated": 125,
+          "labels_added": 489,
+          "modified": true
+        },
+        {
+          "file": "seg7.asm",
+          "calls_seen": 94,
+          "calls_annotated": 91,
+          "labels_added": 246,
+          "modified": true
+        },
+        {
+          "file": "seg8.asm",
+          "calls_seen": 52,
+          "calls_annotated": 48,
+          "labels_added": 201,
+          "modified": true
+        },
+        {
+          "file": "seg9.asm",
+          "calls_seen": 15,
+          "calls_annotated": 15,
+          "labels_added": 54,
+          "modified": true
+        }
+      ]
+    },
+    {
+      "module": "DENMARK",
+      "files_modified": 0,
+      "total_labels_added": 0,
+      "total_calls_annotated": 0,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        },
+        {
+          "file": "seg2.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        },
+        {
+          "file": "seg3.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "EGAHIBW",
+      "files_modified": 0,
+      "total_labels_added": 0,
+      "total_calls_annotated": 0,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        },
+        {
+          "file": "seg2.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "EGAHIRES",
+      "files_modified": 0,
+      "total_labels_added": 0,
+      "total_calls_annotated": 0,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        },
+        {
+          "file": "seg2.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "EGALORES",
+      "files_modified": 0,
+      "total_labels_added": 0,
+      "total_calls_annotated": 0,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        },
+        {
+          "file": "seg2.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "EGAMONO",
+      "files_modified": 0,
+      "total_labels_added": 0,
+      "total_calls_annotated": 0,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        },
+        {
+          "file": "seg2.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "EPSON",
+      "files_modified": 2,
+      "total_labels_added": 76,
+      "total_calls_annotated": 32,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "calls_seen": 10,
+          "calls_annotated": 10,
+          "labels_added": 18,
+          "modified": true
+        },
+        {
+          "file": "seg2.asm",
+          "calls_seen": 22,
+          "calls_annotated": 22,
+          "labels_added": 58,
+          "modified": true
+        },
+        {
+          "file": "seg3.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "EPSONMX",
+      "files_modified": 2,
+      "total_labels_added": 80,
+      "total_calls_annotated": 33,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "calls_seen": 19,
+          "calls_annotated": 19,
+          "labels_added": 52,
+          "modified": true
+        },
+        {
+          "file": "seg2.asm",
+          "calls_seen": 14,
+          "calls_annotated": 14,
+          "labels_added": 28,
+          "modified": true
+        },
+        {
+          "file": "seg3.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "FRANCE",
+      "files_modified": 0,
+      "total_labels_added": 0,
+      "total_calls_annotated": 0,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        },
+        {
+          "file": "seg2.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        },
+        {
+          "file": "seg3.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "FTG",
+      "files_modified": 0,
+      "total_labels_added": 0,
+      "total_calls_annotated": 0,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        },
+        {
+          "file": "seg2.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "GDI",
+      "files_modified": 22,
+      "total_labels_added": 588,
+      "total_calls_annotated": 383,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "calls_seen": 65,
+          "calls_annotated": 64,
+          "labels_added": 92,
+          "modified": true
+        },
+        {
+          "file": "seg10.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        },
+        {
+          "file": "seg11.asm",
+          "calls_seen": 4,
+          "calls_annotated": 4,
+          "labels_added": 4,
+          "modified": true
+        },
+        {
+          "file": "seg12.asm",
+          "calls_seen": 1,
+          "calls_annotated": 1,
+          "labels_added": 1,
+          "modified": true
+        },
+        {
+          "file": "seg13.asm",
+          "calls_seen": 77,
+          "calls_annotated": 75,
+          "labels_added": 155,
+          "modified": true
+        },
+        {
+          "file": "seg14.asm",
+          "calls_seen": 2,
+          "calls_annotated": 2,
+          "labels_added": 2,
+          "modified": true
+        },
+        {
+          "file": "seg15.asm",
+          "calls_seen": 1,
+          "calls_annotated": 1,
+          "labels_added": 1,
+          "modified": true
+        },
+        {
+          "file": "seg16.asm",
+          "calls_seen": 4,
+          "calls_annotated": 4,
+          "labels_added": 4,
+          "modified": true
+        },
+        {
+          "file": "seg17.asm",
+          "calls_seen": 2,
+          "calls_annotated": 2,
+          "labels_added": 2,
+          "modified": true
+        },
+        {
+          "file": "seg18.asm",
+          "calls_seen": 3,
+          "calls_annotated": 3,
+          "labels_added": 3,
+          "modified": true
+        },
+        {
+          "file": "seg19.asm",
+          "calls_seen": 3,
+          "calls_annotated": 3,
+          "labels_added": 3,
+          "modified": true
+        },
+        {
+          "file": "seg2.asm",
+          "calls_seen": 4,
+          "calls_annotated": 4,
+          "labels_added": 7,
+          "modified": true
+        },
+        {
+          "file": "seg20.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        },
+        {
+          "file": "seg21.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        },
+        {
+          "file": "seg22.asm",
+          "calls_seen": 5,
+          "calls_annotated": 5,
+          "labels_added": 5,
+          "modified": true
+        },
+        {
+          "file": "seg23.asm",
+          "calls_seen": 12,
+          "calls_annotated": 12,
+          "labels_added": 15,
+          "modified": true
+        },
+        {
+          "file": "seg24.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        },
+        {
+          "file": "seg25.asm",
+          "calls_seen": 61,
+          "calls_annotated": 60,
+          "labels_added": 87,
+          "modified": true
+        },
+        {
+          "file": "seg26.asm",
+          "calls_seen": 23,
+          "calls_annotated": 23,
+          "labels_added": 53,
+          "modified": true
+        },
+        {
+          "file": "seg27.asm",
+          "calls_seen": 3,
+          "calls_annotated": 3,
+          "labels_added": 7,
+          "modified": true
+        },
+        {
+          "file": "seg28.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        },
+        {
+          "file": "seg29.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        },
+        {
+          "file": "seg3.asm",
+          "calls_seen": 12,
+          "calls_annotated": 10,
+          "labels_added": 10,
+          "modified": true
+        },
+        {
+          "file": "seg30.asm",
+          "calls_seen": 2,
+          "calls_annotated": 2,
+          "labels_added": 2,
+          "modified": true
+        },
+        {
+          "file": "seg31.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        },
+        {
+          "file": "seg4.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        },
+        {
+          "file": "seg5.asm",
+          "calls_seen": 43,
+          "calls_annotated": 40,
+          "labels_added": 58,
+          "modified": true
+        },
+        {
+          "file": "seg6.asm",
+          "calls_seen": 53,
+          "calls_annotated": 45,
+          "labels_added": 54,
+          "modified": true
+        },
+        {
+          "file": "seg7.asm",
+          "calls_seen": 11,
+          "calls_annotated": 11,
+          "labels_added": 11,
+          "modified": true
+        },
+        {
+          "file": "seg8.asm",
+          "calls_seen": 9,
+          "calls_annotated": 9,
+          "labels_added": 12,
+          "modified": true
+        },
+        {
+          "file": "seg9.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "GENIUS",
+      "files_modified": 0,
+      "total_labels_added": 0,
+      "total_calls_annotated": 0,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        },
+        {
+          "file": "seg2.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "GERMANY",
+      "files_modified": 0,
+      "total_labels_added": 0,
+      "total_calls_annotated": 0,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        },
+        {
+          "file": "seg2.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        },
+        {
+          "file": "seg3.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "HERCULES",
+      "files_modified": 0,
+      "total_labels_added": 0,
+      "total_calls_annotated": 0,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        },
+        {
+          "file": "seg2.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "HP7470A",
+      "files_modified": 1,
+      "total_labels_added": 51,
+      "total_calls_annotated": 13,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "calls_seen": 14,
+          "calls_annotated": 13,
+          "labels_added": 51,
+          "modified": true
+        },
+        {
+          "file": "seg2.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "HP7475A",
+      "files_modified": 1,
+      "total_labels_added": 51,
+      "total_calls_annotated": 13,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "calls_seen": 14,
+          "calls_annotated": 13,
+          "labels_added": 51,
+          "modified": true
+        },
+        {
+          "file": "seg2.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "HP7550A",
+      "files_modified": 1,
+      "total_labels_added": 55,
+      "total_calls_annotated": 15,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "calls_seen": 16,
+          "calls_annotated": 15,
+          "labels_added": 55,
+          "modified": true
+        },
+        {
+          "file": "seg2.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "HPLASER",
+      "files_modified": 1,
+      "total_labels_added": 58,
+      "total_calls_annotated": 23,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "calls_seen": 23,
+          "calls_annotated": 23,
+          "labels_added": 58,
+          "modified": true
+        },
+        {
+          "file": "seg2.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "HPLASERP",
+      "files_modified": 1,
+      "total_labels_added": 58,
+      "total_calls_annotated": 23,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "calls_seen": 23,
+          "calls_annotated": 23,
+          "labels_added": 58,
+          "modified": true
+        },
+        {
+          "file": "seg2.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "IBMGRX",
+      "files_modified": 2,
+      "total_labels_added": 80,
+      "total_calls_annotated": 33,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "calls_seen": 19,
+          "calls_annotated": 19,
+          "labels_added": 52,
+          "modified": true
+        },
+        {
+          "file": "seg2.asm",
+          "calls_seen": 14,
+          "calls_annotated": 14,
+          "labels_added": 28,
+          "modified": true
+        },
+        {
+          "file": "seg3.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "ITALY",
+      "files_modified": 0,
+      "total_labels_added": 0,
+      "total_calls_annotated": 0,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        },
+        {
+          "file": "seg2.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        },
+        {
+          "file": "seg3.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "JOYMOUSE",
+      "files_modified": 0,
+      "total_labels_added": 0,
+      "total_calls_annotated": 0,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        },
+        {
+          "file": "seg2.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "KERNEL",
+      "files_modified": 0,
+      "total_labels_added": 0,
+      "total_calls_annotated": 0,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "LMOUSE",
+      "files_modified": 0,
+      "total_labels_added": 0,
+      "total_calls_annotated": 0,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        },
+        {
+          "file": "seg2.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "LPC",
+      "files_modified": 0,
+      "total_labels_added": 0,
+      "total_calls_annotated": 0,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        },
+        {
+          "file": "seg2.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "LQ1500",
+      "files_modified": 2,
+      "total_labels_added": 76,
+      "total_calls_annotated": 32,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "calls_seen": 10,
+          "calls_annotated": 10,
+          "labels_added": 18,
+          "modified": true
+        },
+        {
+          "file": "seg2.asm",
+          "calls_seen": 22,
+          "calls_annotated": 22,
+          "labels_added": 58,
+          "modified": true
+        },
+        {
+          "file": "seg3.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "MOUSE",
+      "files_modified": 0,
+      "total_labels_added": 0,
+      "total_calls_annotated": 0,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        },
+        {
+          "file": "seg2.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        },
+        {
+          "file": "seg3.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "MSDOS",
+      "files_modified": 4,
+      "total_labels_added": 1160,
+      "total_calls_annotated": 363,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "calls_seen": 5,
+          "calls_annotated": 5,
+          "labels_added": 15,
+          "modified": true
+        },
+        {
+          "file": "seg2.asm",
+          "calls_seen": 41,
+          "calls_annotated": 40,
+          "labels_added": 163,
+          "modified": true
+        },
+        {
+          "file": "seg3.asm",
+          "calls_seen": 147,
+          "calls_annotated": 140,
+          "labels_added": 440,
+          "modified": true
+        },
+        {
+          "file": "seg4.asm",
+          "calls_seen": 188,
+          "calls_annotated": 178,
+          "labels_added": 542,
+          "modified": true
+        },
+        {
+          "file": "seg5.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "MSDOSD",
+      "files_modified": 1,
+      "total_labels_added": 18,
+      "total_calls_annotated": 12,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "calls_seen": 12,
+          "calls_annotated": 12,
+          "labels_added": 18,
+          "modified": true
+        },
+        {
+          "file": "seg2.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "MSMOUSE1",
+      "files_modified": 1,
+      "total_labels_added": 3,
+      "total_calls_annotated": 1,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "calls_seen": 1,
+          "calls_annotated": 1,
+          "labels_added": 3,
+          "modified": true
+        },
+        {
+          "file": "seg2.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "MSMOUSE2",
+      "files_modified": 1,
+      "total_labels_added": 3,
+      "total_calls_annotated": 1,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "calls_seen": 1,
+          "calls_annotated": 1,
+          "labels_added": 3,
+          "modified": true
+        },
+        {
+          "file": "seg2.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "NEC3550",
+      "files_modified": 1,
+      "total_labels_added": 74,
+      "total_calls_annotated": 24,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "calls_seen": 24,
+          "calls_annotated": 24,
+          "labels_added": 74,
+          "modified": true
+        },
+        {
+          "file": "seg2.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "NECP2",
+      "files_modified": 2,
+      "total_labels_added": 76,
+      "total_calls_annotated": 32,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "calls_seen": 10,
+          "calls_annotated": 10,
+          "labels_added": 18,
+          "modified": true
+        },
+        {
+          "file": "seg2.asm",
+          "calls_seen": 22,
+          "calls_annotated": 22,
+          "labels_added": 58,
+          "modified": true
+        },
+        {
+          "file": "seg3.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "NOMOUSE",
+      "files_modified": 0,
+      "total_labels_added": 0,
+      "total_calls_annotated": 0,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "NORWAY",
+      "files_modified": 0,
+      "total_labels_added": 0,
+      "total_calls_annotated": 0,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        },
+        {
+          "file": "seg2.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        },
+        {
+          "file": "seg3.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "NOTEPAD",
+      "files_modified": 9,
+      "total_labels_added": 721,
+      "total_calls_annotated": 210,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "calls_seen": 49,
+          "calls_annotated": 44,
+          "labels_added": 147,
+          "modified": true
+        },
+        {
+          "file": "seg10.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        },
+        {
+          "file": "seg2.asm",
+          "calls_seen": 20,
+          "calls_annotated": 19,
+          "labels_added": 85,
+          "modified": true
+        },
+        {
+          "file": "seg3.asm",
+          "calls_seen": 26,
+          "calls_annotated": 24,
+          "labels_added": 62,
+          "modified": true
+        },
+        {
+          "file": "seg4.asm",
+          "calls_seen": 51,
+          "calls_annotated": 50,
+          "labels_added": 169,
+          "modified": true
+        },
+        {
+          "file": "seg5.asm",
+          "calls_seen": 9,
+          "calls_annotated": 9,
+          "labels_added": 35,
+          "modified": true
+        },
+        {
+          "file": "seg6.asm",
+          "calls_seen": 40,
+          "calls_annotated": 39,
+          "labels_added": 134,
+          "modified": true
+        },
+        {
+          "file": "seg7.asm",
+          "calls_seen": 23,
+          "calls_annotated": 20,
+          "labels_added": 68,
+          "modified": true
+        },
+        {
+          "file": "seg8.asm",
+          "calls_seen": 4,
+          "calls_annotated": 4,
+          "labels_added": 13,
+          "modified": true
+        },
+        {
+          "file": "seg9.asm",
+          "calls_seen": 1,
+          "calls_annotated": 1,
+          "labels_added": 8,
+          "modified": true
+        }
+      ]
+    },
+    {
+      "module": "OKI92",
+      "files_modified": 2,
+      "total_labels_added": 76,
+      "total_calls_annotated": 32,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "calls_seen": 10,
+          "calls_annotated": 10,
+          "labels_added": 18,
+          "modified": true
+        },
+        {
+          "file": "seg2.asm",
+          "calls_seen": 22,
+          "calls_annotated": 22,
+          "labels_added": 58,
+          "modified": true
+        },
+        {
+          "file": "seg3.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "PAINT",
+      "files_modified": 31,
+      "total_labels_added": 3121,
+      "total_calls_annotated": 933,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "calls_seen": 218,
+          "calls_annotated": 195,
+          "labels_added": 610,
+          "modified": true
+        },
+        {
+          "file": "seg10.asm",
+          "calls_seen": 124,
+          "calls_annotated": 104,
+          "labels_added": 310,
+          "modified": true
+        },
+        {
+          "file": "seg11.asm",
+          "calls_seen": 38,
+          "calls_annotated": 34,
+          "labels_added": 105,
+          "modified": true
+        },
+        {
+          "file": "seg12.asm",
+          "calls_seen": 37,
+          "calls_annotated": 33,
+          "labels_added": 76,
+          "modified": true
+        },
+        {
+          "file": "seg13.asm",
+          "calls_seen": 29,
+          "calls_annotated": 26,
+          "labels_added": 70,
+          "modified": true
+        },
+        {
+          "file": "seg14.asm",
+          "calls_seen": 3,
+          "calls_annotated": 3,
+          "labels_added": 13,
+          "modified": true
+        },
+        {
+          "file": "seg15.asm",
+          "calls_seen": 7,
+          "calls_annotated": 5,
+          "labels_added": 17,
+          "modified": true
+        },
+        {
+          "file": "seg16.asm",
+          "calls_seen": 8,
+          "calls_annotated": 8,
+          "labels_added": 22,
+          "modified": true
+        },
+        {
+          "file": "seg17.asm",
+          "calls_seen": 10,
+          "calls_annotated": 4,
+          "labels_added": 6,
+          "modified": true
+        },
+        {
+          "file": "seg18.asm",
+          "calls_seen": 10,
+          "calls_annotated": 8,
+          "labels_added": 26,
+          "modified": true
+        },
+        {
+          "file": "seg19.asm",
+          "calls_seen": 10,
+          "calls_annotated": 4,
+          "labels_added": 6,
+          "modified": true
+        },
+        {
+          "file": "seg2.asm",
+          "calls_seen": 18,
+          "calls_annotated": 18,
+          "labels_added": 26,
+          "modified": true
+        },
+        {
+          "file": "seg20.asm",
+          "calls_seen": 6,
+          "calls_annotated": 6,
+          "labels_added": 18,
+          "modified": true
+        },
+        {
+          "file": "seg21.asm",
+          "calls_seen": 6,
+          "calls_annotated": 4,
+          "labels_added": 6,
+          "modified": true
+        },
+        {
+          "file": "seg22.asm",
+          "calls_seen": 7,
+          "calls_annotated": 4,
+          "labels_added": 22,
+          "modified": true
+        },
+        {
+          "file": "seg23.asm",
+          "calls_seen": 7,
+          "calls_annotated": 6,
+          "labels_added": 16,
+          "modified": true
+        },
+        {
+          "file": "seg24.asm",
+          "calls_seen": 63,
+          "calls_annotated": 56,
+          "labels_added": 298,
+          "modified": true
+        },
+        {
+          "file": "seg25.asm",
+          "calls_seen": 4,
+          "calls_annotated": 4,
+          "labels_added": 12,
+          "modified": true
+        },
+        {
+          "file": "seg26.asm",
+          "calls_seen": 46,
+          "calls_annotated": 41,
+          "labels_added": 236,
+          "modified": true
+        },
+        {
+          "file": "seg27.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        },
+        {
+          "file": "seg28.asm",
+          "calls_seen": 5,
+          "calls_annotated": 5,
+          "labels_added": 13,
+          "modified": true
+        },
+        {
+          "file": "seg29.asm",
+          "calls_seen": 14,
+          "calls_annotated": 12,
+          "labels_added": 32,
+          "modified": true
+        },
+        {
+          "file": "seg3.asm",
+          "calls_seen": 61,
+          "calls_annotated": 56,
+          "labels_added": 252,
+          "modified": true
+        },
+        {
+          "file": "seg30.asm",
+          "calls_seen": 4,
+          "calls_annotated": 4,
+          "labels_added": 22,
+          "modified": true
+        },
+        {
+          "file": "seg31.asm",
+          "calls_seen": 75,
+          "calls_annotated": 71,
+          "labels_added": 203,
+          "modified": true
+        },
+        {
+          "file": "seg32.asm",
+          "calls_seen": 26,
+          "calls_annotated": 25,
+          "labels_added": 70,
+          "modified": true
+        },
+        {
+          "file": "seg33.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        },
+        {
+          "file": "seg4.asm",
+          "calls_seen": 45,
+          "calls_annotated": 42,
+          "labels_added": 153,
+          "modified": true
+        },
+        {
+          "file": "seg5.asm",
+          "calls_seen": 28,
+          "calls_annotated": 21,
+          "labels_added": 48,
+          "modified": true
+        },
+        {
+          "file": "seg6.asm",
+          "calls_seen": 31,
+          "calls_annotated": 31,
+          "labels_added": 83,
+          "modified": true
+        },
+        {
+          "file": "seg7.asm",
+          "calls_seen": 26,
+          "calls_annotated": 21,
+          "labels_added": 59,
+          "modified": true
+        },
+        {
+          "file": "seg8.asm",
+          "calls_seen": 45,
+          "calls_annotated": 43,
+          "labels_added": 177,
+          "modified": true
+        },
+        {
+          "file": "seg9.asm",
+          "calls_seen": 49,
+          "calls_annotated": 39,
+          "labels_added": 114,
+          "modified": true
+        }
+      ]
+    },
+    {
+      "module": "PSCRIPT",
+      "files_modified": 2,
+      "total_labels_added": 81,
+      "total_calls_annotated": 21,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "calls_seen": 21,
+          "calls_annotated": 20,
+          "labels_added": 78,
+          "modified": true
+        },
+        {
+          "file": "seg2.asm",
+          "calls_seen": 1,
+          "calls_annotated": 1,
+          "labels_added": 3,
+          "modified": true
+        },
+        {
+          "file": "seg3.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        },
+        {
+          "file": "seg4.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "REVERSI",
+      "files_modified": 1,
+      "total_labels_added": 367,
+      "total_calls_annotated": 127,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "calls_seen": 136,
+          "calls_annotated": 127,
+          "labels_added": 367,
+          "modified": true
+        },
+        {
+          "file": "seg2.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "SETUP",
+      "files_modified": 0,
+      "total_labels_added": 0,
+      "total_calls_annotated": 0,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "SG10",
+      "files_modified": 2,
+      "total_labels_added": 76,
+      "total_calls_annotated": 32,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "calls_seen": 10,
+          "calls_annotated": 10,
+          "labels_added": 18,
+          "modified": true
+        },
+        {
+          "file": "seg2.asm",
+          "calls_seen": 22,
+          "calls_annotated": 22,
+          "labels_added": 58,
+          "modified": true
+        },
+        {
+          "file": "seg3.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "SOUND",
+      "files_modified": 2,
+      "total_labels_added": 13,
+      "total_calls_annotated": 6,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "calls_seen": 8,
+          "calls_annotated": 5,
+          "labels_added": 11,
+          "modified": true
+        },
+        {
+          "file": "seg2.asm",
+          "calls_seen": 1,
+          "calls_annotated": 1,
+          "labels_added": 2,
+          "modified": true
+        },
+        {
+          "file": "seg3.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "SPAIN",
+      "files_modified": 0,
+      "total_labels_added": 0,
+      "total_calls_annotated": 0,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        },
+        {
+          "file": "seg2.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        },
+        {
+          "file": "seg3.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "SPOOLER",
+      "files_modified": 1,
+      "total_labels_added": 350,
+      "total_calls_annotated": 125,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "calls_seen": 133,
+          "calls_annotated": 125,
+          "labels_added": 350,
+          "modified": true
+        },
+        {
+          "file": "seg2.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "SWEDEN",
+      "files_modified": 0,
+      "total_labels_added": 0,
+      "total_calls_annotated": 0,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        },
+        {
+          "file": "seg2.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        },
+        {
+          "file": "seg3.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "SYSTEM",
+      "files_modified": 0,
+      "total_labels_added": 0,
+      "total_calls_annotated": 0,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "TERMINAL",
+      "files_modified": 7,
+      "total_labels_added": 735,
+      "total_calls_annotated": 234,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "calls_seen": 15,
+          "calls_annotated": 15,
+          "labels_added": 30,
+          "modified": true
+        },
+        {
+          "file": "seg2.asm",
+          "calls_seen": 142,
+          "calls_annotated": 136,
+          "labels_added": 430,
+          "modified": true
+        },
+        {
+          "file": "seg3.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        },
+        {
+          "file": "seg4.asm",
+          "calls_seen": 7,
+          "calls_annotated": 7,
+          "labels_added": 11,
+          "modified": true
+        },
+        {
+          "file": "seg5.asm",
+          "calls_seen": 48,
+          "calls_annotated": 42,
+          "labels_added": 149,
+          "modified": true
+        },
+        {
+          "file": "seg6.asm",
+          "calls_seen": 10,
+          "calls_annotated": 10,
+          "labels_added": 34,
+          "modified": true
+        },
+        {
+          "file": "seg7.asm",
+          "calls_seen": 23,
+          "calls_annotated": 20,
+          "labels_added": 68,
+          "modified": true
+        },
+        {
+          "file": "seg8.asm",
+          "calls_seen": 4,
+          "calls_annotated": 4,
+          "labels_added": 13,
+          "modified": true
+        },
+        {
+          "file": "seg9.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "THINKJET",
+      "files_modified": 2,
+      "total_labels_added": 80,
+      "total_calls_annotated": 33,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "calls_seen": 10,
+          "calls_annotated": 10,
+          "labels_added": 18,
+          "modified": true
+        },
+        {
+          "file": "seg2.asm",
+          "calls_seen": 23,
+          "calls_annotated": 23,
+          "labels_added": 62,
+          "modified": true
+        },
+        {
+          "file": "seg3.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "TI850",
+      "files_modified": 2,
+      "total_labels_added": 76,
+      "total_calls_annotated": 32,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "calls_seen": 18,
+          "calls_annotated": 18,
+          "labels_added": 48,
+          "modified": true
+        },
+        {
+          "file": "seg2.asm",
+          "calls_seen": 14,
+          "calls_annotated": 14,
+          "labels_added": 28,
+          "modified": true
+        },
+        {
+          "file": "seg3.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "TOSH",
+      "files_modified": 2,
+      "total_labels_added": 76,
+      "total_calls_annotated": 32,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "calls_seen": 10,
+          "calls_annotated": 10,
+          "labels_added": 18,
+          "modified": true
+        },
+        {
+          "file": "seg2.asm",
+          "calls_seen": 22,
+          "calls_annotated": 22,
+          "labels_added": 58,
+          "modified": true
+        },
+        {
+          "file": "seg3.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "TTY",
+      "files_modified": 1,
+      "total_labels_added": 37,
+      "total_calls_annotated": 10,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "calls_seen": 10,
+          "calls_annotated": 10,
+          "labels_added": 37,
+          "modified": true
+        },
+        {
+          "file": "seg2.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "UK",
+      "files_modified": 0,
+      "total_labels_added": 0,
+      "total_calls_annotated": 0,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        },
+        {
+          "file": "seg2.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        },
+        {
+          "file": "seg3.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "USA",
+      "files_modified": 0,
+      "total_labels_added": 0,
+      "total_calls_annotated": 0,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        },
+        {
+          "file": "seg2.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        },
+        {
+          "file": "seg3.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "USER",
+      "files_modified": 25,
+      "total_labels_added": 1132,
+      "total_calls_annotated": 515,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "calls_seen": 148,
+          "calls_annotated": 138,
+          "labels_added": 438,
+          "modified": true
+        },
+        {
+          "file": "seg10.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        },
+        {
+          "file": "seg11.asm",
+          "calls_seen": 2,
+          "calls_annotated": 2,
+          "labels_added": 3,
+          "modified": true
+        },
+        {
+          "file": "seg12.asm",
+          "calls_seen": 5,
+          "calls_annotated": 5,
+          "labels_added": 25,
+          "modified": true
+        },
+        {
+          "file": "seg13.asm",
+          "calls_seen": 1,
+          "calls_annotated": 1,
+          "labels_added": 1,
+          "modified": true
+        },
+        {
+          "file": "seg14.asm",
+          "calls_seen": 4,
+          "calls_annotated": 4,
+          "labels_added": 18,
+          "modified": true
+        },
+        {
+          "file": "seg15.asm",
+          "calls_seen": 18,
+          "calls_annotated": 16,
+          "labels_added": 22,
+          "modified": true
+        },
+        {
+          "file": "seg16.asm",
+          "calls_seen": 8,
+          "calls_annotated": 8,
+          "labels_added": 15,
+          "modified": true
+        },
+        {
+          "file": "seg17.asm",
+          "calls_seen": 64,
+          "calls_annotated": 64,
+          "labels_added": 86,
+          "modified": true
+        },
+        {
+          "file": "seg18.asm",
+          "calls_seen": 9,
+          "calls_annotated": 9,
+          "labels_added": 12,
+          "modified": true
+        },
+        {
+          "file": "seg19.asm",
+          "calls_seen": 1,
+          "calls_annotated": 1,
+          "labels_added": 10,
+          "modified": true
+        },
+        {
+          "file": "seg2.asm",
+          "calls_seen": 48,
+          "calls_annotated": 47,
+          "labels_added": 87,
+          "modified": true
+        },
+        {
+          "file": "seg20.asm",
+          "calls_seen": 6,
+          "calls_annotated": 5,
+          "labels_added": 10,
+          "modified": true
+        },
+        {
+          "file": "seg21.asm",
+          "calls_seen": 4,
+          "calls_annotated": 3,
+          "labels_added": 6,
+          "modified": true
+        },
+        {
+          "file": "seg22.asm",
+          "calls_seen": 36,
+          "calls_annotated": 33,
+          "labels_added": 53,
+          "modified": true
+        },
+        {
+          "file": "seg23.asm",
+          "calls_seen": 20,
+          "calls_annotated": 20,
+          "labels_added": 26,
+          "modified": true
+        },
+        {
+          "file": "seg24.asm",
+          "calls_seen": 3,
+          "calls_annotated": 3,
+          "labels_added": 6,
+          "modified": true
+        },
+        {
+          "file": "seg25.asm",
+          "calls_seen": 5,
+          "calls_annotated": 5,
+          "labels_added": 8,
+          "modified": true
+        },
+        {
+          "file": "seg26.asm",
+          "calls_seen": 8,
+          "calls_annotated": 8,
+          "labels_added": 19,
+          "modified": true
+        },
+        {
+          "file": "seg27.asm",
+          "calls_seen": 5,
+          "calls_annotated": 4,
+          "labels_added": 4,
+          "modified": true
+        },
+        {
+          "file": "seg28.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        },
+        {
+          "file": "seg3.asm",
+          "calls_seen": 39,
+          "calls_annotated": 36,
+          "labels_added": 46,
+          "modified": true
+        },
+        {
+          "file": "seg4.asm",
+          "calls_seen": 52,
+          "calls_annotated": 52,
+          "labels_added": 103,
+          "modified": true
+        },
+        {
+          "file": "seg5.asm",
+          "calls_seen": 24,
+          "calls_annotated": 24,
+          "labels_added": 58,
+          "modified": true
+        },
+        {
+          "file": "seg6.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        },
+        {
+          "file": "seg7.asm",
+          "calls_seen": 14,
+          "calls_annotated": 13,
+          "labels_added": 23,
+          "modified": true
+        },
+        {
+          "file": "seg8.asm",
+          "calls_seen": 13,
+          "calls_annotated": 11,
+          "labels_added": 46,
+          "modified": true
+        },
+        {
+          "file": "seg9.asm",
+          "calls_seen": 3,
+          "calls_annotated": 3,
+          "labels_added": 7,
+          "modified": true
+        }
+      ]
+    },
+    {
+      "module": "WRITE",
+      "files_modified": 57,
+      "total_labels_added": 1863,
+      "total_calls_annotated": 678,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "calls_seen": 12,
+          "calls_annotated": 12,
+          "labels_added": 20,
+          "modified": true
+        },
+        {
+          "file": "seg10.asm",
+          "calls_seen": 5,
+          "calls_annotated": 4,
+          "labels_added": 20,
+          "modified": true
+        },
+        {
+          "file": "seg11.asm",
+          "calls_seen": 9,
+          "calls_annotated": 8,
+          "labels_added": 26,
+          "modified": true
+        },
+        {
+          "file": "seg12.asm",
+          "calls_seen": 2,
+          "calls_annotated": 2,
+          "labels_added": 12,
+          "modified": true
+        },
+        {
+          "file": "seg13.asm",
+          "calls_seen": 21,
+          "calls_annotated": 20,
+          "labels_added": 54,
+          "modified": true
+        },
+        {
+          "file": "seg14.asm",
+          "calls_seen": 4,
+          "calls_annotated": 4,
+          "labels_added": 10,
+          "modified": true
+        },
+        {
+          "file": "seg15.asm",
+          "calls_seen": 3,
+          "calls_annotated": 3,
+          "labels_added": 11,
+          "modified": true
+        },
+        {
+          "file": "seg16.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        },
+        {
+          "file": "seg17.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        },
+        {
+          "file": "seg18.asm",
+          "calls_seen": 17,
+          "calls_annotated": 16,
+          "labels_added": 30,
+          "modified": true
+        },
+        {
+          "file": "seg19.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        },
+        {
+          "file": "seg2.asm",
+          "calls_seen": 56,
+          "calls_annotated": 54,
+          "labels_added": 197,
+          "modified": true
+        },
+        {
+          "file": "seg20.asm",
+          "calls_seen": 13,
+          "calls_annotated": 13,
+          "labels_added": 37,
+          "modified": true
+        },
+        {
+          "file": "seg21.asm",
+          "calls_seen": 18,
+          "calls_annotated": 18,
+          "labels_added": 44,
+          "modified": true
+        },
+        {
+          "file": "seg22.asm",
+          "calls_seen": 1,
+          "calls_annotated": 1,
+          "labels_added": 4,
+          "modified": true
+        },
+        {
+          "file": "seg23.asm",
+          "calls_seen": 17,
+          "calls_annotated": 17,
+          "labels_added": 68,
+          "modified": true
+        },
+        {
+          "file": "seg24.asm",
+          "calls_seen": 3,
+          "calls_annotated": 3,
+          "labels_added": 11,
+          "modified": true
+        },
+        {
+          "file": "seg25.asm",
+          "calls_seen": 4,
+          "calls_annotated": 4,
+          "labels_added": 16,
+          "modified": true
+        },
+        {
+          "file": "seg26.asm",
+          "calls_seen": 6,
+          "calls_annotated": 6,
+          "labels_added": 27,
+          "modified": true
+        },
+        {
+          "file": "seg27.asm",
+          "calls_seen": 20,
+          "calls_annotated": 20,
+          "labels_added": 94,
+          "modified": true
+        },
+        {
+          "file": "seg28.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        },
+        {
+          "file": "seg29.asm",
+          "calls_seen": 1,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        },
+        {
+          "file": "seg3.asm",
+          "calls_seen": 5,
+          "calls_annotated": 5,
+          "labels_added": 10,
+          "modified": true
+        },
+        {
+          "file": "seg30.asm",
+          "calls_seen": 14,
+          "calls_annotated": 14,
+          "labels_added": 31,
+          "modified": true
+        },
+        {
+          "file": "seg31.asm",
+          "calls_seen": 17,
+          "calls_annotated": 14,
+          "labels_added": 24,
+          "modified": true
+        },
+        {
+          "file": "seg32.asm",
+          "calls_seen": 9,
+          "calls_annotated": 8,
+          "labels_added": 22,
+          "modified": true
+        },
+        {
+          "file": "seg33.asm",
+          "calls_seen": 4,
+          "calls_annotated": 4,
+          "labels_added": 23,
+          "modified": true
+        },
+        {
+          "file": "seg34.asm",
+          "calls_seen": 49,
+          "calls_annotated": 46,
+          "labels_added": 121,
+          "modified": true
+        },
+        {
+          "file": "seg35.asm",
+          "calls_seen": 39,
+          "calls_annotated": 37,
+          "labels_added": 90,
+          "modified": true
+        },
+        {
+          "file": "seg36.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        },
+        {
+          "file": "seg37.asm",
+          "calls_seen": 5,
+          "calls_annotated": 4,
+          "labels_added": 4,
+          "modified": true
+        },
+        {
+          "file": "seg38.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        },
+        {
+          "file": "seg39.asm",
+          "calls_seen": 21,
+          "calls_annotated": 17,
+          "labels_added": 85,
+          "modified": true
+        },
+        {
+          "file": "seg4.asm",
+          "calls_seen": 6,
+          "calls_annotated": 6,
+          "labels_added": 16,
+          "modified": true
+        },
+        {
+          "file": "seg40.asm",
+          "calls_seen": 5,
+          "calls_annotated": 5,
+          "labels_added": 5,
+          "modified": true
+        },
+        {
+          "file": "seg41.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        },
+        {
+          "file": "seg42.asm",
+          "calls_seen": 1,
+          "calls_annotated": 1,
+          "labels_added": 1,
+          "modified": true
+        },
+        {
+          "file": "seg43.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        },
+        {
+          "file": "seg44.asm",
+          "calls_seen": 4,
+          "calls_annotated": 4,
+          "labels_added": 8,
+          "modified": true
+        },
+        {
+          "file": "seg45.asm",
+          "calls_seen": 2,
+          "calls_annotated": 2,
+          "labels_added": 9,
+          "modified": true
+        },
+        {
+          "file": "seg46.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        },
+        {
+          "file": "seg47.asm",
+          "calls_seen": 5,
+          "calls_annotated": 5,
+          "labels_added": 14,
+          "modified": true
+        },
+        {
+          "file": "seg48.asm",
+          "calls_seen": 19,
+          "calls_annotated": 5,
+          "labels_added": 19,
+          "modified": true
+        },
+        {
+          "file": "seg49.asm",
+          "calls_seen": 3,
+          "calls_annotated": 3,
+          "labels_added": 10,
+          "modified": true
+        },
+        {
+          "file": "seg5.asm",
+          "calls_seen": 8,
+          "calls_annotated": 8,
+          "labels_added": 15,
+          "modified": true
+        },
+        {
+          "file": "seg50.asm",
+          "calls_seen": 3,
+          "calls_annotated": 2,
+          "labels_added": 2,
+          "modified": true
+        },
+        {
+          "file": "seg51.asm",
+          "calls_seen": 2,
+          "calls_annotated": 2,
+          "labels_added": 12,
+          "modified": true
+        },
+        {
+          "file": "seg52.asm",
+          "calls_seen": 18,
+          "calls_annotated": 17,
+          "labels_added": 21,
+          "modified": true
+        },
+        {
+          "file": "seg53.asm",
+          "calls_seen": 28,
+          "calls_annotated": 26,
+          "labels_added": 48,
+          "modified": true
+        },
+        {
+          "file": "seg54.asm",
+          "calls_seen": 58,
+          "calls_annotated": 55,
+          "labels_added": 208,
+          "modified": true
+        },
+        {
+          "file": "seg55.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        },
+        {
+          "file": "seg56.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        },
+        {
+          "file": "seg57.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        },
+        {
+          "file": "seg58.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        },
+        {
+          "file": "seg59.asm",
+          "calls_seen": 10,
+          "calls_annotated": 10,
+          "labels_added": 14,
+          "modified": true
+        },
+        {
+          "file": "seg6.asm",
+          "calls_seen": 20,
+          "calls_annotated": 20,
+          "labels_added": 40,
+          "modified": true
+        },
+        {
+          "file": "seg60.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        },
+        {
+          "file": "seg61.asm",
+          "calls_seen": 2,
+          "calls_annotated": 2,
+          "labels_added": 2,
+          "modified": true
+        },
+        {
+          "file": "seg62.asm",
+          "calls_seen": 13,
+          "calls_annotated": 11,
+          "labels_added": 17,
+          "modified": true
+        },
+        {
+          "file": "seg63.asm",
+          "calls_seen": 47,
+          "calls_annotated": 46,
+          "labels_added": 80,
+          "modified": true
+        },
+        {
+          "file": "seg64.asm",
+          "calls_seen": 9,
+          "calls_annotated": 9,
+          "labels_added": 15,
+          "modified": true
+        },
+        {
+          "file": "seg65.asm",
+          "calls_seen": 1,
+          "calls_annotated": 1,
+          "labels_added": 5,
+          "modified": true
+        },
+        {
+          "file": "seg66.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        },
+        {
+          "file": "seg67.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        },
+        {
+          "file": "seg68.asm",
+          "calls_seen": 1,
+          "calls_annotated": 1,
+          "labels_added": 3,
+          "modified": true
+        },
+        {
+          "file": "seg69.asm",
+          "calls_seen": 3,
+          "calls_annotated": 3,
+          "labels_added": 12,
+          "modified": true
+        },
+        {
+          "file": "seg7.asm",
+          "calls_seen": 2,
+          "calls_annotated": 2,
+          "labels_added": 4,
+          "modified": true
+        },
+        {
+          "file": "seg70.asm",
+          "calls_seen": 2,
+          "calls_annotated": 2,
+          "labels_added": 2,
+          "modified": true
+        },
+        {
+          "file": "seg71.asm",
+          "calls_seen": 16,
+          "calls_annotated": 14,
+          "labels_added": 60,
+          "modified": true
+        },
+        {
+          "file": "seg72.asm",
+          "calls_seen": 36,
+          "calls_annotated": 33,
+          "labels_added": 70,
+          "modified": true
+        },
+        {
+          "file": "seg73.asm",
+          "calls_seen": 5,
+          "calls_annotated": 5,
+          "labels_added": 10,
+          "modified": true
+        },
+        {
+          "file": "seg74.asm",
+          "calls_seen": 20,
+          "calls_annotated": 20,
+          "labels_added": 46,
+          "modified": true
+        },
+        {
+          "file": "seg75.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        },
+        {
+          "file": "seg76.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        },
+        {
+          "file": "seg77.asm",
+          "calls_seen": 1,
+          "calls_annotated": 1,
+          "labels_added": 1,
+          "modified": true
+        },
+        {
+          "file": "seg78.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        },
+        {
+          "file": "seg79.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        },
+        {
+          "file": "seg8.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        },
+        {
+          "file": "seg9.asm",
+          "calls_seen": 3,
+          "calls_annotated": 3,
+          "labels_added": 3,
+          "modified": true
+        }
+      ]
+    },
+    {
+      "module": "XER4020",
+      "files_modified": 2,
+      "total_labels_added": 100,
+      "total_calls_annotated": 38,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "calls_seen": 10,
+          "calls_annotated": 10,
+          "labels_added": 18,
+          "modified": true
+        },
+        {
+          "file": "seg2.asm",
+          "calls_seen": 28,
+          "calls_annotated": 28,
+          "labels_added": 82,
+          "modified": true
+        },
+        {
+          "file": "seg3.asm",
+          "calls_seen": 0,
+          "calls_annotated": 0,
+          "labels_added": 0,
+          "modified": false
+        }
+      ]
+    }
+  ]
+}

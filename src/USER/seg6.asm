@@ -1,3 +1,17 @@
+; ======================================================================
+; USER / seg6.asm   (segment 6 of USER)
+; ----------------------------------------------------------------------
+; Functions discovered (pass1b):         5
+; Total instructions:                  145
+; 
+; Classification (pass8):
+;   C-origin (high+medium):              4
+;   ASM-origin (high+medium):            0
+;   Unclear:                             1
+;   Tiny / unclassified:                 0
+; 
+; Far API calls in this segment:     0 (0 unique)
+; ======================================================================
 ; AUTO-GENERATED from original USER segment 6
 ; segment_size=307 bytes, flags=0xf170
 ; mode: humano legible - instrucciones x86 + bytes raw en comentario (autoritativo)
@@ -10,12 +24,6 @@
 ; el binario original).
 
 USER_TEXT SEGMENT BYTE PUBLIC 'CODE'
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; CREATECONVERTWINDOW -- 41 instr
-; Constructor: crea convertwindow.
-; tags: far, medium
-;----------------------------------------------------------------------
 
 
 ;-----------------------------------------------------------------------
@@ -56,6 +64,7 @@ CREATECONVERTWINDOW PROC FAR
         je      L_0049                          ; 74 06
         mov     ax, word ptr [0x54]             ; A1 54 00
         mov     word ptr [0x74c], ax            ; A3 4C 07
+;   [conditional branch target (if/else)] L_0049
 L_0049:
         mov     ax, word ptr [0x62a]            ; A1 2A 06
         sub     bp, 2                           ; 83 ED 02
@@ -65,12 +74,6 @@ L_0049:
         dec     bp                              ; 4D
         retf    0xa                             ; CA 0A 00
 CREATECONVERTWINDOW ENDP
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; SHOWCONVERTWINDOW -- 24 instr
-; Funcion sin clasificar definitiva (24 instr).
-; tags: far, small
-;----------------------------------------------------------------------
 
 
 ;-----------------------------------------------------------------------
@@ -95,6 +98,7 @@ SHOWCONVERTWINDOW PROC FAR
         push    ax                              ; 50
         push    word ptr [bp + 6]               ; FF 76 06
         call    far _SEG1_0E43                  ; 9A FF FF 00 00 [FIXUP]
+;   [conditional branch target (if/else)] L_007E
 L_007E:
         sub     bp, 2                           ; 83 ED 02
         mov     sp, bp                          ; 8B E5
@@ -103,12 +107,6 @@ L_007E:
         dec     bp                              ; 4D
         retf    4                               ; CA 04 00
 SHOWCONVERTWINDOW ENDP
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; SETCONVERTWINDOWHEIGHT -- 30 instr
-; Setter: cambia convertwindowheight.
-; tags: far, small
-;----------------------------------------------------------------------
 
 
 ;-----------------------------------------------------------------------
@@ -139,6 +137,7 @@ SETCONVERTWINDOWHEIGHT PROC FAR
         sub     ax, ax                          ; 2B C0
         push    ax                              ; 50
         call    far _SEG1_204A                  ; 9A FF FF 00 00 [FIXUP]
+;   [conditional branch target (if/else)] L_00C2
 L_00C2:
         sub     bp, 2                           ; 83 ED 02
         mov     sp, bp                          ; 8B E5
@@ -147,12 +146,6 @@ L_00C2:
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
 SETCONVERTWINDOWHEIGHT ENDP
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; ISTWOBYTECHARPREFIX -- 29 instr
-; Predicado: verifica si twobytecharprefix.
-; tags: dispatcher, far
-;----------------------------------------------------------------------
 
 
 ;-----------------------------------------------------------------------
@@ -173,6 +166,7 @@ ISTWOBYTECHARPREFIX PROC FAR
         mov     al, byte ptr [0x5f3]            ; A0 F3 05
         cmp     byte ptr [bp + 6], al           ; 38 46 06
         jle     L_00F7                          ; 7E 10
+;   [conditional branch target (if/else)] L_00E7
 L_00E7:
         mov     al, byte ptr [0x5f4]            ; A0 F4 05
         cmp     byte ptr [bp + 6], al           ; 38 46 06
@@ -180,11 +174,15 @@ L_00E7:
         mov     al, byte ptr [0x5f3]            ; A0 F3 05
         cmp     byte ptr [bp + 6], al           ; 38 46 06
         jg      L_00FC                          ; 7F 05
+;   [conditional branch target (if/else)] L_00F7
 L_00F7:
+        ; constant WM_CREATE
         mov     ax, 1                           ; B8 01 00
         jmp     L_00FE                          ; EB 02
+;   [conditional branch target (if/else)] L_00FC
 L_00FC:
         sub     ax, ax                          ; 2B C0
+;   [unconditional branch target] L_00FE
 L_00FE:
         sub     bp, 2                           ; 83 ED 02
         mov     sp, bp                          ; 8B E5
@@ -193,12 +191,6 @@ L_00FE:
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
 ISTWOBYTECHARPREFIX ENDP
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; SYSHASKANJI -- 21 instr
-; Funcion sin clasificar definitiva (21 instr).
-; tags: far, small
-;----------------------------------------------------------------------
 
 
 ;-----------------------------------------------------------------------
@@ -217,11 +209,15 @@ SYSHASKANJI PROC FAR
         jne     L_0123                          ; 75 08
         cmp     word ptr [0x5f4], 0xfeff        ; 81 3E F4 05 FF FE
         je      L_0128                          ; 74 05
+;   [conditional branch target (if/else)] L_0123
 L_0123:
+        ; constant WM_CREATE
         mov     ax, 1                           ; B8 01 00
         jmp     L_012A                          ; EB 02
+;   [conditional branch target (if/else)] L_0128
 L_0128:
         sub     ax, ax                          ; 2B C0
+;   [unconditional branch target] L_012A
 L_012A:
         sub     bp, 2                           ; 83 ED 02
         mov     sp, bp                          ; 8B E5

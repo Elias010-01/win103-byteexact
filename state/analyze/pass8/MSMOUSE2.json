@@ -1,0 +1,105 @@
+{
+  "module": "MSMOUSE2",
+  "num_functions": 4,
+  "verdict_counts": {
+    "asm_medium": 1,
+    "asm_high": 2,
+    "unclear": 1
+  },
+  "c_count": 0,
+  "asm_count": 3,
+  "unclear_count": 1,
+  "tiny_count": 0,
+  "c_ratio_overall": 0.0,
+  "c_ratio_of_classified": 0.0,
+  "expected_c_ratio": null,
+  "expected_confidence": null,
+  "consistency": "no_expectation",
+  "functions": [
+    {
+      "name": "sub_0034",
+      "segment_file": "seg1.asm",
+      "offset": 52,
+      "size_bytes": null,
+      "num_instructions": 97,
+      "prologue": "none",
+      "epilogue": "jmp_tail",
+      "classification": {
+        "verdict": "asm_medium",
+        "score_c": 0,
+        "score_asm": 5,
+        "score_diff": -5,
+        "signals": [
+          "no BP-frame prologue [+2 ASM]",
+          "jmp tail-call (no proper return) [+2 ASM]",
+          "2 string op(s) [+1 ASM]",
+          "0 `loop` instruction(s) (MSC rarely emits) [+0 ASM]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_0101",
+      "segment_file": "seg1.asm",
+      "offset": 257,
+      "size_bytes": null,
+      "num_instructions": 25,
+      "prologue": "none",
+      "epilogue": "jmp_tail",
+      "classification": {
+        "verdict": "asm_high",
+        "score_c": 0,
+        "score_asm": 9,
+        "score_diff": -9,
+        "signals": [
+          "no BP-frame prologue [+2 ASM]",
+          "jmp tail-call (no proper return) [+2 ASM]",
+          "2 DOS/BIOS int call(s) [+5 ASM]"
+        ],
+        "confidence": "high"
+      }
+    },
+    {
+      "name": "sub_0142",
+      "segment_file": "seg1.asm",
+      "offset": 322,
+      "size_bytes": null,
+      "num_instructions": 54,
+      "prologue": "none",
+      "epilogue": "jmp_tail",
+      "classification": {
+        "verdict": "asm_high",
+        "score_c": 1,
+        "score_asm": 9,
+        "score_diff": -8,
+        "signals": [
+          "no BP-frame prologue [+2 ASM]",
+          "jmp tail-call (no proper return) [+2 ASM]",
+          "3 DOS/BIOS int call(s) [+5 ASM]",
+          "high mov+push density (compiler-like) [+1 C]"
+        ],
+        "confidence": "high"
+      }
+    },
+    {
+      "name": "sub_01B1",
+      "segment_file": "seg1.asm",
+      "offset": 433,
+      "size_bytes": null,
+      "num_instructions": 11,
+      "prologue": "none",
+      "epilogue": "retf",
+      "classification": {
+        "verdict": "unclear",
+        "score_c": 1,
+        "score_asm": 2,
+        "score_diff": -1,
+        "signals": [
+          "no BP-frame prologue [+2 ASM]",
+          "retf without args [+1 C]"
+        ],
+        "confidence": "low"
+      }
+    }
+  ]
+}

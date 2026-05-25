@@ -1,0 +1,876 @@
+{
+  "module": "ATTDC",
+  "num_functions": 41,
+  "verdict_counts": {
+    "asm_medium": 19,
+    "unclear": 15,
+    "asm_high": 5,
+    "tiny": 2
+  },
+  "c_count": 0,
+  "asm_count": 24,
+  "unclear_count": 15,
+  "tiny_count": 2,
+  "c_ratio_overall": 0.0,
+  "c_ratio_of_classified": 0.0,
+  "expected_c_ratio": 0.05,
+  "expected_confidence": "high",
+  "consistency": "ok",
+  "functions": [
+    {
+      "name": "sub_01B3",
+      "segment_file": "seg1.asm",
+      "offset": 435,
+      "size_bytes": null,
+      "num_instructions": 110,
+      "prologue": "saves_regs",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "asm_medium",
+        "score_c": 3,
+        "score_asm": 6,
+        "score_diff": -3,
+        "signals": [
+          "saves registers at entry but no full BP frame [+1 C]",
+          "ret without args [neutral]",
+          "9 DOS/BIOS int call(s) [+5 ASM]",
+          "1 string op(s) [+1 ASM]",
+          "1 FAR-API call(s) [+1 C]",
+          "high mov+push density (compiler-like) [+1 C]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_02C0",
+      "segment_file": "seg1.asm",
+      "offset": 704,
+      "size_bytes": null,
+      "num_instructions": 1322,
+      "prologue": "none",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "asm_medium",
+        "score_c": 2,
+        "score_asm": 7,
+        "score_diff": -5,
+        "signals": [
+          "no BP-frame prologue [+2 ASM]",
+          "ret without args [neutral]",
+          "[bp-N] references in entry/exit (1) [+1 C]",
+          "1 DOS/BIOS int call(s) [+3 ASM]",
+          "61 string ops [+2 ASM]",
+          "0 `loop` instruction(s) (MSC rarely emits) [+0 ASM]",
+          "1 FAR-API call(s) [+1 C]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_0E98",
+      "segment_file": "seg1.asm",
+      "offset": 3736,
+      "size_bytes": null,
+      "num_instructions": 22,
+      "prologue": "none",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "unclear",
+        "score_c": 0,
+        "score_asm": 2,
+        "score_diff": -2,
+        "signals": [
+          "no BP-frame prologue [+2 ASM]",
+          "ret without args [neutral]"
+        ],
+        "confidence": "low"
+      }
+    },
+    {
+      "name": "sub_0ED6",
+      "segment_file": "seg1.asm",
+      "offset": 3798,
+      "size_bytes": null,
+      "num_instructions": 17,
+      "prologue": "none",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "asm_high",
+        "score_c": 0,
+        "score_asm": 6,
+        "score_diff": -6,
+        "signals": [
+          "no BP-frame prologue [+2 ASM]",
+          "ret without args [neutral]",
+          "10 string ops [+2 ASM]",
+          "2 `loop` instruction(s) (MSC rarely emits) [+2 ASM]"
+        ],
+        "confidence": "high"
+      }
+    },
+    {
+      "name": "sub_0EEE",
+      "segment_file": "seg1.asm",
+      "offset": 3822,
+      "size_bytes": null,
+      "num_instructions": 11,
+      "prologue": "none",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "unclear",
+        "score_c": 0,
+        "score_asm": 2,
+        "score_diff": -2,
+        "signals": [
+          "no BP-frame prologue [+2 ASM]",
+          "ret without args [neutral]"
+        ],
+        "confidence": "low"
+      }
+    },
+    {
+      "name": "sub_0F05",
+      "segment_file": "seg1.asm",
+      "offset": 3845,
+      "size_bytes": null,
+      "num_instructions": 10,
+      "prologue": "none",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "unclear",
+        "score_c": 0,
+        "score_asm": 2,
+        "score_diff": -2,
+        "signals": [
+          "no BP-frame prologue [+2 ASM]",
+          "ret without args [neutral]"
+        ],
+        "confidence": "low"
+      }
+    },
+    {
+      "name": "sub_0F1C",
+      "segment_file": "seg1.asm",
+      "offset": 3868,
+      "size_bytes": null,
+      "num_instructions": 15,
+      "prologue": "none",
+      "epilogue": "jmp_tail",
+      "classification": {
+        "verdict": "asm_medium",
+        "score_c": 1,
+        "score_asm": 4,
+        "score_diff": -3,
+        "signals": [
+          "no BP-frame prologue [+2 ASM]",
+          "jmp tail-call (no proper return) [+2 ASM]",
+          "high mov+push density (compiler-like) [+1 C]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_0F43",
+      "segment_file": "seg1.asm",
+      "offset": 3907,
+      "size_bytes": null,
+      "num_instructions": 39,
+      "prologue": "none",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "asm_high",
+        "score_c": 0,
+        "score_asm": 6,
+        "score_diff": -6,
+        "signals": [
+          "no BP-frame prologue [+2 ASM]",
+          "ret without args [neutral]",
+          "8 string ops [+2 ASM]",
+          "2 `loop` instruction(s) (MSC rarely emits) [+2 ASM]"
+        ],
+        "confidence": "high"
+      }
+    },
+    {
+      "name": "sub_0F94",
+      "segment_file": "seg1.asm",
+      "offset": 3988,
+      "size_bytes": null,
+      "num_instructions": 15,
+      "prologue": "none",
+      "epilogue": "unknown",
+      "classification": {
+        "verdict": "unclear",
+        "score_c": 0,
+        "score_asm": 2,
+        "score_diff": -2,
+        "signals": [
+          "no BP-frame prologue [+2 ASM]"
+        ],
+        "confidence": "low"
+      }
+    },
+    {
+      "name": "sub_0FB9",
+      "segment_file": "seg1.asm",
+      "offset": 4025,
+      "size_bytes": null,
+      "num_instructions": 40,
+      "prologue": "none",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "asm_medium",
+        "score_c": 0,
+        "score_asm": 5,
+        "score_diff": -5,
+        "signals": [
+          "no BP-frame prologue [+2 ASM]",
+          "ret without args [neutral]",
+          "1 string op(s) [+1 ASM]",
+          "3 bit-twiddle(s) [+1 ASM]",
+          "1 `loop` instruction(s) (MSC rarely emits) [+1 ASM]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_100B",
+      "segment_file": "seg1.asm",
+      "offset": 4107,
+      "size_bytes": null,
+      "num_instructions": 42,
+      "prologue": "none",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "asm_medium",
+        "score_c": 0,
+        "score_asm": 3,
+        "score_diff": -3,
+        "signals": [
+          "no BP-frame prologue [+2 ASM]",
+          "ret without args [neutral]",
+          "1 bit-twiddle(s) [+1 ASM]",
+          "0 `loop` instruction(s) (MSC rarely emits) [+0 ASM]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_105D",
+      "segment_file": "seg1.asm",
+      "offset": 4189,
+      "size_bytes": null,
+      "num_instructions": 28,
+      "prologue": "none",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "asm_high",
+        "score_c": 0,
+        "score_asm": 6,
+        "score_diff": -6,
+        "signals": [
+          "no BP-frame prologue [+2 ASM]",
+          "ret without args [neutral]",
+          "10 string ops [+2 ASM]",
+          "2 `loop` instruction(s) (MSC rarely emits) [+2 ASM]"
+        ],
+        "confidence": "high"
+      }
+    },
+    {
+      "name": "sub_1098",
+      "segment_file": "seg1.asm",
+      "offset": 4248,
+      "size_bytes": null,
+      "num_instructions": 26,
+      "prologue": "none",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "asm_high",
+        "score_c": 0,
+        "score_asm": 6,
+        "score_diff": -6,
+        "signals": [
+          "no BP-frame prologue [+2 ASM]",
+          "ret without args [neutral]",
+          "10 string ops [+2 ASM]",
+          "2 `loop` instruction(s) (MSC rarely emits) [+2 ASM]"
+        ],
+        "confidence": "high"
+      }
+    },
+    {
+      "name": "sub_10C9",
+      "segment_file": "seg1.asm",
+      "offset": 4297,
+      "size_bytes": null,
+      "num_instructions": 16,
+      "prologue": "none",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "unclear",
+        "score_c": 0,
+        "score_asm": 2,
+        "score_diff": -2,
+        "signals": [
+          "no BP-frame prologue [+2 ASM]",
+          "ret without args [neutral]"
+        ],
+        "confidence": "low"
+      }
+    },
+    {
+      "name": "sub_10F2",
+      "segment_file": "seg1.asm",
+      "offset": 4338,
+      "size_bytes": null,
+      "num_instructions": 65,
+      "prologue": "none",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "unclear",
+        "score_c": 0,
+        "score_asm": 2,
+        "score_diff": -2,
+        "signals": [
+          "no BP-frame prologue [+2 ASM]",
+          "ret without args [neutral]",
+          "0 `loop` instruction(s) (MSC rarely emits) [+0 ASM]"
+        ],
+        "confidence": "low"
+      }
+    },
+    {
+      "name": "sub_118E",
+      "segment_file": "seg1.asm",
+      "offset": 4494,
+      "size_bytes": null,
+      "num_instructions": 14,
+      "prologue": "none",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "unclear",
+        "score_c": 0,
+        "score_asm": 2,
+        "score_diff": -2,
+        "signals": [
+          "no BP-frame prologue [+2 ASM]",
+          "ret without args [neutral]"
+        ],
+        "confidence": "low"
+      }
+    },
+    {
+      "name": "sub_11AE",
+      "segment_file": "seg1.asm",
+      "offset": 4526,
+      "size_bytes": null,
+      "num_instructions": 70,
+      "prologue": "none",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "asm_high",
+        "score_c": 0,
+        "score_asm": 6,
+        "score_diff": -6,
+        "signals": [
+          "no BP-frame prologue [+2 ASM]",
+          "ret without args [neutral]",
+          "14 string ops [+2 ASM]",
+          "2 `loop` instruction(s) (MSC rarely emits) [+2 ASM]"
+        ],
+        "confidence": "high"
+      }
+    },
+    {
+      "name": "sub_123B",
+      "segment_file": "seg1.asm",
+      "offset": 4667,
+      "size_bytes": null,
+      "num_instructions": 36,
+      "prologue": "none",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "unclear",
+        "score_c": 0,
+        "score_asm": 2,
+        "score_diff": -2,
+        "signals": [
+          "no BP-frame prologue [+2 ASM]",
+          "ret without args [neutral]"
+        ],
+        "confidence": "low"
+      }
+    },
+    {
+      "name": "sub_129C",
+      "segment_file": "seg1.asm",
+      "offset": 4764,
+      "size_bytes": null,
+      "num_instructions": 21,
+      "prologue": "none",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "unclear",
+        "score_c": 0,
+        "score_asm": 2,
+        "score_diff": -2,
+        "signals": [
+          "no BP-frame prologue [+2 ASM]",
+          "ret without args [neutral]"
+        ],
+        "confidence": "low"
+      }
+    },
+    {
+      "name": "sub_12C8",
+      "segment_file": "seg1.asm",
+      "offset": 4808,
+      "size_bytes": null,
+      "num_instructions": 1,
+      "prologue": "none",
+      "epilogue": "unknown",
+      "classification": {
+        "verdict": "tiny",
+        "score_c": 0,
+        "score_asm": 0,
+        "score_diff": 0,
+        "signals": [
+          "function too small to classify (<3 instructions)"
+        ],
+        "confidence": "none"
+      }
+    },
+    {
+      "name": "sub_12CC",
+      "segment_file": "seg1.asm",
+      "offset": 4812,
+      "size_bytes": null,
+      "num_instructions": 451,
+      "prologue": "none",
+      "epilogue": "jmp_tail",
+      "classification": {
+        "verdict": "asm_medium",
+        "score_c": 1,
+        "score_asm": 4,
+        "score_diff": -3,
+        "signals": [
+          "no BP-frame prologue [+2 ASM]",
+          "jmp tail-call (no proper return) [+2 ASM]",
+          "1 FAR-API call(s) [+1 C]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_16C7",
+      "segment_file": "seg1.asm",
+      "offset": 5831,
+      "size_bytes": null,
+      "num_instructions": 50,
+      "prologue": "none",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "unclear",
+        "score_c": 2,
+        "score_asm": 2,
+        "score_diff": 0,
+        "signals": [
+          "no BP-frame prologue [+2 ASM]",
+          "ret without args [neutral]",
+          "[bp-N] references in entry/exit (1) [+1 C]",
+          "[bp+N] references in entry/exit (1) [+1 C]"
+        ],
+        "confidence": "low"
+      }
+    },
+    {
+      "name": "sub_174C",
+      "segment_file": "seg1.asm",
+      "offset": 5964,
+      "size_bytes": null,
+      "num_instructions": 180,
+      "prologue": "none",
+      "epilogue": "jmp_tail",
+      "classification": {
+        "verdict": "asm_medium",
+        "score_c": 1,
+        "score_asm": 4,
+        "score_diff": -3,
+        "signals": [
+          "no BP-frame prologue [+2 ASM]",
+          "jmp tail-call (no proper return) [+2 ASM]",
+          "[bp-N] references in entry/exit (1) [+1 C]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_1901",
+      "segment_file": "seg1.asm",
+      "offset": 6401,
+      "size_bytes": null,
+      "num_instructions": 149,
+      "prologue": "none",
+      "epilogue": "retf_n",
+      "classification": {
+        "verdict": "unclear",
+        "score_c": 5,
+        "score_asm": 4,
+        "score_diff": 1,
+        "signals": [
+          "no BP-frame prologue [+2 ASM]",
+          "PASCAL epilogue: retf with arg cleanup [+3 C]",
+          "[bp-N] references in entry/exit (1) [+1 C]",
+          "[bp+N] references in entry/exit (3) [+1 C]",
+          "6 string ops [+2 ASM]",
+          "0 `loop` instruction(s) (MSC rarely emits) [+0 ASM]"
+        ],
+        "confidence": "low"
+      }
+    },
+    {
+      "name": "sub_1A51",
+      "segment_file": "seg1.asm",
+      "offset": 6737,
+      "size_bytes": null,
+      "num_instructions": 2,
+      "prologue": "none",
+      "epilogue": "unknown",
+      "classification": {
+        "verdict": "tiny",
+        "score_c": 0,
+        "score_asm": 0,
+        "score_diff": 0,
+        "signals": [
+          "function too small to classify (<3 instructions)"
+        ],
+        "confidence": "none"
+      }
+    },
+    {
+      "name": "sub_1A56",
+      "segment_file": "seg1.asm",
+      "offset": 6742,
+      "size_bytes": null,
+      "num_instructions": 101,
+      "prologue": "none",
+      "epilogue": "retf_n",
+      "classification": {
+        "verdict": "unclear",
+        "score_c": 3,
+        "score_asm": 4,
+        "score_diff": -1,
+        "signals": [
+          "no BP-frame prologue [+2 ASM]",
+          "PASCAL epilogue: retf with arg cleanup [+3 C]",
+          "3 string ops [+2 ASM]"
+        ],
+        "confidence": "low"
+      }
+    },
+    {
+      "name": "sub_1B1F",
+      "segment_file": "seg1.asm",
+      "offset": 6943,
+      "size_bytes": null,
+      "num_instructions": 26,
+      "prologue": "none",
+      "epilogue": "jmp_tail",
+      "classification": {
+        "verdict": "asm_medium",
+        "score_c": 0,
+        "score_asm": 4,
+        "score_diff": -4,
+        "signals": [
+          "no BP-frame prologue [+2 ASM]",
+          "jmp tail-call (no proper return) [+2 ASM]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_1B6D",
+      "segment_file": "seg1.asm",
+      "offset": 7021,
+      "size_bytes": null,
+      "num_instructions": 4,
+      "prologue": "none",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "unclear",
+        "score_c": 0,
+        "score_asm": 2,
+        "score_diff": -2,
+        "signals": [
+          "no BP-frame prologue [+2 ASM]",
+          "ret without args [neutral]"
+        ],
+        "confidence": "low"
+      }
+    },
+    {
+      "name": "sub_1B73",
+      "segment_file": "seg1.asm",
+      "offset": 7027,
+      "size_bytes": null,
+      "num_instructions": 20,
+      "prologue": "none",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "unclear",
+        "score_c": 0,
+        "score_asm": 2,
+        "score_diff": -2,
+        "signals": [
+          "no BP-frame prologue [+2 ASM]",
+          "ret without args [neutral]"
+        ],
+        "confidence": "low"
+      }
+    },
+    {
+      "name": "sub_1BAB",
+      "segment_file": "seg1.asm",
+      "offset": 7083,
+      "size_bytes": null,
+      "num_instructions": 69,
+      "prologue": "none",
+      "epilogue": "jmp_tail",
+      "classification": {
+        "verdict": "asm_medium",
+        "score_c": 1,
+        "score_asm": 4,
+        "score_diff": -3,
+        "signals": [
+          "no BP-frame prologue [+2 ASM]",
+          "jmp tail-call (no proper return) [+2 ASM]",
+          "high mov+push density (compiler-like) [+1 C]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_1C4B",
+      "segment_file": "seg1.asm",
+      "offset": 7243,
+      "size_bytes": null,
+      "num_instructions": 163,
+      "prologue": "none",
+      "epilogue": "jmp_tail",
+      "classification": {
+        "verdict": "asm_medium",
+        "score_c": 0,
+        "score_asm": 4,
+        "score_diff": -4,
+        "signals": [
+          "no BP-frame prologue [+2 ASM]",
+          "jmp tail-call (no proper return) [+2 ASM]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_1D7B",
+      "segment_file": "seg1.asm",
+      "offset": 7547,
+      "size_bytes": null,
+      "num_instructions": 15,
+      "prologue": "none",
+      "epilogue": "jmp_tail",
+      "classification": {
+        "verdict": "asm_medium",
+        "score_c": 0,
+        "score_asm": 4,
+        "score_diff": -4,
+        "signals": [
+          "no BP-frame prologue [+2 ASM]",
+          "jmp tail-call (no proper return) [+2 ASM]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_1D9E",
+      "segment_file": "seg1.asm",
+      "offset": 7582,
+      "size_bytes": null,
+      "num_instructions": 10,
+      "prologue": "none",
+      "epilogue": "jmp_tail",
+      "classification": {
+        "verdict": "asm_medium",
+        "score_c": 0,
+        "score_asm": 4,
+        "score_diff": -4,
+        "signals": [
+          "no BP-frame prologue [+2 ASM]",
+          "jmp tail-call (no proper return) [+2 ASM]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_1DB6",
+      "segment_file": "seg1.asm",
+      "offset": 7606,
+      "size_bytes": null,
+      "num_instructions": 15,
+      "prologue": "none",
+      "epilogue": "jmp_tail",
+      "classification": {
+        "verdict": "asm_medium",
+        "score_c": 0,
+        "score_asm": 4,
+        "score_diff": -4,
+        "signals": [
+          "no BP-frame prologue [+2 ASM]",
+          "jmp tail-call (no proper return) [+2 ASM]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_1DDD",
+      "segment_file": "seg1.asm",
+      "offset": 7645,
+      "size_bytes": null,
+      "num_instructions": 33,
+      "prologue": "none",
+      "epilogue": "jmp_tail",
+      "classification": {
+        "verdict": "asm_medium",
+        "score_c": 0,
+        "score_asm": 4,
+        "score_diff": -4,
+        "signals": [
+          "no BP-frame prologue [+2 ASM]",
+          "jmp tail-call (no proper return) [+2 ASM]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_1E18",
+      "segment_file": "seg1.asm",
+      "offset": 7704,
+      "size_bytes": null,
+      "num_instructions": 14,
+      "prologue": "none",
+      "epilogue": "jmp_tail",
+      "classification": {
+        "verdict": "asm_medium",
+        "score_c": 0,
+        "score_asm": 4,
+        "score_diff": -4,
+        "signals": [
+          "no BP-frame prologue [+2 ASM]",
+          "jmp tail-call (no proper return) [+2 ASM]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_1E37",
+      "segment_file": "seg1.asm",
+      "offset": 7735,
+      "size_bytes": null,
+      "num_instructions": 15,
+      "prologue": "none",
+      "epilogue": "jmp_tail",
+      "classification": {
+        "verdict": "asm_medium",
+        "score_c": 0,
+        "score_asm": 4,
+        "score_diff": -4,
+        "signals": [
+          "no BP-frame prologue [+2 ASM]",
+          "jmp tail-call (no proper return) [+2 ASM]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_1E62",
+      "segment_file": "seg1.asm",
+      "offset": 7778,
+      "size_bytes": null,
+      "num_instructions": 10,
+      "prologue": "none",
+      "epilogue": "jmp_tail",
+      "classification": {
+        "verdict": "asm_medium",
+        "score_c": 0,
+        "score_asm": 4,
+        "score_diff": -4,
+        "signals": [
+          "no BP-frame prologue [+2 ASM]",
+          "jmp tail-call (no proper return) [+2 ASM]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_1E77",
+      "segment_file": "seg1.asm",
+      "offset": 7799,
+      "size_bytes": null,
+      "num_instructions": 19,
+      "prologue": "none",
+      "epilogue": "retf",
+      "classification": {
+        "verdict": "unclear",
+        "score_c": 1,
+        "score_asm": 2,
+        "score_diff": -1,
+        "signals": [
+          "no BP-frame prologue [+2 ASM]",
+          "retf without args [+1 C]"
+        ],
+        "confidence": "low"
+      }
+    },
+    {
+      "name": "sub_1E9F",
+      "segment_file": "seg1.asm",
+      "offset": 7839,
+      "size_bytes": null,
+      "num_instructions": 44,
+      "prologue": "none",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "asm_medium",
+        "score_c": 0,
+        "score_asm": 5,
+        "score_diff": -5,
+        "signals": [
+          "no BP-frame prologue [+2 ASM]",
+          "ret without args [neutral]",
+          "4 string ops [+2 ASM]",
+          "1 `loop` instruction(s) (MSC rarely emits) [+1 ASM]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_1EFB",
+      "segment_file": "seg1.asm",
+      "offset": 7931,
+      "size_bytes": null,
+      "num_instructions": 18,
+      "prologue": "none",
+      "epilogue": "jmp_tail",
+      "classification": {
+        "verdict": "asm_medium",
+        "score_c": 0,
+        "score_asm": 4,
+        "score_diff": -4,
+        "signals": [
+          "no BP-frame prologue [+2 ASM]",
+          "jmp tail-call (no proper return) [+2 ASM]"
+        ],
+        "confidence": "medium"
+      }
+    }
+  ]
+}

@@ -1,3 +1,17 @@
+; ======================================================================
+; MOUSE / seg1.asm   (segment 1 of MOUSE)
+; ----------------------------------------------------------------------
+; Functions discovered (pass1b):         4
+; Total instructions:                  340
+; 
+; Classification (pass8):
+;   C-origin (high+medium):              0
+;   ASM-origin (high+medium):            2
+;   Unclear:                             2
+;   Tiny / unclassified:                 0
+; 
+; Far API calls in this segment:     0 (0 unique)
+; ======================================================================
 ; AUTO-GENERATED from original MOUSE segment 1
 ; segment_size=953 bytes, flags=0xf170
 ; mode: humano legible - instrucciones x86 + bytes raw en comentario (autoritativo)
@@ -10,13 +24,6 @@
 ; el binario original).
 
 MOUSE_TEXT SEGMENT BYTE PUBLIC 'CODE'
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; entry -- 34 instr
-; Funcion mediana (34 instr, 2 calls).
-; tags: far, medium
-; calls (intra): sub_010B, sub_024D
-;----------------------------------------------------------------------
 
 
 ;-----------------------------------------------------------------------
@@ -36,14 +43,17 @@ entry PROC FAR
         jae     L_0015                          ; 73 04
         jcxz    L_001C                          ; E3 09
         jmp     L_0025                          ; EB 10
+;   [conditional branch target (if/else)] L_0015
 L_0015:
         call    L_010B                          ; E8 F3 00
         or      ax, ax                          ; 0B C0
         jne     L_0025                          ; 75 09
+;   [conditional branch target (if/else)] L_001C
 L_001C:
         call    far _SEG2_010C                  ; 9A FF FF 00 00 [FIXUP]
         or      ax, ax                          ; 0B C0
         je      L_0041                          ; 74 1C
+;   [branch target] L_0025
 L_0025:
         cmp     cx, 0xc8                        ; 81 F9 C8 00
         jae     L_0041                          ; 73 16
@@ -57,6 +67,7 @@ L_0025:
         rep movsb byte ptr es:[di], byte ptr [si] ; F3 A4
         pop     ds                              ; 1F
         mov     byte ptr [0], 0xff              ; C6 06 00 00 FF
+;   [conditional branch target (if/else)] L_0041
 L_0041:
         pop     di                              ; 5F
         pop     si                              ; 5E
@@ -76,6 +87,7 @@ entry ENDP
         out     dx, al                          ; EE
         mov     dx, di                          ; 8B D7
         jmp     L_005E                          ; EB 00
+;   [unconditional branch target] L_005E
 L_005E:
         in      al, dx                          ; EC
         and     al, 0xf                         ; 24 0F
@@ -85,6 +97,7 @@ L_005E:
         out     dx, al                          ; EE
         mov     dx, di                          ; 8B D7
         jmp     L_006C                          ; EB 00
+;   [unconditional branch target] L_006C
 L_006C:
         in      al, dx                          ; EC
         mov     cl, 4                           ; B1 04
@@ -97,6 +110,7 @@ L_006C:
         out     dx, al                          ; EE
         mov     dx, di                          ; 8B D7
         jmp     L_007F                          ; EB 00
+;   [unconditional branch target] L_007F
 L_007F:
         in      al, dx                          ; EC
         and     al, 0xf                         ; 24 0F
@@ -106,6 +120,7 @@ L_007F:
         out     dx, al                          ; EE
         mov     dx, di                          ; 8B D7
         jmp     L_008D                          ; EB 00
+;   [unconditional branch target] L_008D
 L_008D:
         in      al, dx                          ; EC
         mov     cl, 4                           ; B1 04
@@ -121,8 +136,10 @@ L_008D:
         mov     ax, di                          ; 8B C7
         not     ax                              ; F7 D0
         mov     dl, ah                          ; 8A D4
+        ; constant WM_MOVE
         mov     cl, 3                           ; B1 03
         shr     dl, cl                          ; D2 EA
+        ; constant WM_CREATE
         mov     cx, 1                           ; B9 01 00
         and     dx, cx                          ; 23 D1
         not     cx                              ; F7 D1
@@ -134,8 +151,10 @@ L_008D:
         ja      L_00CA                          ; 77 07
         or      byte ptr [0x20], 4              ; 80 0E 20 00 04
         jmp     L_00CF                          ; EB 05
+;   [conditional branch target (if/else)] L_00CA
 L_00CA:
         or      byte ptr [0x20], 2              ; 80 0E 20 00 02
+;   [branch target] L_00CF
 L_00CF:
         mov     cx, 2                           ; B9 02 00
         mov     al, ah                          ; 8A C4
@@ -149,8 +168,10 @@ L_00CF:
         ja      L_00F1                          ; 77 07
         or      byte ptr [0x20], 0x10           ; 80 0E 20 00 10
         jmp     L_00F6                          ; EB 05
+;   [conditional branch target (if/else)] L_00F1
 L_00F1:
         or      byte ptr [0x20], 8              ; 80 0E 20 00 08
+;   [branch target] L_00F6
 L_00F6:
         pop     cx                              ; 59
         mov     al, 0x20                        ; B0 20
@@ -160,19 +181,22 @@ L_00F6:
         or      ax, cx                          ; 0B C1
         je      L_0107                          ; 74 05
         or      byte ptr [0x20], 1              ; 80 0E 20 00 01
+;   [error/early exit] L_0107
 L_0107:
         mov     ax, word ptr [0x20]             ; A1 20 00
         ret                                     ; C3
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_010B -- offset 0x010B -- 127 instr
-; Iterador con bucle (127 instr).
-; tags: complex_iterator, loop
-; callers: entry
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_010B   offset=0x010B  size=127 instr  segment=seg1.asm
+;
+; Classification (pass8): unclear  (score C=0, ASM=2)
+; Prologue: none     Epilogue: ret
+;-------------------------------------------------------------------------
+;   [sub-routine] L_010B
 L_010B:
         mov     dx, 0x23c                       ; BA 3C 02
+        ; constant WM_CREATE
         mov     cx, 1                           ; B9 01 00
+;   [loop iteration target] L_0111
 L_0111:
         push    dx                              ; 52
         mov     al, 0x91                        ; B0 91
@@ -182,9 +206,11 @@ L_0111:
         mov     ah, al                          ; 8A E0
         sub     dx, 2                           ; 83 EA 02
         jmp     L_0121                          ; EB 00
+;   [unconditional branch target] L_0121
 L_0121:
         out     dx, al                          ; EE
         jmp     L_0124                          ; EB 00
+;   [unconditional branch target] L_0124
 L_0124:
         in      al, dx                          ; EC
         cmp     al, ah                          ; 3A C4
@@ -192,15 +218,18 @@ L_0124:
         je      L_0133                          ; 74 09
         add     dx, 4                           ; 83 C2 04
         loop    L_0111                          ; E2 E2
+;   [loop start] L_012F
 L_012F:
         xor     ax, ax                          ; 33 C0
         jmp     L_0187                          ; EB 54
+;   [conditional branch target (if/else)] L_0133
 L_0133:
         add     dx, 2                           ; 83 C2 02
         in      al, dx                          ; EC
         mov     ah, al                          ; 8A E0
         mov     cx, 0x2710                      ; B9 10 27
         xor     bh, bh                          ; 32 FF
+;   [loop iteration target] L_013E
 L_013E:
         in      al, dx                          ; EC
         xor     ah, al                          ; 32 E0
@@ -213,6 +242,7 @@ L_013E:
         mov     word ptr [0xe], dx              ; 89 16 0E 00
         mov     byte ptr [0x10], 8              ; C6 06 10 00 08
         mov     byte ptr [0x11], 0xfe           ; C6 06 11 00 FE
+        ; constant WM_SIZE
         mov     cl, 5                           ; B1 05
         test    bh, 1                           ; F6 C7 01
         jne     L_0173                          ; 75 10
@@ -223,12 +253,14 @@ L_013E:
         test    bh, 4                           ; F6 C7 04
         jne     L_0173                          ; 75 02
         inc     cl                              ; FE C1
+;   [conditional branch target (if/else)] L_0173
 L_0173:
         add     byte ptr [0x10], cl             ; 00 0E 10 00
         rol     byte ptr [0x11], cl             ; D2 06 11 00
         mov     word ptr [4], 0x22              ; C7 06 04 00 22 00
         mov     ax, 0x4c                        ; B8 4C 00
         mov     cx, 0xbf                        ; B9 BF 00
+;   [fall-through exit] L_0187
 L_0187:
         ret                                     ; C3
         mov     dx, word ptr [0xe]              ; 8B 16 0E 00
@@ -237,12 +269,15 @@ L_0187:
         jne     L_0194                          ; 75 03
         jmp     L_020D                          ; EB 7A
         nop                                     ; 90
+;   [conditional branch target (if/else)] L_0194
 L_0194:
         xor     dx, dx                          ; 33 D2
         mov     word ptr [0x20], dx             ; 89 16 20 00
         mov     dl, al                          ; 8A D0
+        ; constant WM_SIZE
         mov     cl, 5                           ; B1 05
         shr     dl, cl                          ; D2 EA
+        ; constant WM_CREATE
         mov     cx, 1                           ; B9 01 00
         and     dx, cx                          ; 23 D1
         not     cx                              ; F7 D1
@@ -254,10 +289,13 @@ L_0194:
         ja      L_01C0                          ; 77 07
         or      byte ptr [0x20], 4              ; 80 0E 20 00 04
         jmp     L_01C5                          ; EB 05
+;   [conditional branch target (if/else)] L_01C0
 L_01C0:
         or      byte ptr [0x20], 2              ; 80 0E 20 00 02
+;   [branch target] L_01C5
 L_01C5:
         mov     dl, al                          ; 8A D0
+        ; constant WM_MOVE
         mov     cl, 3                           ; B1 03
         shr     dl, cl                          ; D2 EA
         mov     cx, 2                           ; B9 02 00
@@ -271,8 +309,10 @@ L_01C5:
         ja      L_01EB                          ; 77 07
         or      byte ptr [0x20], 0x10           ; 80 0E 20 00 10
         jmp     L_01F0                          ; EB 05
+;   [conditional branch target (if/else)] L_01EB
 L_01EB:
         or      byte ptr [0x20], 8              ; 80 0E 20 00 08
+;   [branch target] L_01F0
 L_01F0:
         mov     bx, ax                          ; 8B D8
         mov     cl, 4                           ; B1 04
@@ -285,6 +325,7 @@ L_01F0:
         mov     byte ptr [0x24], bl             ; 88 1E 24 00
         mov     byte ptr [0x26], 1              ; C6 06 26 00 01
         jmp     L_0221                          ; EB 14
+;   [unconditional branch target] L_020D
 L_020D:
         and     al, 0x3f                        ; 24 3F
         cmp     byte ptr [0x26], 1              ; 80 3E 26 00 01
@@ -292,9 +333,11 @@ L_020D:
         ja      L_0225                          ; 77 0D
         or      byte ptr [0x24], al             ; 08 06 24 00
         mov     byte ptr [0x26], 2              ; C6 06 26 00 02
+;   [branch target] L_0221
 L_0221:
         xor     ax, ax                          ; 33 C0
         jmp     L_0245                          ; EB 20
+;   [conditional branch target (if/else)] L_0225
 L_0225:
         or      al, byte ptr [0x25]             ; 0A 06 25 00
         cwde                                    ; 98
@@ -307,8 +350,10 @@ L_0225:
         or      ax, cx                          ; 0B C1
         je      L_0242                          ; 74 05
         or      byte ptr [0x20], 1              ; 80 0E 20 00 01
+;   [conditional branch target (if/else)] L_0242
 L_0242:
         mov     ax, word ptr [0x20]             ; A1 20 00
+;   [unconditional branch target] L_0245
 L_0245:
         push    ax                              ; 50
         mov     al, 0x20                        ; B0 20
@@ -316,16 +361,18 @@ L_0245:
         pop     ax                              ; 58
         sti                                     ; FB
         ret                                     ; C3
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_024D -- offset 0x024D -- 118 instr
-; Interrupt Service Routine (118 instrucciones, posible manejador de INT).
-; tags: isr
-; callers: entry
-; calls (intra): sub_034C
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_024D   offset=0x024D  size=118 instr  segment=seg1.asm
+;
+; Classification (pass8): asm_high  (score C=0, ASM=7)
+; Prologue: none     Epilogue: iret   (INTERRUPT HANDLER)
+;
+; Near calls (internal): L_02B2, L_034C
+;-------------------------------------------------------------------------
+;   [sub-routine] L_024D
 L_024D:
         mov     dx, 0x23e                       ; BA 3E 02
+;   [loop start] L_0250
 L_0250:
         mov     ah, 0xde                        ; B4 DE
         in      al, dx                          ; EC
@@ -334,12 +381,14 @@ L_0250:
         in      al, dx                          ; EC
         cmp     al, ah                          ; 3A C4
         je      L_0267                          ; 74 0B
+;   [loop start] L_025C
 L_025C:
         sub     dx, 4                           ; 83 EA 04
         cmp     dl, 0x2e                        ; 80 FA 2E
         jne     L_0250                          ; 75 EC
         clc                                     ; F8
         jmp     L_0297                          ; EB 30
+;   [conditional branch target (if/else)] L_0267
 L_0267:
         in      al, dx                          ; EC
         mov     bl, al                          ; 8A D8
@@ -351,9 +400,11 @@ L_0267:
         jne     L_025C                          ; 75 E8
         sub     dx, 2                           ; 83 EA 02
         mov     word ptr [0xe], dx              ; 89 16 0E 00
+        ; constant GMEM_ZEROINIT
         mov     al, 0x80                        ; B0 80
         out     dx, al                          ; EE
         jmp     L_0280                          ; EB 00
+;   [unconditional branch target] L_0280
 L_0280:
         mov     al, 7                           ; B0 07
         out     dx, al                          ; EE
@@ -367,6 +418,7 @@ L_0280:
         mov     cx, 0x59                        ; B9 59 00
         nop                                     ; 90
         stc                                     ; F9
+;   [error/early exit] L_0297
 L_0297:
         ret                                     ; C3
         or      ax, 0xbdf                       ; 0D DF 0B
@@ -385,12 +437,15 @@ L_0297:
         mov     al, byte ptr [0xe]              ; A0 0E 00
         sub     al, 0xfc                        ; 2C FC
         jae     L_02C1                          ; 73 02
+        ; constant WM_CREATE
         mov     al, 1                           ; B0 01
+;   [conditional branch target (if/else)] L_02C1
 L_02C1:
         cwde                                    ; 98
         add     ax, ax                          ; 03 C0
         mov     bx, ax                          ; 8B D8
         mov     si, word ptr cs:[bx + 0x2aa]    ; 2E 8B B7 AA 02
+;   [loop start] L_02CB
 L_02CB:
         xor     ax, ax                          ; 33 C0
         mov     es, ax                          ; 8E C0
@@ -417,14 +472,17 @@ L_02CB:
         out     dx, al                          ; EE
         call    L_034C                          ; E8 49 00
         cmp     ax, 3                           ; 3D 03 00
+        ; constant WM_CREATE
         mov     al, 1                           ; B0 01
         out     dx, al                          ; EE
         jb      L_0312                          ; 72 07
         call    L_034C                          ; E8 3E 00
         or      ax, ax                          ; 0B C0
         je      L_0317                          ; 74 05
+;   [conditional branch target (if/else)] L_0312
 L_0312:
         mov     byte ptr [0x10], 0              ; C6 06 10 00 00
+;   [conditional branch target (if/else)] L_0317
 L_0317:
         pop     cx                              ; 59
         cli                                     ; FA
@@ -441,30 +499,35 @@ L_0317:
         mov     al, byte ptr [0x10]             ; A0 10 00
         cmp     al, 1                           ; 3C 01
         jb      L_02CB                          ; 72 97
+;   [error/early exit] L_0334
 L_0334:
         ret                                     ; C3
         add     byte ptr [bx + si], al          ; 00 00
         push    ax                              ; 50
+        ; constant WM_CREATE
         mov     ax, 1                           ; B8 01 00
         add     ax, word ptr cs:[0x335]         ; 2E 03 06 35 03
         jb      L_0346                          ; 72 04
         mov     word ptr cs:[0x335], ax         ; 2E A3 35 03
+;   [conditional branch target (if/else)] L_0346
 L_0346:
         mov     al, 0x20                        ; B0 20
         out     0x20, al                        ; E6 20
         pop     ax                              ; 58
         iret                                    ; CF
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_034C -- offset 0x034C -- 61 instr
-; Iterador con bucle (61 instr).
-; tags: complex_iterator, loop
-; callers: sub_024D
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_034C   offset=0x034C  size=61 instr  segment=seg1.asm
+;
+; Classification (pass8): asm_medium  (score C=0, ASM=3)
+; Prologue: none     Epilogue: ret
+;-------------------------------------------------------------------------
+;   [sub-routine] L_034C
 L_034C:
         mov     word ptr cs:[0x335], es         ; 2E 8C 06 35 03
+        ; constant WM_MOVE
         mov     al, 3                           ; B0 03
         xor     cx, cx                          ; 33 C9
+;   [loop iteration target] L_0355
 L_0355:
         loop    L_0355                          ; E2 FE
         dec     al                              ; FE C8
@@ -477,6 +540,7 @@ L_0355:
         inc     dx                              ; 42
         mov     al, 0x31                        ; B0 31
         out     dx, al                          ; EE
+        ; constant WM_CREATE
         mov     al, 1                           ; B0 01
         dec     dx                              ; 4A
         out     dx, al                          ; EE
@@ -513,6 +577,7 @@ L_0355:
         test    al, 0x10                        ; A8 10
         jne     L_03A3                          ; 75 03
         xor     ah, 6                           ; 80 F4 06
+;   [conditional branch target (if/else)] L_03A3
 L_03A3:
         test    al, 0x20                        ; A8 20
         je      L_03B1                          ; 74 0A
@@ -520,6 +585,7 @@ L_03A3:
         test    al, 4                           ; A8 04
         jne     L_03B1                          ; 75 03
         xor     ah, 0x18                        ; 80 F4 18
+;   [conditional branch target (if/else)] L_03B1
 L_03B1:
         mov     al, 0x20                        ; B0 20
         out     0x20, al                        ; E6 20

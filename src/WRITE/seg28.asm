@@ -1,3 +1,17 @@
+; ======================================================================
+; WRITE / seg28.asm   (segment 28 of WRITE)
+; ----------------------------------------------------------------------
+; Functions discovered (pass1b):         0
+; Total instructions:                    0
+; 
+; Classification (pass8):
+;   C-origin (high+medium):              0
+;   ASM-origin (high+medium):            0
+;   Unclear:                             0
+;   Tiny / unclassified:                 0
+; 
+; Far API calls in this segment:     0 (0 unique)
+; ======================================================================
 ; AUTO-GENERATED from original WRITE segment 28
 ; segment_size=133 bytes, flags=0xf130
 ; mode: humano legible - instrucciones x86 + bytes raw en comentario (autoritativo)
@@ -24,9 +38,12 @@ WRITE_TEXT SEGMENT BYTE PUBLIC 'CODE'
         sub     ax, ax                          ; 2B C0
         push    ax                              ; 50
         call    far _entry_55                   ; 9A FF FF 00 00 [FIXUP]
+;   [loop start] L_0019
 L_0019:
+        ; constant WM_CREATE
         mov     ax, 1                           ; B8 01 00
         jmp     L_007B                          ; EB 5D
+;   [conditional branch target (if/else)] L_001E
 L_001E:
         cmp     word ptr [bp + 0xc], 0x111      ; 81 7E 0C 11 01
         jne     L_003F                          ; 75 1A
@@ -34,12 +51,15 @@ L_001E:
         je      L_0031                          ; 74 06
         cmp     word ptr [bp + 0xa], 2          ; 83 7E 0A 02
         jne     L_0060                          ; 75 2F
+;   [conditional branch target (if/else)] L_0031
 L_0031:
         push    word ptr [bp + 0xe]             ; FF 76 0E
+        ; constant WM_CREATE
         mov     ax, 1                           ; B8 01 00
         push    ax                              ; 50
         call    far _entry_59                   ; 9A FF FF 00 00 [FIXUP]
         jmp     L_0019                          ; EB DA
+;   [conditional branch target (if/else)] L_003F
 L_003F:
         cmp     word ptr [bp + 0xc], 6          ; 83 7E 0C 06
         jne     L_0064                          ; 75 1F
@@ -47,14 +67,17 @@ L_003F:
         je      L_0051                          ; 74 06
         mov     ax, word ptr [bp + 0xe]         ; 8B 46 0E
         mov     word ptr [0x7aa], ax            ; A3 AA 07
+;   [conditional branch target (if/else)] L_0051
 L_0051:
         cmp     word ptr [0x60], 0              ; 83 3E 60 00 00
         je      L_0060                          ; 74 08
         push    word ptr [bp + 0xa]             ; FF 76 0A
         call    far USER.SHOWCURSOR             ; 9A FF FF 00 00 [FIXUP]
+;   [loop start (also forward branch)] L_0060
 L_0060:
         sub     ax, ax                          ; 2B C0
         jmp     L_007B                          ; EB 17
+;   [conditional branch target (if/else)] L_0064
 L_0064:
         cmp     word ptr [bp + 0xc], 9          ; 83 7E 0C 09
         jne     L_0060                          ; 75 F6
@@ -63,6 +86,7 @@ L_0064:
         push    word ptr [0x1240]               ; FF 36 40 12
         call    far _entry_63                   ; 9A FF FF 00 00 [FIXUP]
         jmp     L_0060                          ; EB E5
+;   [unconditional branch target] L_007B
 L_007B:
         sub     bp, 2                           ; 83 ED 02
         mov     sp, bp                          ; 8B E5

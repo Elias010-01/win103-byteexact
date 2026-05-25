@@ -1,3 +1,17 @@
+; ======================================================================
+; ATTMOUSE / seg1.asm   (segment 1 of ATTMOUSE)
+; ----------------------------------------------------------------------
+; Functions discovered (pass1b):         2
+; Total instructions:                   54
+; 
+; Classification (pass8):
+;   C-origin (high+medium):              0
+;   ASM-origin (high+medium):            2
+;   Unclear:                             0
+;   Tiny / unclassified:                 0
+; 
+; Far API calls in this segment:     0 (0 unique)
+; ======================================================================
 ; AUTO-GENERATED from original ATTMOUSE segment 1
 ; segment_size=388 bytes, flags=0x0140
 ; mode: humano legible - instrucciones x86 + bytes raw en comentario (autoritativo)
@@ -23,12 +37,18 @@ ATTMOUSE_TEXT SEGMENT BYTE PUBLIC 'CODE'
         xor     ax, ax                          ; 33 C0
         jcxz    L_0018                          ; E3 08
         push    ax                              ; 50
+        ;   ^ arg wSegment
         push    ax                              ; 50
+        ;   ^ arg wStart
         push    cx                              ; 51
+        ;   ^ arg wEnd
+        ; --> LOCALINIT(WORD wSegment, WORD wStart, WORD wEnd) -> BOOL
         call    far KERNEL.LOCALINIT            ; 9A FF FF 00 00 [FIXUP]
+;   [conditional branch target (if/else)] L_0018
 L_0018:
         xor     ax, ax                          ; 33 C0
         mov     byte ptr [0], al                ; A2 00 00
+        ; constant WM_CREATE
         mov     ax, 1                           ; B8 01 00
         mov     bx, 0xec                        ; BB EC 00
         mov     si, 0xf6                        ; BE F6 00
@@ -54,6 +74,7 @@ L_0018:
         cmp     ax, 3                           ; 3D 03 00
         jne     L_005D                          ; 75 03
         mov     word ptr [2], ax                ; A3 02 00
+;   [conditional branch target (if/else)] L_005D
 L_005D:
         mov     ax, 0x3533                      ; B8 33 35
         int     0x21                            ; CD 21
@@ -63,6 +84,7 @@ L_005D:
         mov     ax, 0x20                        ; B8 20 00
         int     0x33                            ; CD 33
         mov     word ptr [0x12], bx             ; 89 1E 12 00
+;   [conditional branch target (if/else)] L_0079
 L_0079:
         pop     di                              ; 5F
         pop     si                              ; 5E
@@ -83,6 +105,7 @@ L_0079:
         push    di                              ; 57
         les     di, ptr [bp + 6]                ; C4 7E 06
         mov     si, 0                           ; BE 00 00
+        ; constant WM_GETTEXTLENGTH
         mov     ax, 0xe                         ; B8 0E 00
         mov     cx, ax                          ; 8B C8
         rep movsb byte ptr es:[di], byte ptr [si] ; F3 A4
@@ -125,12 +148,16 @@ L_0079:
         int     0x33                            ; CD 33
         jmp     L_0101                          ; EB 0B
         nop                                     ; 90
+;   [conditional branch target (if/else)] L_00F7
 L_00F7:
         lea     bx, [0x1c]                      ; 8D 1E 1C 00
+        ; constant WM_SIZE
         mov     cx, 5                           ; B9 05 00
         call    L_0114                          ; E8 13 00
+;   [unconditional branch target] L_0101
 L_0101:
         mov     word ptr [0xe], 0xffff          ; C7 06 0E 00 FF FF
+;   [conditional branch target (if/else)] L_0107
 L_0107:
         pop     di                              ; 5F
         pop     si                              ; 5E
@@ -140,22 +167,24 @@ L_0107:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    4                               ; CA 04 00
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_0114 -- offset 0x0114 -- 14 instr
-; Iterador con bucle (14 instr).
-; tags: iterator, loop
-; callers: sub_012C
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_0114   offset=0x0114  size=14 instr  segment=seg1.asm
+;
+; Classification (pass8): asm_high  (score C=0, ASM=6)
+; Prologue: none     Epilogue: jmp_tail
+;-------------------------------------------------------------------------
+;   [sub-routine] L_0114
 L_0114:
         pushf                                   ; 9C
         cli                                     ; FA
+;   [loop iteration target] L_0116
 L_0116:
         in      al, 0x64                        ; E4 64
         test    al, 2                           ; A8 02
         jne     L_0116                          ; 75 FA
         push    cx                              ; 51
         mov     cx, 0x64                        ; B9 64 00
+;   [loop iteration target] L_0120
 L_0120:
         loop    L_0120                          ; E2 FE
         pop     cx                              ; 59
@@ -164,15 +193,18 @@ L_0120:
         inc     bx                              ; 43
         loop    L_0116                          ; E2 EC
         jmp     L_012D                          ; EB 01
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_012C -- offset 0x012C -- 40 instr
-; Llama a servicios DOS via INT 21h (40 instr).
-; tags: dos_caller, far, int_21, int_33
-; calls (intra): sub_0114
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_012C   offset=0x012C  size=40 instr  segment=seg1.asm
+;
+; Classification (pass8): asm_high  (score C=1, ASM=7)
+; Prologue: none     Epilogue: retf
+;
+; Near calls (internal): L_0114, L_012C
+;-------------------------------------------------------------------------
+;   [sub-routine] L_012C
 L_012C:
         iret                                    ; CF
+;   [unconditional branch target] L_012D
 L_012D:
         push    cs                              ; 0E
         call    L_012C                          ; E8 FB FF
@@ -196,10 +228,12 @@ L_012D:
         mov     bx, word ptr [0x12]             ; 8B 1E 12 00
         int     0x33                            ; CD 33
         jmp     L_0168                          ; EB 0A
+;   [conditional branch target (if/else)] L_015E
 L_015E:
         lea     bx, [0x21]                      ; 8D 1E 21 00
         mov     cx, 0xa                         ; B9 0A 00
         call    L_0114                          ; E8 AC FF
+;   [unconditional branch target] L_0168
 L_0168:
         mov     ax, 0x2509                      ; B8 09 25
         push    ds                              ; 1E
@@ -207,6 +241,7 @@ L_0168:
         int     0x21                            ; CD 21
         pop     ds                              ; 1F
         mov     word ptr [0xe], 0               ; C7 06 0E 00 00 00
+;   [conditional branch target (if/else)] L_0179
 L_0179:
         pop     di                              ; 5F
         pop     si                              ; 5E

@@ -1,3 +1,24 @@
+; ======================================================================
+; PAINT / seg29.asm   (segment 29 of PAINT)
+; ----------------------------------------------------------------------
+; Functions discovered (pass1b):         3
+; Total instructions:                  291
+; 
+; Classification (pass8):
+;   C-origin (high+medium):              3
+;   ASM-origin (high+medium):            0
+;   Unclear:                             0
+;   Tiny / unclassified:                 0
+; 
+; Far API calls in this segment:     9 (6 unique)
+;   Top:
+;        2  LINETO
+;        2  MOVETO
+;        2  SETROP2
+;        1  POLYLINE
+;        1  GETSTOCKOBJECT
+;        1  SELECTOBJECT
+; ======================================================================
 ; AUTO-GENERATED from original PAINT segment 29
 ; segment_size=912 bytes, flags=0xf130
 ; mode: humano legible - instrucciones x86 + bytes raw en comentario (autoritativo)
@@ -27,22 +48,34 @@ PAINT_TEXT SEGMENT BYTE PUBLIC 'CODE'
         push    word ptr [bp + 0xa]             ; FF 76 0A
         mov     ax, 7                           ; B8 07 00
         push    ax                              ; 50
+        ;   ^ arg iObject
+        ; --> GETSTOCKOBJECT(INT iObject) -> HANDLE
         call    far GDI.GETSTOCKOBJECT          ; 9A 5C 03 00 00 [FIXUP]
         push    ax                              ; 50
+        ; --> SELECTOBJECT(HDC hDC, HANDLE hObj) -> HANDLE
         call    far GDI.SELECTOBJECT            ; 9A 62 03 00 00 [FIXUP]
         cmp     word ptr [0x894], 0             ; 83 3E 94 08 00
         jg      L_0035                          ; 7F 03
         jmp     L_013E                          ; E9 09 01
+;   [conditional branch target (if/else)] L_0035
 L_0035:
         cmp     word ptr [bp + 8], 0            ; 83 7E 08 00
         je      L_008B                          ; 74 50
         push    word ptr [bp + 0xa]             ; FF 76 0A
+        ;   ^ arg hDC
         push    word ptr [0xb98]                ; FF 36 98 0B
+        ;   ^ arg x
         push    word ptr [0xb9a]                ; FF 36 9A 0B
+        ;   ^ arg y
+        ; --> MOVETO(HDC hDC, INT x, INT y) -> DWORD
         call    far GDI.MOVETO                  ; 9A 50 01 00 00 [FIXUP]
         push    word ptr [bp + 0xa]             ; FF 76 0A
+        ;   ^ arg hDC
         push    word ptr [0xb9e]                ; FF 36 9E 0B
+        ;   ^ arg x
         push    word ptr [0xba0]                ; FF 36 A0 0B
+        ;   ^ arg y
+        ; --> LINETO(HDC hDC, INT x, INT y) -> BOOL
         call    far GDI.LINETO                  ; 9A 60 01 00 00 [FIXUP]
         mov     ax, 2                           ; B8 02 00
         imul    word ptr [0xb98]                ; F7 2E 98 0B
@@ -58,14 +91,21 @@ L_0035:
         mov     word ptr [0xba0], ax            ; A3 A0 0B
         mov     word ptr [0xc94], 0             ; C7 06 94 0C 00 00
         jmp     L_009C                          ; EB 11
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_008B -- offset 0x008B -- 105 instr
-; Dispatcher: tabla de decisiones cmp+jcc (105 instr).
-; tags: calls_gdi, dispatcher, far
-; calls (intra): sub_01C8, sub_0293
-; calls (inter): GDI.LINETO, GDI.MOVETO, GDI.POLYLINE, GDI.SETROP2
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_008B   offset=0x008B  size=105 instr  segment=seg29.asm
+;
+; Classification (pass8): c_high  (score C=10, ASM=0)
+; Prologue: standard_bp     Epilogue: retf_n   (PASCAL FAR, callee cleans args)
+;
+; Far API calls:
+;   LINETO(HDC hDC, INT x, INT y) -> BOOL
+;   MOVETO(HDC hDC, INT x, INT y) -> DWORD
+;   POLYLINE
+;   SETROP2
+;
+; Near calls (internal): L_01C8, L_0293
+;-------------------------------------------------------------------------
+;   [conditional branch target (if/else)] L_008B
 L_008B:
         push    word ptr [bp + 0xa]             ; FF 76 0A
         mov     ax, 0xeba                       ; B8 BA 0E
@@ -73,15 +113,18 @@ L_008B:
         push    ax                              ; 50
         push    word ptr [0xc94]                ; FF 36 94 0C
         call    far GDI.POLYLINE                ; 9A 2A 01 00 00 [FIXUP]
+;   [unconditional branch target] L_009C
 L_009C:
         cmp     word ptr [bp + 6], 0            ; 83 7E 06 00
         je      L_00B6                          ; 74 14
         push    word ptr [bp + 0xa]             ; FF 76 0A
+        ; constant VK_RETURN
         mov     ax, 0xd                         ; B8 0D 00
         push    ax                              ; 50
         call    far GDI.SETROP2                 ; 9A 50 03 00 00 [FIXUP]
         push    word ptr [bp + 0xa]             ; FF 76 0A
         call    far _entry_134                  ; 9A 01 03 00 00 [FIXUP]
+;   [conditional branch target (if/else)] L_00B6
 L_00B6:
         mov     ax, word ptr [0xc8a]            ; A1 8A 0C
         shl     ax, 1                           ; D1 E0
@@ -133,25 +176,43 @@ L_00B6:
         push    word ptr [bp + 0xa]             ; FF 76 0A
         call    far _entry_133                  ; 9A 29 03 00 00 [FIXUP]
         jmp     L_01A2                          ; EB 64
+;   [unconditional branch target] L_013E
 L_013E:
         cmp     word ptr [bp + 8], 0            ; 83 7E 08 00
         jne     L_0164                          ; 75 20
         push    word ptr [bp + 0xa]             ; FF 76 0A
+        ;   ^ arg hDC
         push    word ptr [0xbf0]                ; FF 36 F0 0B
+        ;   ^ arg x
         push    word ptr [0xbf2]                ; FF 36 F2 0B
+        ;   ^ arg y
+        ; --> MOVETO(HDC hDC, INT x, INT y) -> DWORD
         call    far GDI.MOVETO                  ; 9A 70 01 00 00 [FIXUP]
         push    word ptr [bp + 0xa]             ; FF 76 0A
+        ;   ^ arg hDC
         push    word ptr [0x1172]               ; FF 36 72 11
+        ;   ^ arg x
         push    word ptr [0x1174]               ; FF 36 74 11
+        ;   ^ arg y
+        ; --> LINETO(HDC hDC, INT x, INT y) -> BOOL
         call    far GDI.LINETO                  ; 9A 80 01 00 00 [FIXUP]
+;   [conditional branch target (if/else)] L_0164
 L_0164:
         push    word ptr [bp + 0xa]             ; FF 76 0A
+        ;   ^ arg hDC
         push    word ptr [0xbf0]                ; FF 36 F0 0B
+        ;   ^ arg x
         push    word ptr [0xbf2]                ; FF 36 F2 0B
+        ;   ^ arg y
+        ; --> MOVETO(HDC hDC, INT x, INT y) -> DWORD
         call    far GDI.MOVETO                  ; 9A 11 03 00 00 [FIXUP]
         push    word ptr [bp + 0xa]             ; FF 76 0A
+        ;   ^ arg hDC
         push    word ptr [0xc8a]                ; FF 36 8A 0C
+        ;   ^ arg x
         push    word ptr [0xc8c]                ; FF 36 8C 0C
+        ;   ^ arg y
+        ; --> LINETO(HDC hDC, INT x, INT y) -> BOOL
         call    far GDI.LINETO                  ; 9A 21 03 00 00 [FIXUP]
         cmp     word ptr [bp + 6], 0            ; 83 7E 06 00
         je      L_01A2                          ; 74 18
@@ -163,6 +224,7 @@ L_0164:
         mov     word ptr [0xb9e], ax            ; A3 9E 0B
         mov     ax, word ptr [0xc8c]            ; A1 8C 0C
         mov     word ptr [0xba0], ax            ; A3 A0 0B
+;   [branch target] L_01A2
 L_01A2:
         cmp     word ptr [bp + 6], 0            ; 83 7E 06 00
         je      L_01BD                          ; 74 15
@@ -170,8 +232,10 @@ L_01A2:
         jle     L_01B7                          ; 7E 08
         mov     word ptr [0x894], 0             ; C7 06 94 08 00 00
         jmp     L_01BD                          ; EB 06
+;   [conditional branch target (if/else)] L_01B7
 L_01B7:
         mov     word ptr [0x894], 1             ; C7 06 94 08 01 00
+;   [branch target] L_01BD
 L_01BD:
         sub     bp, 2                           ; 83 ED 02
         mov     sp, bp                          ; 8B E5
@@ -179,15 +243,17 @@ L_01BD:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    8                               ; CA 08 00
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_01C8 -- offset 0x01C8 -- 90 instr
-; Funcion compleja: 90 instrucciones, 1 llamadas, 1 branches.
-; tags: complex
-; callers: sub_008B
-; calls (intra): sub_0293
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_01C8   offset=0x01C8  size=90 instr  segment=seg29.asm
+;
+; Classification (pass8): c_high  (score C=7, ASM=0)
+; Prologue: standard_bp     Epilogue: ret_n   (PASCAL NEAR, callee cleans args)
+;
+; Near calls (internal): L_01C8, L_0293
+;-------------------------------------------------------------------------
+;   [sub-routine] L_01C8
 L_01C8:
+        ;   = cProc <22> ; NEAR PASCAL prologue
         push    bp                              ; 55
         mov     bp, sp                          ; 8B EC
         sub     sp, 0x16                        ; 83 EC 16
@@ -204,6 +270,7 @@ L_01C8:
         push    word ptr [bx + 2]               ; FF 77 02
         call    L_0293                          ; E8 A7 00
         jmp     L_028B                          ; E9 9C 00
+;   [conditional branch target (if/else)] L_01EF
 L_01EF:
         mov     bx, word ptr [bp + 8]           ; 8B 5E 08
         mov     si, word ptr [bx]               ; 8B 37
@@ -274,21 +341,29 @@ L_01EF:
         dec     ax                              ; 48
         push    ax                              ; 50
         call    L_01C8                          ; E8 3D FF
+;   [fall-through exit] L_028B
 L_028B:
         pop     si                              ; 5E
         pop     di                              ; 5F
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     8                               ; C2 08 00
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_0293 -- offset 0x0293 -- 96 instr
-; Dispatcher: tabla de decisiones cmp+jcc (96 instr).
-; tags: calls_gdi, dispatcher, far
-; callers: sub_008B, sub_01C8
-; calls (inter): GDI.GETSTOCKOBJECT, GDI.LINETO, GDI.MOVETO, GDI.SELECTOBJECT, GDI.SETROP2
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_0293   offset=0x0293  size=96 instr  segment=seg29.asm
+;
+; Classification (pass8): c_high  (score C=10, ASM=0)
+; Prologue: standard_bp     Epilogue: retf_n   (PASCAL FAR, callee cleans args)
+;
+; Far API calls:
+;   GETSTOCKOBJECT(INT iObject) -> HANDLE
+;   LINETO(HDC hDC, INT x, INT y) -> BOOL
+;   MOVETO(HDC hDC, INT x, INT y) -> DWORD
+;   SELECTOBJECT(HDC hDC, HANDLE hObj) -> HANDLE
+;   SETROP2
+;-------------------------------------------------------------------------
+;   [sub-routine] L_0293
 L_0293:
+        ;   = cProc <0> ; NEAR PASCAL prologue
         push    bp                              ; 55
         mov     bp, sp                          ; 8B EC
         push    si                              ; 56
@@ -311,10 +386,12 @@ L_0293:
         mov     ax, word ptr [bp + 4]           ; 8B 46 04
         cmp     word ptr [si + 0xeb8], ax       ; 39 84 B8 0E
         je      L_02EC                          ; 74 22
+;   [conditional branch target (if/else)] L_02CA
 L_02CA:
         cmp     word ptr [0xc94], 0x81          ; 81 3E 94 0C 81 00
         jge     L_02D6                          ; 7D 04
         inc     word ptr [0xc94]                ; FF 06 94 0C
+;   [conditional branch target (if/else)] L_02D6
 L_02D6:
         mov     si, word ptr [0xc94]            ; 8B 36 94 0C
         mov     cl, 2                           ; B1 02
@@ -323,6 +400,7 @@ L_02D6:
         mov     word ptr [si + 0xeb6], ax       ; 89 84 B6 0E
         mov     ax, word ptr [bp + 4]           ; 8B 46 04
         mov     word ptr [si + 0xeb8], ax       ; 89 84 B8 0E
+;   [error/early exit] L_02EC
 L_02EC:
         pop     si                              ; 5E
         mov     sp, bp                          ; 8B E5
@@ -339,12 +417,20 @@ L_02EC:
         push    word ptr [bp + 6]               ; FF 76 06
         call    far _entry_134                  ; 9A FF FF 00 00 [FIXUP]
         push    word ptr [bp + 6]               ; FF 76 06
+        ;   ^ arg hDC
         push    word ptr [0xb98]                ; FF 36 98 0B
+        ;   ^ arg x
         push    word ptr [0xb9a]                ; FF 36 9A 0B
+        ;   ^ arg y
+        ; --> MOVETO(HDC hDC, INT x, INT y) -> DWORD
         call    far GDI.MOVETO                  ; 9A 72 03 00 00 [FIXUP]
         push    word ptr [bp + 6]               ; FF 76 06
+        ;   ^ arg hDC
         push    word ptr [0xb9e]                ; FF 36 9E 0B
+        ;   ^ arg x
         push    word ptr [0xba0]                ; FF 36 A0 0B
+        ;   ^ arg y
+        ; --> LINETO(HDC hDC, INT x, INT y) -> BOOL
         call    far GDI.LINETO                  ; 9A 82 03 00 00 [FIXUP]
         push    word ptr [bp + 6]               ; FF 76 06
         call    far _entry_133                  ; 9A FF FF 00 00 [FIXUP]
@@ -370,16 +456,27 @@ L_02EC:
         push    word ptr [bp + 6]               ; FF 76 06
         mov     ax, 7                           ; B8 07 00
         push    ax                              ; 50
+        ;   ^ arg iObject
+        ; --> GETSTOCKOBJECT(INT iObject) -> HANDLE
         call    far GDI.GETSTOCKOBJECT          ; 9A FF FF 00 00 [FIXUP]
         push    ax                              ; 50
+        ; --> SELECTOBJECT(HDC hDC, HANDLE hObj) -> HANDLE
         call    far GDI.SELECTOBJECT            ; 9A FF FF 00 00 [FIXUP]
         push    word ptr [bp + 6]               ; FF 76 06
+        ;   ^ arg hDC
         push    word ptr [0xb98]                ; FF 36 98 0B
+        ;   ^ arg x
         push    word ptr [0xb9a]                ; FF 36 9A 0B
+        ;   ^ arg y
+        ; --> MOVETO(HDC hDC, INT x, INT y) -> DWORD
         call    far GDI.MOVETO                  ; 9A FF FF 00 00 [FIXUP]
         push    word ptr [bp + 6]               ; FF 76 06
+        ;   ^ arg hDC
         push    word ptr [0xb9e]                ; FF 36 9E 0B
+        ;   ^ arg x
         push    word ptr [0xba0]                ; FF 36 A0 0B
+        ;   ^ arg y
+        ; --> LINETO(HDC hDC, INT x, INT y) -> BOOL
         call    far GDI.LINETO                  ; 9A FF FF 00 00 [FIXUP]
         sub     bp, 2                           ; 83 ED 02
         mov     sp, bp                          ; 8B E5

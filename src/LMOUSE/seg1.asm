@@ -1,3 +1,17 @@
+; ======================================================================
+; LMOUSE / seg1.asm   (segment 1 of LMOUSE)
+; ----------------------------------------------------------------------
+; Functions discovered (pass1b):        17
+; Total instructions:                  559
+; 
+; Classification (pass8):
+;   C-origin (high+medium):              0
+;   ASM-origin (high+medium):            5
+;   Unclear:                            12
+;   Tiny / unclassified:                 0
+; 
+; Far API calls in this segment:     0 (0 unique)
+; ======================================================================
 ; AUTO-GENERATED from original LMOUSE segment 1
 ; segment_size=1421 bytes, flags=0x0040
 ; mode: humano legible - instrucciones x86 + bytes raw en comentario (autoritativo)
@@ -27,6 +41,7 @@ LMOUSE_TEXT SEGMENT BYTE PUBLIC 'CODE'
         je      L_001E                          ; 74 08
         mov     dx, word ptr [2]                ; 8B 16 02 00
         lcall   [0x16]                          ; FF 1E 16 00
+;   [conditional branch target (if/else)] L_001E
 L_001E:
         pop     es                              ; 07
         pop     ds                              ; 1F
@@ -38,13 +53,15 @@ L_001E:
         pop     bx                              ; 5B
         pop     ax                              ; 58
         iret                                    ; CF
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_0028 -- offset 0x0028 -- 64 instr
-; Funcion mediana (64 instr, 1 calls).
-; tags: medium
-; calls (intra): sub_00D9
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_0028   offset=0x0028  size=64 instr  segment=seg1.asm
+;
+; Classification (pass8): unclear  (score C=0, ASM=2)
+; Prologue: none     Epilogue: ret
+;
+; Near calls (internal): L_00D9
+;-------------------------------------------------------------------------
+;   [sub-routine] L_0028
 L_0028:
         mov     dx, word ptr [0xe]              ; 8B 16 0E 00
         in      al, dx                          ; EC
@@ -54,6 +71,7 @@ L_0028:
         je      L_003A                          ; 74 03
         jmp     L_0092                          ; EB 59
         nop                                     ; 90
+;   [conditional branch target (if/else)] L_003A
 L_003A:
         xor     dx, dx                          ; 33 D2
         mov     word ptr [0x37], dx             ; 89 16 37 00
@@ -64,17 +82,22 @@ L_003A:
         ja      L_0052                          ; 77 07
         or      byte ptr [0x37], 4              ; 80 0E 37 00 04
         jmp     L_0057                          ; EB 05
+;   [conditional branch target (if/else)] L_0052
 L_0052:
         or      byte ptr [0x37], 2              ; 80 0E 37 00 02
+;   [branch target] L_0057
 L_0057:
+        ; constant WM_CREATE
         mov     cl, 1                           ; B1 01
         call    L_00D9                          ; E8 7D 00
         je      L_006C                          ; 74 0E
         ja      L_0067                          ; 77 07
         or      byte ptr [0x37], 0x10           ; 80 0E 37 00 10
         jmp     L_006C                          ; EB 05
+;   [conditional branch target (if/else)] L_0067
 L_0067:
         or      byte ptr [0x37], 8              ; 80 0E 37 00 08
+;   [branch target] L_006C
 L_006C:
         mov     cl, 2                           ; B1 02
         call    L_00D9                          ; E8 68 00
@@ -82,16 +105,20 @@ L_006C:
         ja      L_007C                          ; 77 07
         or      byte ptr [0x37], 0x40           ; 80 0E 37 00 40
         jmp     L_0081                          ; EB 05
+;   [conditional branch target (if/else)] L_007C
 L_007C:
         or      byte ptr [0x37], 0x20           ; 80 0E 37 00 20
+;   [branch target] L_0081
 L_0081:
         xor     ax, ax                          ; 33 C0
         mov     word ptr [0x3d], ax             ; A3 3D 00
         mov     word ptr [0x3b], ax             ; A3 3B 00
         mov     byte ptr [0x3f], 1              ; C6 06 3F 00 01
+;   [loop start] L_008E
 L_008E:
         xor     ax, ax                          ; 33 C0
         jmp     L_00D1                          ; EB 3F
+;   [unconditional branch target] L_0092
 L_0092:
         cmp     byte ptr [0x3f], 0              ; 80 3E 3F 00 00
         je      L_008E                          ; 74 F5
@@ -99,6 +126,7 @@ L_0092:
         test    byte ptr [0x3f], 1              ; F6 06 3F 00 01
         jne     L_00A6                          ; 75 03
         mov     bx, 0x3d                        ; BB 3D 00
+;   [conditional branch target (if/else)] L_00A6
 L_00A6:
         cwde                                    ; 98
         add     word ptr [bx], ax               ; 01 07
@@ -113,8 +141,10 @@ L_00A6:
         or      ax, cx                          ; 0B C1
         je      L_00CE                          ; 74 05
         or      byte ptr [0x37], 1              ; 80 0E 37 00 01
+;   [conditional branch target (if/else)] L_00CE
 L_00CE:
         mov     ax, word ptr [0x37]             ; A1 37 00
+;   [unconditional branch target] L_00D1
 L_00D1:
         push    ax                              ; 50
         mov     al, 0x20                        ; B0 20
@@ -122,14 +152,15 @@ L_00D1:
         sti                                     ; FB
         pop     ax                              ; 58
         ret                                     ; C3
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_00D9 -- offset 0x00D9 -- 143 instr
-; Llama a servicios DOS via INT 21h (143 instr).
-; tags: complex_iterator, int_21, loop, string_op
-; callers: sub_0028
-; calls (intra): sub_0267, sub_0278, sub_028B, sub_02A2, sub_02C0, sub_02E4 (+3 mas)
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_00D9   offset=0x00D9  size=143 instr  segment=seg1.asm
+;
+; Classification (pass8): asm_high  (score C=0, ASM=7)
+; Prologue: none     Epilogue: ret
+;
+; Near calls (first 8 of 9): L_0267, L_0278, L_028B, L_02A2, L_02C0, L_02E4, L_032F, L_0387 ...
+;-------------------------------------------------------------------------
+;   [sub-routine] L_00D9
 L_00D9:
         xor     ch, ch                          ; 32 ED
         mov     dl, al                          ; 8A D0
@@ -147,6 +178,7 @@ L_00D9:
         add     byte ptr [bp + di], cl          ; 00 0B
         sal     byte ptr [di + 3], 0xbe         ; C0 75 03 BE
         sub     ax, word ptr [bx + si]          ; 2B 00
+;   [loop start] L_0106
 L_0106:
         lodsw   ax, word ptr [si]               ; AD
         mov     word ptr [0xe], ax              ; A3 0E 00
@@ -209,12 +241,15 @@ L_0106:
         mov     word ptr [bx + 2], cs           ; 8C 4F 02
         sti                                     ; FB
         pop     ds                              ; 1F
+;   [loop start] L_019D
 L_019D:
         cmp     byte ptr cs:[0xfe], 0           ; 2E 80 3E FE 00 00
         je      L_019D                          ; 74 F8
+;   [loop start] L_01A5
 L_01A5:
         inc     word ptr [0x35]                 ; FF 06 35 00
         mov     cx, 0x6e                        ; B9 6E 00
+;   [loop iteration target] L_01AC
 L_01AC:
         loop    L_01AC                          ; E2 FE
         cmp     byte ptr cs:[0xfe], 0xff        ; 2E 80 3E FE 00 FF
@@ -231,8 +266,10 @@ L_01AC:
         mov     word ptr [bx + 2], dx           ; 89 57 02
         sti                                     ; FB
         pop     ds                              ; 1F
+;   [conditional branch target (if/else)] L_01D4
 L_01D4:
         call    L_032F                          ; E8 58 01
+;   [loop start] L_01D7
 L_01D7:
         mov     cx, word ptr [0x35]             ; 8B 0E 35 00
         shl     cx, 1                           ; D1 E1
@@ -250,6 +287,7 @@ L_01D7:
         call    L_0267                          ; E8 6D 00
         mov     dx, word ptr [0xe]              ; 8B 16 0E 00
         add     dx, 5                           ; 83 C2 05
+;   [loop iteration target] L_0201
 L_0201:
         in      al, dx                          ; EC
         and     al, 1                           ; 24 01
@@ -260,21 +298,25 @@ L_0201:
         cmp     al, 0xf                         ; 3C 0F
         je      L_021C                          ; 74 0C
         add     dx, 5                           ; 83 C2 05
+;   [conditional branch target (if/else)] L_0213
 L_0213:
         loop    L_0201                          ; E2 EC
         call    L_0387                          ; E8 6F 01
         jb      L_0234                          ; 72 1A
         jmp     L_01D7                          ; EB BB
+;   [conditional branch target (if/else)] L_021C
 L_021C:
         mov     al, byte ptr [0x32]             ; A0 32 00
         cmp     byte ptr [0x31], al             ; 38 06 31 00
         je      L_0228                          ; 74 03
         call    L_02E4                          ; E8 BC 00
+;   [conditional branch target (if/else)] L_0228
 L_0228:
         call    L_02A2                          ; E8 77 00
         call    L_02C0                          ; E8 92 00
         call    L_0278                          ; E8 47 00
         jmp     L_03D1                          ; E9 9D 01
+;   [conditional branch target (if/else)] L_0234
 L_0234:
         call    L_03F3                          ; E8 BC 01
         mov     al, 0x20                        ; B0 20
@@ -284,51 +326,56 @@ L_0234:
         je      L_024B                          ; 74 06
         mov     si, 0x25                        ; BE 25 00
         jmp     L_0106                          ; E9 BB FE
+;   [error/early exit] L_024B
 L_024B:
         ret                                     ; C3
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_024C -- offset 0x024C -- 9 instr
-; Iterador con bucle (9 instr).
-; tags: iterator, loop
-; callers: sub_02E4
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_024C   offset=0x024C  size=9 instr  segment=seg1.asm
+;
+; Classification (pass8): unclear  (score C=1, ASM=2)
+; Prologue: saves_regs     Epilogue: ret
+;-------------------------------------------------------------------------
+;   [sub-routine] L_024C
 L_024C:
         push    cx                              ; 51
         mov     cx, 0xa                         ; B9 0A 00
+;   [loop iteration target] L_0250
 L_0250:
         push    cx                              ; 51
         mov     cx, word ptr [0x35]             ; 8B 0E 35 00
+;   [loop iteration target] L_0255
 L_0255:
         loop    L_0255                          ; E2 FE
         pop     cx                              ; 59
         loop    L_0250                          ; E2 F6
         pop     cx                              ; 59
         ret                                     ; C3
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_025C -- offset 0x025C -- 6 instr
-; Iterador con bucle (6 instr).
-; tags: iterator, loop
-; callers: sub_032F
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_025C   offset=0x025C  size=6 instr  segment=seg1.asm
+;
+; Classification (pass8): unclear  (score C=1, ASM=2)
+; Prologue: saves_regs     Epilogue: ret
+;-------------------------------------------------------------------------
+;   [sub-routine] L_025C
 L_025C:
         push    cx                              ; 51
         mov     cx, word ptr [0x35]             ; 8B 0E 35 00
+;   [loop iteration target] L_0261
 L_0261:
         loop    L_0261                          ; E2 FE
         pop     cx                              ; 59
         loop    L_025C                          ; E2 F6
         ret                                     ; C3
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_0267 -- offset 0x0267 -- 9 instr
-; Funcion hoja (no llama a otras, 9 instr): probable helper aritmetico/conversion.
-; tags: leaf
-; callers: sub_00D9, sub_02A2, sub_02C0, sub_02E4
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_0267   offset=0x0267  size=9 instr  segment=seg1.asm
+;
+; Classification (pass8): unclear  (score C=1, ASM=0)
+; Prologue: saves_regs     Epilogue: ret
+;-------------------------------------------------------------------------
+;   [sub-routine] L_0267
 L_0267:
         push    ax                              ; 50
+;   [loop start] L_0268
 L_0268:
         mov     dx, word ptr [0xe]              ; 8B 16 0E 00
         add     dx, 5                           ; 83 C2 05
@@ -338,29 +385,30 @@ L_0268:
         jne     L_0268                          ; 75 F2
         pop     ax                              ; 58
         ret                                     ; C3
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_0278 -- offset 0x0278 -- 8 instr
-; Funcion hoja (no llama a otras, 8 instr): probable helper aritmetico/conversion.
-; tags: leaf
-; callers: sub_00D9
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_0278   offset=0x0278  size=8 instr  segment=seg1.asm
+;
+; Classification (pass8): unclear  (score C=0, ASM=2)
+; Prologue: none     Epilogue: ret
+;-------------------------------------------------------------------------
+;   [sub-routine] L_0278
 L_0278:
         mov     dx, word ptr [0xe]              ; 8B 16 0E 00
         add     dl, 1                           ; 80 C2 01
+        ; constant WM_CREATE
         mov     al, 1                           ; B0 01
         out     dx, al                          ; EE
         in      al, 0x21                        ; E4 21
         and     al, byte ptr [0x11]             ; 22 06 11 00
         out     0x21, al                        ; E6 21
         ret                                     ; C3
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_028B -- offset 0x028B -- 10 instr
-; Funcion hoja (no llama a otras, 10 instr): probable helper aritmetico/conversion.
-; tags: leaf
-; callers: sub_00D9
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_028B   offset=0x028B  size=10 instr  segment=seg1.asm
+;
+; Classification (pass8): unclear  (score C=0, ASM=2)
+; Prologue: none     Epilogue: ret
+;-------------------------------------------------------------------------
+;   [sub-routine] L_028B
 L_028B:
         mov     dx, word ptr [0xe]              ; 8B 16 0E 00
         add     dl, 1                           ; 80 C2 01
@@ -372,14 +420,15 @@ L_028B:
         or      al, bl                          ; 0A C3
         out     0x21, al                        ; E6 21
         ret                                     ; C3
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_02A2 -- offset 0x02A2 -- 12 instr
-; Funcion sin clasificar definitiva (12 instr).
-; tags: small
-; callers: sub_00D9
-; calls (intra): sub_0267, sub_02D1
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_02A2   offset=0x02A2  size=12 instr  segment=seg1.asm
+;
+; Classification (pass8): unclear  (score C=0, ASM=2)
+; Prologue: none     Epilogue: ret
+;
+; Near calls (internal): L_0267, L_02D1
+;-------------------------------------------------------------------------
+;   [sub-routine] L_02A2
 L_02A2:
         mov     dx, word ptr [0xe]              ; 8B 16 0E 00
         add     dl, 0                           ; 80 C2 00
@@ -388,19 +437,21 @@ L_02A2:
         call    L_0267                          ; E8 B8 FF
         mov     dx, word ptr [0xe]              ; 8B 16 0E 00
         add     dl, 3                           ; 80 C2 03
+        ; constant WM_PAINT
         mov     al, 0xf                         ; B0 0F
         out     dx, al                          ; EE
         call    L_0267                          ; E8 AB FF
         call    L_02D1                          ; E8 12 00
         ret                                     ; C3
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_02C0 -- offset 0x02C0 -- 7 instr
-; Funcion sin clasificar definitiva (7 instr).
-; tags: small
-; callers: sub_00D9
-; calls (intra): sub_0267, sub_02D1
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_02C0   offset=0x02C0  size=7 instr  segment=seg1.asm
+;
+; Classification (pass8): unclear  (score C=0, ASM=2)
+; Prologue: none     Epilogue: ret
+;
+; Near calls (internal): L_0267, L_02D1
+;-------------------------------------------------------------------------
+;   [sub-routine] L_02C0
 L_02C0:
         mov     dx, word ptr [0xe]              ; 8B 16 0E 00
         add     dl, 0                           ; 80 C2 00
@@ -409,13 +460,13 @@ L_02C0:
         call    L_0267                          ; E8 9A FF
         call    L_02D1                          ; E8 01 00
         ret                                     ; C3
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_02D1 -- offset 0x02D1 -- 8 instr
-; Funcion hoja (no llama a otras, 8 instr): probable helper aritmetico/conversion.
-; tags: leaf
-; callers: sub_02A2, sub_02C0
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_02D1   offset=0x02D1  size=8 instr  segment=seg1.asm
+;
+; Classification (pass8): unclear  (score C=0, ASM=2)
+; Prologue: none     Epilogue: ret
+;-------------------------------------------------------------------------
+;   [sub-routine] L_02D1
 L_02D1:
         mov     dx, word ptr [0xe]              ; 8B 16 0E 00
         add     dl, 5                           ; 80 C2 05
@@ -425,14 +476,15 @@ L_02D1:
         add     dl, 5                           ; 80 C2 05
         in      al, dx                          ; EC
         ret                                     ; C3
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_02E4 -- offset 0x02E4 -- 29 instr
-; Funcion sin clasificar definitiva (29 instr).
-; tags: small
-; callers: sub_00D9
-; calls (intra): sub_024C, sub_0267
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_02E4   offset=0x02E4  size=29 instr  segment=seg1.asm
+;
+; Classification (pass8): unclear  (score C=0, ASM=2)
+; Prologue: none     Epilogue: ret
+;
+; Near calls (internal): L_024C, L_0267
+;-------------------------------------------------------------------------
+;   [sub-routine] L_02E4
 L_02E4:
         call    L_0267                          ; E8 80 FF
         mov     dx, word ptr [0xe]              ; 8B 16 0E 00
@@ -459,18 +511,20 @@ L_02E4:
         out     dx, al                          ; EE
         mov     dx, word ptr [0xe]              ; 8B 16 0E 00
         add     dl, 3                           ; 80 C2 03
+        ; constant WM_PAINT
         mov     al, 0xf                         ; B0 0F
         out     dx, al                          ; EE
         call    L_024C                          ; E8 1E FF
         ret                                     ; C3
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_032F -- offset 0x032F -- 34 instr
-; Funcion mediana (34 instr, 1 calls).
-; tags: medium
-; callers: sub_00D9
-; calls (intra): sub_025C
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_032F   offset=0x032F  size=34 instr  segment=seg1.asm
+;
+; Classification (pass8): unclear  (score C=0, ASM=2)
+; Prologue: none     Epilogue: ret
+;
+; Near calls (internal): L_025C
+;-------------------------------------------------------------------------
+;   [sub-routine] L_032F
 L_032F:
         mov     dx, word ptr [0xe]              ; 8B 16 0E 00
         add     dl, 4                           ; 80 C2 04
@@ -480,6 +534,7 @@ L_032F:
         call    L_025C                          ; E8 1D FF
         mov     dx, word ptr [0xe]              ; 8B 16 0E 00
         add     dl, 3                           ; 80 C2 03
+        ; constant GMEM_ZEROINIT
         mov     al, 0x80                        ; B0 80
         out     dx, al                          ; EE
         mov     byte ptr [0x31], 0x60           ; C6 06 31 00 60
@@ -493,6 +548,7 @@ L_032F:
         out     dx, al                          ; EE
         mov     dx, word ptr [0xe]              ; 8B 16 0E 00
         add     dl, 3                           ; 80 C2 03
+        ; constant WM_PAINT
         mov     al, 0xf                         ; B0 0F
         out     dx, al                          ; EE
         mov     dx, word ptr [0xe]              ; 8B 16 0E 00
@@ -506,13 +562,13 @@ L_032F:
         add     dl, 5                           ; 80 C2 05
         in      al, dx                          ; EC
         ret                                     ; C3
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_0387 -- offset 0x0387 -- 43 instr
-; Iterador con instrucciones de string (movsb/scasb/...) (43 instr).
-; tags: iterator, string_op
-; callers: sub_00D9
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_0387   offset=0x0387  size=43 instr  segment=seg1.asm
+;
+; Classification (pass8): asm_medium  (score C=0, ASM=3)
+; Prologue: none     Epilogue: ret
+;-------------------------------------------------------------------------
+;   [sub-routine] L_0387
 L_0387:
         mov     dx, word ptr [0xe]              ; 8B 16 0E 00
         add     dl, 3                           ; 80 C2 03
@@ -532,6 +588,7 @@ L_0387:
         out     dx, al                          ; EE
         mov     dx, word ptr [0xe]              ; 8B 16 0E 00
         add     dl, 3                           ; 80 C2 03
+        ; constant WM_PAINT
         mov     al, 0xf                         ; B0 0F
         out     dx, al                          ; EE
         mov     dx, word ptr [0xe]              ; 8B 16 0E 00
@@ -542,12 +599,15 @@ L_0387:
         add     dl, 5                           ; 80 C2 05
         in      al, dx                          ; EC
         ret                                     ; C3
+;   [conditional branch target (if/else)] L_03CF
 L_03CF:
         stc                                     ; F9
         ret                                     ; C3
+;   [unconditional branch target] L_03D1
 L_03D1:
         mov     dx, word ptr [0xe]              ; 8B 16 0E 00
         inc     dx                              ; 42
+        ; constant WM_CREATE
         mov     al, 1                           ; B0 01
         out     dx, al                          ; EE
         mov     ax, 0x40                        ; B8 40 00
@@ -557,15 +617,16 @@ L_03D1:
         mov     word ptr [0x23], di             ; 89 3E 23 00
         stosw   word ptr es:[di], ax            ; AB
         mov     word ptr [4], 0x28              ; C7 06 04 00 28 00
+        ; constant WM_CREATE
         mov     ax, 1                           ; B8 01 00
         ret                                     ; C3
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_03F3 -- offset 0x03F3 -- 82 instr
-; Funcion compleja: 82 instrucciones, 0 llamadas, 2 branches.
-; tags: complex, far
-; callers: sub_00D9, sub_0513
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_03F3   offset=0x03F3  size=82 instr  segment=seg1.asm
+;
+; Classification (pass8): asm_medium  (score C=0, ASM=4)
+; Prologue: none     Epilogue: jmp_tail
+;-------------------------------------------------------------------------
+;   [sub-routine] L_03F3
 L_03F3:
         mov     al, byte ptr [0x20]             ; A0 20 00
         or      al, 0x80                        ; 0C 80
@@ -604,6 +665,7 @@ L_03F3:
         push    di                              ; 57
         les     di, ptr [bp + 6]                ; C4 7E 06
         mov     si, 0                           ; BE 00 00
+        ; constant WM_GETTEXTLENGTH
         mov     ax, 0xe                         ; B8 0E 00
         mov     cx, ax                          ; 8B C8
         rep movsb byte ptr es:[di], byte ptr [si] ; F3 A4
@@ -649,22 +711,28 @@ L_03F3:
         or      al, ah                          ; 0A C4
         out     0x21, al                        ; E6 21
         jmp     L_04AD                          ; EB 01
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_04AC -- offset 0x04AC -- 36 instr
-; Llama a servicios DOS via INT 21h (36 instr).
-; tags: dos_caller, int_21
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_04AC   offset=0x04AC  size=36 instr  segment=seg1.asm
+;
+; Classification (pass8): asm_high  (score C=0, ASM=9)
+; Prologue: none     Epilogue: jmp_tail
+;
+; Near calls (internal): L_00FF, L_04AC
+;-------------------------------------------------------------------------
+;   [sub-routine] L_04AC
 L_04AC:
         iret                                    ; CF
+;   [unconditional branch target] L_04AD
 L_04AD:
         push    cs                              ; 0E
         call    L_04AC                          ; E8 FB FF
+        ; constant WM_CREATE
         mov     ax, 1                           ; B8 01 00
         mov     si, 0x2b                        ; BE 2B 00
         cmp     word ptr [0x23], 0              ; 83 3E 23 00 00
         je      L_04C1                          ; 74 03
         mov     si, 0x25                        ; BE 25 00
+;   [conditional branch target (if/else)] L_04C1
 L_04C1:
         call    L_00FF                          ; E8 3B FC
         or      ax, ax                          ; 0B C0
@@ -694,18 +762,22 @@ L_04C1:
         out     0x21, al                        ; E6 21
         mov     word ptr [0x14], 0xffff         ; C7 06 14 00 FF FF
         jmp     L_0514                          ; EB 01
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_0513 -- offset 0x0513 -- 48 instr
-; Llama a servicios DOS via INT 21h (48 instr).
-; tags: far, int_21, iterator, string_op
-; calls (intra): sub_03F3
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_0513   offset=0x0513  size=48 instr  segment=seg1.asm
+;
+; Classification (pass8): asm_high  (score C=1, ASM=7)
+; Prologue: none     Epilogue: jmp_tail
+;
+; Near calls (internal): L_03F3, L_0513
+;-------------------------------------------------------------------------
+;   [sub-routine] L_0513
 L_0513:
         iret                                    ; CF
+;   [unconditional branch target] L_0514
 L_0514:
         push    cs                              ; 0E
         call    L_0513                          ; E8 FB FF
+;   [conditional branch target (if/else)] L_0518
 L_0518:
         pop     di                              ; 5F
         pop     si                              ; 5E
@@ -738,14 +810,17 @@ L_0518:
         jae     L_055A                          ; 73 08
         cmp     word ptr [0x1c], 0x100          ; 81 3E 1C 00 00 01
         jae     L_0568                          ; 73 0E
+;   [conditional branch target (if/else)] L_055A
 L_055A:
         in      al, 0x21                        ; E4 21
         mov     ah, byte ptr [0x11]             ; 8A 26 11 00
         not     ah                              ; F6 D4
         or      al, ah                          ; 0A C4
         jmp     L_0566                          ; EB 00
+;   [unconditional branch target] L_0566
 L_0566:
         out     0x21, al                        ; E6 21
+;   [conditional branch target (if/else)] L_0568
 L_0568:
         mov     ah, 0x25                        ; B4 25
         mov     al, byte ptr [0x10]             ; A0 10 00
@@ -754,16 +829,21 @@ L_0568:
         int     0x21                            ; CD 21
         pop     ds                              ; 1F
         mov     word ptr [0x14], 0              ; C7 06 14 00 00 00
+;   [conditional branch target (if/else)] L_057B
 L_057B:
         jmp     L_057E                          ; EB 01
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_057D -- offset 0x057D -- 11 instr
-; Funcion sin clasificar definitiva (11 instr).
-; tags: far, wrapper
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_057D   offset=0x057D  size=11 instr  segment=seg1.asm
+;
+; Classification (pass8): unclear  (score C=1, ASM=2)
+; Prologue: none     Epilogue: retf
+;
+; Near calls (internal): L_057D
+;-------------------------------------------------------------------------
+;   [sub-routine] L_057D
 L_057D:
         iret                                    ; CF
+;   [unconditional branch target] L_057E
 L_057E:
         push    cs                              ; 0E
         call    L_057D                          ; E8 FB FF

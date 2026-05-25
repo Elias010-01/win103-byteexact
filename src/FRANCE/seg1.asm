@@ -1,3 +1,17 @@
+; ======================================================================
+; FRANCE / seg1.asm   (segment 1 of FRANCE)
+; ----------------------------------------------------------------------
+; Functions discovered (pass1b):         0
+; Total instructions:                    0
+; 
+; Classification (pass8):
+;   C-origin (high+medium):              0
+;   ASM-origin (high+medium):            0
+;   Unclear:                             0
+;   Tiny / unclassified:                 0
+; 
+; Far API calls in this segment:     0 (0 unique)
+; ======================================================================
 ; AUTO-GENERATED from original FRANCE segment 1
 ; segment_size=257 bytes, flags=0xf070
 ; mode: humano legible - instrucciones x86 + bytes raw en comentario (autoritativo)
@@ -88,6 +102,7 @@ FRANCE_TEXT SEGMENT BYTE PUBLIC 'CODE'
         mov     ax, es                          ; 8C C0
         mov     ds, ax                          ; 8E D8
         jmp     L_00F4                          ; EB 42
+;   [conditional branch target (if/else)] L_00B2
 L_00B2:
         mov     al, byte ptr [0x3f7]            ; A0 F7 03
         xchg    byte ptr [0x41f], al            ; 86 06 1F 04
@@ -113,6 +128,7 @@ L_00B2:
         mov     al, byte ptr [0x413]            ; A0 13 04
         xchg    byte ptr [0x415], al            ; 86 06 15 04
         mov     byte ptr [0x413], al            ; A2 13 04
+;   [branch target] L_00F4
 L_00F4:
         xor     ax, ax                          ; 33 C0
         not     ax                              ; F7 D0

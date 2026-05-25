@@ -1,3 +1,17 @@
+; ======================================================================
+; WRITE / seg75.asm   (segment 75 of WRITE)
+; ----------------------------------------------------------------------
+; Functions discovered (pass1b):         0
+; Total instructions:                    0
+; 
+; Classification (pass8):
+;   C-origin (high+medium):              0
+;   ASM-origin (high+medium):            0
+;   Unclear:                             0
+;   Tiny / unclassified:                 0
+; 
+; Far API calls in this segment:     0 (0 unique)
+; ======================================================================
 ; AUTO-GENERATED from original WRITE segment 75
 ; segment_size=70 bytes, flags=0xf130
 ; mode: humano legible - instrucciones x86 + bytes raw en comentario (autoritativo)
@@ -23,10 +37,13 @@ WRITE_TEXT SEGMENT BYTE PUBLIC 'CODE'
         push    ax                              ; 50
         cmp     word ptr [bp + 6], 0            ; 83 7E 06 00
         je      L_0019                          ; 74 05
+        ; constant WM_SIZE
         mov     ax, 5                           ; B8 05 00
         jmp     L_001C                          ; EB 03
+;   [conditional branch target (if/else)] L_0019
 L_0019:
         mov     ax, 6                           ; B8 06 00
+;   [unconditional branch target] L_001C
 L_001C:
         push    ax                              ; 50
         call    far _entry_68                   ; 9A FF FF 00 00 [FIXUP]
@@ -38,6 +55,7 @@ L_001C:
         push    ax                              ; 50
         mov     ax, 0x1102                      ; B8 02 11
         push    ax                              ; 50
+        ; constant GMEM_ZEROINIT
         mov     ax, 0x80                        ; B8 80 00
         push    ax                              ; 50
         call    far USER.CHANGEMENU             ; 9A FF FF 00 00 [FIXUP]

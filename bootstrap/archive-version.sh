@@ -29,8 +29,7 @@ mkdir -p versions
 
 # Calcular numero de version auto-incremental
 LAST=$(ls -1d versions/v*/ 2>/dev/null | sed 's|.*/v||;s|-.*||' | sort -n | tail -1)
-# Forzar base 10 (evita interpretar 08/09 como octal)
-NEXT=$((10#${LAST:-0} + 1))
+NEXT=$((${LAST:-0} + 1))
 NEXT_PAD=$(printf "v%02d" "$NEXT")
 
 STAMP=$(date -u +%Y-%m-%d-%H%M)

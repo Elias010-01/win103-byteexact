@@ -1,3 +1,17 @@
+; ======================================================================
+; WRITE / seg11.asm   (segment 11 of WRITE)
+; ----------------------------------------------------------------------
+; Functions discovered (pass1b):         0
+; Total instructions:                    0
+; 
+; Classification (pass8):
+;   C-origin (high+medium):              0
+;   ASM-origin (high+medium):            0
+;   Unclear:                             0
+;   Tiny / unclassified:                 0
+; 
+; Far API calls in this segment:     0 (0 unique)
+; ======================================================================
 ; AUTO-GENERATED from original WRITE segment 11
 ; segment_size=421 bytes, flags=0xf170
 ; mode: humano legible - instrucciones x86 + bytes raw en comentario (autoritativo)
@@ -20,12 +34,19 @@ WRITE_TEXT SEGMENT BYTE PUBLIC 'CODE'
         push    ds                              ; 1E
         mov     ds, ax                          ; 8E D8
         push    word ptr [0x13ca]               ; FF 36 CA 13
+        ;   ^ arg hWnd
         sub     ax, ax                          ; 2B C0
         push    ax                              ; 50
+        ;   ^ arg lpRect (high/segment)
         push    ax                              ; 50
+        ;   ^ arg lpRect (low/offset)
         push    ax                              ; 50
+        ;   ^ arg bErase
+        ; --> INVALIDATERECT(HWND hWnd, LPRECT lpRect, BOOL bErase) -> VOID
         call    far USER.INVALIDATERECT         ; 9A FF FF 00 00 [FIXUP]
         push    word ptr [0x13ca]               ; FF 36 CA 13
+        ;   ^ arg hWnd
+        ; --> UPDATEWINDOW(HWND hWnd) -> BOOL
         call    far USER.UPDATEWINDOW           ; 9A FF FF 00 00 [FIXUP]
         sub     bp, 2                           ; 83 ED 02
         mov     sp, bp                          ; 8B E5
@@ -45,11 +66,16 @@ WRITE_TEXT SEGMENT BYTE PUBLIC 'CODE'
         cmp     word ptr [bp + 0xc], 0xf        ; 83 7E 0C 0F
         je      L_0041                          ; 74 03
         jmp     L_0121                          ; E9 E0 00
+;   [conditional branch target (if/else)] L_0041
 L_0041:
         push    word ptr [bp + 0xe]             ; FF 76 0E
+        ;   ^ arg hWnd
         lea     ax, [bp - 0x22]                 ; 8D 46 DE
         push    ss                              ; 16
+        ;   ^ arg lpPaintStruct (high/segment)
         push    ax                              ; 50
+        ;   ^ arg lpPaintStruct (low/offset)
+        ; --> BEGINPAINT(HWND hWnd, LPVOID lpPaintStruct) -> HDC
         call    far USER.BEGINPAINT             ; 9A FF FF 00 00 [FIXUP]
         cmp     word ptr [0x7b2], 0             ; 83 3E B2 07 00
         jne     L_00C8                          ; 75 73
@@ -74,16 +100,23 @@ L_0041:
         or      ax, ax                          ; 0B C0
         jne     L_008B                          ; 75 03
         jmp     L_010F                          ; E9 84 00
+;   [conditional branch target (if/else)] L_008B
 L_008B:
         push    word ptr [bp - 0x22]            ; FF 76 DE
+        ;   ^ arg hDC
         push    ax                              ; 50
+        ;   ^ arg hObj
+        ; --> SELECTOBJECT(HDC hDC, HANDLE hObj) -> HANDLE
         call    far GDI.SELECTOBJECT            ; 9A FF FF 00 00 [FIXUP]
         or      ax, ax                          ; 0B C0
         jne     L_00A9                          ; 75 11
         push    word ptr [0x7b2]                ; FF 36 B2 07
+        ;   ^ arg hObj
+        ; --> DELETEOBJECT(HANDLE hObj) -> BOOL
         call    far GDI.DELETEOBJECT            ; 9A FF FF 00 00 [FIXUP]
         mov     word ptr [0x7b2], 0             ; C7 06 B2 07 00 00
         jmp     L_010F                          ; EB 66
+;   [conditional branch target (if/else)] L_00A9
 L_00A9:
         push    word ptr [bp - 0x22]            ; FF 76 DE
         lea     ax, [bp - 0x74]                 ; 8D 46 8C
@@ -97,27 +130,38 @@ L_00A9:
         sar     ax, 1                           ; D1 F8
         sub     ax, word ptr [bp - 0x6e]        ; 2B 46 92
         mov     word ptr [0x1bf2], ax           ; A3 F2 1B
+;   [conditional branch target (if/else)] L_00C8
 L_00C8:
         push    word ptr [bp - 0x22]            ; FF 76 DE
+        ;   ^ arg hDC
         push    word ptr [bp - 0x1e]            ; FF 76 E2
+        ;   ^ arg x
         push    word ptr [bp - 0x1c]            ; FF 76 E4
+        ;   ^ arg y
         mov     ax, word ptr [bp - 0x1a]        ; 8B 46 E6
         sub     ax, word ptr [bp - 0x1e]        ; 2B 46 E2
         push    ax                              ; 50
+        ;   ^ arg nWidth
         mov     ax, word ptr [bp - 0x18]        ; 8B 46 E8
         sub     ax, word ptr [bp - 0x1c]        ; 2B 46 E4
         push    ax                              ; 50
+        ;   ^ arg nHeight
         mov     ax, 0x21                        ; B8 21 00
         mov     dx, 0xf0                        ; BA F0 00
         push    dx                              ; 52
+        ;   ^ arg dwRop (high/segment)
         push    ax                              ; 50
+        ;   ^ arg dwRop (low/offset)
+        ; --> PATBLT(HDC hDC, INT x, INT y, INT nWidth, INT nHeight, DWORD dwRop) -> BOOL
         call    far GDI.PATBLT                  ; 9A FF FF 00 00 [FIXUP]
         push    word ptr [bp - 0x22]            ; FF 76 DE
+        ; constant WM_SIZE
         mov     ax, 5                           ; B8 05 00
         push    ax                              ; 50
         call    far USER.GETSYSTEMMETRICS       ; 9A FF FF 00 00 [FIXUP]
         push    ax                              ; 50
         push    word ptr [0x1bf2]               ; FF 36 F2 1B
+        ; constant GMEM_ZEROINIT
         mov     ax, 0x80                        ; B8 80 00
         push    ds                              ; 1E
         push    ax                              ; 50
@@ -125,17 +169,25 @@ L_00C8:
         call    far _entry_61                   ; 9A FF FF 00 00 [FIXUP]
         dec     ax                              ; 48
         push    ax                              ; 50
+        ; --> TEXTOUT(HDC hDC, INT x, INT y, LPSTR lpszStr, INT cbStr) -> BOOL
         call    far GDI.TEXTOUT                 ; 9A FF FF 00 00 [FIXUP]
+;   [unconditional branch target] L_010F
 L_010F:
         push    word ptr [bp + 0xe]             ; FF 76 0E
+        ;   ^ arg hWnd
         lea     ax, [bp - 0x22]                 ; 8D 46 DE
         push    ss                              ; 16
+        ;   ^ arg lpPaintStruct (high/segment)
         push    ax                              ; 50
+        ;   ^ arg lpPaintStruct (low/offset)
+        ; --> ENDPAINT(HWND hWnd, LPVOID lpPaintStruct) -> BOOL
         call    far USER.ENDPAINT               ; 9A FF FF 00 00 [FIXUP]
+;   [loop start] L_011C
 L_011C:
         sub     ax, ax                          ; 2B C0
         cdq                                     ; 99
         jmp     L_019B                          ; EB 7A
+;   [unconditional branch target] L_0121
 L_0121:
         cmp     word ptr [bp + 0xc], 0x204      ; 81 7E 0C 04 02
         jne     L_0187                          ; 75 5F
@@ -163,13 +215,21 @@ L_0121:
         lcall   [bp - 0x88]                     ; FF 9E 78 FF
         mov     word ptr [0x35c], 0             ; C7 06 5C 03 00 00
         jmp     L_011C                          ; EB 95
+;   [conditional branch target (if/else)] L_0187
 L_0187:
         push    word ptr [bp + 0xe]             ; FF 76 0E
+        ;   ^ arg hWnd
         push    word ptr [bp + 0xc]             ; FF 76 0C
+        ;   ^ arg wMsg
         push    word ptr [bp + 0xa]             ; FF 76 0A
+        ;   ^ arg wParam
         push    word ptr [bp + 8]               ; FF 76 08
+        ;   ^ arg lParam (high/segment)
         push    word ptr [bp + 6]               ; FF 76 06
+        ;   ^ arg lParam (low/offset)
+        ; --> DEFWINDOWPROC(HWND hWnd, WORD wMsg, WPARAM wParam, LPARAM lParam) -> LRESULT
         call    far USER.DEFWINDOWPROC          ; 9A FF FF 00 00 [FIXUP]
+;   [unconditional branch target] L_019B
 L_019B:
         sub     bp, 2                           ; 83 ED 02
         mov     sp, bp                          ; 8B E5

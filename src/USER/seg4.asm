@@ -1,3 +1,26 @@
+; ======================================================================
+; USER / seg4.asm   (segment 4 of USER)
+; ----------------------------------------------------------------------
+; Functions discovered (pass1b):        28
+; Total instructions:                 1686
+; 
+; Classification (pass8):
+;   C-origin (high+medium):             28
+;   ASM-origin (high+medium):            0
+;   Unclear:                             0
+;   Tiny / unclassified:                 0
+; 
+; Far API calls in this segment:     75 (43 unique)
+;   Top:
+;       13  LOCALALLOC
+;       11  LOCALFREE
+;        3  GETPROFILESTRING
+;        2  CREATEBITMAP
+;        2  GETSTOCKOBJECT
+;        2  GETTEXTMETRICS
+;        2  FINDRESOURCE
+;        2  GETMODULEHANDLE
+; ======================================================================
 ; AUTO-GENERATED from original USER segment 4
 ; segment_size=4514 bytes, flags=0xf170
 ; mode: humano legible - instrucciones x86 + bytes raw en comentario (autoritativo)
@@ -23,14 +46,19 @@ USER_TEXT SEGMENT BYTE PUBLIC 'CODE'
         xor     ax, ax                          ; 33 C0
         jcxz    L_0024                          ; E3 14
         push    ax                              ; 50
+        ;   ^ arg wSegment
         push    ax                              ; 50
+        ;   ^ arg wStart
         push    cx                              ; 51
+        ;   ^ arg wEnd
+        ; --> LOCALINIT(WORD wSegment, WORD wStart, WORD wEnd) -> BOOL
         call    far KERNEL.LOCALINIT            ; 9A FF FF 00 00 [FIXUP]
         jcxz    L_0024                          ; E3 0A
         push    ds                              ; 1E
         call    far KERNEL.UNLOCKSEGMENT        ; 9A FF FF 00 00 [FIXUP]
         push    di                              ; 57
         call    L_002F                          ; E8 0B 00
+;   [conditional branch target (if/else)] L_0024
 L_0024:
         pop     di                              ; 5F
         pop     si                              ; 5E
@@ -40,15 +68,20 @@ L_0024:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf                                    ; CB
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_002F -- offset 0x002F -- 66 instr
-; Funcion mediana (66 instr, 14 calls).
-; tags: calls_kernel, medium
-; calls (intra): sub_00D9, sub_017D, sub_0233, sub_04D6, sub_0539, sub_05EE (+7 mas)
-; calls (inter): KERNEL.LOCALALLOC
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_002F   offset=0x002F  size=66 instr  segment=seg4.asm
+;
+; Classification (pass8): c_high  (score C=8, ASM=0)
+; Prologue: standard_bp     Epilogue: ret_n   (PASCAL NEAR, callee cleans args)
+;
+; Far API calls:
+;   LOCALALLOC(WORD wFlags, WORD wBytes) -> HANDLE
+;
+; Near calls (first 8 of 13): L_00D9, L_017D, L_0233, L_04D6, L_0539, L_05EE, L_05F9, L_06DD ...
+;-------------------------------------------------------------------------
+;   [sub-routine] L_002F
 L_002F:
+        ;   = cProc <2> ; NEAR PASCAL prologue
         push    bp                              ; 55
         mov     bp, sp                          ; 8B EC
         sub     sp, 2                           ; 83 EC 02
@@ -69,9 +102,12 @@ L_002F:
         call    far _SEG1_5DD3                  ; 9A FF FF 00 00 [FIXUP]
         mov     ax, 0x40                        ; B8 40 00
         push    ax                              ; 50
+        ;   ^ arg wFlags
         mov     ax, word ptr [0x5f6]            ; A1 F6 05
         add     ax, 0x10                        ; 05 10 00
         push    ax                              ; 50
+        ;   ^ arg wBytes
+        ; --> LOCALALLOC(WORD wFlags, WORD wBytes) -> HANDLE
         call    far KERNEL.LOCALALLOC           ; 9A 09 01 00 00 [FIXUP]
         mov     word ptr [0x416], ax            ; A3 16 04
         call    L_04D6                          ; E8 5E 04
@@ -111,19 +147,23 @@ L_002F:
         call    far _SEG1_0232                  ; 9A FF FF 00 00 [FIXUP]
         mov     word ptr [0x634], ax            ; A3 34 06
         call    L_0B1D                          ; E8 4D 0A
+        ; constant WM_CREATE
         mov     ax, 1                           ; B8 01 00
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     2                               ; C2 02 00
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_00D9 -- offset 0x00D9 -- 65 instr
-; Funcion mediana (65 instr, 1 calls).
-; tags: calls_kernel, medium
-; callers: sub_002F
-; calls (inter): KERNEL.LOCALALLOC
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_00D9   offset=0x00D9  size=65 instr  segment=seg4.asm
+;
+; Classification (pass8): c_medium  (score C=5, ASM=0)
+; Prologue: standard_bp     Epilogue: ret
+;
+; Far API calls:
+;   LOCALALLOC(WORD wFlags, WORD wBytes) -> HANDLE
+;-------------------------------------------------------------------------
+;   [sub-routine] L_00D9
 L_00D9:
+        ;   = cProc <6> ; NEAR PASCAL prologue
         push    bp                              ; 55
         mov     bp, sp                          ; 8B EC
         sub     sp, 6                           ; 83 EC 06
@@ -137,13 +177,18 @@ L_00D9:
         cmp     ax, 0xa                         ; 3D 0A 00
         jle     L_00F9                          ; 7E 06
         mov     word ptr [0x5e2], 0xa           ; C7 06 E2 05 0A 00
+;   [conditional branch target (if/else)] L_00F9
 L_00F9:
         mov     ax, 0x40                        ; B8 40 00
         push    ax                              ; 50
+        ;   ^ arg wFlags
+        ; constant WM_GETTEXTLENGTH
         mov     ax, 0xe                         ; B8 0E 00
         imul    word ptr [0x5e2]                ; F7 2E E2 05
         add     ax, 0x46                        ; 05 46 00
         push    ax                              ; 50
+        ;   ^ arg wBytes
+        ; --> LOCALALLOC(WORD wFlags, WORD wBytes) -> HANDLE
         call    far KERNEL.LOCALALLOC           ; 9A FF FF 00 00 [FIXUP]
         mov     si, ax                          ; 8B F0
         add     si, 0xe                         ; 83 C6 0E
@@ -171,6 +216,7 @@ L_00F9:
         call    far _SEG1_643D                  ; 9A FF FF 00 00 [FIXUP]
         sub     di, di                          ; 2B FF
         jmp     L_0161                          ; EB 12
+;   [loop start] L_014F
 L_014F:
         mov     ax, word ptr [0x514]            ; A1 14 05
         mov     word ptr [si + 2], ax           ; 89 44 02
@@ -179,6 +225,7 @@ L_014F:
         mov     ax, word ptr [0x518]            ; A1 18 05
         mov     word ptr [bx + 6], ax           ; 89 47 06
         inc     di                              ; 47
+;   [unconditional branch target] L_0161
 L_0161:
         cmp     word ptr [0x5e2], di            ; 39 3E E2 05
         jg      L_014F                          ; 7F E8
@@ -192,20 +239,27 @@ L_0161:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_017D -- offset 0x017D -- 47 instr
-; Funcion mediana (47 instr, 4 calls).
-; tags: calls_gdi, medium
-; callers: sub_002F
-; calls (inter): GDI.CREATEBITMAP, GDI.CREATEPATTERNBRUSH, GDI.DELETEOBJECT, GDI.GETSTOCKOBJECT
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_017D   offset=0x017D  size=47 instr  segment=seg4.asm
+;
+; Classification (pass8): c_high  (score C=9, ASM=0)
+; Prologue: standard_bp     Epilogue: ret
+;
+; Far API calls:
+;   CREATEBITMAP(INT nWidth, INT nHeight, WORD nPlanes, WORD nBitCount, LPVOID lpBits) -> HBITMAP
+;   CREATEPATTERNBRUSH
+;   DELETEOBJECT(HANDLE hObj) -> BOOL
+;   GETSTOCKOBJECT(INT iObject) -> HANDLE
+;-------------------------------------------------------------------------
+;   [sub-routine] L_017D
 L_017D:
+        ;   = cProc <20> ; NEAR PASCAL prologue
         push    bp                              ; 55
         mov     bp, sp                          ; 8B EC
         sub     sp, 0x14                        ; 83 EC 14
         push    si                              ; 56
         mov     word ptr [bp - 0x12], 0         ; C7 46 EE 00 00
+;   [loop start] L_0189
 L_0189:
         mov     si, word ptr [bp - 0x12]        ; 8B 76 EE
         shl     si, 1                           ; D1 E6
@@ -219,45 +273,65 @@ L_0189:
         jl      L_0189                          ; 7C E4
         mov     ax, 8                           ; B8 08 00
         push    ax                              ; 50
+        ;   ^ arg nWidth
         push    ax                              ; 50
+        ;   ^ arg nHeight
+        ; constant WM_CREATE
         mov     ax, 1                           ; B8 01 00
         push    ax                              ; 50
+        ;   ^ arg nPlanes
         push    ax                              ; 50
+        ;   ^ arg nBitCount
         lea     ax, [bp - 0x10]                 ; 8D 46 F0
         push    ss                              ; 16
+        ;   ^ arg lpBits (high/segment)
         push    ax                              ; 50
+        ;   ^ arg lpBits (low/offset)
+        ; --> CREATEBITMAP(INT nWidth, INT nHeight, WORD nPlanes, WORD nBitCount, LPVOID lpBits) -> HBITMAP
         call    far GDI.CREATEBITMAP            ; 9A FF FF 00 00 [FIXUP]
         mov     word ptr [bp - 0x14], ax        ; 89 46 EC
         push    ax                              ; 50
         call    far GDI.CREATEPATTERNBRUSH      ; 9A FF FF 00 00 [FIXUP]
         mov     word ptr [0x550], ax            ; A3 50 05
         push    word ptr [bp - 0x14]            ; FF 76 EC
+        ;   ^ arg hObj
+        ; --> DELETEOBJECT(HANDLE hObj) -> BOOL
         call    far GDI.DELETEOBJECT            ; 9A FF FF 00 00 [FIXUP]
         sub     ax, ax                          ; 2B C0
         push    ax                              ; 50
+        ;   ^ arg iObject
+        ; --> GETSTOCKOBJECT(INT iObject) -> HANDLE
         call    far GDI.GETSTOCKOBJECT          ; 9A DD 01 00 00 [FIXUP]
         mov     word ptr [0x636], ax            ; A3 36 06
+        ; constant WM_CREATE
         mov     ax, 1                           ; B8 01 00
         push    ax                              ; 50
+        ;   ^ arg iObject
+        ; --> GETSTOCKOBJECT(INT iObject) -> HANDLE
         call    far GDI.GETSTOCKOBJECT          ; 9A E9 01 00 00 [FIXUP]
         mov     word ptr [0x604], ax            ; A3 04 06
         mov     ax, 4                           ; B8 04 00
         push    ax                              ; 50
+        ;   ^ arg iObject
+        ; --> GETSTOCKOBJECT(INT iObject) -> HANDLE
         call    far GDI.GETSTOCKOBJECT          ; 9A FF FF 00 00 [FIXUP]
         mov     word ptr [0x41c], ax            ; A3 1C 04
         pop     si                              ; 5E
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_01F5 -- offset 0x01F5 -- 29 instr
-; Funcion sin clasificar definitiva (29 instr).
-; tags: calls_gdi, small
-; callers: sub_0233
-; calls (inter): GDI.GETOBJECT
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_01F5   offset=0x01F5  size=29 instr  segment=seg4.asm
+;
+; Classification (pass8): c_high  (score C=8, ASM=0)
+; Prologue: standard_bp     Epilogue: ret_n   (PASCAL NEAR, callee cleans args)
+;
+; Far API calls:
+;   GETOBJECT
+;-------------------------------------------------------------------------
+;   [sub-routine] L_01F5
 L_01F5:
+        ;   = cProc <16> ; NEAR PASCAL prologue
         push    bp                              ; 55
         mov     bp, sp                          ; 8B EC
         sub     sp, 0x10                        ; 83 EC 10
@@ -272,6 +346,7 @@ L_01F5:
         mov     word ptr [si], ax               ; 89 04
         mov     di, ax                          ; 8B F8
         push    di                              ; 57
+        ; constant WM_GETTEXTLENGTH
         mov     ax, 0xe                         ; B8 0E 00
         push    ax                              ; 50
         lea     ax, [bp - 0x10]                 ; 8D 46 F0
@@ -287,16 +362,28 @@ L_01F5:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     4                               ; C2 04 00
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_0233 -- offset 0x0233 -- 255 instr
-; Funcion compleja: 255 instrucciones, 11 llamadas, 1 branches.
-; tags: calls_gdi, calls_kernel, complex
-; callers: sub_002F
-; calls (intra): sub_01F5, sub_08B8
-; calls (inter): GDI.GETSTOCKOBJECT, GDI.GETTEXTMETRICS, KERNEL.FINDRESOURCE, KERNEL.FREERESOURCE, KERNEL.GETMODULEHANDLE, KERNEL.GLOBALUNLOCK (+3 mas)
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_0233   offset=0x0233  size=255 instr  segment=seg4.asm
+;
+; Classification (pass8): c_high  (score C=6, ASM=0)
+; Prologue: standard_bp     Epilogue: ret
+;
+; Far API calls:
+;   GETSTOCKOBJECT(INT iObject) -> HANDLE
+;   GETTEXTMETRICS
+;   FINDRESOURCE
+;   FREERESOURCE
+;   GETMODULEHANDLE(LPSTR lpszModule) -> HANDLE
+;   GLOBALUNLOCK(HANDLE hMem) -> BOOL
+;   LOADRESOURCE
+;   LOCKRESOURCE
+;   SETRESOURCEHANDLER
+;
+; Near calls (internal): L_01F5, L_08B8
+;-------------------------------------------------------------------------
+;   [sub-routine] L_0233
 L_0233:
+        ;   = cProc <50> ; NEAR PASCAL prologue
         push    bp                              ; 55
         mov     bp, sp                          ; 8B EC
         sub     sp, 0x32                        ; 83 EC 32
@@ -305,10 +392,14 @@ L_0233:
         mov     ax, 0xc15                       ; B8 15 0C
         mov     dx, OFFSET _SEG1_0C15           ; BA FF FF [FIXUP]
         push    dx                              ; 52
+        ;   ^ arg lpszModule (high/segment)
         push    ax                              ; 50
+        ;   ^ arg lpszModule (low/offset)
+        ; --> GETMODULEHANDLE(LPSTR lpszModule) -> HANDLE
         call    far KERNEL.GETMODULEHANDLE      ; 9A FF FF 00 00 [FIXUP]
         mov     word ptr [0x614], ax            ; A3 14 06
         push    ax                              ; 50
+        ; constant WM_CREATE
         mov     ax, 1                           ; B8 01 00
         cdq                                     ; 99
         push    dx                              ; 52
@@ -319,6 +410,7 @@ L_0233:
         push    ax                              ; 50
         call    far KERNEL.SETRESOURCEHANDLER   ; 9A 72 02 00 00 [FIXUP]
         push    word ptr [0x614]                ; FF 36 14 06
+        ; constant WM_MOVE
         mov     ax, 3                           ; B8 03 00
         cdq                                     ; 99
         push    dx                              ; 52
@@ -329,6 +421,7 @@ L_0233:
         push    ax                              ; 50
         call    far KERNEL.SETRESOURCEHANDLER   ; 9A FF FF 00 00 [FIXUP]
         push    word ptr [0x614]                ; FF 36 14 06
+        ; constant WM_CREATE
         mov     ax, 1                           ; B8 01 00
         cdq                                     ; 99
         push    dx                              ; 52
@@ -408,6 +501,7 @@ L_0233:
         mov     word ptr [bp - 0x28], 0x3de     ; C7 46 D8 DE 03
         mov     word ptr [bp - 0x2e], 0xa       ; C7 46 D2 0A 00
         jmp     L_037A                          ; EB 1A
+;   [loop start] L_0360
 L_0360:
         mov     bx, word ptr [bp - 0x28]        ; 8B 5E D8
         add     word ptr [bp - 0x28], 4         ; 83 46 D8 04
@@ -417,12 +511,15 @@ L_0360:
         mov     word ptr [bx], ax               ; 89 07
         mov     word ptr [bx + 2], dx           ; 89 57 02
         add     word ptr [bp - 4], 4            ; 83 46 FC 04
+;   [unconditional branch target] L_037A
 L_037A:
         mov     ax, word ptr [bp - 0x2e]        ; 8B 46 D2
         dec     word ptr [bp - 0x2e]            ; FF 4E D2
         or      ax, ax                          ; 0B C0
         jne     L_0360                          ; 75 DC
         push    word ptr [bp - 0x30]            ; FF 76 D0
+        ;   ^ arg hMem
+        ; --> GLOBALUNLOCK(HANDLE hMem) -> BOOL
         call    far KERNEL.GLOBALUNLOCK         ; 9A FF FF 00 00 [FIXUP]
         push    word ptr [bp - 0x30]            ; FF 76 D0
         call    far KERNEL.FREERESOURCE         ; 9A FF FF 00 00 [FIXUP]
@@ -434,8 +531,11 @@ L_037A:
         push    ax                              ; 50
         push    word ptr [0x3be]                ; FF 36 BE 03
         call    far _entry_375                  ; 9A FF FF 00 00 [FIXUP]
+        ; constant VK_RETURN
         mov     ax, 0xd                         ; B8 0D 00
         push    ax                              ; 50
+        ;   ^ arg iObject
+        ; --> GETSTOCKOBJECT(INT iObject) -> HANDLE
         call    far GDI.GETSTOCKOBJECT          ; 9A D1 01 00 00 [FIXUP]
         mov     word ptr [0x484], ax            ; A3 84 04
         push    word ptr [0x3b2]                ; FF 36 B2 03
@@ -511,6 +611,7 @@ L_037A:
         mov     word ptr [0x45a], ax            ; A3 5A 04
         mov     ax, word ptr [0x458]            ; A1 58 04
         cdq                                     ; 99
+        ; constant WM_MOVE
         mov     cx, 3                           ; B9 03 00
         idiv    cx                              ; F7 F9
         mov     word ptr [0x45c], ax            ; A3 5C 04
@@ -546,6 +647,7 @@ L_037A:
         mov     word ptr [0x464], ax            ; A3 64 04
         mov     ax, word ptr [0x426]            ; A1 26 04
         add     ax, word ptr [0x42c]            ; 03 06 2C 04
+        ; constant WM_MOVE
         mov     cx, 3                           ; B9 03 00
         imul    cx                              ; F7 E9
         mov     word ptr [0x462], ax            ; A3 62 04
@@ -554,14 +656,15 @@ L_037A:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_04D6 -- offset 0x04D6 -- 16 instr
-; Funcion sin clasificar definitiva (16 instr).
-; tags: small
-; callers: sub_002F
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_04D6   offset=0x04D6  size=16 instr  segment=seg4.asm
+;
+; Classification (pass8): c_medium  (score C=5, ASM=0)
+; Prologue: standard_bp     Epilogue: ret
+;-------------------------------------------------------------------------
+;   [sub-routine] L_04D6
 L_04D6:
+        ;   = cProc <2> ; NEAR PASCAL prologue
         push    bp                              ; 55
         mov     bp, sp                          ; 8B EC
         sub     sp, 2                           ; 83 EC 02
@@ -578,15 +681,18 @@ L_04D6:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_04FF -- offset 0x04FF -- 23 instr
-; Funcion sin clasificar definitiva (23 instr).
-; tags: calls_system, small
-; callers: sub_0539
-; calls (inter): SYSTEM.CREATESYSTEMTIMER
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_04FF   offset=0x04FF  size=23 instr  segment=seg4.asm
+;
+; Classification (pass8): c_medium  (score C=5, ASM=0)
+; Prologue: standard_bp     Epilogue: ret
+;
+; Far API calls:
+;   CREATESYSTEMTIMER
+;-------------------------------------------------------------------------
+;   [sub-routine] L_04FF
 L_04FF:
+        ;   = cProc <2> ; NEAR PASCAL prologue
         push    bp                              ; 55
         mov     bp, sp                          ; 8B EC
         sub     sp, 2                           ; 83 EC 02
@@ -610,29 +716,47 @@ L_04FF:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_0539 -- offset 0x0539 -- 62 instr
-; Funcion mediana (62 instr, 6 calls).
-; tags: calls_kernel, calls_mouse, calls_system, medium
-; callers: sub_002F
-; calls (intra): sub_04FF
-; calls (inter): KERNEL.FATALEXIT, KERNEL.GETMODULEHANDLE, KERNEL.GETPROCADDRESS, MOUSE.INQUIRE, SYSTEM.INQUIRESYSTEM
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_0539   offset=0x0539  size=62 instr  segment=seg4.asm
+;
+; Classification (pass8): c_high  (score C=6, ASM=0)
+; Prologue: standard_bp     Epilogue: ret
+;
+; Far API calls:
+;   101
+;   FATALEXIT
+;   GETMODULEHANDLE(LPSTR lpszModule) -> HANDLE
+;   GETPROCADDRESS(HANDLE hModule, LPSTR lpszProc) -> FARPROC
+;   1
+;   INQUIRE
+;   INQUIRESYSTEM
+;
+; Near calls (internal): L_04FF
+;-------------------------------------------------------------------------
+;   [sub-routine] L_0539
 L_0539:
+        ;   = cProc <0> ; NEAR PASCAL prologue
         push    bp                              ; 55
         mov     bp, sp                          ; 8B EC
         call    L_04FF                          ; E8 C0 FF
         mov     ax, 0xc33                       ; B8 33 0C
         mov     dx, OFFSET _SEG1_0C33           ; BA FF FF [FIXUP]
         push    dx                              ; 52
+        ;   ^ arg lpszModule (high/segment)
         push    ax                              ; 50
+        ;   ^ arg lpszModule (low/offset)
+        ; --> GETMODULEHANDLE(LPSTR lpszModule) -> HANDLE
         call    far KERNEL.GETMODULEHANDLE      ; 9A 44 02 00 00 [FIXUP]
         push    ax                              ; 50
+        ;   ^ arg hModule
+        ; constant VK_RETURN
         mov     ax, 0xd                         ; B8 0D 00
         cdq                                     ; 99
         push    dx                              ; 52
+        ;   ^ arg lpszProc (high/segment)
         push    ax                              ; 50
+        ;   ^ arg lpszProc (low/offset)
+        ; --> GETPROCADDRESS(HANDLE hModule, LPSTR lpszProc) -> FARPROC
         call    far KERNEL.GETPROCADDRESS       ; 9A FF FF 00 00 [FIXUP]
         mov     es, word ptr [0x32e]            ; 8E 06 2E 03
         mov     word ptr es:[0x5a97], ax        ; 26 A3 97 5A
@@ -649,9 +773,11 @@ L_0539:
         call    far KEYBOARD.1                  ; 9A FF FF 00 00 [FIXUP]
         cmp     ax, 0xc                         ; 3D 0C 00
         je      L_058D                          ; 74 09
+        ; constant WM_SETTEXT
         mov     ax, 0xc                         ; B8 0C 00
         push    ax                              ; 50
         call    far KERNEL.FATALEXIT            ; 9A E6 05 00 00 [FIXUP]
+;   [conditional branch target (if/else)] L_058D
 L_058D:
         mov     word ptr [0x1c0], 0             ; C7 06 C0 01 00 00
         mov     word ptr [0x47c], 1             ; C7 06 7C 04 01 00
@@ -663,6 +789,7 @@ L_058D:
         jne     L_05B6                          ; 75 0C
         mov     word ptr [0x1c0], 0xffff        ; C7 06 C0 01 FF FF
         mov     word ptr [0x47c], 0             ; C7 06 7C 04 00 00
+;   [conditional branch target (if/else)] L_05B6
 L_05B6:
         mov     ax, word ptr [0x47c]            ; A1 7C 04
         mov     word ptr [0x1b4], ax            ; A3 B4 01
@@ -678,35 +805,44 @@ L_05B6:
         call    far DISPLAY.101                 ; 9A FF FF 00 00 [FIXUP]
         cmp     ax, 4                           ; 3D 04 00
         je      L_05EA                          ; 74 09
+        ; constant WM_GETTEXTLENGTH
         mov     ax, 0xe                         ; B8 0E 00
         push    ax                              ; 50
         call    far KERNEL.FATALEXIT            ; 9A FF FF 00 00 [FIXUP]
+;   [error/early exit] L_05EA
 L_05EA:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_05EE -- offset 0x05EE -- 5 instr
-; Funcion hoja (no llama a otras, 5 instr): probable helper aritmetico/conversion.
-; tags: leaf
-; callers: sub_002F
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_05EE   offset=0x05EE  size=5 instr  segment=seg4.asm
+;
+; Classification (pass8): c_medium  (score C=3, ASM=0)
+; Prologue: standard_bp     Epilogue: ret
+;-------------------------------------------------------------------------
+;   [sub-routine] L_05EE
 L_05EE:
+        ;   = cProc <0> ; NEAR PASCAL prologue
         push    bp                              ; 55
         mov     bp, sp                          ; 8B EC
         mov     word ptr [0x62], 0              ; C7 06 62 00 00 00
         pop     bp                              ; 5D
         ret                                     ; C3
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_05F9 -- offset 0x05F9 -- 93 instr
-; Funcion compleja: 93 instrucciones, 4 llamadas, 1 branches.
-; tags: calls_gdi, complex
-; callers: sub_002F
-; calls (inter): GDI.CREATECOMPATIBLEDC, GDI.CREATEDC, GDI.CREATERECTRGN, GDI.GETDEVICECAPS
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_05F9   offset=0x05F9  size=93 instr  segment=seg4.asm
+;
+; Classification (pass8): c_high  (score C=6, ASM=0)
+; Prologue: standard_bp     Epilogue: ret
+;
+; Far API calls:
+;   CREATECOMPATIBLEDC(HDC hDC) -> HDC
+;   CREATEDC(LPSTR lpszDriver, LPSTR lpszDevice, LPSTR lpszOutput, LPVOID lpInitData) -> HDC
+;   CREATERECTRGN
+;   GETDEVICECAPS(HDC hDC, INT iCap) -> INT
+;-------------------------------------------------------------------------
+;   [sub-routine] L_05F9
 L_05F9:
+        ;   = cProc <4> ; NEAR PASCAL prologue
         push    bp                              ; 55
         mov     bp, sp                          ; 8B EC
         sub     sp, 4                           ; 83 EC 04
@@ -736,20 +872,30 @@ L_05F9:
         mov     word ptr [0x650], 0             ; C7 06 50 06 00 00
         mov     di, 0x4ae                       ; BF AE 04
         sub     si, si                          ; 2B F6
+;   [loop start] L_0636
 L_0636:
         mov     ax, word ptr [0x650]            ; A1 50 06
         mov     word ptr [di], ax               ; 89 05
         mov     ax, 0xc15                       ; B8 15 0C
         mov     dx, OFFSET _SEG1_0C15           ; BA 3F 02 [FIXUP]
         push    dx                              ; 52
+        ;   ^ arg lpszDriver (high/segment)
         push    ax                              ; 50
+        ;   ^ arg lpszDriver (low/offset)
         sub     ax, ax                          ; 2B C0
         push    ax                              ; 50
+        ;   ^ arg lpszDevice (high/segment)
         push    ax                              ; 50
+        ;   ^ arg lpszDevice (low/offset)
         push    ax                              ; 50
+        ;   ^ arg lpszOutput (high/segment)
         push    ax                              ; 50
+        ;   ^ arg lpszOutput (low/offset)
         push    ax                              ; 50
+        ;   ^ arg lpInitData (high/segment)
         push    ax                              ; 50
+        ;   ^ arg lpInitData (low/offset)
+        ; --> CREATEDC(LPSTR lpszDriver, LPSTR lpszDevice, LPSTR lpszOutput, LPVOID lpInitData) -> HDC
         call    far GDI.CREATEDC                ; 9A FF FF 00 00 [FIXUP]
         mov     word ptr [di + 4], ax           ; 89 45 04
         mov     byte ptr [di + 7], 0            ; C6 45 07 00
@@ -762,20 +908,28 @@ L_0636:
         jl      L_0636                          ; 7C CC
         mov     bx, ax                          ; 8B D8
         push    word ptr [bx + 4]               ; FF 77 04
+        ;   ^ arg hDC
+        ; --> CREATECOMPATIBLEDC(HDC hDC) -> HDC
         call    far GDI.CREATECOMPATIBLEDC      ; 9A FF FF 00 00 [FIXUP]
         mov     word ptr [0x3b2], ax            ; A3 B2 03
         mov     bx, word ptr [0x650]            ; 8B 1E 50 06
         push    word ptr [bx + 4]               ; FF 77 04
+        ;   ^ arg hDC
         mov     ax, 8                           ; B8 08 00
         push    ax                              ; 50
+        ;   ^ arg iCap
+        ; --> GETDEVICECAPS(HDC hDC, INT iCap) -> INT
         call    far GDI.GETDEVICECAPS           ; 9A 9E 06 00 00 [FIXUP]
         mov     word ptr [0x510], ax            ; A3 10 05
         mov     es, word ptr [0x334]            ; 8E 06 34 03
         mov     word ptr es:[0x5ab5], ax        ; 26 A3 B5 5A
         mov     bx, word ptr [0x650]            ; 8B 1E 50 06
         push    word ptr [bx + 4]               ; FF 77 04
+        ;   ^ arg hDC
         mov     ax, 0xa                         ; B8 0A 00
         push    ax                              ; 50
+        ;   ^ arg iCap
+        ; --> GETDEVICECAPS(HDC hDC, INT iCap) -> INT
         call    far GDI.GETDEVICECAPS           ; 9A FF FF 00 00 [FIXUP]
         mov     word ptr [0x50e], ax            ; A3 0E 05
         mov     es, word ptr [0x336]            ; 8E 06 36 03
@@ -801,15 +955,20 @@ L_0636:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_06DD -- offset 0x06DD -- 162 instr
-; Funcion compleja: 162 instrucciones, 3 llamadas, 2 branches.
-; tags: calls_kernel, complex
-; callers: sub_002F
-; calls (inter): KERNEL.ANSILOWER, KERNEL.GETPROFILEINT, KERNEL.GETPROFILESTRING
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_06DD   offset=0x06DD  size=162 instr  segment=seg4.asm
+;
+; Classification (pass8): c_high  (score C=6, ASM=0)
+; Prologue: standard_bp     Epilogue: ret
+;
+; Far API calls:
+;   ANSILOWER(LPSTR lpsz) -> LPSTR
+;   GETPROFILEINT
+;   GETPROFILESTRING
+;-------------------------------------------------------------------------
+;   [sub-routine] L_06DD
 L_06DD:
+        ;   = cProc <2> ; NEAR PASCAL prologue
         push    bp                              ; 55
         mov     bp, sp                          ; 8B EC
         sub     sp, 2                           ; 83 EC 02
@@ -866,15 +1025,22 @@ L_06DD:
         cwde                                    ; 98
         cdq                                     ; 99
         push    dx                              ; 52
+        ;   ^ arg lpsz (high/segment)
         push    ax                              ; 50
+        ;   ^ arg lpsz (low/offset)
+        ; --> ANSILOWER(LPSTR lpsz) -> LPSTR
         call    far KERNEL.ANSILOWER            ; 9A FF FF 00 00 [FIXUP]
         cmp     byte ptr [bp - 2], al           ; 38 46 FE
         jne     L_076C                          ; 75 05
+;   [conditional branch target (if/else)] L_0767
 L_0767:
+        ; constant WM_CREATE
         mov     ax, 1                           ; B8 01 00
         jmp     L_076E                          ; EB 02
+;   [conditional branch target (if/else)] L_076C
 L_076C:
         sub     ax, ax                          ; 2B C0
+;   [unconditional branch target] L_076E
 L_076E:
         mov     es, word ptr [0x33a]            ; 8E 06 3A 03
         mov     word ptr es:[0x5aa3], ax        ; 26 A3 A3 5A
@@ -959,6 +1125,7 @@ L_076E:
         call    far _entry_174                  ; 9A FF FF 00 00 [FIXUP]
         mov     word ptr [0x5d8], ax            ; A3 D8 05
         push    word ptr [0x3a0]                ; FF 36 A0 03
+        ; constant WM_CREATE
         mov     ax, 1                           ; B8 01 00
         cdq                                     ; 99
         push    dx                              ; 52
@@ -975,14 +1142,15 @@ L_076E:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_0848 -- offset 0x0848 -- 43 instr
-; Dispatcher: tabla de decisiones cmp+jcc (43 instr).
-; tags: dispatcher
-; callers: sub_08B8
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_0848   offset=0x0848  size=43 instr  segment=seg4.asm
+;
+; Classification (pass8): c_high  (score C=8, ASM=0)
+; Prologue: standard_bp     Epilogue: ret_n   (PASCAL NEAR, callee cleans args)
+;-------------------------------------------------------------------------
+;   [sub-routine] L_0848
 L_0848:
+        ;   = cProc <14> ; NEAR PASCAL prologue
         push    bp                              ; 55
         mov     bp, sp                          ; 8B EC
         sub     sp, 0xe                         ; 83 EC 0E
@@ -991,14 +1159,17 @@ L_0848:
         mov     word ptr [bp - 4], ax           ; 89 46 FC
         mov     word ptr [bp - 2], ss           ; 8C 56 FE
         sub     si, si                          ; 2B F6
+;   [loop start] L_085A
 L_085A:
         mov     byte ptr [bp - 6], 0            ; C6 46 FA 00
+;   [loop start] L_085E
 L_085E:
         les     bx, ptr [bp + 4]                ; C4 5E 04
         cmp     byte ptr es:[bx], 0x20          ; 26 80 3F 20
         jne     L_0885                          ; 75 1E
         inc     word ptr [bp + 4]               ; FF 46 04
         jmp     L_085E                          ; EB F2
+;   [loop start] L_086C
 L_086C:
         cmp     byte ptr [bp - 0xe], 0x39       ; 80 7E F2 39
         jg      L_0892                          ; 7F 20
@@ -1009,12 +1180,14 @@ L_086C:
         add     al, byte ptr es:[bx]            ; 26 02 07
         sub     al, 0x30                        ; 2C 30
         mov     byte ptr [bp - 6], al           ; 88 46 FA
+;   [conditional branch target (if/else)] L_0885
 L_0885:
         les     bx, ptr [bp + 4]                ; C4 5E 04
         mov     al, byte ptr es:[bx]            ; 26 8A 07
         mov     byte ptr [bp - 0xe], al         ; 88 46 F2
         cmp     al, 0x30                        ; 3C 30
         jge     L_086C                          ; 7D DA
+;   [conditional branch target (if/else)] L_0892
 L_0892:
         les     bx, ptr [bp - 4]                ; C4 5E FC
         inc     word ptr [bp - 4]               ; FF 46 FC
@@ -1031,16 +1204,21 @@ L_0892:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     4                               ; C2 04 00
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_08B8 -- offset 0x08B8 -- 62 instr
-; Funcion mediana (62 instr, 3 calls).
-; tags: calls_gdi, calls_kernel, medium
-; callers: sub_0233
-; calls (intra): sub_0848
-; calls (inter): GDI.CREATESOLIDBRUSH, KERNEL.GETPROFILESTRING
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_08B8   offset=0x08B8  size=62 instr  segment=seg4.asm
+;
+; Classification (pass8): c_medium  (score C=5, ASM=0)
+; Prologue: standard_bp     Epilogue: ret
+;
+; Far API calls:
+;   CREATESOLIDBRUSH(DWORD clr) -> HBRUSH
+;   GETPROFILESTRING
+;
+; Near calls (internal): L_0848
+;-------------------------------------------------------------------------
+;   [sub-routine] L_08B8
 L_08B8:
+        ;   = cProc <36> ; NEAR PASCAL prologue
         push    bp                              ; 55
         mov     bp, sp                          ; 8B EC
         sub     sp, 0x24                        ; 83 EC 24
@@ -1049,6 +1227,7 @@ L_08B8:
         mov     di, 0x3bc                       ; BF BC 03
         mov     word ptr [bp - 0x20], 0x3de     ; C7 46 E0 DE 03
         sub     si, si                          ; 2B F6
+;   [loop start] L_08CA
 L_08CA:
         mov     ax, 0xc42                       ; B8 42 0C
         mov     dx, OFFSET _SEG1_0C42           ; BA FF FF [FIXUP]
@@ -1084,9 +1263,13 @@ L_08CA:
         call    L_0848                          ; E8 30 FF
         mov     word ptr [bp - 0x24], ax        ; 89 46 DC
         mov     word ptr [bp - 0x22], dx        ; 89 56 DE
+;   [conditional branch target (if/else)] L_091E
 L_091E:
         push    word ptr [bp - 0x22]            ; FF 76 DE
+        ;   ^ arg clr (high/segment)
         push    word ptr [bp - 0x24]            ; FF 76 DC
+        ;   ^ arg clr (low/offset)
+        ; --> CREATESOLIDBRUSH(DWORD clr) -> HBRUSH
         call    far GDI.CREATESOLIDBRUSH        ; 9A FF FF 00 00 [FIXUP]
         mov     dx, ds                          ; 8C DA
         mov     word ptr [di], ax               ; 89 05
@@ -1105,15 +1288,18 @@ L_091E:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_094E -- offset 0x094E -- 120 instr
-; Funcion compleja: 120 instrucciones, 1 llamadas, 0 branches.
-; tags: calls_gdi, complex, far
-; callers: sub_002F
-; calls (inter): GDI.GETTEXTMETRICS
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_094E   offset=0x094E  size=120 instr  segment=seg4.asm
+;
+; Classification (pass8): c_high  (score C=10, ASM=0)
+; Prologue: standard_bp     Epilogue: retf_n   (PASCAL FAR, callee cleans args)
+;
+; Far API calls:
+;   GETTEXTMETRICS
+;-------------------------------------------------------------------------
+;   [sub-routine] L_094E
 L_094E:
+        ;   = cProc <34> ; NEAR PASCAL prologue
         push    bp                              ; 55
         mov     bp, sp                          ; 8B EC
         sub     sp, 0x22                        ; 83 EC 22
@@ -1140,9 +1326,11 @@ L_094E:
         mov     word ptr [0x198], ax            ; A3 98 01
         mov     ax, word ptr [0x480]            ; A1 80 04
         mov     word ptr [0x19a], ax            ; A3 9A 01
+        ; constant WM_SIZE
         mov     ax, 5                           ; B8 05 00
         imul    word ptr [0x47e]                ; F7 2E 7E 04
         mov     word ptr [0x19c], ax            ; A3 9C 01
+        ; constant WM_SIZE
         mov     ax, 5                           ; B8 05 00
         imul    word ptr [0x480]                ; F7 2E 80 04
         mov     word ptr [0x19e], ax            ; A3 9E 01
@@ -1234,19 +1422,25 @@ L_094E:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_0A95 -- offset 0x0A95 -- 51 instr
-; Funcion mediana (51 instr, 3 calls).
-; tags: calls_kernel, medium
-; callers: sub_002F
-; calls (inter): KERNEL.FINDRESOURCE, KERNEL.LOADRESOURCE, KERNEL.LOCKRESOURCE
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_0A95   offset=0x0A95  size=51 instr  segment=seg4.asm
+;
+; Classification (pass8): c_high  (score C=6, ASM=0)
+; Prologue: standard_bp     Epilogue: ret
+;
+; Far API calls:
+;   FINDRESOURCE
+;   LOADRESOURCE
+;   LOCKRESOURCE
+;-------------------------------------------------------------------------
+;   [sub-routine] L_0A95
 L_0A95:
+        ;   = cProc <10> ; NEAR PASCAL prologue
         push    bp                              ; 55
         mov     bp, sp                          ; 8B EC
         sub     sp, 0xa                         ; 83 EC 0A
         push    word ptr [0x3a0]                ; FF 36 A0 03
+        ; constant WM_CREATE
         mov     ax, 1                           ; B8 01 00
         cdq                                     ; 99
         push    dx                              ; 52
@@ -1275,6 +1469,7 @@ L_0A95:
         sub     ah, ah                          ; 2A E4
         mov     word ptr [bp - 6], ax           ; 89 46 FA
         mov     word ptr [bp - 8], 0            ; C7 46 F8 00 00
+;   [loop start] L_0AE8
 L_0AE8:
         mov     bx, word ptr [bp - 8]           ; 8B 5E F8
         inc     word ptr [bp - 4]               ; FF 46 FC
@@ -1292,19 +1487,26 @@ L_0AE8:
         inc     word ptr [bp - 8]               ; FF 46 F8
         cmp     word ptr [bp - 8], 9            ; 83 7E F8 09
         jl      L_0AE8                          ; 7C CF
+;   [error/early exit] L_0B19
 L_0B19:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_0B1D -- offset 0x0B1D -- 125 instr
-; Dispatcher: tabla de decisiones cmp+jcc (125 instr).
-; tags: calls_gdi, calls_kernel, dispatcher
-; callers: sub_002F
-; calls (inter): GDI.ADDFONTRESOURCE, KERNEL.GETPROFILESTRING, KERNEL.LOCALALLOC, KERNEL.LOCALFREE
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_0B1D   offset=0x0B1D  size=125 instr  segment=seg4.asm
+;
+; Classification (pass8): c_high  (score C=7, ASM=0)
+; Prologue: standard_bp     Epilogue: ret
+;
+; Far API calls:
+;   ADDFONTRESOURCE
+;   GETPROFILESTRING
+;   LOCALALLOC(WORD wFlags, WORD wBytes) -> HANDLE
+;   LOCALFREE(HANDLE hMem) -> HANDLE
+;-------------------------------------------------------------------------
+;   [sub-routine] L_0B1D
 L_0B1D:
+        ;   = cProc <30> ; NEAR PASCAL prologue
         push    bp                              ; 55
         mov     bp, sp                          ; 8B EC
         sub     sp, 0x1e                        ; 83 EC 1E
@@ -1313,10 +1515,14 @@ L_0B1D:
         mov     word ptr [bp - 0xc], 0          ; C7 46 F4 00 00
         mov     word ptr [bp - 0xa], 0x12c      ; C7 46 F6 2C 01
         jmp     L_0BAA                          ; EB 79
+;   [loop start] L_0B31
 L_0B31:
         mov     ax, 0x40                        ; B8 40 00
         push    ax                              ; 50
+        ;   ^ arg wFlags
         push    word ptr [bp - 0xa]             ; FF 76 F6
+        ;   ^ arg wBytes
+        ; --> LOCALALLOC(WORD wFlags, WORD wBytes) -> HANDLE
         call    far KERNEL.LOCALALLOC           ; 9A 6E 00 00 00 [FIXUP]
         mov     si, ax                          ; 8B F0
         mov     ax, 0xc49                       ; B8 49 0C
@@ -1340,6 +1546,7 @@ L_0B31:
         je      L_0BA5                          ; 74 3F
         mov     di, si                          ; 8B FE
         jmp     L_0B8D                          ; EB 23
+;   [loop start] L_0B6A
 L_0B6A:
         mov     ax, word ptr [bp - 0xa]         ; 8B 46 F6
         add     ax, si                          ; 03 C6
@@ -1354,28 +1561,37 @@ L_0B6A:
         cmp     ax, di                          ; 3B C7
         jbe     L_0B8C                          ; 76 05
         mov     word ptr [bp - 0xc], 1          ; C7 46 F4 01 00
+;   [conditional branch target (if/else)] L_0B8C
 L_0B8C:
         inc     di                              ; 47
+;   [unconditional branch target] L_0B8D
 L_0B8D:
         cmp     word ptr [bp - 0xc], 0          ; 83 7E F4 00
         je      L_0B6A                          ; 74 D7
+;   [conditional branch target (if/else)] L_0B93
 L_0B93:
         cmp     word ptr [bp - 0xc], 0          ; 83 7E F4 00
         jne     L_0BAA                          ; 75 11
         push    si                              ; 56
+        ;   ^ arg hMem
+        ; --> LOCALFREE(HANDLE hMem) -> HANDLE
         call    far KERNEL.LOCALFREE            ; 9A 4B 0C 00 00 [FIXUP]
         add     word ptr [bp - 0xa], 0x64       ; 83 46 F6 64
         jmp     L_0BAA                          ; EB 05
+;   [conditional branch target (if/else)] L_0BA5
 L_0BA5:
         mov     word ptr [bp - 0xc], 1          ; C7 46 F4 01 00
+;   [branch target] L_0BAA
 L_0BAA:
         cmp     word ptr [bp - 0xc], 0          ; 83 7E F4 00
         je      L_0B31                          ; 74 81
         cmp     word ptr [bp - 0x1e], 0         ; 83 7E E2 00
         jne     L_0BB9                          ; 75 03
         jmp     L_0C49                          ; E9 90 00
+;   [conditional branch target (if/else)] L_0BB9
 L_0BB9:
         mov     di, si                          ; 8B FE
+;   [loop start] L_0BBB
 L_0BBB:
         mov     ax, 0xc49                       ; B8 49 0C
         mov     dx, OFFSET _SEG1_0C49           ; BA FF FF [FIXUP]
@@ -1391,6 +1607,7 @@ L_0BBB:
         lea     ax, [bp - 0x1c]                 ; 8D 46 E4
         push    ss                              ; 16
         push    ax                              ; 50
+        ; constant WM_PAINT
         mov     ax, 0xf                         ; B8 0F 00
         push    ax                              ; 50
         call    far KERNEL.GETPROFILESTRING     ; 9A F8 08 00 00 [FIXUP]
@@ -1400,6 +1617,7 @@ L_0BBB:
         mov     word ptr [bp - 6], ax           ; 89 46 FA
         mov     word ptr [bp - 4], ss           ; 8C 56 FC
         jmp     L_0C23                          ; EB 37
+;   [loop start] L_0BEC
 L_0BEC:
         cmp     byte ptr es:[bx], 0             ; 26 80 3F 00
         jne     L_0C20                          ; 75 2E
@@ -1417,17 +1635,21 @@ L_0BEC:
         mov     bx, word ptr [bp - 6]           ; 8B 5E FA
         mov     byte ptr es:[bx], 0             ; 26 C6 07 00
         jmp     L_0C2C                          ; EB 0C
+;   [conditional branch target (if/else)] L_0C20
 L_0C20:
         inc     word ptr [bp - 6]               ; FF 46 FA
+;   [unconditional branch target] L_0C23
 L_0C23:
         les     bx, ptr [bp - 6]                ; C4 5E FA
         cmp     byte ptr es:[bx], 0x2e          ; 26 80 3F 2E
         jne     L_0BEC                          ; 75 C0
+;   [unconditional branch target] L_0C2C
 L_0C2C:
         lea     ax, [bp - 0x1c]                 ; 8D 46 E4
         push    ss                              ; 16
         push    ax                              ; 50
         call    far GDI.ADDFONTRESOURCE         ; 9A FF FF 00 00 [FIXUP]
+;   [loop start (also forward branch)] L_0C36
 L_0C36:
         inc     di                              ; 47
         cmp     byte ptr [di - 1], 0            ; 80 7D FF 00
@@ -1437,23 +1659,28 @@ L_0C36:
         cmp     ax, di                          ; 3B C7
         jbe     L_0C49                          ; 76 03
         jmp     L_0BBB                          ; E9 72 FF
+;   [branch target] L_0C49
 L_0C49:
         push    si                              ; 56
+        ;   ^ arg hMem
+        ; --> LOCALFREE(HANDLE hMem) -> HANDLE
         call    far KERNEL.LOCALFREE            ; 9A FF FF 00 00 [FIXUP]
         pop     si                              ; 5E
         pop     di                              ; 5F
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_0C55 -- offset 0x0C55 -- 15 instr
-; Funcion sin clasificar definitiva (15 instr).
-; tags: small
-; callers: sub_002F
-; calls (intra): sub_0C7A, sub_0CE9, sub_0D34, sub_0D86, sub_0DDC, sub_0E2E (+4 mas)
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_0C55   offset=0x0C55  size=15 instr  segment=seg4.asm
+;
+; Classification (pass8): c_medium  (score C=3, ASM=0)
+; Prologue: standard_bp     Epilogue: ret
+;
+; Near calls (first 8 of 10): L_0C7A, L_0CE9, L_0D34, L_0D86, L_0DDC, L_0E2E, L_0E80, L_105F ...
+;-------------------------------------------------------------------------
+;   [sub-routine] L_0C55
 L_0C55:
+        ;   = cProc <0> ; NEAR PASCAL prologue
         push    bp                              ; 55
         mov     bp, sp                          ; 8B EC
         call    L_0C7A                          ; E8 1F 00
@@ -1469,15 +1696,19 @@ L_0C55:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_0C7A -- offset 0x0C7A -- 38 instr
-; Funcion mediana (38 instr, 2 calls).
-; tags: calls_kernel, medium
-; callers: sub_0C55, sub_16A4
-; calls (inter): KERNEL.LOCALALLOC, KERNEL.LOCALFREE
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_0C7A   offset=0x0C7A  size=38 instr  segment=seg4.asm
+;
+; Classification (pass8): c_high  (score C=8, ASM=0)
+; Prologue: standard_bp     Epilogue: ret
+;
+; Far API calls:
+;   LOCALALLOC(WORD wFlags, WORD wBytes) -> HANDLE
+;   LOCALFREE(HANDLE hMem) -> HANDLE
+;-------------------------------------------------------------------------
+;   [sub-routine] L_0C7A
 L_0C7A:
+        ;   = cProc <2> ; NEAR PASCAL prologue
         push    bp                              ; 55
         mov     bp, sp                          ; 8B EC
         sub     sp, 2                           ; 83 EC 02
@@ -1491,8 +1722,11 @@ L_0C7A:
         mov     word ptr [0x528], 1             ; C7 06 28 05 01 00
         mov     ax, 0x40                        ; B8 40 00
         push    ax                              ; 50
+        ;   ^ arg wFlags
         mov     ax, 0x1a                        ; B8 1A 00
         push    ax                              ; 50
+        ;   ^ arg wBytes
+        ; --> LOCALALLOC(WORD wFlags, WORD wBytes) -> HANDLE
         call    far KERNEL.LOCALALLOC           ; 9A F8 0C 00 00 [FIXUP]
         mov     si, ax                          ; 8B F0
         mov     word ptr [si + 0x16], 0x8001    ; C7 44 16 01 80
@@ -1510,28 +1744,37 @@ L_0C7A:
         push    ax                              ; 50
         call    far _entry_57                   ; 9A 24 0D 00 00 [FIXUP]
         push    si                              ; 56
+        ;   ^ arg hMem
+        ; --> LOCALFREE(HANDLE hMem) -> HANDLE
         call    far KERNEL.LOCALFREE            ; 9A 2C 0D 00 00 [FIXUP]
         mov     word ptr [0x634], 0             ; C7 06 34 06 00 00
         pop     si                              ; 5E
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_0CE9 -- offset 0x0CE9 -- 26 instr
-; Funcion sin clasificar definitiva (26 instr).
-; tags: calls_kernel, small
-; callers: sub_0C55
-; calls (inter): KERNEL.LOCALALLOC, KERNEL.LOCALFREE
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_0CE9   offset=0x0CE9  size=26 instr  segment=seg4.asm
+;
+; Classification (pass8): c_high  (score C=6, ASM=0)
+; Prologue: standard_bp     Epilogue: ret
+;
+; Far API calls:
+;   LOCALALLOC(WORD wFlags, WORD wBytes) -> HANDLE
+;   LOCALFREE(HANDLE hMem) -> HANDLE
+;-------------------------------------------------------------------------
+;   [sub-routine] L_0CE9
 L_0CE9:
+        ;   = cProc <2> ; NEAR PASCAL prologue
         push    bp                              ; 55
         mov     bp, sp                          ; 8B EC
         sub     sp, 2                           ; 83 EC 02
         mov     ax, 0x40                        ; B8 40 00
         push    ax                              ; 50
+        ;   ^ arg wFlags
         mov     ax, 0x1a                        ; B8 1A 00
         push    ax                              ; 50
+        ;   ^ arg wBytes
+        ; --> LOCALALLOC(WORD wFlags, WORD wBytes) -> HANDLE
         call    far KERNEL.LOCALALLOC           ; 9A 43 0D 00 00 [FIXUP]
         mov     word ptr [bp - 2], ax           ; 89 46 FE
         mov     bx, ax                          ; 8B D8
@@ -1547,26 +1790,35 @@ L_0CE9:
         push    ax                              ; 50
         call    far _entry_57                   ; 9A 76 0D 00 00 [FIXUP]
         push    word ptr [bp - 2]               ; FF 76 FE
+        ;   ^ arg hMem
+        ; --> LOCALFREE(HANDLE hMem) -> HANDLE
         call    far KERNEL.LOCALFREE            ; 9A 7E 0D 00 00 [FIXUP]
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_0D34 -- offset 0x0D34 -- 28 instr
-; Funcion sin clasificar definitiva (28 instr).
-; tags: calls_kernel, small
-; callers: sub_0C55
-; calls (inter): KERNEL.LOCALALLOC, KERNEL.LOCALFREE
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_0D34   offset=0x0D34  size=28 instr  segment=seg4.asm
+;
+; Classification (pass8): c_high  (score C=6, ASM=0)
+; Prologue: standard_bp     Epilogue: ret
+;
+; Far API calls:
+;   LOCALALLOC(WORD wFlags, WORD wBytes) -> HANDLE
+;   LOCALFREE(HANDLE hMem) -> HANDLE
+;-------------------------------------------------------------------------
+;   [sub-routine] L_0D34
 L_0D34:
+        ;   = cProc <2> ; NEAR PASCAL prologue
         push    bp                              ; 55
         mov     bp, sp                          ; 8B EC
         sub     sp, 2                           ; 83 EC 02
         mov     ax, 0x40                        ; B8 40 00
         push    ax                              ; 50
+        ;   ^ arg wFlags
         mov     ax, 0x1a                        ; B8 1A 00
         push    ax                              ; 50
+        ;   ^ arg wBytes
+        ; --> LOCALALLOC(WORD wFlags, WORD wBytes) -> HANDLE
         call    far KERNEL.LOCALALLOC           ; 9A 95 0D 00 00 [FIXUP]
         mov     word ptr [bp - 2], ax           ; 89 46 FE
         mov     bx, ax                          ; 8B D8
@@ -1584,26 +1836,35 @@ L_0D34:
         push    ax                              ; 50
         call    far _entry_57                   ; 9A CC 0D 00 00 [FIXUP]
         push    word ptr [bp - 2]               ; FF 76 FE
+        ;   ^ arg hMem
+        ; --> LOCALFREE(HANDLE hMem) -> HANDLE
         call    far KERNEL.LOCALFREE            ; 9A D4 0D 00 00 [FIXUP]
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_0D86 -- offset 0x0D86 -- 29 instr
-; Funcion sin clasificar definitiva (29 instr).
-; tags: calls_kernel, small
-; callers: sub_0C55
-; calls (inter): KERNEL.LOCALALLOC, KERNEL.LOCALFREE
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_0D86   offset=0x0D86  size=29 instr  segment=seg4.asm
+;
+; Classification (pass8): c_high  (score C=6, ASM=0)
+; Prologue: standard_bp     Epilogue: ret
+;
+; Far API calls:
+;   LOCALALLOC(WORD wFlags, WORD wBytes) -> HANDLE
+;   LOCALFREE(HANDLE hMem) -> HANDLE
+;-------------------------------------------------------------------------
+;   [sub-routine] L_0D86
 L_0D86:
+        ;   = cProc <2> ; NEAR PASCAL prologue
         push    bp                              ; 55
         mov     bp, sp                          ; 8B EC
         sub     sp, 2                           ; 83 EC 02
         mov     ax, 0x40                        ; B8 40 00
         push    ax                              ; 50
+        ;   ^ arg wFlags
         mov     ax, 0x1a                        ; B8 1A 00
         push    ax                              ; 50
+        ;   ^ arg wBytes
+        ; --> LOCALALLOC(WORD wFlags, WORD wBytes) -> HANDLE
         call    far KERNEL.LOCALALLOC           ; 9A EB 0D 00 00 [FIXUP]
         mov     word ptr [bp - 2], ax           ; 89 46 FE
         mov     bx, ax                          ; 8B D8
@@ -1622,26 +1883,35 @@ L_0D86:
         push    ax                              ; 50
         call    far _entry_57                   ; 9A 1E 0E 00 00 [FIXUP]
         push    word ptr [bp - 2]               ; FF 76 FE
+        ;   ^ arg hMem
+        ; --> LOCALFREE(HANDLE hMem) -> HANDLE
         call    far KERNEL.LOCALFREE            ; 9A 26 0E 00 00 [FIXUP]
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_0DDC -- offset 0x0DDC -- 28 instr
-; Funcion sin clasificar definitiva (28 instr).
-; tags: calls_kernel, small
-; callers: sub_0C55
-; calls (inter): KERNEL.LOCALALLOC, KERNEL.LOCALFREE
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_0DDC   offset=0x0DDC  size=28 instr  segment=seg4.asm
+;
+; Classification (pass8): c_high  (score C=6, ASM=0)
+; Prologue: standard_bp     Epilogue: ret
+;
+; Far API calls:
+;   LOCALALLOC(WORD wFlags, WORD wBytes) -> HANDLE
+;   LOCALFREE(HANDLE hMem) -> HANDLE
+;-------------------------------------------------------------------------
+;   [sub-routine] L_0DDC
 L_0DDC:
+        ;   = cProc <2> ; NEAR PASCAL prologue
         push    bp                              ; 55
         mov     bp, sp                          ; 8B EC
         sub     sp, 2                           ; 83 EC 02
         mov     ax, 0x40                        ; B8 40 00
         push    ax                              ; 50
+        ;   ^ arg wFlags
         mov     ax, 0x1a                        ; B8 1A 00
         push    ax                              ; 50
+        ;   ^ arg wBytes
+        ; --> LOCALALLOC(WORD wFlags, WORD wBytes) -> HANDLE
         call    far KERNEL.LOCALALLOC           ; 9A 3D 0E 00 00 [FIXUP]
         mov     word ptr [bp - 2], ax           ; 89 46 FE
         mov     bx, ax                          ; 8B D8
@@ -1659,26 +1929,35 @@ L_0DDC:
         push    ax                              ; 50
         call    far _entry_57                   ; 9A 70 0E 00 00 [FIXUP]
         push    word ptr [bp - 2]               ; FF 76 FE
+        ;   ^ arg hMem
+        ; --> LOCALFREE(HANDLE hMem) -> HANDLE
         call    far KERNEL.LOCALFREE            ; 9A 78 0E 00 00 [FIXUP]
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_0E2E -- offset 0x0E2E -- 28 instr
-; Funcion sin clasificar definitiva (28 instr).
-; tags: calls_kernel, small
-; callers: sub_0C55
-; calls (inter): KERNEL.LOCALALLOC, KERNEL.LOCALFREE
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_0E2E   offset=0x0E2E  size=28 instr  segment=seg4.asm
+;
+; Classification (pass8): c_high  (score C=6, ASM=0)
+; Prologue: standard_bp     Epilogue: ret
+;
+; Far API calls:
+;   LOCALALLOC(WORD wFlags, WORD wBytes) -> HANDLE
+;   LOCALFREE(HANDLE hMem) -> HANDLE
+;-------------------------------------------------------------------------
+;   [sub-routine] L_0E2E
 L_0E2E:
+        ;   = cProc <2> ; NEAR PASCAL prologue
         push    bp                              ; 55
         mov     bp, sp                          ; 8B EC
         sub     sp, 2                           ; 83 EC 02
         mov     ax, 0x40                        ; B8 40 00
         push    ax                              ; 50
+        ;   ^ arg wFlags
         mov     ax, 0x1a                        ; B8 1A 00
         push    ax                              ; 50
+        ;   ^ arg wBytes
+        ; --> LOCALALLOC(WORD wFlags, WORD wBytes) -> HANDLE
         call    far KERNEL.LOCALALLOC           ; 9A 8F 0E 00 00 [FIXUP]
         mov     word ptr [bp - 2], ax           ; 89 46 FE
         mov     bx, ax                          ; 8B D8
@@ -1696,26 +1975,35 @@ L_0E2E:
         push    ax                              ; 50
         call    far _entry_57                   ; 9A C2 0E 00 00 [FIXUP]
         push    word ptr [bp - 2]               ; FF 76 FE
+        ;   ^ arg hMem
+        ; --> LOCALFREE(HANDLE hMem) -> HANDLE
         call    far KERNEL.LOCALFREE            ; 9A CA 0E 00 00 [FIXUP]
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_0E80 -- offset 0x0E80 -- 28 instr
-; Funcion sin clasificar definitiva (28 instr).
-; tags: calls_kernel, small
-; callers: sub_0C55
-; calls (inter): KERNEL.LOCALALLOC, KERNEL.LOCALFREE
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_0E80   offset=0x0E80  size=28 instr  segment=seg4.asm
+;
+; Classification (pass8): c_high  (score C=6, ASM=0)
+; Prologue: standard_bp     Epilogue: ret
+;
+; Far API calls:
+;   LOCALALLOC(WORD wFlags, WORD wBytes) -> HANDLE
+;   LOCALFREE(HANDLE hMem) -> HANDLE
+;-------------------------------------------------------------------------
+;   [sub-routine] L_0E80
 L_0E80:
+        ;   = cProc <2> ; NEAR PASCAL prologue
         push    bp                              ; 55
         mov     bp, sp                          ; 8B EC
         sub     sp, 2                           ; 83 EC 02
         mov     ax, 0x40                        ; B8 40 00
         push    ax                              ; 50
+        ;   ^ arg wFlags
         mov     ax, 0x1a                        ; B8 1A 00
         push    ax                              ; 50
+        ;   ^ arg wBytes
+        ; --> LOCALALLOC(WORD wFlags, WORD wBytes) -> HANDLE
         call    far KERNEL.LOCALALLOC           ; 9A 39 0B 00 00 [FIXUP]
         mov     word ptr [bp - 2], ax           ; 89 46 FE
         mov     bx, ax                          ; 8B D8
@@ -1733,19 +2021,36 @@ L_0E80:
         push    ax                              ; 50
         call    far _entry_57                   ; 9A FF FF 00 00 [FIXUP]
         push    word ptr [bp - 2]               ; FF 76 FE
+        ;   ^ arg hMem
+        ; --> LOCALFREE(HANDLE hMem) -> HANDLE
         call    far KERNEL.LOCALFREE            ; 9A 9B 0B 00 00 [FIXUP]
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_0ED2 -- offset 0x0ED2 -- 134 instr
-; Dispatcher: tabla de decisiones cmp+jcc (134 instr).
-; tags: calls_gdi, calls_kernel, dispatcher
-; callers: sub_002F
-; calls (inter): GDI.CREATEBITMAP, GDI.SETBITMAPDIMENSION, KERNEL.DELETEPATHNAME, KERNEL.GLOBALALLOC, KERNEL.GLOBALFREE, KERNEL.GLOBALLOCK (+3 mas)
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_0ED2   offset=0x0ED2  size=134 instr  segment=seg4.asm
+;
+; Classification (pass8): c_high  (score C=6, ASM=0)
+; Prologue: standard_bp     Epilogue: ret
+;
+; Far API calls:
+;   CREATEBITMAP(INT nWidth, INT nHeight, WORD nPlanes, WORD nBitCount, LPVOID lpBits) -> HBITMAP
+;   SETBITMAPDIMENSION
+;   DELETEPATHNAME
+;   GLOBALALLOC(WORD wFlags, DWORD dwBytes) -> HANDLE
+;   GLOBALFREE(HANDLE hMem) -> HANDLE
+;   GLOBALLOCK(HANDLE hMem) -> LPVOID
+;   GLOBALUNLOCK(HANDLE hMem) -> BOOL
+;   ISSCREENGRAB
+;   OPENPATHNAME
+;   _LCLOSE(HFILE hFile) -> HFILE
+;   _LLSEEK(HFILE hFile, LONG lOffset, INT iOrigin) -> LONG
+;   _LREAD(HFILE hFile, LPVOID lpBuffer, WORD wBytes) -> WORD
+;   6
+;-------------------------------------------------------------------------
+;   [sub-routine] L_0ED2
 L_0ED2:
+        ;   = cProc <30> ; NEAR PASCAL prologue
         push    bp                              ; 55
         mov     bp, sp                          ; 8B EC
         sub     sp, 0x1e                        ; 83 EC 1E
@@ -1753,6 +2058,7 @@ L_0ED2:
         cmp     ax, 2                           ; 3D 02 00
         je      L_0EE5                          ; 74 03
         jmp     L_105B                          ; E9 76 01
+;   [conditional branch target (if/else)] L_0EE5
 L_0EE5:
         mov     ax, 0xc29                       ; B8 29 0C
         mov     dx, OFFSET _SEG1_0C29           ; BA 5A 0F [FIXUP]
@@ -1765,38 +2071,63 @@ L_0EE5:
         inc     ax                              ; 40
         jne     L_0EFE                          ; 75 03
         jmp     L_105B                          ; E9 5D 01
+;   [conditional branch target (if/else)] L_0EFE
 L_0EFE:
         push    word ptr [bp - 0x12]            ; FF 76 EE
+        ;   ^ arg hFile
         sub     ax, ax                          ; 2B C0
         push    ax                              ; 50
+        ;   ^ arg lOffset (high/segment)
         push    ax                              ; 50
+        ;   ^ arg lOffset (low/offset)
         mov     ax, 2                           ; B8 02 00
         push    ax                              ; 50
+        ;   ^ arg iOrigin
+        ; --> _LLSEEK(HFILE hFile, LONG lOffset, INT iOrigin) -> LONG
         call    far KERNEL._LLSEEK              ; 9A 39 0F 00 00 [FIXUP]
         mov     word ptr [bp - 0x10], ax        ; 89 46 F0
         mov     word ptr [bp - 0xe], dx         ; 89 56 F2
+        ; constant BLACKNESS
         mov     ax, 0x42                        ; B8 42 00
         push    ax                              ; 50
+        ;   ^ arg wFlags
         push    dx                              ; 52
+        ;   ^ arg dwBytes (high/segment)
         push    word ptr [bp - 0x10]            ; FF 76 F0
+        ;   ^ arg dwBytes (low/offset)
+        ; --> GLOBALALLOC(WORD wFlags, DWORD dwBytes) -> HANDLE
         call    far KERNEL.GLOBALALLOC          ; 9A FF FF 00 00 [FIXUP]
         mov     word ptr [bp - 0x1c], ax        ; 89 46 E4
         push    ax                              ; 50
+        ;   ^ arg hMem
+        ; --> GLOBALLOCK(HANDLE hMem) -> LPVOID
         call    far KERNEL.GLOBALLOCK           ; 9A FF FF 00 00 [FIXUP]
         mov     word ptr [bp - 0x18], ax        ; 89 46 E8
         mov     word ptr [bp - 0x16], dx        ; 89 56 EA
         push    word ptr [bp - 0x12]            ; FF 76 EE
+        ;   ^ arg hFile
         sub     ax, ax                          ; 2B C0
         push    ax                              ; 50
+        ;   ^ arg lOffset (high/segment)
         push    ax                              ; 50
+        ;   ^ arg lOffset (low/offset)
         push    ax                              ; 50
+        ;   ^ arg iOrigin
+        ; --> _LLSEEK(HFILE hFile, LONG lOffset, INT iOrigin) -> LONG
         call    far KERNEL._LLSEEK              ; 9A FF FF 00 00 [FIXUP]
         push    word ptr [bp - 0x12]            ; FF 76 EE
+        ;   ^ arg hFile
         push    word ptr [bp - 0x16]            ; FF 76 EA
+        ;   ^ arg lpBuffer (high/segment)
         push    word ptr [bp - 0x18]            ; FF 76 E8
+        ;   ^ arg lpBuffer (low/offset)
         push    word ptr [bp - 0x10]            ; FF 76 F0
+        ;   ^ arg wBytes
+        ; --> _LREAD(HFILE hFile, LPVOID lpBuffer, WORD wBytes) -> WORD
         call    far KERNEL._LREAD               ; 9A FF FF 00 00 [FIXUP]
         push    word ptr [bp - 0x12]            ; FF 76 EE
+        ;   ^ arg hFile
+        ; --> _LCLOSE(HFILE hFile) -> HFILE
         call    far KERNEL._LCLOSE              ; 9A FF FF 00 00 [FIXUP]
         mov     ax, 0xc29                       ; B8 29 0C
         mov     dx, OFFSET _SEG1_0C29           ; BA FF FF [FIXUP]
@@ -1814,10 +2145,12 @@ L_0EFE:
         cmp     ax, 2                           ; 3D 02 00
         jge     L_0F83                          ; 7D 03
         jmp     L_105B                          ; E9 D8 00
+;   [conditional branch target (if/else)] L_0F83
 L_0F83:
         cmp     ax, 3                           ; 3D 03 00
         jle     L_0FCC                          ; 7E 44
         jmp     L_105B                          ; E9 D0 00
+;   [conditional branch target (if/else)] L_0F8B
 L_0F8B:
         mov     ax, word ptr [bp - 0x18]        ; 8B 46 E8
         mov     dx, word ptr [bp - 0x16]        ; 8B 56 EA
@@ -1828,17 +2161,21 @@ L_0F8B:
         push    word ptr [bp - 0x18]            ; FF 76 E8
         call    far KEYBOARD.6                  ; 9A FF FF 00 00 [FIXUP]
         push    word ptr [bp - 0x1c]            ; FF 76 E4
+        ;   ^ arg hMem
+        ; --> GLOBALUNLOCK(HANDLE hMem) -> BOOL
         call    far KERNEL.GLOBALUNLOCK         ; 9A 88 03 00 00 [FIXUP]
         mov     ax, word ptr [bp - 0x1c]        ; 8B 46 E4
         mov     word ptr [bp - 6], ax           ; 89 46 FA
         mov     word ptr [0x20], 0              ; C7 06 20 00 00 00
         mov     word ptr [0x24], 1              ; C7 06 24 00 01 00
         push    word ptr [bp - 0x1a]            ; FF 76 E6
+;   [loop start] L_0FBC
 L_0FBC:
         push    word ptr [bp - 6]               ; FF 76 FA
         call    far _entry_141                  ; 9A FF FF 00 00 [FIXUP]
         call    far _entry_138                  ; 9A FF FF 00 00 [FIXUP]
         jmp     L_105B                          ; E9 8F 00
+;   [conditional branch target (if/else)] L_0FCC
 L_0FCC:
         les     bx, ptr [bp - 0x18]             ; C4 5E E8
         mov     ax, word ptr es:[bx + 4]        ; 26 8B 47 04
@@ -1857,17 +2194,26 @@ L_0FCC:
         jne     L_1004                          ; 75 05
         mov     ax, 8                           ; B8 08 00
         jmp     L_1007                          ; EB 03
+;   [conditional branch target (if/else)] L_1004
 L_1004:
         mov     ax, 6                           ; B8 06 00
+;   [unconditional branch target] L_1007
 L_1007:
         shl     ax, 1                           ; D1 E0
         add     word ptr [bp - 0x18], ax        ; 01 46 E8
         push    word ptr [bp - 0x1e]            ; FF 76 E2
+        ;   ^ arg nWidth
         push    word ptr [bp - 2]               ; FF 76 FE
+        ;   ^ arg nHeight
         push    word ptr [bp - 0x14]            ; FF 76 EC
+        ;   ^ arg nPlanes
         push    word ptr [bp - 0xa]             ; FF 76 F6
+        ;   ^ arg nBitCount
         push    word ptr [bp - 0x16]            ; FF 76 EA
+        ;   ^ arg lpBits (high/segment)
         push    word ptr [bp - 0x18]            ; FF 76 E8
+        ;   ^ arg lpBits (low/offset)
+        ; --> CREATEBITMAP(INT nWidth, INT nHeight, WORD nPlanes, WORD nBitCount, LPVOID lpBits) -> HBITMAP
         call    far GDI.CREATEBITMAP            ; 9A B5 01 00 00 [FIXUP]
         mov     word ptr [bp - 6], ax           ; 89 46 FA
         cmp     word ptr [bp - 0x1a], 3         ; 83 7E E6 03
@@ -1876,36 +2222,49 @@ L_1007:
         push    word ptr [bp - 4]               ; FF 76 FC
         push    word ptr [bp - 8]               ; FF 76 F8
         call    far GDI.SETBITMAPDIMENSION      ; 9A FF FF 00 00 [FIXUP]
+;   [conditional branch target (if/else)] L_1038
 L_1038:
         push    word ptr [bp - 0x1c]            ; FF 76 E4
+        ;   ^ arg hMem
+        ; --> GLOBALUNLOCK(HANDLE hMem) -> BOOL
         call    far KERNEL.GLOBALUNLOCK         ; 9A A3 0F 00 00 [FIXUP]
         push    word ptr [bp - 0x1c]            ; FF 76 E4
+        ;   ^ arg hMem
+        ; --> GLOBALFREE(HANDLE hMem) -> HANDLE
         call    far KERNEL.GLOBALFREE           ; 9A FF FF 00 00 [FIXUP]
         mov     word ptr [0x20], 0              ; C7 06 20 00 00 00
         mov     word ptr [0x24], 1              ; C7 06 24 00 01 00
         mov     ax, 2                           ; B8 02 00
         push    ax                              ; 50
         jmp     L_0FBC                          ; E9 61 FF
+;   [fall-through exit] L_105B
 L_105B:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_105F -- offset 0x105F -- 29 instr
-; Funcion sin clasificar definitiva (29 instr).
-; tags: calls_kernel, small
-; callers: sub_0C55
-; calls (inter): KERNEL.LOCALALLOC, KERNEL.LOCALFREE
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_105F   offset=0x105F  size=29 instr  segment=seg4.asm
+;
+; Classification (pass8): c_high  (score C=6, ASM=0)
+; Prologue: standard_bp     Epilogue: ret
+;
+; Far API calls:
+;   LOCALALLOC(WORD wFlags, WORD wBytes) -> HANDLE
+;   LOCALFREE(HANDLE hMem) -> HANDLE
+;-------------------------------------------------------------------------
+;   [sub-routine] L_105F
 L_105F:
+        ;   = cProc <2> ; NEAR PASCAL prologue
         push    bp                              ; 55
         mov     bp, sp                          ; 8B EC
         sub     sp, 2                           ; 83 EC 02
         mov     ax, 0x40                        ; B8 40 00
         push    ax                              ; 50
+        ;   ^ arg wFlags
         mov     ax, 0x1a                        ; B8 1A 00
         push    ax                              ; 50
+        ;   ^ arg wBytes
+        ; --> LOCALALLOC(WORD wFlags, WORD wBytes) -> HANDLE
         call    far KERNEL.LOCALALLOC           ; 9A C4 10 00 00 [FIXUP]
         mov     word ptr [bp - 2], ax           ; 89 46 FE
         mov     bx, ax                          ; 8B D8
@@ -1924,26 +2283,35 @@ L_105F:
         push    ax                              ; 50
         call    far _entry_57                   ; 9A F6 10 00 00 [FIXUP]
         push    word ptr [bp - 2]               ; FF 76 FE
+        ;   ^ arg hMem
+        ; --> LOCALFREE(HANDLE hMem) -> HANDLE
         call    far KERNEL.LOCALFREE            ; 9A FE 10 00 00 [FIXUP]
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_10B5 -- offset 0x10B5 -- 30 instr
-; Funcion sin clasificar definitiva (30 instr).
-; tags: calls_kernel, small
-; callers: sub_0C55
-; calls (inter): KERNEL.LOCALALLOC, KERNEL.LOCALFREE
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_10B5   offset=0x10B5  size=30 instr  segment=seg4.asm
+;
+; Classification (pass8): c_high  (score C=6, ASM=0)
+; Prologue: standard_bp     Epilogue: ret
+;
+; Far API calls:
+;   LOCALALLOC(WORD wFlags, WORD wBytes) -> HANDLE
+;   LOCALFREE(HANDLE hMem) -> HANDLE
+;-------------------------------------------------------------------------
+;   [sub-routine] L_10B5
 L_10B5:
+        ;   = cProc <2> ; NEAR PASCAL prologue
         push    bp                              ; 55
         mov     bp, sp                          ; 8B EC
         sub     sp, 2                           ; 83 EC 02
         mov     ax, 0x40                        ; B8 40 00
         push    ax                              ; 50
+        ;   ^ arg wFlags
         mov     ax, 0x1a                        ; B8 1A 00
         push    ax                              ; 50
+        ;   ^ arg wBytes
+        ; --> LOCALALLOC(WORD wFlags, WORD wBytes) -> HANDLE
         call    far KERNEL.LOCALALLOC           ; 9A 4B 11 00 00 [FIXUP]
         mov     word ptr [bp - 2], ax           ; 89 46 FE
         mov     bx, ax                          ; 8B D8
@@ -1961,21 +2329,28 @@ L_10B5:
         push    ax                              ; 50
         call    far _entry_57                   ; 9A 82 11 00 00 [FIXUP]
         push    word ptr [bp - 2]               ; FF 76 FE
+        ;   ^ arg hMem
+        ; --> LOCALFREE(HANDLE hMem) -> HANDLE
         call    far KERNEL.LOCALFREE            ; 9A 8A 11 00 00 [FIXUP]
         mov     word ptr [0x5b2], 0             ; C7 06 B2 05 00 00
         mov     word ptr [0x658], 0             ; C7 06 58 06 00 00
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_1112 -- offset 0x1112 -- 49 instr
-; Funcion mediana (49 instr, 3 calls).
-; tags: calls_kernel, medium
-; callers: sub_0C55
-; calls (inter): KERNEL.FINDATOM, KERNEL.LOCALALLOC, KERNEL.LOCALFREE
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_1112   offset=0x1112  size=49 instr  segment=seg4.asm
+;
+; Classification (pass8): c_high  (score C=6, ASM=0)
+; Prologue: standard_bp     Epilogue: ret
+;
+; Far API calls:
+;   FINDATOM
+;   LOCALALLOC(WORD wFlags, WORD wBytes) -> HANDLE
+;   LOCALFREE(HANDLE hMem) -> HANDLE
+;-------------------------------------------------------------------------
+;   [sub-routine] L_1112
 L_1112:
+        ;   = cProc <2> ; NEAR PASCAL prologue
         push    bp                              ; 55
         mov     bp, sp                          ; 8B EC
         sub     sp, 2                           ; 83 EC 02
@@ -1995,8 +2370,11 @@ L_1112:
         mov     word ptr [0x4ee], ax            ; A3 EE 04
         mov     ax, 0x40                        ; B8 40 00
         push    ax                              ; 50
+        ;   ^ arg wFlags
         mov     ax, 0x1a                        ; B8 1A 00
         push    ax                              ; 50
+        ;   ^ arg wBytes
+        ; --> LOCALALLOC(WORD wFlags, WORD wBytes) -> HANDLE
         call    far KERNEL.LOCALALLOC           ; 9A A0 0C 00 00 [FIXUP]
         mov     word ptr [bp - 2], ax           ; 89 46 FE
         mov     bx, ax                          ; 8B D8
@@ -2015,6 +2393,8 @@ L_1112:
         push    ax                              ; 50
         call    far _entry_57                   ; 9A D4 0C 00 00 [FIXUP]
         push    word ptr [bp - 2]               ; FF 76 FE
+        ;   ^ arg hMem
+        ; --> LOCALFREE(HANDLE hMem) -> HANDLE
         call    far KERNEL.LOCALFREE            ; 9A DA 0C 00 00 [FIXUP]
         mov     ax, 0xc09                       ; B8 09 0C
         mov     dx, OFFSET _SEG1_0C09           ; BA FF FF [FIXUP]

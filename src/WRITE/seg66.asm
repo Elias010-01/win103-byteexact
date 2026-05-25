@@ -1,3 +1,17 @@
+; ======================================================================
+; WRITE / seg66.asm   (segment 66 of WRITE)
+; ----------------------------------------------------------------------
+; Functions discovered (pass1b):         0
+; Total instructions:                    0
+; 
+; Classification (pass8):
+;   C-origin (high+medium):              0
+;   ASM-origin (high+medium):            0
+;   Unclear:                             0
+;   Tiny / unclassified:                 0
+; 
+; Far API calls in this segment:     0 (0 unique)
+; ======================================================================
 ; AUTO-GENERATED from original WRITE segment 66
 ; segment_size=205 bytes, flags=0xf130
 ; mode: humano legible - instrucciones x86 + bytes raw en comentario (autoritativo)
@@ -53,11 +67,13 @@ WRITE_TEXT SEGMENT BYTE PUBLIC 'CODE'
         jg      L_0062                          ; 7F 05
         cmp     word ptr [bx + 2], ax           ; 39 47 02
         jbe     L_00C3                          ; 76 61
+;   [conditional branch target (if/else)] L_0062
 L_0062:
         mov     ax, word ptr [bp - 0xe]         ; 8B 46 F2
         mov     word ptr [bp - 8], ax           ; 89 46 F8
         mov     word ptr [bp - 0xc], 0          ; C7 46 F4 00 00
         jmp     L_008B                          ; EB 1C
+;   [loop start] L_006F
 L_006F:
         mov     bx, word ptr [bp - 8]           ; 8B 5E F8
         mov     ax, word ptr [bp + 8]           ; 8B 46 08
@@ -67,14 +83,17 @@ L_006F:
         jl      L_0084                          ; 7C 05
         cmp     word ptr [bx + 2], ax           ; 39 47 02
         ja      L_0096                          ; 77 12
+;   [conditional branch target (if/else)] L_0084
 L_0084:
         add     word ptr [bp - 8], 6            ; 83 46 F8 06
         inc     word ptr [bp - 0xc]             ; FF 46 F4
+;   [unconditional branch target] L_008B
 L_008B:
         mov     ax, word ptr [bp - 4]           ; 8B 46 FC
         add     ax, word ptr [bp - 0xc]         ; 03 46 F4
         cmp     ax, word ptr [bp - 0xa]         ; 3B 46 F6
         jl      L_006F                          ; 7C D9
+;   [conditional branch target (if/else)] L_0096
 L_0096:
         cmp     word ptr [bp - 0xc], 0          ; 83 7E F4 00
         je      L_00C3                          ; 74 27
@@ -84,6 +103,7 @@ L_0096:
         sub     word ptr [bp - 0xa], ax         ; 29 46 F6
         mov     ax, word ptr [bp - 0xa]         ; 8B 46 F6
         sub     ax, word ptr [bp - 4]           ; 2B 46 FC
+        ; constant WM_MOVE
         mov     cx, 3                           ; B9 03 00
         imul    cx                              ; F7 E9
         push    ax                              ; 50
@@ -92,6 +112,7 @@ L_0096:
         mov     bx, word ptr [bx]               ; 8B 1F
         mov     ax, word ptr [bp - 0xa]         ; 8B 46 F6
         mov     word ptr [bx], ax               ; 89 07
+;   [conditional branch target (if/else)] L_00C3
 L_00C3:
         sub     bp, 2                           ; 83 ED 02
         mov     sp, bp                          ; 8B E5

@@ -1,3 +1,17 @@
+; ======================================================================
+; SYSTEM / seg1.asm   (segment 1 of SYSTEM)
+; ----------------------------------------------------------------------
+; Functions discovered (pass1b):         6
+; Total instructions:                  361
+; 
+; Classification (pass8):
+;   C-origin (high+medium):              2
+;   ASM-origin (high+medium):            3
+;   Unclear:                             1
+;   Tiny / unclassified:                 0
+; 
+; Far API calls in this segment:     0 (0 unique)
+; ======================================================================
 ; AUTO-GENERATED from original SYSTEM segment 1
 ; segment_size=1109 bytes, flags=0x0140
 ; mode: humano legible - instrucciones x86 + bytes raw en comentario (autoritativo)
@@ -25,10 +39,12 @@ SYSTEM_TEXT SEGMENT BYTE PUBLIC 'CODE'
         mov     dx, 0                           ; BA 00 00
         mov     ax, 0xd68d                      ; B8 8D D6
         jmp     L_0182                          ; E9 61 01
+;   [conditional branch target (if/else)] L_0021
 L_0021:
         dec     ax                              ; 48
         je      L_0027                          ; 74 03
         jmp     L_00CC                          ; E9 A5 00
+;   [conditional branch target (if/else)] L_0027
 L_0027:
         int     0x11                            ; CD 11
         mov     cl, 6                           ; B1 06
@@ -43,27 +59,32 @@ L_0027:
         je      L_0063                          ; 74 22
         push    ax                              ; 50
         mov     dx, bx                          ; 8B D3
+        ; constant WM_GETTEXTLENGTH
         mov     ah, 0xe                         ; B4 0E
         call    far KERNEL.NOHOOKDOSCALL        ; 9A 36 00 00 00 [FIXUP]
         mov     ah, 0x19                        ; B4 19
         call    far KERNEL.NOHOOKDOSCALL        ; 9A 47 00 00 00 [FIXUP]
         mov     bh, al                          ; 8A F8
         pop     dx                              ; 5A
+        ; constant WM_GETTEXTLENGTH
         mov     ah, 0xe                         ; B4 0E
         call    far KERNEL.NOHOOKDOSCALL        ; 9A 4E 00 00 00 [FIXUP]
         cmp     bh, bl                          ; 3A FB
         je      L_0063                          ; 74 03
         jmp     L_017E                          ; E9 1B 01
+;   [conditional branch target (if/else)] L_0063
 L_0063:
         mov     ax, 0x4408                      ; B8 08 44
         mov     bx, word ptr [bp + 6]           ; 8B 5E 06
         inc     bx                              ; 43
         call    far KERNEL.NOHOOKDOSCALL        ; 9A 58 00 00 00 [FIXUP]
         jb      L_00A6                          ; 72 35
+        ; constant WM_MOVE
         mov     cx, 3                           ; B9 03 00
         test    ax, 1                           ; A9 01 00
         jne     L_007C                          ; 75 03
         mov     cx, 2                           ; B9 02 00
+;   [loop start (also forward branch)] L_007C
 L_007C:
         mov     ax, 0x440e                      ; B8 0E 44
         mov     bx, word ptr [bp + 6]           ; 8B 5E 06
@@ -76,39 +97,49 @@ L_007C:
         je      L_00A0                          ; 74 0E
         xor     ah, ah                          ; 32 E4
         mov     dx, ax                          ; 8B D0
+;   [loop start] L_0096
 L_0096:
         xor     ax, ax                          ; 33 C0
         cmp     cx, 2                           ; 83 F9 02
         je      L_00A3                          ; 74 06
         inc     ax                              ; 40
         jmp     L_00A3                          ; EB 03
+;   [loop start (also forward branch)] L_00A0
 L_00A0:
         xchg    cx, ax                          ; 91
         xor     dx, dx                          ; 33 D2
+;   [branch target] L_00A3
 L_00A3:
         jmp     L_0182                          ; E9 DC 00
+;   [conditional branch target (if/else)] L_00A6
 L_00A6:
         mov     ax, word ptr [bp - 4]           ; 8B 46 FC
         or      ax, ax                          ; 0B C0
         jne     L_00AE                          ; 75 01
         inc     ax                              ; 40
+;   [conditional branch target (if/else)] L_00AE
 L_00AE:
         cmp     ax, word ptr [bp + 6]           ; 3B 46 06
+        ; constant WM_MOVE
         mov     cx, 3                           ; B9 03 00
         jb      L_007C                          ; 72 C6
         mov     cx, 2                           ; B9 02 00
         jmp     L_007C                          ; EB C1
+;   [conditional branch target (if/else)] L_00BB
 L_00BB:
         cmp     word ptr [bp + 6], 1            ; 83 7E 06 01
         jne     L_00A0                          ; 75 DF
         cmp     word ptr [bp - 4], 0            ; 83 7E FC 00
         jne     L_00A0                          ; 75 D9
+        ; constant WM_CREATE
         mov     dx, 1                           ; BA 01 00
         jmp     L_0096                          ; EB CA
+;   [unconditional branch target] L_00CC
 L_00CC:
         dec     ax                              ; 48
         je      L_00D2                          ; 74 03
         jmp     L_017E                          ; E9 AC 00
+;   [conditional branch target (if/else)] L_00D2
 L_00D2:
         cmp     word ptr cs:[5], 0              ; 2E 83 3E 05 00 00
         jne     L_00E4                          ; 75 0A
@@ -116,6 +147,7 @@ L_00D2:
         int     0x21                            ; CD 21
         xchg    al, ah                          ; 86 E0
         mov     word ptr cs:[5], ax             ; 2E A3 05 00
+;   [conditional branch target (if/else)] L_00E4
 L_00E4:
         cmp     word ptr [bp + 6], 0            ; 83 7E 06 00
         jne     L_0157                          ; 75 6D
@@ -135,12 +167,14 @@ L_00E4:
         cmp     word ptr es:[bx + 1], 0xa0d     ; 26 81 7F 01 0D 0A
         je      L_012C                          ; 74 07
         mov     word ptr cs:[7], 0x1670         ; 2E C7 06 07 00 70 16
+;   [conditional branch target (if/else)] L_012C
 L_012C:
         xor     ax, ax                          ; 33 C0
         mov     es, ax                          ; 8E C0
         mov     bx, word ptr cs:[7]             ; 2E 8B 1E 07 00
         xchg    byte ptr es:[bx], al            ; 26 86 07
         mov     byte ptr cs:[0], al             ; 2E A2 00 00
+;   [conditional branch target (if/else)] L_013C
 L_013C:
         cmp     word ptr cs:[5], 0x300          ; 2E 81 3E 05 00 00 03
         jne     L_017E                          ; 75 39
@@ -150,6 +184,7 @@ L_013C:
         jne     L_017E                          ; 75 2C
         call    L_018D                          ; E8 38 00
         jmp     L_017E                          ; EB 27
+;   [conditional branch target (if/else)] L_0157
 L_0157:
         cmp     word ptr cs:[5], 0x314          ; 2E 81 3E 05 00 14 03
         jae     L_0170                          ; 73 10
@@ -158,15 +193,18 @@ L_0157:
         mov     bx, word ptr cs:[7]             ; 2E 8B 1E 07 00
         mov     al, byte ptr cs:[0]             ; 2E A0 00 00
         mov     byte ptr es:[bx], al            ; 26 88 07
+;   [conditional branch target (if/else)] L_0170
 L_0170:
         lds     dx, ptr cs:[1]                  ; 2E C5 16 01 00
         mov     cx, ds                          ; 8C D9
         jcxz    L_017E                          ; E3 05
         mov     ax, 0x2513                      ; B8 13 25
         int     0x21                            ; CD 21
+;   [branch target] L_017E
 L_017E:
         xor     dx, dx                          ; 33 D2
         xor     ax, ax                          ; 33 C0
+;   [unconditional branch target] L_0182
 L_0182:
         sub     bp, 2                           ; 83 ED 02
         mov     sp, bp                          ; 8B E5
@@ -174,18 +212,13 @@ L_0182:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    4                               ; CA 04 00
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_018D -- offset 0x018D -- 262 instr
-; Interrupt Service Routine (262 instrucciones, posible manejador de INT).
-; tags: int_21, isr, string_op
-;----------------------------------------------------------------------
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_018D -- offset 0x018D -- 262 instr
-; Interrupt Service Routine (262 instrucciones, posible manejador de INT).
-; tags: int_21, isr, string_op
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_018D   offset=0x018D  size=262 instr  segment=seg1.asm
+;
+; Classification (pass8): asm_high  (score C=0, ASM=12)
+; Prologue: none     Epilogue: iret   (INTERRUPT HANDLER)
+;-------------------------------------------------------------------------
+;   [sub-routine] L_018D
 L_018D:
         mov     ax, 0x3513                      ; B8 13 35
         int     0x21                            ; CD 21
@@ -209,6 +242,7 @@ L_018D:
         lcall   cs:[1]                          ; 2E FF 1E 01 00
         mov     byte ptr cs:[0x2e3], 1          ; 2E C6 06 E3 02 01
         retf    2                               ; CA 02 00
+;   [conditional branch target (if/else)] L_01CC
 L_01CC:
         ljmp    cs:[1]                          ; 2E FF 2E 01 00
         add     bh, bh                          ; 00 FF
@@ -382,6 +416,7 @@ L_01CC:
         add     byte ptr [bx + si], al          ; 00 00
         add     byte ptr [bx + si], al          ; 00 00
         add     word ptr [bx + si], ax          ; 01 00
+;   [loop start] L_02E5
 L_02E5:
         ljmp    cs:[0x2d6]                      ; 2E FF 2E D6 02
         cmp     byte ptr cs:[0x2e3], 0          ; 2E 80 3E E3 02 00
@@ -402,6 +437,7 @@ L_02E5:
         mov     al, 0xb                         ; B0 0B
         out     0x20, al                        ; E6 20
         jmp     L_031D                          ; EB 00
+;   [unconditional branch target] L_031D
 L_031D:
         in      al, 0x20                        ; E4 20
         or      al, al                          ; 0A C0
@@ -416,6 +452,7 @@ L_031D:
         push    di                              ; 57
         xor     bp, bp                          ; 33 ED
         lds     si, ptr cs:[0x2da]              ; 2E C5 36 DA 02
+;   [loop start] L_0332
 L_0332:
         cld                                     ; FC
         lodsw   ax, word ptr [si]               ; AD
@@ -426,6 +463,7 @@ L_0332:
         je      L_035A                          ; 74 1F
         add     si, 4                           ; 83 C6 04
         jmp     L_0332                          ; EB F2
+;   [conditional branch target (if/else)] L_0340
 L_0340:
         dec     ax                              ; 48
         je      L_034C                          ; 74 09
@@ -433,6 +471,7 @@ L_0340:
         je      L_034C                          ; 74 05
         add     si, 6                           ; 83 C6 06
         jmp     L_0332                          ; EB E6
+;   [conditional branch target (if/else)] L_034C
 L_034C:
         mov     word ptr [si], ax               ; 89 04
         inc     si                              ; 46
@@ -441,6 +480,7 @@ L_034C:
         lcall   [si]                            ; FF 1C
         add     si, 4                           ; 83 C6 04
         jmp     L_0332                          ; EB D8
+;   [conditional branch target (if/else)] L_035A
 L_035A:
         pop     di                              ; 5F
         pop     si                              ; 5E
@@ -450,25 +490,14 @@ L_035A:
         pop     es                              ; 07
         pop     ds                              ; 1F
         pop     bp                              ; 5D
+;   [conditional branch target (if/else)] L_0362
 L_0362:
         pop     ax                              ; 58
         cli                                     ; FA
         dec     byte ptr cs:[0x2e2]             ; 2E FE 0E E2 02
         mov     ss, word ptr cs:[0x2e0]         ; 2E 8E 16 E0 02
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; ENABLESYSTEMTIMERS -- 17 instr
-; Llama a servicios DOS via INT 21h (17 instr).
-; tags: dos_caller, far, int_21
-;----------------------------------------------------------------------
         mov     sp, word ptr cs:[0x2de]         ; 2E 8B 26 DE 02
         iret                                    ; CF
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; ENABLESYSTEMTIMERS -- 17 instr
-; Llama a servicios DOS via INT 21h (17 instr).
-; tags: dos_caller, far, int_21
-;----------------------------------------------------------------------
 
 ;-----------------------------------------------------------------------
 ; ENABLESYSTEMTIMERS  (offset 0x0374, size 44 bytes)
@@ -486,27 +515,14 @@ ENABLESYSTEMTIMERS PROC FAR
         push    ds                              ; 1E
         push    cs                              ; 0E
         pop     ds                              ; 1F
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; DISABLESYSTEMTIMERS -- 10 instr
-; Llama a servicios DOS via INT 21h (10 instr).
-; tags: dos_caller, far, int_21
-;----------------------------------------------------------------------
         mov     dx, 0x2ea                       ; BA EA 02
         int     0x21                            ; CD 21
         pop     ds                              ; 1F
         mov     byte ptr cs:[0x2e2], 1          ; 2E C6 06 E2 02 01
+;   [error/early exit] L_039F
 L_039F:
         retf                                    ; CB
 ENABLESYSTEMTIMERS ENDP
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; CREATESYSTEMTIMER -- 35 instr
-; Constructor: crea systemtimer.
-; tags: far, medium
-;----------------------------------------------------------------------
-; tags: dos_caller, far, int_21
-;----------------------------------------------------------------------
 
 
 ;-----------------------------------------------------------------------
@@ -522,15 +538,10 @@ DISABLESYSTEMTIMERS PROC FAR
         lds     dx, ptr cs:[0x2d6]              ; 2E C5 16 D6 02
         int     0x21                            ; CD 21
         pop     ds                              ; 1F
+;   [error/early exit] L_03BB
 L_03BB:
         retf                                    ; CB
 DISABLESYSTEMTIMERS ENDP
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; CREATESYSTEMTIMER -- 35 instr
-; Constructor: crea systemtimer.
-; tags: far, medium
-;----------------------------------------------------------------------
 
 
 ;-----------------------------------------------------------------------
@@ -549,6 +560,7 @@ CREATESYSTEMTIMER PROC FAR
         mul     cx                              ; F7 E1
         mov     cx, 0xd68d                      ; B9 8D D6
         div     cx                              ; F7 F1
+;   [loop start (also forward branch)] L_03D7
 L_03D7:
         cmp     word ptr [bx], -1               ; 83 3F FF
         jne     L_03F6                          ; 75 1A
@@ -558,21 +570,18 @@ L_03D7:
         mov     dx, word ptr [bp + 8]           ; 8B 56 08
         mov     word ptr [bx + 4], cx           ; 89 4F 04
         mov     word ptr [bx + 6], dx           ; 89 57 06
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; KILLSYSTEMTIMER -- 34 instr
-; Iterador con instrucciones de string (movsb/scasb/...) (34 instr).
-; tags: far, iterator, string_op
-;----------------------------------------------------------------------
         mov     word ptr [bx + 2], ax           ; 89 47 02
         mov     word ptr [bx], ax               ; 89 07
         jmp     L_03FD                          ; EB 08
         nop                                     ; 90
+;   [conditional branch target (if/else)] L_03F6
 L_03F6:
         add     bx, 8                           ; 83 C3 08
         jmp     L_03D7                          ; EB DC
+;   [conditional branch target (if/else)] L_03FB
 L_03FB:
         xor     bx, bx                          ; 33 DB
+;   [unconditional branch target] L_03FD
 L_03FD:
         mov     ax, bx                          ; 8B C3
         mov     cx, bx                          ; 8B CB
@@ -583,12 +592,6 @@ L_03FD:
         dec     bp                              ; 4D
         retf    6                               ; CA 06 00
 CREATESYSTEMTIMER ENDP
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; KILLSYSTEMTIMER -- 34 instr
-; Iterador con instrucciones de string (movsb/scasb/...) (34 instr).
-; tags: far, iterator, string_op
-;----------------------------------------------------------------------
 
 
 ;-----------------------------------------------------------------------
@@ -602,6 +605,7 @@ KILLSYSTEMTIMER PROC FAR
         push    di                              ; 57
         les     di, ptr cs:[0x2da]              ; 2E C4 3E DA 02
         mov     ax, word ptr [bp + 6]           ; 8B 46 06
+;   [loop start] L_041A
 L_041A:
         cmp     word ptr es:[di], -1            ; 26 83 3D FF
         jne     L_042A                          ; 75 0A
@@ -609,12 +613,7 @@ L_041A:
         jne     L_043B                          ; 75 14
         jmp     L_0440                          ; EB 17
         nop                                     ; 90
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; INQUIRELONGINTS -- 3 instr
-; Stub trivial (3 instrucciones, sin logica significativa).
-; tags: far, trivial_stub
-;----------------------------------------------------------------------
+;   [conditional branch target (if/else)] L_042A
 L_042A:
         cmp     di, ax                          ; 3B F8
         jne     L_043B                          ; 75 0D
@@ -627,9 +626,11 @@ L_042A:
         stosw   word ptr es:[di], ax            ; AB
         jmp     L_0440                          ; EB 06
         nop                                     ; 90
+;   [conditional branch target (if/else)] L_043B
 L_043B:
         add     di, 8                           ; 83 C7 08
         jmp     L_041A                          ; EB DA
+;   [unconditional branch target] L_0440
 L_0440:
         mov     cx, ax                          ; 8B C8
         pop     di                              ; 5F
@@ -640,12 +641,6 @@ L_0440:
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
 KILLSYSTEMTIMER ENDP
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; INQUIRELONGINTS -- 3 instr
-; Stub trivial (3 instrucciones, sin logica significativa).
-; tags: far, trivial_stub
-;----------------------------------------------------------------------
 
 
 ;-----------------------------------------------------------------------

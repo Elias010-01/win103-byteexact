@@ -1,0 +1,2665 @@
+{
+  "pass": "pass10_annotate_api_calls",
+  "dry_run": false,
+  "modules_processed": 69,
+  "total_annotations_added": 6164,
+  "total_files_modified": 222,
+  "backup_dir": "C:\\Users\\Elias\\CascadeProjects\\modern-personality-agent\\backups\\pass10-2026-05-25-142921",
+  "results": [
+    {
+      "module": "ATTDC",
+      "files_modified": 0,
+      "total_annotations_added": 0,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        },
+        {
+          "file": "seg2.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "ATTDEB",
+      "files_modified": 0,
+      "total_annotations_added": 0,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        },
+        {
+          "file": "seg2.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "ATTKBD",
+      "files_modified": 0,
+      "total_annotations_added": 0,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        },
+        {
+          "file": "seg2.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        },
+        {
+          "file": "seg3.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "ATTMOUSE",
+      "files_modified": 1,
+      "total_annotations_added": 1,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "annotations_would_add": 1,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg2.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "CALC",
+      "files_modified": 1,
+      "total_annotations_added": 134,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "annotations_would_add": 134,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg2.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "CALENDAR",
+      "files_modified": 8,
+      "total_annotations_added": 286,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "annotations_would_add": 17,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg10.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        },
+        {
+          "file": "seg2.asm",
+          "annotations_would_add": 23,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg3.asm",
+          "annotations_would_add": 235,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg4.asm",
+          "annotations_would_add": 4,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg5.asm",
+          "annotations_would_add": 1,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg6.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        },
+        {
+          "file": "seg7.asm",
+          "annotations_would_add": 1,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg8.asm",
+          "annotations_would_add": 1,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg9.asm",
+          "annotations_would_add": 4,
+          "already_annotated": 0,
+          "modified": true
+        }
+      ]
+    },
+    {
+      "module": "CARDFILE",
+      "files_modified": 6,
+      "total_annotations_added": 538,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "annotations_would_add": 19,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg2.asm",
+          "annotations_would_add": 38,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg3.asm",
+          "annotations_would_add": 101,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg4.asm",
+          "annotations_would_add": 195,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg5.asm",
+          "annotations_would_add": 81,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg6.asm",
+          "annotations_would_add": 104,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg7.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "CGA",
+      "files_modified": 0,
+      "total_annotations_added": 0,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        },
+        {
+          "file": "seg2.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "CITOH",
+      "files_modified": 2,
+      "total_annotations_added": 34,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "annotations_would_add": 10,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg2.asm",
+          "annotations_would_add": 24,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg3.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "CLIPBRD",
+      "files_modified": 1,
+      "total_annotations_added": 89,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "annotations_would_add": 89,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg2.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "CLOCK",
+      "files_modified": 0,
+      "total_annotations_added": 0,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 68,
+          "modified": false
+        },
+        {
+          "file": "seg2.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "COMM",
+      "files_modified": 0,
+      "total_annotations_added": 0,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        },
+        {
+          "file": "seg2.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "CONTROL",
+      "files_modified": 9,
+      "total_annotations_added": 702,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "annotations_would_add": 104,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg10.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        },
+        {
+          "file": "seg2.asm",
+          "annotations_would_add": 51,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg3.asm",
+          "annotations_would_add": 10,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg4.asm",
+          "annotations_would_add": 225,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg5.asm",
+          "annotations_would_add": 23,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg6.asm",
+          "annotations_would_add": 128,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg7.asm",
+          "annotations_would_add": 94,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg8.asm",
+          "annotations_would_add": 52,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg9.asm",
+          "annotations_would_add": 15,
+          "already_annotated": 0,
+          "modified": true
+        }
+      ]
+    },
+    {
+      "module": "DENMARK",
+      "files_modified": 0,
+      "total_annotations_added": 0,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        },
+        {
+          "file": "seg2.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        },
+        {
+          "file": "seg3.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "EGAHIBW",
+      "files_modified": 0,
+      "total_annotations_added": 0,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        },
+        {
+          "file": "seg2.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "EGAHIRES",
+      "files_modified": 0,
+      "total_annotations_added": 0,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        },
+        {
+          "file": "seg2.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "EGALORES",
+      "files_modified": 0,
+      "total_annotations_added": 0,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        },
+        {
+          "file": "seg2.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "EGAMONO",
+      "files_modified": 0,
+      "total_annotations_added": 0,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        },
+        {
+          "file": "seg2.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "EPSON",
+      "files_modified": 2,
+      "total_annotations_added": 32,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "annotations_would_add": 10,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg2.asm",
+          "annotations_would_add": 22,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg3.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "EPSONMX",
+      "files_modified": 2,
+      "total_annotations_added": 33,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "annotations_would_add": 19,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg2.asm",
+          "annotations_would_add": 14,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg3.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "FRANCE",
+      "files_modified": 0,
+      "total_annotations_added": 0,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        },
+        {
+          "file": "seg2.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        },
+        {
+          "file": "seg3.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "FTG",
+      "files_modified": 0,
+      "total_annotations_added": 0,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        },
+        {
+          "file": "seg2.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "GDI",
+      "files_modified": 22,
+      "total_annotations_added": 400,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "annotations_would_add": 65,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg10.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        },
+        {
+          "file": "seg11.asm",
+          "annotations_would_add": 4,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg12.asm",
+          "annotations_would_add": 1,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg13.asm",
+          "annotations_would_add": 77,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg14.asm",
+          "annotations_would_add": 2,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg15.asm",
+          "annotations_would_add": 1,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg16.asm",
+          "annotations_would_add": 4,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg17.asm",
+          "annotations_would_add": 2,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg18.asm",
+          "annotations_would_add": 3,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg19.asm",
+          "annotations_would_add": 3,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg2.asm",
+          "annotations_would_add": 4,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg20.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        },
+        {
+          "file": "seg21.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        },
+        {
+          "file": "seg22.asm",
+          "annotations_would_add": 5,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg23.asm",
+          "annotations_would_add": 12,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg24.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        },
+        {
+          "file": "seg25.asm",
+          "annotations_would_add": 61,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg26.asm",
+          "annotations_would_add": 23,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg27.asm",
+          "annotations_would_add": 3,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg28.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        },
+        {
+          "file": "seg29.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        },
+        {
+          "file": "seg3.asm",
+          "annotations_would_add": 12,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg30.asm",
+          "annotations_would_add": 2,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg31.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        },
+        {
+          "file": "seg4.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        },
+        {
+          "file": "seg5.asm",
+          "annotations_would_add": 43,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg6.asm",
+          "annotations_would_add": 53,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg7.asm",
+          "annotations_would_add": 11,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg8.asm",
+          "annotations_would_add": 9,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg9.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "GENIUS",
+      "files_modified": 0,
+      "total_annotations_added": 0,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        },
+        {
+          "file": "seg2.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "GERMANY",
+      "files_modified": 0,
+      "total_annotations_added": 0,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        },
+        {
+          "file": "seg2.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        },
+        {
+          "file": "seg3.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "HERCULES",
+      "files_modified": 0,
+      "total_annotations_added": 0,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        },
+        {
+          "file": "seg2.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "HP7470A",
+      "files_modified": 1,
+      "total_annotations_added": 14,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "annotations_would_add": 14,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg2.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "HP7475A",
+      "files_modified": 1,
+      "total_annotations_added": 14,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "annotations_would_add": 14,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg2.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "HP7550A",
+      "files_modified": 1,
+      "total_annotations_added": 16,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "annotations_would_add": 16,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg2.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "HPLASER",
+      "files_modified": 1,
+      "total_annotations_added": 23,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "annotations_would_add": 23,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg2.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "HPLASERP",
+      "files_modified": 1,
+      "total_annotations_added": 23,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "annotations_would_add": 23,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg2.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "IBMGRX",
+      "files_modified": 2,
+      "total_annotations_added": 33,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "annotations_would_add": 19,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg2.asm",
+          "annotations_would_add": 14,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg3.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "ITALY",
+      "files_modified": 0,
+      "total_annotations_added": 0,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        },
+        {
+          "file": "seg2.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        },
+        {
+          "file": "seg3.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "JOYMOUSE",
+      "files_modified": 0,
+      "total_annotations_added": 0,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        },
+        {
+          "file": "seg2.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "KERNEL",
+      "files_modified": 0,
+      "total_annotations_added": 0,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "LMOUSE",
+      "files_modified": 0,
+      "total_annotations_added": 0,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        },
+        {
+          "file": "seg2.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "LPC",
+      "files_modified": 0,
+      "total_annotations_added": 0,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        },
+        {
+          "file": "seg2.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "LQ1500",
+      "files_modified": 2,
+      "total_annotations_added": 32,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "annotations_would_add": 10,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg2.asm",
+          "annotations_would_add": 22,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg3.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "MOUSE",
+      "files_modified": 0,
+      "total_annotations_added": 0,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        },
+        {
+          "file": "seg2.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        },
+        {
+          "file": "seg3.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "MSDOS",
+      "files_modified": 4,
+      "total_annotations_added": 381,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "annotations_would_add": 5,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg2.asm",
+          "annotations_would_add": 41,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg3.asm",
+          "annotations_would_add": 147,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg4.asm",
+          "annotations_would_add": 188,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg5.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "MSDOSD",
+      "files_modified": 1,
+      "total_annotations_added": 12,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "annotations_would_add": 12,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg2.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "MSMOUSE1",
+      "files_modified": 1,
+      "total_annotations_added": 1,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "annotations_would_add": 1,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg2.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "MSMOUSE2",
+      "files_modified": 1,
+      "total_annotations_added": 1,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "annotations_would_add": 1,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg2.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "NEC3550",
+      "files_modified": 1,
+      "total_annotations_added": 24,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "annotations_would_add": 24,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg2.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "NECP2",
+      "files_modified": 2,
+      "total_annotations_added": 32,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "annotations_would_add": 10,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg2.asm",
+          "annotations_would_add": 22,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg3.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "NOMOUSE",
+      "files_modified": 0,
+      "total_annotations_added": 0,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "NORWAY",
+      "files_modified": 0,
+      "total_annotations_added": 0,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        },
+        {
+          "file": "seg2.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        },
+        {
+          "file": "seg3.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "NOTEPAD",
+      "files_modified": 9,
+      "total_annotations_added": 223,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "annotations_would_add": 49,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg10.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        },
+        {
+          "file": "seg2.asm",
+          "annotations_would_add": 20,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg3.asm",
+          "annotations_would_add": 26,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg4.asm",
+          "annotations_would_add": 51,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg5.asm",
+          "annotations_would_add": 9,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg6.asm",
+          "annotations_would_add": 40,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg7.asm",
+          "annotations_would_add": 23,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg8.asm",
+          "annotations_would_add": 4,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg9.asm",
+          "annotations_would_add": 1,
+          "already_annotated": 0,
+          "modified": true
+        }
+      ]
+    },
+    {
+      "module": "OKI92",
+      "files_modified": 2,
+      "total_annotations_added": 32,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "annotations_would_add": 10,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg2.asm",
+          "annotations_would_add": 22,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg3.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "PAINT",
+      "files_modified": 31,
+      "total_annotations_added": 1060,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "annotations_would_add": 218,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg10.asm",
+          "annotations_would_add": 124,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg11.asm",
+          "annotations_would_add": 38,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg12.asm",
+          "annotations_would_add": 37,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg13.asm",
+          "annotations_would_add": 29,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg14.asm",
+          "annotations_would_add": 3,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg15.asm",
+          "annotations_would_add": 7,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg16.asm",
+          "annotations_would_add": 8,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg17.asm",
+          "annotations_would_add": 10,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg18.asm",
+          "annotations_would_add": 10,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg19.asm",
+          "annotations_would_add": 10,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg2.asm",
+          "annotations_would_add": 18,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg20.asm",
+          "annotations_would_add": 6,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg21.asm",
+          "annotations_would_add": 6,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg22.asm",
+          "annotations_would_add": 7,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg23.asm",
+          "annotations_would_add": 7,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg24.asm",
+          "annotations_would_add": 63,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg25.asm",
+          "annotations_would_add": 4,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg26.asm",
+          "annotations_would_add": 46,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg27.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        },
+        {
+          "file": "seg28.asm",
+          "annotations_would_add": 5,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg29.asm",
+          "annotations_would_add": 14,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg3.asm",
+          "annotations_would_add": 61,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg30.asm",
+          "annotations_would_add": 4,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg31.asm",
+          "annotations_would_add": 75,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg32.asm",
+          "annotations_would_add": 26,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg33.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        },
+        {
+          "file": "seg4.asm",
+          "annotations_would_add": 45,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg5.asm",
+          "annotations_would_add": 28,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg6.asm",
+          "annotations_would_add": 31,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg7.asm",
+          "annotations_would_add": 26,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg8.asm",
+          "annotations_would_add": 45,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg9.asm",
+          "annotations_would_add": 49,
+          "already_annotated": 0,
+          "modified": true
+        }
+      ]
+    },
+    {
+      "module": "PSCRIPT",
+      "files_modified": 2,
+      "total_annotations_added": 22,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "annotations_would_add": 21,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg2.asm",
+          "annotations_would_add": 1,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg3.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        },
+        {
+          "file": "seg4.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "REVERSI",
+      "files_modified": 1,
+      "total_annotations_added": 136,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "annotations_would_add": 136,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg2.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "SETUP",
+      "files_modified": 0,
+      "total_annotations_added": 0,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "SG10",
+      "files_modified": 2,
+      "total_annotations_added": 32,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "annotations_would_add": 10,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg2.asm",
+          "annotations_would_add": 22,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg3.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "SOUND",
+      "files_modified": 2,
+      "total_annotations_added": 9,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "annotations_would_add": 8,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg2.asm",
+          "annotations_would_add": 1,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg3.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "SPAIN",
+      "files_modified": 0,
+      "total_annotations_added": 0,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        },
+        {
+          "file": "seg2.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        },
+        {
+          "file": "seg3.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "SPOOLER",
+      "files_modified": 1,
+      "total_annotations_added": 133,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "annotations_would_add": 133,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg2.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "SWEDEN",
+      "files_modified": 0,
+      "total_annotations_added": 0,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        },
+        {
+          "file": "seg2.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        },
+        {
+          "file": "seg3.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "SYSTEM",
+      "files_modified": 0,
+      "total_annotations_added": 0,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "TERMINAL",
+      "files_modified": 7,
+      "total_annotations_added": 249,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "annotations_would_add": 15,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg2.asm",
+          "annotations_would_add": 142,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg3.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        },
+        {
+          "file": "seg4.asm",
+          "annotations_would_add": 7,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg5.asm",
+          "annotations_would_add": 48,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg6.asm",
+          "annotations_would_add": 10,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg7.asm",
+          "annotations_would_add": 23,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg8.asm",
+          "annotations_would_add": 4,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg9.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "THINKJET",
+      "files_modified": 2,
+      "total_annotations_added": 33,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "annotations_would_add": 10,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg2.asm",
+          "annotations_would_add": 23,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg3.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "TI850",
+      "files_modified": 2,
+      "total_annotations_added": 32,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "annotations_would_add": 18,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg2.asm",
+          "annotations_would_add": 14,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg3.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "TOSH",
+      "files_modified": 2,
+      "total_annotations_added": 32,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "annotations_would_add": 10,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg2.asm",
+          "annotations_would_add": 22,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg3.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "TTY",
+      "files_modified": 1,
+      "total_annotations_added": 10,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "annotations_would_add": 10,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg2.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "UK",
+      "files_modified": 0,
+      "total_annotations_added": 0,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        },
+        {
+          "file": "seg2.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        },
+        {
+          "file": "seg3.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "USA",
+      "files_modified": 0,
+      "total_annotations_added": 0,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        },
+        {
+          "file": "seg2.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        },
+        {
+          "file": "seg3.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "module": "USER",
+      "files_modified": 25,
+      "total_annotations_added": 540,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "annotations_would_add": 148,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg10.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        },
+        {
+          "file": "seg11.asm",
+          "annotations_would_add": 2,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg12.asm",
+          "annotations_would_add": 5,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg13.asm",
+          "annotations_would_add": 1,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg14.asm",
+          "annotations_would_add": 4,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg15.asm",
+          "annotations_would_add": 18,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg16.asm",
+          "annotations_would_add": 8,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg17.asm",
+          "annotations_would_add": 64,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg18.asm",
+          "annotations_would_add": 9,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg19.asm",
+          "annotations_would_add": 1,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg2.asm",
+          "annotations_would_add": 48,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg20.asm",
+          "annotations_would_add": 6,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg21.asm",
+          "annotations_would_add": 4,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg22.asm",
+          "annotations_would_add": 36,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg23.asm",
+          "annotations_would_add": 20,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg24.asm",
+          "annotations_would_add": 3,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg25.asm",
+          "annotations_would_add": 5,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg26.asm",
+          "annotations_would_add": 8,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg27.asm",
+          "annotations_would_add": 5,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg28.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        },
+        {
+          "file": "seg3.asm",
+          "annotations_would_add": 39,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg4.asm",
+          "annotations_would_add": 52,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg5.asm",
+          "annotations_would_add": 24,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg6.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        },
+        {
+          "file": "seg7.asm",
+          "annotations_would_add": 14,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg8.asm",
+          "annotations_would_add": 13,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg9.asm",
+          "annotations_would_add": 3,
+          "already_annotated": 0,
+          "modified": true
+        }
+      ]
+    },
+    {
+      "module": "WRITE",
+      "files_modified": 58,
+      "total_annotations_added": 728,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "annotations_would_add": 12,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg10.asm",
+          "annotations_would_add": 5,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg11.asm",
+          "annotations_would_add": 9,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg12.asm",
+          "annotations_would_add": 2,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg13.asm",
+          "annotations_would_add": 21,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg14.asm",
+          "annotations_would_add": 4,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg15.asm",
+          "annotations_would_add": 3,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg16.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        },
+        {
+          "file": "seg17.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        },
+        {
+          "file": "seg18.asm",
+          "annotations_would_add": 17,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg19.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        },
+        {
+          "file": "seg2.asm",
+          "annotations_would_add": 56,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg20.asm",
+          "annotations_would_add": 13,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg21.asm",
+          "annotations_would_add": 18,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg22.asm",
+          "annotations_would_add": 1,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg23.asm",
+          "annotations_would_add": 17,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg24.asm",
+          "annotations_would_add": 3,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg25.asm",
+          "annotations_would_add": 4,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg26.asm",
+          "annotations_would_add": 6,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg27.asm",
+          "annotations_would_add": 20,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg28.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        },
+        {
+          "file": "seg29.asm",
+          "annotations_would_add": 1,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg3.asm",
+          "annotations_would_add": 5,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg30.asm",
+          "annotations_would_add": 14,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg31.asm",
+          "annotations_would_add": 17,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg32.asm",
+          "annotations_would_add": 9,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg33.asm",
+          "annotations_would_add": 4,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg34.asm",
+          "annotations_would_add": 49,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg35.asm",
+          "annotations_would_add": 39,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg36.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        },
+        {
+          "file": "seg37.asm",
+          "annotations_would_add": 5,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg38.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        },
+        {
+          "file": "seg39.asm",
+          "annotations_would_add": 21,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg4.asm",
+          "annotations_would_add": 6,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg40.asm",
+          "annotations_would_add": 5,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg41.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        },
+        {
+          "file": "seg42.asm",
+          "annotations_would_add": 1,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg43.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        },
+        {
+          "file": "seg44.asm",
+          "annotations_would_add": 4,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg45.asm",
+          "annotations_would_add": 2,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg46.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        },
+        {
+          "file": "seg47.asm",
+          "annotations_would_add": 5,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg48.asm",
+          "annotations_would_add": 19,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg49.asm",
+          "annotations_would_add": 3,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg5.asm",
+          "annotations_would_add": 8,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg50.asm",
+          "annotations_would_add": 3,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg51.asm",
+          "annotations_would_add": 2,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg52.asm",
+          "annotations_would_add": 18,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg53.asm",
+          "annotations_would_add": 28,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg54.asm",
+          "annotations_would_add": 58,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg55.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        },
+        {
+          "file": "seg56.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        },
+        {
+          "file": "seg57.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        },
+        {
+          "file": "seg58.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        },
+        {
+          "file": "seg59.asm",
+          "annotations_would_add": 10,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg6.asm",
+          "annotations_would_add": 20,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg60.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        },
+        {
+          "file": "seg61.asm",
+          "annotations_would_add": 2,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg62.asm",
+          "annotations_would_add": 13,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg63.asm",
+          "annotations_would_add": 47,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg64.asm",
+          "annotations_would_add": 9,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg65.asm",
+          "annotations_would_add": 1,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg66.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        },
+        {
+          "file": "seg67.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        },
+        {
+          "file": "seg68.asm",
+          "annotations_would_add": 1,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg69.asm",
+          "annotations_would_add": 3,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg7.asm",
+          "annotations_would_add": 2,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg70.asm",
+          "annotations_would_add": 2,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg71.asm",
+          "annotations_would_add": 16,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg72.asm",
+          "annotations_would_add": 36,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg73.asm",
+          "annotations_would_add": 5,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg74.asm",
+          "annotations_would_add": 20,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg75.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        },
+        {
+          "file": "seg76.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        },
+        {
+          "file": "seg77.asm",
+          "annotations_would_add": 1,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg78.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        },
+        {
+          "file": "seg79.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        },
+        {
+          "file": "seg8.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        },
+        {
+          "file": "seg9.asm",
+          "annotations_would_add": 3,
+          "already_annotated": 0,
+          "modified": true
+        }
+      ]
+    },
+    {
+      "module": "XER4020",
+      "files_modified": 2,
+      "total_annotations_added": 38,
+      "per_file": [
+        {
+          "file": "seg1.asm",
+          "annotations_would_add": 10,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg2.asm",
+          "annotations_would_add": 28,
+          "already_annotated": 0,
+          "modified": true
+        },
+        {
+          "file": "seg3.asm",
+          "annotations_would_add": 0,
+          "already_annotated": 0,
+          "modified": false
+        }
+      ]
+    }
+  ]
+}

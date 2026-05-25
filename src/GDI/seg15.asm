@@ -1,3 +1,19 @@
+; ======================================================================
+; GDI / seg15.asm   (segment 15 of GDI)
+; ----------------------------------------------------------------------
+; Functions discovered (pass1b):         6
+; Total instructions:                  316
+; 
+; Classification (pass8):
+;   C-origin (high+medium):              5
+;   ASM-origin (high+medium):            0
+;   Unclear:                             1
+;   Tiny / unclassified:                 0
+; 
+; Far API calls in this segment:     1 (1 unique)
+;   Top:
+;        1  LOCALFREE
+; ======================================================================
 ; AUTO-GENERATED from original GDI segment 15
 ; segment_size=692 bytes, flags=0xf130
 ; mode: humano legible - instrucciones x86 + bytes raw en comentario (autoritativo)
@@ -10,13 +26,6 @@
 ; el binario original).
 
 GDI_TEXT SEGMENT BYTE PUBLIC 'CODE'
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; POLYGON -- 45 instr
-; Dibuja poligono.
-; tags: far, medium
-; calls (intra): sub_0054
-;----------------------------------------------------------------------
 
 
 ;-----------------------------------------------------------------------
@@ -39,6 +48,7 @@ POLYGON PROC FAR
         jne     L_001A                          ; 75 04
         sub     ax, ax                          ; 2B C0
         jmp     L_0047                          ; EB 2D
+;   [conditional branch target (if/else)] L_001A
 L_001A:
         mov     bx, si                          ; 8B DE
         mov     bx, word ptr [bx]               ; 8B 1F
@@ -48,6 +58,7 @@ L_001A:
         push    ax                              ; 50
         call    far _SEG1_36B8                  ; 9A 7B 01 00 00 [FIXUP]
         jmp     L_0047                          ; EB 18
+;   [conditional branch target (if/else)] L_002F
 L_002F:
         push    si                              ; 56
         push    word ptr [bp + 0xa]             ; FF 76 0A
@@ -62,6 +73,7 @@ L_002F:
         nop                                     ; 90
         push    cs                              ; 0E
         call    L_0054                          ; E8 0D 00
+;   [unconditional branch target] L_0047
 L_0047:
         pop     si                              ; 5E
         pop     di                              ; 5F
@@ -72,15 +84,17 @@ L_0047:
         dec     bp                              ; 4D
         retf    8                               ; CA 08 00
 POLYGON ENDP
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_0054 -- offset 0x0054 -- 104 instr
-; Dispatcher: tabla de decisiones cmp+jcc (104 instr).
-; tags: calls_kernel, dispatcher, far
-; callers: POLYGON
-; calls (inter): KERNEL.LOCALFREE
-;----------------------------------------------------------------------
 
+;-------------------------------------------------------------------------
+; sub_0054   offset=0x0054  size=104 instr  segment=seg15.asm
+;
+; Classification (pass8): c_high  (score C=7, ASM=0)
+; Prologue: saves_regs     Epilogue: retf_n   (PASCAL FAR, callee cleans args)
+;
+; Far API calls:
+;   LOCALFREE(HANDLE hMem) -> HANDLE
+;-------------------------------------------------------------------------
+;   [sub-routine] L_0054
 L_0054:
         push    ds                              ; 1E
         pop     ax                              ; 58
@@ -96,8 +110,10 @@ L_0054:
         mov     si, word ptr [bp + 0xc]         ; 8B 76 0C
         cmp     si, 2                           ; 83 FE 02
         jge     L_0071                          ; 7D 06
+        ; constant WM_CREATE
         mov     ax, 1                           ; B8 01 00
         jmp     L_0149                          ; E9 D8 00
+;   [conditional branch target (if/else)] L_0071
 L_0071:
         mov     word ptr [bp - 0x12], 0         ; C7 46 EE 00 00
         mov     ax, si                          ; 8B C6
@@ -111,6 +127,7 @@ L_0071:
         jne     L_0091                          ; 75 05
         sub     ax, ax                          ; 2B C0
         jmp     L_0149                          ; E9 B8 00
+;   [conditional branch target (if/else)] L_0091
 L_0091:
         mov     bx, word ptr [bp - 0x1a]        ; 8B 5E E6
         inc     byte ptr [bx + 3]               ; FE 47 03
@@ -139,9 +156,11 @@ L_0091:
         cmp     word ptr es:[bx - 2], ax        ; 26 39 47 FE
         jne     L_00D8                          ; 75 01
         dec     si                              ; 4E
+;   [conditional branch target (if/else)] L_00D8
 L_00D8:
         sub     di, di                          ; 2B FF
         jmp     L_0103                          ; EB 27
+;   [loop start] L_00DC
 L_00DC:
         les     bx, ptr [bp - 0x18]             ; C4 5E E8
         add     word ptr [bp - 0x18], 2         ; 83 46 E8 02
@@ -156,6 +175,7 @@ L_00DC:
         add     word ptr [bp - 0x1e], 2         ; 83 46 E2 02
         mov     word ptr [bx], ax               ; 89 07
         inc     di                              ; 47
+;   [unconditional branch target] L_0103
 L_0103:
         cmp     di, si                          ; 3B FE
         jl      L_00DC                          ; 7C D5
@@ -169,6 +189,7 @@ L_0103:
         push    ax                              ; 50
         push    si                              ; 56
         call    far _SEG1_3308                  ; 9A FF FF 00 00 [FIXUP]
+;   [conditional branch target (if/else)] L_0120
 L_0120:
         mov     bx, word ptr [bp - 0xa]         ; 8B 5E F6
         mov     word ptr [bx], si               ; 89 37
@@ -182,8 +203,11 @@ L_0120:
         mov     bx, word ptr [bp - 0x1a]        ; 8B 5E E6
         dec     byte ptr [bx + 3]               ; FE 4F 03
         push    bx                              ; 53
+        ;   ^ arg hMem
+        ; --> LOCALFREE(HANDLE hMem) -> HANDLE
         call    far KERNEL.LOCALFREE            ; 9A FF FF 00 00 [FIXUP]
         mov     ax, word ptr [bp - 0x12]        ; 8B 46 EE
+;   [unconditional branch target] L_0149
 L_0149:
         pop     si                              ; 5E
         pop     di                              ; 5F
@@ -193,12 +217,6 @@ L_0149:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0xe                             ; CA 0E 00
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; ELLIPSE -- 44 instr
-; Dibuja elipse.
-; tags: far, medium
-;----------------------------------------------------------------------
 
 ;-----------------------------------------------------------------------
 ; ELLIPSE  (offset 0x0156, size 91 bytes)
@@ -218,6 +236,7 @@ ELLIPSE PROC FAR
         jne     L_016C                          ; 75 04
         sub     ax, ax                          ; 2B C0
         jmp     L_01A5                          ; EB 39
+;   [conditional branch target (if/else)] L_016C
 L_016C:
         mov     bx, si                          ; 8B DE
         mov     bx, word ptr [bx]               ; 8B 1F
@@ -227,6 +246,7 @@ L_016C:
         push    ax                              ; 50
         call    far _SEG1_36B8                  ; 9A D6 01 00 00 [FIXUP]
         jmp     L_01A5                          ; EB 24
+;   [conditional branch target (if/else)] L_0181
 L_0181:
         push    si                              ; 56
         push    word ptr [bp + 0xc]             ; FF 76 0C
@@ -243,6 +263,7 @@ L_0181:
         push    ax                              ; 50
         push    ax                              ; 50
         call    far _entry_406                  ; 9A F4 01 00 00 [FIXUP]
+;   [unconditional branch target] L_01A5
 L_01A5:
         pop     si                              ; 5E
         sub     bp, 2                           ; 83 ED 02
@@ -252,12 +273,6 @@ L_01A5:
         dec     bp                              ; 4D
         retf    0xa                             ; CA 0A 00
 ELLIPSE ENDP
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; ROUNDRECT -- 40 instr
-; Funcion mediana (40 instr, 0 calls).
-; tags: far, medium
-;----------------------------------------------------------------------
 
 
 ;-----------------------------------------------------------------------
@@ -278,6 +293,7 @@ ROUNDRECT PROC FAR
         jne     L_01C7                          ; 75 04
         sub     ax, ax                          ; 2B C0
         jmp     L_01F8                          ; EB 31
+;   [conditional branch target (if/else)] L_01C7
 L_01C7:
         mov     bx, si                          ; 8B DE
         mov     bx, word ptr [bx]               ; 8B 1F
@@ -287,6 +303,7 @@ L_01C7:
         push    ax                              ; 50
         call    far _SEG1_36B8                  ; 9A 29 02 00 00 [FIXUP]
         jmp     L_01F8                          ; EB 1C
+;   [conditional branch target (if/else)] L_01DC
 L_01DC:
         push    si                              ; 56
         push    word ptr [bp + 0x10]            ; FF 76 10
@@ -299,6 +316,7 @@ L_01DC:
         push    ax                              ; 50
         push    ax                              ; 50
         call    far _entry_406                  ; 9A FF FF 00 00 [FIXUP]
+;   [unconditional branch target] L_01F8
 L_01F8:
         pop     si                              ; 5E
         sub     bp, 2                           ; 83 ED 02
@@ -308,12 +326,6 @@ L_01F8:
         dec     bp                              ; 4D
         retf    0xe                             ; CA 0E 00
 ROUNDRECT ENDP
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; PIE -- 41 instr
-; Dibuja sector circular.
-; tags: far, medium
-;----------------------------------------------------------------------
 
 
 ;-----------------------------------------------------------------------
@@ -334,6 +346,7 @@ PIE PROC FAR
         jne     L_021A                          ; 75 04
         sub     ax, ax                          ; 2B C0
         jmp     L_0251                          ; EB 37
+;   [conditional branch target (if/else)] L_021A
 L_021A:
         mov     bx, si                          ; 8B DE
         mov     bx, word ptr [bx]               ; 8B 1F
@@ -343,7 +356,9 @@ L_021A:
         push    ax                              ; 50
         call    far _SEG1_36B8                  ; 9A 82 02 00 00 [FIXUP]
         jmp     L_0251                          ; EB 22
+;   [conditional branch target (if/else)] L_022F
 L_022F:
+        ; constant WM_CREATE
         mov     ax, 1                           ; B8 01 00
         push    ax                              ; 50
         push    si                              ; 56
@@ -356,6 +371,7 @@ L_022F:
         push    word ptr [bp + 8]               ; FF 76 08
         push    word ptr [bp + 6]               ; FF 76 06
         call    far _entry_405                  ; 9A A5 02 00 00 [FIXUP]
+;   [unconditional branch target] L_0251
 L_0251:
         pop     si                              ; 5E
         sub     bp, 2                           ; 83 ED 02
@@ -365,12 +381,6 @@ L_0251:
         dec     bp                              ; 4D
         retf    0x12                            ; CA 12 00
 PIE ENDP
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; ARC -- 42 instr
-; Dibuja arco.
-; tags: far, medium
-;----------------------------------------------------------------------
 
 
 ;-----------------------------------------------------------------------
@@ -391,6 +401,7 @@ ARC PROC FAR
         jne     L_0273                          ; 75 04
         sub     ax, ax                          ; 2B C0
         jmp     L_02A9                          ; EB 36
+;   [conditional branch target (if/else)] L_0273
 L_0273:
         mov     bx, si                          ; 8B DE
         mov     bx, word ptr [bx]               ; 8B 1F
@@ -400,6 +411,7 @@ L_0273:
         push    ax                              ; 50
         call    far _SEG1_36B8                  ; 9A FF FF 00 00 [FIXUP]
         jmp     L_02A9                          ; EB 21
+;   [conditional branch target (if/else)] L_0288
 L_0288:
         sub     ax, ax                          ; 2B C0
         push    ax                              ; 50
@@ -413,6 +425,7 @@ L_0288:
         push    word ptr [bp + 8]               ; FF 76 08
         push    word ptr [bp + 6]               ; FF 76 06
         call    far _entry_405                  ; 9A FF FF 00 00 [FIXUP]
+;   [unconditional branch target] L_02A9
 L_02A9:
         pop     si                              ; 5E
         sub     bp, 2                           ; 83 ED 02

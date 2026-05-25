@@ -1,0 +1,2845 @@
+{
+  "module": "CALC",
+  "num_functions": 132,
+  "verdict_counts": {
+    "c_high": 19,
+    "c_medium": 41,
+    "unclear": 28,
+    "asm_medium": 23,
+    "asm_high": 14,
+    "tiny": 7
+  },
+  "c_count": 60,
+  "asm_count": 37,
+  "unclear_count": 28,
+  "tiny_count": 7,
+  "c_ratio_overall": 0.455,
+  "c_ratio_of_classified": 0.619,
+  "expected_c_ratio": 0.95,
+  "expected_confidence": "very_high",
+  "consistency": "under",
+  "functions": [
+    {
+      "name": "sub_0000",
+      "segment_file": "seg1.asm",
+      "offset": 0,
+      "size_bytes": null,
+      "num_instructions": 171,
+      "prologue": "standard_bp",
+      "epilogue": "retf_n",
+      "classification": {
+        "verdict": "c_high",
+        "score_c": 9,
+        "score_asm": 0,
+        "score_diff": 9,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "PASCAL epilogue: retf with arg cleanup [+3 C]",
+          "6 FAR-API calls (heavy API user) [+2 C]",
+          "high mov+push density (compiler-like) [+1 C]"
+        ],
+        "confidence": "high"
+      }
+    },
+    {
+      "name": "sub_019E",
+      "segment_file": "seg1.asm",
+      "offset": 414,
+      "size_bytes": null,
+      "num_instructions": 100,
+      "prologue": "standard_bp",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "c_medium",
+        "score_c": 4,
+        "score_asm": 0,
+        "score_diff": 4,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "ret without args [neutral]",
+          "[bp-N] references in entry/exit (1) [+1 C]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_029F",
+      "segment_file": "seg1.asm",
+      "offset": 671,
+      "size_bytes": null,
+      "num_instructions": 92,
+      "prologue": "standard_bp",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "c_high",
+        "score_c": 6,
+        "score_asm": 0,
+        "score_diff": 6,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "ret without args [neutral]",
+          "[bp+N] references in entry/exit (1) [+1 C]",
+          "3 FAR-API calls (heavy API user) [+2 C]"
+        ],
+        "confidence": "high"
+      }
+    },
+    {
+      "name": "sub_037C",
+      "segment_file": "seg1.asm",
+      "offset": 892,
+      "size_bytes": null,
+      "num_instructions": 8,
+      "prologue": "standard_bp",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "c_medium",
+        "score_c": 4,
+        "score_asm": 0,
+        "score_diff": 4,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "ret without args [neutral]",
+          "1 FAR-API call(s) [+1 C]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_038F",
+      "segment_file": "seg1.asm",
+      "offset": 911,
+      "size_bytes": null,
+      "num_instructions": 46,
+      "prologue": "standard_bp",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "c_high",
+        "score_c": 6,
+        "score_asm": 0,
+        "score_diff": 6,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "ret without args [neutral]",
+          "[bp+N] references in entry/exit (1) [+1 C]",
+          "canonical SI/DI save/restore (1 push / 1 pop) [+2 C]"
+        ],
+        "confidence": "high"
+      }
+    },
+    {
+      "name": "sub_0403",
+      "segment_file": "seg1.asm",
+      "offset": 1027,
+      "size_bytes": null,
+      "num_instructions": 352,
+      "prologue": "standard_bp",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "c_high",
+        "score_c": 6,
+        "score_asm": 0,
+        "score_diff": 6,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "ret without args [neutral]",
+          "15 FAR-API calls (heavy API user) [+2 C]",
+          "high mov+push density (compiler-like) [+1 C]"
+        ],
+        "confidence": "high"
+      }
+    },
+    {
+      "name": "sub_0799",
+      "segment_file": "seg1.asm",
+      "offset": 1945,
+      "size_bytes": null,
+      "num_instructions": 101,
+      "prologue": "standard_bp",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "c_medium",
+        "score_c": 5,
+        "score_asm": 0,
+        "score_diff": 5,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "ret without args [neutral]",
+          "5 FAR-API calls (heavy API user) [+2 C]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_08A2",
+      "segment_file": "seg1.asm",
+      "offset": 2210,
+      "size_bytes": null,
+      "num_instructions": 264,
+      "prologue": "standard_bp",
+      "epilogue": "jmp_tail",
+      "classification": {
+        "verdict": "c_medium",
+        "score_c": 5,
+        "score_asm": 2,
+        "score_diff": 3,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "jmp tail-call (no proper return) [+2 ASM]",
+          "22 FAR-API calls (heavy API user) [+2 C]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_0B8C",
+      "segment_file": "seg1.asm",
+      "offset": 2956,
+      "size_bytes": null,
+      "num_instructions": 137,
+      "prologue": "standard_bp",
+      "epilogue": "retf_n",
+      "classification": {
+        "verdict": "c_high",
+        "score_c": 9,
+        "score_asm": 0,
+        "score_diff": 9,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "PASCAL epilogue: retf with arg cleanup [+3 C]",
+          "[bp-N] references in entry/exit (2) [+1 C]",
+          "5 FAR-API calls (heavy API user) [+2 C]"
+        ],
+        "confidence": "high"
+      }
+    },
+    {
+      "name": "sub_0D01",
+      "segment_file": "seg1.asm",
+      "offset": 3329,
+      "size_bytes": null,
+      "num_instructions": 15,
+      "prologue": "standard_bp",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "c_high",
+        "score_c": 7,
+        "score_asm": 0,
+        "score_diff": 7,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "ret without args [neutral]",
+          "[bp+N] references in entry/exit (1) [+1 C]",
+          "canonical SI/DI save/restore (1 push / 1 pop) [+2 C]",
+          "high mov+push density (compiler-like) [+1 C]"
+        ],
+        "confidence": "high"
+      }
+    },
+    {
+      "name": "sub_0D20",
+      "segment_file": "seg1.asm",
+      "offset": 3360,
+      "size_bytes": null,
+      "num_instructions": 42,
+      "prologue": "standard_bp",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "c_high",
+        "score_c": 6,
+        "score_asm": 0,
+        "score_diff": 6,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "ret without args [neutral]",
+          "[bp+N] references in entry/exit (1) [+1 C]",
+          "3 FAR-API calls (heavy API user) [+2 C]"
+        ],
+        "confidence": "high"
+      }
+    },
+    {
+      "name": "sub_0D7F",
+      "segment_file": "seg1.asm",
+      "offset": 3455,
+      "size_bytes": null,
+      "num_instructions": 87,
+      "prologue": "standard_bp",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "c_high",
+        "score_c": 6,
+        "score_asm": 0,
+        "score_diff": 6,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "ret without args [neutral]",
+          "[bp+N] references in entry/exit (1) [+1 C]",
+          "3 FAR-API calls (heavy API user) [+2 C]"
+        ],
+        "confidence": "high"
+      }
+    },
+    {
+      "name": "sub_0E51",
+      "segment_file": "seg1.asm",
+      "offset": 3665,
+      "size_bytes": null,
+      "num_instructions": 21,
+      "prologue": "standard_bp",
+      "epilogue": "jmp_tail",
+      "classification": {
+        "verdict": "unclear",
+        "score_c": 4,
+        "score_asm": 2,
+        "score_diff": 2,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "jmp tail-call (no proper return) [+2 ASM]",
+          "[bp+N] references in entry/exit (1) [+1 C]"
+        ],
+        "confidence": "low"
+      }
+    },
+    {
+      "name": "sub_0E83",
+      "segment_file": "seg1.asm",
+      "offset": 3715,
+      "size_bytes": null,
+      "num_instructions": 215,
+      "prologue": "standard_bp",
+      "epilogue": "ret_n",
+      "classification": {
+        "verdict": "c_high",
+        "score_c": 9,
+        "score_asm": 0,
+        "score_diff": 9,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "PASCAL epilogue: ret with arg cleanup [+2 C]",
+          "[bp+N] references in entry/exit (1) [+1 C]",
+          "12 FAR-API calls (heavy API user) [+2 C]",
+          "high mov+push density (compiler-like) [+1 C]"
+        ],
+        "confidence": "high"
+      }
+    },
+    {
+      "name": "sub_108F",
+      "segment_file": "seg1.asm",
+      "offset": 4239,
+      "size_bytes": null,
+      "num_instructions": 55,
+      "prologue": "standard_bp",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "c_high",
+        "score_c": 6,
+        "score_asm": 0,
+        "score_diff": 6,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "ret without args [neutral]",
+          "4 FAR-API calls (heavy API user) [+2 C]",
+          "high mov+push density (compiler-like) [+1 C]"
+        ],
+        "confidence": "high"
+      }
+    },
+    {
+      "name": "sub_1128",
+      "segment_file": "seg1.asm",
+      "offset": 4392,
+      "size_bytes": null,
+      "num_instructions": 31,
+      "prologue": "standard_bp",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "c_medium",
+        "score_c": 5,
+        "score_asm": 0,
+        "score_diff": 5,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "ret without args [neutral]",
+          "4 FAR-API calls (heavy API user) [+2 C]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_1176",
+      "segment_file": "seg1.asm",
+      "offset": 4470,
+      "size_bytes": null,
+      "num_instructions": 48,
+      "prologue": "standard_bp",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "c_high",
+        "score_c": 8,
+        "score_asm": 0,
+        "score_diff": 8,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "ret without args [neutral]",
+          "canonical SI/DI save/restore (1 push / 1 pop) [+2 C]",
+          "4 FAR-API calls (heavy API user) [+2 C]",
+          "high mov+push density (compiler-like) [+1 C]"
+        ],
+        "confidence": "high"
+      }
+    },
+    {
+      "name": "sub_11EB",
+      "segment_file": "seg1.asm",
+      "offset": 4587,
+      "size_bytes": null,
+      "num_instructions": 150,
+      "prologue": "standard_bp",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "c_high",
+        "score_c": 8,
+        "score_asm": 0,
+        "score_diff": 8,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "ret without args [neutral]",
+          "canonical SI/DI save/restore (1 push / 1 pop) [+2 C]",
+          "9 FAR-API calls (heavy API user) [+2 C]",
+          "high mov+push density (compiler-like) [+1 C]"
+        ],
+        "confidence": "high"
+      }
+    },
+    {
+      "name": "sub_135F",
+      "segment_file": "seg1.asm",
+      "offset": 4959,
+      "size_bytes": null,
+      "num_instructions": 29,
+      "prologue": "standard_bp",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "c_medium",
+        "score_c": 5,
+        "score_asm": 0,
+        "score_diff": 5,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "ret without args [neutral]",
+          "1 FAR-API call(s) [+1 C]",
+          "high mov+push density (compiler-like) [+1 C]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_139D",
+      "segment_file": "seg1.asm",
+      "offset": 5021,
+      "size_bytes": null,
+      "num_instructions": 26,
+      "prologue": "standard_bp",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "c_medium",
+        "score_c": 5,
+        "score_asm": 2,
+        "score_diff": 3,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "ret without args [neutral]",
+          "[bp+N] references in entry/exit (1) [+1 C]",
+          "4 string ops [+2 ASM]",
+          "high mov+push density (compiler-like) [+1 C]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_13C9",
+      "segment_file": "seg1.asm",
+      "offset": 5065,
+      "size_bytes": null,
+      "num_instructions": 25,
+      "prologue": "standard_bp",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "c_high",
+        "score_c": 7,
+        "score_asm": 0,
+        "score_diff": 7,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "ret without args [neutral]",
+          "[bp+N] references in entry/exit (2) [+1 C]",
+          "canonical SI/DI save/restore (1 push / 1 pop) [+2 C]",
+          "1 FAR-API call(s) [+1 C]"
+        ],
+        "confidence": "high"
+      }
+    },
+    {
+      "name": "sub_1400",
+      "segment_file": "seg1.asm",
+      "offset": 5120,
+      "size_bytes": null,
+      "num_instructions": 133,
+      "prologue": "standard_bp",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "c_medium",
+        "score_c": 5,
+        "score_asm": 0,
+        "score_diff": 5,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "ret without args [neutral]",
+          "3 FAR-API calls (heavy API user) [+2 C]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_1558",
+      "segment_file": "seg1.asm",
+      "offset": 5464,
+      "size_bytes": null,
+      "num_instructions": 37,
+      "prologue": "standard_bp",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "c_medium",
+        "score_c": 4,
+        "score_asm": 0,
+        "score_diff": 4,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "ret without args [neutral]",
+          "2 FAR-API call(s) [+1 C]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_15AC",
+      "segment_file": "seg1.asm",
+      "offset": 5548,
+      "size_bytes": null,
+      "num_instructions": 46,
+      "prologue": "standard_bp",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "c_medium",
+        "score_c": 5,
+        "score_asm": 0,
+        "score_diff": 5,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "ret without args [neutral]",
+          "1 FAR-API call(s) [+1 C]",
+          "high mov+push density (compiler-like) [+1 C]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_1614",
+      "segment_file": "seg1.asm",
+      "offset": 5652,
+      "size_bytes": null,
+      "num_instructions": 33,
+      "prologue": "standard_bp",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "c_medium",
+        "score_c": 5,
+        "score_asm": 0,
+        "score_diff": 5,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "ret without args [neutral]",
+          "[bp+N] references in entry/exit (1) [+1 C]",
+          "1 FAR-API call(s) [+1 C]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_165C",
+      "segment_file": "seg1.asm",
+      "offset": 5724,
+      "size_bytes": null,
+      "num_instructions": 331,
+      "prologue": "standard_bp",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "unclear",
+        "score_c": 3,
+        "score_asm": 2,
+        "score_diff": 1,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "ret without args [neutral]",
+          "16 string ops [+2 ASM]"
+        ],
+        "confidence": "low"
+      }
+    },
+    {
+      "name": "sub_19E8",
+      "segment_file": "seg1.asm",
+      "offset": 6632,
+      "size_bytes": null,
+      "num_instructions": 99,
+      "prologue": "standard_bp",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "unclear",
+        "score_c": 4,
+        "score_asm": 2,
+        "score_diff": 2,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "ret without args [neutral]",
+          "16 string ops [+2 ASM]",
+          "1 FAR-API call(s) [+1 C]"
+        ],
+        "confidence": "low"
+      }
+    },
+    {
+      "name": "sub_1AC0",
+      "segment_file": "seg1.asm",
+      "offset": 6848,
+      "size_bytes": null,
+      "num_instructions": 19,
+      "prologue": "standard_bp",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "c_medium",
+        "score_c": 5,
+        "score_asm": 0,
+        "score_diff": 5,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "ret without args [neutral]",
+          "1 FAR-API call(s) [+1 C]",
+          "high mov+push density (compiler-like) [+1 C]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_1AEE",
+      "segment_file": "seg1.asm",
+      "offset": 6894,
+      "size_bytes": null,
+      "num_instructions": 27,
+      "prologue": "standard_bp",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "c_medium",
+        "score_c": 5,
+        "score_asm": 0,
+        "score_diff": 5,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "ret without args [neutral]",
+          "1 FAR-API call(s) [+1 C]",
+          "high mov+push density (compiler-like) [+1 C]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_1B38",
+      "segment_file": "seg1.asm",
+      "offset": 6968,
+      "size_bytes": null,
+      "num_instructions": 66,
+      "prologue": "standard_bp",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "c_medium",
+        "score_c": 4,
+        "score_asm": 0,
+        "score_diff": 4,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "ret without args [neutral]",
+          "2 FAR-API call(s) [+1 C]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_1BCB",
+      "segment_file": "seg1.asm",
+      "offset": 7115,
+      "size_bytes": null,
+      "num_instructions": 88,
+      "prologue": "standard_bp",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "c_high",
+        "score_c": 6,
+        "score_asm": 0,
+        "score_diff": 6,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "ret without args [neutral]",
+          "5 FAR-API calls (heavy API user) [+2 C]",
+          "high mov+push density (compiler-like) [+1 C]"
+        ],
+        "confidence": "high"
+      }
+    },
+    {
+      "name": "sub_1CAA",
+      "segment_file": "seg1.asm",
+      "offset": 7338,
+      "size_bytes": null,
+      "num_instructions": 42,
+      "prologue": "standard_bp",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "c_high",
+        "score_c": 7,
+        "score_asm": 0,
+        "score_diff": 7,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "ret without args [neutral]",
+          "canonical SI/DI save/restore (1 push / 1 pop) [+2 C]",
+          "8 FAR-API calls (heavy API user) [+2 C]"
+        ],
+        "confidence": "high"
+      }
+    },
+    {
+      "name": "sub_1D10",
+      "segment_file": "seg1.asm",
+      "offset": 7440,
+      "size_bytes": null,
+      "num_instructions": 112,
+      "prologue": "standard_bp",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "unclear",
+        "score_c": 3,
+        "score_asm": 2,
+        "score_diff": 1,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "ret without args [neutral]",
+          "12 string ops [+2 ASM]"
+        ],
+        "confidence": "low"
+      }
+    },
+    {
+      "name": "sub_1E23",
+      "segment_file": "seg1.asm",
+      "offset": 7715,
+      "size_bytes": null,
+      "num_instructions": 12,
+      "prologue": "standard_bp",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "c_medium",
+        "score_c": 3,
+        "score_asm": 0,
+        "score_diff": 3,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "ret without args [neutral]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_1E3E",
+      "segment_file": "seg1.asm",
+      "offset": 7742,
+      "size_bytes": null,
+      "num_instructions": 112,
+      "prologue": "standard_bp",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "unclear",
+        "score_c": 3,
+        "score_asm": 2,
+        "score_diff": 1,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "ret without args [neutral]",
+          "12 string ops [+2 ASM]"
+        ],
+        "confidence": "low"
+      }
+    },
+    {
+      "name": "sub_1F51",
+      "segment_file": "seg1.asm",
+      "offset": 8017,
+      "size_bytes": null,
+      "num_instructions": 117,
+      "prologue": "standard_bp",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "c_medium",
+        "score_c": 5,
+        "score_asm": 0,
+        "score_diff": 5,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "ret without args [neutral]",
+          "[bp+N] references in entry/exit (1) [+1 C]",
+          "1 FAR-API call(s) [+1 C]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_2084",
+      "segment_file": "seg1.asm",
+      "offset": 8324,
+      "size_bytes": null,
+      "num_instructions": 101,
+      "prologue": "standard_bp",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "unclear",
+        "score_c": 3,
+        "score_asm": 2,
+        "score_diff": 1,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "ret without args [neutral]",
+          "8 string ops [+2 ASM]"
+        ],
+        "confidence": "low"
+      }
+    },
+    {
+      "name": "sub_217D",
+      "segment_file": "seg1.asm",
+      "offset": 8573,
+      "size_bytes": null,
+      "num_instructions": 23,
+      "prologue": "standard_bp",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "c_medium",
+        "score_c": 5,
+        "score_asm": 0,
+        "score_diff": 5,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "ret without args [neutral]",
+          "1 FAR-API call(s) [+1 C]",
+          "high mov+push density (compiler-like) [+1 C]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_21B9",
+      "segment_file": "seg1.asm",
+      "offset": 8633,
+      "size_bytes": null,
+      "num_instructions": 51,
+      "prologue": "standard_bp",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "c_medium",
+        "score_c": 5,
+        "score_asm": 0,
+        "score_diff": 5,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "ret without args [neutral]",
+          "1 FAR-API call(s) [+1 C]",
+          "high mov+push density (compiler-like) [+1 C]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_2230",
+      "segment_file": "seg1.asm",
+      "offset": 8752,
+      "size_bytes": null,
+      "num_instructions": 40,
+      "prologue": "none",
+      "epilogue": "jmp_tail",
+      "classification": {
+        "verdict": "asm_medium",
+        "score_c": 2,
+        "score_asm": 7,
+        "score_diff": -5,
+        "signals": [
+          "no BP-frame prologue [+2 ASM]",
+          "jmp tail-call (no proper return) [+2 ASM]",
+          "1 DOS/BIOS int call(s) [+3 ASM]",
+          "4 FAR-API calls (heavy API user) [+2 C]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_2295",
+      "segment_file": "seg1.asm",
+      "offset": 8853,
+      "size_bytes": null,
+      "num_instructions": 11,
+      "prologue": "none",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "unclear",
+        "score_c": 0,
+        "score_asm": 2,
+        "score_diff": -2,
+        "signals": [
+          "no BP-frame prologue [+2 ASM]",
+          "ret without args [neutral]"
+        ],
+        "confidence": "low"
+      }
+    },
+    {
+      "name": "sub_22A6",
+      "segment_file": "seg1.asm",
+      "offset": 8870,
+      "size_bytes": null,
+      "num_instructions": 177,
+      "prologue": "standard_bp",
+      "epilogue": "jmp_tail",
+      "classification": {
+        "verdict": "c_medium",
+        "score_c": 7,
+        "score_asm": 4,
+        "score_diff": 3,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "jmp tail-call (no proper return) [+2 ASM]",
+          "[bp+N] references in entry/exit (1) [+1 C]",
+          "8 string ops [+2 ASM]",
+          "8 FAR-API calls (heavy API user) [+2 C]",
+          "high mov+push density (compiler-like) [+1 C]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_240E",
+      "segment_file": "seg1.asm",
+      "offset": 9230,
+      "size_bytes": null,
+      "num_instructions": 36,
+      "prologue": "saves_regs",
+      "epilogue": "jmp_tail",
+      "classification": {
+        "verdict": "asm_medium",
+        "score_c": 1,
+        "score_asm": 4,
+        "score_diff": -3,
+        "signals": [
+          "saves registers at entry but no full BP frame [+1 C]",
+          "jmp tail-call (no proper return) [+2 ASM]",
+          "4 string ops [+2 ASM]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_245B",
+      "segment_file": "seg1.asm",
+      "offset": 9307,
+      "size_bytes": null,
+      "num_instructions": 75,
+      "prologue": "none",
+      "epilogue": "jmp_tail",
+      "classification": {
+        "verdict": "asm_high",
+        "score_c": 0,
+        "score_asm": 6,
+        "score_diff": -6,
+        "signals": [
+          "no BP-frame prologue [+2 ASM]",
+          "jmp tail-call (no proper return) [+2 ASM]",
+          "4 string ops [+2 ASM]"
+        ],
+        "confidence": "high"
+      }
+    },
+    {
+      "name": "sub_24FA",
+      "segment_file": "seg1.asm",
+      "offset": 9466,
+      "size_bytes": null,
+      "num_instructions": 16,
+      "prologue": "none",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "unclear",
+        "score_c": 3,
+        "score_asm": 3,
+        "score_diff": 0,
+        "signals": [
+          "no BP-frame prologue [+2 ASM]",
+          "ret without args [neutral]",
+          "2 string op(s) [+1 ASM]",
+          "canonical SI/DI save/restore (2 push / 2 pop) [+2 C]",
+          "high mov+push density (compiler-like) [+1 C]"
+        ],
+        "confidence": "low"
+      }
+    },
+    {
+      "name": "sub_251A",
+      "segment_file": "seg1.asm",
+      "offset": 9498,
+      "size_bytes": null,
+      "num_instructions": 22,
+      "prologue": "standard_bp",
+      "epilogue": "jmp_tail",
+      "classification": {
+        "verdict": "unclear",
+        "score_c": 4,
+        "score_asm": 2,
+        "score_diff": 2,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "jmp tail-call (no proper return) [+2 ASM]",
+          "high mov+push density (compiler-like) [+1 C]"
+        ],
+        "confidence": "low"
+      }
+    },
+    {
+      "name": "sub_2548",
+      "segment_file": "seg1.asm",
+      "offset": 9544,
+      "size_bytes": null,
+      "num_instructions": 23,
+      "prologue": "none",
+      "epilogue": "jmp_tail",
+      "classification": {
+        "verdict": "asm_high",
+        "score_c": 0,
+        "score_asm": 6,
+        "score_diff": -6,
+        "signals": [
+          "no BP-frame prologue [+2 ASM]",
+          "jmp tail-call (no proper return) [+2 ASM]",
+          "4 string ops [+2 ASM]"
+        ],
+        "confidence": "high"
+      }
+    },
+    {
+      "name": "sub_2575",
+      "segment_file": "seg1.asm",
+      "offset": 9589,
+      "size_bytes": null,
+      "num_instructions": 21,
+      "prologue": "saves_regs",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "c_medium",
+        "score_c": 3,
+        "score_asm": 0,
+        "score_diff": 3,
+        "signals": [
+          "saves registers at entry but no full BP frame [+1 C]",
+          "ret without args [neutral]",
+          "canonical SI/DI save/restore (2 push / 2 pop) [+2 C]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_25A0",
+      "segment_file": "seg1.asm",
+      "offset": 9632,
+      "size_bytes": null,
+      "num_instructions": 145,
+      "prologue": "saves_regs",
+      "epilogue": "jmp_tail",
+      "classification": {
+        "verdict": "unclear",
+        "score_c": 3,
+        "score_asm": 4,
+        "score_diff": -1,
+        "signals": [
+          "saves registers at entry but no full BP frame [+1 C]",
+          "jmp tail-call (no proper return) [+2 ASM]",
+          "7 string ops [+2 ASM]",
+          "1 FAR-API call(s) [+1 C]",
+          "high mov+push density (compiler-like) [+1 C]"
+        ],
+        "confidence": "low"
+      }
+    },
+    {
+      "name": "sub_26A6",
+      "segment_file": "seg1.asm",
+      "offset": 9894,
+      "size_bytes": null,
+      "num_instructions": 14,
+      "prologue": "saves_regs",
+      "epilogue": "jmp_tail",
+      "classification": {
+        "verdict": "unclear",
+        "score_c": 1,
+        "score_asm": 2,
+        "score_diff": -1,
+        "signals": [
+          "saves registers at entry but no full BP frame [+1 C]",
+          "jmp tail-call (no proper return) [+2 ASM]"
+        ],
+        "confidence": "low"
+      }
+    },
+    {
+      "name": "sub_26BE",
+      "segment_file": "seg1.asm",
+      "offset": 9918,
+      "size_bytes": null,
+      "num_instructions": 14,
+      "prologue": "saves_regs",
+      "epilogue": "jmp_tail",
+      "classification": {
+        "verdict": "unclear",
+        "score_c": 1,
+        "score_asm": 2,
+        "score_diff": -1,
+        "signals": [
+          "saves registers at entry but no full BP frame [+1 C]",
+          "jmp tail-call (no proper return) [+2 ASM]"
+        ],
+        "confidence": "low"
+      }
+    },
+    {
+      "name": "sub_26D6",
+      "segment_file": "seg1.asm",
+      "offset": 9942,
+      "size_bytes": null,
+      "num_instructions": 14,
+      "prologue": "saves_regs",
+      "epilogue": "jmp_tail",
+      "classification": {
+        "verdict": "unclear",
+        "score_c": 1,
+        "score_asm": 2,
+        "score_diff": -1,
+        "signals": [
+          "saves registers at entry but no full BP frame [+1 C]",
+          "jmp tail-call (no proper return) [+2 ASM]"
+        ],
+        "confidence": "low"
+      }
+    },
+    {
+      "name": "sub_26EE",
+      "segment_file": "seg1.asm",
+      "offset": 9966,
+      "size_bytes": null,
+      "num_instructions": 28,
+      "prologue": "saves_regs",
+      "epilogue": "jmp_tail",
+      "classification": {
+        "verdict": "unclear",
+        "score_c": 2,
+        "score_asm": 2,
+        "score_diff": 0,
+        "signals": [
+          "saves registers at entry but no full BP frame [+1 C]",
+          "jmp tail-call (no proper return) [+2 ASM]",
+          "high mov+push density (compiler-like) [+1 C]"
+        ],
+        "confidence": "low"
+      }
+    },
+    {
+      "name": "sub_271E",
+      "segment_file": "seg1.asm",
+      "offset": 10014,
+      "size_bytes": null,
+      "num_instructions": 20,
+      "prologue": "saves_regs",
+      "epilogue": "jmp_tail",
+      "classification": {
+        "verdict": "unclear",
+        "score_c": 2,
+        "score_asm": 2,
+        "score_diff": 0,
+        "signals": [
+          "saves registers at entry but no full BP frame [+1 C]",
+          "jmp tail-call (no proper return) [+2 ASM]",
+          "high mov+push density (compiler-like) [+1 C]"
+        ],
+        "confidence": "low"
+      }
+    },
+    {
+      "name": "sub_274C",
+      "segment_file": "seg1.asm",
+      "offset": 10060,
+      "size_bytes": null,
+      "num_instructions": 4,
+      "prologue": "none",
+      "epilogue": "jmp_tail",
+      "classification": {
+        "verdict": "asm_medium",
+        "score_c": 0,
+        "score_asm": 4,
+        "score_diff": -4,
+        "signals": [
+          "no BP-frame prologue [+2 ASM]",
+          "jmp tail-call (no proper return) [+2 ASM]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_2756",
+      "segment_file": "seg1.asm",
+      "offset": 10070,
+      "size_bytes": null,
+      "num_instructions": 2,
+      "prologue": "none",
+      "epilogue": "jmp_tail",
+      "classification": {
+        "verdict": "tiny",
+        "score_c": 0,
+        "score_asm": 0,
+        "score_diff": 0,
+        "signals": [
+          "function too small to classify (<3 instructions)"
+        ],
+        "confidence": "none"
+      }
+    },
+    {
+      "name": "sub_275B",
+      "segment_file": "seg1.asm",
+      "offset": 10075,
+      "size_bytes": null,
+      "num_instructions": 45,
+      "prologue": "none",
+      "epilogue": "jmp_tail",
+      "classification": {
+        "verdict": "asm_medium",
+        "score_c": 1,
+        "score_asm": 4,
+        "score_diff": -3,
+        "signals": [
+          "no BP-frame prologue [+2 ASM]",
+          "jmp tail-call (no proper return) [+2 ASM]",
+          "1 FAR-API call(s) [+1 C]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_27CA",
+      "segment_file": "seg1.asm",
+      "offset": 10186,
+      "size_bytes": null,
+      "num_instructions": 80,
+      "prologue": "none",
+      "epilogue": "retf",
+      "classification": {
+        "verdict": "asm_high",
+        "score_c": 1,
+        "score_asm": 7,
+        "score_diff": -6,
+        "signals": [
+          "no BP-frame prologue [+2 ASM]",
+          "retf without args [+1 C]",
+          "3 DOS/BIOS int call(s) [+5 ASM]"
+        ],
+        "confidence": "high"
+      }
+    },
+    {
+      "name": "sub_2869",
+      "segment_file": "seg1.asm",
+      "offset": 10345,
+      "size_bytes": null,
+      "num_instructions": 12,
+      "prologue": "none",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "asm_medium",
+        "score_c": 0,
+        "score_asm": 3,
+        "score_diff": -3,
+        "signals": [
+          "no BP-frame prologue [+2 ASM]",
+          "ret without args [neutral]",
+          "2 string op(s) [+1 ASM]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_287F",
+      "segment_file": "seg1.asm",
+      "offset": 10367,
+      "size_bytes": null,
+      "num_instructions": 14,
+      "prologue": "none",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "asm_medium",
+        "score_c": 0,
+        "score_asm": 4,
+        "score_diff": -4,
+        "signals": [
+          "no BP-frame prologue [+2 ASM]",
+          "ret without args [neutral]",
+          "4 string ops [+2 ASM]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_2897",
+      "segment_file": "seg1.asm",
+      "offset": 10391,
+      "size_bytes": null,
+      "num_instructions": 4,
+      "prologue": "none",
+      "epilogue": "jmp_tail",
+      "classification": {
+        "verdict": "asm_medium",
+        "score_c": 0,
+        "score_asm": 4,
+        "score_diff": -4,
+        "signals": [
+          "no BP-frame prologue [+2 ASM]",
+          "jmp tail-call (no proper return) [+2 ASM]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_28A3",
+      "segment_file": "seg1.asm",
+      "offset": 10403,
+      "size_bytes": null,
+      "num_instructions": 1,
+      "prologue": "none",
+      "epilogue": "unknown",
+      "classification": {
+        "verdict": "tiny",
+        "score_c": 0,
+        "score_asm": 0,
+        "score_diff": 0,
+        "signals": [
+          "function too small to classify (<3 instructions)"
+        ],
+        "confidence": "none"
+      }
+    },
+    {
+      "name": "sub_28A6",
+      "segment_file": "seg1.asm",
+      "offset": 10406,
+      "size_bytes": null,
+      "num_instructions": 54,
+      "prologue": "none",
+      "epilogue": "jmp_tail",
+      "classification": {
+        "verdict": "asm_high",
+        "score_c": 0,
+        "score_asm": 6,
+        "score_diff": -6,
+        "signals": [
+          "no BP-frame prologue [+2 ASM]",
+          "jmp tail-call (no proper return) [+2 ASM]",
+          "12 bit-twiddle (rol/ror/rcl/rcr) [+2 ASM]"
+        ],
+        "confidence": "high"
+      }
+    },
+    {
+      "name": "sub_2926",
+      "segment_file": "seg1.asm",
+      "offset": 10534,
+      "size_bytes": null,
+      "num_instructions": 131,
+      "prologue": "none",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "asm_medium",
+        "score_c": 0,
+        "score_asm": 5,
+        "score_diff": -5,
+        "signals": [
+          "no BP-frame prologue [+2 ASM]",
+          "ret without args [neutral]",
+          "4 string ops [+2 ASM]",
+          "3 bit-twiddle(s) [+1 ASM]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_2A40",
+      "segment_file": "seg1.asm",
+      "offset": 10816,
+      "size_bytes": null,
+      "num_instructions": 2,
+      "prologue": "none",
+      "epilogue": "jmp_tail",
+      "classification": {
+        "verdict": "tiny",
+        "score_c": 0,
+        "score_asm": 0,
+        "score_diff": 0,
+        "signals": [
+          "function too small to classify (<3 instructions)"
+        ],
+        "confidence": "none"
+      }
+    },
+    {
+      "name": "sub_2A45",
+      "segment_file": "seg1.asm",
+      "offset": 10821,
+      "size_bytes": null,
+      "num_instructions": 2,
+      "prologue": "none",
+      "epilogue": "jmp_tail",
+      "classification": {
+        "verdict": "tiny",
+        "score_c": 0,
+        "score_asm": 0,
+        "score_diff": 0,
+        "signals": [
+          "function too small to classify (<3 instructions)"
+        ],
+        "confidence": "none"
+      }
+    },
+    {
+      "name": "sub_2A4A",
+      "segment_file": "seg1.asm",
+      "offset": 10826,
+      "size_bytes": null,
+      "num_instructions": 2,
+      "prologue": "none",
+      "epilogue": "jmp_tail",
+      "classification": {
+        "verdict": "tiny",
+        "score_c": 0,
+        "score_asm": 0,
+        "score_diff": 0,
+        "signals": [
+          "function too small to classify (<3 instructions)"
+        ],
+        "confidence": "none"
+      }
+    },
+    {
+      "name": "sub_2A4F",
+      "segment_file": "seg1.asm",
+      "offset": 10831,
+      "size_bytes": null,
+      "num_instructions": 15,
+      "prologue": "none",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "asm_medium",
+        "score_c": 0,
+        "score_asm": 3,
+        "score_diff": -3,
+        "signals": [
+          "no BP-frame prologue [+2 ASM]",
+          "ret without args [neutral]",
+          "2 bit-twiddle(s) [+1 ASM]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_2A6F",
+      "segment_file": "seg1.asm",
+      "offset": 10863,
+      "size_bytes": null,
+      "num_instructions": 2,
+      "prologue": "none",
+      "epilogue": "jmp_tail",
+      "classification": {
+        "verdict": "tiny",
+        "score_c": 0,
+        "score_asm": 0,
+        "score_diff": 0,
+        "signals": [
+          "function too small to classify (<3 instructions)"
+        ],
+        "confidence": "none"
+      }
+    },
+    {
+      "name": "sub_2A74",
+      "segment_file": "seg1.asm",
+      "offset": 10868,
+      "size_bytes": null,
+      "num_instructions": 13,
+      "prologue": "none",
+      "epilogue": "jmp_tail",
+      "classification": {
+        "verdict": "asm_medium",
+        "score_c": 0,
+        "score_asm": 4,
+        "score_diff": -4,
+        "signals": [
+          "no BP-frame prologue [+2 ASM]",
+          "jmp tail-call (no proper return) [+2 ASM]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_2A90",
+      "segment_file": "seg1.asm",
+      "offset": 10896,
+      "size_bytes": null,
+      "num_instructions": 27,
+      "prologue": "none",
+      "epilogue": "jmp_tail",
+      "classification": {
+        "verdict": "asm_high",
+        "score_c": 0,
+        "score_asm": 6,
+        "score_diff": -6,
+        "signals": [
+          "no BP-frame prologue [+2 ASM]",
+          "jmp tail-call (no proper return) [+2 ASM]",
+          "4 string ops [+2 ASM]"
+        ],
+        "confidence": "high"
+      }
+    },
+    {
+      "name": "sub_2AC5",
+      "segment_file": "seg1.asm",
+      "offset": 10949,
+      "size_bytes": null,
+      "num_instructions": 98,
+      "prologue": "none",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "asm_medium",
+        "score_c": 0,
+        "score_asm": 5,
+        "score_diff": -5,
+        "signals": [
+          "no BP-frame prologue [+2 ASM]",
+          "ret without args [neutral]",
+          "2 string op(s) [+1 ASM]",
+          "6 bit-twiddle (rol/ror/rcl/rcr) [+2 ASM]",
+          "0 `loop` instruction(s) (MSC rarely emits) [+0 ASM]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_2BAD",
+      "segment_file": "seg1.asm",
+      "offset": 11181,
+      "size_bytes": null,
+      "num_instructions": 30,
+      "prologue": "none",
+      "epilogue": "jmp_tail",
+      "classification": {
+        "verdict": "asm_high",
+        "score_c": 0,
+        "score_asm": 6,
+        "score_diff": -6,
+        "signals": [
+          "no BP-frame prologue [+2 ASM]",
+          "jmp tail-call (no proper return) [+2 ASM]",
+          "4 string ops [+2 ASM]"
+        ],
+        "confidence": "high"
+      }
+    },
+    {
+      "name": "sub_2BF4",
+      "segment_file": "seg1.asm",
+      "offset": 11252,
+      "size_bytes": null,
+      "num_instructions": 61,
+      "prologue": "none",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "asm_medium",
+        "score_c": 0,
+        "score_asm": 3,
+        "score_diff": -3,
+        "signals": [
+          "no BP-frame prologue [+2 ASM]",
+          "ret without args [neutral]",
+          "2 string op(s) [+1 ASM]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_2C7F",
+      "segment_file": "seg1.asm",
+      "offset": 11391,
+      "size_bytes": null,
+      "num_instructions": 208,
+      "prologue": "none",
+      "epilogue": "jmp_tail",
+      "classification": {
+        "verdict": "asm_high",
+        "score_c": 0,
+        "score_asm": 6,
+        "score_diff": -6,
+        "signals": [
+          "no BP-frame prologue [+2 ASM]",
+          "jmp tail-call (no proper return) [+2 ASM]",
+          "4 bit-twiddle (rol/ror/rcl/rcr) [+2 ASM]",
+          "0 `loop` instruction(s) (MSC rarely emits) [+0 ASM]"
+        ],
+        "confidence": "high"
+      }
+    },
+    {
+      "name": "sub_2E4E",
+      "segment_file": "seg1.asm",
+      "offset": 11854,
+      "size_bytes": null,
+      "num_instructions": 22,
+      "prologue": "none",
+      "epilogue": "unknown",
+      "classification": {
+        "verdict": "asm_medium",
+        "score_c": 0,
+        "score_asm": 3,
+        "score_diff": -3,
+        "signals": [
+          "no BP-frame prologue [+2 ASM]",
+          "1 bit-twiddle(s) [+1 ASM]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_2E7C",
+      "segment_file": "seg1.asm",
+      "offset": 11900,
+      "size_bytes": null,
+      "num_instructions": 147,
+      "prologue": "none",
+      "epilogue": "jmp_tail",
+      "classification": {
+        "verdict": "asm_high",
+        "score_c": 0,
+        "score_asm": 6,
+        "score_diff": -6,
+        "signals": [
+          "no BP-frame prologue [+2 ASM]",
+          "jmp tail-call (no proper return) [+2 ASM]",
+          "7 bit-twiddle (rol/ror/rcl/rcr) [+2 ASM]"
+        ],
+        "confidence": "high"
+      }
+    },
+    {
+      "name": "sub_2FCD",
+      "segment_file": "seg1.asm",
+      "offset": 12237,
+      "size_bytes": null,
+      "num_instructions": 2,
+      "prologue": "none",
+      "epilogue": "unknown",
+      "classification": {
+        "verdict": "tiny",
+        "score_c": 0,
+        "score_asm": 0,
+        "score_diff": 0,
+        "signals": [
+          "function too small to classify (<3 instructions)"
+        ],
+        "confidence": "none"
+      }
+    },
+    {
+      "name": "sub_2FD1",
+      "segment_file": "seg1.asm",
+      "offset": 12241,
+      "size_bytes": null,
+      "num_instructions": 84,
+      "prologue": "none",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "asm_medium",
+        "score_c": 0,
+        "score_asm": 4,
+        "score_diff": -4,
+        "signals": [
+          "no BP-frame prologue [+2 ASM]",
+          "ret without args [neutral]",
+          "3 string ops [+2 ASM]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_3089",
+      "segment_file": "seg1.asm",
+      "offset": 12425,
+      "size_bytes": null,
+      "num_instructions": 142,
+      "prologue": "none",
+      "epilogue": "jmp_tail",
+      "classification": {
+        "verdict": "asm_high",
+        "score_c": 0,
+        "score_asm": 8,
+        "score_diff": -8,
+        "signals": [
+          "no BP-frame prologue [+2 ASM]",
+          "jmp tail-call (no proper return) [+2 ASM]",
+          "3 string ops [+2 ASM]",
+          "16 bit-twiddle (rol/ror/rcl/rcr) [+2 ASM]",
+          "0 `loop` instruction(s) (MSC rarely emits) [+0 ASM]"
+        ],
+        "confidence": "high"
+      }
+    },
+    {
+      "name": "sub_31B9",
+      "segment_file": "seg1.asm",
+      "offset": 12729,
+      "size_bytes": null,
+      "num_instructions": 40,
+      "prologue": "none",
+      "epilogue": "jmp_tail",
+      "classification": {
+        "verdict": "asm_medium",
+        "score_c": 0,
+        "score_asm": 5,
+        "score_diff": -5,
+        "signals": [
+          "no BP-frame prologue [+2 ASM]",
+          "jmp tail-call (no proper return) [+2 ASM]",
+          "3 bit-twiddle(s) [+1 ASM]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_320F",
+      "segment_file": "seg1.asm",
+      "offset": 12815,
+      "size_bytes": null,
+      "num_instructions": 55,
+      "prologue": "none",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "asm_medium",
+        "score_c": 0,
+        "score_asm": 4,
+        "score_diff": -4,
+        "signals": [
+          "no BP-frame prologue [+2 ASM]",
+          "ret without args [neutral]",
+          "6 string ops [+2 ASM]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_328D",
+      "segment_file": "seg1.asm",
+      "offset": 12941,
+      "size_bytes": null,
+      "num_instructions": 42,
+      "prologue": "none",
+      "epilogue": "jmp_tail",
+      "classification": {
+        "verdict": "asm_high",
+        "score_c": 0,
+        "score_asm": 6,
+        "score_diff": -6,
+        "signals": [
+          "no BP-frame prologue [+2 ASM]",
+          "jmp tail-call (no proper return) [+2 ASM]",
+          "5 bit-twiddle (rol/ror/rcl/rcr) [+2 ASM]"
+        ],
+        "confidence": "high"
+      }
+    },
+    {
+      "name": "sub_32F0",
+      "segment_file": "seg1.asm",
+      "offset": 13040,
+      "size_bytes": null,
+      "num_instructions": 106,
+      "prologue": "none",
+      "epilogue": "jmp_tail",
+      "classification": {
+        "verdict": "asm_high",
+        "score_c": 0,
+        "score_asm": 8,
+        "score_diff": -8,
+        "signals": [
+          "no BP-frame prologue [+2 ASM]",
+          "jmp tail-call (no proper return) [+2 ASM]",
+          "13 string ops [+2 ASM]",
+          "16 bit-twiddle (rol/ror/rcl/rcr) [+2 ASM]"
+        ],
+        "confidence": "high"
+      }
+    },
+    {
+      "name": "sub_33BF",
+      "segment_file": "seg1.asm",
+      "offset": 13247,
+      "size_bytes": null,
+      "num_instructions": 60,
+      "prologue": "none",
+      "epilogue": "jmp_tail",
+      "classification": {
+        "verdict": "asm_medium",
+        "score_c": 0,
+        "score_asm": 4,
+        "score_diff": -4,
+        "signals": [
+          "no BP-frame prologue [+2 ASM]",
+          "jmp tail-call (no proper return) [+2 ASM]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_3443",
+      "segment_file": "seg1.asm",
+      "offset": 13379,
+      "size_bytes": null,
+      "num_instructions": 242,
+      "prologue": "none",
+      "epilogue": "jmp_tail",
+      "classification": {
+        "verdict": "asm_high",
+        "score_c": 0,
+        "score_asm": 8,
+        "score_diff": -8,
+        "signals": [
+          "no BP-frame prologue [+2 ASM]",
+          "jmp tail-call (no proper return) [+2 ASM]",
+          "8 string ops [+2 ASM]",
+          "13 bit-twiddle (rol/ror/rcl/rcr) [+2 ASM]"
+        ],
+        "confidence": "high"
+      }
+    },
+    {
+      "name": "sub_363A",
+      "segment_file": "seg1.asm",
+      "offset": 13882,
+      "size_bytes": null,
+      "num_instructions": 87,
+      "prologue": "standard_bp",
+      "epilogue": "jmp_tail",
+      "classification": {
+        "verdict": "unclear",
+        "score_c": 4,
+        "score_asm": 4,
+        "score_diff": 0,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "jmp tail-call (no proper return) [+2 ASM]",
+          "16 string ops [+2 ASM]",
+          "1 FAR-API call(s) [+1 C]"
+        ],
+        "confidence": "low"
+      }
+    },
+    {
+      "name": "sub_36F5",
+      "segment_file": "seg1.asm",
+      "offset": 14069,
+      "size_bytes": null,
+      "num_instructions": 109,
+      "prologue": "none",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "asm_medium",
+        "score_c": 0,
+        "score_asm": 4,
+        "score_diff": -4,
+        "signals": [
+          "no BP-frame prologue [+2 ASM]",
+          "ret without args [neutral]",
+          "18 bit-twiddle (rol/ror/rcl/rcr) [+2 ASM]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_37DA",
+      "segment_file": "seg1.asm",
+      "offset": 14298,
+      "size_bytes": null,
+      "num_instructions": 30,
+      "prologue": "standard_bp",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "c_medium",
+        "score_c": 5,
+        "score_asm": 0,
+        "score_diff": 5,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "ret without args [neutral]",
+          "[bp+N] references in entry/exit (1) [+1 C]",
+          "high mov+push density (compiler-like) [+1 C]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_3813",
+      "segment_file": "seg1.asm",
+      "offset": 14355,
+      "size_bytes": null,
+      "num_instructions": 44,
+      "prologue": "standard_bp",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "c_medium",
+        "score_c": 4,
+        "score_asm": 0,
+        "score_diff": 4,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "ret without args [neutral]",
+          "[bp+N] references in entry/exit (1) [+1 C]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_3867",
+      "segment_file": "seg1.asm",
+      "offset": 14439,
+      "size_bytes": null,
+      "num_instructions": 49,
+      "prologue": "standard_bp",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "c_medium",
+        "score_c": 5,
+        "score_asm": 2,
+        "score_diff": 3,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "ret without args [neutral]",
+          "[bp+N] references in entry/exit (1) [+1 C]",
+          "4 string ops [+2 ASM]",
+          "high mov+push density (compiler-like) [+1 C]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_38CC",
+      "segment_file": "seg1.asm",
+      "offset": 14540,
+      "size_bytes": null,
+      "num_instructions": 114,
+      "prologue": "standard_bp",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "unclear",
+        "score_c": 4,
+        "score_asm": 2,
+        "score_diff": 2,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "ret without args [neutral]",
+          "[bp+N] references in entry/exit (1) [+1 C]",
+          "4 string ops [+2 ASM]"
+        ],
+        "confidence": "low"
+      }
+    },
+    {
+      "name": "sub_39BC",
+      "segment_file": "seg1.asm",
+      "offset": 14780,
+      "size_bytes": null,
+      "num_instructions": 91,
+      "prologue": "standard_bp",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "c_medium",
+        "score_c": 5,
+        "score_asm": 2,
+        "score_diff": 3,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "ret without args [neutral]",
+          "[bp+N] references in entry/exit (1) [+1 C]",
+          "4 string ops [+2 ASM]",
+          "high mov+push density (compiler-like) [+1 C]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_3A84",
+      "segment_file": "seg1.asm",
+      "offset": 14980,
+      "size_bytes": null,
+      "num_instructions": 44,
+      "prologue": "standard_bp",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "unclear",
+        "score_c": 4,
+        "score_asm": 2,
+        "score_diff": 2,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "ret without args [neutral]",
+          "[bp+N] references in entry/exit (1) [+1 C]",
+          "4 string ops [+2 ASM]"
+        ],
+        "confidence": "low"
+      }
+    },
+    {
+      "name": "sub_3AE4",
+      "segment_file": "seg1.asm",
+      "offset": 15076,
+      "size_bytes": null,
+      "num_instructions": 29,
+      "prologue": "standard_bp",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "c_medium",
+        "score_c": 4,
+        "score_asm": 0,
+        "score_diff": 4,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "ret without args [neutral]",
+          "[bp+N] references in entry/exit (2) [+1 C]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_3B31",
+      "segment_file": "seg1.asm",
+      "offset": 15153,
+      "size_bytes": null,
+      "num_instructions": 19,
+      "prologue": "standard_bp",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "c_medium",
+        "score_c": 4,
+        "score_asm": 0,
+        "score_diff": 4,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "ret without args [neutral]",
+          "[bp+N] references in entry/exit (1) [+1 C]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_3B53",
+      "segment_file": "seg1.asm",
+      "offset": 15187,
+      "size_bytes": null,
+      "num_instructions": 36,
+      "prologue": "standard_bp",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "unclear",
+        "score_c": 4,
+        "score_asm": 2,
+        "score_diff": 2,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "ret without args [neutral]",
+          "6 string ops [+2 ASM]",
+          "high mov+push density (compiler-like) [+1 C]"
+        ],
+        "confidence": "low"
+      }
+    },
+    {
+      "name": "sub_3B97",
+      "segment_file": "seg1.asm",
+      "offset": 15255,
+      "size_bytes": null,
+      "num_instructions": 141,
+      "prologue": "standard_bp",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "unclear",
+        "score_c": 3,
+        "score_asm": 2,
+        "score_diff": 1,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "ret without args [neutral]",
+          "24 string ops [+2 ASM]",
+          "0 `loop` instruction(s) (MSC rarely emits) [+0 ASM]"
+        ],
+        "confidence": "low"
+      }
+    },
+    {
+      "name": "sub_3CC8",
+      "segment_file": "seg1.asm",
+      "offset": 15560,
+      "size_bytes": null,
+      "num_instructions": 18,
+      "prologue": "saves_regs",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "unclear",
+        "score_c": 3,
+        "score_asm": 1,
+        "score_diff": 2,
+        "signals": [
+          "saves registers at entry but no full BP frame [+1 C]",
+          "ret without args [neutral]",
+          "1 `loop` instruction(s) (MSC rarely emits) [+1 ASM]",
+          "canonical SI/DI save/restore (1 push / 1 pop) [+2 C]"
+        ],
+        "confidence": "low"
+      }
+    },
+    {
+      "name": "sub_3CF1",
+      "segment_file": "seg1.asm",
+      "offset": 15601,
+      "size_bytes": null,
+      "num_instructions": 55,
+      "prologue": "saves_regs",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "asm_medium",
+        "score_c": 1,
+        "score_asm": 5,
+        "score_diff": -4,
+        "signals": [
+          "saves registers at entry but no full BP frame [+1 C]",
+          "ret without args [neutral]",
+          "4 string ops [+2 ASM]",
+          "6 bit-twiddle (rol/ror/rcl/rcr) [+2 ASM]",
+          "1 `loop` instruction(s) (MSC rarely emits) [+1 ASM]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_3D4D",
+      "segment_file": "seg1.asm",
+      "offset": 15693,
+      "size_bytes": null,
+      "num_instructions": 136,
+      "prologue": "saves_regs",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "asm_medium",
+        "score_c": 1,
+        "score_asm": 4,
+        "score_diff": -3,
+        "signals": [
+          "saves registers at entry but no full BP frame [+1 C]",
+          "ret without args [neutral]",
+          "6 string ops [+2 ASM]",
+          "19 bit-twiddle (rol/ror/rcl/rcr) [+2 ASM]",
+          "0 `loop` instruction(s) (MSC rarely emits) [+0 ASM]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_3E4D",
+      "segment_file": "seg1.asm",
+      "offset": 15949,
+      "size_bytes": null,
+      "num_instructions": 197,
+      "prologue": "none",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "asm_high",
+        "score_c": 0,
+        "score_asm": 6,
+        "score_diff": -6,
+        "signals": [
+          "no BP-frame prologue [+2 ASM]",
+          "ret without args [neutral]",
+          "9 string ops [+2 ASM]",
+          "5 bit-twiddle (rol/ror/rcl/rcr) [+2 ASM]",
+          "0 `loop` instruction(s) (MSC rarely emits) [+0 ASM]"
+        ],
+        "confidence": "high"
+      }
+    },
+    {
+      "name": "sub_3FD7",
+      "segment_file": "seg1.asm",
+      "offset": 16343,
+      "size_bytes": null,
+      "num_instructions": 21,
+      "prologue": "standard_bp",
+      "epilogue": "unknown",
+      "classification": {
+        "verdict": "unclear",
+        "score_c": 4,
+        "score_asm": 5,
+        "score_diff": -1,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "[bp+N] references in entry/exit (1) [+1 C]",
+          "2 DOS/BIOS int call(s) [+5 ASM]"
+        ],
+        "confidence": "low"
+      }
+    },
+    {
+      "name": "sub_400D",
+      "segment_file": "seg1.asm",
+      "offset": 16397,
+      "size_bytes": null,
+      "num_instructions": 50,
+      "prologue": "standard_bp",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "c_medium",
+        "score_c": 5,
+        "score_asm": 0,
+        "score_diff": 5,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "ret without args [neutral]",
+          "[bp+N] references in entry/exit (1) [+1 C]",
+          "high mov+push density (compiler-like) [+1 C]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_407B",
+      "segment_file": "seg1.asm",
+      "offset": 16507,
+      "size_bytes": null,
+      "num_instructions": 59,
+      "prologue": "none",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "asm_high",
+        "score_c": 1,
+        "score_asm": 7,
+        "score_diff": -6,
+        "signals": [
+          "no BP-frame prologue [+2 ASM]",
+          "ret without args [neutral]",
+          "5 DOS/BIOS int call(s) [+5 ASM]",
+          "0 `loop` instruction(s) (MSC rarely emits) [+0 ASM]",
+          "1 FAR-API call(s) [+1 C]"
+        ],
+        "confidence": "high"
+      }
+    },
+    {
+      "name": "sub_410D",
+      "segment_file": "seg1.asm",
+      "offset": 16653,
+      "size_bytes": null,
+      "num_instructions": 8,
+      "prologue": "standard_bp",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "c_medium",
+        "score_c": 4,
+        "score_asm": 0,
+        "score_diff": 4,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "ret without args [neutral]",
+          "[bp+N] references in entry/exit (1) [+1 C]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_411D",
+      "segment_file": "seg1.asm",
+      "offset": 16669,
+      "size_bytes": null,
+      "num_instructions": 47,
+      "prologue": "standard_bp",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "c_medium",
+        "score_c": 5,
+        "score_asm": 0,
+        "score_diff": 5,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "ret without args [neutral]",
+          "canonical SI/DI save/restore (2 push / 2 pop) [+2 C]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_416F",
+      "segment_file": "seg1.asm",
+      "offset": 16751,
+      "size_bytes": null,
+      "num_instructions": 26,
+      "prologue": "standard_bp",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "c_high",
+        "score_c": 7,
+        "score_asm": 1,
+        "score_diff": 6,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "ret without args [neutral]",
+          "[bp+N] references in entry/exit (1) [+1 C]",
+          "1 string op(s) [+1 ASM]",
+          "canonical SI/DI save/restore (1 push / 1 pop) [+2 C]",
+          "high mov+push density (compiler-like) [+1 C]"
+        ],
+        "confidence": "high"
+      }
+    },
+    {
+      "name": "sub_419E",
+      "segment_file": "seg1.asm",
+      "offset": 16798,
+      "size_bytes": null,
+      "num_instructions": 39,
+      "prologue": "standard_bp",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "c_medium",
+        "score_c": 4,
+        "score_asm": 0,
+        "score_diff": 4,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "ret without args [neutral]",
+          "high mov+push density (compiler-like) [+1 C]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_41F3",
+      "segment_file": "seg1.asm",
+      "offset": 16883,
+      "size_bytes": null,
+      "num_instructions": 21,
+      "prologue": "standard_bp",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "c_high",
+        "score_c": 6,
+        "score_asm": 0,
+        "score_diff": 6,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "ret without args [neutral]",
+          "canonical SI/DI save/restore (2 push / 2 pop) [+2 C]",
+          "high mov+push density (compiler-like) [+1 C]"
+        ],
+        "confidence": "high"
+      }
+    },
+    {
+      "name": "sub_4216",
+      "segment_file": "seg1.asm",
+      "offset": 16918,
+      "size_bytes": null,
+      "num_instructions": 16,
+      "prologue": "standard_bp",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "c_high",
+        "score_c": 7,
+        "score_asm": 0,
+        "score_diff": 7,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "ret without args [neutral]",
+          "[bp+N] references in entry/exit (1) [+1 C]",
+          "canonical SI/DI save/restore (1 push / 1 pop) [+2 C]",
+          "high mov+push density (compiler-like) [+1 C]"
+        ],
+        "confidence": "high"
+      }
+    },
+    {
+      "name": "sub_422F",
+      "segment_file": "seg1.asm",
+      "offset": 16943,
+      "size_bytes": null,
+      "num_instructions": 6,
+      "prologue": "none",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "asm_medium",
+        "score_c": 0,
+        "score_asm": 4,
+        "score_diff": -4,
+        "signals": [
+          "no BP-frame prologue [+2 ASM]",
+          "ret without args [neutral]",
+          "1 bit-twiddle(s) [+1 ASM]",
+          "1 `loop` instruction(s) (MSC rarely emits) [+1 ASM]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_423A",
+      "segment_file": "seg1.asm",
+      "offset": 16954,
+      "size_bytes": null,
+      "num_instructions": 102,
+      "prologue": "standard_bp",
+      "epilogue": "jmp_tail",
+      "classification": {
+        "verdict": "asm_medium",
+        "score_c": 4,
+        "score_asm": 7,
+        "score_diff": -3,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "jmp tail-call (no proper return) [+2 ASM]",
+          "[bp+N] references in entry/exit (1) [+1 C]",
+          "5 DOS/BIOS int call(s) [+5 ASM]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_430D",
+      "segment_file": "seg1.asm",
+      "offset": 17165,
+      "size_bytes": null,
+      "num_instructions": 101,
+      "prologue": "standard_bp",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "c_medium",
+        "score_c": 5,
+        "score_asm": 0,
+        "score_diff": 5,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "ret without args [neutral]",
+          "[bp+N] references in entry/exit (1) [+1 C]",
+          "high mov+push density (compiler-like) [+1 C]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_4409",
+      "segment_file": "seg1.asm",
+      "offset": 17417,
+      "size_bytes": null,
+      "num_instructions": 10,
+      "prologue": "none",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "unclear",
+        "score_c": 1,
+        "score_asm": 2,
+        "score_diff": -1,
+        "signals": [
+          "no BP-frame prologue [+2 ASM]",
+          "ret without args [neutral]",
+          "1 FAR-API call(s) [+1 C]"
+        ],
+        "confidence": "low"
+      }
+    },
+    {
+      "name": "sub_441B",
+      "segment_file": "seg1.asm",
+      "offset": 17435,
+      "size_bytes": null,
+      "num_instructions": 24,
+      "prologue": "none",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "unclear",
+        "score_c": 1,
+        "score_asm": 2,
+        "score_diff": -1,
+        "signals": [
+          "no BP-frame prologue [+2 ASM]",
+          "ret without args [neutral]",
+          "1 FAR-API call(s) [+1 C]"
+        ],
+        "confidence": "low"
+      }
+    },
+    {
+      "name": "sub_4447",
+      "segment_file": "seg1.asm",
+      "offset": 17479,
+      "size_bytes": null,
+      "num_instructions": 22,
+      "prologue": "none",
+      "epilogue": "jmp_tail",
+      "classification": {
+        "verdict": "asm_medium",
+        "score_c": 0,
+        "score_asm": 4,
+        "score_diff": -4,
+        "signals": [
+          "no BP-frame prologue [+2 ASM]",
+          "jmp tail-call (no proper return) [+2 ASM]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_4475",
+      "segment_file": "seg1.asm",
+      "offset": 17525,
+      "size_bytes": null,
+      "num_instructions": 182,
+      "prologue": "standard_bp",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "unclear",
+        "score_c": 3,
+        "score_asm": 2,
+        "score_diff": 1,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "ret without args [neutral]",
+          "3 string ops [+2 ASM]"
+        ],
+        "confidence": "low"
+      }
+    },
+    {
+      "name": "sub_4644",
+      "segment_file": "seg1.asm",
+      "offset": 17988,
+      "size_bytes": null,
+      "num_instructions": 111,
+      "prologue": "standard_bp",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "c_medium",
+        "score_c": 3,
+        "score_asm": 0,
+        "score_diff": 3,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "ret without args [neutral]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_4772",
+      "segment_file": "seg1.asm",
+      "offset": 18290,
+      "size_bytes": null,
+      "num_instructions": 51,
+      "prologue": "standard_bp",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "c_medium",
+        "score_c": 4,
+        "score_asm": 0,
+        "score_diff": 4,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "ret without args [neutral]",
+          "high mov+push density (compiler-like) [+1 C]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_47FE",
+      "segment_file": "seg1.asm",
+      "offset": 18430,
+      "size_bytes": null,
+      "num_instructions": 52,
+      "prologue": "standard_bp",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "c_medium",
+        "score_c": 4,
+        "score_asm": 0,
+        "score_diff": 4,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "ret without args [neutral]",
+          "[bp-N] references in entry/exit (1) [+1 C]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_489E",
+      "segment_file": "seg1.asm",
+      "offset": 18590,
+      "size_bytes": null,
+      "num_instructions": 31,
+      "prologue": "standard_bp",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "c_medium",
+        "score_c": 5,
+        "score_asm": 0,
+        "score_diff": 5,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "ret without args [neutral]",
+          "canonical SI/DI save/restore (1 push / 1 pop) [+2 C]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_48EB",
+      "segment_file": "seg1.asm",
+      "offset": 18667,
+      "size_bytes": null,
+      "num_instructions": 43,
+      "prologue": "standard_bp",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "c_medium",
+        "score_c": 4,
+        "score_asm": 0,
+        "score_diff": 4,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "ret without args [neutral]",
+          "high mov+push density (compiler-like) [+1 C]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_4954",
+      "segment_file": "seg1.asm",
+      "offset": 18772,
+      "size_bytes": null,
+      "num_instructions": 46,
+      "prologue": "standard_bp",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "c_medium",
+        "score_c": 4,
+        "score_asm": 0,
+        "score_diff": 4,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "ret without args [neutral]",
+          "high mov+push density (compiler-like) [+1 C]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_49BE",
+      "segment_file": "seg1.asm",
+      "offset": 18878,
+      "size_bytes": null,
+      "num_instructions": 72,
+      "prologue": "standard_bp",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "unclear",
+        "score_c": 3,
+        "score_asm": 1,
+        "score_diff": 2,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "ret without args [neutral]",
+          "1 string op(s) [+1 ASM]"
+        ],
+        "confidence": "low"
+      }
+    },
+    {
+      "name": "sub_4A80",
+      "segment_file": "seg1.asm",
+      "offset": 19072,
+      "size_bytes": null,
+      "num_instructions": 14,
+      "prologue": "standard_bp",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "c_medium",
+        "score_c": 3,
+        "score_asm": 0,
+        "score_diff": 3,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "ret without args [neutral]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_4A9F",
+      "segment_file": "seg1.asm",
+      "offset": 19103,
+      "size_bytes": null,
+      "num_instructions": 21,
+      "prologue": "standard_bp",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "c_medium",
+        "score_c": 3,
+        "score_asm": 0,
+        "score_diff": 3,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "ret without args [neutral]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_4AD2",
+      "segment_file": "seg1.asm",
+      "offset": 19154,
+      "size_bytes": null,
+      "num_instructions": 46,
+      "prologue": "standard_bp",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "unclear",
+        "score_c": 3,
+        "score_asm": 1,
+        "score_diff": 2,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "ret without args [neutral]",
+          "1 string op(s) [+1 ASM]"
+        ],
+        "confidence": "low"
+      }
+    },
+    {
+      "name": "sub_4B3A",
+      "segment_file": "seg1.asm",
+      "offset": 19258,
+      "size_bytes": null,
+      "num_instructions": 20,
+      "prologue": "standard_bp",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "c_high",
+        "score_c": 6,
+        "score_asm": 0,
+        "score_diff": 6,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "ret without args [neutral]",
+          "canonical SI/DI save/restore (1 push / 1 pop) [+2 C]",
+          "high mov+push density (compiler-like) [+1 C]"
+        ],
+        "confidence": "high"
+      }
+    },
+    {
+      "name": "sub_4B62",
+      "segment_file": "seg1.asm",
+      "offset": 19298,
+      "size_bytes": null,
+      "num_instructions": 14,
+      "prologue": "standard_bp",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "c_medium",
+        "score_c": 4,
+        "score_asm": 0,
+        "score_diff": 4,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "ret without args [neutral]",
+          "[bp+N] references in entry/exit (1) [+1 C]"
+        ],
+        "confidence": "medium"
+      }
+    },
+    {
+      "name": "sub_4B82",
+      "segment_file": "seg1.asm",
+      "offset": 19330,
+      "size_bytes": null,
+      "num_instructions": 84,
+      "prologue": "standard_bp",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "unclear",
+        "score_c": 3,
+        "score_asm": 1,
+        "score_diff": 2,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "ret without args [neutral]",
+          "2 string op(s) [+1 ASM]"
+        ],
+        "confidence": "low"
+      }
+    },
+    {
+      "name": "sub_4C1B",
+      "segment_file": "seg1.asm",
+      "offset": 19483,
+      "size_bytes": null,
+      "num_instructions": 44,
+      "prologue": "standard_bp",
+      "epilogue": "ret",
+      "classification": {
+        "verdict": "c_medium",
+        "score_c": 5,
+        "score_asm": 0,
+        "score_diff": 5,
+        "signals": [
+          "standard PASCAL prologue (push bp / mov bp,sp) [+3 C]",
+          "ret without args [neutral]",
+          "[bp+N] references in entry/exit (1) [+1 C]",
+          "high mov+push density (compiler-like) [+1 C]"
+        ],
+        "confidence": "medium"
+      }
+    }
+  ]
+}

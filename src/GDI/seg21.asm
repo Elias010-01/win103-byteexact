@@ -1,3 +1,17 @@
+; ======================================================================
+; GDI / seg21.asm   (segment 21 of GDI)
+; ----------------------------------------------------------------------
+; Functions discovered (pass1b):         3
+; Total instructions:                  145
+; 
+; Classification (pass8):
+;   C-origin (high+medium):              0
+;   ASM-origin (high+medium):            2
+;   Unclear:                             0
+;   Tiny / unclassified:                 1
+; 
+; Far API calls in this segment:     0 (0 unique)
+; ======================================================================
 ; AUTO-GENERATED from original GDI segment 21
 ; segment_size=660 bytes, flags=0xf130
 ; mode: humano legible - instrucciones x86 + bytes raw en comentario (autoritativo)
@@ -10,12 +24,6 @@
 ; el binario original).
 
 GDI_TEXT SEGMENT BYTE PUBLIC 'CODE'
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; LINEDDA -- 2 instr
-; Stub trivial (2 instrucciones, sin logica significativa).
-; tags: far, trivial_stub
-;----------------------------------------------------------------------
 
 
 ;-----------------------------------------------------------------------
@@ -38,22 +46,26 @@ LINEDDA ENDP
         push    di                              ; 57
         mov     ax, word ptr [bp + 0x10]        ; 8B 46 10
         mov     bx, word ptr [bp + 0x14]        ; 8B 5E 14
+        ; constant WM_CREATE
         mov     cx, 1                           ; B9 01 00
         sub     ax, bx                          ; 2B C3
         jge     L_0025                          ; 7D 04
         neg     ax                              ; F7 D8
         neg     cx                              ; F7 D9
+;   [conditional branch target (if/else)] L_0025
 L_0025:
         mov     word ptr [bp - 4], ax           ; 89 46 FC
         mov     word ptr [bp - 6], cx           ; 89 4E FA
         mov     ax, word ptr [bp + 0xe]         ; 8B 46 0E
         mov     bx, word ptr [bp + 0x12]        ; 8B 5E 12
+        ; constant WM_CREATE
         mov     cx, 1                           ; B9 01 00
         sub     ax, bx                          ; 2B C3
         jge     L_003F                          ; 7D 07
         neg     ax                              ; F7 D8
         neg     cx                              ; F7 D9
         jmp     L_00C5                          ; E9 86 00
+;   [conditional branch target (if/else)] L_003F
 L_003F:
         mov     word ptr [bp - 8], ax           ; 89 46 F8
         mov     word ptr [bp - 0xa], cx         ; 89 4E F6
@@ -67,12 +79,14 @@ L_003F:
         je      L_005B                          ; 74 04
         add     dx, dx                          ; 03 D2
         sub     dx, bx                          ; 2B D3
+;   [conditional branch target (if/else)] L_005B
 L_005B:
         sar     dx, 1                           ; D1 FA
         mov     si, word ptr [bp + 0x14]        ; 8B 76 14
         mov     di, word ptr [bp + 0x12]        ; 8B 7E 12
         mov     cx, word ptr [bp - 8]           ; 8B 4E F8
         jcxz    L_0087                          ; E3 1F
+;   [loop iteration target] L_0068
 L_0068:
         push    cx                              ; 51
         push    dx                              ; 52
@@ -88,10 +102,13 @@ L_0068:
         jge     L_0085                          ; 7D 06
         add     dx, word ptr [bp - 8]           ; 03 56 F8
         add     si, word ptr [bp - 6]           ; 03 76 FA
+;   [conditional branch target (if/else)] L_0085
 L_0085:
         loop    L_0068                          ; E2 E1
+;   [conditional branch target (if/else)] L_0087
 L_0087:
         jmp     L_014A                          ; E9 C0 00
+;   [conditional branch target (if/else)] L_008A
 L_008A:
         mov     di, dx                          ; 8B FA
         mov     dx, bx                          ; 8B D3
@@ -99,12 +116,14 @@ L_008A:
         je      L_0096                          ; 74 04
         add     dx, dx                          ; 03 D2
         sub     dx, ax                          ; 2B D0
+;   [conditional branch target (if/else)] L_0096
 L_0096:
         sar     dx, 1                           ; D1 FA
         mov     si, word ptr [bp + 0x14]        ; 8B 76 14
         mov     di, word ptr [bp + 0x12]        ; 8B 7E 12
         mov     cx, word ptr [bp - 4]           ; 8B 4E FC
         jcxz    L_00C2                          ; E3 1F
+;   [loop iteration target] L_00A3
 L_00A3:
         push    cx                              ; 51
         push    dx                              ; 52
@@ -120,10 +139,13 @@ L_00A3:
         jge     L_00C0                          ; 7D 06
         add     dx, word ptr [bp - 4]           ; 03 56 FC
         add     di, word ptr [bp - 0xa]         ; 03 7E F6
+;   [conditional branch target (if/else)] L_00C0
 L_00C0:
         loop    L_00A3                          ; E2 E1
+;   [conditional branch target (if/else)] L_00C2
 L_00C2:
         jmp     L_014A                          ; E9 85 00
+;   [unconditional branch target] L_00C5
 L_00C5:
         mov     word ptr [bp - 8], ax           ; 89 46 F8
         mov     word ptr [bp - 0xa], cx         ; 89 4E F6
@@ -137,6 +159,7 @@ L_00C5:
         je      L_00E1                          ; 74 04
         add     dx, dx                          ; 03 D2
         sub     dx, bx                          ; 2B D3
+;   [conditional branch target (if/else)] L_00E1
 L_00E1:
         inc     dx                              ; 42
         sar     dx, 1                           ; D1 FA
@@ -144,6 +167,7 @@ L_00E1:
         mov     di, word ptr [bp + 0x12]        ; 8B 7E 12
         mov     cx, word ptr [bp - 8]           ; 8B 4E F8
         jcxz    L_010E                          ; E3 1F
+;   [loop iteration target] L_00EF
 L_00EF:
         push    cx                              ; 51
         push    dx                              ; 52
@@ -159,11 +183,14 @@ L_00EF:
         jg      L_010C                          ; 7F 06
         add     dx, word ptr [bp - 8]           ; 03 56 F8
         add     si, word ptr [bp - 6]           ; 03 76 FA
+;   [conditional branch target (if/else)] L_010C
 L_010C:
         loop    L_00EF                          ; E2 E1
+;   [conditional branch target (if/else)] L_010E
 L_010E:
         jmp     L_014A                          ; EB 3A
         nop                                     ; 90
+;   [conditional branch target (if/else)] L_0111
 L_0111:
         mov     di, dx                          ; 8B FA
         mov     dx, bx                          ; 8B D3
@@ -171,6 +198,7 @@ L_0111:
         je      L_011D                          ; 74 04
         add     dx, dx                          ; 03 D2
         sub     dx, ax                          ; 2B D0
+;   [conditional branch target (if/else)] L_011D
 L_011D:
         inc     dx                              ; 42
         sar     dx, 1                           ; D1 FA
@@ -178,6 +206,7 @@ L_011D:
         mov     di, word ptr [bp + 0x12]        ; 8B 7E 12
         mov     cx, word ptr [bp - 4]           ; 8B 4E FC
         jcxz    L_014A                          ; E3 1F
+;   [loop iteration target] L_012B
 L_012B:
         push    cx                              ; 51
         push    dx                              ; 52
@@ -193,8 +222,10 @@ L_012B:
         jg      L_0148                          ; 7F 06
         add     dx, word ptr [bp - 4]           ; 03 56 FC
         add     di, word ptr [bp - 0xa]         ; 03 7E F6
+;   [conditional branch target (if/else)] L_0148
 L_0148:
         loop    L_012B                          ; E2 E1
+;   [branch target] L_014A
 L_014A:
         pop     di                              ; 5F
         pop     si                              ; 5E
@@ -204,12 +235,6 @@ L_014A:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0x10                            ; CA 10 00
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; SETPIXEL -- 78 instr
-; Pone pixel de color en (x,y).
-; tags: complex_iterator, far, string_op
-;----------------------------------------------------------------------
 
 ;-----------------------------------------------------------------------
 ; SETPIXEL  (offset 0x0157, size 174 bytes)
@@ -240,6 +265,7 @@ SETPIXEL PROC FAR
         mov     ax, ss                          ; 8C D0
         mov     es, ax                          ; 8E C0
         lea     di, [bp - 0xa]                  ; 8D 7E F6
+;   [conditional branch target (if/else)] L_0189
 L_0189:
         mov     dx, di                          ; 8B D7
         mov     ax, word ptr [bp + 0xc]         ; 8B 46 0C
@@ -247,6 +273,7 @@ L_0189:
         mov     ax, word ptr [bp + 0xa]         ; 8B 46 0A
         stosw   word ptr es:[di], ax            ; AB
         mov     di, dx                          ; 8B FA
+        ; constant WM_CREATE
         mov     cx, 1                           ; B9 01 00
         xor     bx, bx                          ; 33 DB
         call    far _SEG1_335C                  ; 9A FF FF 00 00 [FIXUP]
@@ -285,9 +312,11 @@ L_0189:
         mov     ax, word ptr [bp - 6]           ; 8B 46 FA
         mov     dx, word ptr [bp - 4]           ; 8B 56 FC
         jmp     L_01FB                          ; EB 04
+;   [conditional branch target (if/else)] L_01F7
 L_01F7:
         mov     ax, 0xffff                      ; B8 FF FF
         cdq                                     ; 99
+;   [unconditional branch target] L_01FB
 L_01FB:
         pop     di                              ; 5F
         pop     si                              ; 5E
@@ -299,12 +328,6 @@ L_01FB:
 SETPIXEL ENDP
 
         retf    0xa                             ; CA 0A 00
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; GETPIXEL -- 65 instr
-; Lee color de pixel en (x,y).
-; tags: complex_iterator, far, string_op
-;----------------------------------------------------------------------
 
 ;-----------------------------------------------------------------------
 ; GETPIXEL  (offset 0x0208, size 136 bytes)
@@ -332,6 +355,7 @@ GETPIXEL PROC FAR
         mov     ax, word ptr [bp + 6]           ; 8B 46 06
         stosw   word ptr es:[di], ax            ; AB
         lea     di, [bp - 6]                    ; 8D 7E FA
+        ; constant WM_CREATE
         mov     cx, 1                           ; B9 01 00
         xor     bx, bx                          ; 33 DB
         call    far _SEG1_335C                  ; 9A 9B 01 00 00 [FIXUP]
@@ -368,9 +392,11 @@ GETPIXEL PROC FAR
         call    far _SEG1_1694                  ; 9A EA 01 00 00 [FIXUP]
         pop     ax                              ; 58
         jmp     L_0288                          ; EB 04
+;   [conditional branch target (if/else)] L_0284
 L_0284:
         mov     ax, 0xffff                      ; B8 FF FF
         cdq                                     ; 99
+;   [unconditional branch target] L_0288
 L_0288:
         pop     di                              ; 5F
         pop     si                              ; 5E

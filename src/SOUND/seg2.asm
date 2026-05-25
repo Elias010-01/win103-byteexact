@@ -1,3 +1,17 @@
+; ======================================================================
+; SOUND / seg2.asm   (segment 2 of SOUND)
+; ----------------------------------------------------------------------
+; Functions discovered (pass1b):         0
+; Total instructions:                    0
+; 
+; Classification (pass8):
+;   C-origin (high+medium):              0
+;   ASM-origin (high+medium):            0
+;   Unclear:                             0
+;   Tiny / unclassified:                 0
+; 
+; Far API calls in this segment:     0 (0 unique)
+; ======================================================================
 ; AUTO-GENERATED from original SOUND segment 2
 ; segment_size=140 bytes, flags=0x0140
 ; mode: humano legible - instrucciones x86 + bytes raw en comentario (autoritativo)
@@ -26,8 +40,12 @@ SOUND_TEXT SEGMENT BYTE PUBLIC 'CODE'
         push    di                              ; 57
         mov     ax, 0                           ; B8 00 00
         push    cs                              ; 0E
+        ;   ^ arg lpszModule (high/segment)
         push    ax                              ; 50
+        ;   ^ arg lpszModule (low/offset)
+        ; --> GETMODULEHANDLE(LPSTR lpszModule) -> HANDLE
         call    far KERNEL.GETMODULEHANDLE      ; 9A FF FF 00 00 [FIXUP]
+        ; constant WM_CREATE
         mov     bx, 1                           ; BB 01 00
         push    ax                              ; 50
         push    bx                              ; 53
@@ -42,6 +60,7 @@ SOUND_TEXT SEGMENT BYTE PUBLIC 'CODE'
         mov     ax, 0x5d                        ; B8 5D 00
         push    ax                              ; 50
         retf                                    ; CB
+;   [conditional branch target (if/else)] L_0038
 L_0038:
         pop     di                              ; 5F
         pop     si                              ; 5E
@@ -64,25 +83,31 @@ L_0038:
         mov     al, ah                          ; 8A C4
         out     0x42, al                        ; E6 42
         jmp     L_0062                          ; EB 00
+;   [unconditional branch target] L_0062
 L_0062:
         in      al, 0x61                        ; E4 61
         mov     ah, al                          ; 8A E0
         or      al, 3                           ; 0C 03
         out     0x61, al                        ; E6 61
         mov     cx, 0x2400                      ; B9 00 24
+;   [loop iteration target] L_006D
 L_006D:
         loop    L_006D                          ; E2 FE
         mov     cx, 0x633                       ; B9 33 06
         mov     al, cl                          ; 8A C1
         out     0x42, al                        ; E6 42
+        ; constant WM_SETTEXT
         mov     al, ch                          ; 8A C5
         out     0x42, al                        ; E6 42
         mov     cx, 0x3400                      ; B9 00 34
+;   [loop iteration target] L_007D
 L_007D:
         loop    L_007D                          ; E2 FE
         mov     al, ah                          ; 8A C4
         out     0x61, al                        ; E6 61
+        ; constant WM_CREATE
         mov     al, 1                           ; B0 01
+;   [conditional branch target (if/else)] L_0085
 L_0085:
         dec     byte ptr cs:[0x43]              ; 2E FE 0E 43 00
         db      0cah                            ; CA

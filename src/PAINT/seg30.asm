@@ -1,3 +1,17 @@
+; ======================================================================
+; PAINT / seg30.asm   (segment 30 of PAINT)
+; ----------------------------------------------------------------------
+; Functions discovered (pass1b):         0
+; Total instructions:                    0
+; 
+; Classification (pass8):
+;   C-origin (high+medium):              0
+;   ASM-origin (high+medium):            0
+;   Unclear:                             0
+;   Tiny / unclassified:                 0
+; 
+; Far API calls in this segment:     0 (0 unique)
+; ======================================================================
 ; AUTO-GENERATED from original PAINT segment 30
 ; segment_size=317 bytes, flags=0xf130
 ; mode: humano legible - instrucciones x86 + bytes raw en comentario (autoritativo)
@@ -24,6 +38,7 @@ PAINT_TEXT SEGMENT BYTE PUBLIC 'CODE'
         push    si                              ; 56
         cmp     word ptr [bp + 8], 0            ; 83 7E 08 00
         je      L_003C                          ; 74 27
+        ; constant VK_SHIFT
         mov     ax, 0x10                        ; B8 10 00
         push    ax                              ; 50
         call    far USER.GETKEYSTATE            ; 9A FF FF 00 00 [FIXUP]
@@ -32,9 +47,11 @@ PAINT_TEXT SEGMENT BYTE PUBLIC 'CODE'
         mov     word ptr [0xbec], 0x3a9         ; C7 06 EC 0B A9 03
         mov     word ptr [0xbee], 0xa8          ; C7 06 EE 0B A8 00
         jmp     L_003C                          ; EB 0C
+;   [conditional branch target (if/else)] L_0030
 L_0030:
         mov     word ptr [0xbec], 0x74a         ; C7 06 EC 0B 4A 07
         mov     word ptr [0xbee], 0xb8          ; C7 06 EE 0B B8 00
+;   [branch target] L_003C
 L_003C:
         mov     ax, word ptr [0xc8a]            ; A1 8A 0C
         sub     ax, word ptr [0x1172]           ; 2B 06 72 11
@@ -43,6 +60,7 @@ L_003C:
         jge     L_004F                          ; 7D 05
         neg     ax                              ; F7 D8
         mov     word ptr [bp - 4], ax           ; 89 46 FC
+;   [conditional branch target (if/else)] L_004F
 L_004F:
         mov     ax, word ptr [0xc8c]            ; A1 8C 0C
         sub     ax, word ptr [0x1174]           ; 2B 06 74 11
@@ -51,6 +69,7 @@ L_004F:
         jge     L_0062                          ; 7D 05
         neg     ax                              ; F7 D8
         mov     word ptr [bp - 6], ax           ; 89 46 FA
+;   [conditional branch target (if/else)] L_0062
 L_0062:
         inc     word ptr [0x896]                ; FF 06 96 08
         cmp     word ptr [0x896], 2             ; 83 3E 96 08 02
@@ -61,12 +80,15 @@ L_0062:
         jg      L_007F                          ; 7F 06
         cmp     word ptr [bp - 6], 2            ; 83 7E FA 02
         jle     L_0085                          ; 7E 06
+;   [conditional branch target (if/else)] L_007F
 L_007F:
         mov     word ptr [0x896], 0             ; C7 06 96 08 00 00
+;   [conditional branch target (if/else)] L_0085
 L_0085:
         cmp     word ptr [0x896], 0             ; 83 3E 96 08 00
         je      L_008F                          ; 74 03
         jmp     L_0131                          ; E9 A2 00
+;   [conditional branch target (if/else)] L_008F
 L_008F:
         push    word ptr [0xe04]                ; FF 36 04 0E
         call    far _entry_27                   ; 9A A0 00 00 00 [FIXUP]
@@ -77,24 +99,35 @@ L_008F:
         push    ax                              ; 50
         call    far _entry_131                  ; 9A FF FF 00 00 [FIXUP]
         push    word ptr [bp - 0xa]             ; FF 76 F6
+        ;   ^ arg hDCDest
         mov     ax, word ptr [0xc8a]            ; A1 8A 0C
         mov     cx, word ptr [0x1122]           ; 8B 0E 22 11
         sar     cx, 1                           ; D1 F9
         sub     ax, cx                          ; 2B C1
         push    ax                              ; 50
+        ;   ^ arg x
         mov     ax, word ptr [0xc8c]            ; A1 8C 0C
         mov     cx, word ptr [0x1168]           ; 8B 0E 68 11
         sar     cx, 1                           ; D1 F9
         sub     ax, cx                          ; 2B C1
         push    ax                              ; 50
+        ;   ^ arg y
         push    word ptr [0x1122]               ; FF 36 22 11
+        ;   ^ arg nWidth
         push    word ptr [0x1168]               ; FF 36 68 11
+        ;   ^ arg nHeight
         push    word ptr [bp - 8]               ; FF 76 F8
+        ;   ^ arg hDCSrc
         sub     ax, ax                          ; 2B C0
         push    ax                              ; 50
+        ;   ^ arg xSrc
         push    ax                              ; 50
+        ;   ^ arg ySrc
         push    word ptr [0xbee]                ; FF 36 EE 0B
+        ;   ^ arg dwRop (high/segment)
         push    word ptr [0xbec]                ; FF 36 EC 0B
+        ;   ^ arg dwRop (low/offset)
+        ; --> BITBLT(HDC hDCDest, INT x, INT y, INT nWidth, INT nHeight, HDC hDCSrc, INT xSrc, INT ySrc, DWORD dwRop) -> BOOL
         call    far GDI.BITBLT                  ; 9A 1D 01 00 00 [FIXUP]
         push    word ptr [bp - 0xa]             ; FF 76 F6
         call    far _entry_130                  ; 9A FF FF 00 00 [FIXUP]
@@ -107,22 +140,38 @@ L_008F:
         sar     ax, 1                           ; D1 F8
         sub     di, ax                          ; 2B F8
         push    word ptr [bp + 0xa]             ; FF 76 0A
+        ;   ^ arg hDCDest
         push    di                              ; 57
+        ;   ^ arg x
         push    si                              ; 56
+        ;   ^ arg y
         push    word ptr [0x1122]               ; FF 36 22 11
+        ;   ^ arg nWidth
         push    word ptr [0x1168]               ; FF 36 68 11
+        ;   ^ arg nHeight
         push    word ptr [bp - 0xa]             ; FF 76 F6
+        ;   ^ arg hDCSrc
         push    di                              ; 57
+        ;   ^ arg xSrc
         push    si                              ; 56
+        ;   ^ arg ySrc
         mov     ax, 0x20                        ; B8 20 00
         mov     dx, 0xcc                        ; BA CC 00
         push    dx                              ; 52
+        ;   ^ arg dwRop (high/segment)
         push    ax                              ; 50
+        ;   ^ arg dwRop (low/offset)
+        ; --> BITBLT(HDC hDCDest, INT x, INT y, INT nWidth, INT nHeight, HDC hDCSrc, INT xSrc, INT ySrc, DWORD dwRop) -> BOOL
         call    far GDI.BITBLT                  ; 9A FF FF 00 00 [FIXUP]
         push    word ptr [bp - 0xa]             ; FF 76 F6
+        ;   ^ arg hDC
+        ; --> DELETEDC(HDC hDC) -> BOOL
         call    far GDI.DELETEDC                ; 9A 2D 01 00 00 [FIXUP]
         push    word ptr [bp - 8]               ; FF 76 F8
+        ;   ^ arg hDC
+        ; --> DELETEDC(HDC hDC) -> BOOL
         call    far GDI.DELETEDC                ; 9A FF FF 00 00 [FIXUP]
+;   [unconditional branch target] L_0131
 L_0131:
         pop     si                              ; 5E
         pop     di                              ; 5F

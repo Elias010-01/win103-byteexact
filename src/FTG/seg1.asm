@@ -1,3 +1,17 @@
+; ======================================================================
+; FTG / seg1.asm   (segment 1 of FTG)
+; ----------------------------------------------------------------------
+; Functions discovered (pass1b):         4
+; Total instructions:                  130
+; 
+; Classification (pass8):
+;   C-origin (high+medium):              0
+;   ASM-origin (high+medium):            3
+;   Unclear:                             1
+;   Tiny / unclassified:                 0
+; 
+; Far API calls in this segment:     0 (0 unique)
+; ======================================================================
 ; AUTO-GENERATED from original FTG segment 1
 ; segment_size=385 bytes, flags=0x0040
 ; mode: humano legible - instrucciones x86 + bytes raw en comentario (autoritativo)
@@ -39,6 +53,7 @@ FTG_TEXT SEGMENT BYTE PUBLIC 'CODE'
         cmp     cl, 0xf                         ; 80 F9 0F
         jle     L_0045                          ; 7E 03
         add     cl, 0x60                        ; 80 C1 60
+;   [conditional branch target (if/else)] L_0045
 L_0045:
         mov     byte ptr [0xe], cl              ; 88 0E 0E 00
         cmp     cl, 0x64                        ; 80 F9 64
@@ -47,6 +62,7 @@ L_0045:
         sub     cl, 7                           ; 80 E9 07
         jmp     L_006C                          ; EB 16
         nop                                     ; 90
+;   [conditional branch target (if/else)] L_0057
 L_0057:
         mov     dx, 0xa1                        ; BA A1 00
         sub     cl, 0x6f                        ; 80 E9 6F
@@ -56,25 +72,32 @@ L_0057:
         and     al, 0xfb                        ; 24 FB
         out     0x21, al                        ; E6 21
         jmp     L_0068                          ; EB 01
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_0067 -- offset 0x0067 -- 52 instr
-; Funcion mediana (52 instr, 0 calls).
-; tags: far, medium
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_0067   offset=0x0067  size=52 instr  segment=seg1.asm
+;
+; Classification (pass8): asm_medium  (score C=0, ASM=5)
+; Prologue: none     Epilogue: jmp_tail
+;
+; Near calls (internal): L_0067
+;-------------------------------------------------------------------------
+;   [sub-routine] L_0067
 L_0067:
         iret                                    ; CF
+;   [unconditional branch target] L_0068
 L_0068:
         push    cs                              ; 0E
         call    L_0067                          ; E8 FB FF
+;   [unconditional branch target] L_006C
 L_006C:
         mov     ah, 0x7f                        ; B4 7F
         rol     ah, cl                          ; D2 C4
         mov     byte ptr [0xf], ah              ; 88 26 0F 00
         mov     word ptr [0x12], dx             ; 89 16 12 00
+;   [conditional branch target (if/else)] L_0078
 L_0078:
         les     di, ptr [bp + 6]                ; C4 7E 06
         mov     si, 0                           ; BE 00 00
+        ; constant WM_GETTEXTLENGTH
         mov     ax, 0xe                         ; B8 0E 00
         mov     cx, ax                          ; 8B C8
         rep movsb byte ptr es:[di], byte ptr [si] ; F3 A4
@@ -118,14 +141,18 @@ L_0078:
         or      al, ah                          ; 0A C4
         out     dx, al                          ; EE
         jmp     L_00DC                          ; EB 01
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_00DB -- offset 0x00DB -- 20 instr
-; Llama a servicios DOS via INT 21h (20 instr).
-; tags: dos_caller, int_21
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_00DB   offset=0x00DB  size=20 instr  segment=seg1.asm
+;
+; Classification (pass8): asm_high  (score C=0, ASM=9)
+; Prologue: none     Epilogue: jmp_tail
+;
+; Near calls (internal): L_00DB
+;-------------------------------------------------------------------------
+;   [sub-routine] L_00DB
 L_00DB:
         iret                                    ; CF
+;   [unconditional branch target] L_00DC
 L_00DC:
         push    cs                              ; 0E
         call    L_00DB                          ; E8 FB FF
@@ -146,17 +173,22 @@ L_00DC:
         out     dx, al                          ; EE
         mov     word ptr [0x10], 0xffff         ; C7 06 10 00 FF FF
         jmp     L_010E                          ; EB 01
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_010D -- offset 0x010D -- 47 instr
-; Llama a servicios DOS via INT 21h (47 instr).
-; tags: dos_caller, far, int_21
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_010D   offset=0x010D  size=47 instr  segment=seg1.asm
+;
+; Classification (pass8): asm_high  (score C=1, ASM=7)
+; Prologue: none     Epilogue: jmp_tail
+;
+; Near calls (internal): L_010D
+;-------------------------------------------------------------------------
+;   [sub-routine] L_010D
 L_010D:
         iret                                    ; CF
+;   [unconditional branch target] L_010E
 L_010E:
         push    cs                              ; 0E
         call    L_010D                          ; E8 FB FF
+;   [conditional branch target (if/else)] L_0112
 L_0112:
         pop     di                              ; 5F
         pop     si                              ; 5E
@@ -185,6 +217,7 @@ L_0112:
         not     ah                              ; F6 D4
         or      al, ah                          ; 0A C4
         jmp     L_0143                          ; EB 00
+;   [unconditional branch target] L_0143
 L_0143:
         out     dx, al                          ; EE
         mov     dx, word ptr [0x14]             ; 8B 16 14 00
@@ -202,16 +235,21 @@ L_0143:
         int     0x21                            ; CD 21
         pop     ds                              ; 1F
         mov     word ptr [0x10], 0              ; C7 06 10 00 00 00
+;   [conditional branch target (if/else)] L_016F
 L_016F:
         jmp     L_0172                          ; EB 01
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_0171 -- offset 0x0171 -- 11 instr
-; Funcion sin clasificar definitiva (11 instr).
-; tags: far, wrapper
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_0171   offset=0x0171  size=11 instr  segment=seg1.asm
+;
+; Classification (pass8): unclear  (score C=1, ASM=2)
+; Prologue: none     Epilogue: retf
+;
+; Near calls (internal): L_0171
+;-------------------------------------------------------------------------
+;   [sub-routine] L_0171
 L_0171:
         iret                                    ; CF
+;   [unconditional branch target] L_0172
 L_0172:
         push    cs                              ; 0E
         call    L_0171                          ; E8 FB FF

@@ -1,3 +1,26 @@
+; ======================================================================
+; USER / seg10.asm   (segment 10 of USER)
+; ----------------------------------------------------------------------
+; Functions discovered (pass1b):         5
+; Total instructions:                  189
+; 
+; Classification (pass8):
+;   C-origin (high+medium):              5
+;   ASM-origin (high+medium):            0
+;   Unclear:                             0
+;   Tiny / unclassified:                 0
+; 
+; Far API calls in this segment:     10 (9 unique)
+;   Top:
+;        2  DEATH
+;        1  EXITKERNEL
+;        1  2
+;        1  ENABLE
+;        1  ENABLESYSTEMTIMERS
+;        1  3
+;        1  DISABLE
+;        1  DISABLESYSTEMTIMERS
+; ======================================================================
 ; AUTO-GENERATED from original USER segment 10
 ; segment_size=516 bytes, flags=0xf170
 ; mode: humano legible - instrucciones x86 + bytes raw en comentario (autoritativo)
@@ -10,14 +33,6 @@
 ; el binario original).
 
 USER_TEXT SEGMENT BYTE PUBLIC 'CODE'
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; EXITWINDOWS -- 60 instr
-; Termina Windows y devuelve a DOS.
-; tags: calls_gdi, calls_kernel, far, medium
-; calls (intra): sub_015B
-; calls (inter): GDI.DEATH, KERNEL.EXITKERNEL
-;----------------------------------------------------------------------
 
 
 ;-----------------------------------------------------------------------
@@ -39,10 +54,13 @@ EXITWINDOWS PROC FAR
         call    L_007C                          ; E8 62 00
         or      ax, ax                          ; 0B C0
         je      L_0023                          ; 74 05
+        ; constant WM_CREATE
         mov     ax, 1                           ; B8 01 00
         jmp     L_0025                          ; EB 02
+;   [conditional branch target (if/else)] L_0023
 L_0023:
         sub     ax, ax                          ; 2B C0
+;   [unconditional branch target] L_0025
 L_0025:
         mov     word ptr [bp - 6], ax           ; 89 46 FA
         push    ax                              ; 50
@@ -53,6 +71,7 @@ L_0025:
         mov     word ptr [0x5a], 0              ; C7 06 5A 00 00 00
         sub     ax, ax                          ; 2B C0
         jmp     L_0071                          ; EB 2F
+;   [conditional branch target (if/else)] L_0042
 L_0042:
         call    far _SEG1_3781                  ; 9A FF FF 00 00 [FIXUP]
         call    L_015B                          ; E8 11 01
@@ -64,11 +83,14 @@ L_0042:
         mov     ax, word ptr [bp + 6]           ; 8B 46 06
         mov     word ptr [bp - 8], ax           ; 89 46 F8
         jmp     L_0069                          ; EB 05
+;   [conditional branch target (if/else)] L_0064
 L_0064:
         mov     word ptr [bp - 8], 1            ; C7 46 F8 01 00
+;   [unconditional branch target] L_0069
 L_0069:
         push    word ptr [bp - 8]               ; FF 76 F8
         call    far KERNEL.EXITKERNEL           ; 9A FF FF 00 00 [FIXUP]
+;   [unconditional branch target] L_0071
 L_0071:
         sub     bp, 2                           ; 83 ED 02
         mov     sp, bp                          ; 8B E5
@@ -76,7 +98,9 @@ L_0071:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    4                               ; CA 04 00
+;   [sub-routine] L_007C
 L_007C:
+        ;   = cProc <0> ; NEAR PASCAL prologue
         push    bp                              ; 55
         mov     bp, sp                          ; 8B EC
         mov     ax, OFFSET _entry_340           ; B8 FF FF [FIXUP]
@@ -108,17 +132,22 @@ EXITWINDOWS ENDP
         mov     ax, word ptr [0x54]             ; A1 54 00
         cmp     word ptr [bx + 0xc], ax         ; 39 47 0C
         jne     L_00B9                          ; 75 05
+;   [loop start] L_00B4
 L_00B4:
+        ; constant WM_CREATE
         mov     ax, 1                           ; B8 01 00
         jmp     L_00DC                          ; EB 23
+;   [conditional branch target (if/else)] L_00B9
 L_00B9:
         push    word ptr [bp + 0xa]             ; FF 76 0A
         cmp     si, 2                           ; 83 FE 02
         jne     L_00C6                          ; 75 05
         mov     ax, 0x11                        ; B8 11 00
         jmp     L_00C9                          ; EB 03
+;   [conditional branch target (if/else)] L_00C6
 L_00C6:
         mov     ax, 0x16                        ; B8 16 00
+;   [unconditional branch target] L_00C9
 L_00C9:
         push    ax                              ; 50
         push    si                              ; 56
@@ -129,6 +158,7 @@ L_00C9:
         mov     word ptr [bp - 4], ax           ; 89 46 FC
         cmp     si, 2                           ; 83 FE 02
         jne     L_00B4                          ; 75 D8
+;   [unconditional branch target] L_00DC
 L_00DC:
         pop     si                              ; 5E
         sub     bp, 2                           ; 83 ED 02
@@ -137,14 +167,18 @@ L_00DC:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    6                               ; CA 06 00
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_00E8 -- offset 0x00E8 -- 49 instr
-; Funcion mediana (49 instr, 2 calls).
-; tags: calls_mouse, calls_system, far, medium
-; callers: ENABLEOEMLAYER
-; calls (inter): MOUSE.ENABLE, SYSTEM.ENABLESYSTEMTIMERS
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_00E8   offset=0x00E8  size=49 instr  segment=seg10.asm
+;
+; Classification (pass8): c_medium  (score C=5, ASM=0)
+; Prologue: saves_regs     Epilogue: retf
+;
+; Far API calls:
+;   2
+;   ENABLE
+;   ENABLESYSTEMTIMERS
+;-------------------------------------------------------------------------
+;   [sub-routine] L_00E8
 L_00E8:
         push    ds                              ; 1E
         pop     ax                              ; 58
@@ -159,9 +193,11 @@ L_00E8:
         call    far SYSTEM.ENABLESYSTEMTIMERS   ; 9A FF FF 00 00 [FIXUP]
         mov     si, 0x182                       ; BE 82 01
         jmp     L_0107                          ; EB 07
+;   [loop start] L_0100
 L_0100:
         sub     si, 2                           ; 83 EE 02
         mov     word ptr [si], 0                ; C7 04 00 00
+;   [unconditional branch target] L_0107
 L_0107:
         cmp     si, 0x82                        ; 81 FE 82 00
         jne     L_0100                          ; 75 F3
@@ -190,6 +226,7 @@ L_0107:
         push    dx                              ; 52
         push    ax                              ; 50
         call    far MOUSE.ENABLE                ; 9A FF FF 00 00 [FIXUP]
+;   [conditional branch target (if/else)] L_0151
 L_0151:
         pop     si                              ; 5E
         sub     bp, 2                           ; 83 ED 02
@@ -198,24 +235,31 @@ L_0151:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf                                    ; CB
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_015B -- offset 0x015B -- 26 instr
-; Funcion sin clasificar definitiva (26 instr).
-; tags: calls_mouse, calls_system, small
-; callers: DISABLEOEMLAYER, EXITWINDOWS
-; calls (inter): MOUSE.DISABLE, SYSTEM.DISABLESYSTEMTIMERS
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_015B   offset=0x015B  size=26 instr  segment=seg10.asm
+;
+; Classification (pass8): c_medium  (score C=5, ASM=0)
+; Prologue: standard_bp     Epilogue: ret
+;
+; Far API calls:
+;   3
+;   DISABLE
+;   DISABLESYSTEMTIMERS
+;-------------------------------------------------------------------------
+;   [sub-routine] L_015B
 L_015B:
+        ;   = cProc <18> ; NEAR PASCAL prologue
         push    bp                              ; 55
         mov     bp, sp                          ; 8B EC
         sub     sp, 0x12                        ; 83 EC 12
         cmp     word ptr [0x47c], 0             ; 83 3E 7C 04 00
         je      L_016D                          ; 74 05
         call    far MOUSE.DISABLE               ; 9A FF FF 00 00 [FIXUP]
+;   [conditional branch target (if/else)] L_016D
 L_016D:
         call    far KEYBOARD.3                  ; 9A FF FF 00 00 [FIXUP]
         call    far SYSTEM.DISABLESYSTEMTIMERS  ; 9A FF FF 00 00 [FIXUP]
+;   [loop start] L_0177
 L_0177:
         mov     es, word ptr [0x314]            ; 8E 06 14 03
         push    word ptr es:[0x57d5]            ; 26 FF 36 D5 57
@@ -227,6 +271,7 @@ L_0177:
         push    ax                              ; 50
         mov     ax, 0xffff                      ; B8 FF FF
         push    ax                              ; 50
+        ; constant WM_CREATE
         mov     ax, 1                           ; B8 01 00
         push    ax                              ; 50
         call    far _SEG1_5EEE                  ; 9A FF FF 00 00 [FIXUP]
@@ -235,14 +280,6 @@ L_0177:
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret                                     ; C3
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; DISABLEOEMLAYER -- 19 instr
-; Funcion sin clasificar definitiva (19 instr).
-; tags: calls_gdi, far, small
-; calls (intra): sub_015B
-; calls (inter): GDI.DEATH
-;----------------------------------------------------------------------
 
 ;-----------------------------------------------------------------------
 ; DISABLEOEMLAYER  (offset 0x019E, size 39 bytes)
@@ -268,14 +305,6 @@ DISABLEOEMLAYER PROC FAR
         dec     bp                              ; 4D
         retf                                    ; CB
 DISABLEOEMLAYER ENDP
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; ENABLEOEMLAYER -- 35 instr
-; Funcion mediana (35 instr, 2 calls).
-; tags: calls_gdi, far, medium
-; calls (intra): sub_00E8
-; calls (inter): GDI.RESURRECTION
-;----------------------------------------------------------------------
 
 
 ;-----------------------------------------------------------------------

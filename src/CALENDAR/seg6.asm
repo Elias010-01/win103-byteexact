@@ -1,3 +1,17 @@
+; ======================================================================
+; CALENDAR / seg6.asm   (segment 6 of CALENDAR)
+; ----------------------------------------------------------------------
+; Functions discovered (pass1b):         1
+; Total instructions:                   43
+; 
+; Classification (pass8):
+;   C-origin (high+medium):              0
+;   ASM-origin (high+medium):            0
+;   Unclear:                             1
+;   Tiny / unclassified:                 0
+; 
+; Far API calls in this segment:     0 (0 unique)
+; ======================================================================
 ; AUTO-GENERATED from original CALENDAR segment 6
 ; segment_size=527 bytes, flags=0x0010
 ; mode: humano legible - instrucciones x86 + bytes raw en comentario (autoritativo)
@@ -80,12 +94,15 @@ CALENDAR_TEXT SEGMENT BYTE PUBLIC 'CODE'
         sub     word ptr [bp - 4], 0xc          ; 83 6E FC 0C
         mov     word ptr [bp - 6], 0x138        ; C7 46 FA 38 01
         jmp     L_008D                          ; EB 05
+;   [conditional branch target (if/else)] L_0088
 L_0088:
         mov     word ptr [bp - 6], 0x132        ; C7 46 FA 32 01
+;   [unconditional branch target] L_008D
 L_008D:
         cmp     word ptr [bp - 4], 0            ; 83 7E FC 00
         jne     L_0098                          ; 75 05
         mov     word ptr [bp - 4], 0xc          ; C7 46 FC 0C 00
+;   [conditional branch target (if/else)] L_0098
 L_0098:
         push    word ptr [bp - 4]               ; FF 76 FC
         push    si                              ; 56
@@ -93,11 +110,15 @@ L_0098:
         jne     L_00A9                          ; 75 06
         test    byte ptr [bp + 6], 4            ; F6 46 06 04
         je      L_00AE                          ; 74 05
+;   [conditional branch target (if/else)] L_00A9
 L_00A9:
+        ; constant WM_CREATE
         mov     ax, 1                           ; B8 01 00
         jmp     L_00B0                          ; EB 02
+;   [conditional branch target (if/else)] L_00AE
 L_00AE:
         sub     ax, ax                          ; 2B C0
+;   [unconditional branch target] L_00B0
 L_00B0:
         push    ax                              ; 50
         nop                                     ; 90
@@ -112,6 +133,7 @@ L_00B0:
         sub     ah, ah                          ; 2A E4
         push    ax                              ; 50
         push    si                              ; 56
+        ; constant WM_CREATE
         mov     ax, 1                           ; B8 01 00
         push    ax                              ; 50
         nop                                     ; 90
@@ -122,16 +144,19 @@ L_00B0:
         je      L_00F1                          ; 74 18
         mov     byte ptr [si], 0x20             ; C6 04 20
         jmp     L_00E8                          ; EB 0A
+;   [loop start] L_00DE
 L_00DE:
         mov     bx, word ptr [bp - 6]           ; 8B 5E FA
         inc     word ptr [bp - 6]               ; FF 46 FA
         mov     al, byte ptr [bx]               ; 8A 07
         mov     byte ptr [si], al               ; 88 04
+;   [unconditional branch target] L_00E8
 L_00E8:
         inc     si                              ; 46
         mov     bx, word ptr [bp - 6]           ; 8B 5E FA
         cmp     byte ptr [bx], 0                ; 80 3F 00
         jne     L_00DE                          ; 75 ED
+;   [conditional branch target (if/else)] L_00F1
 L_00F1:
         test    byte ptr [bp + 6], 8            ; F6 46 06 08
         je      L_0102                          ; 74 0B
@@ -139,6 +164,7 @@ L_00F1:
         cmp     byte ptr [bx], 0x30             ; 80 3F 30
         jne     L_0102                          ; 75 03
         mov     byte ptr [bx], 0x20             ; C6 07 20
+;   [conditional branch target (if/else)] L_0102
 L_0102:
         mov     byte ptr [si], 0                ; C6 04 00
         mov     ax, si                          ; 8B C6
@@ -189,6 +215,7 @@ L_0102:
         mov     ax, dx                          ; 8B C2
         mov     word ptr [bp - 4], ax           ; 89 46 FC
         mov     word ptr [bp - 8], di           ; 89 7E F8
+;   [conditional branch target (if/else)] L_0175
 L_0175:
         push    word ptr [bp - 4]               ; FF 76 FC
         push    si                              ; 56
@@ -227,12 +254,13 @@ L_0175:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    6                               ; CA 06 00
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_01C1 -- offset 0x01C1 -- 43 instr
-; Funcion mediana (43 instr, 0 calls).
-; tags: medium
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_01C1   offset=0x01C1  size=43 instr  segment=seg6.asm
+;
+; Classification (pass8): unclear  (score C=2, ASM=0)
+; Prologue: saves_regs     Epilogue: unknown
+;-------------------------------------------------------------------------
+;   [sub-routine] L_01C1
 L_01C1:
         push    ds                              ; 1E
         pop     ax                              ; 58
@@ -256,11 +284,13 @@ L_01C1:
         jne     L_01EB                          ; 75 06
         cmp     word ptr [bp + 6], 0            ; 83 7E 06 00
         je      L_01F3                          ; 74 08
+;   [conditional branch target (if/else)] L_01EB
 L_01EB:
         mov     al, byte ptr [bp - 4]           ; 8A 46 FC
         add     al, 0x30                        ; 04 30
         mov     byte ptr [di], al               ; 88 05
         inc     di                              ; 47
+;   [conditional branch target (if/else)] L_01F3
 L_01F3:
         mov     ax, si                          ; 8B C6
         cdq                                     ; 99

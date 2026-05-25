@@ -1,3 +1,17 @@
+; ======================================================================
+; NOMOUSE / seg1.asm   (segment 1 of NOMOUSE)
+; ----------------------------------------------------------------------
+; Functions discovered (pass1b):         0
+; Total instructions:                    0
+; 
+; Classification (pass8):
+;   C-origin (high+medium):              0
+;   ASM-origin (high+medium):            0
+;   Unclear:                             0
+;   Tiny / unclassified:                 0
+; 
+; Far API calls in this segment:     0 (0 unique)
+; ======================================================================
 ; AUTO-GENERATED from original NOMOUSE segment 1
 ; segment_size=56 bytes, flags=0x0040
 ; mode: humano legible - instrucciones x86 + bytes raw en comentario (autoritativo)
@@ -29,6 +43,7 @@ NOMOUSE_TEXT SEGMENT BYTE PUBLIC 'CODE'
         pop     ds                              ; 1F
         les     di, ptr [bp + 6]                ; C4 7E 06
         mov     si, 0                           ; BE 00 00
+        ; constant WM_GETTEXTLENGTH
         mov     ax, 0xe                         ; B8 0E 00
         mov     cx, ax                          ; 8B C8
         rep movsb byte ptr es:[di], byte ptr [si] ; F3 A4

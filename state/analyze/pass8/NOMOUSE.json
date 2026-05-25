@@ -1,0 +1,15 @@
+{
+  "module": "NOMOUSE",
+  "num_functions": 0,
+  "verdict_counts": {},
+  "c_count": 0,
+  "asm_count": 0,
+  "unclear_count": 0,
+  "tiny_count": 0,
+  "c_ratio_overall": 0.0,
+  "c_ratio_of_classified": 0.0,
+  "expected_c_ratio": null,
+  "expected_confidence": null,
+  "consistency": "no_expectation",
+  "functions": []
+}

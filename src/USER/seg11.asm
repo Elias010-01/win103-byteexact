@@ -1,3 +1,20 @@
+; ======================================================================
+; USER / seg11.asm   (segment 11 of USER)
+; ----------------------------------------------------------------------
+; Functions discovered (pass1b):         1
+; Total instructions:                  111
+; 
+; Classification (pass8):
+;   C-origin (high+medium):              0
+;   ASM-origin (high+medium):            0
+;   Unclear:                             1
+;   Tiny / unclassified:                 0
+; 
+; Far API calls in this segment:     2 (2 unique)
+;   Top:
+;        1  CREATESOLIDBRUSH
+;        1  DELETEOBJECT
+; ======================================================================
 ; AUTO-GENERATED from original USER segment 11
 ; segment_size=267 bytes, flags=0xf130
 ; mode: humano legible - instrucciones x86 + bytes raw en comentario (autoritativo)
@@ -10,13 +27,6 @@
 ; el binario original).
 
 USER_TEXT SEGMENT BYTE PUBLIC 'CODE'
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; SETSYSCOLORS -- 111 instr
-; Setter: cambia syscolors.
-; tags: calls_gdi, dispatcher, far
-; calls (inter): GDI.CREATESOLIDBRUSH, GDI.DELETEOBJECT
-;----------------------------------------------------------------------
 
 
 ;-----------------------------------------------------------------------
@@ -39,6 +49,7 @@ SETSYSCOLORS PROC FAR
         mov     word ptr [bp - 0x12], 0x3de     ; C7 46 EE DE 03
         sub     si, si                          ; 2B F6
         jmp     L_0094                          ; EB 72
+;   [loop start] L_0022
 L_0022:
         les     bx, ptr [bp + 6]                ; C4 5E 06
         add     word ptr [bp + 6], 4            ; 83 46 06 04
@@ -49,6 +60,7 @@ L_0022:
         les     bx, ptr [bp + 0xa]              ; C4 5E 0A
         add     word ptr [bp + 0xa], 2          ; 83 46 0A 02
         mov     di, word ptr es:[bx]            ; 26 8B 3F
+        ; constant WM_CREATE
         mov     ax, 1                           ; B8 01 00
         mov     cx, di                          ; 8B CF
         shl     ax, cl                          ; D3 E0
@@ -64,16 +76,23 @@ L_0022:
         or      ax, ax                          ; 0B C0
         je      L_0067                          ; 74 06
         push    ax                              ; 50
+        ;   ^ arg hObj
+        ; --> DELETEOBJECT(HANDLE hObj) -> BOOL
         call    far GDI.DELETEOBJECT            ; 9A FF FF 00 00 [FIXUP]
+;   [conditional branch target (if/else)] L_0067
 L_0067:
         push    word ptr [bp - 0xe]             ; FF 76 F2
+        ;   ^ arg clr (high/segment)
         push    word ptr [bp - 0x10]            ; FF 76 F0
+        ;   ^ arg clr (low/offset)
+        ; --> CREATESOLIDBRUSH(DWORD clr) -> HBRUSH
         call    far GDI.CREATESOLIDBRUSH        ; 9A FF FF 00 00 [FIXUP]
         mov     bx, word ptr [bp - 0xa]         ; 8B 5E F6
         mov     cx, di                          ; 8B CF
         shl     cx, 1                           ; D1 E1
         add     bx, cx                          ; 03 D9
         mov     word ptr [bx], ax               ; 89 07
+;   [conditional branch target (if/else)] L_007D
 L_007D:
         mov     bx, word ptr [bp - 0x12]        ; 8B 5E EE
         mov     ax, di                          ; 8B C7
@@ -85,6 +104,7 @@ L_007D:
         mov     word ptr [bx], ax               ; 89 07
         mov     word ptr [bx + 2], dx           ; 89 57 02
         inc     si                              ; 46
+;   [unconditional branch target] L_0094
 L_0094:
         cmp     word ptr [bp + 0xe], si         ; 39 76 0E
         jg      L_0022                          ; 7F 89
@@ -99,22 +119,28 @@ L_0094:
         call    far _SEG1_253F                  ; 9A FF FF 00 00 [FIXUP]
         test    word ptr [bp - 6], 0x120        ; F7 46 FA 20 01
         je      L_00BE                          ; 74 0C
+        ; constant WM_SIZE
         mov     ax, 5                           ; B8 05 00
         push    ax                              ; 50
         sub     ax, ax                          ; 2B C0
         push    ax                              ; 50
+        ; constant WM_CREATE
         mov     ax, 1                           ; B8 01 00
         jmp     L_00CC                          ; EB 0E
+;   [conditional branch target (if/else)] L_00BE
 L_00BE:
         test    word ptr [bp - 6], 0x2dd        ; F7 46 FA DD 02
         je      L_00D2                          ; 74 0D
+        ; constant WM_SIZE
         mov     ax, 5                           ; B8 05 00
         push    ax                              ; 50
         sub     ax, ax                          ; 2B C0
         push    ax                              ; 50
+;   [unconditional branch target] L_00CC
 L_00CC:
         push    ax                              ; 50
         call    far _SEG1_18E3                  ; 9A EB 00 00 00 [FIXUP]
+;   [conditional branch target (if/else)] L_00D2
 L_00D2:
         test    byte ptr [bp - 6], 2            ; F6 46 FA 02
         je      L_00FF                          ; 74 27
@@ -124,6 +150,7 @@ L_00D2:
         push    ax                              ; 50
         sub     ax, ax                          ; 2B C0
         push    ax                              ; 50
+        ; constant WM_CREATE
         mov     ax, 1                           ; B8 01 00
         push    ax                              ; 50
         call    far _SEG1_18E3                  ; 9A FF FF 00 00 [FIXUP]
@@ -132,6 +159,7 @@ L_00D2:
         mov     ax, 0x512                       ; B8 12 05
         push    ax                              ; 50
         call    far _entry_330                  ; 9A FF FF 00 00 [FIXUP]
+;   [conditional branch target (if/else)] L_00FF
 L_00FF:
         pop     si                              ; 5E
         pop     di                              ; 5F

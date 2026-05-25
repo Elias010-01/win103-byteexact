@@ -1,3 +1,17 @@
+; ======================================================================
+; SPAIN / seg3.asm   (segment 3 of SPAIN)
+; ----------------------------------------------------------------------
+; Functions discovered (pass1b):         0
+; Total instructions:                    0
+; 
+; Classification (pass8):
+;   C-origin (high+medium):              0
+;   ASM-origin (high+medium):            0
+;   Unclear:                             0
+;   Tiny / unclassified:                 0
+; 
+; Far API calls in this segment:     0 (0 unique)
+; ======================================================================
 ; AUTO-GENERATED from original SPAIN segment 3
 ; segment_size=1046 bytes, flags=0x0041
 ; mode: humano legible - instrucciones x86 + bytes raw en comentario (autoritativo)

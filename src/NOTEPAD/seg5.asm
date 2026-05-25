@@ -1,3 +1,19 @@
+; ======================================================================
+; NOTEPAD / seg5.asm   (segment 5 of NOTEPAD)
+; ----------------------------------------------------------------------
+; Functions discovered (pass1b):         2
+; Total instructions:                  178
+; 
+; Classification (pass8):
+;   C-origin (high+medium):              1
+;   ASM-origin (high+medium):            0
+;   Unclear:                             1
+;   Tiny / unclassified:                 0
+; 
+; Far API calls in this segment:     1 (1 unique)
+;   Top:
+;        1  LSTRCPY
+; ======================================================================
 ; AUTO-GENERATED from original NOTEPAD segment 5
 ; segment_size=595 bytes, flags=0xf130
 ; mode: humano legible - instrucciones x86 + bytes raw en comentario (autoritativo)
@@ -31,12 +47,16 @@ NOTEPAD_TEXT SEGMENT BYTE PUBLIC 'CODE'
         mov     bx, word ptr [bp - 4]           ; 8B 5E FC
         inc     word ptr [bp - 4]               ; FF 46 FC
         mov     byte ptr [bx], 0xa              ; C6 07 0A
+;   [conditional branch target (if/else)] L_002B
 L_002B:
         push    word ptr [bp - 4]               ; FF 76 FC
         call    L_0094                          ; E8 63 00
         lea     ax, [bp - 0x36]                 ; 8D 46 CA
         push    ss                              ; 16
+        ;   ^ arg lpsz (high/segment)
         push    ax                              ; 50
+        ;   ^ arg lpsz (low/offset)
+        ; --> LSTRLEN(LPSTR lpsz) -> INT
         call    far KERNEL.LSTRLEN              ; 9A FF FF 00 00 [FIXUP]
         mov     word ptr [bp - 0x38], ax        ; 89 46 C8
         cmp     word ptr [bp + 6], 0            ; 83 7E 06 00
@@ -50,6 +70,7 @@ L_002B:
         mov     si, word ptr [bp - 0x38]        ; 8B 76 C8
         inc     word ptr [bp - 0x38]            ; FF 46 C8
         mov     byte ptr [bp + si - 0x36], 0    ; C6 42 CA 00
+;   [conditional branch target (if/else)] L_0061
 L_0061:
         cmp     word ptr [bp + 6], 0            ; 83 7E 06 00
         jne     L_0073                          ; 75 0C
@@ -57,16 +78,24 @@ L_0061:
         call    far _entry_16                   ; 9A FF FF 00 00 [FIXUP]
         or      ax, ax                          ; 0B C0
         je      L_0088                          ; 74 15
+;   [conditional branch target (if/else)] L_0073
 L_0073:
         push    word ptr [0x1a]                 ; FF 36 1A 00
+        ;   ^ arg hWnd
         mov     ax, 0x412                       ; B8 12 04
         push    ax                              ; 50
+        ;   ^ arg wMsg
         sub     ax, ax                          ; 2B C0
         push    ax                              ; 50
+        ;   ^ arg wParam
         lea     ax, [bp - 0x36]                 ; 8D 46 CA
         push    ss                              ; 16
+        ;   ^ arg lParam (high/segment)
         push    ax                              ; 50
+        ;   ^ arg lParam (low/offset)
+        ; --> SENDMESSAGE(HWND hWnd, WORD wMsg, WPARAM wParam, LPARAM lParam) -> LRESULT
         call    far USER.SENDMESSAGE            ; 9A FF FF 00 00 [FIXUP]
+;   [conditional branch target (if/else)] L_0088
 L_0088:
         pop     si                              ; 5E
         sub     bp, 2                           ; 83 ED 02
@@ -75,15 +104,20 @@ L_0088:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    2                               ; CA 02 00
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_0094 -- offset 0x0094 -- 153 instr
-; Dispatcher: tabla de decisiones cmp+jcc (153 instr).
-; tags: calls_kernel, dispatcher
-; calls (intra): sub_021C
-; calls (inter): KERNEL.LSTRCPY
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_0094   offset=0x0094  size=153 instr  segment=seg5.asm
+;
+; Classification (pass8): c_high  (score C=10, ASM=0)
+; Prologue: standard_bp     Epilogue: ret_n   (PASCAL NEAR, callee cleans args)
+;
+; Far API calls:
+;   LSTRCPY(LPSTR lpszDest, LPSTR lpszSrc) -> LPSTR
+;
+; Near calls (internal): L_021C
+;-------------------------------------------------------------------------
+;   [sub-routine] L_0094
 L_0094:
+        ;   = cProc <22> ; NEAR PASCAL prologue
         push    bp                              ; 55
         mov     bp, sp                          ; 8B EC
         sub     sp, 0x16                        ; 83 EC 16
@@ -164,6 +198,7 @@ L_0094:
         cwde                                    ; 98
         or      ax, cx                          ; 0B C1
         je      L_0185                          ; 74 1D
+;   [conditional branch target (if/else)] L_0168
 L_0168:
         mov     word ptr [bp - 0xe], 0x114      ; C7 46 F2 14 01
         cmp     word ptr [0x126], 0             ; 83 3E 26 01 00
@@ -173,6 +208,7 @@ L_0168:
         jle     L_0185                          ; 7E 07
         dec     byte ptr [bp + si - 0x14]       ; FE 4A EC
         sub     byte ptr [bp + si - 0x13], 2    ; 80 6A ED 02
+;   [conditional branch target (if/else)] L_0185
 L_0185:
         cmp     word ptr [0x128], 0             ; 83 3E 28 01 00
         jne     L_01E2                          ; 75 56
@@ -181,80 +217,120 @@ L_0185:
         jne     L_01B1                          ; 75 1B
         lea     ax, [bp + si - 0xc]             ; 8D 42 F4
         push    ss                              ; 16
+        ;   ^ arg lpszDest (high/segment)
         push    ax                              ; 50
+        ;   ^ arg lpszDest (low/offset)
         lea     ax, [bp + si - 0xb]             ; 8D 42 F5
         push    ss                              ; 16
+        ;   ^ arg lpszSrc (high/segment)
         push    ax                              ; 50
+        ;   ^ arg lpszSrc (low/offset)
+        ; --> LSTRCPY(LPSTR lpszDest, LPSTR lpszSrc) -> LPSTR
         call    far KERNEL.LSTRCPY              ; 9A C5 01 00 00 [FIXUP]
         mov     ax, word ptr [0x120]            ; A1 20 01
         cmp     word ptr [0x122], ax            ; 39 06 22 01
         jle     L_01B1                          ; 7E 03
         inc     word ptr [bp - 0x16]            ; FF 46 EA
+;   [conditional branch target (if/else)] L_01B1
 L_01B1:
         mov     si, word ptr [bp - 0x16]        ; 8B 76 EA
         cmp     byte ptr [bp + si - 0xc], 0x30  ; 80 7A F4 30
         jne     L_01C9                          ; 75 0F
         lea     ax, [bp + si - 0xc]             ; 8D 42 F4
         push    ss                              ; 16
+        ;   ^ arg lpszDest (high/segment)
         push    ax                              ; 50
+        ;   ^ arg lpszDest (low/offset)
         lea     ax, [bp + si - 0xb]             ; 8D 42 F5
         push    ss                              ; 16
+        ;   ^ arg lpszSrc (high/segment)
         push    ax                              ; 50
+        ;   ^ arg lpszSrc (low/offset)
+        ; --> LSTRCPY(LPSTR lpszDest, LPSTR lpszSrc) -> LPSTR
         call    far KERNEL.LSTRCPY              ; 9A DE 01 00 00 [FIXUP]
+;   [conditional branch target (if/else)] L_01C9
 L_01C9:
         mov     si, word ptr [0x11a]            ; 8B 36 1A 01
         cmp     byte ptr [bp + si - 0x14], 0x30 ; 80 7A EC 30
         jne     L_01E2                          ; 75 0F
         lea     ax, [bp + si - 0x14]            ; 8D 42 EC
         push    ss                              ; 16
+        ;   ^ arg lpszDest (high/segment)
         push    ax                              ; 50
+        ;   ^ arg lpszDest (low/offset)
         lea     ax, [bp + si - 0x13]            ; 8D 42 ED
         push    ss                              ; 16
+        ;   ^ arg lpszSrc (high/segment)
         push    ax                              ; 50
+        ;   ^ arg lpszSrc (low/offset)
+        ; --> LSTRCPY(LPSTR lpszDest, LPSTR lpszSrc) -> LPSTR
         call    far KERNEL.LSTRCPY              ; 9A ED 01 00 00 [FIXUP]
+;   [conditional branch target (if/else)] L_01E2
 L_01E2:
         mov     ax, word ptr [bp + 4]           ; 8B 46 04
         push    ds                              ; 1E
+        ;   ^ arg lpszDest (high/segment)
         push    ax                              ; 50
+        ;   ^ arg lpszDest (low/offset)
         lea     ax, [bp - 0x14]                 ; 8D 46 EC
         push    ss                              ; 16
+        ;   ^ arg lpszSrc (high/segment)
         push    ax                              ; 50
+        ;   ^ arg lpszSrc (low/offset)
+        ; --> LSTRCPY(LPSTR lpszDest, LPSTR lpszSrc) -> LPSTR
         call    far KERNEL.LSTRCPY              ; 9A F9 01 00 00 [FIXUP]
         push    dx                              ; 52
+        ;   ^ arg lpszDest (high/segment)
         push    ax                              ; 50
+        ;   ^ arg lpszDest (low/offset)
         mov     ax, word ptr [bp - 0xe]         ; 8B 46 F2
         push    ds                              ; 1E
+        ;   ^ arg lpszSrc (high/segment)
         push    ax                              ; 50
+        ;   ^ arg lpszSrc (low/offset)
+        ; --> LSTRCPY(LPSTR lpszDest, LPSTR lpszSrc) -> LPSTR
         call    far KERNEL.LSTRCPY              ; 9A 05 02 00 00 [FIXUP]
         push    dx                              ; 52
+        ;   ^ arg lpszDest (high/segment)
         push    ax                              ; 50
+        ;   ^ arg lpszDest (low/offset)
         mov     ax, 0x12a                       ; B8 2A 01
         push    ds                              ; 1E
+        ;   ^ arg lpszSrc (high/segment)
         push    ax                              ; 50
+        ;   ^ arg lpszSrc (low/offset)
+        ; --> LSTRCPY(LPSTR lpszDest, LPSTR lpszSrc) -> LPSTR
         call    far KERNEL.LSTRCPY              ; 9A 11 02 00 00 [FIXUP]
         push    dx                              ; 52
+        ;   ^ arg lpszDest (high/segment)
         push    ax                              ; 50
+        ;   ^ arg lpszDest (low/offset)
         lea     ax, [bp - 0xc]                  ; 8D 46 F4
         push    ss                              ; 16
+        ;   ^ arg lpszSrc (high/segment)
         push    ax                              ; 50
+        ;   ^ arg lpszSrc (low/offset)
+        ; --> LSTRCPY(LPSTR lpszDest, LPSTR lpszSrc) -> LPSTR
         call    far KERNEL.LSTRCPY              ; 9A FF FF 00 00 [FIXUP]
         pop     si                              ; 5E
         mov     sp, bp                          ; 8B E5
         pop     bp                              ; 5D
         ret     2                               ; C2 02 00
-; @ANALYSIS_v1
-;----------------------------------------------------------------------
-; sub_021C -- offset 0x021C -- 25 instr
-; Funcion sin clasificar definitiva (25 instr).
-; tags: small
-; callers: sub_0094
-;----------------------------------------------------------------------
+;-------------------------------------------------------------------------
+; sub_021C   offset=0x021C  size=25 instr  segment=seg5.asm
+;
+; Classification (pass8): unclear  (score C=4, ASM=2)
+; Prologue: standard_bp     Epilogue: jmp_tail
+;-------------------------------------------------------------------------
+;   [sub-routine] L_021C
 L_021C:
+        ;   = cProc <0> ; NEAR PASCAL prologue
         push    bp                              ; 55
         mov     bp, sp                          ; 8B EC
         mov     ax, word ptr [bp + 4]           ; 8B 46 04
         add     word ptr [bp + 6], ax           ; 01 46 06
         jmp     L_0244                          ; EB 1D
+;   [loop start] L_0227
 L_0227:
         mov     ax, word ptr [bp + 8]           ; 8B 46 08
         cdq                                     ; 99
@@ -268,6 +344,7 @@ L_0227:
         cdq                                     ; 99
         idiv    cx                              ; F7 F9
         mov     word ptr [bp + 8], ax           ; 89 46 08
+;   [unconditional branch target] L_0244
 L_0244:
         mov     ax, word ptr [bp + 4]           ; 8B 46 04
         dec     word ptr [bp + 4]               ; FF 4E 04
