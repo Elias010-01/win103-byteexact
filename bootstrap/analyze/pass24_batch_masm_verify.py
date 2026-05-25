@@ -363,7 +363,38 @@ def patch_ambiguous_xchg(asm_lines, byte_seq):
             line = db_directive(
                 ib, f'was {ins.mnemonic} {ins.op_str} (32-bit reg in 16-bit code)')
             replaced = True
-        # 4) non-minimal ModRM displacement (disp16 fits in disp8, etc.)
+        # 4) Operand-size prefix (0x66) leading byte in 16-bit code. This
+        #    is a 386+ prefix to switch operand size; MASM 4.0 strips
+        #    redundant 66 prefixes silently, and the 32-bit forms are
+        #    usually a sign of inlined string/data being misread as code.
+        if not replaced and ib and ib[0] == 0x66:
+            line = db_directive(
+                ib, f'was {ins.mnemonic} {ins.op_str} (operand-size prefix)')
+            replaced = True
+        # 5) Address-size prefix (0x67) leading byte: we already catch
+        #    most via the 32-bit reg check, but some encodings collapse
+        #    back to 16-bit syntax that MASM happily compiles to a
+        #    different (shorter) form. Be conservative: any 67 prefix
+        #    is db'd.
+        if not replaced and ib and ib[0] == 0x67:
+            line = db_directive(
+                ib, f'was {ins.mnemonic} {ins.op_str} (address-size prefix)')
+            replaced = True
+        # 6) Floating-point instructions. Capstone happily disassembles
+        #    f-prefixed FPU mnemonics (fadd, fnsave, fimul, fninit,
+        #    fnstcw, etc.) but MASM 4.0 needs `.8087` enabled and even
+        #    then its encoding choices for memory operands frequently
+        #    differ from what the original binary used. The original
+        #    bytes are unambiguous, so emit them verbatim.
+        if not replaced and ins.mnemonic.startswith('f'):
+            # Skip FAR/FAR-jump style fakes (e.g. far jmp 'jmp far')
+            # by checking we actually had a multi-byte FPU encoding.
+            # Real FPU first byte is in D8h..DFh.
+            if ib and 0xD8 <= ib[0] <= 0xDF:
+                line = db_directive(
+                    ib, f'was {ins.mnemonic} {ins.op_str} (FPU - MASM 4.0 reenc)')
+                replaced = True
+        # 7) non-minimal ModRM displacement (disp16 fits in disp8, etc.)
         if not replaced and _shorter_encoding_exists(ib):
             line = db_directive(
                 ib, f'was {ins.mnemonic} (non-minimal ModRM enc)')
