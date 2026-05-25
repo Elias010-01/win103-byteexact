@@ -350,7 +350,20 @@ def patch_ambiguous_xchg(asm_lines, byte_seq):
                 line = db_directive(
                     ib, f'was {ins.mnemonic} with seg override prefix')
                 replaced = True
-        # 3) non-minimal ModRM displacement (disp16 fits in disp8, etc.)
+        # 3) Instruction Capstone disassembled using 32-bit registers
+        #    (eax/ebx/ecx/edx/esp/ebp/esi/edi). This happens when there's
+        #    an address-size override prefix (0x67) in 16-bit code, often
+        #    a sign that those bytes are actually inlined data
+        #    (jump tables, vtables, etc.) being misinterpreted as code.
+        #    MASM 4.0 doesn't know 32-bit registers, so we have to emit
+        #    raw bytes.
+        if (not replaced and ins.op_str and
+                re.search(r'\be[abcd]x\b|\be[bs]p\b|\be[sd]i\b',
+                          ins.op_str)):
+            line = db_directive(
+                ib, f'was {ins.mnemonic} {ins.op_str} (32-bit reg in 16-bit code)')
+            replaced = True
+        # 4) non-minimal ModRM displacement (disp16 fits in disp8, etc.)
         if not replaced and _shorter_encoding_exists(ib):
             line = db_directive(
                 ib, f'was {ins.mnemonic} (non-minimal ModRM enc)')

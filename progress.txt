@@ -1,0 +1,17 @@
+================================================================
+6-HOUR AUTONOMOUS BUILD LOG
+Started: 2026-05-26 00:00 UTC+2
+Target:  2026-05-26 06:00 UTC+2
+================================================================
+
+PHASE 1: pass24 -> >=99% byte-exact (start: 1145/1201 = 95.3%)
+PHASE 2: pass26 - link OBJ -> EXE/DRV, hash vs originals
+PHASE 3: pack everything into a bootable DOS+WIN1 disk image
+PHASE 4: verify boot in DOSBox / 86Box
+
+================================================================
+TIMELINE
+================================================================
+
+[T+0:00]  Start. State: pass24 v4 committed at e28e4af (95.3%).
+          Next: investigate FPU misdecodes (DD..) and REP+seg fails.
