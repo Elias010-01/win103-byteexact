@@ -54,15 +54,17 @@ state/*.db-journal
 state/*.db-wal
 state/*.db-shm
 
-# state/analyze/pass*/ JSONs SI se suben:
-#   - Son texto plano (compresibles)
-#   - Permiten que clonadores ejecuten passes posteriores SIN tener
-#     que regenerar pass1/1b/2/4 (que requieren tener los .EXE
-#     originales y ~minutos de CPU)
-#   - Bug detectado por @starfrost013 (2026-05-25): ignorar estos
-#     directorios hacia que pasos posteriores (pass5+, pass8+, etc.)
-#     se saltaran silenciosamente al clonar el repo.
-# state/analyze/  -> NO se ignora (ver comentario arriba)
+# state/analyze/ se IGNORA por completo:
+#   - Cada clone debe ejecutar el pipeline desde cero (con sus
+#     binarios originales en original/) para regenerar pass1..pass21.
+#   - Bug detectado por @starfrost013 (2026-05-25): si trackeamos
+#     state/analyze/, el progress.json viene marcando cada pass como
+#     "done" para los 69 modulos. Al ejecutar el pipeline tras un
+#     clon, cada pass mira progress.json, ve "done" y salta todos los
+#     modulos sin trabajo, dejando el repo en estado inconsistente.
+#   - La solucion correcta es ignorar el directorio entero y dejar
+#     que cada clone empiece limpio.
+state/analyze/
 
 # ---- Backups y snapshots historicos (pesados) ----
 backups/
