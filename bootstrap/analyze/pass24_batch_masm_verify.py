@@ -35,6 +35,7 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[2]
 PASS23 = REPO / 'state' / 'analyze' / 'pass23'
+PASS25 = REPO / 'state' / 'analyze' / 'pass25'
 PASS24 = REPO / 'state' / 'analyze' / 'pass24'
 WORK = REPO / 'tools' / 'dos' / 'work' / 'batch'
 CACHE = REPO / 'tools' / 'dos' / 'work' / 'cache'
@@ -607,32 +608,54 @@ def main():
     import capstone
     md_global = capstone.Cs(capstone.CS_ARCH_X86, capstone.CS_MODE_16)
     md_global.detail = False
+
+    # Load both pass23 (PROC FAR blocks from reconstructed .asm) and pass25
+    # (every exported ordinal from the NE entry table, much broader).
+    # Dedup by (module, true_bytes_hex) so we don't process the same function
+    # twice when both sources point at it.
+    seen = set()
     all_candidates = []
     redisasm_count = 0
     skipped = 0
-    for jp in sorted(PASS23.glob('*.json')):
-        d = json.loads(jp.read_text(encoding='utf-8'))
-        for c in d['candidates']:
-            c['module'] = d['module']
-            true_hex = c.get('true_bytes_hex', '')
-            if not true_hex:
-                skipped += 1
-                continue
-            seg_bytes = bytes.fromhex(true_hex)
-            new_lines = []
-            for ins in md_global.disasm(seg_bytes, 0):
-                new_lines.append(
-                    f"        {ins.mnemonic}  {ins.op_str}".rstrip())
-            if not new_lines:
-                skipped += 1
-                continue
-            c['asm_lines'] = new_lines
-            c['body_bytes_hex'] = true_hex
-            redisasm_count += 1
-            all_candidates.append(c)
-    print(f'Loaded {len(all_candidates)} candidates from pass23 '
-          f'({redisasm_count} re-disassembled from true segment bytes, '
-          f'{skipped} skipped - no usable bytes).\n')
+    src_counts = {'pass23': 0, 'pass25': 0}
+
+    def _load_dir(src_dir, source_name):
+        nonlocal redisasm_count, skipped
+        if not src_dir.exists():
+            return
+        for jp in sorted(src_dir.glob('*.json')):
+            d = json.loads(jp.read_text(encoding='utf-8'))
+            for c in d['candidates']:
+                c['module'] = d.get('module', jp.stem)
+                true_hex = c.get('true_bytes_hex', '')
+                if not true_hex:
+                    skipped += 1
+                    continue
+                key = (c['module'], true_hex)
+                if key in seen:
+                    continue
+                seen.add(key)
+                seg_bytes = bytes.fromhex(true_hex)
+                new_lines = []
+                for ins in md_global.disasm(seg_bytes, 0):
+                    new_lines.append(
+                        f"        {ins.mnemonic}  {ins.op_str}".rstrip())
+                if not new_lines:
+                    skipped += 1
+                    continue
+                c['asm_lines'] = new_lines
+                c['body_bytes_hex'] = true_hex
+                c.setdefault('source', source_name)
+                redisasm_count += 1
+                src_counts[source_name] += 1
+                all_candidates.append(c)
+
+    _load_dir(PASS23, 'pass23')
+    _load_dir(PASS25, 'pass25')
+
+    print(f'Loaded {len(all_candidates)} candidates '
+          f'(pass23={src_counts["pass23"]}, pass25={src_counts["pass25"]}, '
+          f'{redisasm_count} re-disassembled, {skipped} skipped).\n')
 
     # Stage MASM toolchain
     combined = REPO / 'tools' / 'dos' / 'combined'
@@ -678,15 +701,25 @@ def main():
 
     # Print final summary
     matched = sum(1 for r in final_results if r['match'])
+    total = len(final_results)
+    pct = 100 * matched / total if total else 0
     print(f'\n===== FINAL RESULTS =====')
-    print(f'  {matched}/{len(final_results)} byte-exact matches')
+    print(f'  {matched}/{total} byte-exact matches ({pct:.1f}%)')
     print(f'  Refinement history: {history}')
     print()
-    print(f"{'Module':<10}{'Name':<25}{'Status':<10}{'Note'}")
-    print('-' * 90)
+    # Per-module summary (instead of per-function, which is overwhelming
+    # when there are thousands of candidates).
+    from collections import defaultdict
+    mod_stats = defaultdict(lambda: [0, 0])  # module -> [matched, total]
     for r in final_results:
-        status = 'MATCH' if r['match'] else 'FAIL'
-        print(f"{r['module']:<10}{r['name']:<25}{status:<10}{r['note']}")
+        mod_stats[r['module']][1] += 1
+        if r['match']:
+            mod_stats[r['module']][0] += 1
+    print(f"{'Module':<14}{'Matched':>9}{'Total':>9}{'Pct':>7}")
+    print('-' * 40)
+    for m, (mt, t) in sorted(mod_stats.items()):
+        p = 100 * mt / t if t else 0
+        print(f'{m:<14}{mt:>9}{t:>9}{p:>6.1f}%')
 
     # Markdown report
     md = ['# Pass 24: Byte-exact verification batch\n']
