@@ -66,6 +66,17 @@ state/*.db-shm
 #     que cada clone empiece limpio.
 state/analyze/
 
+# ---- tools/dos/ - vintage Microsoft toolchain (MASM 4.0, MSC 4.0) ----
+# Downloaded from archive.org for the byte-exact build loop. These are
+# proprietary Microsoft tools from 1985-1986 and MUST NOT be redistributed
+# in this repo. Each user fetches them locally via tools/dos/fetch.sh.
+tools/dos/*.zip
+tools/dos/*.img
+tools/dos/extracted/
+tools/dos/combined/
+tools/dos/build/
+tools/dos/work/
+
 # ---- Backups y snapshots historicos (pesados) ----
 backups/
 versions/*/*.tar.gz
