@@ -29,7 +29,7 @@ SRC = REPO / 'src'
 ORIG = REPO / 'original'
 OUT = REPO / 'state' / 'analyze' / 'pass23'
 
-MAX_INSTRUCTIONS = 20
+MAX_INSTRUCTIONS = 25
 
 
 def parse_def_exports(def_path):
