@@ -2,6 +2,57 @@
 
 Historial de versiones del proyecto win103-byteexact (renombrado desde modern-personality-agent).
 
+## v12.3 - 2026-05-26 - py_exe2bin-validated-vs-real-MS-DOS-EXE2BIN
+
+py_exe2bin.py validado byte-por-byte contra el EXE2BIN.EXE real de
+Microsoft, construido desde el source open-source de MS-DOS 2.0 con
+nuestro propio toolchain MASM 4.0 + LINK 3.51.
+
+Nuevo tool:
+
+  bootstrap/validate_py_exe2bin.py
+    Pipeline 3-pasos:
+      1. fetch source files de github.com/microsoft/MS-DOS v2.0/source/:
+           EXE2BIN.ASM (13.8 KB, codigo principal)
+           EXEMES.ASM  ( 0.7 KB, error message strings)
+      2. build EXE2BIN.EXE en DOSBox-X usando nuestro MASM.EXE 4.00 +
+         LINK.EXE 3.51, con un stub minimo de DOSSYM.ASM en lugar del
+         original (42 KB de macros MASM-1.x/2.x que no compilan en
+         MASM 4.0). El stub define solo las 9 EQUs que EXE2BIN
+         realmente usa: Get_Version, STD_CON_STRING_OUTPUT/INPUT,
+         open, CREAT, CLOSE, read, write, lseek.
+      3. validate corriendo la EXE2BIN.EXE recien construida y nuestro
+         py_exe2bin.py sobre 6 inputs (5 sinteticos + WINC.EXE):
+           S1.EXE (1 B)   - smallest possible COM
+           S2.EXE (4 B)   - 3 nops + ret
+           S3.EXE (5 B)   - mov ax,4C00h + int 21h
+           S4.EXE (513 B) - exact 512-byte page boundary
+           S5.EXE (124 B) - irregular size, partial last page
+           WINC.EXE (5641 -> 4873 B) - real WIN.COM via LINK 3.51
+
+Resultado: 6/6 inputs producen output BYTE-IDENTICO entre el real
+Microsoft EXE2BIN.EXE y bootstrap/py_exe2bin.exe_to_com().
+
+  EXE2BIN.EXE construido: 1649 bytes
+  Test cases passed: 6/6 (varied sizes, including page-boundary edge case)
+  Tiempo: ~30s (build + validate, en una sola sesion DOSBox-X cada paso)
+
+Fixes durante la integracion:
+
+  - DOSSYM.ASM original (42 KB) usa directivas MASM 1.x/2.x que no
+    compilan en MASM 4.0. Sustituido por bootstrap/exe2bin_dossym_stub.asm
+    (28 lineas, solo INT 21h function-number EQUs).
+  - gather_test_exes() filtra por header (e_ip == 0x100, e_crlc == 0)
+    para excluir EXEs no-COM-style (como MASM.EXE) que EXE2BIN
+    legitimamente rechaza.
+
+Output:
+  state/analyze/validate_py_exe2bin/REPORT.md
+  state/analyze/validate_py_exe2bin/results.json
+  tools/dos/exe2bin_src_msdos20/{EXE2BIN.ASM, EXEMES.ASM}  (cache)
+  tools/dos/work/exe2bin_build/EXE2BIN.EXE  (built binary)
+
+
 ## v12.2 - 2026-05-26 - WIN.COM-real-instructions
 
 Conversion del disassembly Capstone de WIN.COM en MASM 4.00 source con

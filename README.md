@@ -32,6 +32,8 @@ Every executable code byte that shipped on the original Windows 1.03 floppy disk
 
 - `bootstrap/analyze/pass24_batch_masm_verify.py` — function-level verification across the 68 code-bearing NE modules (8,555 functions, 986,658 bytes).
 - `bootstrap/analyze/verify_flat_com_via_masm.py` — segment-level verification for the boot loader `WIN.COM` (4,873 B), `WIN100.BIN` (31,103 B code segment) and `WINOLDAP.MOD` (16,310 + 1,200 B segments). With `--with-link` it also runs LINK 3.51 + `bootstrap/py_exe2bin.py` (pure-Python `EXE2BIN.EXE` equivalent) to demonstrate the full historical `MASM → LINK → EXE2BIN → COM` chain.
+- `bootstrap/disasm_to_masm.py` — iteratively converts the Capstone disassembly of `WIN.COM` into a MASM 4.00 source with **real instructions** (89 % real mnemonics, 11 % `db` fallback) that reassembles byte-exact via the original toolchain. Output: `src/WIN/seg1_real.asm`.
+- `bootstrap/validate_py_exe2bin.py` — builds the **real Microsoft `EXE2BIN.EXE`** (1,649 B) from open-source MS-DOS 2.0 source (github.com/microsoft/MS-DOS) using our own MASM 4.0 + LINK 3.51, then runs both it and `py_exe2bin.exe_to_com()` on 6 test EXEs (5 synthetic + `WINC.EXE`); all 6 produce byte-identical output, validating our pure-Python implementation against the authentic 1983 utility.
 
 In addition, **every other binary on the floppy set** — boot loader, font resource files, DOS-app compatibility module, graphics resources — is brought into the same source pipeline (`src/<MODULE>/`) and `bootstrap/build_from_source.py` rebuilds all 92 of them byte-identical to their originals.
 
