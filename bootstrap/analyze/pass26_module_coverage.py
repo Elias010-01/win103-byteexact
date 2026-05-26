@@ -27,6 +27,7 @@ REPO = Path(__file__).resolve().parents[1].parent
 ORIGINAL_DIR = REPO / 'original'
 PASS24_RESULTS = REPO / 'state' / 'analyze' / 'pass24' / 'results.json'
 PASS25_DIR = REPO / 'state' / 'analyze' / 'pass25'
+PASS27_DIR = REPO / 'state' / 'analyze' / 'pass27'
 OUT_DIR = REPO / 'state' / 'analyze' / 'pass26'
 OUT_DIR.mkdir(parents=True, exist_ok=True)
 
@@ -110,13 +111,18 @@ def main():
             continue
         data = orig.read_bytes()
 
-        # Find pass25 candidates for this module (canonical source of
-        # function locations).
+        # Prefer pass27 (universal exports + internal call targets) over
+        # pass25 (exports only). Either one feeds candidates with the
+        # same shape.
+        p27_path = PASS27_DIR / f'{module_name}.json'
         p25_path = PASS25_DIR / f'{module_name}.json'
-        if not p25_path.exists():
+        if p27_path.exists():
+            p_meta = json.loads(p27_path.read_text())
+        elif p25_path.exists():
+            p_meta = json.loads(p25_path.read_text())
+        else:
             continue
-        p25 = json.loads(p25_path.read_text())
-        candidates = p25.get('candidates', [])
+        candidates = p_meta.get('candidates', [])
 
         # Build per-segment coverage bitmap.
         seg_coverage = {}

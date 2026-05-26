@@ -947,9 +947,20 @@ def main():
 
     # Clean previous work artifacts (per-function files) and any leftover
     # worker subdirs. KEEP the cache: it's the whole point of the speedup.
+    # File deletion can race with antivirus / open handles, so retry a
+    # few times before giving up.
+    import time
     for f in WORK.iterdir():
         if f.is_file():
-            f.unlink()
+            for attempt in range(5):
+                try:
+                    f.unlink()
+                    break
+                except PermissionError:
+                    time.sleep(0.5)
+            else:
+                # As a last resort, leave it - we'll overwrite it later.
+                pass
         elif f.is_dir() and f.name.startswith('worker_'):
             shutil.rmtree(f, ignore_errors=True)
 
@@ -1005,15 +1016,13 @@ def main():
                 src_counts[source_name] += 1
                 all_candidates.append(c)
 
-    # pass27 is a strict superset of pass25 (it merges in pass27 internals
-    # AND keeps every pass25 export); load it first if available so we don't
-    # double-process candidates.
+    # Load every available candidate source. The (module, true_bytes_hex)
+    # dedup `seen` set means we won't process the same function twice
+    # even when several passes flag it.
     src_counts['pass27'] = 0
-    if PASS27.exists() and any(PASS27.glob('*.json')):
-        _load_dir(PASS27, 'pass27')
-    else:
-        _load_dir(PASS25, 'pass25')
-    _load_dir(PASS23, 'pass23')
+    _load_dir(PASS27, 'pass27')   # superset (exports + internals), if run
+    _load_dir(PASS25, 'pass25')   # exports only (always-present baseline)
+    _load_dir(PASS23, 'pass23')   # legacy mini-stubs
 
     print(f'Loaded {len(all_candidates)} candidates '
           f'(pass23={src_counts["pass23"]}, pass25={src_counts["pass25"]}, '

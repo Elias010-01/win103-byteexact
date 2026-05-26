@@ -154,9 +154,14 @@ def main():
     md.append('| Module | Code bytes | Covered | % | Status |')
     md.append('|--------|-----------:|--------:|--:|:-------|')
     for module, total, cov, pct in sorted(rows):
-        status = '✅' if cov == total else (
-            '🟢' if pct >= 95 else (
-                '🟡' if pct >= 50 else '🔴'))
+        if cov == total:
+            status = 'full'
+        elif pct >= 95:
+            status = 'high'
+        elif pct >= 50:
+            status = 'mid'
+        else:
+            status = 'low'
         md.append(f'| {module} | {total} | {cov} | {pct:.1f}% | {status} |')
     md.append('')
     md.append('## What "byte-exact" means')
