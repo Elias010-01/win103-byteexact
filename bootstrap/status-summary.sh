@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-cd /mnt/c/Users/Elias/CascadeProjects/modern-personality-agent
+cd /mnt/c/Users/Elias/CascadeProjects/win103-byteexact
 ./.venv/bin/python <<'PY'
 import sqlite3
 c = sqlite3.connect('state/mpa.db')

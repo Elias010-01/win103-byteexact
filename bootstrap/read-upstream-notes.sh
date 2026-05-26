@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-UP=/mnt/c/Users/Elias/CascadeProjects/modern-personality-agent/vendor/modern-personality-windows
+UP=/mnt/c/Users/Elias/CascadeProjects/win103-byteexact/vendor/modern-personality-windows
 echo "=== notes/ ==="
 ls -la "$UP/notes/"
 echo

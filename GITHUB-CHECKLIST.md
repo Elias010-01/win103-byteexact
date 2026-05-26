@@ -108,7 +108,7 @@ Si supera 100 MB hay algo mal.
 ## 4. Crear el repo en GitHub
 
 Recomendado:
-- **Nombre**: `modern-personality-agent` (mismo)
+- **Nombre**: `win103-byteexact`
 - **Visibility**: Public
 - **License**: MIT (ya tenemos LICENSE en el repo)
 - **Topics**: `reverse-engineering`, `windows-1`, `decompilation`,
@@ -121,7 +121,7 @@ Recomendado:
 ## 5. Subir
 
 ```bash
-git remote add origin https://github.com/<TU_USUARIO>/modern-personality-agent.git
+git remote add origin https://github.com/<TU_USUARIO>/win103-byteexact.git
 git branch -M main
 git push -u origin main
 ```

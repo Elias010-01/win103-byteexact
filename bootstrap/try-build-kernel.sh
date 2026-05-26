@@ -2,7 +2,7 @@
 # Intenta compilar TODO el kernel.mak del autor del repo upstream
 # usando MASM 4.0 + LINK4 dentro de DOSBox-X.
 set -euo pipefail
-cd /mnt/c/Users/Elias/CascadeProjects/modern-personality-agent
+cd /mnt/c/Users/Elias/CascadeProjects/win103-byteexact
 
 WORK=$(mktemp -d -t mpa-kernel-XXXX)
 TC=$HOME/opt/legacy-toolchain/c

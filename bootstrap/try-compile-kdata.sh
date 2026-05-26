@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Intenta compilar KDATA.asm con MASM 4.0 en DOSBox-X para validar pipeline.
 set -euo pipefail
-cd /mnt/c/Users/Elias/CascadeProjects/modern-personality-agent
+cd /mnt/c/Users/Elias/CascadeProjects/win103-byteexact
 
 WORK=$(mktemp -d -t mpa-upbuild-XXXX)
 TC=$HOME/opt/legacy-toolchain/c

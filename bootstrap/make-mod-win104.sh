@@ -47,7 +47,7 @@ fi
 cat > "$MOD_DIR/meta.toml" <<'EOF'
 name = "win104"
 title = "Windows 1.04 (cambia version reportada por GetVersion)"
-author = "modern-personality-agent"
+author = "win103-byteexact"
 description = """
 Modifica KERNEL.GETVERSION para que reporte version 1.04 (AX=0x0401)
 en lugar de 1.03 (AX=0x0301). Apps que llaman GetVersion veran "1.04".

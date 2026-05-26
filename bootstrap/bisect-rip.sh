@@ -2,7 +2,7 @@
 # Bisect: copia las primeras N lineas de RIP_C.ASM, compila, ve si funciona.
 # Encuentra la primera linea que rompe el compile.
 set -uo pipefail
-cd /mnt/c/Users/Elias/CascadeProjects/modern-personality-agent
+cd /mnt/c/Users/Elias/CascadeProjects/win103-byteexact
 
 UP=$HOME/opt/legacy-toolchain/upstream-build
 TC=$HOME/opt/legacy-toolchain/c

@@ -140,7 +140,7 @@ def main():
     (mod_dir / "meta.toml").write_text(
         'name = "menubar"\n'
         'title = "Elias\'s Windows: splash + menu + titulos personalizados"\n'
-        'author = "modern-personality-agent"\n'
+        'author = "win103-byteexact"\n'
         'description = """\n'
         'Personaliza Windows 1.03 con cambios visibles inmediatamente al arrancar:\n'
         '\n'

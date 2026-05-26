@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Debug: corre bulk-batch dejando el work dir intacto
 set -uo pipefail
-cd /mnt/c/Users/Elias/CascadeProjects/modern-personality-agent
+cd /mnt/c/Users/Elias/CascadeProjects/win103-byteexact
 
 # Patch temporal: hace que TempDir no se borre
 ./.venv/bin/python <<'PY'

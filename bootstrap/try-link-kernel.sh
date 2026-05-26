@@ -2,7 +2,7 @@
 # Linkea el KERNEL.EXE con LINK4.EXE usando los OBJs ya compilados.
 # Espera la WORK dir como $1, o usa la ultima creada.
 set -euo pipefail
-cd /mnt/c/Users/Elias/CascadeProjects/modern-personality-agent
+cd /mnt/c/Users/Elias/CascadeProjects/win103-byteexact
 
 WORK="${1:-$(ls -dt /tmp/mpa-kernel-* 2>/dev/null | head -1)}"
 if [ -z "$WORK" ] || [ ! -d "$WORK" ]; then

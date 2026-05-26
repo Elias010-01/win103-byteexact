@@ -1,4 +1,4 @@
-# Pipeline dependencies for modern-personality-agent
+# Pipeline dependencies for win103-byteexact
 # Python 3.10+
 
 # Disassembly engine (x86 16-bit)

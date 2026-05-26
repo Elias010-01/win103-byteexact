@@ -2,7 +2,7 @@
 # Solo sanitiza el codigo del autor a upstream-build, sin compilar.
 set -euo pipefail
 
-UP_SRC=/mnt/c/Users/Elias/CascadeProjects/modern-personality-agent/vendor/modern-personality-windows
+UP_SRC=/mnt/c/Users/Elias/CascadeProjects/win103-byteexact/vendor/modern-personality-windows
 UP=$HOME/opt/legacy-toolchain/upstream-build
 
 rm -rf "$UP"

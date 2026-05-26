@@ -4,7 +4,7 @@ export PATH="$HOME/.local/bin:$PATH"
 LOG=/tmp/mpa-step.log
 exec > "$LOG" 2>&1
 
-REPO=/mnt/c/Users/Elias/CascadeProjects/modern-personality-agent
+REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$REPO"
 
 echo "=== which uv just ==="

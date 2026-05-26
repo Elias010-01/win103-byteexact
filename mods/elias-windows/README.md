@@ -1,6 +1,6 @@
 # Mod: elias-windows
 
-Showcase mod of the modern-personality-agent project. Personalizes Windows
+Showcase mod of the win103-byteexact project. Personalizes Windows
 1.03 with visible changes at boot.
 
 ## What it changes

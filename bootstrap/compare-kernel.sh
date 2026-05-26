@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
-cd /mnt/c/Users/Elias/CascadeProjects/modern-personality-agent
+cd /mnt/c/Users/Elias/CascadeProjects/win103-byteexact
 
 WORK=$(ls -dt /tmp/mpa-kernel-* | head -1)
 OURS="$WORK/OUT/KERNEL.EXE"

@@ -2,7 +2,7 @@
 # Sanitiza los .asm/.inc del autor (UTF-8 -> ASCII + CRLF + 8.3 names)
 # y re-build COMPLETO con MASM 4.0 + LINK4. Re-link contra original.
 set -euo pipefail
-cd /mnt/c/Users/Elias/CascadeProjects/modern-personality-agent
+cd /mnt/c/Users/Elias/CascadeProjects/win103-byteexact
 
 UP=vendor/modern-personality-windows
 TC=$HOME/opt/legacy-toolchain/c

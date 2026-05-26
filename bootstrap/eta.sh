@@ -1,5 +1,5 @@
 #!/bin/bash
-WS=/mnt/c/Users/Elias/CascadeProjects/modern-personality-agent/workspaces/CGA
+WS=/mnt/c/Users/Elias/CascadeProjects/win103-byteexact/workspaces/CGA
 S=$(ls $WS | wc -l)
 sleep 10
 E=$(ls $WS | wc -l)

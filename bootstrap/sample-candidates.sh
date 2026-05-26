@@ -5,7 +5,7 @@
 #   - primeras 5 instrucciones del disasm bruto (bytes de NE)
 # para clasificarlas por patron.
 set -euo pipefail
-cd /mnt/c/Users/Elias/CascadeProjects/modern-personality-agent
+cd /mnt/c/Users/Elias/CascadeProjects/win103-byteexact
 
 ./.venv/bin/python <<'PY'
 import sqlite3

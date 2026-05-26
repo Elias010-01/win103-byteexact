@@ -1,6 +1,6 @@
 # CHANGELOG
 
-Historial de versiones del proyecto modern-personality-agent.
+Historial de versiones del proyecto win103-byteexact (renombrado desde modern-personality-agent).
 
 ## v10 - 2026-05-25T01:55:48Z - windows103-documentado-funcion-por-funcion
 

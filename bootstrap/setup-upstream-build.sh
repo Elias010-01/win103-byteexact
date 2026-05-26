@@ -2,7 +2,7 @@
 # Prepara una build copia del codigo de modern-personality-windows
 # usando MASM 4.0 + LINK4 que vienen con el repo, ya monteables en DOSBox-X.
 set -euo pipefail
-cd /mnt/c/Users/Elias/CascadeProjects/modern-personality-agent
+cd /mnt/c/Users/Elias/CascadeProjects/win103-byteexact
 
 UP=vendor/modern-personality-windows
 TC=$HOME/opt/legacy-toolchain/c

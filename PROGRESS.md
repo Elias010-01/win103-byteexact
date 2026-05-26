@@ -338,7 +338,7 @@ después.
 # Si la sesión anterior dejó analyze corriendo:
 wsl ps aux | grep mpa
 # o tail al log:
-wsl tail -f /mnt/c/Users/Elias/CascadeProjects/modern-personality-agent/logs/analyze-all.log
+wsl tail -f /mnt/c/Users/Elias/CascadeProjects/win103-byteexact/logs/analyze-all.log
 ```
 
 Duración estimada: ~5-15 min por módulo, ~1.5-3 h total para los 11

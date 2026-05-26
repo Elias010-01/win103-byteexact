@@ -1,4 +1,4 @@
--- modern-personality-agent: esquema de state
+-- win103-byteexact: esquema de state
 --
 -- Este esquema es la memoria persistente del agente. Toda decisión, todo
 -- intento, todo símbolo descubierto se guarda aquí. El agente NO recuerda

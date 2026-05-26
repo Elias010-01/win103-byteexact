@@ -1,4 +1,4 @@
-# modern-personality-agent
+# win103-byteexact
 
 > **Windows 1.03 reverse-engineered into editable, recompilable source code — in one night, by me at 16, with AI assistance.**
 >
@@ -28,8 +28,8 @@
 ### 1. Clone the repo
 
 ```bash
-git clone https://github.com/Elias010-01/modern-personality-agent.git
-cd modern-personality-agent
+git clone https://github.com/Elias010-01/win103-byteexact.git
+cd win103-byteexact
 ```
 
 ### 2. Install Python dependencies
@@ -147,8 +147,8 @@ bash bootstrap/deploy-to-img.sh   # copies built/ into the floppy image
 
 ```bash
 # 1. Clonar
-git clone https://github.com/Elias010-01/modern-personality-agent.git
-cd modern-personality-agent
+git clone https://github.com/Elias010-01/win103-byteexact.git
+cd win103-byteexact
 
 # 2. Dependencias Python (capstone + keystone)
 pip install -r requirements.txt
@@ -362,7 +362,7 @@ python bootstrap/mod_system.py revert                # revierte
 ## Estructura del repo
 
 ```
-modern-personality-agent/
+win103-byteexact/
 ├── bootstrap/         Scripts del pipeline (Python + bash)
 │   └── analyze/       Pipeline de analisis semantico (7 passes)
 ├── src/               .asm humano-legibles con bytes en comentarios

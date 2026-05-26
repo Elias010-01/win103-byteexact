@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
-cd /mnt/c/Users/Elias/CascadeProjects/modern-personality-agent
+cd /mnt/c/Users/Elias/CascadeProjects/win103-byteexact
 echo "=== state/ ==="
 ls -la state/ 2>&1 || echo "(no existe)"
 echo
@@ -16,6 +16,6 @@ print("logs exists:", cfg.paths.logs.exists())
 PY
 echo
 echo "=== buscando .gpr (proyecto Ghidra) en posibles paths ==="
-find /mnt/c/Users/Elias/CascadeProjects/modern-personality-agent -name '*.gpr' 2>/dev/null | head -5
+find /mnt/c/Users/Elias/CascadeProjects/win103-byteexact -name '*.gpr' 2>/dev/null | head -5
 find /home/elias -name 'KERNEL.gpr' 2>/dev/null | head -5
 find /tmp -name '*.gpr' 2>/dev/null | head -5

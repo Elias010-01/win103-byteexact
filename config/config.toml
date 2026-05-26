@@ -1,4 +1,4 @@
-# modern-personality-agent: configuración global
+# win103-byteexact: configuración global
 #
 # Las rutas relativas se resuelven respecto a la raíz del repo.
 # Las rutas con ~ se expanden al $HOME del usuario en WSL.

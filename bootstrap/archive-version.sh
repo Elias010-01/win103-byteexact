@@ -111,7 +111,7 @@ if [[ ! -f "$CHANGELOG" ]]; then
   cat > "$CHANGELOG" <<EOF
 # CHANGELOG
 
-Historial de versiones del proyecto modern-personality-agent.
+Historial de versiones del proyecto win103-byteexact.
 Cada version tiene un snapshot completo en versions/.
 EOF
 fi

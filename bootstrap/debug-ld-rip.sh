@@ -2,7 +2,7 @@
 # Compila LD.c.asm y RIP.c.asm dirigidamente con LIST output completo
 # para ver el error real en el assembler.
 set -euo pipefail
-cd /mnt/c/Users/Elias/CascadeProjects/modern-personality-agent
+cd /mnt/c/Users/Elias/CascadeProjects/win103-byteexact
 
 WORK=$(mktemp -d -t mpa-debug-XXXX)
 TC=$HOME/opt/legacy-toolchain/c

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-F=/mnt/c/Users/Elias/CascadeProjects/modern-personality-agent/vendor/modern-personality-windows/kernel/RIP.c.asm
+F=/mnt/c/Users/Elias/CascadeProjects/win103-byteexact/vendor/modern-personality-windows/kernel/RIP.c.asm
 echo "=== file ==="
 file "$F"
 echo

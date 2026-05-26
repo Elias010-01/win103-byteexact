@@ -3,7 +3,7 @@
 # Asume que mswin103.zip ya está descargado en /tmp/win103-dl/.
 set -euo pipefail
 
-REPO=/mnt/c/Users/Elias/CascadeProjects/modern-personality-agent
+REPO=/mnt/c/Users/Elias/CascadeProjects/win103-byteexact
 DL=/tmp/win103-dl
 SRC="$DL/Microsoft Windows 1.03 (5.25)"
 DST="$REPO/original"
