@@ -122,10 +122,15 @@ def main():
         if mod == "README":
             continue
         if mod in src_modules:
-            # Check if src/MOD has actual sources (seg*.asm)
+            # Check if src/MOD has actual sources OR a layout.json.
+            # NE modules with 0 code segments (resource-only, e.g. .FON) have
+            # only layout.json + ne_meta.bin and no seg*.asm, but they ARE in
+            # the byte-exact pipeline (build_from_source.py reproduces them
+            # bit-perfect from the meta blob).
             src_dir = SRC / mod
             asm_files = list(src_dir.glob("seg*.asm")) + list(src_dir.glob("*.asm"))
-            if asm_files:
+            layout = src_dir / "layout.json"
+            if asm_files or layout.exists():
                 in_pipeline.append((name, size, identify_format(name, data)))
             else:
                 in_pipeline_partial.append((name, size, identify_format(name, data)))
