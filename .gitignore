@@ -13,6 +13,11 @@ original/
 built/
 runtime/
 
+# ---- Binarios extraidos del IMG para inspeccion local ----
+# bootstrap/extract_win_com.py y compañia los regeneran desde la IMG legal
+# del usuario. NUNCA se suben (mismo principio que original/).
+tmp_extract/
+
 # ---- Binarios derivados dentro de mods (ne_meta.bin patcheados) ----
 # Se regeneran ejecutando el script generador del mod.
 mods/*/img/
