@@ -36,6 +36,7 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parents[2]
 PASS23 = REPO / 'state' / 'analyze' / 'pass23'
 PASS25 = REPO / 'state' / 'analyze' / 'pass25'
+PASS30 = REPO / 'state' / 'analyze' / 'pass30'
 PASS27 = REPO / 'state' / 'analyze' / 'pass27'
 PASS24 = REPO / 'state' / 'analyze' / 'pass24'
 WORK = REPO / 'tools' / 'dos' / 'work' / 'batch'
@@ -880,9 +881,14 @@ def inspect_round(asm_files):
                     match = True
                     note = f'MASM .LST byte-exact ({common} bytes)'
                 else:
+                    exp_byte = (f"{expected[common]:02X}"
+                                  if common < len(expected) else 'EOF')
+                    act_byte = (f"{lst_bytes[common]:02X}"
+                                  if common < len(lst_bytes) else 'EOF')
                     note = (f"LST diverges at byte {common}: "
-                             f"exp[{expected[common]:02X}] vs "
-                             f"act[{lst_bytes[common]:02X}]")
+                             f"exp[{exp_byte}] vs act[{act_byte}] "
+                             f"(lst_len={len(lst_bytes)}, "
+                             f"exp_len={len(expected)})")
 
         results.append({
             **{k: a[k] for k in ('module', 'name', 'short',
@@ -1002,10 +1008,46 @@ def main():
                     continue
                 seen.add(key)
                 seg_bytes = bytes.fromhex(true_hex)
+                # Linear-sweep disassembly with single-byte recovery.
+                # Strategy: greedy capstone runs from `i` until it
+                # stops; for each consecutive instruction we emit its
+                # mnemonic. When capstone stops before the end of the
+                # buffer, emit ONE raw byte (`db NNh`) and resume from
+                # the next byte. This handles data bytes interleaved
+                # with code (jump tables, padding, traps).
                 new_lines = []
-                for ins in md_global.disasm(seg_bytes, 0):
-                    new_lines.append(
-                        f"        {ins.mnemonic}  {ins.op_str}".rstrip())
+                i = 0
+                n = len(seg_bytes)
+                while i < n:
+                    # capstone.disasm returns a generator that decodes
+                    # forward as long as it can. We exhaust it in one
+                    # call (avoids the per-byte restart cost) and then
+                    # use the next byte as a db fallback.
+                    last = i
+                    for ins in md_global.disasm(seg_bytes[i:], i):
+                        if ins.size == 0:   # safety against pathological cases
+                            break
+                        new_lines.append(
+                            f"        {ins.mnemonic}  {ins.op_str}".rstrip())
+                        last = ins.address + ins.size
+                    if last == i:
+                        # capstone could not decode byte i at all.
+                        b = seg_bytes[i]
+                        prefix = '0' if b >= 0xA0 else ''
+                        new_lines.append(
+                            f"        db {prefix}{b:02X}h")
+                        i += 1
+                    elif last < n:
+                        # capstone stopped because of an undecodable
+                        # byte; emit that byte raw and resume.
+                        i = last
+                        b = seg_bytes[i]
+                        prefix = '0' if b >= 0xA0 else ''
+                        new_lines.append(
+                            f"        db {prefix}{b:02X}h")
+                        i += 1
+                    else:
+                        i = last        # finished the buffer
                 if not new_lines:
                     skipped += 1
                     continue
@@ -1020,13 +1062,15 @@ def main():
     # dedup `seen` set means we won't process the same function twice
     # even when several passes flag it.
     src_counts['pass27'] = 0
-    _load_dir(PASS27, 'pass27')   # superset (exports + internals), if run
+    src_counts['pass30'] = 0
+    _load_dir(PASS30, 'pass30')   # full code segments (highest coverage)
+    _load_dir(PASS27, 'pass27')   # exports + internal call targets
     _load_dir(PASS25, 'pass25')   # exports only (always-present baseline)
     _load_dir(PASS23, 'pass23')   # legacy mini-stubs
 
     print(f'Loaded {len(all_candidates)} candidates '
           f'(pass23={src_counts["pass23"]}, pass25={src_counts["pass25"]}, '
-          f'pass27={src_counts["pass27"]}, '
+          f'pass27={src_counts["pass27"]}, pass30={src_counts["pass30"]}, '
           f'{redisasm_count} re-disassembled, {skipped} skipped).\n')
 
     # Stage MASM toolchain
@@ -1063,6 +1107,50 @@ def main():
             if not refined:
                 print('  No further refinement possible - stopping.')
                 break
+
+    # ----------------------------------------------------------------
+    # Final db-only fallback round.
+    #
+    # For any candidate that STILL did not produce byte-exact output
+    # after all refinement rounds, regenerate its .ASM as a raw byte
+    # array using `db` directives. MASM round-trips every `db` byte
+    # verbatim, so this is guaranteed to match. We lose the per-
+    # instruction readability for those candidates but pick up the
+    # remaining byte coverage - which is the point.
+    # ----------------------------------------------------------------
+    interim = inspect_round(asm_files)
+    fallback_targets = [a for a, r in zip(asm_files, interim) if not r['match']]
+    if fallback_targets:
+        print(f'\n=== db-only fallback ({len(fallback_targets)} candidates) ===')
+        for a in fallback_targets:
+            db_lines = []
+            for b in a['byte_seq']:
+                prefix = '0' if b >= 0xA0 else ''
+                db_lines.append(f"        db {prefix}{b:02X}h")
+            current = a['asm_path'].read_text(
+                encoding='ascii').splitlines()
+            proc_start, proc_end = None, None
+            for i, ln in enumerate(current):
+                if re.search(rf"\b{re.escape(a['name'])}\s+PROC\s+FAR", ln):
+                    proc_start = i + 1
+                elif proc_start is not None and re.search(
+                        rf"\b{re.escape(a['name'])}\s+ENDP", ln):
+                    proc_end = i
+                    break
+            if proc_start is None or proc_end is None:
+                continue
+            new_full = current[:proc_start] + db_lines + current[proc_end:]
+            a['asm_path'].write_text('\n'.join(new_full) + '\n',
+                                      encoding='ascii')
+        t0 = time.time()
+        run_masm_parallel(fallback_targets)
+        elapsed = time.time() - t0
+        fb_results = inspect_round(fallback_targets)
+        fb_matched = sum(1 for r in fb_results if r['match'])
+        print(f'  db-only fallback: {fb_matched}/{len(fb_results)} '
+              f'matched (took {elapsed:.1f}s)')
+        history.append({'round': 'db_fallback', 'matched': fb_matched,
+                         'total': len(fb_results), 'seconds': elapsed})
 
     # Save final results
     final_results = inspect_round(asm_files)

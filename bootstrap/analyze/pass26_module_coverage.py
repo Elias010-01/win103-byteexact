@@ -28,6 +28,7 @@ ORIGINAL_DIR = REPO / 'original'
 PASS24_RESULTS = REPO / 'state' / 'analyze' / 'pass24' / 'results.json'
 PASS25_DIR = REPO / 'state' / 'analyze' / 'pass25'
 PASS27_DIR = REPO / 'state' / 'analyze' / 'pass27'
+PASS30_DIR = REPO / 'state' / 'analyze' / 'pass30'
 OUT_DIR = REPO / 'state' / 'analyze' / 'pass26'
 OUT_DIR.mkdir(parents=True, exist_ok=True)
 
@@ -111,18 +112,17 @@ def main():
             continue
         data = orig.read_bytes()
 
-        # Prefer pass27 (universal exports + internal call targets) over
-        # pass25 (exports only). Either one feeds candidates with the
-        # same shape.
-        p27_path = PASS27_DIR / f'{module_name}.json'
-        p25_path = PASS25_DIR / f'{module_name}.json'
-        if p27_path.exists():
-            p_meta = json.loads(p27_path.read_text())
-        elif p25_path.exists():
-            p_meta = json.loads(p25_path.read_text())
-        else:
+        # Combine candidates from every pass that produced them. Pass30
+        # full-segment candidates capture the most ground; pass27 fills
+        # in internal call targets; pass25 has the exports baseline.
+        candidates = []
+        for src_dir in (PASS30_DIR, PASS27_DIR, PASS25_DIR):
+            jp = src_dir / f'{module_name}.json'
+            if jp.exists():
+                candidates.extend(
+                    json.loads(jp.read_text()).get('candidates', []))
+        if not candidates:
             continue
-        candidates = p_meta.get('candidates', [])
 
         # Build per-segment coverage bitmap.
         seg_coverage = {}
