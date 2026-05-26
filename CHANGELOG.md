@@ -2,6 +2,78 @@
 
 Historial de versiones del proyecto win103-byteexact (renombrado desde modern-personality-agent).
 
+## v12.2 - 2026-05-26 - WIN.COM-real-instructions
+
+Conversion del disassembly Capstone de WIN.COM en MASM 4.00 source con
+INSTRUCCIONES REALES (mov, jmp, call, int, etc.) en vez de solo `db`.
+El resultado se reensambla byte-exact via MASM 4.00 dentro de DOSBox-X.
+
+Nuevo tool:
+
+  bootstrap/disasm_to_masm.py
+    Pipeline plan-build-verify iterativo:
+      1. Flow analysis desde el JMP de entry (offset 0) marca code/data
+      2. Capstone disassembla cada instruccion
+      3. Traduce sintaxis Capstone -> MASM 4.0:
+         - 0x123 -> 0123h (con 0 leading si empieza con letra)
+         - [const] -> ds:[const] (segment override explicito; sin el,
+           MASM tira "error 56: No immediate mode")
+         - jmp short LABEL para opcode EB (MASM elige E9 near por defecto)
+         - mnemonics implicit-operand (lodsb, rep movsb...) -> bare form
+         - lcall/ljmp/etc con sintaxis ambigua -> db fallback
+      4. Ensambla via MASM 4.0 en DOSBox-X
+      5. Si MASM falla parsing: parsea el .LST por errores 'WINREAL.ASM(NN) :
+         error MM' y marca esos items para db fallback
+      6. Si MASM produce OBJ: compara LEDATA bytes con original; primer
+         byte mismatch -> marca esa instruccion para db (1 por iteracion
+         para evitar cascadas por size shifts)
+      7. Repite hasta byte-exact
+
+Resultado para WIN.COM (4873 B, 1186 bytes de codigo):
+
+  Cobertura: 470 instrucciones reales / 523 totales = 89% real instructions
+  Bytes:     1025 byt-real-insn / 161 byt-db-fallback / 3687 byt-data
+  Iteraciones hasta byte-exact: 45
+  Tiempo:    ~1m32s
+
+Output:
+  src/WIN/seg1_real.asm   (771 lineas, MASM 4.0 reassembleable, byte-exact)
+  src/WIN/seg1_real.json  (cobertura JSON)
+
+Cuatro bugs MASM 4.0 corregidos durante la integracion:
+
+  - Truncacion silenciosa de lineas a 128 chars: si una linea excede
+    el limite y contiene un string literal sin cerrar, MASM convierte
+    todo el resto del archivo en un "string fantasma" gigante y reporta
+    bogus "Open procedures" / "Number of open conditionals: 14112".
+    Fix: limitar lineas a 120 chars + partir strings db en chunks <= 60.
+
+  - Instruction encoding diffs: MASM 4.0 a veces emite C7 06 (mov r/m16,
+    imm16) en vez de A3/A1 (mov moffs16/8) que el original usaba. Fix:
+    fallback a db con comentario del disasm preservado.
+
+  - Memory references sin segment override: "mov word ptr [100h]" causa
+    error 56 ("No immediate mode") porque MASM no resuelve [100h] como
+    memoria sin ASSUME ds: + ds: prefix explicito.
+
+  - JMP short vs near: MASM 4.0 elige E9 (near, 3B) por defecto en jumps
+    forward; el original usaba EB (short, 2B). Fix: detectar raw[0]==0xEB
+    y emitir 'jmp short LABEL'.
+
+Lo que pass24 hace al nivel de funcion para los 68 NE modules, ahora
+disasm_to_masm hace al nivel de instruccion para WIN.COM. La cadena:
+
+  original/WIN.COM (4873 B raw bytes)
+       |
+       v   bootstrap/disasm_to_masm.py (Capstone + MASM iterative)
+       v
+  src/WIN/seg1_real.asm (770 lineas MASM, 89% mnemonics reales)
+       |
+       v   MASM 4.00 inside DOSBox-X (single batch session)
+       v
+  WINREAL.OBJ (LEDATA bytes)  ===  original/WIN.COM (byte-exact)
+
+
 ## v12.1 - 2026-05-26 - flat-COM-via-compilador
 
 Extension de v12: los 3 modulos nuevos con codigo (WIN.COM, WIN100.BIN,
