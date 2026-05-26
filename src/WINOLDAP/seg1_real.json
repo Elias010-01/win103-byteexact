@@ -1,0 +1,15 @@
+{
+  "module": "WINOLDAP",
+  "seg_index": 1,
+  "status": "OK_DB_FALLBACK",
+  "kind": "code-ne",
+  "instructions_real": 0,
+  "instructions_db_forced": 0,
+  "data_blocks": 1,
+  "real_insn_pct": 0,
+  "bytes_real_insn": 0,
+  "bytes_db_forced": 0,
+  "bytes_data": 16310,
+  "bytes_total": 16310,
+  "note": "real disasm did not converge in 30 iters; emitted as pure-db (byte-exact via MASM 4.00)."
+}

@@ -1,0 +1,14 @@
+{
+  "module": "WINOLDAP",
+  "seg_index": 2,
+  "status": "OK",
+  "kind": "data",
+  "instructions_real": 0,
+  "instructions_db_forced": 0,
+  "data_blocks": 1,
+  "real_insn_pct": 0,
+  "bytes_real_insn": 0,
+  "bytes_db_forced": 0,
+  "bytes_total": 1200,
+  "bytes_data": 1200
+}

@@ -2,6 +2,128 @@
 
 Historial de versiones del proyecto win103-byteexact (renombrado desde modern-personality-agent).
 
+## v13.3 - 2026-05-26 - Real MASM 4.00 toolchain end-to-end + NE reloc parser
+
+Reemplazo del path "Python regex parsea db de los .asm" por un path
+real "MASM 4.00 + LINK 3.51 ensambla los .asm" que tambien produce
+byte-exact contra los binarios Microsoft 1985.  Tres modulos clave
+(WIN.COM, WIN100.BIN, WINOLDAP.MOD) ahora se reconstruyen via
+toolchain de epoca; los 92 modulos siguen pasando por la ruta db
+historica como antes.
+
+### Hallazgo: pure-db sources son MASM 4.00 valido
+
+  Antes asumiamos que los `seg<N>.asm` 100 % `db` (200 KB para WIN100)
+  excedian el "source budget" de MASM 4.00 y por eso no podian
+  ensamblarse.  Verificacion empirica con DOSBox-X + MASM.EXE 4.00:
+
+    WIN100/seg1.asm     198 KB / 1952 lines  -> MASM produce 31103 B byte-exact
+    WINOLDAP/seg1.asm   104 KB / 1028 lines  -> MASM produce 16310 B byte-exact
+    WINOLDAP/seg2.asm     7 KB /   88 lines  -> MASM produce  1200 B byte-exact
+
+  MASM 4.00 no tiene limite practico de source size; lo que excedia el
+  budget era el formato real-disasm con comentario `; [hex bytes]` por
+  instruccion (883 KB para WIN100).  El comentario obsoleto en
+  `disasm_to_masm.py` se elimino.
+
+### `bootstrap/build_from_source.py --mode=masm` ahora real
+
+  Antes era un TODO que delegaba a `parse_db_bytes`.  Ahora invoca
+  `assemble_via_masm` (MASM 4.00 + LINK 3.51 bajo DOSBox-X), parsea
+  los OBJ records y verifica byte-exact.  Resultados:
+
+    WIN.COM       -> sha b4b974d4b3665a5a == original (4873 B, 1 seg)
+    WIN100.BIN    -> sha c9a7c802661cc483 == original (185248 B, 1 seg)
+    WINOLDAP.MOD  -> sha f901cc470fa05b26 == original (19824 B, 2 segs)
+    MSDOS.EXE     -> sha 857e99ec96dd4acc == original (43104 B, 5 segs)
+
+  Para los otros 88 modulos (cuyos `seg<N>.asm` son disasm parciales
+  con labels huerfanos), `--mode=masm` cae automaticamente a
+  `parse_db_bytes` con un nota `masm-fallback-db` en el resumen.
+  `--mode=db` (default) sigue usando solo el regex parser y mantiene
+  el resultado historico 92/92.
+
+### Bug fix critico: `parse_obj_ledata` lee SEGDEF
+
+  MASM 4.00 omite LEDATA records para `db N DUP(0)` al final de un
+  segmento (los considera "uninitialized space" pese a estar declarados
+  como zeros explicitos).  Sin el fix, una fuente con
+  `db 645 DUP(0)` antes de `WIN100_SEG1 ENDS` producia un OBJ con
+  solo 30458 B en LEDATA records de un segmento de 31103 B.
+
+  `parse_obj_ledata` ahora lee tambien los SEGDEF records (0x98/0x99),
+  y padea la salida con zeros hasta `max(LEDATA_end, SEGDEF_size)`.
+  Con esto, todos los `db N DUP(0)` round-trippean byte-exact aunque
+  MASM no los emita.
+
+### Nuevo: parser de NE relocations + flow analysis seeded
+
+  `parse_ne_relocations(file_data, seg_off, seg_len, has_relocations)`
+  decodea la tabla per-segmento de fixups que sigue al segmento en el
+  fichero NE (count word + N x 8-byte records).  Honor del flag
+  `0x0100 HAS_RELOCATIONS` evita malinterpretar bytes basura como
+  contador (e.g. WIN100 seg1 con flags=0x0040 sin relocs).
+
+  `relocation_seeded_flow_analyze` usa cada `src_off` reloc como
+  ancla: walks back 1-5 bytes hasta encontrar la instruccion cuya
+  operand-byte coincide con `src_off`, y ejecuta worklist-based flow
+  analysis desde ahi.  Bytes no alcanzados se emiten como `db` (data),
+  evitando que Capstone disassemble strings/tablas como codigo.
+
+  Resultado en WINOLDAP seg1 (102 relocs): 9702 / 16310 bytes (59.5%)
+  identificados como codigo via 124 regiones alternantes code/data.
+  La cascada de longitud Capstone-vs-MASM aun impide convergencia
+  byte-exact en 30 iteraciones, asi que el segmento cae al fallback
+  pure-db (que SI byte-matches via MASM 4.00).
+
+### Compact emission para sources NE
+
+  `emit_masm_source(..., compact=True)` (auto para NE):
+
+    * Drop del comentario `; [hex bytes]` por instruccion.  Para 10000
+      insn cuts source size de 883 KB a ~250 KB.
+    * `db N DUP(0)` para zero-runs >= 16 bytes en `_emit_db_block`.
+      Para WIN100 31 KB con muchas zero pads, source baja de ~200 KB
+      a ~180 KB (`d_009E: db 120 DUP(0)`, etc.).
+
+  COM mantiene `compact=False` por legibilidad humana (el comentario
+  hex por linea ayuda a auditar las 470 instrucciones reales del
+  disasm de WIN.COM).
+
+### Graceful fallback en disasm iterativo
+
+  Antes: si la iteracion no convergia en 200 iters, `process_segment`
+  retornaba `FAIL_MAX_ITERS` y dejaba el `seg<N>_real.asm` en estado
+  inconsistente.  Ahora: si tras `MAX_ITERS=30` (NE) o `MAX_ITERS=200`
+  (COM) no hay convergencia, el segmento se reescribe en formato
+  pure-db (100 % `db`) y se verifica que asi SI assembla byte-exact
+  con MASM 4.00.  Status: `OK_DB_FALLBACK`.
+
+  Esto convierte una falla silenciosa en un fallback explicito y
+  garantiza que el `seg<N>_real.asm` resultante siempre es source MASM
+  4.00 valido que round-trippea al binario original.
+
+### Nuevo: `bootstrap/try_assemble_db_source.py`
+
+  Tool de diagnostico standalone que dado `<MOD>:<seg>` ensambla el
+  `seg<N>.asm` con MASM 4.00 y compara byte-exact contra el original.
+  Util para verificar si un source pure-db es MASM-ready sin invocar
+  todo el toolchain de `disasm_to_masm`.
+
+### Cobertura final v13.3
+
+    Module                      Source       Real-disasm  MASM 4.00
+    --------------------------- ------------ ------------ ----------
+    WIN.COM           seg1     real disasm  470/523 89%  byte-exact
+    WIN100.BIN        seg1     pure-db      0%           byte-exact
+    WINOLDAP.MOD      seg1     pure-db      0%           byte-exact
+    WINOLDAP.MOD      seg2     pure-db      data         byte-exact
+    MSDOS.EXE         seg1-5   pure-db      0%           byte-exact
+
+  4/4 modulos clave round-trippean por la toolchain de 1985.
+  92/92 modulos round-trippean por la toolchain Python regex (modo db).
+  37/37 tests pasan.
+
 ## v13.2 - 2026-05-26 - SDK hardening: declarative mod engine + tests + CI
 
 Refactor profundo del Mod SDK introducido en v13.1.  Sin romper nada
