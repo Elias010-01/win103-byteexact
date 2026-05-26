@@ -2,6 +2,76 @@
 
 Historial de versiones del proyecto win103-byteexact (renombrado desde modern-personality-agent).
 
+## v13.0 - 2026-05-26 - WIN.COM-semantic-labels + disasm-to-masm-refactor
+
+Refactor de bootstrap/disasm_to_masm.py para soportar multiples modulos
+(WIN.COM, WIN100.BIN, WINOLDAP.MOD) y mejoras de convergencia + labels
+semanticos reverse-engineered en src/WIN/seg1_real.asm.
+
+Cambios principales en bootstrap/disasm_to_masm.py:
+
+  - Funcion process_module(mod_name) parametrizada: lee
+    src/<MOD>/layout.json, procesa cada segmento.
+  - linear_analyze() para NE segments (sin entry-point conocido).
+  - emit_masm_source(mod_name, seg_index, va_bias, is_data_seg, ...)
+    parametrizado: maneja COM (va_bias=0x100) vs NE (va_bias=0) y
+    data segments (todo db, sin Capstone).
+  - assemble_via_masm(short, work_dir) parametrizado para uso paralelo
+    por segmento.
+  - find_offending_offsets(): adaptive batching - cuando
+    len(obj)==len(orig), las divergencias son puramente encoding diffs
+    (no cascade), batch-fallback de TODAS de una vez. Esto reduce
+    drasticamente las iteraciones en WIN.COM:
+      antes (v12.2): 45 iteraciones, ~1m32s
+      ahora (v13):    3 iteraciones, ~30s
+
+Semantic labels en src/WIN/seg1_real.asm (11 renames cosmeticos,
+aplicados como post-pass tras byte-exact y re-verificados):
+
+  L_01C1 -> win_main                  (entry point del JMP @ offset 0)
+  d_0010 -> msg_dos_prompts           ('DOS$Insert Application$Insert Windows Startup$ disk in drive')
+  d_005F -> msg_when_ready            ('when ready $')
+  d_007B -> msg_program_too_big       ('.. big to fit in memory')
+  d_00A0 -> msg_no_screen_xchg_space  ('.. space for screen exchange')
+  d_00CA -> msg_no_startup_files      ('.. dows startup files')
+  d_00EC -> env_comspec_eq            ('COMSPEC=')
+  d_0790 -> tag_logo                  ('LOGO' 4-char tag)
+  d_07C4 -> txt_windows               ('..ndows')
+  d_07E9 -> msg_copyright_ms          ('Microsoft Corporation, 1985, ..')
+  d_0831 -> msg_trademark_ms          ('a registered trademark of Microsoft Corp.')
+
+  Resultado: src/WIN/seg1_real.asm sigue byte-exact (4873 B match,
+  verificado dos veces en cada run).
+
+Modulos NE (WIN100.BIN, WINOLDAP.MOD) - intentados, no incluidos:
+
+  Razones tecnicas para mantener WIN100/WINOLDAP en 100% db emission:
+
+  1. WIN100.BIN seg1 (31 KB code): la disassembly Capstone produce
+     un .ASM de 883 KB. MASM 4.00 sale silenciosamente despues del
+     banner sin generar .OBJ ni .LST -- el source excede el budget
+     interno del ensamblador (1985-era memory limits, ~64KB heap).
+
+  2. WINOLDAP.MOD seg1 (16 KB code): linear-sweep analysis sin
+     entry-point conocido marca todos los bytes como codigo
+     candidato. Muchos son data mezclado con codigo, Capstone
+     produce instrucciones erroneas que MASM re-encoda con tamano
+     diferente. >200 iteraciones todavia ~9 KB de diff (cada length
+     cascade fuerza fix individual). Convergencia real requeriria
+     cargar la tabla de relocations de NE para identificar bytes
+     que SI son codigo, fuera del scope de v13.
+
+  Estos modulos siguen byte-exact via build_from_source.py
+  (emision flat-db por segmento). bootstrap/analyze/verify_flat_com_via_masm.py
+  confirma todos: WIN seg1 4873B, WIN100 seg1 31103B, WINOLDAP seg1
+  16310B, WINOLDAP seg2 1200B.
+
+Output:
+  src/WIN/seg1_real.asm        (771 lineas, semantic-labeled, byte-exact)
+  src/WIN/seg1_real.json       (coverage stats: 89% real, 1025/161 B)
+  bootstrap/disasm_to_masm.py  (refactor multi-modulo + semantic rename)
+
+
 ## v12.3 - 2026-05-26 - py_exe2bin-validated-vs-real-MS-DOS-EXE2BIN
 
 py_exe2bin.py validado byte-por-byte contra el EXE2BIN.EXE real de

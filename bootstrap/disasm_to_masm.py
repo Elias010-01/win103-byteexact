@@ -47,18 +47,24 @@ import capstone as cs
 
 ROOT = Path(__file__).resolve().parent.parent
 ORIG = ROOT / "original"
-SRC_WIN = ROOT / "src" / "WIN"
+SRC = ROOT / "src"
+SRC_WIN = SRC / "WIN"
 TOOLS_DOS = ROOT / "tools" / "dos"
-WORK = TOOLS_DOS / "work" / "disasm_to_masm"
+WORK_ROOT = TOOLS_DOS / "work" / "disasm_to_masm"
 COMBINED = TOOLS_DOS / "combined"
 
 
 # ----------------------------------------------------------------------
-# 1. Flow analysis (same approach as bootstrap/disasm_win_com.py)
+# 1. Flow analysis (COM-style: follows JMP/CALL from a known entry point)
 # ----------------------------------------------------------------------
 
-def flow_analyze(data: bytes):
+def flow_analyze(data: bytes, va_bias: int = 0x100):
     """Return (is_code: bytearray, branch_targets: set[int], entry: int).
+
+    `va_bias` is the runtime virtual address of byte 0 of `data` so that
+    Capstone can compute proper relative-jump targets:
+      * COM file:  va_bias = 0x100 (DOS loads .COM at CS:100)
+      * NE seg:    va_bias = 0 (segment-relative)
 
     `branch_targets` contains file offsets that are reachable as the
     target of jcc/jmp/call (i.e. need a code label).
@@ -67,7 +73,7 @@ def flow_analyze(data: bytes):
     is_code = bytearray(SIZE)
     branch_targets: set[int] = set()
     if data[0] != 0xE9:
-        raise RuntimeError("WIN.COM does not start with JMP near (E9)")
+        raise RuntimeError("flow_analyze: data must start with JMP near (E9)")
     entry = 3 + struct.unpack("<h", data[1:3])[0]
     branch_targets.add(entry)
     md = cs.Cs(cs.CS_ARCH_X86, cs.CS_MODE_16)
@@ -79,7 +85,7 @@ def flow_analyze(data: bytes):
             continue
         while pc < SIZE and not is_code[pc]:
             try:
-                insn = next(md.disasm(data[pc:pc + 15], 0x100 + pc), None)
+                insn = next(md.disasm(data[pc:pc + 15], va_bias + pc), None)
             except StopIteration:
                 insn = None
             if insn is None or insn.size == 0:
@@ -93,7 +99,7 @@ def flow_analyze(data: bytes):
                 if insn.operands and \
                         insn.operands[0].type == cs.x86.X86_OP_IMM:
                     tgt_va = insn.operands[0].imm
-                    tgt_off = tgt_va - 0x100
+                    tgt_off = tgt_va - va_bias
                     if 0 <= tgt_off < SIZE:
                         branch_targets.add(tgt_off)
                         if not is_code[tgt_off]:
@@ -103,6 +109,44 @@ def flow_analyze(data: bytes):
                 break
             pc += insn.size
     return is_code, branch_targets, entry
+
+
+def linear_analyze(data: bytes, va_bias: int = 0):
+    """Linear-sweep "all bytes are code" analysis for NE segments where
+    we don't have a single known entry point.
+
+    Treats every byte as candidate code. Discovers branch targets by
+    walking forwards through the segment and noting jmp/call immediates
+    that fall back inside the segment. The iteration loop in `main` will
+    later mark whatever doesn't round-trip through MASM 4.0 as `db`.
+
+    Returns (is_code, branch_targets, entry=0).
+    """
+    SIZE = len(data)
+    is_code = bytearray([1] * SIZE)  # everything is code candidate
+    branch_targets: set[int] = set()
+    md = cs.Cs(cs.CS_ARCH_X86, cs.CS_MODE_16)
+    md.detail = True
+    pc = 0
+    while pc < SIZE:
+        try:
+            insn = next(md.disasm(data[pc:pc + 15], va_bias + pc), None)
+        except StopIteration:
+            insn = None
+        if insn is None or insn.size == 0:
+            pc += 1
+            continue
+        mnem = insn.mnemonic
+        if (mnem in ("call", "jmp") or
+                (mnem.startswith("j") and mnem != "jmp")):
+            if insn.operands and \
+                    insn.operands[0].type == cs.x86.X86_OP_IMM:
+                tgt_va = insn.operands[0].imm
+                tgt_off = tgt_va - va_bias
+                if 0 <= tgt_off < SIZE:
+                    branch_targets.add(tgt_off)
+        pc += insn.size
+    return is_code, branch_targets, 0
 
 
 # ----------------------------------------------------------------------
@@ -152,19 +196,21 @@ def _byte_to_masm(b: int) -> str:
 
 
 def translate_op_str(op_str: str, branch_target_offsets: set[int],
-                     is_branch_op: bool) -> str:
+                     is_branch_op: bool, va_bias: int = 0x100) -> str:
     """Translate a Capstone op_str to MASM 4.00 syntax.
 
-    `branch_target_offsets` holds file offsets that have a code label
-    (`L_XXXX`). When the instruction is a branch (is_branch_op=True) and
-    the immediate corresponds to a known branch target, we replace it
-    with the label name; otherwise we keep it as a raw hex constant.
+    `branch_target_offsets` holds segment-relative offsets that have a
+    code label (`L_XXXX`). When the instruction is a branch
+    (is_branch_op=True) and the immediate (a virtual address from
+    Capstone) corresponds to a known branch target after subtracting
+    `va_bias`, we replace it with the label name; otherwise we keep it
+    as a raw hex constant.
     """
     def repl(match: re.Match) -> str:
         hexv = match.group(1)
         val = int(hexv, 16)
         if is_branch_op:
-            tgt_off = val - 0x100
+            tgt_off = val - va_bias
             if tgt_off in branch_target_offsets:
                 return f"L_{tgt_off:04X}"
         return _hex_to_masm(hexv)
@@ -230,9 +276,13 @@ def _is_capstone_str_op_with_operands(mnem: str, op_str: str) -> bool:
 # 3. Build the MASM source from the disassembly
 # ----------------------------------------------------------------------
 
-def disasm_instructions(data: bytes, is_code: bytearray):
+def disasm_instructions(data: bytes, is_code: bytearray, va_bias: int = 0x100):
     """Yield (file_off, size, mnemonic, op_str, raw_bytes) for every
-    instruction, walking only over byte ranges marked as code."""
+    instruction, walking only over byte ranges marked as code.
+
+    `va_bias` is the runtime virtual address of byte 0 of `data`,
+    forwarded to Capstone so it produces correct relative-jump targets.
+    """
     md = cs.Cs(cs.CS_ARCH_X86, cs.CS_MODE_16)
     md.detail = True
     SIZE = len(data)
@@ -250,16 +300,13 @@ def disasm_instructions(data: bytes, is_code: bytearray):
         j = off
         while j < SIZE and is_code[j]:
             j += 1
-        # Disassemble within [off..j)
         run_data = data[off:j]
-        run_va = 0x100 + off
+        run_va = va_bias + off
         cur = 0
         while cur < len(run_data):
             insn = next(md.disasm(run_data[cur:cur + 15], run_va + cur),
                         None)
             if insn is None or insn.size == 0:
-                # Should not happen if flow_analyze marked correctly,
-                # but emit raw bytes just in case.
                 yield ("code-fallback", off + cur, 1, run_data[cur:cur + 1])
                 cur += 1
                 continue
@@ -271,40 +318,66 @@ def disasm_instructions(data: bytes, is_code: bytearray):
 
 def emit_masm_source(data: bytes, is_code: bytearray,
                      branch_targets: set[int],
-                     fallback_offsets: set[int]) -> tuple[str, list[dict]]:
-    """Build a MASM 4.00 source string from the disasm.
+                     fallback_offsets: set[int],
+                     mod_name: str = "WIN",
+                     seg_index: int = 1,
+                     seg_name: str | None = None,
+                     orig_name: str = "WIN.COM",
+                     va_bias: int = 0x100,
+                     is_data_seg: bool = False) -> tuple[str, list[dict]]:
+    """Build a MASM 4.00 source string from the disasm of one segment.
 
-    `fallback_offsets` is a set of file offsets at which the corresponding
-    Capstone instruction MUST be emitted as `db <bytes>` (because MASM
-    re-encoded it differently in a previous iteration, or rejected the
-    syntax with a parse error).
+    Parameters:
+      `mod_name`, `seg_index`, `seg_name` – control naming of the
+        SEGMENT directive and labels.  Defaults work for WIN.COM seg1.
+      `va_bias` – passed to Capstone & translate_op_str (0x100 for COM,
+        0 for NE segs).
+      `is_data_seg` – when True, skip Capstone entirely and emit every
+        byte as `db`. Used for NE data segments (e.g. WINOLDAP seg2).
+      `fallback_offsets` – file offsets that MUST be emitted as `db`
+        (because MASM re-encoded them differently or rejected the
+        syntax in a previous iteration).
 
-    Returns (source_text, items) where `items` is a per-instruction list
-    suitable for byte-offset -> instruction mapping. Each item carries a
-    `line_idx` (1-based MASM source line number) so MASM error messages
-    of the form 'WINREAL.ASM(NN) : error ...' can be mapped back to the
-    file offset that owns the offending bytes.
+    Returns (source_text, items) where each item carries a 1-based
+    MASM source line index so MASM error messages of the form
+    'WINREAL.ASM(NN) : error ...' can be mapped back to file offsets.
     """
+    if seg_name is None:
+        seg_name = f"{mod_name.upper()}_SEG{seg_index}"
     lines = [
         "; ============================================================",
-        "; src/WIN/seg1_real.asm  --  AUTO-GENERATED by",
+        f"; src/{mod_name}/seg{seg_index}_real.asm  --  AUTO-GENERATED by",
         ";   bootstrap/disasm_to_masm.py",
         ";",
-        "; Byte-exact MASM 4.00 source for original/WIN.COM (4873 B). The",
-        "; bulk of executable code appears as real instructions; only",
+        f"; Byte-exact MASM 4.00 source for segment {seg_index} of "
+        f"original/{orig_name}",
+        f"; ({len(data)} B). Capstone disassembly with iterative `db` "
+        "fallback for",
         "; instructions whose MASM 4.00 encoding differs from the shipped",
-        "; bytes (or which cross-reference data in opaque ways) fall back",
-        "; to `db <bytes>` directives. This file is verified byte-exact",
-        "; via bootstrap/analyze/verify_flat_com_via_masm.py.",
+        "; bytes. This file is verified byte-exact via",
+        "; bootstrap/analyze/verify_flat_com_via_masm.py.",
         "; ============================================================",
         "",
         "        .8086",
-        "WIN_SEG1 SEGMENT BYTE PUBLIC 'CODE'",
-        "        ASSUME cs:WIN_SEG1, ds:WIN_SEG1, ss:WIN_SEG1, es:WIN_SEG1",
+        f"{seg_name} SEGMENT BYTE PUBLIC 'CODE'",
+        f"        ASSUME cs:{seg_name}, ds:{seg_name}, "
+        f"ss:{seg_name}, es:{seg_name}",
         "",
     ]
+    # Pure-data segments: emit every byte as `db`, no Capstone.
+    if is_data_seg:
+        lines.append(f"; -- data 0x0000..0x{len(data)-1:04X} ({len(data)}B) --")
+        line_idx = len(lines) + 1
+        _emit_db_block(lines, 0, data)
+        items = [{"kind": "data", "off": 0, "size": len(data),
+                  "line_idx": line_idx}]
+        lines.append("")
+        lines.append(f"{seg_name} ENDS")
+        lines.append("        END")
+        lines.append("")
+        return "\n".join(lines), items
     items = []  # one entry per emitted line that owns ranges of bytes
-    for entry in disasm_instructions(data, is_code):
+    for entry in disasm_instructions(data, is_code, va_bias=va_bias):
         kind = entry[0]
         if kind == "data":
             _, off, sz, raw = entry
@@ -368,7 +441,8 @@ def emit_masm_source(data: bytes, is_code: bytearray,
             # not the explicit operands form Capstone produces.
             masm_op = ""
         else:
-            masm_op = translate_op_str(op_str, branch_targets, is_branch)
+            masm_op = translate_op_str(op_str, branch_targets, is_branch,
+                                       va_bias=va_bias)
         # MASM 4.0 picks the larger encoding by default for forward jmps,
         # so `EB xx` (jmp short, 2 bytes) becomes `E9 xx xx` (jmp near,
         # 3 bytes). Force `short` keyword when the original was 2-byte.
@@ -388,7 +462,7 @@ def emit_masm_source(data: bytes, is_code: bytearray,
                       "mnem": masm_mnem_full, "op_str": masm_op,
                       "line_idx": len(lines)})
     lines.append("")
-    lines.append("WIN_SEG1 ENDS")
+    lines.append(f"{seg_name} ENDS")
     lines.append("        END")
     lines.append("")
     return "\n".join(lines), items
@@ -450,57 +524,64 @@ def _winpath_to_wsl(p: Path) -> str:
     return s
 
 
-_LST_ERR_RE = re.compile(
-    r"^WINREAL\.ASM\((\d+)\)\s*:\s*error\s+(\d+):", re.IGNORECASE)
+def _make_lst_err_re(short: str) -> re.Pattern:
+    return re.compile(
+        rf"^{re.escape(short)}\.ASM\((\d+)\)\s*:\s*error\s+(\d+):",
+        re.IGNORECASE)
 
 
-def parse_masm_errors(lst_text: str) -> list[tuple[int, int, str]]:
+def parse_masm_errors(lst_text: str, short: str) -> list[tuple[int, int, str]]:
     """Return a list of (source_line, error_code, message) for every
-    'WINREAL.ASM(NN) : error MM: ...' line in the MASM 4.0 .LST."""
+    '<SHORT>.ASM(NN) : error MM: ...' line in the MASM 4.0 .LST."""
+    pat = _make_lst_err_re(short)
     out = []
     for ln in lst_text.splitlines():
-        m = _LST_ERR_RE.match(ln.strip())
+        m = pat.match(ln.strip())
         if m:
             out.append((int(m.group(1)), int(m.group(2)), ln.strip()))
     return out
 
 
-def assemble_via_masm(asm_text: str) -> tuple[bytes | None, str]:
-    """Stage asm_text in tools/dos/work/disasm_to_masm/, run MASM 4.00 in
-    a single DOSBox-X session, and return (LEDATA bytes or None, LST
-    text) so the caller can inspect MASM error messages."""
-    if WORK.exists():
-        shutil.rmtree(WORK)
-    WORK.mkdir(parents=True)
+def assemble_via_masm(asm_text: str,
+                      short: str = "WINREAL",
+                      work_dir: Path | None = None
+                      ) -> tuple[bytes | None, str]:
+    """Stage asm_text in `work_dir` (default: WORK_ROOT/<SHORT>/), run
+    MASM 4.00 in a single DOSBox-X session, and return (LEDATA bytes or
+    None, LST text) so the caller can inspect MASM error messages.
+    """
+    if work_dir is None:
+        work_dir = WORK_ROOT / short
+    if work_dir.exists():
+        shutil.rmtree(work_dir)
+    work_dir.mkdir(parents=True)
     for tool in ("MASM.EXE", "LINK.EXE"):
         src = COMBINED / tool
         if src.exists():
-            shutil.copy2(src, WORK / tool)
-    short = "WINREAL"
-    (WORK / f"{short}.ASM").write_text(asm_text, encoding="ascii",
-                                       errors="replace")
+            shutil.copy2(src, work_dir / tool)
+    (work_dir / f"{short}.ASM").write_text(asm_text, encoding="ascii",
+                                           errors="replace")
     bat = "\r\n".join([
         "@echo off",
         f"MASM {short}, {short}.OBJ, {short}.LST; > {short}_M.LOG",
         f"if errorlevel 1 echo MASM_FAIL >> {short}_M.LOG",
         "",
     ])
-    (WORK / "BUILD.BAT").write_text(bat, encoding="ascii")
+    (work_dir / "BUILD.BAT").write_text(bat, encoding="ascii")
     cmd = ["wsl", "--", "bash",
            _winpath_to_wsl(TOOLS_DOS / "dosbuild.sh"),
-           _winpath_to_wsl(WORK), "BUILD.BAT"]
+           _winpath_to_wsl(work_dir), "BUILD.BAT"]
     try:
-        subprocess.run(cmd, capture_output=True, text=True, timeout=120)
+        subprocess.run(cmd, capture_output=True, text=True, timeout=240)
     except subprocess.TimeoutExpired:
         print("ERR: MASM under DOSBox-X timed out")
         return None, ""
-    lst_path = WORK / f"{short}.LST"
+    lst_path = work_dir / f"{short}.LST"
     lst_text = lst_path.read_text(encoding="ascii", errors="replace") \
         if lst_path.exists() else ""
-    obj_path = WORK / f"{short}.OBJ"
+    obj_path = work_dir / f"{short}.OBJ"
     if not obj_path.exists():
         return None, lst_text
-    # Re-use parse_obj_ledata from build_from_source
     sys.path.insert(0, str(ROOT / "bootstrap"))
     from build_from_source import parse_obj_ledata  # noqa: E402
     return parse_obj_ledata(obj_path.read_bytes()), lst_text
@@ -509,30 +590,36 @@ def assemble_via_masm(asm_text: str) -> tuple[bytes | None, str]:
 def find_offending_offsets(items: list[dict],
                            orig_bytes: bytes,
                            obj_bytes: bytes,
-                           batch_limit: int = 1) -> set[int]:
+                           batch_limit: int | None = None) -> set[int]:
     """Find instructions whose MASM 4.00 output differs from the original.
 
-    We only mark up to `batch_limit` instructions per call, starting from
-    the FIRST divergence. The reason: when MASM emits an instruction with
-    a different length than the original, every subsequent byte is shifted
-    in the OBJ stream, so a naive bytewise diff would attribute many
-    spurious mismatches to instructions that are actually correct. Marking
-    just the first diff instruction per iteration converges reliably.
+    Adaptive batching:
+      * If `len(obj) == len(orig)`, all diffs are pure encoding diffs
+        (no cascade), so we can safely batch ALL bad insn items at once.
+        This dramatically reduces iteration count on big segments.
+      * If lengths differ, MASM emitted an instruction with a different
+        size; subsequent bytes in OBJ are shifted, so any further diff
+        is unreliable. We only mark the FIRST bad item.
+
+    `batch_limit` overrides the adaptive choice if given (1 = strict).
     """
-    # Map every original file offset to the item that owns it
     off_to_item = {}
     for it in items:
         for k in range(it["size"]):
             off_to_item[it["off"] + k] = it
+    same_len = len(orig_bytes) == len(obj_bytes)
+    if batch_limit is None:
+        batch_limit = 99999 if same_len else 1
     n = min(len(orig_bytes), len(obj_bytes))
     bad: list[int] = []
     for i in range(n):
         if obj_bytes[i] != orig_bytes[i]:
             it = off_to_item.get(i)
             if it is None or it["kind"] != "insn":
-                # Either past end of items, or item is already a db /
-                # data block. The latter would indicate a real bug
-                # elsewhere; just stop and let caller see the diff.
+                if same_len:
+                    # Length match means we can keep scanning; this byte
+                    # is in a non-insn item which shouldn't really diff.
+                    continue
                 break
             if it["off"] not in bad:
                 bad.append(it["off"])
@@ -557,114 +644,308 @@ def find_offending_offsets(items: list[dict],
 # 5. Driver
 # ----------------------------------------------------------------------
 
-def main() -> int:
-    orig_bytes = (ORIG / "WIN.COM").read_bytes()
-    print(f"Loaded WIN.COM: {len(orig_bytes)} bytes")
+def process_segment(mod_name: str, seg_index: int, target: bytes,
+                    orig_name: str, is_data: bool, is_com: bool) -> dict:
+    """Run the iterative disasm-to-MASM loop on one segment of one
+    module.  Returns a coverage dict (always written to
+    src/<mod_name>/seg<idx>_real.json) and writes the source to
+    src/<mod_name>/seg<idx>_real.asm.
 
-    is_code, branch_targets, entry = flow_analyze(orig_bytes)
+    Strategy per kind:
+      * is_com=True (WIN.COM):  flow_analyze, va_bias=0x100
+      * is_data=True            (NE data seg, e.g. WINOLDAP seg2):
+                                emit-everything-as-db, no Capstone
+      * else (NE code seg):     linear_analyze, va_bias=0
+    """
+    src_dir = SRC / mod_name
+    src_dir.mkdir(parents=True, exist_ok=True)
+    out_path = src_dir / f"seg{seg_index}_real.asm"
+    cov_path = src_dir / f"seg{seg_index}_real.json"
+    short = (mod_name.upper()[:6] + f"R{seg_index}")[:8]
+
+    if is_data:
+        print(f"  [{mod_name} seg{seg_index}] DATA segment: emit all-db, "
+              "no iteration.")
+        asm_text, items = emit_masm_source(
+            target, bytearray(len(target)), set(), set(),
+            mod_name=mod_name, seg_index=seg_index,
+            orig_name=orig_name, va_bias=0, is_data_seg=True)
+        out_path.write_text(asm_text, encoding="ascii", errors="replace")
+        obj_bytes, lst_text = assemble_via_masm(
+            asm_text, short=short, work_dir=WORK_ROOT / short)
+        if obj_bytes is None:
+            print(f"  ERR: MASM failed on data segment.")
+            return {"module": mod_name, "seg_index": seg_index,
+                    "status": "FAIL_MASM", "size": len(target)}
+        if obj_bytes != target:
+            print(f"  ERR: data segment mismatch.")
+            return {"module": mod_name, "seg_index": seg_index,
+                    "status": "FAIL_DIFF", "size": len(target)}
+        cov = {"module": mod_name, "seg_index": seg_index,
+               "status": "OK", "kind": "data",
+               "instructions_real": 0, "instructions_db_forced": 0,
+               "data_blocks": 1, "real_insn_pct": 0,
+               "bytes_real_insn": 0, "bytes_db_forced": 0,
+               "bytes_total": len(target),
+               "bytes_data": len(target)}
+        cov_path.write_text(json.dumps(cov, indent=2))
+        print(f"  OK: data segment byte-exact ({len(target)} B)")
+        return cov
+
+    # Code segment (COM or NE)
+    va_bias = 0x100 if is_com else 0
+    if is_com:
+        is_code, branch_targets, _entry = flow_analyze(target,
+                                                       va_bias=va_bias)
+    else:
+        is_code, branch_targets, _entry = linear_analyze(target,
+                                                         va_bias=va_bias)
     code_bytes = sum(is_code)
-    print(f"Flow analysis: {code_bytes} code bytes, {len(orig_bytes) - code_bytes} data bytes")
-    print(f"Branch targets: {len(branch_targets)}")
+    print(f"  [{mod_name} seg{seg_index}] {code_bytes} code bytes / "
+          f"{len(target)-code_bytes} data bytes, "
+          f"{len(branch_targets)} branch targets")
 
     fallback: set[int] = set()
     items: list[dict] = []
-    last_diff_count = None
-    MAX_ITERS = 80   # one bad instruction is fixed per iteration; should
-                    # be enough headroom for WIN.COM's ~1186 code bytes.
+    MAX_ITERS = 200
+    last_iter_msg = None
     for iteration in range(1, MAX_ITERS + 1):
-        print(f"\n--- iteration {iteration} ---")
-        asm_text, items = emit_masm_source(orig_bytes, is_code,
-                                           branch_targets, fallback)
-        # Stage the source so the user can inspect even if MASM fails
-        SRC_WIN.mkdir(parents=True, exist_ok=True)
-        out_path = SRC_WIN / "seg1_real.asm"
+        asm_text, items = emit_masm_source(
+            target, is_code, branch_targets, fallback,
+            mod_name=mod_name, seg_index=seg_index,
+            orig_name=orig_name, va_bias=va_bias)
         out_path.write_text(asm_text, encoding="ascii", errors="replace")
-        print(f"Wrote {out_path.relative_to(ROOT)} "
-              f"({asm_text.count(chr(10))} lines, "
-              f"{len(fallback)} forced db fallbacks)")
-        obj_bytes, lst_text = assemble_via_masm(asm_text)
+
+        obj_bytes, lst_text = assemble_via_masm(
+            asm_text, short=short, work_dir=WORK_ROOT / short)
         if obj_bytes is None:
-            # MASM did not produce an OBJ -- parse the LST for error
-            # lines, find which items they belong to, mark for db.
-            errs = parse_masm_errors(lst_text)
+            errs = parse_masm_errors(lst_text, short)
             if not errs:
-                print("ERR: MASM failed AND the .LST has no parseable "
-                      "errors; aborting.")
-                return 1
+                print(f"  ERR iter {iteration}: MASM failed AND "
+                      f".LST has no parseable errors. Aborting.")
+                return {"module": mod_name, "seg_index": seg_index,
+                        "status": "FAIL_MASM_NO_ERRS", "size": len(target),
+                        "fallback_count": len(fallback)}
             line_to_item = {it["line_idx"]: it for it in items
                             if it.get("line_idx") is not None}
             new_bad = set()
-            for src_line, code, _msg in errs:
+            for src_line, _code, _msg in errs:
                 it = line_to_item.get(src_line)
-                if it is None:
-                    continue
-                if it["kind"] != "insn":
-                    continue
-                new_bad.add(it["off"])
+                if it and it["kind"] == "insn":
+                    new_bad.add(it["off"])
+            new_bad -= fallback
             if not new_bad:
-                print(f"ERR: MASM has {len(errs)} errors but none "
-                      f"map to any insn item.  First few: "
-                      f"{[e[2] for e in errs[:3]]}")
-                return 1
-            sample = sorted(new_bad)[:5]
-            print(f"  MASM had {len(errs)} errors -> "
-                  f"{len(new_bad)} instructions marked for db "
-                  f"(file_off {[hex(x) for x in sample]})")
+                print(f"  ERR iter {iteration}: MASM has {len(errs)} "
+                      f"errors but none map to fixable insn items.")
+                return {"module": mod_name, "seg_index": seg_index,
+                        "status": "FAIL_UNFIXABLE", "size": len(target),
+                        "fallback_count": len(fallback)}
+            print(f"  iter {iteration}: MASM {len(errs)} errors -> +"
+                  f"{len(new_bad)} db fallbacks (total {len(fallback) + len(new_bad)})")
             fallback |= new_bad
             continue
-        if obj_bytes == orig_bytes:
-            print(f"OK: byte-exact ({len(obj_bytes)} B match) at "
-                  f"iteration {iteration}.")
+
+        if obj_bytes == target:
+            print(f"  OK iter {iteration}: byte-exact "
+                  f"({len(obj_bytes)} B match)")
+            # Post-pass: apply reverse-engineered semantic label
+            # renames (cosmetic, doesn't change emitted bytes). Then
+            # re-verify byte-exact as a sanity check that the rename
+            # didn't accidentally collide with a real symbol.
+            renamed_text, n_replaced = apply_semantic_labels(
+                asm_text, mod_name)
+            if n_replaced > 0:
+                print(f"  applying {n_replaced} semantic label "
+                      f"renames...")
+                out_path.write_text(renamed_text, encoding="ascii",
+                                    errors="replace")
+                obj2, _lst2 = assemble_via_masm(
+                    renamed_text, short=short,
+                    work_dir=WORK_ROOT / short)
+                if obj2 != target:
+                    print(f"  ERR: semantic rename broke byte-exactness; "
+                          f"reverting to numeric labels.")
+                    out_path.write_text(asm_text, encoding="ascii",
+                                        errors="replace")
+                else:
+                    print(f"  OK: semantic-labeled source still "
+                          f"byte-exact ({len(obj2)} B match)")
             break
-        # Find divergences
-        n = min(len(obj_bytes), len(orig_bytes))
-        diff_count = sum(1 for i in range(n)
-                         if obj_bytes[i] != orig_bytes[i])
-        print(f"  diff count: {diff_count} bytes  "
-              f"(obj={len(obj_bytes)} vs orig={len(orig_bytes)})")
-        bad = find_offending_offsets(items, orig_bytes, obj_bytes)
-        if not bad:
-            print(f"  no recoverable instructions to fall back; giving up.")
-            return 2
+
+        same_len = len(obj_bytes) == len(target)
+        diff_count = sum(1 for i in range(min(len(obj_bytes), len(target)))
+                         if obj_bytes[i] != target[i])
+        bad = find_offending_offsets(items, target, obj_bytes)
         new_bad = bad - fallback
         if not new_bad:
-            print(f"  selected instructions already in fallback set; "
-                  f"some non-insn item is wrong. Giving up.")
-            return 3
-        sample = sorted(new_bad)[:5]
-        print(f"  marking {len(new_bad)} instructions for db fallback "
-              f"(file_off {[hex(x) for x in sample]})")
+            print(f"  ERR iter {iteration}: no recoverable diffs "
+                  f"({diff_count} byte mismatches, same_len={same_len})")
+            return {"module": mod_name, "seg_index": seg_index,
+                    "status": "FAIL_NO_PROGRESS", "size": len(target),
+                    "fallback_count": len(fallback),
+                    "remaining_diffs": diff_count}
+        print(f"  iter {iteration}: diff={diff_count}B "
+              f"(obj={len(obj_bytes)} vs orig={len(target)}, "
+              f"same_len={same_len}) -> +{len(new_bad)} db fallbacks "
+              f"(total {len(fallback) + len(new_bad)})")
         fallback |= new_bad
     else:
-        print(f"Exhausted {MAX_ITERS} iterations without converging.")
-        return 4
+        print(f"  ERR: exhausted {MAX_ITERS} iterations without "
+              f"converging.")
+        return {"module": mod_name, "seg_index": seg_index,
+                "status": "FAIL_MAX_ITERS", "size": len(target),
+                "fallback_count": len(fallback)}
 
-    # Coverage report
     n_insn = sum(1 for it in items if it["kind"] == "insn")
     n_db_forced = sum(1 for it in items if it["kind"] == "db-forced")
-    n_data = sum(1 for it in items if it["kind"] == "data")
+    n_data_blocks = sum(1 for it in items if it["kind"] == "data")
     code_insns_total = n_insn + n_db_forced
-    real_pct = (n_insn * 100 // code_insns_total
-                if code_insns_total else 0)
+    real_pct = (n_insn * 100 // code_insns_total) if code_insns_total else 0
     bytes_real = sum(it["size"] for it in items if it["kind"] == "insn")
     bytes_db_forced = sum(it["size"] for it in items
                           if it["kind"] == "db-forced")
-    coverage = {
+    bytes_data = sum(it["size"] for it in items if it["kind"] == "data")
+    cov = {
+        "module": mod_name,
+        "seg_index": seg_index,
+        "status": "OK",
+        "kind": "code-com" if is_com else "code-ne",
         "instructions_real": n_insn,
         "instructions_db_forced": n_db_forced,
-        "data_blocks": n_data,
+        "data_blocks": n_data_blocks,
         "real_insn_pct": real_pct,
         "bytes_real_insn": bytes_real,
         "bytes_db_forced": bytes_db_forced,
-        "bytes_total": len(orig_bytes),
+        "bytes_data": bytes_data,
+        "bytes_total": len(target),
     }
-    (SRC_WIN / "seg1_real.json").write_text(
-        json.dumps(coverage, indent=2))
-    print(f"\nCoverage: {n_insn} real instructions / "
-          f"{code_insns_total} total code-instructions ({real_pct}%)")
-    print(f"Bytes: {bytes_real} real-insn / {bytes_db_forced} db-fallback / "
-          f"{len(orig_bytes) - bytes_real - bytes_db_forced} data")
-    return 0
+    cov_path.write_text(json.dumps(cov, indent=2))
+    print(f"  Coverage: {n_insn}/{code_insns_total} real instructions "
+          f"({real_pct}%), {bytes_real}/{bytes_db_forced}/{bytes_data} "
+          f"bytes (real-insn/db-fallback/data)")
+    return cov
+
+
+def process_module(mod_name: str) -> list[dict]:
+    """Run process_segment over every segment listed in
+    src/<mod_name>/layout.json. Returns a list of coverage dicts."""
+    layout_path = SRC / mod_name / "layout.json"
+    if not layout_path.exists():
+        print(f"!! {mod_name}: no src/{mod_name}/layout.json")
+        return []
+    layout = json.loads(layout_path.read_text())
+    orig_name = layout["original_name"]
+    orig = (ORIG / orig_name).read_bytes()
+    is_com = orig_name.upper().endswith(".COM")
+    print(f"\n=== {mod_name} ({orig_name}, {len(orig)} B) ===")
+    results = []
+    for seg in layout["segments"]:
+        idx = seg["index"]
+        fo = seg["file_off"]
+        sz = seg["data_len"]
+        target = orig[fo:fo + sz]
+        is_data = bool(seg.get("is_data", False))
+        r = process_segment(mod_name, idx, target, orig_name,
+                            is_data=is_data, is_com=is_com)
+        results.append(r)
+    return results
+
+
+DEFAULT_MODULES = ["WIN"]
+# WIN100.BIN seg1 (31 KB) and WINOLDAP.MOD seg1 (16 KB) were attempted
+# in v13 development; results: WIN100 produces an 883 KB ASM source that
+# exceeds MASM 4.00's source budget (assembler exits silently after the
+# banner with no .OBJ output), and WINOLDAP without a known entry point
+# requires linear-sweep analysis where mixed code/data segments fail to
+# converge in a reasonable iteration count (>200 iters still ~9 KB
+# diff, since each length-cascade fixes only one instruction).  These
+# modules remain at 100 % `db` emission via build_from_source.py, which
+# still produces byte-exact output.  See state/analyze/disasm_to_masm/
+# attempt_log.md for details.
+
+# ----------------------------------------------------------------------
+# 6. Semantic-label rename (post-pass, doesn't change emitted bytes)
+# ----------------------------------------------------------------------
+
+# Reverse-engineered names for WIN.COM seg1 data labels and the main
+# entry point.  Each `d_XXXX` label was identified by inspecting the
+# string at that offset in the assembled output, plus contextual code
+# usage.  These renames are pure cosmetic relabels (MASM emits the same
+# instruction bytes regardless of symbolic name).
+SEMANTIC_LABELS: dict[str, dict[str, str]] = {
+    "WIN": {
+        # Code labels
+        "L_01C1": "win_main",
+        # Data labels (DOS .COM-style $-terminated message strings)
+        # ".COM" / "DOS$Insert Application$Insert Windows Startup$"
+        # / " disk in drive x:" -- multi-prompt block.
+        "d_0010": "msg_dos_prompts",
+        "d_005F": "msg_when_ready",
+        "d_007B": "msg_program_too_big",      # ".. big to fit in memory"
+        "d_00A0": "msg_no_screen_xchg_space",  # ".. space for screen xchg"
+        "d_00CA": "msg_no_startup_files",      # ".. dows startup files"
+        "d_00EC": "env_comspec_eq",            # "COMSPEC="
+        "d_0790": "tag_logo",                  # "LOGO" 4-char tag
+        "d_07C4": "txt_windows",               # "..ndows" -> Windows
+        "d_07E9": "msg_copyright_ms",
+        "d_0831": "msg_trademark_ms",
+    },
+}
+
+
+def apply_semantic_labels(asm_text: str, mod_name: str) -> tuple[str, int]:
+    """Rename `L_XXXX` and `d_XXXX` labels (declarations + references)
+    to reverse-engineered semantic names from SEMANTIC_LABELS[mod_name].
+
+    Pure cosmetic transform: MASM emits the same bytes regardless of
+    symbol name, so the post-rename source must still assemble
+    byte-exact (which the caller verifies).  Returns the new text and
+    the count of replacements made (across all distinct labels).
+    """
+    rename_map = SEMANTIC_LABELS.get(mod_name, {})
+    if not rename_map:
+        return asm_text, 0
+    n_replaced = 0
+    out = asm_text
+    for old, new in rename_map.items():
+        # `\b` word boundaries pin to whole-symbol matches so we don't
+        # accidentally rewrite e.g. `d_001023h` (none currently exist
+        # but defensive).
+        pat = re.compile(rf"\b{re.escape(old)}\b")
+        new_text, n = pat.subn(new, out)
+        n_replaced += n
+        out = new_text
+    return out, n_replaced
+
+
+def main() -> int:
+    args = sys.argv[1:]
+    targets = args or DEFAULT_MODULES
+    all_results: dict[str, list[dict]] = {}
+    for t in targets:
+        all_results[t] = process_module(t)
+
+    # Summary
+    print("\n" + "=" * 60)
+    print("SUMMARY")
+    print("=" * 60)
+    overall_ok = True
+    for mod, results in all_results.items():
+        for r in results:
+            status = r.get("status", "?")
+            ok = status == "OK"
+            if not ok:
+                overall_ok = False
+            sz = r.get("size", r.get("bytes_total", "?"))
+            extras = ""
+            if r.get("kind") == "code-com" or r.get("kind") == "code-ne":
+                extras = (f"  {r['instructions_real']}/"
+                          f"{r['instructions_real'] + r['instructions_db_forced']}"
+                          f" real ({r['real_insn_pct']}%)")
+            print(f"  {mod} seg{r.get('seg_index','?')}: {status}  "
+                  f"size={sz}{extras}")
+
+    return 0 if overall_ok else 1
 
 
 if __name__ == "__main__":

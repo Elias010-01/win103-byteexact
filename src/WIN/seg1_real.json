@@ -1,9 +1,14 @@
 {
+  "module": "WIN",
+  "seg_index": 1,
+  "status": "OK",
+  "kind": "code-com",
   "instructions_real": 470,
   "instructions_db_forced": 53,
   "data_blocks": 3,
   "real_insn_pct": 89,
   "bytes_real_insn": 1025,
   "bytes_db_forced": 161,
+  "bytes_data": 3687,
   "bytes_total": 4873
 }
