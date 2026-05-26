@@ -2,6 +2,58 @@
 
 Historial de versiones del proyecto win103-byteexact (renombrado desde modern-personality-agent).
 
+## v12.1 - 2026-05-26 - flat-COM-via-compilador
+
+Extension de v12: los 3 modulos nuevos con codigo (WIN.COM, WIN100.BIN,
+WINOLDAP.MOD) ahora tambien estan verificados POR EL COMPILADOR original,
+no solo por la cadena de extraccion. Pass24 cubria los 69 NE; los 3
+flat/multi-seg quedaban verificados unicamente por byte-extract. Ahora
+MASM 4.00 los reensambla y produce bytes byte-identicos a los originales.
+
+Nuevo verifier:
+
+  bootstrap/analyze/verify_flat_com_via_masm.py
+    Plan-build-verify para flat-COM y NE de un solo paso. Reensambla
+    cada segmento via MASM 4.00 dentro de DOSBox-X (UNA sola invocacion,
+    estilo pass24) y compara LEDATA bytes contra el slice correspondiente
+    del binario original.
+
+    Con --with-link tambien corre LINK 3.51 + py_exe2bin para demostrar
+    la cadena historica completa MASM->LINK->EXE2BIN->COM en WIN.COM.
+
+  bootstrap/py_exe2bin.py
+    Equivalente puro-Python de EXE2BIN.EXE (que MS-DOS distribuia y NO
+    viene con MASM 4 / MSC 4). Convierte MZ EXE -> flat .COM strippeando
+    la cabecera MZ y los 0x100 bytes de padding-PSP para EXEs COM-style
+    (IP entry = 0x100).
+
+  bootstrap/analyze/run_verify_flat_com.sh
+    Wrapper bash que ejecuta DOSBox-X DIRECTAMENTE (sin subprocess de
+    Python), util si el shell parent no muestra progreso en tiempo real.
+
+Resultados (sub-segundo de overhead por modulo dentro del batch DOSBox-X):
+
+  WIN.COM            OBJ-path OK (4873B)   EXE2BIN OK (4873B)
+  WIN100.BIN seg1    OBJ-path OK (31103B)  (multi-seg, n/a EXE2BIN)
+  WINOLDAP.MOD seg1  OBJ-path OK (16310B)
+  WINOLDAP.MOD seg2  OBJ-path OK (1200B)
+
+Total ~50KB de `db` ensamblados por MASM 4.00 en una sola sesion DOSBox-X
+en ~9 segundos. Tres bugs corregidos durante la integracion:
+
+  - MASM 4.0 sin `;` al final del prompt-line bloquea esperando
+    "Cross-reference [NUL.CRF]:" via stdin, lo que cuelga DOSBox-X.
+  - py_exe2bin debe strippear ademas los primeros 0x100 bytes del
+    image area en EXEs COM-style.
+  - LINK 3.51 emite e_cs=0x0000 (no 0xFFF0) para COM-style EXEs;
+    py_exe2bin chequea solo e_ip == 0x100 (no e_cs).
+
+Pendiente futuro (v13):
+  - Convertir el disassembly Capstone de WIN.asm en source MASM 4.00
+    reassemblable con instrucciones reales (no solo `db`).
+  - Conseguir o emular EXE2BIN.EXE original para validar py_exe2bin
+    contra el comportamiento de referencia.
+
 ## v12 - 2026-05-26 - cobertura-completa-92-de-92
 
 v12 - TODO EL OS EN EL PIPELINE BYTE-EXACT (no solo los 69 NE)

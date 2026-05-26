@@ -25,9 +25,13 @@
 | Functions verified byte-identical via MASM 4.00 reassembly | **8,555 / 8,555** |
 | Executable code bytes verified | **986,658 / 986,658 (100%)** |
 | Code-bearing NE modules at 100% function-level coverage | **68 / 68** |
-| Toolchain | Original Microsoft **MASM 4.00** under DOSBox-X |
+| Additional code binaries verified via MASM 4.00 (flat-COM / single-segment NE) | **3 / 3** (`WIN.COM`, `WIN100.BIN`, `WINOLDAP.MOD`) |
+| Toolchain | Original Microsoft **MASM 4.00** + **LINK 3.51** under DOSBox-X |
 
-Every executable code byte that shipped on the original Windows 1.03 floppy disks has been verified byte-identical to the output of the genuine 1985 Microsoft MASM 4.00 assembler. The verifier (`bootstrap/analyze/pass24_batch_masm_verify.py`) runs the original toolchain under DOSBox-X and compares assembled output to the shipping binaries via authoritative `.LST` byte streams — no instruction is "trusted", every byte is checked.
+Every executable code byte that shipped on the original Windows 1.03 floppy disks has been verified byte-identical to the output of the genuine 1985 Microsoft MASM 4.00 assembler. Two complementary verifiers run the original toolchain under DOSBox-X and compare assembled output to the shipping binaries:
+
+- `bootstrap/analyze/pass24_batch_masm_verify.py` — function-level verification across the 68 code-bearing NE modules (8,555 functions, 986,658 bytes).
+- `bootstrap/analyze/verify_flat_com_via_masm.py` — segment-level verification for the boot loader `WIN.COM` (4,873 B), `WIN100.BIN` (31,103 B code segment) and `WINOLDAP.MOD` (16,310 + 1,200 B segments). With `--with-link` it also runs LINK 3.51 + `bootstrap/py_exe2bin.py` (pure-Python `EXE2BIN.EXE` equivalent) to demonstrate the full historical `MASM → LINK → EXE2BIN → COM` chain.
 
 In addition, **every other binary on the floppy set** — boot loader, font resource files, DOS-app compatibility module, graphics resources — is brought into the same source pipeline (`src/<MODULE>/`) and `bootstrap/build_from_source.py` rebuilds all 92 of them byte-identical to their originals.
 
