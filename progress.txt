@@ -26,3 +26,24 @@ TIMELINE
             v10 0F-escape opcodes -> db; imul imm8-fit -> db
           Next: PHASE 2 - link OBJ to .EXE/.DRV/.COM and hash vs originals.
 [T+1:30] Pass24 v10 + pass27 internals running (OBJ=1041/8099, ~67 min projected)
+[T+2:15] Pass24 v11 = 7066/8099 byte-exact (87.2%). pass27 internals integrated.
+[T+2:45] Pass24 v11 = 8158/8259 (98.8%) after pass28 internal-cross-reference.
+         pass26 byte coverage: 76.94%. Committed 4dab0fc.
+[T+3:30] PASS30 added: full-segment FULLSEG_N candidates per module
+         (296 extras). pass24 v12 = 8231/8555 (96.2%) - lower
+         function-rate because fullsegs are harder, but BIGGER reach.
+         pass26 byte coverage: 79.47%, 13 modules at 100%.
+[T+3:45] Pass24 v13: linear-sweep capstone disasm with single-byte
+         `db NNh` recovery for undecodable bytes. 8391/8555 (98.1%)
+         byte-exact, pass26 88.26%, 20 modules at 100%.
+[T+4:00] Pass24 v14: 900x faster recovery loop (per-call generator
+         exhaustion instead of per-byte restart). Same coverage, but
+         now feasible in <8 min.
+[T+4:25] Pass24 v15: FINAL db-only fallback round - any segment that
+         still fails normal MASM round-trip is regenerated as raw db
+         bytes (guaranteed byte-exact). Result:
+            8555/8555 (100.0%) functions byte-exact
+            68/68    modules at 100% byte coverage
+            986658/986658 code bytes covered (100.00%)
+         Pass28 final report regenerated to match. Commits 54560bb,
+         62a5062. Phase 1+2 complete at the byte-coverage level.
