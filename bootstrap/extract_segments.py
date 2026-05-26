@@ -164,15 +164,48 @@ def extract_mz_only(name: str) -> dict:
     Para binarios MZ puros (DOS executables sin NE, como SETUP.EXE).
     Estrategia: una sola "sección" raw con todo el binario.
     """
+    return _extract_raw_blob(name, kind="mz_raw")
+
+
+def extract_flat_blob(name: str) -> dict:
+    """
+    Para binarios sin header MZ (flat .COM, overlays, graphics resources).
+    Igual que extract_mz_only: una sola seccion raw con todo el binario.
+    """
+    return _extract_raw_blob(name, kind="flat_raw")
+
+
+def _resolve_mod_dir(name: str) -> Path:
+    """Pick a unique src/<MOD>/ for `name`. If `src/<stem>/` already
+    contains a layout.json from a DIFFERENT file, use `src/<stem>_<EXT>/`
+    instead to avoid collision (e.g., WIN100.BIN vs WIN100.OVL)."""
+    stem = Path(name).stem
+    ext = Path(name).suffix.lstrip(".").upper()
+    base = SRC / stem
+    layout = base / "layout.json"
+    if layout.exists():
+        try:
+            import json
+            existing = json.loads(layout.read_text())
+            if existing.get("original_name", "").upper() == name.upper():
+                return base  # same file, reuse
+        except Exception:
+            pass
+        # Different file -> rename with ext suffix
+        return SRC / f"{stem}_{ext}"
+    return base
+
+
+def _extract_raw_blob(name: str, kind: str) -> dict:
     path = ROOT / "original" / name
     buf = path.read_bytes()
-    mod_dir = SRC / Path(name).stem
+    mod_dir = _resolve_mod_dir(name)
     mod_dir.mkdir(parents=True, exist_ok=True)
 
     # Emitir todo el binario como un seg1.asm con db
     head = [
-        f"; AUTO-GENERATED from original {name} (MZ DOS executable)",
-        f"; size={len(buf)} bytes (raw copy; no NE structure)",
+        f"; AUTO-GENERATED from original {name} ({kind})",
+        f"; size={len(buf)} bytes (raw copy; preserved for byte-exact rebuild)",
         "",
         f"{Path(name).stem}_SEG1 SEGMENT BYTE PUBLIC 'CODE'",
         "",
@@ -182,14 +215,13 @@ def extract_mz_only(name: str) -> dict:
     asm = "\n".join(head) + body + "\n" + "\n".join(tail)
     (mod_dir / "seg1.asm").write_text(asm, encoding="ascii")
 
-    # Layout: una "seccion" de tipo raw_copy
     layout = {
         "module": Path(name).stem,
         "original_name": name,
         "original_size": len(buf),
         "ne_off": None,
         "sector": None,
-        "kind": "mz_raw",
+        "kind": kind,
         "segments": [
             {
                 "index": 1,
@@ -202,7 +234,6 @@ def extract_mz_only(name: str) -> dict:
             }
         ],
     }
-    # ne_meta.bin = vacio del mismo tamano, será sobreescrito enteramente
     (mod_dir / "ne_meta.bin").write_bytes(b"\x00" * len(buf))
     import json
     (mod_dir / "layout.json").write_text(json.dumps(layout, indent=2))
@@ -215,46 +246,65 @@ def main() -> int:
         candidates_explicit = sys.argv[1:]
         candidates_ne = []
         candidates_mz = []
+        candidates_flat = []
         for name in candidates_explicit:
             path = ROOT / "original" / name
             if not path.exists():
                 continue
             b = path.read_bytes()
-            if len(b) < 2 or b[:2] != b"MZ":
-                continue
-            try:
-                ne_off = struct.unpack_from("<I", b, 0x3C)[0]
-                if 0 < ne_off < len(b) - 2 and b[ne_off:ne_off+2] == b"NE":
-                    candidates_ne.append(name)
-                else:
+            if len(b) >= 2 and b[:2] == b"MZ":
+                try:
+                    ne_off = struct.unpack_from("<I", b, 0x3C)[0]
+                    if 0 < ne_off < len(b) - 2 and b[ne_off:ne_off+2] == b"NE":
+                        candidates_ne.append(name)
+                    else:
+                        candidates_mz.append(name)
+                except Exception:
                     candidates_mz.append(name)
-            except Exception:
-                candidates_mz.append(name)
+            else:
+                # Flat blob (no MZ): WIN.COM, WIN100.OVL, WINOLDAP.GRB, ...
+                candidates_flat.append(name)
     else:
         orig = ROOT / "original"
         candidates_ne = []
         candidates_mz = []
+        candidates_flat = []
+        # Auto-discover: NE/MZ from .EXE/.DRV/.FON/.MOD; flat from .COM/.OVL/.GRB/.BIN
         for p in sorted(orig.iterdir()):
-            if p.suffix.upper() not in (".EXE", ".DRV"):
+            ext = p.suffix.upper()
+            if not p.is_file():
                 continue
-            try:
-                b = p.read_bytes()
-                if len(b) < 2 or b[:2] != b"MZ":
-                    continue
-                ne_off = struct.unpack_from("<I", b, 0x3C)[0]
-                if 0 < ne_off < len(b) - 2 and b[ne_off:ne_off+2] == b"NE":
-                    candidates_ne.append(p.name)
-                else:
-                    candidates_mz.append(p.name)
-            except Exception:
-                pass
+            if ext in (".EXE", ".DRV", ".FON", ".MOD"):
+                try:
+                    b = p.read_bytes()
+                    if len(b) < 2 or b[:2] != b"MZ":
+                        continue
+                    ne_off = struct.unpack_from("<I", b, 0x3C)[0]
+                    if 0 < ne_off < len(b) - 2 and b[ne_off:ne_off+2] == b"NE":
+                        candidates_ne.append(p.name)
+                    else:
+                        candidates_mz.append(p.name)
+                except Exception:
+                    pass
+            elif ext in (".COM", ".OVL", ".GRB", ".BIN"):
+                # MZ-with-COM-extension exists; check
+                try:
+                    b = p.read_bytes()
+                    if len(b) >= 2 and b[:2] == b"MZ":
+                        ne_off = struct.unpack_from("<I", b, 0x3C)[0]
+                        if 0 < ne_off < len(b) - 2 and b[ne_off:ne_off+2] == b"NE":
+                            candidates_ne.append(p.name)
+                            continue
+                    candidates_flat.append(p.name)
+                except Exception:
+                    pass
 
     total_segs = 0
     for name in candidates_ne:
         try:
             layout = extract_one(name)
             total_segs += len(layout["segments"])
-            print(f"[OK NE] {name:14s} -> src/{Path(name).stem}/  "
+            print(f"[OK NE]   {name:14s} -> src/{Path(name).stem}/  "
                   f"({len(layout['segments'])} segs)")
         except Exception as e:
             print(f"[ERR] {name}: {e}")
@@ -262,14 +312,25 @@ def main() -> int:
         try:
             layout = extract_mz_only(name)
             total_segs += len(layout["segments"])
-            print(f"[OK MZ] {name:14s} -> src/{Path(name).stem}/  "
+            print(f"[OK MZ]   {name:14s} -> src/{Path(name).stem}/  "
                   f"(MZ raw, {layout['original_size']} bytes)")
         except Exception as e:
             print(f"[ERR] {name}: {e}")
+    for name in candidates_flat:
+        try:
+            layout = extract_flat_blob(name)
+            total_segs += len(layout["segments"])
+            print(f"[OK FLAT] {name:14s} -> src/{Path(name).stem}/  "
+                  f"(flat raw, {layout['original_size']} bytes)")
+        except Exception as e:
+            print(f"[ERR] {name}: {e}")
 
-    print(f"\n=== {len(candidates_ne)} NE + {len(candidates_mz)} MZ "
-          f"= {len(candidates_ne) + len(candidates_mz)} módulos, "
-          f"{total_segs} segmentos extraídos ===")
+    n_ne = len(candidates_ne)
+    n_mz = len(candidates_mz)
+    n_flat = len(candidates_flat)
+    print(f"\n=== {n_ne} NE + {n_mz} MZ + {n_flat} FLAT "
+          f"= {n_ne + n_mz + n_flat} modulos, "
+          f"{total_segs} segmentos extraidos ===")
     return 0
 
 

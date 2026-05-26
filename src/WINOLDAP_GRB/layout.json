@@ -1,0 +1,19 @@
+{
+  "module": "WINOLDAP",
+  "original_name": "WINOLDAP.GRB",
+  "original_size": 1266,
+  "ne_off": null,
+  "sector": null,
+  "kind": "flat_raw",
+  "segments": [
+    {
+      "index": 1,
+      "file_off": 0,
+      "data_len": 1266,
+      "flags": 0,
+      "is_data": false,
+      "has_reloc": false,
+      "reloc_count": 0
+    }
+  ]
+}

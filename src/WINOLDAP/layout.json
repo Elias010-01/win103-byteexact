@@ -1,0 +1,27 @@
+{
+  "module": "WINOLDAP",
+  "original_name": "WINOLDAP.MOD",
+  "original_size": 19824,
+  "ne_off": 64,
+  "sector": 16,
+  "segments": [
+    {
+      "index": 1,
+      "file_off": 400,
+      "data_len": 16310,
+      "flags": 256,
+      "is_data": false,
+      "has_reloc": true,
+      "reloc_count": 102
+    },
+    {
+      "index": 2,
+      "file_off": 17536,
+      "data_len": 1200,
+      "flags": 257,
+      "is_data": true,
+      "has_reloc": true,
+      "reloc_count": 6
+    }
+  ]
+}
