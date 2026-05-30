@@ -1,5 +1,16 @@
 # `kb/symbols/` — Reference symbols (third-party)
 
+> **Status banner (2026-05-27).** The 3 large debug-build `*syms.txt`
+> files in this directory are **mirrored from
+> [starfrost013/modern-personality-research](https://github.com/starfrost013/modern-personality-research)
+> pending explicit confirmation from Connor Hyde (@starfrost013)**. They
+> are kept here only because `pass21_starfrost_symbols.py` benefits from
+> offline access; the pipeline already supports falling back to the
+> vendored clone in `vendor/modern-personality-research/`. **If Connor
+> asks us to remove them, we will do so on the same day.** A heads-up
+> message about this mirror is being sent to him alongside the v14.0
+> release.
+
 The `*syms.txt` files in this directory are **NOT our work**. They are
 mirrored here for the convenience of the analysis pipeline (`pass 21`).
 They are reproduced **with attribution and pending explicit upstream

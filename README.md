@@ -1,8 +1,13 @@
 # win103-byteexact
 
-> **Windows 1.03 reverse-engineered into editable, recompilable source code — in one night, by me at 16, with AI assistance.**
+> **Windows 1.03 reverse-engineered into editable, recompilable source code —
+> base reconstruction in one night at 16 with AI assistance, followed by
+> extended verification with the original 1985 Microsoft MASM 4.00 toolchain.**
 >
-> **Windows 1.03 ingeniería inversa hasta código fuente editable y recompilable — en una sola noche, por mí con 16 años y la ayuda de una IA.**
+> **Windows 1.03 ingeniería inversa hasta código fuente editable y
+> recompilable — reconstrucción base en una noche a los 16 con ayuda de IA,
+> seguida de verificación extendida con el toolchain original Microsoft MASM
+> 4.00 de 1985.**
 
 ![Elias's Windows splash booting in DOSBox-X](screenshots/01-elias-windows-splash.png)
 
@@ -23,6 +28,7 @@
 | ↳ `.FON` bitmap font modules (HELVA…D, COURA…D, TMSRA…D, etc.) | 18 |
 | ↳ Loader + DOS-compat (`WIN.COM`, `WIN100.BIN`, `WIN100.OVL`, `WINOLDAP.MOD`, `WINOLDAP.GRB`) | 5 |
 | Functions verified byte-identical via MASM 4.00 reassembly | **8,555 / 8,555** |
+| ↳ Of which use `db` fallback (Capstone couldn't decode the instruction) | **164 (1.9 %)** |
 | Executable code bytes verified | **986,658 / 986,658 (100%)** |
 | Code-bearing NE modules at 100% function-level coverage | **68 / 68** |
 | Additional code binaries verified via MASM 4.00 (flat-COM / single-segment NE) | **3 / 3** (`WIN.COM`, `WIN100.BIN`, `WINOLDAP.MOD`) |
@@ -129,6 +135,16 @@ This regenerates **all 92** binaries identical byte-for-byte to the originals
 `WINOLDAP.MOD`, `WINOLDAP.GRB`). Output goes to `built/`. The script reports
 an SHA-256 match for each module and ends with `=== 92/92 modulos byte-exact
 desde fuente ===`.
+
+> **Note on verification method.** By default `build_from_source.py` rebuilds
+> via a Python parser that reads the byte comments from the `.asm` sources
+> (`parse_db_bytes`). This is fast, deterministic, and produces the exact
+> same bytes. For a stricter check against the real 1985 toolchain, run with
+> `--mode=masm`: this sends the source through Microsoft MASM 4.00 under
+> DOSBox-X and compares the assembled OBJ output. The mixed-format `.asm`
+> sources (instruction + `; hex bytes` comment) are transparently rewritten to
+> pure `db` directives on the fly when MASM needs them, so every segment goes
+> through the real assembler and still comes out byte-exact.
 
 ### 6. (Optional) Generate semantic documentation
 
@@ -312,8 +328,11 @@ from there.
 
 - **92 / 92 binaries** rebuilt byte-identical to the originals from `src/<MOD>/`
   (69 NE `.EXE`/`.DRV` + 18 `.FON` + 5 loader/compat: `WIN.COM`, `WIN100.BIN`,
-  `WIN100.OVL`, `WINOLDAP.MOD`, `WINOLDAP.GRB`)
-- **8,555 / 8,555 functions** verified byte-identical via MASM 4.00 reassembly under DOSBox-X
+  `WIN100.OVL`, `WINOLDAP.MOD`, `WINOLDAP.GRB`). By default via Python parser
+  (`parse_db_bytes`); MASM 4.00 path available with `--mode=masm`.
+- **8,555 / 8,555 functions** verified byte-identical via MASM 4.00 reassembly
+  under DOSBox-X (164 of them use `db` fallback because Capstone could not
+  decode the original instruction, but MASM still produces byte-exact output)
 - **986,658 / 986,658 code bytes** verified — 100 % of all executable code shipped on the floppies
 - **68 / 68 code-bearing modules** at 100 % function-level byte coverage
 - **Symbolic call graph** with 5,104 intra-module + 5,143 inter-module edges

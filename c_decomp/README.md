@@ -4,9 +4,13 @@ This directory contains AUTO-GENERATED C scaffolding for the application
 modules of Windows 1.03 (CALC, CARDFILE, NOTEPAD, PAINT, REVERSI, WRITE,
 TERMINAL, etc.), generated from the byte-exact `.asm` sources in `src/`.
 
-**Status**: scaffolding only. Function bodies are placeholders (`TODO`).
-These files are documentation in C form, intended as a starting point
-for future hand-lift work.
+> **Status (2026-05-27).** These are **scaffolds only**. Function bodies
+> are placeholders (`TODO`). These files are documentation in C form,
+> intended as a starting point for future hand-lift work. They are **not
+> a working C source tree** and will not compile as-is. The
+> byte-exact reconstruction lives in `src/<MOD>/seg*.asm`; nothing in
+> `c_decomp/` participates in `build_from_source.py` or the
+> 92/92 / 8555/8555 verification claims.
 
 ## Statistics
 

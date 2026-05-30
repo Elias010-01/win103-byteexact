@@ -47,3 +47,52 @@ TIMELINE
             986658/986658 code bytes covered (100.00%)
          Pass28 final report regenerated to match. Commits 54560bb,
          62a5062. Phase 1+2 complete at the byte-coverage level.
+
+================================================================
+v14.0 CLEANUP + CLAIMS ALIGNMENT (2026-05-27)
+================================================================
+Goal: close the gap between README claims and technical reality
+discovered in the v13.4 audit (see chat log "revisa el real
+estado del proyecto").
+
+PLAN (all to be done in one autonomous session, no time pressure):
+
+  A1+A2+A3  README claims alignment
+            - clarify --mode=masm verifies FUNCTIONS (8555/8555)
+              not whole modules (4/92)
+            - mention 164 db-fallback functions (1.9%) honestly
+            - "in one night" = base reconstruction, not the
+              MASM verification or mod SDK phases
+  A4        Commit bootstrap/survey_asm_format.py
+
+  B1        mods/win104 -> implement real "Version 1.03" -> "1.04" mod
+  B2        c_decomp/ -> keep with clearer status note
+  B3        tools/mpa/ -> move to parked/legacy_mpa/, justfile cleanup
+  B4        parked/cleanroom-01/ -> add abandonment note
+  B5        bootstrap/ legacy *.sh -> bootstrap/legacy/
+
+  C1        --mode=masm transforms mixed-asm to pure-db on-the-fly
+            BEFORE invoking MASM 4.00. Result: 92/92 via real MASM.
+            Keeps src/<MOD>/seg*.asm human-readable.
+  C3        Apply retail names to sub_XXXX (8 retail dumps from pass21)
+  C4        Verify retail offsets match pass1b-detected sub_XXXX
+  C5        kb/symbols/README -> mirror disclaimer pending starfrost
+            consent (will notify him after; will remove if declined)
+  C6        Add Blibbet user-edited logo mod as second example
+
+  Final     pytest + smart_build verify + commit v14.0 + push
+
+PROGRESS LIVE (updated as I go):
+  [ ] A4   commit survey script
+  [ ] A123 README alignment
+  [ ] C5   kb/symbols disclaimer
+  [ ] B5   bootstrap/legacy/
+  [ ] B3   parked/legacy_mpa/
+  [ ] B4   parked/cleanroom-01 note
+  [ ] B2   c_decomp/ status clarification
+  [ ] C1   masm-mode pure-db pre-transform (the big one)
+  [ ] C4   retail offsets vs pass1b cross-check
+  [ ] C3   apply retail names to .asm + regenerate docs
+  [ ] B1   win104 real
+  [ ] C6   Blibbet user-edited mod
+  [ ] verify + commit + push
