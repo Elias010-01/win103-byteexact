@@ -345,7 +345,9 @@ from there.
 
 ### Honest facts
 
-- **Built in approximately one night** (~24 hours of focused work)
+- **Base reconstruction in approximately one night** (~24 hours of focused
+  work), followed by extended verification with the original 1985 Microsoft
+  MASM 4.00 toolchain
 - **Author**: Elias, 16 years old
 - **AI assistance**: heavy. The pipeline scripts, parsers, heuristics,
   documentation generators and overall architecture were written in

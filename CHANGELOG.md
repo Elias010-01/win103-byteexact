@@ -60,6 +60,14 @@ la auditoria v13.4.  Todos los puntos del plan de cleanup resueltos.
   - 50/50 tests pytest pass
   - Commit `cc54ebd` pushed a origin/main
 
+### v14.0-fix (2026-05-30 posterior)
+
+  - README español: sección "Inicio rápido" paso 5 corregido de "69/69"
+    a "92/92" + nota `--mode=masm`; sección "Qué tienes" añade aclaración
+    Python parser vs MASM 4.00 y 164 funciones db-fallback; "Hechos honestos"
+    actualizado a "reconstrucción base + verificación extendida".
+  - README inglés "Honest facts" actualizado con la misma aclaración.
+
 ## v13.4 - 2026-05-27 - Pass 21 cubre 11 modulos (3781 simbolos) + docs README
 
 Acciona los puntos abiertos del email de @starfrost013 (2026-05-25) que aun
