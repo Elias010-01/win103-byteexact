@@ -271,8 +271,10 @@ pip install -r requirements.txt
 python bootstrap/extract_segments.py
 python bootstrap/decompile_segment.py
 
-# 5. Reconstruir binarios byte-exactos (69/69)
+# 5. Reconstruir binarios byte-exactos (92/92)
 python bootstrap/build_from_source.py
+# Por defecto via Python parser (rápido). Para verificación estricta con
+# MASM 4.00 real: python bootstrap/build_from_source.py --mode=masm
 
 # 6. (Opcional) Documentar semánticamente (pasadas 1–7)
 python bootstrap/analyze/pass1_patterns.py
@@ -406,8 +408,11 @@ propiedad de Microsoft Corporation. Tú aportas tu copia legal de Windows
 
 - **92 / 92 binarios** reconstruidos byte-idénticos a los originales desde `src/<MOD>/`
   (69 NE `.EXE`/`.DRV` + 18 `.FON` + 5 loader/compat: `WIN.COM`, `WIN100.BIN`,
-  `WIN100.OVL`, `WINOLDAP.MOD`, `WINOLDAP.GRB`)
-- **8.555 / 8.555 funciones** verificadas byte-idénticas con reensamblado MASM 4.00 bajo DOSBox-X
+  `WIN100.OVL`, `WINOLDAP.MOD`, `WINOLDAP.GRB`). Por defecto via parser Python
+  (`parse_db_bytes`); path MASM 4.00 disponible con `--mode=masm`.
+- **8.555 / 8.555 funciones** verificadas byte-idénticas con reensamblado MASM 4.00
+  bajo DOSBox-X (164 usan fallback `db` porque Capstone no pudo decodificar la
+  instrucción original, pero MASM sigue produciendo output byte-exacto)
 - **986.658 / 986.658 bytes de código** verificados — el 100 % del código ejecutable que viajó en los disquetes
 - **68 / 68 módulos con código** al 100 % de cobertura byte-exacta a nivel de función
 - **Call graph simbólico** con 5.104 aristas intra-módulo + 5.143 inter-módulo
@@ -418,7 +423,9 @@ propiedad de Microsoft Corporation. Tú aportas tu copia legal de Windows
 
 ### Hechos honestos
 
-- **Construido en aproximadamente una noche** (~24 horas de trabajo enfocado)
+- **Reconstrucción base en aproximadamente una noche** (~24 horas de trabajo
+  enfocado), seguida de verificación extendida con el toolchain original
+  Microsoft MASM 4.00 de 1985
 - **Autor**: Elías, 16 años
 - **Ayuda de IA**: intensa. Los scripts del pipeline, parsers, heurísticas,
   generadores de documentación y arquitectura general fueron escritos en
