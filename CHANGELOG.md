@@ -64,6 +64,19 @@ la auditoria v13.4.  Todos los puntos del plan de cleanup resueltos.
     re-ensamblaron los .obj/.lst).
   - Commit `cc54ebd` pushed a origin/main
 
+### C2 (2026-05-30 posterior)
+
+  Análisis y resolución parcial de refs huérfanas (orphan label refs).
+
+  - Audit: 16,236 refs huérfanas detectadas en 286 archivos .asm.
+    Desglose real: 9,988 exports (EXTRN válidas), 5,024 numeric/mem,
+    1,224 L_XXXX labels del disassembler.
+  - De 1,224 L_XXXX: 182 (14.9%) en límite de instrucción (solvable),
+    1,042 (85.1%) en medio de instrucción (requiere re-disassembly).
+  - Auto-insertadas 74 labels en 25 archivos .asm (108 ya existían).
+  - Build sigue 92/92 byte-exact. Test MASM en CALC/seg1: success.
+  - Restantes 1,042 off-boundary: proyecto de meses, diferido a v15.0+.
+
 ### v14.0-fix (2026-05-30 posterior)
 
   - README español: sección "Inicio rápido" paso 5 corregido de "69/69"
