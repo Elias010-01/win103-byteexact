@@ -102,5 +102,6 @@ PROGRESS LIVE (all DONE 2026-05-30):
   All 50/50 tests pass. 92/92 byte-exact rebuild verified.
   CHANGELOG.md + progress.txt updated.
 
-  PENDING (not blocking): pass24_batch_masm_verify.py full run post-C1
-  to confirm 8555/8555 still pass with pure-db retry. Estimated: hours.
+  pass24_batch_masm_verify.py full run post-C1: DONE 2026-05-30.
+    8555/8555 (100.0%) byte-exact confirmed. 164 funciones db-fallback.
+    Runtime ~30s con cache existente.

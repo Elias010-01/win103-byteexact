@@ -58,6 +58,10 @@ la auditoria v13.4.  Todos los puntos del plan de cleanup resueltos.
 
   - 92/92 modulos byte-exact (sha-iguales) via `build_from_source.py`
   - 50/50 tests pytest pass
+  - pass24_batch_masm_verify.py full run post-C1: **8555/8555 (100.0%)**
+    byte-exact confirmed. 164 funciones db-fallback (1.9%). Runtime ~30s
+    con cache existente (los .asm previos se reutilizaron; solo se
+    re-ensamblaron los .obj/.lst).
   - Commit `cc54ebd` pushed a origin/main
 
 ### v14.0-fix (2026-05-30 posterior)
