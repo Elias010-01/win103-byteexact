@@ -82,17 +82,21 @@ PLAN (all to be done in one autonomous session, no time pressure):
 
   Final     pytest + smart_build verify + commit v14.0 + push
 
-PROGRESS LIVE (updated as I go):
-  [ ] A4   commit survey script
-  [ ] A123 README alignment
-  [ ] C5   kb/symbols disclaimer
-  [ ] B5   bootstrap/legacy/
-  [ ] B3   parked/legacy_mpa/
-  [ ] B4   parked/cleanroom-01 note
-  [ ] B2   c_decomp/ status clarification
-  [ ] C1   masm-mode pure-db pre-transform (the big one)
-  [ ] C4   retail offsets vs pass1b cross-check
-  [ ] C3   apply retail names to .asm + regenerate docs
-  [ ] B1   win104 real
-  [ ] C6   Blibbet user-edited mod
-  [ ] verify + commit + push
+PROGRESS LIVE (all DONE 2026-05-30):
+  [x] A4   commit survey script
+  [x] A123 README alignment
+  [x] C5   kb/symbols disclaimer
+  [x] B5   bootstrap/legacy/
+  [x] B3   parked/legacy_mpa/
+  [x] B4   parked/cleanroom-01 note
+  [x] B2   c_decomp/ status clarification
+  [x] C1   masm-mode pure-db pre-transform (the big one)
+  [x] C4   retail offsets vs pass1b cross-check -> OFFSETS DON'T MATCH
+  [x] C3   apply retail names to .asm + regenerate docs -> NOT VIABLE
+  [x] B1   win104 real
+  [x] C6   Blibbet user-edited mod
+  [x] verify + commit + push
+
+  Result: v14.0 committed at cc54ebd and pushed to origin/main.
+  All 50/50 tests pass. 92/92 byte-exact rebuild verified.
+  CHANGELOG.md updated with v14.0 entry.

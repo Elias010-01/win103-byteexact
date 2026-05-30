@@ -2,6 +2,64 @@
 
 Historial de versiones del proyecto win103-byteexact (renombrado desde modern-personality-agent).
 
+## v14.0 - 2026-05-30 - Claims alignment + MASM pure-db retry + new mods
+
+Cierre del gap entre README claims y realidad técnica descubierta en
+la auditoria v13.4.  Todos los puntos del plan de cleanup resueltos.
+
+### README claims alineados (A1+A2+A3)
+
+  - "in one night" -> "base reconstruction in one night + extended
+    verification with original 1985 MASM 4.00".
+  - 92/92 rebuild aclarado: por defecto via `parse_db_bytes` (Python);
+    MASM 4.00 disponible via `--mode=masm`.
+  - 164 funciones db-fallback (1.9%) mencionadas honestamente.
+  - Nota explicativa en "Quick Start" sobre el dual-path (db vs masm).
+
+### MASM 4.00 pure-db pre-transform (C1)
+
+  - `bootstrap/puredb_convert.py`: nuevo modulo que reescribe fuentes
+    `.asm` mixtas (`instr ; HEX`) a puro `db 0XXh, ...` que MASM 4.00
+    acepta incondicionalmente.
+  - `build_from_source.py --mode=masm` ahora hace retry:
+      1. Intenta MASM directo (instruction-level)
+      2. Si falla, pre-transforma a pure-db y reintenta
+      3. Si incluso eso falla, fallback a `parse_db_bytes`
+  - Invariante garantizada: `parse_db_bytes(convert_to_pure_db(asm)) ==
+    parse_db_bytes(asm)` para toda fuente en `src/<MOD>/`.
+  - Tests: 50/50 pytest pass (sintetico + 9 modulos reales).
+
+### Nuevos mods (B1 + C6)
+
+  - `mods/win104/`: mod declarativo funcional. Cambia strings visibles
+    `"Version 1.03"` -> `"Version 1.04"` en `WIN.COM` + `WIN100.OVL`.
+  - `mods/blibbet-user/`: mod ejemplo minimalista. Solo reemplaza el
+    logo Blibbet del splash screen por bitmap editado por el usuario.
+
+### Legacy cleanup (B2+B3+B4+B5)
+
+  - `c_decomp/README.md`: banner clarificado (scaffolds only, no working
+    C source tree).
+  - `tools/mpa/` -> `parked/legacy_mpa/` (justfile simplificado).
+  - `parked/cleanroom-01/`: RETOMAR.md con status de abandono.
+  - `bootstrap/legacy/`: 36 scripts bash legacy movidos.
+
+### Simbolos y nombres (C3+C4+C5)
+
+  - C4: verificacion offsets retail vs pass1b: **NO COINCIDEN**.
+    Offset-based rename de `sub_XXXX` -> nombres retail **descartado**
+    por seguridad. Script `bootstrap/legacy/_check_c4.py` documenta
+    hallazgo.
+  - C5: `kb/symbols/README.md` con disclaimer de mirror pendiente
+    consentimiento de @starfrost013.
+  - A4: `bootstrap/survey_asm_format.py` ya existia y commiteado.
+
+### Verificacion
+
+  - 92/92 modulos byte-exact (sha-iguales) via `build_from_source.py`
+  - 50/50 tests pytest pass
+  - Commit `cc54ebd` pushed a origin/main
+
 ## v13.4 - 2026-05-27 - Pass 21 cubre 11 modulos (3781 simbolos) + docs README
 
 Acciona los puntos abiertos del email de @starfrost013 (2026-05-25) que aun
