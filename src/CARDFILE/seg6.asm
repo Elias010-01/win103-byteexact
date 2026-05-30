@@ -2311,6 +2311,7 @@ L_0D75:
         ;   ^ arg wFlags
         mov     ax, 0x1c3                       ; B8 C3 01
         cdq                                     ; 99
+        L_0BA2:
         push    dx                              ; 52
         ;   ^ arg dwBytes (high/segment)
         push    ax                              ; 50

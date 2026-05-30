@@ -447,6 +447,7 @@ L_034F:
 L_0352:
         mov     ax, word ptr [0x30e]            ; A1 0E 03
         mov     word ptr [0x8a2], ax            ; A3 A2 08
+        L_02F9:
         cmp     ax, 1                           ; 3D 01 00
         jne     L_0365                          ; 75 08
         mov     word ptr [0x8a0], 9             ; C7 06 A0 08 09 00

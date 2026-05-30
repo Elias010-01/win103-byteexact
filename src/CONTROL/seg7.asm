@@ -1831,6 +1831,7 @@ L_0D0E:
         mov     cx, 0x31                        ; B9 31 00
         idiv    cx                              ; F7 F9
         add     ax, word ptr [0x6c4]            ; 03 06 C4 06
+        L_0B61:
         add     ax, word ptr [0x80c]            ; 03 06 0C 08
         mov     word ptr [bp - 0xe], ax         ; 89 46 F2
         mov     ax, word ptr [bp - 2]           ; 8B 46 FE

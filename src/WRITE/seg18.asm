@@ -619,6 +619,7 @@ L_0483:
         nop                                     ; 90
         inc     bp                              ; 45
         push    bp                              ; 55
+        L_03AC:
         mov     bp, sp                          ; 8B EC
         push    ds                              ; 1E
         mov     ds, ax                          ; 8E D8

@@ -3596,6 +3596,7 @@ L_1AF9:
 L_1AFC:
         push    ax                              ; 50
         call    far _entry_154                  ; 9A FF FF 00 00 [FIXUP]
+        L_17A6:
         push    word ptr [0x322]                ; FF 36 22 03
         call    far _entry_156                  ; 9A FF FF 00 00 [FIXUP]
         push    word ptr [0x322]                ; FF 36 22 03

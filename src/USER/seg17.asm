@@ -621,6 +621,7 @@ L_03F9:
         push    word ptr [bp + 8]               ; FF 76 08
         push    word ptr [bp + 0xa]             ; FF 76 0A
         call    far _entry_516                  ; 9A FF FF 00 00 [FIXUP]
+        L_0396:
         push    word ptr [bp + 8]               ; FF 76 08
         lea     ax, [bp - 0xe]                  ; 8D 46 F2
         push    ss                              ; 16

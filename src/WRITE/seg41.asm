@@ -709,6 +709,7 @@ L_0576:
         mov     bp, sp                          ; 8B EC
         push    ds                              ; 1E
         mov     ds, ax                          ; 8E D8
+        L_0558:
         mov     bx, word ptr [bp + 6]           ; 8B 5E 06
         cmp     byte ptr [bx], 0x1a             ; 80 3F 1A
         jne     L_058D                          ; 75 05

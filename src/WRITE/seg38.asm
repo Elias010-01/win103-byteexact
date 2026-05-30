@@ -511,6 +511,7 @@ L_036D:
         jmp     L_0431                          ; E9 A6 00
 ;   [conditional branch target (if/else)] L_038B
 L_038B:
+        L_0354:
         cmp     ax, 0x8022                      ; 3D 22 80
         jne     L_0393                          ; 75 03
         jmp     L_0478                          ; E9 E5 00

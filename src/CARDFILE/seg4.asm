@@ -557,6 +557,7 @@ L_03AF:
         sub     bp, 2                           ; 83 ED 02
         mov     sp, bp                          ; 8B E5
         pop     ds                              ; 1F
+        L_033D:
         pop     bp                              ; 5D
         dec     bp                              ; 4D
         retf    0xa                             ; CA 0A 00
@@ -4940,6 +4941,7 @@ L_2154:
         mov     al, byte ptr es:[bx]            ; 26 8A 07
         sub     ah, ah                          ; 2A E4
         sub     cx, cx                          ; 2B C9
+        L_1CD9:
         push    cx                              ; 51
         ;   ^ arg lpsz (high/segment)
         push    ax                              ; 50
@@ -5143,6 +5145,7 @@ L_2268:
         or      ax, ax                          ; 0B C0
         je      L_2263                          ; 74 C4
         test    byte ptr [0x410], 2             ; F6 06 10 04 02
+        L_1DE5:
         jne     L_22BC                          ; 75 16
         push    word ptr [0x29a]                ; FF 36 9A 02
         ;   ^ arg hWnd
@@ -6396,6 +6399,7 @@ L_2A4F:
 ;   [conditional branch target (if/else)] L_2A8D
 L_2A8D:
         push    word ptr [0x18]                 ; FF 36 18 00
+        L_24B0:
         call    L_2219                          ; E8 85 F7
         add     sp, 2                           ; 83 C4 02
         or      ax, ax                          ; 0B C0

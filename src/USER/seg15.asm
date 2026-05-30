@@ -1361,6 +1361,7 @@ L_0884:
         jne     L_08B8                          ; 75 09
         jle     L_08BA                          ; 7E 09
         test    byte ptr [bx + di], cl          ; 84 09
+        L_0778:
         stosw   word ptr es:[di], ax            ; AB
         or      word ptr [bp + di - 0x41f7], bp ; 09 AB 09 BE
 ;   [conditional branch target (if/else)] L_08B8

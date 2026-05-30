@@ -898,6 +898,7 @@ L_0562:
         mov     word ptr [bx + 0x8a], cx        ; 89 8F 8A 00
         mov     di, word ptr [bx + 0x88]        ; 8B BF 88 00
         inc     word ptr [bx + 0x88]            ; FF 87 88 00
+        L_053F:
         push    word ptr [bp + 6]               ; FF 76 06
         nop                                     ; 90
         push    cs                              ; 0E
@@ -996,6 +997,7 @@ L_0646:
         pop     cx                              ; 59
 ;   [conditional branch target (if/else)] L_0647
 L_0647:
+        L_05E3:
         mov     ax, word ptr [di + 0x88]        ; 8B 85 88 00
         cmp     ax, cx                          ; 3B C1
         ja      L_0600                          ; 77 B1

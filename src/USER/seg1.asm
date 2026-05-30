@@ -1920,6 +1920,7 @@ L_0CD8:
         mov     si, word ptr [bp + 6]           ; 8B 76 06
         or      si, si                          ; 0B F6
         je      L_0D06                          ; 74 12
+        L_0C68:
         test    byte ptr [si + 0x33], 0xc0      ; F6 44 33 C0
         jne     L_0D06                          ; 75 0C
         test    byte ptr [si + 0x33], 0x20      ; F6 44 33 20
@@ -2017,6 +2018,7 @@ L_0D5B:
         push    cs                              ; 0E
         call    L_253F                          ; E8 CA 17
         and     byte ptr [si + 0x33], 0xdf      ; 80 64 33 DF
+        L_0CDE:
         and     byte ptr [si + 0x33], 0xef      ; 80 64 33 EF
         push    si                              ; 56
         ; constant WM_MOVE
@@ -2033,12 +2035,14 @@ L_0D5B:
         call    L_889F                          ; E8 04 7B
         add     byte ptr [bp + si], al          ; 00 02
         mov     si, word ptr [bp + 8]           ; 8B 76 08
+        L_0D05:
         push    si                              ; 56
         call    L_0DB7                          ; E8 13 00
         push    si                              ; 56
         push    word ptr [bp + 6]               ; FF 76 06
         call    far _entry_370                  ; 9A FF FF 00 00 [FIXUP]
         cmp     word ptr [bp + 6], 0            ; 83 7E 06 00
+        L_0D11:
         jne     L_0DB6                          ; 75 03
         call    L_13A8                          ; E8 F2 05
 ;   [error/early exit] L_0DB6
@@ -2062,6 +2066,7 @@ L_0DB7:
         mov     si, word ptr [bp + 4]           ; 8B 76 04
         push    si                              ; 56
         mov     ax, 0x18                        ; B8 18 00
+        L_0D23:
         push    ax                              ; 50
         sub     ax, ax                          ; 2B C0
         push    ax                              ; 50
@@ -2082,6 +2087,7 @@ L_0DDA:
         push    ax                              ; 50
         sub     ax, ax                          ; 2B C0
         push    ax                              ; 50
+        L_0D46:
         push    ax                              ; 50
         push    ax                              ; 50
         nop                                     ; 90
@@ -2090,6 +2096,7 @@ L_0DDA:
 ;   [unconditional branch target] L_0DED
 L_0DED:
         cmp     word ptr [0x1be], si            ; 39 36 BE 01
+        L_0D51:
         jne     L_0E02                          ; 75 0F
         cmp     word ptr [0x12], 0              ; 83 3E 12 00 00
         jne     L_0E02                          ; 75 08
@@ -7440,6 +7447,7 @@ L_3192:
         mov     ax, 1                           ; B8 01 00
         push    ax                              ; 50
         mov     al, byte ptr [si + 0x33]        ; 8A 44 33
+        L_2F89:
         sub     ah, ah                          ; 2A E4
         and     ax, 0x20                        ; 25 20 00
         sub     dx, dx                          ; 2B D2
@@ -17976,6 +17984,7 @@ L_71B4:
         ; constant WM_SIZE
         mov     ax, 5                           ; B8 05 00
         push    ax                              ; 50
+        L_6BE3:
         call    L_8731                          ; E8 70 15
         nop                                     ; 90
         push    cs                              ; 0E
@@ -18661,6 +18670,7 @@ L_76CE:
         call    L_84B8                          ; E8 A3 0D
         cmp     word ptr [bp + 6], 2            ; 83 7E 06 02
         jne     L_7722                          ; 75 07
+        L_711D:
         test    word ptr [bp - 0x4a], 0x8080    ; F7 46 B6 80 80
         jne     L_772A                          ; 75 08
 ;   [conditional branch target (if/else)] L_7722
@@ -18693,6 +18703,7 @@ L_7743:
         mov     ax, word ptr [bp - 0x4c]        ; 8B 46 B4
         push    ds                              ; 1E
         push    ax                              ; 50
+        L_7153:
         mov     ax, word ptr [bp - 0x1c]        ; 8B 46 E4
         cmp     word ptr [bp - 0x50], ax        ; 39 46 B0
         jne     L_775E                          ; 75 05
@@ -18733,6 +18744,7 @@ L_777B:
         lea     ax, [bp - 0x42]                 ; 8D 46 BE
         push    ss                              ; 16
         push    ax                              ; 50
+        L_7191:
         nop                                     ; 90
         push    cs                              ; 0E
         call    L_1A93                          ; E8 FA A2

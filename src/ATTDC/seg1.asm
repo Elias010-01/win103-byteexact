@@ -492,6 +492,7 @@ L_031E:
         and     ax, 0x3947                      ; 25 47 39
         inc     di                              ; 47
         cmp     word ptr [bp - 0x74], ax        ; 39 46 8C
+        L_0336:
         fcom    dword ptr [bx + si + 0x5545]    ; D8 90 45 55
         mov     bp, sp                          ; 8B EC
         push    ds                              ; 1E
@@ -506,6 +507,7 @@ L_031E:
 L_035B:
         cld                                     ; FC
         mov     cx, 0x100                       ; B9 00 01
+        L_0350:
         mov     word ptr [bp - 6], cx           ; 89 4E FA
         xor     ax, ax                          ; 33 C0
         mov     word ptr [bp - 4], ax           ; 89 46 FC

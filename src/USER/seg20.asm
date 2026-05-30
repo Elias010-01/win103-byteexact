@@ -775,10 +775,12 @@ L_04D2:
         push    ax                              ; 50
         call    far _SEG1_2E78                  ; 9A FF FF 00 00 [FIXUP]
         or      ax, ax                          ; 0B C0
+        L_0456:
         jge     L_04F3                          ; 7D 14
 ;   [conditional branch target (if/else)] L_04DF
 L_04DF:
         cmp     byte ptr [si + 0x30], 7         ; 80 7C 30 07
+        L_045C:
         je      L_04F3                          ; 74 0E
         push    si                              ; 56
         ; constant WM_CREATE

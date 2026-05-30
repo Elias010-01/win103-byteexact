@@ -105,3 +105,13 @@ PROGRESS LIVE (all DONE 2026-05-30):
   pass24_batch_masm_verify.py full run post-C1: DONE 2026-05-30.
     8555/8555 (100.0%) byte-exact confirmed. 164 funciones db-fallback.
     Runtime ~30s con cache existente.
+
+  C2 (orphan refs): DONE 2026-05-30 (partial).
+    - Analyzed 16,236 refs: 9,988 exports (EXTRN, not errors), 5,024 other
+      (numeric offsets, mem refs), 1,224 L_XXXX labels.
+    - Of 1,224 L_XXXX: 182 on instruction boundary (solvable), 1,042 off
+      boundary (requires re-disassembly of segment).
+    - Auto-inserted 74 labels in 25 files. 108 already existed.
+    - Build remains 92/92 byte-exact. MASM test on CALC/seg1: success.
+    - Remaining 1,042 off-boundary refs: requires re-disassembly (months
+      of work, deferred to future version).

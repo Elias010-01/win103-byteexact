@@ -1989,6 +1989,7 @@ L_0C8A:
         cmp     word ptr [0x27e], 0             ; 83 3E 7E 02 00
         jne     L_0C99                          ; 75 05
         mov     ax, 0x22                        ; B8 22 00
+        L_0AD2:
         jmp     L_0C9C                          ; EB 03
 ;   [conditional branch target (if/else)] L_0C99
 L_0C99:

@@ -3907,6 +3907,7 @@ L_1960:
         pop     si                              ; 5E
         pop     di                              ; 5F
         sub     bp, 2                           ; 83 ED 02
+        L_16BB:
         mov     sp, bp                          ; 8B E5
         pop     ds                              ; 1F
         pop     bp                              ; 5D

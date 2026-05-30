@@ -1111,6 +1111,7 @@ L_07C4:
         cld                                     ; FC
         movsw   word ptr es:[di], word ptr [si] ; A5
         movsw   word ptr es:[di], word ptr [si] ; A5
+        L_07C3:
         mov     ax, word ptr [bp + 8]           ; 8B 46 08
         stosw   word ptr es:[di], ax            ; AB
         mov     ax, word ptr [bp + 6]           ; 8B 46 06

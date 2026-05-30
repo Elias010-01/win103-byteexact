@@ -1476,6 +1476,7 @@ L_09B6:
 L_09BE:
         push    word ptr [bp + 0xa]             ; FF 76 0A
         push    word ptr [bp + 8]               ; FF 76 08
+        L_08CA:
         push    word ptr [bp + 6]               ; FF 76 06
         call    L_038F                          ; E8 C5 F9
 ;   [loop start] L_09CA
@@ -6127,6 +6128,7 @@ L_264B:
         ; constant VK_SHIFT
         mov     ax, 0x10                        ; B8 10 00
         jmp     L_2666                          ; EB 16
+        L_2253:
         push    si                              ; 56
         push    di                              ; 57
         mov     ax, ss                          ; 8C D0
@@ -7276,9 +7278,11 @@ L_2BF4:
         mov     cx, di                          ; 8B CF
         and     ch, 0x7f                        ; 80 E5 7F
         mov     ax, 0x18                        ; B8 18 00
+        L_2827:
         shl     cx, 1                           ; D1 E1
         ; constant WM_SETTEXT
         mov     cl, ch                          ; 8A CD
+        L_282B:
         xor     ch, ch                          ; 32 ED
         sub     cx, 0x96                        ; 81 E9 96 00
         jge     L_2C78                          ; 7D 48
@@ -7303,7 +7307,9 @@ L_2C4C:
 L_2C4E:
         cmp     cl, 8                           ; 80 F9 08
         jl      L_2C67                          ; 7C 14
+        L_2856:
         cmp     dl, 1                           ; 80 FA 01
+        L_2859:
         cmc                                     ; F5
         mov     dl, 0                           ; B2 00
         adc     dl, 0                           ; 80 D2 00
@@ -7358,6 +7364,7 @@ L_2C88:
 L_2C8E:
         or      dl, bh                          ; 0A D7
         and     bl, dh                          ; 22 DE
+        L_2895:
         or      dl, bl                          ; 0A D3
         cmp     dl, 0x81                        ; 80 FA 81
         ; constant WM_CREATE
@@ -11058,6 +11065,7 @@ L_42C0:
         cmp     byte ptr [bx], 0x1a             ; 80 3F 1A
         jne     L_42D2                          ; 75 03
         clc                                     ; F8
+        L_3ED3:
         jmp     L_42D6                          ; EB 04
 ;   [conditional branch target (if/else)] L_42D2
 L_42D2:
@@ -11221,6 +11229,7 @@ L_43E0:
         push    di                              ; 57
         lea     ax, [bp + 4]                    ; 8D 46 04
         push    ax                              ; 50
+        L_3FEB:
         mov     al, byte ptr [si + 7]           ; 8A 44 07
         cwde                                    ; 98
         push    ax                              ; 50

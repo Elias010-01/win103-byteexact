@@ -2878,6 +2878,7 @@ L_124F:
         jmp     L_12FB                          ; E9 A0 00
 ;   [conditional branch target (if/else)] L_125B
 L_125B:
+        L_102F:
         mov     al, byte ptr [bp - 0x14a]       ; 8A 86 B6 FE
         cwde                                    ; 98
         push    ax                              ; 50

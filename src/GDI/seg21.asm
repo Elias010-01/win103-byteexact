@@ -259,6 +259,7 @@ SETPIXEL PROC FAR
         add     al, 0x8b                        ; 04 8B
         jle     L_0189                          ; 7E 0E
         or      di, di                          ; 0B FF
+        L_0178:
         je      L_01F7                          ; 74 78
         mov     si, word ptr [di]               ; 8B 35
         cld                                     ; FC

@@ -453,6 +453,7 @@ L_02B8:
         xchg    word ptr [bp + 2], ax           ; 87 46 02
         xchg    word ptr [bp], ax               ; 87 46 00
         mov     word ptr [bp + 4], ax           ; 89 46 04
+        L_02CB:
         db      0ffh                            ; FF
         jg      L_0312                          ; 7F 3F
         pop     ds                              ; 1F
@@ -496,6 +497,7 @@ L_02FA:
         jns     L_02CB                          ; 79 B6
         insw    word ptr es:[di], dx            ; 6D
         stosb   byte ptr es:[di], al            ; AA
+        L_0312:
         stosb   byte ptr es:[di], al            ; AA
         stosb   byte ptr es:[di], al            ; AA
         stosb   byte ptr es:[di], al            ; AA
@@ -509,6 +511,7 @@ L_02FA:
         mov     ax, 0x40                        ; B8 40 00
         call    L_25D2                          ; E8 A2 22
         push    si                              ; 56
+        L_032C:
         push    di                              ; 57
         jae     L_0337                          ; 73 03
         jmp     L_0B69                          ; E9 32 08
@@ -4631,6 +4634,7 @@ L_1F9D:
         dec     dx                              ; 4A
         mov     bx, word ptr [si + 0xe]         ; 8B 5C 0E
         ; constant WM_MOVE
+        L_1FAE:
         mov     ah, 3                           ; B4 03
         cmp     byte ptr [si + 8], 3            ; 80 7C 08 03
         lds     si, ptr [si + 0xa]              ; C5 74 0A
@@ -4926,6 +4930,7 @@ L_211F:
         je      L_2191                          ; 74 0B
         call    L_20F7                          ; E8 6E FF
         les     di, ptr [bp + 6]                ; C4 7E 06
+        L_2187:
         cld                                     ; FC
         stosw   word ptr es:[di], ax            ; AB
         mov     word ptr es:[di], dx            ; 26 89 15

@@ -336,6 +336,7 @@ L_01CE:
         popaw                                   ; 61
         pop     es                              ; 07
         popaw                                   ; 61
+        L_01DE:
         pop     es                              ; 07
         cmp     al, 0xff                        ; 3C FF
         inc     dx                              ; 42
@@ -411,6 +412,7 @@ L_0276:
         dec     dx                              ; 4A
         db      0feh                            ; FE
         call    0xffffe782                      ; E8 03 E5
+        L_0266:
         add     bp, word ptr [bx + si - 1]      ; 03 68 FF
         adc     cx, word ptr [bx + di]          ; 13 09
         insb    byte ptr es:[di], dx            ; 6C
@@ -453,6 +455,7 @@ L_0276:
         push    es                              ; 06
         db      0ffh                            ; FF
         inc     word ptr [bx + si]              ; FF 00
+        L_02C2:
         db      0ffh                            ; FF
         in      al, dx                          ; EC
         add     ax, 0xff07                      ; 05 07 FF
@@ -700,6 +703,7 @@ L_0423:
         jne     L_0445                          ; 75 07
         push    cx                              ; 51
         call    far _entry_42                   ; 9A FF FF 00 00 [FIXUP]
+        L_040D:
         pop     cx                              ; 59
 ;   [conditional branch target (if/else)] L_0445
 L_0445:
@@ -1871,6 +1875,7 @@ L_0B72:
         cmp     al, 0x2d                        ; 3C 2D
         jne     L_0B93                          ; 75 1D
         mov     bx, 0x404f                      ; BB 4F 40
+        L_0B10:
         inc     di                              ; 47
         jcxz    L_0B86                          ; E3 0A
         mov     word ptr [bp - 5], 0x345b       ; C7 46 FB 5B 34

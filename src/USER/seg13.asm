@@ -1700,6 +1700,7 @@ L_0BEA:
         push    word ptr [bp + 6]               ; FF 76 06
         push    di                              ; 57
         call    L_0BBF                          ; E8 CE FF
+        L_0AF7:
         mov     di, ax                          ; 8B F8
         cmp     word ptr [bp + 4], di           ; 39 7E 04
         jne     L_0C00                          ; 75 08

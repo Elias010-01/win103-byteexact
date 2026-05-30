@@ -736,6 +736,7 @@ L_05CD:
         push    bp                              ; 55
         mov     bp, sp                          ; 8B EC
         sub     sp, 8                           ; 83 EC 08
+        L_0538:
         cmp     word ptr [bp + 4], -1           ; 83 7E 04 FF
         jne     L_05DC                          ; 75 03
         jmp     L_06B9                          ; E9 DD 00

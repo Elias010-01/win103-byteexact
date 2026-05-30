@@ -1836,6 +1836,7 @@ L_0F24:
         push    ds                              ; 1E
         pop     ax                              ; 58
         nop                                     ; 90
+        L_0E42:
         inc     bp                              ; 45
         push    bp                              ; 55
         mov     bp, sp                          ; 8B EC

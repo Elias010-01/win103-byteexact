@@ -693,6 +693,7 @@ L_04D9:
 ;   [conditional branch target (if/else)] L_04E1
 L_04E1:
         cmp     ax, 0x464                       ; 3D 64 04
+        L_048A:
         jne     L_04E9                          ; 75 03
         jmp     L_03E0                          ; E9 F7 FE
 ;   [conditional branch target (if/else)] L_04E9
@@ -1714,6 +1715,7 @@ L_0A67:
         add     ax, 0x7bc                       ; 05 BC 07
         mov     word ptr [bp - 3], ax           ; 89 46 FD
         lea     ax, [bp - 6]                    ; 8D 46 FA
+        L_095C:
         push    ax                              ; 50
         push    word ptr [bp + 4]               ; FF 76 04
         ; constant WM_CREATE

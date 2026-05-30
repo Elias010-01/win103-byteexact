@@ -1100,9 +1100,11 @@ L_09AC:
         nop                                     ; 90
         inc     bp                              ; 45
         push    bp                              ; 55
+        L_09A9:
         mov     bp, sp                          ; 8B EC
         push    ds                              ; 1E
         mov     ds, ax                          ; 8E D8
+        L_09AE:
         sub     sp, 6                           ; 83 EC 06
         push    si                              ; 56
         cmp     word ptr [0x10e], 0             ; 83 3E 0E 01 00
@@ -1973,6 +1975,7 @@ L_10BA:
         jmp     L_10FE                          ; EB 31
 ;   [loop start] L_10CD
 L_10CD:
+        L_0FBE:
         mov     di, word ptr [bp - 0x14]        ; 8B 7E EC
         shl     di, 1                           ; D1 E7
         shl     di, 1                           ; D1 E7

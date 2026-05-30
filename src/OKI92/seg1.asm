@@ -573,6 +573,7 @@ L_048A:
         push    word ptr es:[bx + 0x2e]         ; 26 FF 77 2E
         mov     ax, bx                          ; 8B C3
         mov     dx, es                          ; 8C C2
+        L_0463:
         add     ax, 0x68                        ; 05 68 00
         push    dx                              ; 52
         push    ax                              ; 50

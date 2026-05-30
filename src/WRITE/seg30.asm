@@ -442,6 +442,7 @@ L_03A8:
         sub     ah, ah                          ; 2A E4
         add     ax, 0x80                        ; 05 80 00
         mov     word ptr [bp - 0x86], ax        ; 89 86 7A FF
+        L_0337:
         push    word ptr [0xeea]                ; FF 36 EA 0E
         lea     ax, [bp - 0x86]                 ; 8D 86 7A FF
         push    ax                              ; 50
