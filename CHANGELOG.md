@@ -2,6 +2,19 @@
 
 Historial de versiones del proyecto win103-byteexact (renombrado desde modern-personality-agent).
 
+## v16.2 - 2026-05-31 - C Scaffolds for all 92 modules + DB conversion report
+
+C scaffolding completo:
+- `generate_all_scaffolds.py`: Genera stubs C para TODOS los módulos
+- **79 nuevos scaffolds** generados (antes solo 13 existían)
+- Total: **92/92 módulos** con scaffold C en `c_decomp/`
+- Cada scaffold incluye header, lista de funciones descubiertas, y stubs
+
+Documentación:
+- `docs/analysis/DB_CONVERSION_STATUS.md`: Reporte detallado del estado
+  de conversión db → mnemonics, con análisis de por qué quedan 92,959 db lines
+  y recomendaciones para trabajo futuro.
+
 ## v16.1 - 2026-05-31 - Syntax Adapter DB Conversion (+40 multi-byte lines)
 
 Pipeline de syntax adaptation para instrucciones de múltiples bytes:
