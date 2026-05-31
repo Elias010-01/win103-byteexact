@@ -2,6 +2,45 @@
 
 Historial de versiones del proyecto win103-byteexact (renombrado desde modern-personality-agent).
 
+## v15.0 - 2026-05-31 - C-Port Preparation: 7 Analysis Phases
+
+Fases 2-7 de preparación para port a C, ejecutadas autónomamente.
+Build byte-exact se mantiene (92/92), tests 50/50 pass.
+
+### Nuevos analysis passes
+
+  - `pass31_classify_db.py`: Clasifica las 114,431 líneas `db` restantes:
+    - 87.7% CODE (instrucciones que NASM no pudo replicar)
+    - 5.2% PADDING (alineación)
+    - 1.3% DATA (strings, tablas, bitmaps)
+    - 5.8% UNKNOWN
+  - `pass32_api_int_calls.py`: Documenta 21,198 llamadas API/INT:
+    - 745 INT 21h (DOS services, con mapping AH→función)
+    - 5 INT 2Fh (multiplex)
+    - 289 Other INT (BIOS, etc.)
+    - 9,875 Windows API (far calls KERNEL/USER/GDI)
+    - 10,284 Internal near calls
+  - `pass33_control_flow_structs.py`: Análisis de control flow + estructuras:
+    - 7,624 simple loops, 29,912 nested loops
+    - 9,320 if/else chains, 351 switch/jumptables
+    - 104,001 BP-relative (stack vars/params)
+    - 26,987 BX/SI-relative (struct/array access)
+  - `pass34_master_report.py`: Genera 92 reportes por módulo + MASTER_REPORT
+
+### Documentación generada
+
+  - `docs/analysis/modules/<MODULE>.md`: 92 reportes individuales
+  - `docs/analysis/MASTER_REPORT.md`: Resumen global con métricas,
+    matriz de prioridad para C port, y próximos pasos recomendados.
+  - `state/analyze/pass31/`..`pass34/`: JSON por módulo + summary.md
+
+### Estado del proyecto post-fases
+
+  - 369 archivos .asm en `src/` (92 módulos)
+  - 79.5% mnemonics, 20.5% db con comentarios semánticos
+  - 4 archivos 100% semantic reconstruction (NASM-puro)
+  - 92/92 módulos byte-exact, 50/50 tests pass
+
 ## v14.0 - 2026-05-30 - Claims alignment + MASM pure-db retry + new mods
 
 Cierre del gap entre README claims y realidad técnica descubierta en
