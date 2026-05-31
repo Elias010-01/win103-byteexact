@@ -502,18 +502,18 @@ BITS 16
     db 08Bh, 00Eh, 017h, 000h         ; mov cx, word [0x17]
     db 0B4h, 001h                     ; mov ah, 1
     db 0CDh, 010h                     ; int 0x10
-    db 0A0h, 019h, 000h               ; mov al, byte [0x19]
+    mov al, byte [0x19]                      ; A0 19 00
     db 08Ah, 0C8h                     ; mov cl, al
-    db 0B4h, 005h                     ; mov ah, 5
-    db 0CDh, 010h                     ; int 0x10
+    mov ah, 5                                ; B4 05
+    int 0x10                                 ; CD 10
     db 033h, 0DBh                     ; xor bx, bx
     db 08Ah, 0D9h                     ; mov bl, cl
-    db 0D1h, 0E3h                     ; shl bx, 1
-    db 08Bh, 057h, 007h               ; mov dx, word [bx + 7]
+    shl bx, 1                                ; D1 E3
+    mov dx, word [bx + 7]                    ; 8B 57 07
     db 08Ah, 0F9h                     ; mov bh, cl
-    db 0B4h, 002h                     ; mov ah, 2
-    db 0CDh, 010h                     ; int 0x10
-    db 080h, 03Eh, 000h, 000h, 005h   ; cmp byte [0], 5
+    mov ah, 2                                ; B4 02
+    int 0x10                                 ; CD 10
+    cmp byte [0], 5                          ; 80 3E 00 00 05
     db 077h, 023h                     ; ja 0x49f
     db 08Ah, 01Eh, 01Dh, 000h         ; mov bl, byte [0x1d]
     db 0B7h, 000h                     ; mov bh, 0
@@ -555,7 +555,7 @@ BITS 16
     db 0B8h, 033h, 005h               ; mov ax, 0x533
     db 0E6h, 042h                     ; out 0x42, al
     db 08Ah, 0C4h                     ; mov al, ah
-    db 0E6h, 042h                     ; out 0x42, al
+    out 0x42, al                             ; E6 42
     db 0EBh, 000h                     ; jmp 0x4d0
     db 0E4h, 061h                     ; in al, 0x61
     db 08Ah, 0E0h                     ; mov ah, al

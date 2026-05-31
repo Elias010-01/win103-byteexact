@@ -4854,12 +4854,12 @@ BITS 16
     db 0BEh, 040h, 010h               ; mov si, 0x1040
     db 0E8h, 05Bh, 000h               ; call 0x2cd7
     db 033h, 0C0h                     ; xor ax, ax
-    db 099h                           ; cdq
-    db 0C3h                           ; ret
-    db 050h                           ; push ax
-    db 053h                           ; push bx
-    db 0BFh, 0B0h, 000h               ; mov di, 0xb0
-    db 08Bh, 005h                     ; mov ax, word [di]
+    cdq                                      ; 99
+    ret                                      ; C3
+    push ax                                  ; 50
+    push bx                                  ; 53
+    mov di, 0xb0                             ; BF B0 00
+    mov ax, word [di]                        ; 8B 05
     db 00Ah, 0C0h                     ; or al, al
     db 074h, 029h                     ; je 0x2cb4
     db 080h, 0FCh, 03Ah               ; cmp ah, 0x3a

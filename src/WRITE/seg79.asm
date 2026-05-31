@@ -602,92 +602,92 @@ BITS 16
     db 000h, 000h                     ; add byte [bx + si], al
     db 000h, 000h                     ; add byte [bx + si], al
     db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 044h, 07Ah               ; add byte [si + 0x7a], al
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [si + 0x7a], al                 ; 00 44 7A
     db 07Dh, 077h                     ; jge 0x5d4
     db 07Ch, 064h                     ; jl 0x5c3
     db 060h                           ; pushaw
@@ -702,9 +702,9 @@ BITS 16
     db 07Ch, 066h                     ; jl 0x5da
     db 074h, 07Bh                     ; je 0x5f1
     db 067h, 033h, 067h, 07Ch         ; xor sp, word [edi + 0x7c]
-    db 033h, 06Ah, 07Ch               ; xor bp, word [bp + si + 0x7c]
-    db 066h, 033h, 071h, 06Ah         ; xor esi, dword [bx + di + 0x6a]
-    db 033h, 051h, 07Ch               ; xor dx, word [bx + di + 0x7c]
+    xor bp, word [bp + si + 0x7c]            ; 33 6A 7C
+    xor esi, dword [bx + di + 0x6a]          ; 66 33 71 6A
+    xor dx, word [bx + di + 0x7c]            ; 33 51 7C
     db 071h, 03Fh                     ; jno 0x5c5
     db 033h, 051h, 07Ch               ; xor dx, word [bx + di + 0x7c]
     db 071h, 03Fh                     ; jno 0x5ca
@@ -729,179 +729,179 @@ BITS 16
     db 000h, 000h                     ; add byte [bx + si], al
     db 000h, 000h                     ; add byte [bx + si], al
     db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 001h                     ; add byte [bx + di], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 031h, 000h                     ; xor word [bx + si], ax
-    db 000h, 031h                     ; add byte [bx + di], dh
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 0FFh                     ; add bh, bh
-    db 0FFh, 031h                     ; push word [bx + di]
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 000h, 000h                     ; add byte [bx + si], al
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + di], al                   ; 00 01
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    xor word [bx + si], ax                   ; 31 00
+    add byte [bx + di], dh                   ; 00 31
+    add byte [bx + si], al                   ; 00 00
+    add bh, bh                               ; 00 FF
+    push word [bx + di]                      ; FF 31
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
     db 000h, 000h                     ; add byte [bx + si], al
     db 000h, 000h                     ; add byte [bx + si], al
     db 000h, 000h                     ; add byte [bx + si], al
