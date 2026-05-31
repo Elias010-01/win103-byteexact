@@ -2,7 +2,7 @@
 
 ## Summary
 
-As of v16.1, the project has converted **21,684 db lines** to pure mnemonics while
+As of v16.3, the project has converted **21,686 db lines** to pure mnemonics while
 maintaining byte-exact build (92/92 modules, 50/50 tests pass).
 
 | Metric | Before | After | Delta |
@@ -77,6 +77,41 @@ All three approaches are massive undertakings beyond the scope of automated conv
 | WIN100/seg1.asm | 4,436 | WIN100 binary |
 | WIN/seg1.asm | 880 | DOS .COM loader |
 | WRITE/seg79.asm | 700 | WRITE segment |
+
+## Critical Finding: MASM 4.0 Alternative Opcodes
+
+After exhaustive testing with multiple modern assemblers (NASM 2.16.03, Keystone 0.9.2),
+the root cause of remaining db lines has been identified:
+
+**MASM 4.0 frequently uses alternative x86 opcodes for the same semantic instruction.**
+
+### Example: `mov bp, sp`
+
+| Assembler | Bytes | Opcode | Encoding |
+|-----------|-------|--------|----------|
+| MASM 4.0  | `8B EC` | `8B` | `mov reg, r/m` (reg=bp, r/m=sp) |
+| NASM      | `89 E5` | `89` | `mov r/m, reg` (r/m=bp, reg=sp) |
+| Keystone  | `89 E5` | `89` | `mov r/m, reg` (r/m=bp, reg=sp) |
+
+Both encodings are valid x86, but produce different bytes. Modern assemblers always
+choose `89` for `mov bp, sp`. There is no NASM/Keystone syntax to force opcode `8B`.
+
+### Impact
+
+This pattern affects the majority of remaining multi-byte instructions:
+- `mov reg, reg` (~600 instances): MASM uses `8B`, modern assemblers use `89`
+- `add/sub/cmp/xor/or reg, reg` (~500 instances): Similar opcode alternation
+- Memory reference instructions: Different ModR/M encoding choices
+
+**Consequence**: The remaining 92,959 db lines CANNOT be converted to pure
+mnemonics with any modern assembler while maintaining byte-exactness.
+
+### Options
+
+1. **Keep as db with semantic comments** (current approach, recommended)
+2. **Build with MASM 4.0** (`--mode=masm` flag exists)
+3. **Write a MASM 4.0-compatible assembler** (massive undertaking)
+4. **Accept non-byte-exact builds** for mnemonic-pure sources (not recommended)
 
 ## Recommendation for Future Work
 
