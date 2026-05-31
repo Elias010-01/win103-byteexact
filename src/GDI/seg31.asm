@@ -1,5 +1,5 @@
 ; GDI/seg31.asm
-; Semantic data - verified byte-exact
+; Semantic reconstruction - verified byte-exact
 BITS 16
 
     add byte [bx + si], al                   ; 00 00
@@ -94,7 +94,7 @@ BITS 16
     db 074h, 073h                     ; je 0x12b
     add byte [bx + 0x65], ch                 ; 00 6F 65
     db 06Dh                           ; insw word es:[di], dx
-    db 062h, 069h, 06Eh               ; bound bp, dword [bx + di + 0x6e]
+    bound bp, [bx+di+0x6e]                   ; 62 69 6E
     add byte [bx + 0x69], dh                 ; 00 77 69
     db 06Eh                           ; outsb dx, byte [si]
     db 064h, 06Fh                     ; outsw dx, word fs:[si]

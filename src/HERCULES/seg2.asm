@@ -1,5 +1,5 @@
 ; HERCULES/seg2.asm
-; Semantic data - verified byte-exact
+; Semantic reconstruction - verified byte-exact
 BITS 16
 
     add byte [bx + si], al                   ; 00 00
@@ -37,7 +37,7 @@ BITS 16
     sti                                      ; FB
     pop ds                                   ; 1F
     dec bx                                   ; 4B
-    db 0E0h, 060h                     ; loopne 0xa7
+    loopne 0x62                              ; E0 60
     add byte [bx + si], bl                   ; 00 18
     add byte [bx + si], dl                   ; 00 10
     add ah, ch                               ; 00 EC

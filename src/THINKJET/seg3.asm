@@ -1,5 +1,5 @@
 ; THINKJET/seg3.asm
-; Semantic data - verified byte-exact
+; Semantic reconstruction - verified byte-exact
 BITS 16
 
     add byte [bx + si], al                   ; 00 00
@@ -399,7 +399,7 @@ BITS 16
     add al, byte [bx + si]                   ; 02 00
     adc ax, 0x6000                           ; 15 00 60
     push es                                  ; 06
-    db 062h, 004h                     ; bound ax, dword [si]
+    bound ax, [si]                           ; 62 04
     mov al, 0                                ; B0 00
     inc dx                                   ; 42
     add byte [bp + si + 4], ah               ; 00 62 04

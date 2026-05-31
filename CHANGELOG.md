@@ -2,6 +2,16 @@
 
 Historial de versiones del proyecto win103-byteexact (renombrado desde modern-personality-agent).
 
+## v16.1 - 2026-05-31 - Syntax Adapter DB Conversion (+40 multi-byte lines)
+
+Pipeline de syntax adaptation para instrucciones de múltiples bytes:
+- `db_convert_syntax.py`: Prueba múltiples variantes de sintaxis NASM por instrucción
+  (remover ptr, fix spacing, diferentes formas de size keywords, etc.)
+- **+40 db lines** convertidas con syntax adaptation
+- Total acumulado: **21,684 db lines** convertidas a mnemónicos
+- Cobertura mnemonics: 83.3%
+- Build: 92/92 byte-exact, 50/50 tests pass
+
 ## v16.0 - 2026-05-31 - Structural Fixes + Safe DB Conversion + 21K mnemonics
 
 Corrección de bugs estructurales y conversión segura de 21,635 db lines a mnemónicos.

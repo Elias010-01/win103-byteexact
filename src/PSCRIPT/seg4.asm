@@ -1,5 +1,5 @@
 ; PSCRIPT/seg4.asm
-; Semantic data - verified byte-exact
+; Semantic reconstruction - verified byte-exact
 BITS 16
 
     add byte [bx + si], al                   ; 00 00
@@ -502,7 +502,7 @@ BITS 16
     and byte fs:[bx], ch                     ; 64 20 2F
     push bx                                  ; 53
     db 079h, 06Dh                     ; jns 0x4bd
-    db 062h, 06Fh, 06Ch               ; bound bp, dword [bx + 0x6c]
+    bound bp, [bx+0x6c]                      ; 62 6F 6C
     and byte [bp + 0x6f], ah                 ; 20 66 6F
     db 06Eh                           ; outsb dx, byte [si]
     db 074h, 00Ah                     ; je 0x463

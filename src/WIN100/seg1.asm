@@ -1,5 +1,5 @@
 ; WIN100/seg1.asm
-; Semantic data - verified byte-exact
+; Semantic reconstruction - verified byte-exact
 BITS 16
 
     add byte [bx + si], al                   ; 00 00
@@ -4998,7 +4998,7 @@ BITS 16
     mov word es:[si + 8], ax                 ; 26 89 44 08
     add si, 0xc                              ; 83 C6 0C
     pop cx                                   ; 59
-    db 0E2h, 0CCh                     ; loop 0x2d5e
+    loop 0xece                               ; E2 CC
     db 0EBh, 0B3h                     ; jmp 0x2d47
     pop di                                   ; 5F
     pop si                                   ; 5E

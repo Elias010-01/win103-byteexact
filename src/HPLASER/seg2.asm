@@ -1,5 +1,5 @@
 ; HPLASER/seg2.asm
-; Semantic data - verified byte-exact
+; Semantic reconstruction - verified byte-exact
 BITS 16
 
     add byte [bx + si], al                   ; 00 00
@@ -14,7 +14,7 @@ BITS 16
     add byte [si], al                        ; 00 04
     add ax, cx                               ; 01 C8
     add byte [bx + si], al                   ; 00 00
-    db 00Fh, 060h, 009h               ; punpcklbw mm1, dword [bx + di]
+    punpcklbw mm1, [bx+di]                   ; 0F 60 09
     add word [bx + si], ax                   ; 01 00
     add word [bx + si], ax                   ; 01 00
     adc word [bx + si], ax                   ; 11 00
@@ -279,7 +279,7 @@ BITS 16
     xor byte [bx + si + 0x31], ch            ; 30 68 31
     xor dh, byte [bp + 0x30]                 ; 32 76 30
     db 073h, 030h                     ; jae 0x282
-    db 062h, 033h                     ; bound si, dword [bp + di]
+    bound si, [bp+di]                        ; 62 33
     push sp                                  ; 54
     add byte [bp + di], bl                   ; 00 1B
     sub byte [bx + si], bh                   ; 28 38
@@ -301,7 +301,7 @@ BITS 16
     xor byte [bx + si + 0x31], ch            ; 30 68 31
     xor dh, byte [bp + 0x31]                 ; 32 76 31
     db 073h, 030h                     ; jae 0x2ae
-    db 062h, 033h                     ; bound si, dword [bp + di]
+    bound si, [bp+di]                        ; 62 33
     push sp                                  ; 54
     add byte [bp + di], bl                   ; 00 1B
     sub byte [bx + si], bh                   ; 28 38
@@ -312,7 +312,7 @@ BITS 16
     db 036h, 02Eh, 036h, 036h, 068h, 038h, 02Eh ; push 0x2e38
     xor ax, 0x3076                           ; 35 76 30
     db 073h, 030h                     ; jae 0x2c8
-    db 062h, 030h                     ; bound si, dword [bx + si]
+    bound si, [bx+si]                        ; 62 30
     push sp                                  ; 54
     add byte [bp + di], bl                   ; 00 1B
     sub byte [di + 0x1b], dl                 ; 28 55 1B
@@ -326,7 +326,7 @@ BITS 16
     db 073h, 035h                     ; jae 0x2e6
     db 074h, 031h                     ; je 0x2e4
     xor byte [bp + 0x73], dh                 ; 30 76 73
-    db 062h, 031h                     ; bound si, dword [bx + di]
+    bound si, [bx+di]                        ; 62 31
     push ax                                  ; 50
     add byte [bp + di], bl                   ; 00 1B
     sub byte [di + 0x1b], dl                 ; 28 55 1B
@@ -385,7 +385,7 @@ BITS 16
     xor ch, byte [bx + si + 0x31]            ; 32 68 31
     xor dh, byte [bp + 0x30]                 ; 32 76 30
     db 073h, 030h                     ; jae 0x367
-    db 062h, 036h, 054h, 000h         ; bound si, dword [0x54]
+    bound si, [0x54]                         ; 62 36 54 00
     sbb bp, word [bx + si]                   ; 1B 28
     cmp byte [di + 0x1b], dl                 ; 38 55 1B
     sub byte [bp + di + 0x30], dh            ; 28 73 30
@@ -393,7 +393,7 @@ BITS 16
     xor ch, byte [bx + si + 0x31]            ; 32 68 31
     xor byte [bp + 0x30], dh                 ; 30 76 30
     db 073h, 033h                     ; jae 0x380
-    db 062h, 036h, 054h, 000h         ; bound si, dword [0x54]
+    bound si, [0x54]                         ; 62 36 54 00
     sbb bp, word [bx + si]                   ; 1B 28
     cmp byte [di + 0x1b], dl                 ; 38 55 1B
     sub byte [bp + di + 0x30], dh            ; 28 73 30
@@ -401,7 +401,7 @@ BITS 16
     xor ch, byte [bx + si + 0x31]            ; 32 68 31
     xor byte [bp + 0x31], dh                 ; 30 76 31
     db 073h, 030h                     ; jae 0x393
-    db 062h, 036h, 054h, 000h         ; bound si, dword [0x54]
+    bound si, [0x54]                         ; 62 36 54 00
     sbb bp, word [bx + si]                   ; 1B 28
     cmp byte [di + 0x1b], dl                 ; 38 55 1B
     sub byte [bp + di + 0x35], dh            ; 28 73 35
@@ -413,7 +413,7 @@ BITS 16
     sub byte [bp + di + 0x35], dh            ; 28 73 35
     db 074h, 031h                     ; je 0x3b1
     xor byte [bp + 0x73], dh                 ; 30 76 73
-    db 062h, 031h                     ; bound si, dword [bx + di]
+    bound si, [bx+di]                        ; 62 31
     push ax                                  ; 50
     add byte [bp + di], bl                   ; 00 1B
     sub byte [bx + si], bh                   ; 28 38
@@ -458,7 +458,7 @@ BITS 16
     db 02Eh, 035h, 068h, 031h         ; xor ax, 0x3168
     cmp byte [bp + 0x30], dh                 ; 38 76 30
     db 073h, 033h                     ; jae 0x414
-    db 062h, 031h                     ; bound si, dword [bx + di]
+    bound si, [bx+di]                        ; 62 31
     db 031h, 054h, 000h               ; xor word [si], dx
     sbb bp, word [bx + si]                   ; 1B 28
     xor byte [di + 0x1b], dl                 ; 30 55 1B
@@ -467,7 +467,7 @@ BITS 16
     xor word cs:[bx + si + 0x31], bp         ; 2E 31 68 31
     db 036h, 076h, 030h               ; jbe 0x427
     db 073h, 033h                     ; jae 0x42c
-    db 062h, 031h                     ; bound si, dword [bx + di]
+    bound si, [bx+di]                        ; 62 31
     db 031h, 054h, 000h               ; xor word [si], dx
     sbb bp, word [bx + si]                   ; 1B 28
     xor byte [di + 0x1b], dl                 ; 30 55 1B
@@ -476,7 +476,7 @@ BITS 16
     xor byte [bx + si + 0x31], ch            ; 30 68 31
     xor al, 0x76                             ; 34 76
     xor byte [bp + di + 0x33], dh            ; 30 73 33
-    db 062h, 031h                     ; bound si, dword [bx + di]
+    bound si, [bx+di]                        ; 62 31
     db 031h, 054h, 000h               ; xor word [si], dx
     sbb bp, word [bx + si]                   ; 1B 28
     xor byte [di + 0x1b], dl                 ; 30 55 1B
@@ -485,7 +485,7 @@ BITS 16
     db 02Eh, 035h, 068h, 031h         ; xor ax, 0x3168
     cmp byte [bp + 0x30], dh                 ; 38 76 30
     db 073h, 030h                     ; jae 0x458
-    db 062h, 036h, 054h, 000h         ; bound si, dword [0x54]
+    bound si, [0x54]                         ; 62 36 54 00
     inc bx                                   ; 43
     db 06Fh                           ; outsw dx, word [si]
     db 075h, 072h                     ; jne 0x4a2

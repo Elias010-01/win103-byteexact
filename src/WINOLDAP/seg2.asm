@@ -1,5 +1,5 @@
 ; WINOLDAP/seg2.asm
-; Semantic data - verified byte-exact
+; Semantic reconstruction - verified byte-exact
 BITS 16
 
     add byte [bx + si], al                   ; 00 00
@@ -101,7 +101,7 @@ BITS 16
     add byte [bx + si], al                   ; 00 00
     add byte [bx + si], al                   ; 00 00
     add byte [bx + si], al                   ; 00 00
-    db 000h, 000h                     ; add byte [bx + si], al
+    add byte [bx + si], al                   ; 00 00
     add byte [bx + si], al                   ; 00 00
     add byte [bx + si], al                   ; 00 00
     add byte [bx + si], al                   ; 00 00
@@ -339,7 +339,7 @@ BITS 16
     add byte [bx + si], al                   ; 00 00
     add byte [bx + si], al                   ; 00 00
     add byte [bx + si], al                   ; 00 00
-    db 000h, 0FFh                     ; add bh, bh
+    add bh, bh                               ; 00 FF
     db 0FFh, 000h                     ; inc word [bx + si]
     add byte [bx + si], al                   ; 00 00
     add byte [bx + si], al                   ; 00 00
@@ -354,19 +354,19 @@ BITS 16
     add byte [bx + si], al                   ; 00 00
     add byte [bx + si], al                   ; 00 00
     add byte [bx + si], al                   ; 00 00
-    db 000h, 07Fh, 080h               ; add byte [bx - 0x80], bh
-    add byte [bx + si], al                   ; 00 00
-    add byte [bx + si], al                   ; 00 00
-    add byte [bx + si], al                   ; 00 00
-    db 000h, 000h                     ; add byte [bx + si], al
-    db 019h, 000h                     ; sbb word [bx + si], ax
-    db 000h, 001h                     ; add byte [bx + di], al
-    db 008h, 016h, 000h, 000h         ; or byte [0], dl
+    add byte [bx - 0x80], bh                 ; 00 7F 80
     add byte [bx + si], al                   ; 00 00
     add byte [bx + si], al                   ; 00 00
     add byte [bx + si], al                   ; 00 00
     add byte [bx + si], al                   ; 00 00
-    db 000h, 000h                     ; add byte [bx + si], al
+    sbb word [bx + si], ax                   ; 19 00
+    add byte [bx + di], al                   ; 00 01
+    or byte [0], dl                          ; 08 16 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
+    add byte [bx + si], al                   ; 00 00
     db 0FFh, 000h                     ; inc word [bx + si]
     add byte [bx + si], al                   ; 00 00
     add byte [bx + si], al                   ; 00 00
@@ -401,7 +401,7 @@ BITS 16
     add byte [bx + si], al                   ; 00 00
     add byte [bx + si], al                   ; 00 00
     add byte [bx + si], al                   ; 00 00
-    db 000h, 000h                     ; add byte [bx + si], al
+    add byte [bx + si], al                   ; 00 00
     add byte [bx + si], al                   ; 00 00
     add byte [bx + si], al                   ; 00 00
     add byte [bx + si], al                   ; 00 00

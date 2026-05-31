@@ -1,5 +1,5 @@
 ; MOUSE/seg3.asm
-; Semantic data - verified byte-exact
+; Semantic reconstruction - verified byte-exact
 BITS 16
 
     add byte [bx + si], al                   ; 00 00
@@ -33,7 +33,7 @@ BITS 16
     push es                                  ; 06
     mov ax, cs                               ; 8C C8
     mov ds, ax                               ; 8E D8
-    db 0E8h, 016h, 000h               ; call 0x4e
+    call 0x19                                ; E8 16 00
     db 00Bh, 0C0h                     ; or ax, ax
     db 074h, 008h                     ; je 0x44
     mov dx, word [2]                         ; 8B 16 02 00

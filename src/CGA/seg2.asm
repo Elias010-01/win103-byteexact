@@ -1,5 +1,5 @@
 ; CGA/seg2.asm
-; Semantic data - verified byte-exact
+; Semantic reconstruction - verified byte-exact
 BITS 16
 
     add byte [bx + si], al                   ; 00 00
@@ -38,7 +38,7 @@ BITS 16
     sti                                      ; FB
     pop ds                                   ; 1F
     dec bx                                   ; 4B
-    db 0E0h, 030h                     ; loopne 0x77
+    loopne 0x32                              ; E0 30
     add byte [bx + si], bl                   ; 00 18
     add byte [bx + si], dl                   ; 00 10
     add byte [bp + di + 0xf], dl             ; 00 53 0F

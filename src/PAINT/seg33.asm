@@ -1,5 +1,5 @@
 ; PAINT/seg33.asm
-; Semantic data - verified byte-exact
+; Semantic reconstruction - verified byte-exact
 BITS 16
 
     add byte [bx + si], al                   ; 00 00
@@ -43,7 +43,7 @@ BITS 16
     db 072h, 06Ch                     ; jb 0xc2
     imul bp, word [bp + 0x65], 0x6300        ; 69 6E 65 00 63
     db 075h, 072h                     ; jne 0xcf
-    db 062h, 072h, 075h               ; bound si, dword [bp + si + 0x75]
+    bound si, [bp+si+0x75]                   ; 62 72 75
     db 073h, 068h                     ; jae 0xca
     add byte [bp + di + 0x75], ah            ; 00 63 75
     db 072h, 033h                     ; jb 0x9a
@@ -497,7 +497,7 @@ BITS 16
     imul bp, word [bp + 0x64], 0x776f        ; 69 6E 64 6F 77
     db 073h, 000h                     ; jae 0x352
     inc cx                                   ; 41
-    db 062h, 06Fh, 072h               ; bound bp, dword [bx + 0x72]
+    bound bp, [bx+0x72]                      ; 62 6F 72
     db 074h, 050h                     ; je 0x3a8
     db 072h, 069h                     ; jb 0x3c3
     db 06Eh                           ; outsb dx, byte [si]

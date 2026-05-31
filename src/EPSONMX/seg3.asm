@@ -1,5 +1,5 @@
 ; EPSONMX/seg3.asm
-; Semantic data - verified byte-exact
+; Semantic reconstruction - verified byte-exact
 BITS 16
 
     add byte [bx + si], al                   ; 00 00
@@ -414,7 +414,7 @@ BITS 16
     pop si                                   ; 5E
     push bp                                  ; 55
     db 082h, 059h, 083h, 070h         ; sbb byte [bx + di - 0x7d], 0x70
-    db 062h, 02Eh, 000h, 061h         ; bound bp, dword [0x6100]
+    bound bp, [0x6100]                       ; 62 2E 00 61
     test byte [bx + di - 0x7d], ah           ; 84 61 83
     popaw                                    ; 61
     pop si                                   ; 5E

@@ -1,5 +1,5 @@
 ; CALC/seg2.asm
-; Semantic data - verified byte-exact
+; Semantic reconstruction - verified byte-exact
 BITS 16
 
     add byte [bx + si], al                   ; 00 00
@@ -69,7 +69,7 @@ BITS 16
     db 066h, 030h, 072h, 02Dh         ; xor byte [bp + si + 0x2d], dh
     db 064h, 030h, 0DEh               ; xor dh, bl
     lea si, cs:[bp + si]                     ; 2E 8D 32
-    db 062h, 02Fh                     ; bound bp, dword [bx]
+    bound bp, [bx]                           ; 62 2F
     lock xor ah, byte [bx + si + 0x2f]       ; F0 32 60 2F
     out dx, al                               ; EE
     db 032h, 0CDh                     ; xor cl, ch

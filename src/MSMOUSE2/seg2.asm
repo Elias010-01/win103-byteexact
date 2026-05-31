@@ -1,5 +1,5 @@
 ; MSMOUSE2/seg2.asm
-; Semantic data - verified byte-exact
+; Semantic reconstruction - verified byte-exact
 BITS 16
 
     add byte [bx + di], al                   ; 00 01
@@ -26,7 +26,7 @@ BITS 16
     push ds                                  ; 1E
     mov ax, cs                               ; 8C C8
     mov ds, ax                               ; 8E D8
-    db 0E8h, 024h, 000h               ; call 0x52
+    call 0x27                                ; E8 24 00
     db 00Bh, 0C0h                     ; or ax, ax
     db 074h, 00Fh                     ; je 0x41
     mov dx, 3                                ; BA 03 00

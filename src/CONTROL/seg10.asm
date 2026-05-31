@@ -1,5 +1,5 @@
 ; CONTROL/seg10.asm
-; Semantic data - verified byte-exact
+; Semantic reconstruction - verified byte-exact
 BITS 16
 
     add byte [bx + si], al                   ; 00 00
@@ -193,7 +193,7 @@ BITS 16
     db 072h, 06Fh                     ; jb 0x20e
     db 06Ch                           ; insb byte es:[di], dx
     db 06Ch                           ; insb byte es:[di], dx
-    db 062h, 061h, 072h               ; bound sp, dword [bx + di + 0x72]
+    bound sp, [bx+di+0x72]                   ; 62 61 72
     add byte [bx + di + 0x63], al            ; 00 41 63
     db 074h, 069h                     ; je 0x212
     db 076h, 065h                     ; jbe 0x210
