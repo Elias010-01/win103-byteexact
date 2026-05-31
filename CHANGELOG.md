@@ -2,6 +2,21 @@
 
 Historial de versiones del proyecto win103-byteexact (renombrado desde modern-personality-agent).
 
+## v16.3 - 2026-05-31 - Exhaustive DB Conversion Attempts (limit reached)
+
+Últimos intentos de conversión db → mnemonics:
+- `db_convert_blocks.py`: Convierte bloques contiguos con labels para jumps internos
+  - Resultado: +2 líneas (los bloques con jumps externos no pueden convertirse)
+- `db_convert_keystone.py`: Prueba Keystone assembler como alternativa a NASM
+  - Resultado: 0 líneas (Keystone también produce bytes diferentes a MASM 4.0)
+- Total acumulado: **21,686 db lines** convertidas
+- Cobertura mnemonics: 83.3%
+
+**Conclusión**: Las 92,959 db lines restantes requieren trabajo manual o un motor
+de ensamblaje compatible con MASM 4.0. Los ensambladores modernos (NASM, Keystone)
+tienen diferencias fundamentales de encoding con MASM 4.0 (1985) que no pueden
+resolverse con transformaciones sintácticas automáticas.
+
 ## v16.2 - 2026-05-31 - C Scaffolds for all 92 modules + DB conversion report
 
 C scaffolding completo:

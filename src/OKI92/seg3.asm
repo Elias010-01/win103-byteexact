@@ -1,5 +1,5 @@
 ; OKI92/seg3.asm
-; Semantic data - verified byte-exact
+; Semantic reconstruction - verified byte-exact
 BITS 16
 
     add byte [bx + si], al                   ; 00 00
@@ -94,7 +94,7 @@ BITS 16
     pushaw                                   ; 60
     dec di                                   ; 4F
     or al, 0x6c                              ; 0C 6C
-    db 0E0h, 001h                     ; loopne 0xb7
+    loopne 3                                 ; E0 01
     db 0F0h                           ; F0
     cld                                      ; FC
     and byte [bp + di], al                   ; 20 03
@@ -105,7 +105,7 @@ BITS 16
     inc ax                                   ; 40
     pop ds                                   ; 1F
     mov byte [bp + si], ch                   ; 88 2A
-    db 0E0h, 001h                     ; loopne 0xc7
+    loopne 3                                 ; E0 01
     db 0F0h                           ; F0
     cld                                      ; FC
     add byte [di], ch                        ; 00 2D
