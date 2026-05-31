@@ -592,32 +592,48 @@ This is not authoritative documentation.
 See [LEGAL.md](LEGAL.md) for the full legal notice.
 
 
-## C-Port Preparation Status (v15.0)
+## C-Port Preparation Status (v16.3)
 
 All 7 analysis phases completed:
 
 | Phase | Status | Details |
 |-------|--------|---------|
-| Function boundaries | Done | 3,954 functions in 69 modules |
+| Function boundaries | Done | 3,954 functions in 92 modules |
 | DB classification | Done | 114,431 db lines classified |
 | API/INT documentation | Done | 21,198 calls documented |
 | Control flow analysis | Done | 7,624 loops, 9,320 if/else |
 | Structure mapping | Done | 104,001 BP-relative accesses |
-| Module documentation | Done | 92 module reports generated |
+| Module documentation | Done | 92 module reports + 92 READMEs |
+| C scaffolds | Done | 92/92 modules with C stubs |
 | Build verification | Done | 92/92 byte-exact, 50/50 tests |
+
+### DB to Mnemonic Conversion
+
+| Metric | Before | After | Delta |
+|--------|--------|-------|-------|
+| DB lines | 114,431 | 92,745 | -21,686 |
+| Mnemonic coverage | 79.5% | 83.4% | +3.9% |
+
+**Critical finding**: MASM 4.0 uses alternative x86 opcodes that modern assemblers
+(NASM, Keystone) cannot reproduce. Example: `mov bp, sp` = `8B EC` in MASM but
+`89 E5` in NASM. The remaining 92,745 db lines require manual work or a
+MASM 4.0-compatible assembler. See `docs/analysis/DB_CONVERSION_STATUS.md`.
 
 ### DB Line Breakdown
 
 | Category | Count | Percentage |
 |----------|-------|------------|
-| CODE (NASM-unreplicable) | 100,373 | 87.7% |
+| CODE (MASM-opcode alternatives) | 92,745 | 81.1% |
 | PADDING | 5,949 | 5.2% |
 | DATA (strings, tables) | 1,498 | 1.3% |
-| UNKNOWN | 6,611 | 5.8% |
+| UNKNOWN | 6,084 | 5.3% |
+| CONVERTED to mnemonics | 21,686 | 18.9% |
 
 ### Analysis Outputs
 
 - `docs/analysis/modules/*.md` - 92 per-module reports
 - `docs/analysis/MASTER_REPORT.md` - Global summary
+- `docs/analysis/DB_CONVERSION_STATUS.md` - DB conversion analysis
 - `state/analyze/pass31/` to `pass34/` - Raw analysis data
+- `c_decomp/<MODULE>/<MODULE>.c` - C scaffolds for all 92 modules
 
